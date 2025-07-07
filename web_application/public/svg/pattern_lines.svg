@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke-width: 16px;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12 {
+        stroke: #898989;
+        stroke-miterlimit: 1;
+      }
+
+      .cls-3 {
+        stroke-width: 8px;
+      }
+
+      .cls-13 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-14, .cls-15, .cls-16, .cls-17 {
+        fill: #666;
+      }
+
+      .cls-4 {
+        stroke-width: 2px;
+      }
+
+      .cls-5 {
+        stroke-width: 4px;
+      }
+
+      .cls-6 {
+        stroke-width: 32px;
+      }
+
+      .cls-18 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-19 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-7 {
+        stroke-width: 36px;
+      }
+
+      .cls-8 {
+        stroke-width: 24px;
+      }
+
+      .cls-15 {
+        opacity: .2;
+      }
+
+      .cls-9 {
+        stroke-width: 56px;
+      }
+
+      .cls-10 {
+        stroke-width: 6px;
+      }
+
+      .cls-11 {
+        stroke-width: 48px;
+      }
+
+      .cls-12 {
+        stroke-width: 12px;
+      }
+
+      .cls-16 {
+        opacity: .9;
+      }
+
+      .cls-17 {
+        opacity: .4;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="400" height="400"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-1" x="-420" width="400" height="400"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="cls-1" x="420" width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g class="cls-13">
+    <line class="cls-4" x1="-9" y1="31" x2="447" y2="31"/>
+    <line class="cls-5" x1="-9" y1="63" x2="447" y2="63"/>
+    <line class="cls-10" x1="-9" y1="95" x2="447" y2="95"/>
+    <line class="cls-3" x1="-9" y1="127" x2="447" y2="127"/>
+    <line class="cls-12" x1="-9" y1="159" x2="447" y2="159"/>
+    <line class="cls-2" x1="-9" y1="191" x2="447" y2="191"/>
+    <line class="cls-8" x1="-9" y1="223" x2="447" y2="223"/>
+    <line class="cls-6" x1="-9" y1="255" x2="447" y2="255"/>
+    <line class="cls-7" x1="-9" y1="287" x2="447" y2="287"/>
+    <line class="cls-11" x1="-9" y1="319" x2="447" y2="319"/>
+    <line class="cls-9" x1="-9" y1="351" x2="447" y2="351"/>
+    <line class="cls-9" x1="-9" y1="383" x2="447" y2="383"/>
+  </g>
+  <g class="cls-18">
+    <rect class="cls-14" x="-20" y="80" width="40" height="40"/>
+    <rect class="cls-14" x="-20" y="160" width="40" height="40"/>
+    <rect class="cls-14" x="-20" width="40" height="40"/>
+    <rect class="cls-14" x="-20" y="320" width="40" height="40"/>
+    <rect class="cls-14" x="-20" y="240" width="40" height="40"/>
+  </g>
+  <g class="cls-19">
+    <g>
+      <polygon class="cls-14" points="414.94 73.78 376.35 140.61 453.52 140.61 414.94 73.78"/>
+      <polygon class="cls-16" points="414.94 140.66 376.35 207.49 453.52 207.49 414.94 140.66"/>
+      <polygon class="cls-17" points="414.94 -59.98 376.35 6.85 453.52 6.85 414.94 -59.98"/>
+      <polygon class="cls-14" points="414.94 6.9 376.35 73.73 453.52 73.73 414.94 6.9"/>
+      <polygon class="cls-15" points="414.94 207.54 376.35 274.37 453.52 274.37 414.94 207.54"/>
+      <polygon class="cls-14" points="414.94 274.42 376.35 341.24 453.52 341.24 414.94 274.42"/>
+      <polygon class="cls-15" points="414.94 341.29 376.35 408.12 453.52 408.12 414.94 341.29"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+{
+    "title": "Finanzen",
+    "balance": "Saldo",
+    "initial_balance": "Startguthaben",
+    "account_id": "Konto ID",
+    "amount": "Betrag",
+    "transaction": "Transaktion",
+    "transactions": "Transaktionen",
+    "iban": "IBAN",
+    "bic": "BIC",
+    "name": "Name",
+    "purpose": "Zweck",
+    "booking": "Buchung",
+    "valuation": "Valuta",
+    "credit": "Haben",
+    "debit": "Soll",
+    "receipt": "Beleg",
+    "close": "Schließen",
+    "new_badge": "Neu",
+    "info_badge": "Info",
+    "all_accounts": "Alle Konten",
+    "add_account": "Konto hinzufügen",
+    "select_account": "Konto auswählen",
+    "transaction_count": "{{count}} von {{total}}",
+    "search_placeholder": "Transaktionen durchsuchen",
+    "account_management": {
+        "select_account_description": "Wählen Sie ein Bankkonto aus der Seitenleiste, um dessen Details und Transaktionen anzuzeigen.",
+        "account_information": "Kontoinformationen",
+        "account_info_description": "Kontoinformationen und Transaktionsverlauf",
+        "show_transactions": "Transaktionen anzeigen",
+        "no_accounts": "Keine Bankkonten",
+        "no_accounts_description": "Erstellen Sie Ihr erstes Konto.",
+        "no_transactions": "Keine Transaktionen",
+        "no_transactions_description": "Dieses Konto hat noch keine Transaktionen.",
+        "error_loading_accounts": "Fehler beim Laden der Konten",
+        "error_loading_transactions": "Fehler beim Laden der Transaktionen",
+        "account_not_found": "Konto nicht gefunden",
+        "online_bank_account": "Online Bankkonto",
+        "cash_account": "Kasse"
+    },
+    "default_values": {
+        "person_name": "Maria Musterfrau",
+        "purpose": "Miete Tennisplatz"
+    },
+    "transaction_details": {
+        "title": "Details Transaktion",
+        "assigned_on": "Zugeordnet am",
+        "assigned_by": "Zugeordnet von",
+        "transaction_overview": "Transaktionsübersicht",
+        "financial_information": "Finanzinformationen",
+        "additional_details": "Zusätzliche Details"
+    }
+}

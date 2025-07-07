@@ -1,0 +1,10 @@
+.noIcon::-webkit-calendar-picker-indicator {
+    @apply cursor-pointer pr-2;
+
+    color: transparent;
+    background: none;
+}
+
+.noIcon::-webkit-date-and-time-value {
+    text-align: left;
+}

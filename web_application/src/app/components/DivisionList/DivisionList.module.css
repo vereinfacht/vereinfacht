@@ -1,0 +1,14 @@
+details > .summary {
+    @apply list-none;
+}
+details > .summary::-webkit-details-marker {
+    @apply hidden;
+}
+
+details .summary {
+    transition: margin 150ms ease-out;
+}
+
+details[open] .summary {
+    @apply mb-2;
+}

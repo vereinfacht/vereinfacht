@@ -1,0 +1,79 @@
+{
+    "title": {
+        "one": "Verein",
+        "other": "Vereine",
+        "label": "Name"
+    },
+    "extended_title": {
+        "label": "Erweiterter Name",
+        "help": "Der vollständige Name des Vereins"
+    },
+    "apply_title": {
+        "label": "Antragstitel",
+        "help": "Titel in der Kopfzeile des Antragsformulars"
+    },
+    "apply_url": {
+        "label": "Link zum Antragsformular"
+    },
+    "address": {
+        "label": "Adresse"
+    },
+    "zip_code": {
+        "label": "Postleitzahl"
+    },
+    "city": {
+        "label": "Ort"
+    },
+    "country": {
+        "label": "Land"
+    },
+    "email": {
+        "label": "E-Mail",
+        "help": "An diese E-Mail-Adresse werden die ausgefüllten Antragsformulare verschickt"
+    },
+    "website_url": {
+        "label": "Homepage",
+        "help": "Link zur Homepage des Vereins"
+    },
+    "primary_color": {
+        "label": "Primäre Farbe",
+        "help": "Wird für die Farbgebung des Antragsformulars verwendet"
+    },
+    "logo": {
+        "label": "Logo",
+        "help": "Wird unter anderen im Antragsformular verwendet"
+    },
+    "logo_url": {
+        "label": "URL des Logos",
+        "help": "Das Logo muss derzeit über eine externe URL eingebunden werden"
+    },
+    "privacy_statement_url": {
+        "label": "Link zur Datenschutzerklärung",
+        "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+    },
+    "contribution_statement_url": {
+        "label": "Link zur Beitragsordnung",
+        "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+    },
+    "constitution_url": {
+        "label": "Link zur Vereinssatzung",
+        "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+    },
+    "membership_start_cycle_type": {
+        "label": "Mitgliedschaftsstartzyklus",
+        "daily": "täglich",
+        "monthly": "monatlich",
+        "help": "Gibt an, zu welchem Zyklus Mitgliedschaften beginnen können"
+    },
+    "allow_voluntary_contribution": {
+        "label": "Freiwilligen Zusatzbeitrag erlauben"
+    },
+    "has_consented_media_publication_is_required": {
+        "label": "Einwilligung Medienveröffentlichung erforderlich",
+        "help": "Muss für die Antragstellung zwingend zugestimmt werden"
+    },
+    "has_consented_media_publication_default_value": {
+        "label": "Standardwert für Einwilligung Medienveröffentlichung"
+    },
+    "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf."
+}

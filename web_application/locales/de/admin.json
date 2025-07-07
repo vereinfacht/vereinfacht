@@ -1,0 +1,23 @@
+{
+    "title": "Vereinsverwaltung",
+    "dashboard": "Dashboard",
+    "welcome": "Willkommen, {{name}}.",
+    "menu": "Menü",
+    "visit_apply_form": "Formular für Mitgliedsanträge besuchen",
+    "visit_club_website": "Website besuchen",
+
+    "join_signal_chat_title": "Signal-Chat beitreten",
+    "join_signal_chat_description": "Feedback geben, Support erhalten und vereinfacht mitgestalten.",
+    "support_phone": "Telefonischer Support",
+    "support_email": "E-Mail Support",
+
+    "finances": "Finanzen",
+    "bank_and_cashier": "Bank & Kassen",
+    "invoices": "Rechnungen",
+    "donations": "Spenden",
+    "evaluations": "Auswertungen",
+    "contacts": "Kontakte",
+    "settings": "Einstellungen",
+
+    "unnamed": "Unbenannt"
+}

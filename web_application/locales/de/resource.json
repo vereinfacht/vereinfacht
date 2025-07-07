@@ -1,0 +1,10 @@
+{
+    "no_resources_found": "Keine {{name}} gefunden.",
+
+    "fields": {
+        "created_at": "Erstellt am",
+        "currency": {
+            "help": "In EUR"
+        }
+    }
+}

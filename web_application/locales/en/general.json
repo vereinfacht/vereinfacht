@@ -1,0 +1,23 @@
+{
+    "add": "add",
+    "choose": "choose",
+    "edit": "edit",
+    "save": "save",
+    "cancel": "cancel",
+    "view": "view",
+    "back": "back",
+
+    "imprint": "Imprint",
+    "made_with": "Digital product by",
+    "nothing_found": "Nothing found",
+    "privacy": "Privacy policy",
+    "search_select": "Search and select",
+    "select": "Select",
+
+    "title": "Title",
+    "email": "Email",
+    "password": "Password",
+
+    "yes": "yes",
+    "no": "no"
+}

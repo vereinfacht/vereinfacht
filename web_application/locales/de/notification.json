@@ -1,0 +1,15 @@
+{
+    "title": {
+        "default": "Information",
+        "success": "Erfolg",
+        "error": "Fehler",
+        "warning": "Warnung"
+    },
+
+    "resource": {
+        "update": {
+            "success": "{{resource}} wurde aktualisiert",
+            "error": "{{resource}} konnte nicht aktualisiert werden"
+        }
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "title": {
+        "one": "Membership",
+        "other": "Memberships"
+    },
+    "apply_to": "<0>Applying for: <1>{{membershipType}}</1></0>",
+    "bank_account_holder": {
+        "label": "Account holder",
+        "placeholder": "First and last name"
+    },
+    "bank_iban": {
+        "label": "IBAN"
+    },
+    "division_not_included": "Not included in „{{title}}“.",
+    "divisions_all": "<0>All</0> divisions selectable:",
+    "divisions_most": "<0>Most</0> divisions selectable:",
+    "divisions_none": "<0>No</0> divisions selectable:",
+    "divisions_some": "<0>Some</0> divisions selectable:",
+    "hide": "Hide",
+    "minimum_month_count": {
+        "one": "Minimum duration of <0>{{count}}</0> month",
+        "other": "Minimum duration of <0>{{count}}</0> months"
+    },
+    "per_month": "per month",
+    "person_count": {
+        "one": "For <0>one</0> person",
+        "other": "For <0>{{count}}</0> persons"
+    },
+    "person_count_range": "For <0>{{minimum}}</0> to <0>{{maximum}}</0> persons",
+    "show": "Show",
+    "started_at": {
+        "label": "Start of membership",
+        "placeholder": "DD.MM.YYYY"
+    },
+    "ended_at": {
+        "label": "End of membership",
+        "placeholder": "DD.MM.YYYY"
+    },
+    "owner": {
+        "label": "Inhaber*in"
+    },
+    "owner_email": "Owner email",
+    "notes": {
+        "label": "Other",
+        "help": "Information provided by applying person.",
+        "placeholder": "Hints, questions, notes"
+    },
+    "status": {
+        "applied": "applied",
+        "active": "active",
+        "cancelled": "cancelled",
+        "label": "Status"
+    },
+    "monthly_fee": {
+        "label": "Monthly fee",
+        "help": "Including all division fees and optional voluntary contributions"
+    },
+    "voluntary_contribution": {
+        "label": "Voluntary extra contribution",
+        "help": "An optional extra contribution that is charged in addition to the membership fee. Only added if the club has activated this feature."
+    }
+}

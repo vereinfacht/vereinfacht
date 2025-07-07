@@ -1,0 +1,7 @@
+.swiper-pagination-bullet {
+    @apply pointer-events-auto w-[6rem] cursor-pointer select-none text-center text-sm leading-tight text-slate-600;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    @apply text-slate-900;
+}

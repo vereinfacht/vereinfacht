@@ -1,0 +1,23 @@
+{
+    "add": "hinzufügen",
+    "choose": "auswählen",
+    "edit": "bearbeiten",
+    "save": "speichern",
+    "cancel": "abbrechen",
+    "view": "ansehen",
+    "back": "zurück",
+
+    "imprint": "Impressum",
+    "made_with": "Digitales Produkt von",
+    "nothing_found": "Keine Treffer",
+    "privacy": "Datenschutz",
+    "search_select": "Suchen und wählen",
+    "select": "Wählen",
+
+    "title": "Titel",
+    "email": "E-Mail",
+    "password": "Passwort",
+
+    "yes": "ja",
+    "no": "nein"
+}

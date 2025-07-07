@@ -1,0 +1,80 @@
+{
+    "title": {
+        "one": "Club",
+        "other": "Clubs",
+        "label": "Name"
+    },
+    "extended_title": {
+        "label": "Extended name",
+        "help": "The extended name is used in the header of the application form"
+    },
+    "apply_title": {
+        "label": "Application title",
+        "help": "The title of the application form"
+    },
+    "apply_url": {
+        "label": "Link to application form"
+    },
+    "address": {
+        "label": "Address"
+    },
+    "zip_code": {
+        "label": "Zip code"
+    },
+    "city": {
+        "label": "City"
+    },
+    "country": {
+        "label": "Country"
+    },
+    "email": {
+        "label": "Email",
+        "help": "Filled out application forms will be sent to this address"
+    },
+    "website_url": {
+        "label": "Homepage",
+        "help": "Link to the club's homepage"
+    },
+    "primary_color": {
+        "label": "Primary color",
+        "help": "The primary color of the club's application form"
+    },
+    "logo": {
+        "label": "Logo",
+        "help": "The logo is displayed in the header of the application form"
+    },
+    "logo_url": {
+        "label": "URL of the logo",
+        "help": "Currently the logo has to be hosted on a server and be accessible via an external URL"
+    },
+    "privacy_statement_url": {
+        "label": "Link to privacy statement",
+        "help": "Will be displayed in the application form and has to be agreed to"
+    },
+    "contribution_statement_url": {
+        "label": "Link to contribution statement",
+        "help": "Will be displayed in the application form and has to be agreed to"
+    },
+    "constitution_url": {
+        "label": "Link to constitution",
+        "help": "Will be displayed in the application form and has to be agreed to"
+    },
+    "membership_start_cycle_type": {
+        "label": "Membership start cycle",
+        "daily": "daily",
+        "monthly": "monthly",
+        "help": "The cycle in which memberships start"
+    },
+    "allow_voluntary_contribution": {
+        "label": "Allow voluntary extra contribution"
+    },
+    "has_consented_media_publication_is_required": {
+        "label": "Consent media publication required",
+        "help": "If enabled, the consent to media publication is required for all members"
+    },
+    "has_consented_media_publication_default_value": {
+        "label": "Default value for consent media publication"
+    },
+
+    "edit_hint": "Only certain fields can be edited on you own. Please contact the support if you need to change other fields."
+}

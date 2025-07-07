@@ -1,0 +1,29 @@
+{
+    "title": {
+        "one": "Membership type",
+        "other": "Membership types",
+        "label": "Name"
+    },
+    "admission_fee": {
+        "label": "Admission fee"
+    },
+    "no_admission_fee": {
+        "label": "No admission fee"
+    },
+    "monthly_fee": {
+        "label": "Monthly fee"
+    },
+    "description": {
+        "label": "Description"
+    },
+    "minimum_number_of_months": {
+        "label": "Minimum duration",
+        "help": "In months"
+    },
+    "minimum_number_of_members": {
+        "label": "Minimum number of persons"
+    },
+    "maximum_number_of_members": {
+        "label": "Maximum number of persons"
+    }
+}

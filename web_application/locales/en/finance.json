@@ -1,0 +1,53 @@
+{
+    "title": "Finances",
+    "balance": "Balance",
+    "initial_balance": "Initial Balance",
+    "account_id": "Account ID",
+    "amount": "Amount",
+    "transaction": "Transaction",
+    "transactions": "Transactions",
+    "iban": "IBAN",
+    "bic": "BIC",
+    "name": "Name",
+    "purpose": "Purpose",
+    "booking": "Booking",
+    "valuation": "Valuation",
+    "credit": "Credit",
+    "debit": "Debit",
+    "receipt": "Receipt",
+    "close": "Close",
+    "new_badge": "New",
+    "info_badge": "Info",
+    "all_accounts": "All Accounts",
+    "add_account": "Add Account",
+    "select_account": "Select an account",
+    "transaction_count": "{{count}} of {{total}}",
+    "search_placeholder": "Search transactions",
+    "account_management": {
+        "select_account_description": "Choose a finance account from the sidebar to view its details and transactions.",
+        "account_information": "Account information",
+        "account_info_description": "Account details and transaction history",
+        "show_transactions": "Show transactions",
+        "no_accounts": "No bank accounts",
+        "no_accounts_description": "Create your first account.",
+        "no_transactions": "No transactions",
+        "no_transactions_description": "This account doesn't have any transactions yet.",
+        "error_loading_accounts": "Error loading accounts",
+        "error_loading_transactions": "Error loading transactions",
+        "account_not_found": "Account not found",
+        "online_bank_account": "Online Bank Account",
+        "cash_account": "Cash"
+    },
+    "default_values": {
+        "person_name": "Maria Musterfrau",
+        "purpose": "Court rent"
+    },
+    "transaction_details": {
+        "title": "Transaction Details",
+        "assigned_on": "Assigned on",
+        "assigned_by": "Assigned by",
+        "transaction_overview": "Transaction Overview",
+        "financial_information": "Financial Information",
+        "additional_details": "Additional Details"
+    }
+}

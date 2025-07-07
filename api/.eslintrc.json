@@ -1,0 +1,28 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "strict": "error",
+        "indent": [
+            "error",
+            4
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "camelcase": "warn",
+        "eqeqeq": "warn",
+        "no-use-before-define": "error",
+        "new-cap": "error",
+        "no-undef": "error",
+        "no-unused-vars": "error",
+        "no-eq-null": "off"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "title": {
+        "one": "Mitgliedschaft",
+        "other": "Mitgliedschaften"
+    },
+    "apply_to": "<0>Antrag für: <1>{{membershipType}}</1>.</0>",
+    "bank_account_holder": {
+        "label": "Kontoinhaber:in",
+        "placeholder": "Vor- und Nachname"
+    },
+    "bank_iban": {
+        "label": "IBAN"
+    },
+    "division_not_included": "Nicht in „{{title}}“ enthalten",
+    "divisions_all": "<0>Alle</0> Sparten wählbar:",
+    "divisions_most": "<0>Großteil</0> der Sparten wählbar:",
+    "divisions_none": "<0>Keine</0> Sparten wählbar:",
+    "divisions_some": "<0>Einige</0> Sparten wählbar:",
+    "hide": "Verbergen",
+    "minimum_month_count": {
+        "one": "Minimale Laufzeit von <0>{{count}}</0> Monat",
+        "other": "Minimale Laufzeit von <0>{{count}}</0> Monaten"
+    },
+    "per_month": "pro Monat",
+    "person_count": {
+        "one": "Für <0>eine</0> Person",
+        "other": "Für <0>{{count}}</0> Personen"
+    },
+    "person_count_range": "Für <0>{{minimum}}</0> bis <0>{{maximum}}</0> Personen",
+    "show": "Anzeigen",
+    "started_at": {
+        "label": "Beginn der Mitgliedschaft",
+        "placeholder": "DD.MM.YYYY"
+    },
+    "ended_at": {
+        "label": "Ende der Mitgliedschaft",
+        "placeholder": "DD.MM.YYYY"
+    },
+    "owner": {
+        "label": "Inhaber*in"
+    },
+    "owner_email": "Inhaber*in-E-Mail",
+    "notes": {
+        "label": "Sonstiges",
+        "help": "Angaben der antragestellenden Person",
+        "placeholder": "Anmerkungen, Fragen, Notizen"
+    },
+    "status": {
+        "applied": "beantragt",
+        "active": "aktiv",
+        "cancelled": "gekündigt",
+        "label": "Status"
+    },
+    "monthly_fee": {
+        "label": "Monatlicher Beitrag",
+        "help": "Inklusive aller Spartenbeiträge und ggf. freiwilliger Zusatzbeiträge"
+    },
+    "voluntary_contribution": {
+        "label": "Freiwilliger Zusatzbeitrag",
+        "help": "Ein freiwilliger Zusatzbeitrag, der zusätzlich zum Mitgliedsbeitrag erhoben wird. Wird nur hinzugerechnet, sofern der Verein diese Funktion aktiviert hat."
+    }
+}

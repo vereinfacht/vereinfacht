@@ -1,0 +1,19 @@
+{
+    "unknown": "Unknown error",
+    "description": "We're sorry, but something went wrong. Please try again.",
+    "headline": "Something went wrong",
+    "membership_failed": "Failed to create membership, please try again.",
+    "try_again": "Try again",
+    "validation": {
+        "general": "Validation failed. Please check your input.",
+        "iban": "Please enter a valid IBAN."
+    },
+
+    "status": {
+        "404": {
+            "headline": "Error 404",
+            "subline": "Page not found",
+            "description": "The page you are looking for does not exist."
+        }
+    }
+}

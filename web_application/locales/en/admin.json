@@ -1,0 +1,23 @@
+{
+    "title": "Club management",
+    "dashboard": "Dashboard",
+    "welcome": "Welcome, {{name}}.",
+    "menu": "Menu",
+    "visit_apply_form": "Visit member application form",
+    "visit_club_website": "Visit website",
+
+    "join_signal_chat_title": "Join Signal-Chat",
+    "join_signal_chat_description": "Provide feedback, get support and help shape vereinfacht.",
+    "support_phone": "Phone support",
+    "support_email": "Email support",
+
+    "finances": "Finances",
+    "bank_and_cashier": "Bank & Cashier",
+    "invoices": "Invoices",
+    "donations": "Donations",
+    "evaluations": "Reports",
+    "contacts": "Contacts",
+    "settings": "Settings",
+
+    "unnamed": "Unnamed"
+}

@@ -1,0 +1,29 @@
+{
+    "title": {
+        "one": "Mitgliedschaftsart",
+        "other": "Mitgliedschaftsarten",
+        "label": "Name"
+    },
+    "admission_fee": {
+        "label": "Aufnahmegebühr"
+    },
+    "no_admission_fee": {
+        "label": "Keine Aufnahmegebühr"
+    },
+    "monthly_fee": {
+        "label": "Monatlicher Beitrag"
+    },
+    "description": {
+        "label": "Beschreibung"
+    },
+    "minimum_number_of_months": {
+        "label": "Minimale Laufzeit",
+        "help": "In Monaten"
+    },
+    "minimum_number_of_members": {
+        "label": "Minimale Anzahl an Personen"
+    },
+    "maximum_number_of_members": {
+        "label": "Maximale Anzahl an Personen"
+    }
+}

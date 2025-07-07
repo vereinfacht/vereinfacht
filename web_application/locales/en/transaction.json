@@ -1,0 +1,28 @@
+{
+    "title": {
+        "one": "Transaction",
+        "other": "Transactions",
+        "label": "Name"
+    },
+
+    "purpose": {
+        "label": "Purpose"
+    },
+    "booked_at": {
+        "label": "Booked At"
+    },
+    "valued_at": {
+        "label": "Valued At"
+    },
+    "amount": {
+        "label": "Amount"
+    },
+    "iban": {
+        "label": "IBAN"
+    },
+    "bic": {
+        "label": "BIC"
+    },
+
+    "all_accounts": "All Accounts"
+}

@@ -1,0 +1,19 @@
+{
+    "unknown": "Unbekannter Fehler",
+    "description": "Entschuldigung, etwas lief falsch. Bitte versuche es erneut.",
+    "headline": "Etwas ist schief gelaufen",
+    "membership_failed": "Erstellen der Mitgliedschaft fehlgeschlagen, bitte versuche es erneut.",
+    "try_again": "Nochmal versuchen",
+    "validation": {
+        "general": "Validierung fehlgeschlagen. Bitte überprüfe deine Eingaben.",
+        "iban": "Bitte gib eine gültige IBAN ein."
+    },
+
+    "status": {
+        "404": {
+            "headline": "Fehler 404",
+            "subline": "Seite nicht gefunden",
+            "description": "Die Seite, die du suchst, existiert nicht."
+        }
+    }
+}

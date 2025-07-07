@@ -1,0 +1,42 @@
+{
+    "add_person": "Person hinzufügen",
+    "confirm": "Bestätigen",
+    "division_text": "Sofern gekennzeichnet, kann die Auswahl gewisser Sparten zusätzliche monatliche Kosten verursachen.",
+    "header_subline": "Mitglied werden",
+    "headline_billing": "Zahlungsdaten",
+    "headline_division": "Sparten auswählen",
+    "headline_person": "Person {{count}}",
+    "headline_personal_data": "Angaben zur Person",
+    "headline_summary": "Zusammenfassung",
+    "intro_owner": "Diese Person ist außerdem Inhaber:in dieser Mitgliedschaft und wird in diesem Zusammhang kontaktiert werden, sofern notwendig.",
+    "next": "Weiter",
+    "persons": "Personen",
+    "steps_missing_modal": {
+        "description": "Du hast nicht alle Schritte vervollständigt. Bitte vervollständige diese und fahre anschließend fort.",
+        "ok": "Ok",
+        "title": "Fehlende Schritte"
+    },
+    "success": {
+        "headline": "<0>Mitgliedschaft <1></1><2>„{{membershipType}}”</2> erfolgreich beantragt.</0>",
+        "text": "Wir haben deinen Mitgliedsantrag erhalten und werden dir, sowie weiteren angegebenen Personen, in Kürze eine E-Mail mit den hinterlegten Daten senden. Sobald wir deinen Antrag vollständig bearbeitet haben, melden wir uns wieder bei dir."
+    },
+    "summary": {
+        "checkbox": {
+            "club_terms": "Ich stimme der <constitutionLink>Vereinssatzung</constitutionLink>, der <contributionLink>Beitragsordnung</contributionLink>, der <privacyLink>Datenschutzordnung</privacyLink> und der Abbuchung vom angegebenen Konto zu den entsprechenden Zyklen zu.",
+            "vereinfacht_terms": "Ich stimme der Verarbeitung der personenbezogenen Daten durch vereinfacht zu, habe die zugehörige <privacyLink>Datenschutzerklärung</privacyLink> gelesen und stimme diesen zu."
+        },
+        "label": {
+            "billing": "Zahlung",
+            "contact": "Kontakt",
+            "monthly_fee": "Monatliche Kosten",
+            "one_time_fee": "Einmalige Kosten",
+            "voluntary_contribution": "Freiw. Zusatzbeitrag",
+            "membership_fee": "Beitrag „{{title}}“",
+            "persons": "Personen",
+            "start_of_membership": "Beginn der Mitgliedschaft",
+            "sum": "Summe",
+            "your_membership": "Deine Mitgliedschaft"
+        }
+    },
+    "total_division_costs": "Zusätzliche monatliche Kosten durch Spartenauswahl"
+}

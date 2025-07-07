@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title" aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path data-name="layer2" d="M32.5 42a8.9 8.9 0 0 1-2.3 8.6l-8.7 8.7a8.9 8.9 0 0 1-12.6 0l-4.3-4.2a8.9 8.9 0 0 1 0-12.6l8.7-8.7a8.9 8.9 0 0 1 8.8-2.3m10-8a8.9 8.9 0 0 1 1.8-10.1l8.7-8.7a8.9 8.9 0 0 1 12.6 0L59.5 9a8.9 8.9 0 0 1 0 12.6l-8.7 8.7a8.9 8.9 0 0 1-10 1.8" fill="none" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+	</path>
+	<path data-name="layer1" fill="none" stroke-miterlimit="10" stroke-width="2" d="M15.1 26h-13m22-11V2m-8 16L6.9 8.8M49.1 38H62M40.1 49v13m8-16l9.1 9.2" stroke-linejoin="round" stroke-linecap="round">
+	</path>
+</svg>

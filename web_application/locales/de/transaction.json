@@ -1,0 +1,28 @@
+{
+    "title": {
+        "one": "Transaktion",
+        "other": "Transaktionen",
+        "label": "Name"
+    },
+
+    "purpose": {
+        "label": "Zweck"
+    },
+    "booked_at": {
+        "label": "Buchung"
+    },
+    "valued_at": {
+        "label": "Valuta"
+    },
+    "amount": {
+        "label": "Betrag"
+    },
+    "iban": {
+        "label": "IBAN"
+    },
+    "bic": {
+        "label": "BIC"
+    },
+
+    "all_accounts": "Alle Konten"
+}

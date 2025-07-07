@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-4 {
+        fill: #666;
+      }
+
+      .cls-5 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-2 {
+        stroke: #666;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="400" height="400"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-1" x="-420" width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g class="cls-3">
+    <rect class="cls-4" x="40" y="40" width="40" height="40"/>
+    <rect class="cls-4" x="120" y="40" width="40" height="40"/>
+    <rect class="cls-4" x="0" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="80" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="160" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="40" y="120" width="40" height="40"/>
+    <rect class="cls-4" x="120" y="120" width="40" height="40"/>
+    <rect class="cls-4" x="0" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="80" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="160" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="0" width="40" height="40"/>
+    <rect class="cls-4" x="80" width="40" height="40"/>
+    <rect class="cls-4" x="160" width="40" height="40"/>
+    <rect class="cls-4" x="200" y="40" width="40" height="40"/>
+    <rect class="cls-4" x="280" y="40" width="40" height="40"/>
+    <rect class="cls-4" x="360" y="40" width="40" height="40"/>
+    <rect class="cls-4" x="240" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="320" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="400" y="80" width="40" height="40"/>
+    <rect class="cls-4" x="200" y="120" width="40" height="40"/>
+    <rect class="cls-4" x="280" y="120" width="40" height="40"/>
+    <rect class="cls-4" x="360" y="120" width="40" height="40"/>
+    <rect class="cls-4" x="240" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="320" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="400" y="160" width="40" height="40"/>
+    <rect class="cls-4" x="240" width="40" height="40"/>
+    <rect class="cls-4" x="320" width="40" height="40"/>
+    <rect class="cls-4" x="400" width="40" height="40"/>
+    <rect class="cls-4" x="40" y="280" width="40" height="40"/>
+    <rect class="cls-4" x="120" y="280" width="40" height="40"/>
+    <rect class="cls-4" x="0" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="80" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="160" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="40" y="360" width="40" height="40"/>
+    <rect class="cls-4" x="120" y="360" width="40" height="40"/>
+    <rect class="cls-4" x="40" y="200" width="40" height="40"/>
+    <rect class="cls-4" x="120" y="200" width="40" height="40"/>
+    <rect class="cls-4" x="0" y="240" width="40" height="40"/>
+    <rect class="cls-4" x="80" y="240" width="40" height="40"/>
+    <rect class="cls-4" x="160" y="240" width="40" height="40"/>
+    <rect class="cls-4" x="200" y="280" width="40" height="40"/>
+    <rect class="cls-4" x="280" y="280" width="40" height="40"/>
+    <rect class="cls-4" x="360" y="280" width="40" height="40"/>
+    <rect class="cls-4" x="240" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="320" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="400" y="320" width="40" height="40"/>
+    <rect class="cls-4" x="200" y="360" width="40" height="40"/>
+    <rect class="cls-4" x="280" y="360" width="40" height="40"/>
+    <rect class="cls-4" x="360" y="360" width="40" height="40"/>
+    <rect class="cls-4" x="200" y="200" width="40" height="40"/>
+    <rect class="cls-4" x="280" y="200" width="40" height="40"/>
+    <rect class="cls-4" x="360" y="200" width="40" height="40"/>
+    <rect class="cls-4" x="240" y="240" width="40" height="40"/>
+    <rect class="cls-4" x="320" y="240" width="40" height="40"/>
+    <rect class="cls-4" x="400" y="240" width="40" height="40"/>
+  </g>
+  <g class="cls-5">
+    <g>
+      <polygon class="cls-2" points="49 322.5 17 338.5 17 298.5 49 282.5 49 322.5"/>
+      <polygon class="cls-2" points="-15 322.5 17 338.5 17 298.5 -15 282.5 -15 322.5"/>
+      <polygon class="cls-2" points="17 266.5 -15 282.5 17 298.5 49 282.5 17 266.5"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="17 267.07 -15 283.07 -15 243.07 17 227.07 17 267.07"/>
+      <polygon class="cls-2" points="-15 211.07 -47 227.07 -15 243.07 17 227.07 -15 211.07"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="49 433.5 17 449.5 17 409.5 49 393.5 49 433.5"/>
+      <polygon class="cls-2" points="-15 433.5 17 449.5 17 409.5 -15 393.5 -15 433.5"/>
+      <polygon class="cls-2" points="17 377.5 -15 393.5 17 409.5 49 393.5 17 377.5"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="17 378.07 -15 394.07 -15 354.07 17 338.07 17 378.07"/>
+      <polygon class="cls-2" points="-15 322.07 -47 338.07 -15 354.07 17 338.07 -15 322.07"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="49 99.5 17 115.5 17 75.5 49 59.5 49 99.5"/>
+      <polygon class="cls-2" points="-15 99.5 17 115.5 17 75.5 -15 59.5 -15 99.5"/>
+      <polygon class="cls-2" points="17 43.5 -15 59.5 17 75.5 49 59.5 17 43.5"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="17 44.07 -15 60.07 -15 20.07 17 4.07 17 44.07"/>
+      <polygon class="cls-2" points="-15 -11.93 -47 4.07 -15 20.07 17 4.07 -15 -11.93"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="49 210.5 17 226.5 17 186.5 49 170.5 49 210.5"/>
+      <polygon class="cls-2" points="-15 210.5 17 226.5 17 186.5 -15 170.5 -15 210.5"/>
+      <polygon class="cls-2" points="17 154.5 -15 170.5 17 186.5 49 170.5 17 154.5"/>
+    </g>
+    <g>
+      <polygon class="cls-2" points="17 155.07 -15 171.07 -15 131.07 17 115.07 17 155.07"/>
+      <polygon class="cls-2" points="-15 99.07 -47 115.07 -15 131.07 17 115.07 -15 99.07"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #666;
+      }
+
+      .cls-4 {
+        clip-path: url(#clippath-1);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="400" height="400"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-1" x="420" width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <g>
+      <circle class="cls-3" cx="10" cy="10" r="10"/>
+      <circle class="cls-3" cx="50" cy="10" r="10"/>
+      <circle class="cls-3" cx="90" cy="10" r="10"/>
+      <circle class="cls-3" cx="130" cy="10" r="10"/>
+      <circle class="cls-3" cx="170" cy="10" r="10"/>
+      <circle class="cls-3" cx="210" cy="10" r="10"/>
+      <circle class="cls-3" cx="250" cy="10" r="10"/>
+      <circle class="cls-3" cx="290" cy="10" r="10"/>
+      <circle class="cls-3" cx="330" cy="10" r="10"/>
+      <circle class="cls-3" cx="370" cy="10" r="10"/>
+      <circle class="cls-3" cx="30" cy="40" r="10"/>
+      <circle class="cls-3" cx="70" cy="40" r="10"/>
+      <circle class="cls-3" cx="110" cy="40" r="10"/>
+      <circle class="cls-3" cx="150" cy="40" r="10"/>
+      <circle class="cls-3" cx="190" cy="40" r="10"/>
+      <circle class="cls-3" cx="230" cy="40" r="10"/>
+      <circle class="cls-3" cx="270" cy="40" r="10"/>
+      <circle class="cls-3" cx="310" cy="40" r="10"/>
+      <circle class="cls-3" cx="350" cy="40" r="10"/>
+      <circle class="cls-3" cx="390" cy="40" r="10"/>
+      <circle class="cls-3" cx="10" cy="70" r="10"/>
+      <circle class="cls-3" cx="50" cy="70" r="10"/>
+      <circle class="cls-3" cx="90" cy="70" r="10"/>
+      <circle class="cls-3" cx="130" cy="70" r="10"/>
+      <circle class="cls-3" cx="170" cy="70" r="10"/>
+      <circle class="cls-3" cx="210" cy="70" r="10"/>
+      <circle class="cls-3" cx="250" cy="70" r="10"/>
+      <circle class="cls-3" cx="290" cy="70" r="10"/>
+      <circle class="cls-3" cx="330" cy="70" r="10"/>
+      <circle class="cls-3" cx="370" cy="70" r="10"/>
+      <circle class="cls-3" cx="30" cy="100" r="10"/>
+      <circle class="cls-3" cx="70" cy="100" r="10"/>
+      <circle class="cls-3" cx="110" cy="100" r="10"/>
+      <circle class="cls-3" cx="150" cy="100" r="10"/>
+      <circle class="cls-3" cx="190" cy="100" r="10"/>
+      <circle class="cls-3" cx="230" cy="100" r="10"/>
+      <circle class="cls-3" cx="270" cy="100" r="10"/>
+      <circle class="cls-3" cx="310" cy="100" r="10"/>
+      <circle class="cls-3" cx="350" cy="100" r="10"/>
+      <circle class="cls-3" cx="390" cy="100" r="10"/>
+      <circle class="cls-3" cx="10" cy="130" r="10"/>
+      <circle class="cls-3" cx="50" cy="130" r="10"/>
+      <circle class="cls-3" cx="90" cy="130" r="10"/>
+      <circle class="cls-3" cx="130" cy="130" r="10"/>
+      <circle class="cls-3" cx="170" cy="130" r="10"/>
+      <circle class="cls-3" cx="210" cy="130" r="10"/>
+      <circle class="cls-3" cx="250" cy="130" r="10"/>
+      <circle class="cls-3" cx="290" cy="130" r="10"/>
+      <circle class="cls-3" cx="330" cy="130" r="10"/>
+      <circle class="cls-3" cx="370" cy="130" r="10"/>
+      <circle class="cls-3" cx="30" cy="160" r="10"/>
+      <circle class="cls-3" cx="70" cy="160" r="10"/>
+      <circle class="cls-3" cx="110" cy="160" r="10"/>
+      <circle class="cls-3" cx="150" cy="160" r="10"/>
+      <circle class="cls-3" cx="190" cy="160" r="10"/>
+      <circle class="cls-3" cx="230" cy="160" r="10"/>
+      <circle class="cls-3" cx="270" cy="160" r="10"/>
+      <circle class="cls-3" cx="310" cy="160" r="10"/>
+      <circle class="cls-3" cx="350" cy="160" r="10"/>
+      <circle class="cls-3" cx="390" cy="160" r="10"/>
+      <circle class="cls-3" cx="10" cy="190" r="10"/>
+      <circle class="cls-3" cx="50" cy="190" r="10"/>
+      <circle class="cls-3" cx="90" cy="190" r="10"/>
+      <circle class="cls-3" cx="130" cy="190" r="10"/>
+      <circle class="cls-3" cx="170" cy="190" r="10"/>
+      <circle class="cls-3" cx="210" cy="190" r="10"/>
+      <circle class="cls-3" cx="250" cy="190" r="10"/>
+      <circle class="cls-3" cx="290" cy="190" r="10"/>
+      <circle class="cls-3" cx="330" cy="190" r="10"/>
+      <circle class="cls-3" cx="370" cy="190" r="10"/>
+      <circle class="cls-3" cx="30" cy="220" r="10"/>
+      <circle class="cls-3" cx="70" cy="220" r="10"/>
+      <circle class="cls-3" cx="110" cy="220" r="10"/>
+      <circle class="cls-3" cx="150" cy="220" r="10"/>
+      <circle class="cls-3" cx="190" cy="220" r="10"/>
+      <circle class="cls-3" cx="230" cy="220" r="10"/>
+      <circle class="cls-3" cx="270" cy="220" r="10"/>
+      <circle class="cls-3" cx="310" cy="220" r="10"/>
+      <circle class="cls-3" cx="350" cy="220" r="10"/>
+      <circle class="cls-3" cx="390" cy="220" r="10"/>
+      <circle class="cls-3" cx="10" cy="250" r="10"/>
+      <circle class="cls-3" cx="50" cy="250" r="10"/>
+      <circle class="cls-3" cx="90" cy="250" r="10"/>
+      <circle class="cls-3" cx="130" cy="250" r="10"/>
+      <circle class="cls-3" cx="170" cy="250" r="10"/>
+      <circle class="cls-3" cx="210" cy="250" r="10"/>
+      <circle class="cls-3" cx="250" cy="250" r="10"/>
+      <circle class="cls-3" cx="290" cy="250" r="10"/>
+      <circle class="cls-3" cx="330" cy="250" r="10"/>
+      <circle class="cls-3" cx="370" cy="250" r="10"/>
+      <circle class="cls-3" cx="30" cy="280" r="10"/>
+      <circle class="cls-3" cx="70" cy="280" r="10"/>
+      <circle class="cls-3" cx="110" cy="280" r="10"/>
+      <circle class="cls-3" cx="150" cy="280" r="10"/>
+      <circle class="cls-3" cx="190" cy="280" r="10"/>
+      <circle class="cls-3" cx="230" cy="280" r="10"/>
+      <circle class="cls-3" cx="270" cy="280" r="10"/>
+      <circle class="cls-3" cx="310" cy="280" r="10"/>
+      <circle class="cls-3" cx="350" cy="280" r="10"/>
+      <circle class="cls-3" cx="390" cy="280" r="10"/>
+      <circle class="cls-3" cx="10" cy="310" r="10"/>
+      <circle class="cls-3" cx="50" cy="310" r="10"/>
+      <circle class="cls-3" cx="90" cy="310" r="10"/>
+      <circle class="cls-3" cx="130" cy="310" r="10"/>
+      <circle class="cls-3" cx="170" cy="310" r="10"/>
+      <circle class="cls-3" cx="210" cy="310" r="10"/>
+      <circle class="cls-3" cx="250" cy="310" r="10"/>
+      <circle class="cls-3" cx="290" cy="310" r="10"/>
+      <circle class="cls-3" cx="330" cy="310" r="10"/>
+      <circle class="cls-3" cx="370" cy="310" r="10"/>
+      <circle class="cls-3" cx="30" cy="340" r="10"/>
+      <circle class="cls-3" cx="70" cy="340" r="10"/>
+      <circle class="cls-3" cx="110" cy="340" r="10"/>
+      <circle class="cls-3" cx="150" cy="340" r="10"/>
+      <circle class="cls-3" cx="190" cy="340" r="10"/>
+      <circle class="cls-3" cx="230" cy="340" r="10"/>
+      <circle class="cls-3" cx="270" cy="340" r="10"/>
+      <circle class="cls-3" cx="310" cy="340" r="10"/>
+      <circle class="cls-3" cx="350" cy="340" r="10"/>
+      <circle class="cls-3" cx="390" cy="340" r="10"/>
+      <circle class="cls-3" cx="10" cy="370" r="10"/>
+      <circle class="cls-3" cx="50" cy="370" r="10"/>
+      <circle class="cls-3" cx="90" cy="370" r="10"/>
+      <circle class="cls-3" cx="130" cy="370" r="10"/>
+      <circle class="cls-3" cx="170" cy="370" r="10"/>
+      <circle class="cls-3" cx="210" cy="370" r="10"/>
+      <circle class="cls-3" cx="250" cy="370" r="10"/>
+      <circle class="cls-3" cx="290" cy="370" r="10"/>
+      <circle class="cls-3" cx="330" cy="370" r="10"/>
+      <circle class="cls-3" cx="370" cy="370" r="10"/>
+      <circle class="cls-3" cx="30" cy="400" r="10"/>
+      <circle class="cls-3" cx="70" cy="400" r="10"/>
+      <circle class="cls-3" cx="110" cy="400" r="10"/>
+      <circle class="cls-3" cx="150" cy="400" r="10"/>
+      <circle class="cls-3" cx="190" cy="400" r="10"/>
+      <circle class="cls-3" cx="230" cy="400" r="10"/>
+      <circle class="cls-3" cx="270" cy="400" r="10"/>
+      <circle class="cls-3" cx="310" cy="400" r="10"/>
+      <circle class="cls-3" cx="350" cy="400" r="10"/>
+      <circle class="cls-3" cx="390" cy="400" r="10"/>
+    </g>
+  </g>
+  <g class="cls-4">
+    <polygon class="cls-3" points="400.48 22 442.48 -78 402.48 -78 360.48 22 402.48 122 360.48 222 402.48 322 360.48 422 402.48 522 442.48 522 400.48 422 442.48 322 400.48 222 442.48 122 400.48 22"/>
+  </g>
+</svg>

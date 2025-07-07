@@ -1,0 +1,32 @@
+{
+    "defaultLocale": "en",
+    "locales": ["en", "de"],
+    "pages": {
+        "*": [
+            "general",
+            "member",
+            "membership",
+            "resource",
+            "application",
+            "error",
+            "membership_type",
+            "payment_period"
+        ],
+        "rgx:/admin/.*": [
+            "admin",
+            "auth",
+            "club",
+            "division",
+            "resource",
+            "notification",
+            "membership_type",
+            "payment_period",
+            "finance",
+            "finance_account",
+            "transaction",
+            "receipt",
+            "user"
+        ],
+        "rgx:/admin/[resource]/.*": ["admin", "auth", "membership"]
+    }
+}

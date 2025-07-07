@@ -1,0 +1,22 @@
+.swiper-slide::after {
+    @apply pointer-events-none absolute inset-0 bg-white/0 transition-colors;
+    content: '';
+}
+
+.swiper-slide:not(:global .swiper-slide-active) {
+    @apply shadow-slate-900/[0.02];
+}
+
+.swiper-slide:not(:global .swiper-slide-active)::after {
+    @apply bg-white/20;
+}
+
+.swiper-slide:global(.swiper-slide-prev),
+.swiper-slide:global(.swiper-slide-next) {
+    @apply shadow-slate-900/[0.05];
+}
+
+.swiper-slide:global(.swiper-slide-prev)::after,
+.swiper-slide:global(.swiper-slide-next)::after {
+    @apply bg-white/10;
+}

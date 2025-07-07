@@ -1,0 +1,42 @@
+{
+    "add_person": "Add person",
+    "confirm": "Confirm",
+    "division_text": "If marked, the selection of certain divisions may incur additional monthly charges.",
+    "header_subline": "Become a member",
+    "headline_billing": "Billing information",
+    "headline_division": "Choose divisions",
+    "headline_person": "Person {{count}}",
+    "headline_personal_data": "Personal data",
+    "headline_summary": "Summary",
+    "intro_owner": "This person also acts as owner of the membership and will be contacted regarding this membership if neccessary.",
+    "next": "Next",
+    "persons": "Persons",
+    "steps_missing_modal": {
+        "description": "You have not completed all steps. Please complete all steps before you continue.",
+        "ok": "Ok",
+        "title": "Missing steps"
+    },
+    "success": {
+        "headline": "<0>Successfully applied for <1></1><2>„{{membershipType}}”</2> membership.</0>",
+        "text": "We’ve received your application and will send you an email with your provided data shortly. As soon as we’ve fully processed your application, we will come back to you again."
+    },
+    "summary": {
+        "checkbox": {
+            "club_terms": "I agree to the <constitutionLink>club constitution</constitutionLink>, <contributionLink>contribution terms</contributionLink>, <privacyLink>privacy policy</privacyLink> and the debit of the provided bank account to the stated cycle.",
+            "vereinfacht_terms": "I agree to the data processing by vereinfacht and have read and agree to their <privacyLink>privacy policy and terms</privacyLink>."
+        },
+        "label": {
+            "billing": "Billing",
+            "contact": "Contact",
+            "monthly_fee": "Monthly fee",
+            "one_time_fee": "One-time fee",
+            "voluntary_contribution": "Voluntary contribution",
+            "membership_fee": "Fee „{{title}}“",
+            "persons": "Persons",
+            "start_of_membership": "Start of membership",
+            "sum": "Sum",
+            "your_membership": "Your membership"
+        }
+    },
+    "total_division_costs": "Additional monthly fee resulting from division selection"
+}
