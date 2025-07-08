@@ -55,6 +55,9 @@ JsonApiRoute::server('v1')
                 $actions->post('logout');
             });
 
+        $server->resource('finance-contacts', JsonApiController::class)
+            ->only('index');
+
         $server->resource('finance-accounts', JsonApiController::class)
             ->relationships(function ($relations) {
                 $relations->hasOne('club', JsonApiController::class);

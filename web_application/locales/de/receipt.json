@@ -3,5 +3,20 @@
         "one": "Beleg",
         "other": "Belege",
         "label": "Name"
+    },
+    "type": {
+        "invoice": "Rechnung",
+        "ingoing_payment": "Eingangszahlung",
+        "outgoing_payment": "Ausgangszahlung",
+        "label": "Typ"
+    },
+    "name": {
+        "label": "Name"
+    },
+    "number": {
+        "label": "Nummer"
+    },
+    "total_amount": {
+        "label": "Gesamtbetrag"
     }
 }

@@ -26,6 +26,7 @@ class FakeFinanceAccountSeeder extends Seeder
                     'title' => 'Sparkasse Beiträge',
                     'club_id' => $club->id,
                     'finance_account_type_id' => FinanceAccountType::where('title->en', 'Bank account')->first()->id,
+                    'initial_balance' => 1000,
                 ]);
             FinanceAccount::factory()
                 ->has(

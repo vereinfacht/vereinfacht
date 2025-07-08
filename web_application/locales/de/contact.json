@@ -1,0 +1,37 @@
+{
+    "title": {
+        "one": "Kontakt",
+        "other": "Kontakte",
+        "label": "Name"
+    },
+    "type": {
+        "person": "Einzelperson",
+        "company": "Firma",
+        "label": "Typ"
+    },
+    "email": {
+        "label": "E-Mail"
+    },
+    "phone": {
+        "label": "Telefon"
+    },
+    "street": {
+        "label": "Straße"
+    },
+    "postal_code": {
+        "label": "Postleitzahl"
+    },
+    "city": {
+        "label": "Stadt"
+    },
+    "created_at": {
+        "label": "Erstellt am"
+    },
+    "gender": "Geschlecht",
+    "gender_options": {
+        "female": "weiblich",
+        "male": "männlich",
+        "none": "keine Angabe",
+        "other": "divers"
+    }
+}

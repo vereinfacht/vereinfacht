@@ -13,7 +13,7 @@ class TransactionTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_api_can_get_transactions_of_a_club()
+    public function test_club_can_only_get_own_transactions()
     {
         $club = Club::factory()->create();
         $financeAccountType = FinanceAccountType::factory()->create([

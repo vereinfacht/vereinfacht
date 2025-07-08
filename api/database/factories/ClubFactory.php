@@ -20,8 +20,8 @@ class ClubFactory extends Factory
         $urlFormattedPrimaryColor = strtoupper(ltrim($primaryColor, '#'));
 
         $attributes = [
-            'title' => $this->faker->company(),
-            'extended_title' => $this->faker->company().' '.$this->faker->companySuffix(),
+            'title' => $this->faker->unique()->company(),
+            'extended_title' => $this->faker->company() . ' ' . $this->faker->companySuffix(),
             'address' => $this->faker->streetAddress(),
             'zip_code' => $this->faker->postcode(),
             'city' => $this->faker->city(),

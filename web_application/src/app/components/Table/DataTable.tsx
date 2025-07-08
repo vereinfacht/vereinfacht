@@ -80,23 +80,25 @@ export function DataTable<TData extends Model, TValue>({
                                         )}
                                     </TableCell>
                                 ))}
-                                <TableCell
-                                    key="actions"
-                                    className="flex items-center justify-end gap-4"
-                                >
-                                    {canEdit && (
-                                        <TableAction
-                                            type="edit"
-                                            href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                        />
-                                    )}
-                                    {canView && (
-                                        <TableAction
-                                            type="view"
-                                            href={`/admin/${resourceName}/${row.original.id}`}
-                                        />
-                                    )}
-                                </TableCell>
+                                {canEdit || canView ? (
+                                    <TableCell
+                                        key="actions"
+                                        className="flex items-center justify-end gap-4"
+                                    >
+                                        {canEdit && (
+                                            <TableAction
+                                                type="edit"
+                                                href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                            />
+                                        )}
+                                        {canView && (
+                                            <TableAction
+                                                type="view"
+                                                href={`/admin/${resourceName}/${row.original.id}`}
+                                            />
+                                        )}
+                                    </TableCell>
+                                ) : null}
                             </TableRow>
                         ))
                     ) : (

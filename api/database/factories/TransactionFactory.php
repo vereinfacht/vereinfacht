@@ -27,8 +27,8 @@ class TransactionFactory extends Factory
             'amount' => $this->faker->randomFloat(2, -1000, 1000),
             'valued_at' => $valuedAt,
             'booked_at' => $bookedAt,
-            'club_id' => Club::factory()->create()->id,
-            'finance_account_id' => FinanceAccount::factory()->create()->id,
+            'club_id' => Club::factory(),
+            'finance_account_id' => FinanceAccount::factory(),
         ];
     }
 }

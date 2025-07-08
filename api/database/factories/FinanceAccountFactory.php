@@ -33,8 +33,9 @@ class FinanceAccountFactory extends Factory
             'bic' => $this->faker->swiftBicNumber(),
             'starts_at' => $this->faker->dateTime(),
             'initial_balance' => $this->faker->randomFloat(2, -1000, 1000),
-            'club_id' => Club::factory()->create()->id,
-            'finance_account_type_id' => FinanceAccountType::factory()->create()->id,
+            'club_id' => Club::factory(),
+            'finance_account_type_id' => FinanceAccountType::factory(),
+
         ];
     }
 }
