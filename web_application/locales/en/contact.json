@@ -9,6 +9,12 @@
         "company": "Company",
         "label": "Type"
     },
+    "company_name": {
+        "label": "Company"
+    },
+    "full_name": {
+        "label": "Name"
+    },
     "email": {
         "label": "E-Mail"
     },

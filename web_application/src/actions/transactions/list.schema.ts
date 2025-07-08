@@ -1,12 +1,6 @@
 import { z } from 'zod';
 
 export const listTransactionsSortingOptions = [
-    'id',
-    '-id',
-    'createdAt',
-    '-createdAt',
-    'updatedAt',
-    '-updatedAt',
     'bookedAt',
     '-bookedAt',
     'valuedAt',

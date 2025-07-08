@@ -1,3 +1,4 @@
+import { listFinanceContactsSortingOptions } from '@/actions/financeContacts/list.schema';
 import { listTransactionsSortingOptions } from '@/actions/transactions/list.schema';
 import {
     createLoader,
@@ -16,10 +17,26 @@ export const listTransactionSearchParams = {
     accountId: parseAsString,
 };
 
+export const listFinanceContactSearchParams = {
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(listFinanceContactsSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListTransactionsSearchParams = createLoader(
     listTransactionSearchParams,
 );
 
+export const loadListFinanceContactsSearchParams = createLoader(
+    listFinanceContactSearchParams,
+);
+
 export type ListTransactionSearchParamsType = inferParserType<
     typeof listTransactionSearchParams
+>;
+
+export type ListFinanceContactSearchParamsType = inferParserType<
+    typeof listFinanceContactSearchParams
 >;

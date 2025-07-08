@@ -3,13 +3,9 @@ import {
     ListTransactionSearchParamsType,
     loadListTransactionsSearchParams,
 } from '@/utils/search-params';
-import { type SearchParams } from 'nuqs/server';
 import AccountsList from './_components/accounts-list';
 import TransactionsList from './_components/transactions-list';
-
-type Props = {
-    searchParams: Promise<SearchParams>;
-};
+import { WithSearchParams } from '@/types/params';
 
 async function getTransactions(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
@@ -23,7 +19,7 @@ async function getTransactions(params: ListTransactionSearchParamsType) {
     return response || [];
 }
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListTransactionsSearchParams(searchParams);
     const transactions = await getTransactions(params);
 

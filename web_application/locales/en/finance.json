@@ -6,6 +6,7 @@
     "amount": "Amount",
     "transaction": "Transaction",
     "transactions": "Transactions",
+    "contacts": "Contacts",
     "iban": "IBAN",
     "bic": "BIC",
     "name": "Name",

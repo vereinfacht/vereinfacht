@@ -3068,10 +3068,14 @@
                                 "enum": [
                                     "id",
                                     "-id",
-                                    "createdAt",
-                                    "-createdAt",
-                                    "updatedAt",
-                                    "-updatedAt"
+                                    "companyName",
+                                    "-companyName",
+                                    "city",
+                                    "-city",
+                                    "fullName",
+                                    "-fullName",
+                                    "fullName",
+                                    "-fullName"
                                 ],
                                 "type": "string"
                             }
@@ -6828,18 +6832,23 @@
                     "attributes": {
                         "type": "object",
                         "properties": {
-                            "last_name": {
-                                "title": "last_name",
+                            "lastName": {
+                                "title": "lastName",
                                 "type": "string",
-                                "example": "Marks"
+                                "example": "Pfeffer"
                             },
-                            "first_name": {
-                                "title": "first_name",
+                            "firstName": {
+                                "title": "firstName",
                                 "type": "string",
-                                "example": "Stanford"
+                                "example": "Jewel"
                             },
-                            "company_name": {
-                                "title": "company_name",
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Jewel Pfeffer"
+                            },
+                            "companyName": {
+                                "title": "companyName",
                                 "type": "string"
                             },
                             "gender": {
@@ -6850,32 +6859,32 @@
                             "address": {
                                 "title": "address",
                                 "type": "string",
-                                "example": "7128 Moore Pines"
+                                "example": "5096 Reynolds Shore Apt. 863"
                             },
-                            "zip_code": {
-                                "title": "zip_code",
+                            "zipCode": {
+                                "title": "zipCode",
                                 "type": "string",
-                                "example": "23330-1505"
+                                "example": "65642-4518"
                             },
                             "city": {
                                 "title": "city",
                                 "type": "string",
-                                "example": "Crawfordfort"
+                                "example": "Amandaport"
                             },
                             "country": {
                                 "title": "country",
                                 "type": "string",
-                                "example": "Suriname"
+                                "example": "Faroe Islands"
                             },
-                            "phone_number": {
-                                "title": "phone_number",
+                            "phoneNumber": {
+                                "title": "phoneNumber",
                                 "type": "string",
-                                "example": "+18704972276"
+                                "example": "+14582898852"
                             },
                             "email": {
                                 "title": "email",
                                 "type": "string",
-                                "example": "bill62@example.com"
+                                "example": "haley.luigi@example.org"
                             },
                             "type": {
                                 "title": "type",
@@ -6886,13 +6895,13 @@
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-07T07:54:32.000000Z"
+                                "example": "2025-07-07T10:04:26.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-07T07:54:32.000000Z"
+                                "example": "2025-07-07T10:04:26.000000Z"
                             }
                         }
                     },

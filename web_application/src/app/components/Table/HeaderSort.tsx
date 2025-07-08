@@ -36,7 +36,7 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
                 ) : matchedSort === columnId ? (
                     <ArrowUp className="h-4 w-4 stroke-slate-900" />
                 ) : (
-                    <ArrowUpDown className="h-4 w-4 stroke-current" />
+                    <ArrowUpDown className="h-4 w-4 stroke-slate-500" />
                 )}
             </Button>
         </span>

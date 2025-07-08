@@ -1,10 +1,12 @@
 import { z } from 'zod';
 
 export const listFinanceContactsSortingOptions = [
-    'createdAt',
-    '-createdAt',
-    'updatedAt',
-    '-updatedAt',
+    'fullName',
+    '-fullName',
+    'companyName',
+    '-companyName',
+    'city',
+    '-city',
 ] as const;
 
 export const listFinanceContactsSchema = z.object({

@@ -1,60 +1,65 @@
 'use client';
 
 import { DataTable } from '@/app/components/Table/DataTable';
+import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
+import { TFinanceContactDeserialized } from '@/types/resources';
+import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
-    contacts: any[];
+    contacts: TFinanceContactDeserialized[];
 }
 
 export default function ContactTable({ contacts }: Props) {
     const { t } = useTranslation('contact');
 
-    const columns: ColumnDef<any>[] = [
+    const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
             accessorKey: 'type',
             header: t('type.label'),
             cell: ({ row }) => {
                 const { type } = row.original;
-                return type === 'company' ? <CircleUserRound /> : <Building2 />;
+                return type === 'person' ? <CircleUserRound /> : <Building2 />;
             },
         },
         {
-            accessorKey: 'name',
-            header: t('title.label'),
-            cell: ({ row }) => {
-                const { type, first_name, last_name, company_name } =
-                    row.original;
-                const name =
-                    type === 'company'
-                        ? company_name
-                        : `${first_name} ${last_name}`;
-                return <TextCell>{name}</TextCell>;
-            },
+            accessorKey: 'fullName',
+            header: ({ column }) => (
+                <HeaderSort
+                    parser={listFinanceContactSearchParams.sort as any}
+                    columnId={column.id}
+                    columnTitle={t('full_name.label')}
+                />
+            ),
+            cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
         },
         {
-            accessorKey: 'gender',
-            header: t('gender'),
-            cell: ({ row }) => {
-                const { gender } = row.original;
-
-                switch (gender) {
-                    case 'male':
-                        return <TextCell>{t('gender_options.male')}</TextCell>;
-                    case 'female':
-                        return (
-                            <TextCell>{t('gender_options.female')}</TextCell>
-                        );
-                    case 'other':
-                        return <TextCell>{t('gender_options.other')}</TextCell>;
-                    default:
-                        return <TextCell>{t('gender_options.none')}</TextCell>;
-                }
-            },
+            accessorKey: 'companyName',
+            header: ({ column }) => (
+                <HeaderSort
+                    parser={listFinanceContactSearchParams.sort as any}
+                    columnId={column.id}
+                    columnTitle={t('company_name.label')}
+                />
+            ),
+            cell: ({ row }) => (
+                <TextCell>{row.getValue('companyName')}</TextCell>
+            ),
+        },
+        {
+            accessorKey: 'city',
+            header: ({ column }) => (
+                <HeaderSort
+                    parser={listFinanceContactSearchParams.sort as any}
+                    columnId={column.id}
+                    columnTitle={t('city.label')}
+                />
+            ),
+            cell: ({ row }) => <TextCell>{row.getValue('city')}</TextCell>,
         },
         {
             accessorKey: 'email',

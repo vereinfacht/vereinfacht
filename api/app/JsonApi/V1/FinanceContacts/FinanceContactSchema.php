@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\FinanceContacts;
 
+use App\JsonApi\Sorting\FullNameSort;
 use App\Models\FinanceContact;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -26,19 +27,20 @@ class FinanceContactSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('last_name'),
-            Str::make('first_name'),
-            Str::make('company_name'),
+            Str::make('lastName'),
+            Str::make('firstName'),
+            Str::make('fullName'),
+            Str::make('companyName')->sortable(),
             Str::make('gender'),
             Str::make('address'),
-            Str::make('zip_code'),
-            Str::make('city'),
+            Str::make('zipCode'),
+            Str::make('city')->sortable(),
             Str::make('country'),
-            Str::make('phone_number'),
+            Str::make('phoneNumber'),
             Str::make('email'),
             Str::make('type'),
-            DateTime::make('createdAt')->sortable()->readOnly(),
-            DateTime::make('updatedAt')->sortable()->readOnly(),
+            DateTime::make('createdAt')->readOnly(),
+            DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
         ];
     }
@@ -59,5 +61,12 @@ class FinanceContactSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function sortables(): iterable
+    {
+        return [
+            FullNameSort::make('fullName'),
+        ];
     }
 }
