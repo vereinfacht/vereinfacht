@@ -1,0 +1,30 @@
+{
+    "title": {
+        "one": "Contact",
+        "other": "Contacts",
+        "label": "Name"
+    },
+    "type": {
+        "person": "Individual",
+        "company": "Company",
+        "label": "Type"
+    },
+    "email": {
+        "label": "E-Mail"
+    },
+    "phone": {
+        "label": "Phone"
+    },
+    "street": {
+        "label": "Street"
+    },
+    "postal_code": {
+        "label": "Postal Code"
+    },
+    "city": {
+        "label": "City"
+    },
+    "created_at": {
+        "label": "Created At"
+    }
+}

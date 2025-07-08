@@ -3,6 +3,8 @@ import { components } from '@/types/schema_v1';
 // Raw finance domain types
 export type TFinanceAccountRaw =
     components['schemas']['resources.finance-accounts.resource.fetch'];
+export type TFinanceContactRaw =
+    components['schemas']['resources.finance-contacts.resource.fetch'];
 export type TFinanceAccountTypeRaw =
     components['schemas']['resources.finance-account-types.resource.fetch'];
 export type TTransactionRaw =
@@ -14,6 +16,11 @@ export type TFinanceAccountDeserialized = TFinanceAccountRaw['attributes'] & {
     transactions?: TTransactionDeserialized[];
     type?: TFinanceAccountTypeDeserialized;
 };
+
+export type TFinanceContactDeserialized = TFinanceContactRaw['attributes'] & {
+    id: string;
+};
+
 export type TFinanceAccountTypeDeserialized =
     TFinanceAccountTypeRaw['attributes'] & {
         id: string;

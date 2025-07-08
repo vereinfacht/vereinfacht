@@ -7,6 +7,7 @@ use App\JsonApi\V1\DivisionMembershipTypes\DivisionMembershipTypeSchema;
 use App\JsonApi\V1\Divisions\DivisionSchema;
 use App\JsonApi\V1\FinanceAccounts\FinanceAccountSchema;
 use App\JsonApi\V1\FinanceAccountTypes\FinanceAccountTypeSchema;
+use App\JsonApi\V1\FinanceContacts\FinanceContactSchema;
 use App\JsonApi\V1\Members\MemberSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
@@ -16,6 +17,7 @@ use App\JsonApi\V1\Users\UserSchema;
 use App\Models\Club;
 use App\Models\Division;
 use App\Models\FinanceAccount;
+use App\Models\FinanceContact;
 use App\Models\Member;
 use App\Models\Membership;
 use App\Models\MembershipType;
@@ -109,6 +111,7 @@ class Server extends BaseServer
             FinanceAccountSchema::class,
             FinanceAccountTypeSchema::class,
             TransactionSchema::class,
+            FinanceContactSchema::class,
         ];
     }
 
@@ -122,8 +125,9 @@ class Server extends BaseServer
         Member::addGlobalScope(new ClubScope);
         Division::addGlobalScope(new ClubScope);
         Membership::addGlobalScope(new ClubScope);
+        Transaction::addGlobalScope(new ClubScope);
         MembershipType::addGlobalScope(new ClubScope);
         FinanceAccount::addGlobalScope(new ClubScope);
-        Transaction::addGlobalScope(new ClubScope);
+        FinanceContact::addGlobalScope(new ClubScope);
     }
 }

@@ -49,10 +49,10 @@ export default async function Navigation() {
                 //     href: '/admin/dashboard',
                 //     title: t('admin:evaluations'),
                 // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:contacts'),
-                // },
+                {
+                    href: '/admin/finances/contacts',
+                    title: t('admin:contacts'),
+                },
             ],
         },
         {

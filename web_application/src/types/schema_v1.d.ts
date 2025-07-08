@@ -310,6 +310,23 @@ export interface paths {
         patch: operations["clubs.financeAccounts.update"];
         trace?: never;
     };
+    "/finance-contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all finance-contacts */
+        get: operations["finance-contacts.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/finance-accounts": {
         parameters: {
             query?: never;
@@ -1671,6 +1688,97 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Finance-contact/Fetch */
+        "resources.finance-contacts.resource.fetch": {
+            /**
+             * type
+             * @default finance-contacts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * last_name
+                 * @example Marks
+                 */
+                last_name?: string;
+                /**
+                 * first_name
+                 * @example Stanford
+                 */
+                first_name?: string;
+                /** company_name */
+                company_name?: string;
+                /**
+                 * gender
+                 * @example female
+                 */
+                gender?: string;
+                /**
+                 * address
+                 * @example 7128 Moore Pines
+                 */
+                address?: string;
+                /**
+                 * zip_code
+                 * @example 23330-1505
+                 */
+                zip_code?: string;
+                /**
+                 * city
+                 * @example Crawfordfort
+                 */
+                city?: string;
+                /**
+                 * country
+                 * @example Suriname
+                 */
+                country?: string;
+                /**
+                 * phone_number
+                 * @example +18704972276
+                 */
+                phone_number?: string;
+                /**
+                 * email
+                 * @example bill62@example.com
+                 */
+                email?: string;
+                /**
+                 * type
+                 * @example person
+                 */
+                type?: string;
+                /**
+                 * createdAt
+                 * @example 2025-07-07T07:54:32.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-07-07T07:54:32.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
                          */
                         self?: string;
                     };
@@ -4073,6 +4181,45 @@ export interface operations {
             401: components["responses"]["401"];
             404: components["responses"]["404"];
             422: components["responses"]["422"];
+        };
+    };
+    "finance-contacts.index": {
+        parameters: {
+            query?: {
+                /** @description The page size for paginated results */
+                "page[size]"?: number;
+                /** @description The page number for paginated results */
+                "page[number]"?: number;
+                sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
         };
     };
     "finance-accounts.index": {
