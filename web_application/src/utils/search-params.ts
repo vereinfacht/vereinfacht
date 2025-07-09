@@ -4,9 +4,14 @@ import {
     createLoader,
     inferParserType,
     parseAsArrayOf,
+    parseAsInteger,
     parseAsString,
     parseAsStringLiteral,
 } from 'nuqs/server';
+
+export const paginationSearchParams = {
+    page: parseAsInteger.withDefault(1).withOptions({ shallow: false }),
+};
 
 export const listTransactionSearchParams = {
     sort: parseAsArrayOf(
@@ -23,6 +28,7 @@ export const listFinanceContactSearchParams = {
     ).withOptions({
         shallow: false,
     }),
+    page: paginationSearchParams.page,
 };
 
 export const loadListTransactionsSearchParams = createLoader(

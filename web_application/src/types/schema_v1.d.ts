@@ -1705,17 +1705,22 @@ export interface components {
             id: string;
             attributes: {
                 /**
-                 * last_name
-                 * @example Marks
+                 * lastName
+                 * @example Pfeffer
                  */
-                last_name?: string;
+                lastName?: string;
                 /**
-                 * first_name
-                 * @example Stanford
+                 * firstName
+                 * @example Jewel
                  */
-                first_name?: string;
-                /** company_name */
-                company_name?: string;
+                firstName?: string;
+                /**
+                 * fullName
+                 * @example Jewel Pfeffer
+                 */
+                fullName?: string;
+                /** companyName */
+                companyName?: string;
                 /**
                  * gender
                  * @example female
@@ -1723,32 +1728,32 @@ export interface components {
                 gender?: string;
                 /**
                  * address
-                 * @example 7128 Moore Pines
+                 * @example 5096 Reynolds Shore Apt. 863
                  */
                 address?: string;
                 /**
-                 * zip_code
-                 * @example 23330-1505
+                 * zipCode
+                 * @example 65642-4518
                  */
-                zip_code?: string;
+                zipCode?: string;
                 /**
                  * city
-                 * @example Crawfordfort
+                 * @example Amandaport
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Suriname
+                 * @example Faroe Islands
                  */
                 country?: string;
                 /**
-                 * phone_number
-                 * @example +18704972276
+                 * phoneNumber
+                 * @example +14582898852
                  */
-                phone_number?: string;
+                phoneNumber?: string;
                 /**
                  * email
-                 * @example bill62@example.com
+                 * @example haley.luigi@example.org
                  */
                 email?: string;
                 /**
@@ -1758,12 +1763,12 @@ export interface components {
                 type?: string;
                 /**
                  * createdAt
-                 * @example 2025-07-07T07:54:32.000000Z
+                 * @example 2025-07-07T10:04:26.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-07-07T07:54:32.000000Z
+                 * @example 2025-07-07T10:04:26.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4190,7 +4195,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "companyName" | "-companyName" | "city" | "-city" | "fullName" | "-fullName" | "fullName" | "-fullName")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
             };

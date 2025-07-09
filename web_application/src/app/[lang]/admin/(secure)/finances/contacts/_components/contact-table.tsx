@@ -12,9 +12,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     contacts: TFinanceContactDeserialized[];
+    totalPages: number;
 }
 
-export default function ContactTable({ contacts }: Props) {
+export default function ContactTable({ contacts, totalPages }: Props) {
     const { t } = useTranslation('contact');
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
@@ -73,6 +74,7 @@ export default function ContactTable({ contacts }: Props) {
             data={contacts}
             columns={columns}
             resourceName={'contacts' as ResourceName}
+            totalPages={totalPages}
         />
     );
 }

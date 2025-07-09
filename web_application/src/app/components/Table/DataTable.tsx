@@ -15,10 +15,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/app/components/Table/Table';
+import { ResourceName } from '@/resources/resource';
+import { Model } from '@/types/models';
 import Text from '../Text/Text';
 import { TableAction } from './TableAction';
-import { Model } from '@/types/models';
-import { ResourceName } from '@/resources/resource';
+import TablePagination from './TablePagination';
 
 interface DataTableProps<TData, TValue> {
     data: TData[];
@@ -26,6 +27,7 @@ interface DataTableProps<TData, TValue> {
     resourceName: ResourceName;
     canView?: boolean;
     canEdit?: boolean;
+    totalPages?: number;
 }
 
 export function DataTable<TData extends Model, TValue>({
@@ -34,6 +36,7 @@ export function DataTable<TData extends Model, TValue>({
     resourceName,
     canView = false,
     canEdit = false,
+    totalPages,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -42,77 +45,82 @@ export function DataTable<TData extends Model, TValue>({
     });
 
     return (
-        <div className="rounded-md border">
-            <Table>
-                <TableHeader>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => {
-                                return (
-                                    <TableHead key={header.id}>
-                                        {header.isPlaceholder ? null : (
-                                            <Text preset="label">
-                                                {flexRender(
-                                                    header.column.columnDef
-                                                        .header,
-                                                    header.getContext(),
-                                                )}
-                                            </Text>
-                                        )}
-                                    </TableHead>
-                                );
-                            })}
-                        </TableRow>
-                    ))}
-                </TableHeader>
-                <TableBody>
-                    {table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map((row) => (
-                            <TableRow
-                                key={row.id}
-                                data-state={row.getIsSelected() && 'selected'}
-                            >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext(),
-                                        )}
-                                    </TableCell>
-                                ))}
-                                {canEdit || canView ? (
-                                    <TableCell
-                                        key="actions"
-                                        className="flex items-center justify-end gap-4"
-                                    >
-                                        {canEdit && (
-                                            <TableAction
-                                                type="edit"
-                                                href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                            />
-                                        )}
-                                        {canView && (
-                                            <TableAction
-                                                type="view"
-                                                href={`/admin/${resourceName}/${row.original.id}`}
-                                            />
-                                        )}
-                                    </TableCell>
-                                ) : null}
+        <>
+            <div className="rounded-md border">
+                <Table>
+                    <TableHeader>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <TableRow key={headerGroup.id}>
+                                {headerGroup.headers.map((header) => {
+                                    return (
+                                        <TableHead key={header.id}>
+                                            {header.isPlaceholder ? null : (
+                                                <Text preset="label">
+                                                    {flexRender(
+                                                        header.column.columnDef
+                                                            .header,
+                                                        header.getContext(),
+                                                    )}
+                                                </Text>
+                                            )}
+                                        </TableHead>
+                                    );
+                                })}
                             </TableRow>
-                        ))
-                    ) : (
-                        <TableRow>
-                            <TableCell
-                                colSpan={columns.length}
-                                className="h-24 text-center"
-                            >
-                                No results.
-                            </TableCell>
-                        </TableRow>
-                    )}
-                </TableBody>
-            </Table>
-        </div>
+                        ))}
+                    </TableHeader>
+                    <TableBody>
+                        {table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    data-state={
+                                        row.getIsSelected() && 'selected'
+                                    }
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id}>
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext(),
+                                            )}
+                                        </TableCell>
+                                    ))}
+                                    {canEdit || canView ? (
+                                        <TableCell
+                                            key="actions"
+                                            className="flex items-center justify-end gap-4"
+                                        >
+                                            {canEdit && (
+                                                <TableAction
+                                                    type="edit"
+                                                    href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                />
+                                            )}
+                                            {canView && (
+                                                <TableAction
+                                                    type="view"
+                                                    href={`/admin/${resourceName}/${row.original.id}`}
+                                                />
+                                            )}
+                                        </TableCell>
+                                    ) : null}
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={columns.length}
+                                    className="h-24 text-center"
+                                >
+                                    No results.
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+            <TablePagination totalPages={totalPages} />
+        </>
     );
 }

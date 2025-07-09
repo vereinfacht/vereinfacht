@@ -4,8 +4,6 @@ import {
 } from '@/lib/api/utils';
 import 'server-only';
 import { listFinanceContactsSchema } from './list.schema';
-import { deserialize } from 'jsonapi-fractal';
-import { TFinanceContactDeserialized } from '@/types/resources';
 
 export const listFinanceContacts = createAuthenticatedActionWithOptionalParams(
     'view',
@@ -18,11 +16,6 @@ export const listFinanceContacts = createAuthenticatedActionWithOptionalParams(
             },
         });
 
-        return deserialize(
-            handleApiResponse(
-                response,
-                'Failed to fetch finance contacts',
-            ) as any,
-        ) as TFinanceContactDeserialized[];
+        return handleApiResponse(response, 'Failed to fetch finance contacts');
     },
 );

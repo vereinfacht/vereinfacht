@@ -5,10 +5,12 @@ import {
     loadListFinanceContactsSearchParams,
 } from '@/utils/search-params';
 import { WithSearchParams } from '@/types/params';
+import { deserialize } from 'jsonapi-fractal';
 
-async function getContacts(params: ListFinanceContactSearchParamsType) {
+async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
     const response = await listFinanceContacts({
         sort: params.sort ?? undefined,
+        page: { size: 5, number: params.page },
     });
 
     return response || [];
@@ -16,7 +18,12 @@ async function getContacts(params: ListFinanceContactSearchParamsType) {
 
 export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListFinanceContactsSearchParams(searchParams);
-    const contacts = await getContacts(params);
+    const response = await getContactsFromApi(params);
 
-    return <ContactTable contacts={contacts} />;
+    const contacts = deserialize(response);
+    const meta = (response as any).meta;
+    const totalPages = (meta?.page?.lastPage as number) ?? 1;
+
+    console.log('totalPages:', totalPages);
+    return <ContactTable contacts={contacts} totalPages={totalPages} />;
 }
