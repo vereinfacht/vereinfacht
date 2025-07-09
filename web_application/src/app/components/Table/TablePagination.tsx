@@ -9,134 +9,168 @@ import {
 import { Button } from '../ui/button';
 import { useQueryState } from 'nuqs';
 import { paginationSearchParams } from '@/utils/search-params';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     totalPages?: number;
 }
 
+type EllipsesItemType = {
+    type: 'ellipsis';
+};
+
+type PageItemType = {
+    type: 'page';
+    index: number;
+    disabled?: boolean;
+};
+
+type PaginationItemType = EllipsesItemType | PageItemType;
+
 export default function TablePagination({ totalPages }: Props) {
+    const { t } = useTranslation('general');
     const [currentPage, setCurrentPage] = useQueryState(
         'page',
         paginationSearchParams.page,
     );
 
-    if (!totalPages || totalPages <= 1) {
+    if (totalPages === undefined || totalPages <= 1) {
         return null;
+    }
+
+    function changeCurrentPage(
+        event: React.MouseEvent<HTMLButtonElement>,
+        page: number,
+    ) {
+        event.preventDefault();
+        setCurrentPage(page);
+    }
+
+    function getPaginationItems() {
+        const items: PaginationItemType[] = [];
+
+        if (totalPages === undefined || totalPages <= 1) {
+            return items;
+        }
+
+        // start ellipsis and first page
+        if (currentPage > totalPages - 2) {
+            items.push({
+                type: 'page',
+                index: 1,
+            });
+
+            items.push({
+                type: 'ellipsis',
+            });
+        }
+
+        // previous page
+        if (currentPage > 1) {
+            if (currentPage === totalPages || currentPage === totalPages - 2) {
+                items.push({
+                    type: 'page',
+                    index: currentPage - 2,
+                });
+            }
+
+            items.push({
+                type: 'page',
+                index: currentPage - 1,
+            });
+        }
+
+        // current page
+        items.push({
+            type: 'page',
+            index: currentPage,
+            disabled: true,
+        });
+
+        // next page
+        if (currentPage < totalPages) {
+            items.push({
+                type: 'page',
+                index: currentPage + 1,
+            });
+
+            if (currentPage === 1) {
+                items.push({
+                    type: 'page',
+                    index: currentPage + 2,
+                });
+            }
+
+            if (currentPage === totalPages - 2) {
+                items.push({
+                    type: 'page',
+                    index: totalPages,
+                });
+            }
+        }
+
+        // end ellipsis and last page
+        if (currentPage < totalPages - 2) {
+            items.push({
+                type: 'ellipsis',
+            });
+
+            items.push({
+                type: 'page',
+                index: totalPages,
+            });
+        }
+
+        return items;
     }
 
     return (
         <Pagination className="mt-4">
             <PaginationContent>
-                {/* previous button */}
                 <PaginationItem>
                     <Button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setCurrentPage(currentPage - 1);
-                        }}
+                        onClick={(event) =>
+                            changeCurrentPage(event, currentPage - 1)
+                        }
                         variant="default"
                         disabled={currentPage <= 1}
                     >
-                        Previous
+                        {t('pagination.previous')}
                     </Button>
                 </PaginationItem>
 
-                {/* previous pages */}
-                {!(currentPage + 1 < totalPages - 1) && (
-                    <PaginationItem>
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setCurrentPage(currentPage - 2);
-                            }}
-                            variant="outline"
-                        >
-                            {currentPage - 2}
-                        </Button>
-                    </PaginationItem>
-                )}
-                {/* previous pages */}
-                {currentPage > 1 && (
-                    <PaginationItem>
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setCurrentPage(currentPage - 1);
-                            }}
-                            variant="outline"
-                        >
-                            {currentPage - 1}
-                        </Button>
-                    </PaginationItem>
-                )}
-                {/* current page */}
-                <PaginationItem>
-                    <Button variant="default" disabled>
-                        {currentPage}
-                    </Button>
-                </PaginationItem>
+                {getPaginationItems().map((item, index) => {
+                    if (item.type === 'ellipsis') {
+                        return (
+                            <PaginationEllipsis key={index} className="w-10" />
+                        );
+                    }
 
-                {/* next two pages */}
-                {[currentPage + 1]
-                    .filter((page) => page < 8)
-                    .map((page) => (
-                        <PaginationItem key={page}>
+                    return (
+                        <PaginationItem key={index}>
                             <Button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setCurrentPage(page);
-                                }}
-                                variant="outline"
+                                className="w-10"
+                                onClick={(event) =>
+                                    changeCurrentPage(event, item.index)
+                                }
+                                variant={item.disabled ? 'default' : 'outline'}
+                                disabled={item.disabled ?? false}
                             >
-                                {page}
+                                {item.index}
                             </Button>
                         </PaginationItem>
-                    ))}
-                {currentPage === 1 && (
-                    <PaginationItem>
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setCurrentPage(3);
-                            }}
-                            variant="outline"
-                        >
-                            3
-                        </Button>
-                    </PaginationItem>
-                )}
+                    );
+                })}
 
-                {/* next ellipsis */}
-                {typeof totalPages === 'number' &&
-                    currentPage + 1 < totalPages - 1 && (
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                    )}
-                {/* last page */}
-                {typeof totalPages === 'number' && currentPage < totalPages && (
-                    <PaginationItem>
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setCurrentPage(totalPages);
-                            }}
-                            variant="outline"
-                        >
-                            {totalPages}
-                        </Button>
-                    </PaginationItem>
-                )}
                 <PaginationItem>
                     <Button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setCurrentPage(currentPage + 1);
-                        }}
+                        onClick={(event) =>
+                            changeCurrentPage(event, currentPage + 1)
+                        }
                         variant="default"
-                        disabled={currentPage >= (totalPages ?? 1)}
+                        disabled={currentPage >= totalPages}
                     >
-                        Next
+                        {t('pagination.next')}
                     </Button>
                 </PaginationItem>
             </PaginationContent>
