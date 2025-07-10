@@ -6,21 +6,39 @@ import IconEye from '/public/svg/eye.svg';
 import IconPen from '/public/svg/pen.svg';
 
 interface Props {
-    href: string;
+    href?: string;
+    onClick?: () => void;
     type?: 'view' | 'edit';
 }
 
-export function TableAction({ type = 'view', href }: Props) {
+export function TableAction({ type = 'view', onClick, href }: Props) {
     const { t } = useTranslation();
     const iconProps = {
         className:
             'stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]',
     };
 
+    if (onClick && href === undefined) {
+        return (
+            <button
+                title={t(`general:${type}`)}
+                onClick={onClick}
+                className="transition-color text-blue-500 duration-300 hover:text-blue-500/50"
+            >
+                {type === 'view' ? (
+                    <IconEye {...iconProps} />
+                ) : (
+                    <IconPen {...iconProps} />
+                )}
+            </button>
+        );
+    }
+
     return (
         <Link
-            href={href}
+            href={href ?? ''}
             title={t(`general:${type}`)}
+            onClick={onClick}
             className="transition-color text-blue-500 duration-300 hover:text-blue-500/50"
         >
             {type === 'view' ? (

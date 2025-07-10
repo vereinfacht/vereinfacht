@@ -6,11 +6,13 @@ import {
 import AccountsList from './_components/accounts-list';
 import TransactionsList from './_components/transactions-list';
 import { WithSearchParams } from '@/types/params';
+import { deserialize } from 'jsonapi-fractal';
+import { TTransactionDeserialized } from '@/types/resources';
 
-async function getTransactions(params: ListTransactionSearchParamsType) {
+async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
         sort: params.sort ?? undefined,
-        page: { size: 50, number: 1 },
+        page: { size: 10, number: params.page },
         filter: params.accountId ? { financeAccountId: params.accountId } : {},
         include: ['financeAccount'],
         fields: { 'finance-accounts': ['title', 'iban', 'bic'] },
@@ -21,13 +23,22 @@ async function getTransactions(params: ListTransactionSearchParamsType) {
 
 export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListTransactionsSearchParams(searchParams);
-    const transactions = await getTransactions(params);
+    const response = await getTransactionsFromApi(params);
+
+    const transactions = deserialize(
+        response as any,
+    ) as TTransactionDeserialized[];
+    const meta = (response as any).meta;
+    const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
     return (
         <div className="flex gap-6">
             <AccountsList />
 
-            <TransactionsList transactions={transactions} />
+            <TransactionsList
+                transactions={transactions}
+                totalPages={totalPages}
+            />
         </div>
     );
 }

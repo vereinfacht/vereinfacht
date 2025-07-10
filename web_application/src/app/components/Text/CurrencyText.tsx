@@ -19,7 +19,7 @@ export default function CurrencyText({ value, className, ...props }: Props) {
                 value > 0
                     ? 'text-green-500'
                     : value < 0
-                      ? 'text-red-600'
+                      ? 'text-red-400'
                       : 'text-slate-900',
             ].join(' ')}
         >
