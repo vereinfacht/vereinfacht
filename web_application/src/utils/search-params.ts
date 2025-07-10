@@ -1,4 +1,7 @@
-import { listFinanceContactsSortingOptions } from '@/actions/financeContacts/list.schema';
+import {
+    financeContactTypeOptions,
+    listFinanceContactsSortingOptions,
+} from '@/actions/financeContacts/list.schema';
 import { listTransactionsSortingOptions } from '@/actions/transactions/list.schema';
 import {
     createLoader,
@@ -29,6 +32,11 @@ export const listFinanceContactSearchParams = {
         shallow: false,
     }),
     page: paginationSearchParams.page,
+    type: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
 };
 
 export const loadListTransactionsSearchParams = createLoader(

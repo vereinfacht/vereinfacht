@@ -55,13 +55,13 @@ export function DataTable<TData extends Model, TValue>({
                                     return (
                                         <TableHead key={header.id}>
                                             {header.isPlaceholder ? null : (
-                                                <Text preset="label">
+                                                <div className="text-sm font-medium text-gray-500">
                                                     {flexRender(
                                                         header.column.columnDef
                                                             .header,
                                                         header.getContext(),
                                                     )}
-                                                </Text>
+                                                </div>
                                             )}
                                         </TableHead>
                                     );

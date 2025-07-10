@@ -1,6 +1,8 @@
 'use client';
 
+import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
 import { DataTable } from '@/app/components/Table/DataTable';
+import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
@@ -9,6 +11,7 @@ import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
+import { useQueryState } from 'nuqs';
 
 interface Props {
     contacts: TFinanceContactDeserialized[];
@@ -16,12 +19,33 @@ interface Props {
 }
 
 export default function ContactTable({ contacts, totalPages }: Props) {
+    const [contactTypesParam, setContactTypesParam] = useQueryState(
+        'type',
+        listFinanceContactSearchParams.type,
+    );
+
     const { t } = useTranslation('contact');
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
             accessorKey: 'type',
-            header: t('type.label'),
+            header: () => (
+                <HeaderOptionFilter
+                    options={financeContactTypeOptions ?? []}
+                    headerLabel={t('type.label')}
+                    value={contactTypesParam}
+                    onChange={(contactTypesParam) => {
+                        setContactTypesParam(
+                            contactTypesParam
+                                ? ([...contactTypesParam] as (
+                                      | 'person'
+                                      | 'company'
+                                  )[])
+                                : contactTypesParam,
+                        );
+                    }}
+                />
+            ),
             cell: ({ row }) => {
                 const { type } = row.original;
                 return type === 'person' ? <CircleUserRound /> : <Building2 />;
@@ -70,11 +94,13 @@ export default function ContactTable({ contacts, totalPages }: Props) {
     ];
 
     return (
-        <DataTable
-            data={contacts}
-            columns={columns}
-            resourceName={'contacts' as ResourceName}
-            totalPages={totalPages}
-        />
+        <>
+            <DataTable
+                data={contacts}
+                columns={columns}
+                resourceName={'contacts' as ResourceName}
+                totalPages={totalPages}
+            />
+        </>
     );
 }

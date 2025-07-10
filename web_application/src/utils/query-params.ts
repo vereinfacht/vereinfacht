@@ -15,6 +15,10 @@ export function prepareQuery(params: any) {
 
     if (params.filter) {
         Object.entries(params.filter).forEach(([key, value]) => {
+            if (value === undefined || value === null) {
+                return;
+            }
+
             if (Array.isArray(value)) {
                 queryParams[`filter[${key}]`] = value;
             } else {

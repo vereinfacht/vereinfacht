@@ -108,7 +108,7 @@ export class MembershipResource extends Resource<Membership> {
                 cell: (cell) => <TextCell>{cell.getValue()}</TextCell>,
             }),
             columnHelper.accessor('status', {
-                header: t('membership:status.label'),
+                header: t('membership:status.label'), // here we gonna use a dropdown filter
                 cell: (cell) => {
                     const status = cell.getValue();
 

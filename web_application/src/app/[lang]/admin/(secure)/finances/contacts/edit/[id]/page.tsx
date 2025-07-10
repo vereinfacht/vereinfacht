@@ -22,8 +22,6 @@ export default function EditContactPage({ params }: ContactPageProps) {
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
 
-        console.log('Updated contact:', formData);
-
         router.push(`/admin/finance/contacts`);
     };
 

@@ -9,6 +9,8 @@ export const listFinanceContactsSortingOptions = [
     '-city',
 ] as const;
 
+export const financeContactTypeOptions = ['person', 'company'] as const;
+
 export const listFinanceContactsSchema = z.object({
     // Pagination parameters
     page: z
@@ -25,7 +27,7 @@ export const listFinanceContactsSchema = z.object({
     filter: z
         .object({
             id: z.array(z.string()).optional(),
-            financeAccountId: z.string().optional(),
+            type: z.array(z.enum(financeContactTypeOptions)).optional(),
         })
         .optional(),
 
