@@ -10,25 +10,26 @@ import {
 import { Button } from '@/app/components/ui/button';
 import Checkbox from '@/app/components/Input/Checkbox';
 import { ListFilter } from 'lucide-react';
+import { Badge } from '../ui/badge';
 
 interface Probs {
     headerLabel: ReactNode;
     options: readonly string[];
-    value: readonly string[];
+    values?: readonly string[];
     onChange?: (value: readonly string[]) => void;
 }
 
 export function HeaderOptionFilter({
     options,
     headerLabel,
-    value,
+    values,
     onChange,
 }: Probs) {
     const toggleValue = (option: string, checked: boolean) => {
-        const selectedOptions = checked
-            ? [...(value ?? []), option]
-            : (value ?? []).filter((value) => value !== option);
-        onChange?.(selectedOptions);
+        const updatedValues = checked
+            ? [...(values ?? []), option]
+            : (values ?? []).filter((value) => value !== option);
+        onChange?.(updatedValues);
     };
 
     return (
@@ -36,8 +37,15 @@ export function HeaderOptionFilter({
             {headerLabel}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost">
-                        <ListFilter className="ml-auto h-4 w-4 text-gray-400" />
+                    <Button className="relative" variant="ghost">
+                        <ListFilter
+                            className={`ml-auto h-4 w-4 text-gray-400 ${values?.length ? 'text-slate-800' : ''}`}
+                        />
+                        {values?.length ? (
+                            <Badge className="absolute right-0 top-0 flex h-5 w-5 flex-col items-center justify-center rounded-full bg-slate-800 px-1 text-[10px] tabular-nums text-white">
+                                {values.length}
+                            </Badge>
+                        ) : null}
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="flex flex-col gap-y-4 p-2">
@@ -53,7 +61,7 @@ export function HeaderOptionFilter({
                                 value={option}
                                 key={option}
                                 label={option}
-                                defaultValue={value?.includes(option) ?? false}
+                                defaultValue={values?.includes(option) ?? false}
                                 handleChange={(e) =>
                                     toggleValue(option, e.target.checked)
                                 }

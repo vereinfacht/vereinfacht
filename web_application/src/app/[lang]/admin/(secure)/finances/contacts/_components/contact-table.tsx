@@ -33,7 +33,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 <HeaderOptionFilter
                     options={financeContactTypeOptions ?? []}
                     headerLabel={t('type.label')}
-                    value={contactTypesParam}
+                    values={contactTypesParam}
                     onChange={(contactTypesParam) => {
                         setContactTypesParam(
                             contactTypesParam
