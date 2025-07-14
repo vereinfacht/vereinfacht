@@ -1,4 +1,4 @@
-<img src="https://vereinfacht.digital/assets/github-header-1752496154.png" alt="vereinfacht repository header graphic">https://user-images.githubusercontent.com/8019099/210054112-5955e812-a76e-4160-9ddd-58f2c72f1cce.png
+<img src="https://vereinfacht.digital/assets/github-header-1752496154.png" alt="vereinfacht repository header graphic">
 
 # vereinfacht
 
