@@ -4,7 +4,7 @@
 
 **vereinfacht** is an open‑source, web‑based club management platform, designed to digitize core organizational tasks for nonprofit and volunteer-based associations. It replaces paper forms and manual processes with flexible, multilingual online membership applications, customizable to each club's branding, structure, and member‑type needs. It includes an descriptive management interface and is built on an open source tools and dependencies, supporting smooth integration and self‑hosting at no cost.
 
-This project still being actively developed an is an early-adoption phase. **vereinfacht** is also [available as Software as a service](https://vereinfacht.digital/).
+This project still being actively developed and is in an early-adoption phase. It is is also [available as Software as a service](https://vereinfacht.digital/).
 
 ## Table of Contents
 
@@ -83,7 +83,8 @@ The local API docs automatically use the API definition file stored in [`/api/pu
 
 A new version of this file may be greated with `php artisan jsonapi:openapi:generate v1` (requires the `FakeDatabaseSeeder` to be ran).
 
-> [!NOTE] This process is **not** automated, because the generator package being used does not support all the specs / features the API needs.
+> [!NOTE]
+> This process is **not** automated, because the generator package being used does not support all the specs / features the API needs.
 
 The newly generated file can be found in `/api/storage/public`. For the time being you'll then have to manually copy over new additions to the previously mentioned and tracked file in [`/api/public`](api/public/v1_openapi.json). Remember to afterwards bump the version (`openapi.info.version`) of the specs accordingly:
 
@@ -95,7 +96,7 @@ The newly generated file can be found in `/api/storage/public`. For the time bei
         "description": "JSON:API implementation for vereinfacht.digital",
         "version": "0.0.1"
     },
-    …
+    ...
 }
 ```
 
@@ -147,7 +148,8 @@ php artisan test
 
 We're using Cypress for End-to-End testing the web frontend areas of this project. Running tests successfully requires a database seeded with the `FakeDatabaseSeeder.php`, which is not being done automatically.
 
-> Other than running the PHPUnit tests in the `api` project, the database state currently neither is reset after running the Cypress test suite nor do they run with a separate testing database. Keep that in mind when running the tests on our local copy of the application.
+> [!WARNING]
+> After running the Cypress End-to-End test suite, the database state is neither reset nor does it run with a separate testing database. This is different from the behavior of the PHPUnit tests in the `api` project. Keep that in mind when running the tests on your local copy of the application.
 
 In order to use the component testing feature of Cypress, we would need to integrate Cypress into our Next.js application as an dependency. But then we're losing the option to test other parts of the mono repo in the future (i. e. a docs project or API pages). That's why Cypress was installed as a seperate project at the moment.
 
