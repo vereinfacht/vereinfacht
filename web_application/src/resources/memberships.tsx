@@ -1,4 +1,14 @@
+import { getOne } from '@/actions/fetchAdminResources';
+import { membershipStatusOptions } from '@/actions/memberships/list.schema';
+import {
+    getUpdateMembershipSchema,
+    updateMembership,
+} from '@/actions/memberships/update';
+import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
+import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import TextCell from '@/app/components/Table/TextCell';
+import { Query } from '@/services/api-endpoints';
 import {
     Member,
     Membership,
@@ -9,14 +19,7 @@ import { formatDate } from '@/utils/dates';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { BelongsToDetailFieldDef, DetailFieldDef, Resource } from './resource';
-import {
-    getUpdateMembershipSchema,
-    updateMembership,
-} from '@/actions/memberships/update';
-import { getOne } from '@/actions/fetchAdminResources';
-import { Query } from '@/services/api-endpoints';
-import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
-import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import { listMembershipSearchParams } from '@/utils/search-params';
 
 export class MembershipResource extends Resource<Membership> {
     constructor() {
@@ -30,8 +33,9 @@ export class MembershipResource extends Resource<Membership> {
         this.updateAction = updateMembership;
     }
 
-    getIndexResources() {
+    getIndexResources(query) {
         return super.getIndexResources({
+            ...query,
             include: ['membershipType', 'owner', 'paymentPeriod'],
             fields: {
                 memberships: [
@@ -108,7 +112,14 @@ export class MembershipResource extends Resource<Membership> {
                 cell: (cell) => <TextCell>{cell.getValue()}</TextCell>,
             }),
             columnHelper.accessor('status', {
-                header: t('membership:status.label'), // here we gonna use a dropdown filter
+                header: ({ column }) => (
+                    <HeaderOptionFilter
+                        options={membershipStatusOptions ?? []}
+                        parser={listMembershipSearchParams['filter[status]']}
+                        paramKey={'filter[status]'}
+                        translationKey={'membership:status'}
+                    />
+                ),
                 cell: (cell) => {
                     const status = cell.getValue();
 

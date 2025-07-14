@@ -12,7 +12,6 @@ class ClubPermission
     public function handle($request, \Closure $next)
     {
         $authenticable = Auth::guard('sanctum')->user();
-
         if (! empty($authenticable)) {
             $clubId = $this->getCurrentPermissionsClubId($authenticable);
 
@@ -39,6 +38,5 @@ class ClubPermission
         if ($authenticatable instanceof User) {
             return $authenticatable->getDefaultClub()?->id;
         }
-
     }
 }

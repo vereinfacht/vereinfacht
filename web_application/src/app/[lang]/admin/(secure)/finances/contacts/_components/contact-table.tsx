@@ -11,7 +11,6 @@ import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
-import { useQueryState } from 'nuqs';
 
 interface Props {
     contacts: TFinanceContactDeserialized[];
@@ -19,31 +18,17 @@ interface Props {
 }
 
 export default function ContactTable({ contacts, totalPages }: Props) {
-    const [contactTypesParam, setContactTypesParam] = useQueryState(
-        'type',
-        listFinanceContactSearchParams.type,
-    );
-
     const { t } = useTranslation('contact');
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
             accessorKey: 'type',
-            header: () => (
+            header: ({ column }) => (
                 <HeaderOptionFilter
                     options={financeContactTypeOptions ?? []}
-                    headerLabel={t('type.label')}
-                    values={contactTypesParam}
-                    onChange={(contactTypesParam) => {
-                        setContactTypesParam(
-                            contactTypesParam
-                                ? ([...contactTypesParam] as (
-                                      | 'person'
-                                      | 'company'
-                                  )[])
-                                : contactTypesParam,
-                        );
-                    }}
+                    parser={listFinanceContactSearchParams.type}
+                    paramKey={column.id}
+                    translationKey={'contact:type'}
                 />
             ),
             cell: ({ row }) => {

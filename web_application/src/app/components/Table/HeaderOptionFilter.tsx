@@ -1,49 +1,63 @@
-// refactor the dropdown filter
-// implement the component in Mitgliedschaften -> status (memenberships.tsx)
-import React, { ReactNode } from 'react';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/app/components/DropdownMenu';
-import { Button } from '@/app/components/ui/button';
 import Checkbox from '@/app/components/Input/Checkbox';
+import { Button } from '@/app/components/ui/button';
 import { ListFilter } from 'lucide-react';
+import useTranslation from 'next-translate/useTranslation';
+import { ParserBuilder, useQueryState } from 'nuqs';
 import { Badge } from '../ui/badge';
-
-interface Probs {
-    headerLabel: ReactNode;
+interface Props {
+    parser: ParserBuilder<any[]>;
+    paramKey: string;
     options: readonly string[];
-    values?: readonly string[];
-    onChange?: (value: readonly string[]) => void;
+    translationKey: string;
 }
 
 export function HeaderOptionFilter({
     options,
-    headerLabel,
-    values,
-    onChange,
-}: Probs) {
-    const toggleValue = (option: string, checked: boolean) => {
-        const updatedValues = checked
-            ? [...(values ?? []), option]
-            : (values ?? []).filter((value) => value !== option);
-        onChange?.(updatedValues);
-    };
+    paramKey,
+    parser,
+    translationKey,
+}: Props) {
+    const { t } = useTranslation();
+    const [filterQueryParam, setFilterQueryParam] = useQueryState(
+        paramKey,
+        parser,
+    );
+
+    function handleToggleOption(selectedOption: string, checked: boolean) {
+        const currentOptions = filterQueryParam ?? [];
+        const updated = checked
+            ? [...currentOptions, selectedOption]
+            : currentOptions.filter((option) => option !== selectedOption);
+
+        setFilterQueryParam(updated);
+    }
 
     return (
         <div className="flex items-center gap-x-4">
-            {headerLabel}
+            {t(`${translationKey}.label`)}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button className="relative" variant="ghost">
                         <ListFilter
-                            className={`ml-auto h-4 w-4 text-gray-400 ${values?.length ? 'text-slate-800' : ''}`}
+                            className={[
+                                'ml-auto h-4 w-4 text-gray-400',
+                                filterQueryParam?.length
+                                    ? 'text-slate-800'
+                                    : '',
+                            ].join(' ')}
                         />
-                        {values?.length ? (
-                            <Badge className="absolute right-0 top-0 flex h-5 w-5 flex-col items-center justify-center rounded-full bg-slate-800 px-1 text-[10px] tabular-nums text-white">
-                                {values.length}
+                        {filterQueryParam?.length ? (
+                            <Badge
+                                className="absolute right-0 top-0 flex h-5 w-5 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
+                                variant="primary"
+                            >
+                                {filterQueryParam.length}
                             </Badge>
                         ) : null}
                     </Button>
@@ -60,10 +74,12 @@ export function HeaderOptionFilter({
                                 id={option}
                                 value={option}
                                 key={option}
-                                label={option}
-                                defaultValue={values?.includes(option) ?? false}
+                                label={t(`${translationKey}.${option}`)}
+                                defaultValue={
+                                    filterQueryParam?.includes(option) ?? false
+                                }
                                 handleChange={(e) =>
-                                    toggleValue(option, e.target.checked)
+                                    handleToggleOption(option, e.target.checked)
                                 }
                             />
                         </DropdownMenuItem>

@@ -1,4 +1,5 @@
 import { FormMember } from '@/hooks/application/ApplicationProvider';
+import { ResourceName } from '@/resources/resource';
 import {
     JsonApiClub,
     JsonApiDivision,
@@ -6,14 +7,16 @@ import {
     JsonApiMembership,
 } from '@/types/jsonapi-models';
 import { Division, Membership } from '@/types/models';
-import { JsonApi } from './json-api';
 import { camelCaseToKebabCase } from '@/utils/strings';
-import { ResourceName } from '@/resources/resource';
+import { JsonApi } from './json-api';
+
+type FilterValue = string | number;
 
 export interface Query {
     include?: string[];
     sort?: string;
     fields?: { [key: string]: string[] };
+    filter?: { [key: string]: FilterValue | FilterValue[] };
 }
 
 export interface UpdateData extends Record<string, any> {
@@ -25,23 +28,35 @@ function addQueryParams(path: string, query?: Query) {
         return path;
     }
 
-    const searchParams: any = query;
+    const searchParams = new URLSearchParams();
 
     if (query.include && query.include.length > 0) {
-        searchParams.include = [...query.include].join(',');
+        searchParams.set('include', query.include.join(','));
     }
 
     if (query.fields) {
-        const fields = query.fields;
-
-        delete searchParams.fields;
-
-        Object.entries(fields).map(([key, value]) => {
-            searchParams[`fields[${key}]`] = value;
+        Object.entries(query.fields).forEach(([key, value]) => {
+            searchParams.set(`fields[${key}]`, value.join(','));
         });
     }
 
-    return path + '?' + new URLSearchParams(searchParams).toString();
+    if (query.sort) {
+        searchParams.set('sort', query.sort);
+    }
+
+    Object.entries(query).forEach(([key, value]) => {
+        if (!key.startsWith('filter[')) {
+            return;
+        }
+
+        if (!Array.isArray(value)) {
+            searchParams.set(key, value.toString());
+        } else if (value.length > 0) {
+            searchParams.set(key, value.join(','));
+        }
+    });
+
+    return path + '?' + searchParams.toString();
 }
 
 function preparedGetParams(
@@ -111,13 +126,11 @@ export class ApiEndpoints extends JsonApi {
 
     async getMembership<T>(query: Query = {}, id: string | number): Promise<T> {
         const { path, tags } = preparedGetParams('memberships', query, id);
-
         return await this.get(path, tags);
     }
 
     async getMemberships<T>(query?: Query): Promise<T> {
         const { path, tags } = preparedGetParams('memberships', query);
-
         return await this.get(path, tags);
     }
 

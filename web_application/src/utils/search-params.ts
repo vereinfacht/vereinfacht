@@ -2,6 +2,7 @@ import {
     financeContactTypeOptions,
     listFinanceContactsSortingOptions,
 } from '@/actions/financeContacts/list.schema';
+import { membershipStatusOptions } from '@/actions/memberships/list.schema';
 import { listTransactionsSortingOptions } from '@/actions/transactions/list.schema';
 import {
     createLoader,
@@ -14,6 +15,16 @@ import {
 
 export const paginationSearchParams = {
     page: parseAsInteger.withDefault(1).withOptions({ shallow: false }),
+};
+
+export const listMembershipSearchParams = {
+    'filter[status]': parseAsArrayOf(
+        parseAsStringLiteral(membershipStatusOptions),
+    )
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
 };
 
 export const listTransactionSearchParams = {
@@ -39,6 +50,10 @@ export const listFinanceContactSearchParams = {
         }),
 };
 
+export const loadListMembershipsSearchParams = createLoader(
+    listMembershipSearchParams,
+);
+
 export const loadListTransactionsSearchParams = createLoader(
     listTransactionSearchParams,
 );
@@ -46,6 +61,10 @@ export const loadListTransactionsSearchParams = createLoader(
 export const loadListFinanceContactsSearchParams = createLoader(
     listFinanceContactSearchParams,
 );
+
+export type ListMembershipSearchParamsType = inferParserType<
+    typeof listMembershipSearchParams
+>;
 
 export type ListTransactionSearchParamsType = inferParserType<
     typeof listTransactionSearchParams

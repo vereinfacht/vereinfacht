@@ -17,7 +17,6 @@ import {
 } from '@/app/components/Table/Table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
-import Text from '../Text/Text';
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
 
