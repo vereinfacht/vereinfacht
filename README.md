@@ -59,6 +59,7 @@ docker exec -it verein_tooling bash
 cd api
 composer install
 cp .env.example .env
+php artisan key:generate
 php artisan migrate:fresh --seeder=FakeDatabaseSeeder
 ```
 
@@ -66,7 +67,10 @@ Aftwards create a token for the default super admin user:
 
 ```sh
 php artisan tinker
->User::find(1)->createToken('Super Admin Token')->plainTextToken;
+```
+
+```php
+> User::find(1)->createToken('Super Admin Token')->plainTextToken;
 ```
 
 Copy the generated token and supply it to the `/web_application/.env.local` file (see [web frontend](#web-frontend) setup below) as well as the `/e2e/cypress.config.ts`. If for any reason this token should change, remember to change it in those places as well.
