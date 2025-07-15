@@ -2,7 +2,10 @@ import {
     financeContactTypeOptions,
     listFinanceContactsSortingOptions,
 } from '@/actions/financeContacts/list.schema';
-import { membershipStatusOptions } from '@/actions/memberships/list.schema';
+import {
+    listMembershipsSortingOptions,
+    membershipStatusOptions,
+} from '@/actions/memberships/list.schema';
 import { listTransactionsSortingOptions } from '@/actions/transactions/list.schema';
 import {
     createLoader,
@@ -25,6 +28,11 @@ export const listMembershipSearchParams = {
         .withOptions({
             shallow: false,
         }),
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(listMembershipsSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
 };
 
 export const listTransactionSearchParams = {

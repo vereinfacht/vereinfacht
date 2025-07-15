@@ -7,6 +7,7 @@ import {
 import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
+import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { Query } from '@/services/api-endpoints';
 import {
@@ -16,10 +17,10 @@ import {
     PaymentPeriod,
 } from '@/types/models';
 import { formatDate } from '@/utils/dates';
+import { listMembershipSearchParams } from '@/utils/search-params';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { BelongsToDetailFieldDef, DetailFieldDef, Resource } from './resource';
-import { listMembershipSearchParams } from '@/utils/search-params';
 
 export class MembershipResource extends Resource<Membership> {
     constructor() {
@@ -33,7 +34,7 @@ export class MembershipResource extends Resource<Membership> {
         this.updateAction = updateMembership;
     }
 
-    getIndexResources(query) {
+    getIndexResources(query: any) {
         return super.getIndexResources({
             ...query,
             include: ['membershipType', 'owner', 'paymentPeriod'],
@@ -84,7 +85,13 @@ export class MembershipResource extends Resource<Membership> {
                 },
             }),
             columnHelper.accessor('startedAt', {
-                header: t('membership:started_at.label'),
+                header: ({ column }) => (
+                    <HeaderSort
+                        parser={listMembershipSearchParams.sort as any}
+                        columnId={column.id}
+                        columnTitle={t('membership:started_at.label')}
+                    />
+                ),
                 cell: (cell) => (
                     <TextCell>
                         {formatDate(cell.getValue(), this.locale)}
@@ -133,7 +140,13 @@ export class MembershipResource extends Resource<Membership> {
                 },
             }),
             columnHelper.accessor('createdAt', {
-                header: t('resource:fields.created_at'),
+                header: ({ column }) => (
+                    <HeaderSort
+                        parser={listMembershipSearchParams.sort as any}
+                        columnId={column.id}
+                        columnTitle={t('resource:fields.created_at')}
+                    />
+                ),
                 cell: (cell) => (
                     <TextCell>
                         {formatDate(cell.getValue(), this.locale)}
