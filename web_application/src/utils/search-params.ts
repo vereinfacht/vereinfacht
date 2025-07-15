@@ -1,12 +1,12 @@
 import {
     financeContactTypeOptions,
-    listFinanceContactsSortingOptions,
+    financeContactSortingOptions,
 } from '@/actions/financeContacts/list.schema';
 import {
-    listMembershipsSortingOptions,
+    membershipSortingOptions,
     membershipStatusOptions,
 } from '@/actions/memberships/list.schema';
-import { listTransactionsSortingOptions } from '@/actions/transactions/list.schema';
+import { transactionSortingOptions } from '@/actions/transactions/list.schema';
 import {
     createLoader,
     inferParserType,
@@ -20,7 +20,27 @@ export const paginationSearchParams = {
     page: parseAsInteger.withDefault(1).withOptions({ shallow: false }),
 };
 
+function getSortParser<T>(sortingOptions: T) {
+    // @ts-expect-error: not able to infer the readonly type for T
+    return parseAsArrayOf(parseAsStringLiteral<T>(sortingOptions)).withOptions({
+        shallow: false,
+    });
+}
+
+export function getDefaultSearchParams<T>(sortingOptions?: T) {
+    const defaultParams = {
+        page: paginationSearchParams.page,
+    };
+
+    if (sortingOptions) {
+        Object.assign(defaultParams, { sort: getSortParser(sortingOptions) });
+    }
+
+    return defaultParams;
+}
+
 export const listMembershipSearchParams = {
+    ...getDefaultSearchParams(membershipSortingOptions),
     'filter[status]': parseAsArrayOf(
         parseAsStringLiteral(membershipStatusOptions),
     )
@@ -28,36 +48,23 @@ export const listMembershipSearchParams = {
         .withOptions({
             shallow: false,
         }),
-    sort: parseAsArrayOf(
-        parseAsStringLiteral(listMembershipsSortingOptions),
-    ).withOptions({
-        shallow: false,
-    }),
 };
 
 export const listTransactionSearchParams = {
-    sort: parseAsArrayOf(
-        parseAsStringLiteral(listTransactionsSortingOptions),
-    ).withOptions({
-        shallow: false,
-    }),
+    ...getDefaultSearchParams(transactionSortingOptions),
     accountId: parseAsString,
-    page: paginationSearchParams.page,
 };
 
 export const listFinanceContactSearchParams = {
-    sort: parseAsArrayOf(
-        parseAsStringLiteral(listFinanceContactsSortingOptions),
-    ).withOptions({
-        shallow: false,
-    }),
-    page: paginationSearchParams.page,
+    ...getDefaultSearchParams(financeContactSortingOptions),
     type: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
         .withDefault([])
         .withOptions({
             shallow: false,
         }),
 };
+
+export const loadListSearchParams = createLoader(getDefaultSearchParams());
 
 export const loadListMembershipsSearchParams = createLoader(
     listMembershipSearchParams,

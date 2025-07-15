@@ -6,11 +6,12 @@ import {
 } from '@/utils/search-params';
 import { WithSearchParams } from '@/types/params';
 import { deserialize } from 'jsonapi-fractal';
+import { itemsPerPage } from '@/services/api-endpoints';
 
 async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
     const response = await listFinanceContacts({
         sort: params.sort ?? undefined,
-        page: { size: 5, number: params.page },
+        page: { size: itemsPerPage, number: params.page },
         filter: {
             type: params.type ? params.type : undefined,
         },

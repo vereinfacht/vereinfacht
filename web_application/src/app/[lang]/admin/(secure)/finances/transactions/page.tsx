@@ -8,11 +8,12 @@ import TransactionsList from './_components/transactions-list';
 import { WithSearchParams } from '@/types/params';
 import { deserialize } from 'jsonapi-fractal';
 import { TTransactionDeserialized } from '@/types/resources';
+import { itemsPerPage } from '@/services/api-endpoints';
 
 async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
         sort: params.sort ?? undefined,
-        page: { size: 10, number: params.page },
+        page: { size: itemsPerPage, number: params.page },
         filter: params.accountId ? { financeAccountId: params.accountId } : {},
         include: ['financeAccount'],
         fields: { 'finance-accounts': ['title', 'iban', 'bic'] },

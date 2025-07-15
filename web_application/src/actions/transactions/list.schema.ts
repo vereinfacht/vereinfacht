@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const listTransactionsSortingOptions = [
+export const transactionSortingOptions = [
     'bookedAt',
     '-bookedAt',
     'valuedAt',
@@ -19,7 +19,7 @@ export const listTransactionsSchema = z.object({
         .optional(),
 
     // Sorting parameters
-    sort: z.array(z.enum(listTransactionsSortingOptions)).optional(),
+    sort: z.array(z.enum(transactionSortingOptions)).optional(),
 
     // Filter parameters
     filter: z

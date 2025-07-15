@@ -40,7 +40,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
             accessorKey: 'fullName',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listFinanceContactSearchParams.sort as any}
+                    parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('full_name.label')}
                 />
@@ -51,7 +51,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
             accessorKey: 'companyName',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listFinanceContactSearchParams.sort as any}
+                    parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('company_name.label')}
                 />
@@ -64,7 +64,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
             accessorKey: 'city',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listFinanceContactSearchParams.sort as any}
+                    parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('city.label')}
                 />

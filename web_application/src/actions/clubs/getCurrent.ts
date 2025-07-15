@@ -12,5 +12,7 @@ export async function getCurrentClub() {
         return redirect('/login');
     }
 
-    return await getOne<Club>('clubs', session.club_id, {});
+    const [club] = await getOne<Club>('clubs', session.club_id, {});
+
+    return club;
 }

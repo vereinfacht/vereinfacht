@@ -12,11 +12,13 @@ import { JsonApi } from './json-api';
 
 type FilterValue = string | number;
 
+export const itemsPerPage = 10;
 export interface Query {
     include?: string[];
     sort?: string;
     fields?: { [key: string]: string[] };
     filter?: { [key: string]: FilterValue | FilterValue[] };
+    page?: number;
 }
 
 export interface UpdateData extends Record<string, any> {
@@ -55,6 +57,11 @@ function addQueryParams(path: string, query?: Query) {
             searchParams.set(key, value.join(','));
         }
     });
+
+    if (query.page) {
+        searchParams.set('page[number]', query.page.toString());
+        searchParams.set('page[size]', itemsPerPage.toString());
+    }
 
     return path + '?' + searchParams.toString();
 }

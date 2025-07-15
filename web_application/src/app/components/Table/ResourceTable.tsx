@@ -12,9 +12,14 @@ import { DataTable } from './DataTable';
 interface Props {
     resources: ResourceModel[];
     resourceName: ResourceName;
+    totalPages: number;
 }
 
-export default function ResourceTable({ resources, resourceName }: Props) {
+export default function ResourceTable({
+    resources,
+    resourceName,
+    totalPages,
+}: Props) {
     // due to an error when passing functions to client components,
     // we need to get the indexColumns in this explicit client component
     // instead of the resource index page
@@ -46,6 +51,7 @@ export default function ResourceTable({ resources, resourceName }: Props) {
                 resourceName={resourceName}
                 canView={resource.canView}
                 canEdit={resource.canEdit}
+                totalPages={totalPages}
             />
         </div>
     );

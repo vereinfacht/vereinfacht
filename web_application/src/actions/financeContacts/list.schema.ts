@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const listFinanceContactsSortingOptions = [
+export const financeContactSortingOptions = [
     'fullName',
     '-fullName',
     'companyName',
@@ -21,7 +21,7 @@ export const listFinanceContactsSchema = z.object({
         .optional(),
 
     // Sorting parameters
-    sort: z.array(z.enum(listFinanceContactsSortingOptions)).optional(),
+    sort: z.array(z.enum(financeContactSortingOptions)).optional(),
 
     // Filter parameters
     filter: z

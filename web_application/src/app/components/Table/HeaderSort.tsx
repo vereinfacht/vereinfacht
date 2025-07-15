@@ -5,7 +5,7 @@ import { ParserBuilder, useQueryState } from 'nuqs';
 import { Button } from '../ui/button';
 
 interface Props {
-    parser: ParserBuilder<string[]>;
+    parser: ParserBuilder<any[]>;
     columnTitle: string;
     columnId: string;
 }

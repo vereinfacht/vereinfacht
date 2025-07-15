@@ -19,8 +19,12 @@ import { formatDate } from '@/utils/dates';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { BelongsToDetailFieldDef, DetailFieldDef, Resource } from './resource';
-import { listMembershipSearchParams } from '@/utils/search-params';
+import {
+    listMembershipSearchParams,
+    loadListMembershipsSearchParams,
+} from '@/utils/search-params';
 import HeaderSort from '@/app/components/Table/HeaderSort';
+import { SearchParams } from 'nuqs';
 
 export class MembershipResource extends Resource<Membership> {
     constructor() {
@@ -34,7 +38,7 @@ export class MembershipResource extends Resource<Membership> {
         this.updateAction = updateMembership;
     }
 
-    getIndexResources(query: Query = {}) {
+    async getIndexResources(query: Query = {}) {
         return super.getIndexResources({
             ...query,
             include: ['membershipType', 'owner', 'paymentPeriod'],
@@ -54,6 +58,10 @@ export class MembershipResource extends Resource<Membership> {
                 members: ['firstName', 'lastName'],
             },
         });
+    }
+
+    async loadIndexParams(searchParams: Promise<SearchParams>) {
+        return await loadListMembershipsSearchParams(searchParams);
     }
 
     getIndexColumns(t: Translate) {
@@ -87,7 +95,7 @@ export class MembershipResource extends Resource<Membership> {
             columnHelper.accessor('startedAt', {
                 header: ({ column }) => (
                     <HeaderSort
-                        parser={listMembershipSearchParams.sort as any}
+                        parser={listMembershipSearchParams.sort}
                         columnId={column.id}
                         columnTitle={t('membership:started_at.label')}
                     />
@@ -119,7 +127,7 @@ export class MembershipResource extends Resource<Membership> {
                 cell: (cell) => <TextCell>{cell.getValue()}</TextCell>,
             }),
             columnHelper.accessor('status', {
-                header: ({ column }) => (
+                header: ({}) => (
                     <HeaderOptionFilter
                         options={membershipStatusOptions ?? []}
                         parser={listMembershipSearchParams['filter[status]']}
@@ -140,7 +148,13 @@ export class MembershipResource extends Resource<Membership> {
                 },
             }),
             columnHelper.accessor('createdAt', {
-                header: t('resource:fields.created_at'),
+                header: ({ column }) => (
+                    <HeaderSort
+                        parser={listMembershipSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('resource:fields.created_at')}
+                    />
+                ),
                 cell: (cell) => (
                     <TextCell>
                         {formatDate(cell.getValue(), this.locale)}
@@ -150,13 +164,15 @@ export class MembershipResource extends Resource<Membership> {
         ] as ColumnDef<Membership, unknown>[];
     }
 
-    getShowResource(_query: Query = {}, id: string) {
-        return getOne<Membership>(
+    async getShowResource(_query: Query = {}, id: string) {
+        const [response] = await getOne<Membership>(
             this.name,
             id,
             { include: ['membershipType', 'owner', 'paymentPeriod'] },
             this.locale,
         );
+
+        return response;
     }
 
     getDetailFields(t: Translate): DetailFieldDef<Membership>[] {

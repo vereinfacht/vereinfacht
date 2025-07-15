@@ -61,7 +61,7 @@ export default function TransactionsList({
             accessorKey: 'valuedAt',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listTransactionSearchParams.sort as any}
+                    parser={listTransactionSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('transaction:valued_at.label')}
                 />
@@ -76,7 +76,7 @@ export default function TransactionsList({
             accessorKey: 'bookedAt',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listTransactionSearchParams.sort as any}
+                    parser={listTransactionSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('transaction:booked_at.label')}
                 />
@@ -102,7 +102,7 @@ export default function TransactionsList({
             accessorKey: 'amount',
             header: ({ column }) => (
                 <HeaderSort
-                    parser={listTransactionSearchParams.sort as any}
+                    parser={listTransactionSearchParams.sort}
                     columnId={column.id}
                     columnTitle={t('transaction:amount.label')}
                 />

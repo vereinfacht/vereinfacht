@@ -15,7 +15,7 @@ export default async function Navigation() {
         return redirect('/login');
     }
 
-    const club = await getOne<Club>('clubs', session.club_id, {});
+    const [club] = await getOne<Club>('clubs', session.club_id, {});
 
     const items = [
         {
