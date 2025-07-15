@@ -3,9 +3,10 @@
 import Empty from '@/app/components/Empty';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import HeaderSort from '@/app/components/Table/HeaderSort';
+import { TableAction } from '@/app/components/Table/TableAction';
+import TablePagination from '@/app/components/Table/TablePagination';
 import TextCell from '@/app/components/Table/TextCell';
 import Text from '@/app/components/Text/Text';
-import { Button } from '@/app/components/ui/button';
 import {
     Table,
     TableBody,
@@ -24,7 +25,6 @@ import {
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { Eye } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
@@ -32,10 +32,12 @@ import TransactionDetailsModal from './transaction-details-modal';
 
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
+    totalPages: number;
 }
 
 export default function TransactionsList({
     transactions,
+    totalPages,
 }: TransactionsListProps) {
     const [accountId] = useQueryState('accountId');
     const translationHook = useTranslation();
@@ -109,20 +111,12 @@ export default function TransactionsList({
         },
         {
             id: 'actions',
-            cell: ({ row }) => {
-                return (
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                        onClick={() => {
-                            openTransactionDetails(row.original);
-                        }}
-                    >
-                        <Eye className="h-3 w-3" />
-                    </Button>
-                );
-            },
+            cell: ({ row }) => (
+                <TableAction
+                    type="view"
+                    onClick={() => openTransactionDetails(row.original)}
+                />
+            ),
         },
     ];
 
@@ -163,7 +157,7 @@ export default function TransactionsList({
     }
 
     return (
-        <>
+        <div className="flex flex-col">
             <div className="overflow-scroll rounded-md border">
                 <Table>
                     <TableHeader>
@@ -234,6 +228,7 @@ export default function TransactionsList({
                     onClose={closeModal}
                 />
             )}
-        </>
+            <TablePagination totalPages={totalPages} />
+        </div>
     );
 }

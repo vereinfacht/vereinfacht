@@ -4,8 +4,6 @@ import {
 } from '@/lib/api/utils';
 import 'server-only';
 import { listTransactionsSchema } from './list.schema';
-import { deserialize } from 'jsonapi-fractal';
-import { TTransactionDeserialized } from '@/types/resources';
 
 export const listTransactions = createAuthenticatedActionWithOptionalParams(
     'view',
@@ -18,8 +16,6 @@ export const listTransactions = createAuthenticatedActionWithOptionalParams(
             },
         });
 
-        return deserialize(
-            handleApiResponse(response, 'Failed to fetch transactions') as any,
-        ) as TTransactionDeserialized[];
+        return handleApiResponse(response, 'Failed to fetch transactions');
     },
 );

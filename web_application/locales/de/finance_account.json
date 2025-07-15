@@ -3,5 +3,9 @@
         "one": "Konto",
         "other": "Konten",
         "label": "Name"
-    }
+    },
+
+    "rename": "Umbenennen",
+    "deactivate": "Deaktivieren",
+    "import_transactions": "Transaktionen importieren"
 }

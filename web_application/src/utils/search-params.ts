@@ -42,6 +42,7 @@ export const listTransactionSearchParams = {
         shallow: false,
     }),
     accountId: parseAsString,
+    page: paginationSearchParams.page,
 };
 
 export const listFinanceContactSearchParams = {
