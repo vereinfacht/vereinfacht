@@ -41,7 +41,7 @@ class MembershipSchema extends Schema
             Number::make('voluntaryContribution'),
             DateTime::make('startedAt')->sortable(),
             DateTime::make('endedAt')->sortable(),
-            DateTime::make('createdAt')->sortable(),
+            DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('membershipType')->type('membership-types'),

@@ -7,8 +7,6 @@ export const membershipStatusOptions = [
 ] as const;
 
 export const listMembershipsSortingOptions = [
-    'createdAt',
-    '-createdAt',
     'startedAt',
     '-startedAt',
 ] as const;
