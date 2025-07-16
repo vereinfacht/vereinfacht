@@ -3160,6 +3160,78 @@
                 }
             }
         },
+        "\/finance-contacts\/{finance_contact}": {
+            "get": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Show one finance-contact",
+                "description": "",
+                "operationId": "finance-contacts.show",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
         "\/finance-accounts": {
             "get": {
                 "tags": [

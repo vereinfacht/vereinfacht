@@ -18,20 +18,26 @@
     "email": {
         "label": "E-Mail"
     },
-    "phone": {
+    "phone_number": {
         "label": "Telefon"
     },
-    "street": {
+    "address": {
         "label": "Straße"
     },
-    "postal_code": {
+    "zip_code": {
         "label": "Postleitzahl"
     },
     "city": {
         "label": "Stadt"
     },
+    "country": {
+        "label": "Land"
+    },
     "created_at": {
         "label": "Erstellt am"
+    },
+    "updated_at": {
+        "label": "Aktualisiert am"
     },
     "gender": "Geschlecht",
     "gender_options": {

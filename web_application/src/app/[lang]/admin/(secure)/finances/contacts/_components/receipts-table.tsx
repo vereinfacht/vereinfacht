@@ -45,9 +45,7 @@ export default function ReceiptsTable({ receipts }: Props) {
 
     return (
         <div>
-            <Text className="mb-2 font-light text-slate-600 md:hyphens-auto">
-                {t('title.other')}
-            </Text>
+            <Text className="mb-4">{t('title.other')}</Text>
             <DataTable
                 data={receipts as any}
                 columns={columns as any}

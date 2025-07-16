@@ -79,13 +79,13 @@ export default function ContactTable({ contacts, totalPages }: Props) {
     ];
 
     return (
-        <>
-            <DataTable
-                data={contacts}
-                columns={columns}
-                resourceName={'contacts' as ResourceName}
-                totalPages={totalPages}
-            />
-        </>
+        <DataTable
+            data={contacts}
+            columns={columns}
+            resourceName={'finances/contacts' as ResourceName}
+            totalPages={totalPages}
+            canEdit={true}
+            canView={true}
+        />
     );
 }

@@ -327,6 +327,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/finance-contacts/{finance_contact}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show one finance-contact */
+        get: operations["finance-contacts.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/finance-accounts": {
         parameters: {
             query?: never;
@@ -4225,6 +4242,40 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "finance-contacts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
     "finance-accounts.index": {

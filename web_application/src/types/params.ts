@@ -16,14 +16,18 @@ export interface ResourceIndexPageParams extends ResourcePageParams {
     resource: ResourceName;
 }
 
-export interface ResourceShowPageParams extends ResourcePageParams {
-    id: string;
-}
+export type ResourceShowPageParams = ResourcePageParams & ShowPageParams;
 
 export type WithSearchParams = {
     searchParams: Promise<SearchParams>;
 };
 
 export type ResourceEditPageParams = ResourceShowPageParams;
+
+export interface ShowPageParams extends LocalizedPageParams {
+    id: string;
+}
+
+export type EditPageParams = ShowPageParams;
 
 export type SecurePageParams = LocalizedPageParams;
