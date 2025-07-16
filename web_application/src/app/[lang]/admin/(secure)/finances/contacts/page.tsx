@@ -5,8 +5,9 @@ import {
     loadListFinanceContactsSearchParams,
 } from '@/utils/search-params';
 import { WithSearchParams } from '@/types/params';
-import { deserialize } from 'jsonapi-fractal';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { itemsPerPage } from '@/services/api-endpoints';
+import { TFinanceContactDeserialized } from '@/types/resources';
 
 async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
     const response = await listFinanceContacts({
@@ -25,7 +26,9 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     const response = await getContactsFromApi(params);
 
-    const contacts = deserialize(response);
+    const contacts = deserialize(
+        response as DocumentObject,
+    ) as TFinanceContactDeserialized[];
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 

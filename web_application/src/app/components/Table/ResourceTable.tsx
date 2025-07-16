@@ -12,7 +12,7 @@ import { DataTable } from './DataTable';
 interface Props {
     resources: ResourceModel[];
     resourceName: ResourceName;
-    totalPages: number;
+    totalPages?: number;
 }
 
 export default function ResourceTable({

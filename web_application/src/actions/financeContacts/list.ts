@@ -1,8 +1,9 @@
+'use server';
+
 import {
     createAuthenticatedActionWithOptionalParams,
     handleApiResponse,
 } from '@/lib/api/utils';
-import 'server-only';
 import { listFinanceContactsSchema } from './list.schema';
 
 export const listFinanceContacts = createAuthenticatedActionWithOptionalParams(

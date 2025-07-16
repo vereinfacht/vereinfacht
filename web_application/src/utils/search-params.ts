@@ -20,16 +20,13 @@ export const paginationSearchParamParser = parseAsInteger
     .withDefault(1)
     .withOptions({ shallow: false });
 
-function getSortParser<T>(sortingOptions: T) {
-    // @ts-expect-error: not able to infer the readonly type for T
-    return parseAsArrayOf(parseAsStringLiteral<T>(sortingOptions)).withOptions({
-        shallow: false,
-    });
-}
-
 export const listMembershipSearchParams = {
     page: paginationSearchParamParser,
-    sort: getSortParser(membershipSortingOptions),
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(membershipSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
     'filter[status]': parseAsArrayOf(
         parseAsStringLiteral(membershipStatusOptions),
     )
@@ -41,13 +38,21 @@ export const listMembershipSearchParams = {
 
 export const listTransactionSearchParams = {
     page: paginationSearchParamParser,
-    sort: getSortParser(transactionSortingOptions),
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(transactionSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
     accountId: parseAsString,
 };
 
 export const listFinanceContactSearchParams = {
     page: paginationSearchParamParser,
-    sort: getSortParser(financeContactSortingOptions),
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(financeContactSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
     type: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
         .withDefault([])
         .withOptions({
