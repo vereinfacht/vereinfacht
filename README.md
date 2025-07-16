@@ -88,13 +88,14 @@ A new version of this file may be greated with `php artisan jsonapi:openapi:gene
 
 The newly generated file can be found in `/api/storage/public`. For the time being you'll then have to manually copy over new additions to the previously mentioned and tracked file in [`/api/public`](api/public/v1_openapi.json). Remember to afterwards bump the version (`openapi.info.version`) of the specs accordingly:
 
-```json
+```diff
 {
     "openapi": "3.0.2",
     "info": {
         "title": "vereinfacht.digital JSON:API",
         "description": "JSON:API implementation for vereinfacht.digital",
-        "version": "0.0.1"
+-       "version": "0.0.1"
++       "version": "0.0.2"
     },
     ...
 }
