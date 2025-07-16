@@ -1,4 +1,3 @@
-import 'server-only';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import { getFinanceAccountSchema } from './get.schema';
 

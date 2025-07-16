@@ -8,7 +8,7 @@ import {
 
 import { Button } from '../ui/button';
 import { useQueryState } from 'nuqs';
-import { paginationSearchParams } from '@/utils/search-params';
+import { paginationSearchParamParser } from '@/utils/search-params';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
@@ -31,7 +31,7 @@ export default function TablePagination({ totalPages }: Props) {
     const { t } = useTranslation('general');
     const [currentPage, setCurrentPage] = useQueryState(
         'page',
-        paginationSearchParams.page,
+        paginationSearchParamParser,
     );
 
     if (totalPages === undefined || totalPages <= 1) {

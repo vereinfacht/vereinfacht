@@ -1,4 +1,3 @@
-// import 'server-only';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import { createFinanceAccountSchema } from './create.schema';
 

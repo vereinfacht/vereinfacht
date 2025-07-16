@@ -1,4 +1,3 @@
-import 'server-only';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import { deleteFinanceAccountSchema } from './delete.schema';
 

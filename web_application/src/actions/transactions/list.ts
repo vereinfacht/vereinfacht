@@ -2,7 +2,6 @@ import {
     createAuthenticatedActionWithOptionalParams,
     handleApiResponse,
 } from '@/lib/api/utils';
-import 'server-only';
 import { listTransactionsSchema } from './list.schema';
 
 export const listTransactions = createAuthenticatedActionWithOptionalParams(

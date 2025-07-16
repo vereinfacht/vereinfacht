@@ -16,9 +16,9 @@ import {
     parseAsStringLiteral,
 } from 'nuqs/server';
 
-export const paginationSearchParams = {
-    page: parseAsInteger.withDefault(1).withOptions({ shallow: false }),
-};
+export const paginationSearchParamParser = parseAsInteger
+    .withDefault(1)
+    .withOptions({ shallow: false });
 
 function getSortParser<T>(sortingOptions: T) {
     // @ts-expect-error: not able to infer the readonly type for T
@@ -27,20 +27,9 @@ function getSortParser<T>(sortingOptions: T) {
     });
 }
 
-export function getDefaultSearchParams<T>(sortingOptions?: T) {
-    const defaultParams = {
-        page: paginationSearchParams.page,
-    };
-
-    if (sortingOptions) {
-        Object.assign(defaultParams, { sort: getSortParser(sortingOptions) });
-    }
-
-    return defaultParams;
-}
-
 export const listMembershipSearchParams = {
-    ...getDefaultSearchParams(membershipSortingOptions),
+    page: paginationSearchParamParser,
+    sort: getSortParser(membershipSortingOptions),
     'filter[status]': parseAsArrayOf(
         parseAsStringLiteral(membershipStatusOptions),
     )
@@ -51,12 +40,14 @@ export const listMembershipSearchParams = {
 };
 
 export const listTransactionSearchParams = {
-    ...getDefaultSearchParams(transactionSortingOptions),
+    page: paginationSearchParamParser,
+    sort: getSortParser(transactionSortingOptions),
     accountId: parseAsString,
 };
 
 export const listFinanceContactSearchParams = {
-    ...getDefaultSearchParams(financeContactSortingOptions),
+    page: paginationSearchParamParser,
+    sort: getSortParser(financeContactSortingOptions),
     type: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
         .withDefault([])
         .withOptions({
@@ -64,7 +55,9 @@ export const listFinanceContactSearchParams = {
         }),
 };
 
-export const loadListSearchParams = createLoader(getDefaultSearchParams());
+export const loadListSearchParams = createLoader({
+    page: paginationSearchParamParser,
+});
 
 export const loadListMembershipsSearchParams = createLoader(
     listMembershipSearchParams,
