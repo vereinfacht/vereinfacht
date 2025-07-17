@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use LaravelJsonApi\Core\Document\Error;
@@ -40,6 +41,20 @@ class UserController extends Controller
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
                 'detail' => "User could not be logged out: {$th->getMessage()}}",
+            ]));
+        }
+    }
+
+    public function index(): DataResponse
+    {
+        try {
+            $users = User::with('roles')->get();
+
+            return new DataResponse($users);
+        } catch (\Throwable $th) {
+            throw new JsonApiException(Error::fromArray([
+                'status' => 500,
+                'detail' => "Failed to fetch users: {$th->getMessage()}",
             ]));
         }
     }

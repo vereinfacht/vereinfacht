@@ -70,6 +70,10 @@ export default async function Navigation() {
                     href: '/admin/membershipTypes',
                     title: t('membership_type:title.other'),
                 },
+                {
+                    href: '/admin/users',
+                    title: t('user:title.other'),
+                },
                 // {
                 //     href: '/admin/dashboard',
                 //     title: t('user:title.other'),

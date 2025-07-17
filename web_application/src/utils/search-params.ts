@@ -7,6 +7,7 @@ import {
     membershipStatusOptions,
 } from '@/actions/memberships/list.schema';
 import { transactionSortingOptions } from '@/actions/transactions/list.schema';
+import { userSortingOptions } from '@/actions/users/list.schema';
 import {
     createLoader,
     inferParserType,
@@ -60,6 +61,12 @@ export const listFinanceContactSearchParams = {
         }),
 };
 
+export const listUserSearchParams = {
+    sort: parseAsArrayOf(parseAsStringLiteral(userSortingOptions)).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -76,6 +83,8 @@ export const loadListFinanceContactsSearchParams = createLoader(
     listFinanceContactSearchParams,
 );
 
+export const loadListUsersSearchParams = createLoader(listUserSearchParams);
+
 export type ListMembershipSearchParamsType = inferParserType<
     typeof listMembershipSearchParams
 >;
@@ -86,4 +95,8 @@ export type ListTransactionSearchParamsType = inferParserType<
 
 export type ListFinanceContactSearchParamsType = inferParserType<
     typeof listFinanceContactSearchParams
+>;
+
+export type ListUserSearchParamsType = inferParserType<
+    typeof listUserSearchParams
 >;
