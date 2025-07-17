@@ -613,6 +613,20 @@ export interface components {
              */
             version: string;
         };
+        "meta.page": {
+            /** @example 1 */
+            currentPage?: number;
+            /** @example 1 */
+            from?: number;
+            /** @example 20 */
+            lastPage?: number;
+            /** @example 10 */
+            perPage?: number;
+            /** @example 2 */
+            to?: number;
+            /** @example 2 */
+            total?: number;
+        };
         /** Resource/Club/Relationship/Divisions/Attach */
         "resources.clubs.relationship.divisions.attach": {
             /**
@@ -4957,6 +4971,9 @@ export interface operations {
                 };
                 content: {
                     "application/vnd.api+json": {
+                        meta?: {
+                            page?: components["schemas"]["meta.page"];
+                        };
                         jsonapi: {
                             /**
                              * version

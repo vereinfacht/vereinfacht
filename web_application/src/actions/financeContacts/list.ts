@@ -16,6 +16,7 @@ export const listFinanceContacts = createAuthenticatedActionWithOptionalParams(
                 query,
             },
         });
+
         return handleApiResponse(response, 'Failed to fetch finance contacts');
     },
 );

@@ -1,12 +1,12 @@
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { getFinanceContactSchema } from './get.schema';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { TFinanceContactDeserialized } from '@/types/resources';
+import { baseGetSchema } from '../base/get.schema';
 
 export const getFinanceContact = createAuthenticatedAction(
     'view',
     'finance-contacts',
-    getFinanceContactSchema,
+    baseGetSchema,
     async (params, client) => {
         const response = await client.GET(
             '/finance-contacts/{finance_contact}',

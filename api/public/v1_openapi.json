@@ -3,7 +3,7 @@
     "info": {
         "title": "vereinfacht.digital JSON:API",
         "description": "JSON:API implementation for vereinfacht.digital",
-        "version": "1.0.0"
+        "version": "0.0.1"
     },
     "servers": [
         {
@@ -4812,6 +4812,14 @@
                                         "data"
                                     ],
                                     "properties": {
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "page": {
+                                                    "$ref": "#\/components\/schemas\/meta.page"
+                                                }
+                                            }  
+                                        },
                                         "jsonapi": {
                                             "type": "object",
                                             "properties": {
@@ -5280,6 +5288,35 @@
                         "title": "version",
                         "type": "string",
                         "example": "1.0"
+                    }
+                }
+            },
+            "meta.page": {
+                "type": "object",
+                "properties": {
+                    "currentPage": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "from": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "lastPage": {
+                        "type": "integer",
+                        "example": 20
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "to": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "total": {
+                        "type": "integer",
+                        "example": 2
                     }
                 }
             },

@@ -1,4 +1,3 @@
-import { listTransactions } from '@/actions/transactions';
 import {
     ListTransactionSearchParamsType,
     loadListTransactionsSearchParams,
@@ -9,6 +8,7 @@ import { WithSearchParams } from '@/types/params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { TTransactionDeserialized } from '@/types/resources';
 import { itemsPerPage } from '@/services/api-endpoints';
+import { listTransactions } from '@/actions/transactions/list';
 
 async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
@@ -25,7 +25,6 @@ async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
 export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListTransactionsSearchParams(searchParams);
     const response = await getTransactionsFromApi(params);
-
     const transactions = deserialize(
         response as DocumentObject,
     ) as TTransactionDeserialized[];

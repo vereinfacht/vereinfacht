@@ -14,7 +14,6 @@ export const membershipSortingOptions = [
 ] as const;
 
 export const listMembershipsSchema = z.object({
-    // Sorting parameters
     sort: z.array(z.enum(membershipSortingOptions)).optional(),
 });
 

@@ -1,10 +1,10 @@
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { deleteFinanceAccountSchema } from './delete.schema';
+import { baseDeleteSchema } from '../base/delete.schema';
 
 export const deleteFinanceAccount = createAuthenticatedAction(
     'delete',
     'finance-accounts',
-    deleteFinanceAccountSchema,
+    baseDeleteSchema,
     async (params, client) => {
         const response = await client.DELETE(
             '/finance-accounts/{finance_account}',
