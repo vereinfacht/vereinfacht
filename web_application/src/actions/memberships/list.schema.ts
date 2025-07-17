@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { baseListSchema } from '../base/list.schema';
 
 export const membershipStatusOptions = [
     'applied',
@@ -13,7 +14,7 @@ export const membershipSortingOptions = [
     '-startedAt',
 ] as const;
 
-export const listMembershipsSchema = z.object({
+export const listMembershipsSchema = baseListSchema.extend({
     sort: z.array(z.enum(membershipSortingOptions)).optional(),
 });
 
