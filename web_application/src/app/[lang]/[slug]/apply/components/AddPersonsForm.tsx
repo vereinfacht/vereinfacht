@@ -55,6 +55,7 @@ export default function AddPersonsForm(props: Props) {
         members,
         members.length,
         membershipType.minimumNumberOfMembers,
+        INITIAL_MEMBER,
     ]);
 
     const addNewMember = () => {

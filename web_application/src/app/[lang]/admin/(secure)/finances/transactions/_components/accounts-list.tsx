@@ -1,4 +1,4 @@
-import { listFinanceAccounts } from '@/actions/financeAccounts';
+import { listFinanceAccounts } from '@/actions/financeAccounts/list';
 import createTranslation from 'next-translate/createTranslation';
 import AccountCard from './account-card';
 

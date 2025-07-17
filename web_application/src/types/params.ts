@@ -1,4 +1,5 @@
 import { ResourceName } from '@/resources/resource';
+import { SearchParams } from 'nuqs';
 
 export interface LocalizedPageParams {
     lang: string;
@@ -15,10 +16,18 @@ export interface ResourceIndexPageParams extends ResourcePageParams {
     resource: ResourceName;
 }
 
-export interface ResourceShowPageParams extends ResourcePageParams {
+export type ResourceShowPageParams = ResourcePageParams & ShowPageParams;
+
+export type WithSearchParams = {
+    searchParams: Promise<SearchParams>;
+};
+
+export type ResourceEditPageParams = ResourceShowPageParams;
+
+export interface ShowPageParams extends LocalizedPageParams {
     id: string;
 }
 
-export type ResourceEditPageParams = ResourceShowPageParams;
+export type EditPageParams = ShowPageParams;
 
 export type SecurePageParams = LocalizedPageParams;

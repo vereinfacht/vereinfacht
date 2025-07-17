@@ -19,5 +19,10 @@
     "password": "Passwort",
 
     "yes": "ja",
-    "no": "nein"
+    "no": "nein",
+
+    "pagination": {
+        "previous": "Vorherige Seite",
+        "next": "Nächste Seite"
+    }
 }

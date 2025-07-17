@@ -23,6 +23,7 @@ interface ApiResponse<T = unknown> {
  */
 export async function createAuthenticatedClient() {
     const session = await auth();
+
     if (!session?.accessToken) {
         redirect('/admin/auth/login');
     }

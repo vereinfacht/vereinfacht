@@ -59,7 +59,6 @@ export default async function ShowResourcePage({ params }: Props) {
                             <BelongsToManyField
                                 key={index}
                                 {...field}
-                                // @ts-expect-error: types for more complex fields not fully implemented yet
                                 value={resource[field.attribute]}
                             />
                         );

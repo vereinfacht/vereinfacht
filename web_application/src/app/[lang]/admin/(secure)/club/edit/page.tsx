@@ -16,7 +16,7 @@ async function getClubEditData(locale: string) {
         return redirect('/login');
     }
 
-    const resourceData = await getOne<Club>(
+    const [resourceData] = await getOne<Club>(
         'clubs',
         session.club_id,
         {},

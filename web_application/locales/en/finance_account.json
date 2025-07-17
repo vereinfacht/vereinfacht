@@ -3,5 +3,9 @@
         "one": "Account",
         "other": "Accounts",
         "label": "Name"
-    }
+    },
+
+    "rename": "Rename",
+    "deactivate": "Deactivate",
+    "import_transactions": "Import transactions"
 }

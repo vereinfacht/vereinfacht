@@ -19,7 +19,7 @@ async function getClubData(locale: string) {
         return redirect('/login');
     }
 
-    const club = await getOne<Club>('clubs', session.club_id, {}, locale);
+    const [club] = await getOne<Club>('clubs', session.club_id, {}, locale);
 
     return club;
 }

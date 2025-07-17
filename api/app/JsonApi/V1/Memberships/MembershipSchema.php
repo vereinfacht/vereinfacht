@@ -11,6 +11,7 @@ use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
@@ -35,7 +36,7 @@ class MembershipSchema extends Schema
             Str::make('notes'),
             Str::make('status'),
             Str::make('monthlyFee')->extractUsing(
-                static fn ($model) => $model->getMonthlyFee()
+                static fn($model) => $model->getMonthlyFee()
             )->readOnly(),
             Number::make('voluntaryContribution'),
             DateTime::make('startedAt')->sortable(),
@@ -57,6 +58,7 @@ class MembershipSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereIn::make('status')->delimiter(','),
         ];
     }
 
