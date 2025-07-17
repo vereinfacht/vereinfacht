@@ -18,19 +18,32 @@
     "email": {
         "label": "E-Mail"
     },
-    "phone": {
+    "phone_number": {
         "label": "Phone"
     },
-    "street": {
+    "address": {
         "label": "Street"
     },
-    "postal_code": {
+    "zip_code": {
         "label": "Postal Code"
     },
     "city": {
         "label": "City"
     },
+    "country": {
+        "label": "Country"
+    },
     "created_at": {
         "label": "Created At"
+    },
+        "updated_at": {
+        "label": "Updated At"
+    },
+    "gender": "Gender",
+    "gender_options": {
+        "female": "female",
+        "male": "male",
+        "none": "not specified",
+        "other": "diverse"
     }
 }
