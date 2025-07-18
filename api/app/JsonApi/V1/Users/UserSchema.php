@@ -25,7 +25,10 @@ class UserSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
+            Str::make('name')->sortable(),
+            Str::make('email'),
+            Str::make('role')->sortable(),
+            Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

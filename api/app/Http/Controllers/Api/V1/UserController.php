@@ -10,9 +10,21 @@ use Illuminate\Http\Request;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Responses\DataResponse;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
 class UserController extends Controller
 {
+    use Actions\AttachRelationship;
+    use Actions\Destroy;
+    use Actions\DetachRelationship;
+    use Actions\FetchMany;
+    use Actions\FetchOne;
+    use Actions\FetchRelated;
+    use Actions\FetchRelationship;
+    use Actions\Store;
+    use Actions\Update;
+    use Actions\UpdateRelationship;
+
     public function login(Request $request): DataResponse
     {
         try {

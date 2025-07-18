@@ -28,12 +28,12 @@ class FakeClubsSeeder extends Seeder
             ->hasDivisions(5)
             ->hasMembershipTypes(3)
             ->create()
-            ->each(fn ($club) => $this->attachDivisionsToMembershipTypes($club))
-            ->each(fn ($club) => $this->attachPaymentPeriods($club))
-            ->each(fn ($club) => $this->createClubMemberships($club))
-            ->each(fn ($club) => $this->attachMembersToDivision($club))
-            ->each(fn ($club) => $this->assignClubAdminRole($club))
-            ->each(fn ($club) => $this->assignSuperAdminRole($club));
+            ->each(fn($club) => $this->attachDivisionsToMembershipTypes($club))
+            ->each(fn($club) => $this->attachPaymentPeriods($club))
+            ->each(fn($club) => $this->createClubMemberships($club))
+            ->each(fn($club) => $this->attachMembersToDivision($club))
+            ->each(fn($club) => $this->assignClubAdminRole($club))
+            ->each(fn($club) => $this->assignSuperAdminRole($club));
     }
 
     protected function attachDivisionsToMembershipTypes($club)
@@ -42,7 +42,7 @@ class FakeClubsSeeder extends Seeder
 
         $club->membershipTypes()->each(function ($membershipType) use ($divisions) {
             $divisions->random($this->faker->numberBetween(0, $divisions->count()))->each(
-                fn ($division) => $membershipType
+                fn($division) => $membershipType
                     ->divisions()
                     ->attach(
                         $division->id,
@@ -65,7 +65,7 @@ class FakeClubsSeeder extends Seeder
                 $membership->save();
             });
 
-        $club->memberships()->each(fn ($membership) => $this->createMembershipMembers($membership, $club));
+        $club->memberships()->each(fn($membership) => $this->createMembershipMembers($membership, $club));
     }
 
     protected function createMembershipMembers($membership, $club)
@@ -95,15 +95,22 @@ class FakeClubsSeeder extends Seeder
         $divisions = $club->divisions()->get(['id']);
         $club->members()
             ->get()
-            ->each(fn ($member) => $member->divisions()->attach($divisions->random()->id));
+            ->each(fn($member) => $member->divisions()->attach($divisions->random()->id));
     }
 
     protected function assignClubAdminRole($club)
     {
         setPermissionsTeamId($club);
+
         User::factory([
             'email' => "club-admin-{$club->getKey()}@example.org",
         ])->create()->assignRole('club admin');
+
+        $additionalClubAdmins = $this->faker->numberBetween(5, 10);
+
+        for ($i = 0; $i < $additionalClubAdmins; $i++) {
+            User::factory()->create()->assignRole('club admin');
+        }
     }
 
     protected function assignSuperAdminRole($club)

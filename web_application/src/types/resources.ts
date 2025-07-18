@@ -9,6 +9,11 @@ export type TFinanceContactRaw =
     components['schemas']['resources.finance-contacts.resource.fetch'];
 export type TTransactionRaw =
     components['schemas']['resources.transactions.resource.fetch'];
+export type TUserRaw = components['schemas']['resources.users.resource.fetch'];
+
+export type TUserDeserialized = TUserRaw['attributes'] & {
+    id: string;
+};
 
 // Deserialized finance domain types
 export type TFinanceAccountDeserialized = TFinanceAccountRaw['attributes'] & {
