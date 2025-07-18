@@ -45,7 +45,7 @@ export default async function UserShowPage({ params }: Props) {
             value: user.preferredLocale,
         },
         {
-            label: t('created_al.label'),
+            label: t('created_at.label'),
             attribute: 'createdAt',
             value: user.createdAt,
         },
