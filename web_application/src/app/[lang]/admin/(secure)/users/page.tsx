@@ -22,5 +22,6 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const users = deserialize(
         response as DocumentObject,
     ) as TUserDeserialized[];
+
     return <UserTable users={users} />;
 }
