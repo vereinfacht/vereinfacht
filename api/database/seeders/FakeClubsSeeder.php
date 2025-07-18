@@ -108,7 +108,7 @@ class FakeClubsSeeder extends Seeder
 
         $additionalClubAdmins = $this->faker->numberBetween(5, 10);
 
-        for ($i = 1; $i < $additionalClubAdmins; $i++) {
+        for ($i = 0; $i < $additionalClubAdmins; $i++) {
             User::factory()->create()->assignRole('club admin');
         }
     }
