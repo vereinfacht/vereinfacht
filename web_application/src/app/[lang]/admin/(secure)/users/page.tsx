@@ -12,6 +12,7 @@ async function getUsersFromApi(params: ListUserSearchParamsType) {
     const response = await listUsers({
         sort: params.sort ?? undefined,
     });
+
     return response || [];
 }
 
