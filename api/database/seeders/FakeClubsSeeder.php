@@ -102,12 +102,10 @@ class FakeClubsSeeder extends Seeder
     {
         setPermissionsTeamId($club);
 
-        $adminsCount = $this->faker->numberBetween(5, 10);
+        $additionalClubAdmins = $this->faker->numberBetween(5, 10);
 
-        for ($i = 1; $i < $adminsCount; $i++) {
-            User::factory()->create([
-                'email' => "club-{$club->id}-admin-{$i}@example.org",
-            ])->assignRole('club admin');
+        for ($i = 1; $i < $additionalClubAdmins; $i++) {
+            User::factory()->create()->assignRole('club admin');
         }
     }
 
