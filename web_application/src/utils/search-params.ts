@@ -62,6 +62,7 @@ export const listFinanceContactSearchParams = {
 };
 
 export const listUserSearchParams = {
+    page: paginationSearchParamParser,
     sort: parseAsArrayOf(parseAsStringLiteral(userSortingOptions)).withOptions({
         shallow: false,
     }),
