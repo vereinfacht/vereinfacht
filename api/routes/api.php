@@ -53,8 +53,6 @@ JsonApiRoute::server('v1')
             ->actions(function (ActionRegistrar $actions) {
                 $actions->post('login');
                 $actions->post('logout');
-                $actions->get('index');
-                $actions->withId()->get('show');
             });
 
         $server->resource('finance-contacts', JsonApiController::class)

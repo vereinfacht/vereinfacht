@@ -22,37 +22,33 @@ export default async function UserShowPage({ params }: Props) {
         {
             label: 'ID',
             attribute: 'id',
-            value: user.id,
         },
         {
             label: t('title.label'),
             attribute: 'name',
-            value: user.name,
         },
         {
             label: t('email.label'),
             attribute: 'email',
-            value: user.email,
         },
         {
             label: t('role.label'),
             attribute: 'role',
-            value: user.role,
+            value: 'club admin',
         },
         {
             label: t('preferred_locale.label'),
             attribute: 'preferredLocale',
-            value: user.preferredLocale,
         },
         {
             label: t('created_at.label'),
             attribute: 'createdAt',
-            value: user.createdAt,
+            type: 'date',
         },
         {
             label: t('updated_at.label'),
             attribute: 'updatedAt',
-            value: user.updatedAt,
+            type: 'date',
         },
     ];
 
@@ -64,8 +60,8 @@ export default async function UserShowPage({ params }: Props) {
                     <DetailField
                         key={index}
                         {...field}
-                        resourceName={'receipts' as ResourceName}
-                        value={field.value}
+                        resourceName={'users' as ResourceName}
+                        value={field.value ?? user[field.attribute]}
                     />
                 ))}
             </ul>
