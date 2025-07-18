@@ -50,7 +50,7 @@ JsonApiRoute::server('v1')
 
         $server->resource('users', UserController::class)
             ->only('index', 'show', 'login', 'logout')
-            ->actions('-actions', function (ActionRegistrar $actions) {
+            ->actions(function (ActionRegistrar $actions) {
                 $actions->post('login');
                 $actions->post('logout');
                 $actions->get('index');
