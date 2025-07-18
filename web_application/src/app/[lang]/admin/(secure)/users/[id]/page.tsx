@@ -61,7 +61,6 @@ export default async function UserShowPage({ params }: Props) {
             <EditButton href={`/admin/users/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
-                    // @ts-expect-error: value type as element mismatch
                     <DetailField
                         key={index}
                         {...field}
