@@ -42,7 +42,7 @@ export default function UserTable({ users }: Props) {
         {
             accessorKey: 'role',
             header: t('role.label'),
-            cell: ({ row }) => <TextCell>club admin</TextCell>,
+            cell: () => <TextCell>club admin</TextCell>,
         },
         {
             accessorKey: 'preferredLocale',
