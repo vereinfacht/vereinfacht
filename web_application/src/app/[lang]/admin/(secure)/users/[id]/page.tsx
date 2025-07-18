@@ -61,7 +61,10 @@ export default async function UserShowPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName={'users' as ResourceName}
-                        value={field.value ?? user[field.attribute]}
+                        value={
+                            field.value ??
+                            user[field.attribute as keyof typeof user]
+                        }
                     />
                 ))}
             </ul>
