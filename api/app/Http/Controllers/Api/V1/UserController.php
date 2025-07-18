@@ -58,4 +58,16 @@ class UserController extends Controller
             ]));
         }
     }
+
+    public function show(User $user): DataResponse
+    {
+        try {
+            return new DataResponse($user->load('roles'));
+        } catch (\Throwable $th) {
+            throw new JsonApiException(Error::fromArray([
+                'status' => 404,
+                'detail' => "User not found: {$th->getMessage()}",
+            ]));
+        }
+    }
 }
