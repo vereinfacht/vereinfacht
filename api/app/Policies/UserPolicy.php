@@ -25,13 +25,11 @@ class UserPolicy
      */
     public function view(User $user, UserModel $model): bool
     {
-        return true;
-
         if ($user instanceof Club) {
-            return $user->id === $model->club_id;
+            return $model->clubs->contains('id', $user->id);
         }
 
-        return $user->can('view users') && $model->club_id === getPermissionsTeamId();
+        return $user->can('view users') && $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
     }
 
     /**
