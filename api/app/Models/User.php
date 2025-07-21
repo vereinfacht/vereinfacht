@@ -105,4 +105,15 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     {
         return $this->clubs()->withoutGlobalScope(ClubScope::class)->first();
     }
+
+    public function roles(): MorphToMany
+    {
+        return $this->morphToMany(
+            Role::class,
+            'model',
+            'model_has_roles',
+            'model_id',
+            'role_id'
+        );
+    }
 }

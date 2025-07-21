@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Club;
-use App\Models\User as UserModel;
 use Illuminate\Foundation\Auth\User;
+use Spatie\Permission\Models\Role;
 
-class UserPolicy
+class RolePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -17,19 +17,15 @@ class UserPolicy
             return true;
         }
 
-        return $user->can('view users');
+        return $user->can('view roles');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, UserModel $model): bool
+    public function view(User $user, Role $role): bool
     {
-        if ($user instanceof Club) {
-            return $model->clubs->contains('id', $user->id);
-        }
-
-        return $user->can('view users') && $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
+        return true;
     }
 
     /**
@@ -43,7 +39,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, UserModel $model): bool
+    public function update(User $user, Role $role): bool
     {
         return false;
     }
@@ -51,7 +47,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, UserModel $model): bool
+    public function delete(User $user, Role $role): bool
     {
         return false;
     }
@@ -59,7 +55,7 @@ class UserPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, UserModel $model): bool
+    public function restore(User $user, Role $role): bool
     {
         return false;
     }
@@ -67,18 +63,8 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, UserModel $model): bool
+    public function forceDelete(User $user, Role $role): bool
     {
         return false;
-    }
-
-    public function viewRoles(User $user, UserModel $model): bool
-    {
-        if ($user instanceof Club) {
-            return $model->clubs->contains('id', $user->id);
-        }
-
-        return $user->can('view roles') &&
-            $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
     }
 }

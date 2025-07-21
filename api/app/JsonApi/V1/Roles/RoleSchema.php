@@ -1,23 +1,23 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Roles;
 
-use App\Models\User;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use Spatie\Permission\Models\Role;
+use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
 
-class UserSchema extends Schema
+class RoleSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
      */
-    public static string $model = User::class;
+    public static string $model = Role::class;
 
     /**
      * Get the resource fields.
@@ -27,11 +27,9 @@ class UserSchema extends Schema
         return [
             ID::make(),
             Str::make('name')->sortable(),
-            Str::make('email'),
-            Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
-            HasMany::make('roles')->type('roles'),
+            HasOne::make('user'),
         ];
     }
 
