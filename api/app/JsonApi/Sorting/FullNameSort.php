@@ -6,18 +6,12 @@ use LaravelJsonApi\Eloquent\Contracts\SortField;
 
 class FullNameSort implements SortField
 {
-
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
      * Create a new sort field.
      *
-     * @param string $name
-     * @param string|null $column
-     * @return FullNameSort
+     * @param  string|null  $column
      */
     public static function make(string $name): self
     {
@@ -26,8 +20,6 @@ class FullNameSort implements SortField
 
     /**
      * FullNameSort constructor.
-     *
-     * @param string $name
      */
     public function __construct(string $name)
     {
@@ -36,8 +28,6 @@ class FullNameSort implements SortField
 
     /**
      * Get the name of the sort field.
-     *
-     * @return string
      */
     public function sortField(): string
     {
@@ -47,8 +37,7 @@ class FullNameSort implements SortField
     /**
      * Apply the sort order to the query.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $direction
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function sort($query, string $direction = 'asc')

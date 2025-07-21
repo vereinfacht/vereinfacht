@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     protected $permissionNames = [
         'view users',
         'create users',
