@@ -49,14 +49,14 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'update');
 
         $server->resource('users', UserController::class)
-            ->only('login', 'logout')
+            ->only('index', 'show', 'login', 'logout')
             ->actions(function (ActionRegistrar $actions) {
                 $actions->post('login');
                 $actions->post('logout');
             });
 
         $server->resource('finance-contacts', JsonApiController::class)
-            ->only('index');
+            ->only('index', 'show');
 
         $server->resource('finance-accounts', JsonApiController::class)
             ->relationships(function ($relations) {

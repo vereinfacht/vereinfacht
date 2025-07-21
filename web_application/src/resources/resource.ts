@@ -2,8 +2,10 @@ import { getAny, getOne } from '@/actions/fetchAdminResources';
 import { ActionState } from '@/actions/validateForm';
 import { Query } from '@/services/api-endpoints';
 import { SupportedLocale, defaultLocale } from '@/utils/localization';
+import { loadListSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
+import { SearchParams } from 'nuqs';
 import { z } from 'zod';
 
 export type ResourceName =
@@ -74,9 +76,9 @@ export class Resource<T> {
         this.locale = locale;
     }
 
-    getIndexResources(query: Query = {}) {
+    async getIndexResources(query: Query = {}) {
         // @TODO: prevent even fetching resources when not allowed
-        return getAny<T[]>(this.name, null, query, this.locale);
+        return await getAny<T[]>(this.name, null, query, this.locale);
     }
 
     getIndexColumns(
@@ -86,9 +88,14 @@ export class Resource<T> {
         return [];
     }
 
-    getShowResource(query: Query = {}, id: string) {
+    async loadIndexParams(searchParams: Promise<SearchParams>) {
+        return await loadListSearchParams(searchParams);
+    }
+
+    async getShowResource(query: Query = {}, id: string) {
         // @TODO: prevent even fetching resources when not allowed
-        return getOne<T>(this.name, id, query, this.locale);
+        const [response] = await getOne<T>(this.name, id, query, this.locale);
+        return response;
     }
 
     getDetailFields(_t: Translate): DetailFieldDef<T>[] {

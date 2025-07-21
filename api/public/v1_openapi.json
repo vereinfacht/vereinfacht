@@ -3,7 +3,7 @@
     "info": {
         "title": "vereinfacht.digital JSON:API",
         "description": "JSON:API implementation for vereinfacht.digital",
-        "version": "1.0.0"
+        "version": "0.0.1"
     },
     "servers": [
         {
@@ -3028,6 +3028,212 @@
                 }
             }
         },
+        "\/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "description": "",
+                "operationId": "users.index",
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The page size for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "name",
+                                    "-name",
+                                    "role",
+                                    "-role",
+                                    "preferredLocale",
+                                    "-preferredLocale",
+                                    "createdAt",
+                                    "-createdAt",
+                                    "updatedAt",
+                                    "-updatedAt"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            },
+                            "2": {
+                                "value": [
+                                    "2"
+                                ]
+                            },
+                            "3": {
+                                "value": [
+                                    "3"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index users",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.users.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
+        "\/users\/{user}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show one user",
+                "description": "",
+                "operationId": "users.show",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show users",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.users.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
         "\/finance-contacts": {
             "get": {
                 "tags": [
@@ -3068,10 +3274,14 @@
                                 "enum": [
                                     "id",
                                     "-id",
-                                    "createdAt",
-                                    "-createdAt",
-                                    "updatedAt",
-                                    "-updatedAt"
+                                    "companyName",
+                                    "-companyName",
+                                    "city",
+                                    "-city",
+                                    "fullName",
+                                    "-fullName",
+                                    "fullName",
+                                    "-fullName"
                                 ],
                                 "type": "string"
                             }
@@ -3152,6 +3362,78 @@
                     },
                     "401": {
                         "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
+        "\/finance-contacts\/{finance_contact}": {
+            "get": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Show one finance-contact",
+                "description": "",
+                "operationId": "finance-contacts.show",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
                     }
                 }
             }
@@ -4736,6 +5018,14 @@
                                         "data"
                                     ],
                                     "properties": {
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "page": {
+                                                    "$ref": "#\/components\/schemas\/meta.page"
+                                                }
+                                            }  
+                                        },
                                         "jsonapi": {
                                             "type": "object",
                                             "properties": {
@@ -5204,6 +5494,35 @@
                         "title": "version",
                         "type": "string",
                         "example": "1.0"
+                    }
+                }
+            },
+            "meta.page": {
+                "type": "object",
+                "properties": {
+                    "currentPage": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "from": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "lastPage": {
+                        "type": "integer",
+                        "example": 20
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "to": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "total": {
+                        "type": "integer",
+                        "example": 2
                     }
                 }
             },
@@ -6828,18 +7147,23 @@
                     "attributes": {
                         "type": "object",
                         "properties": {
-                            "last_name": {
-                                "title": "last_name",
+                            "lastName": {
+                                "title": "lastName",
                                 "type": "string",
-                                "example": "Marks"
+                                "example": "Pfeffer"
                             },
-                            "first_name": {
-                                "title": "first_name",
+                            "firstName": {
+                                "title": "firstName",
                                 "type": "string",
-                                "example": "Stanford"
+                                "example": "Jewel"
                             },
-                            "company_name": {
-                                "title": "company_name",
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Jewel Pfeffer"
+                            },
+                            "companyName": {
+                                "title": "companyName",
                                 "type": "string"
                             },
                             "gender": {
@@ -6850,32 +7174,32 @@
                             "address": {
                                 "title": "address",
                                 "type": "string",
-                                "example": "7128 Moore Pines"
+                                "example": "5096 Reynolds Shore Apt. 863"
                             },
-                            "zip_code": {
-                                "title": "zip_code",
+                            "zipCode": {
+                                "title": "zipCode",
                                 "type": "string",
-                                "example": "23330-1505"
+                                "example": "65642-4518"
                             },
                             "city": {
                                 "title": "city",
                                 "type": "string",
-                                "example": "Crawfordfort"
+                                "example": "Amandaport"
                             },
                             "country": {
                                 "title": "country",
                                 "type": "string",
-                                "example": "Suriname"
+                                "example": "Faroe Islands"
                             },
-                            "phone_number": {
-                                "title": "phone_number",
+                            "phoneNumber": {
+                                "title": "phoneNumber",
                                 "type": "string",
-                                "example": "+18704972276"
+                                "example": "+14582898852"
                             },
                             "email": {
                                 "title": "email",
                                 "type": "string",
-                                "example": "bill62@example.com"
+                                "example": "haley.luigi@example.org"
                             },
                             "type": {
                                 "title": "type",
@@ -6886,13 +7210,13 @@
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-07T07:54:32.000000Z"
+                                "example": "2025-07-07T10:04:26.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-07T07:54:32.000000Z"
+                                "example": "2025-07-07T10:04:26.000000Z"
                             }
                         }
                     },
@@ -8404,6 +8728,62 @@
                                         "readOnly": true
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.users.resource.fetch": {
+                "title": "Resource\/User\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "users",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "title": "name",
+                                "type": "string",
+                                "example": "Miss Lauren Ebert DVM"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "hello@vereinfacht.digital"
+                            },
+                            "role": {
+                                "title": "role",
+                                "type": "string"
+                            },
+                            "preferredLocale": {
+                                "title": "preferredLocale",
+                                "type": "string",
+                                "example": "en"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-07-18T08:29:02.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-07-18T08:29:02.000000Z"
                             }
                         }
                     }

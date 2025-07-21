@@ -1,6 +1,6 @@
 'use client';
 
-import Text from '@/app/components/Text/Text';
+import CurrencyText from '@/app/components/Text/CurrencyText';
 import { Button } from '@/app/components/ui/button';
 import {
     Card,
@@ -14,7 +14,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/app/components/ui/dialog';
-import useCurrency from '@/hooks/useCurrency';
 import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
@@ -31,7 +30,6 @@ export default function TransactionDetailsModal({
     isOpen,
     onClose,
 }: TransactionDetailsModalProps) {
-    const { getFormatted } = useCurrency();
     const translationHook = useTranslation();
     const lang = translationHook.lang as SupportedLocale;
     const { t } = translationHook;
@@ -121,16 +119,7 @@ export default function TransactionDetailsModal({
                                         {t('transaction:amount.label')}
                                     </label>
                                     <div className="mt-1 flex items-center gap-2">
-                                        <Text
-                                            preset="currency"
-                                            className={
-                                                amount >= 0
-                                                    ? 'text-green-600'
-                                                    : 'text-red-600'
-                                            }
-                                        >
-                                            {getFormatted(Math.abs(amount))}
-                                        </Text>
+                                        <CurrencyText value={amount} />
                                     </div>
                                 </div>
                             </div>

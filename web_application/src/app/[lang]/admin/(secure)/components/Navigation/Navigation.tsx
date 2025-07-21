@@ -15,7 +15,7 @@ export default async function Navigation() {
         return redirect('/login');
     }
 
-    const club = await getOne<Club>('clubs', session.club_id, {});
+    const [club] = await getOne<Club>('clubs', session.club_id, {});
 
     const items = [
         {
@@ -69,6 +69,10 @@ export default async function Navigation() {
                 {
                     href: '/admin/membershipTypes',
                     title: t('membership_type:title.other'),
+                },
+                {
+                    href: '/admin/users',
+                    title: t('user:title.other'),
                 },
                 // {
                 //     href: '/admin/dashboard',

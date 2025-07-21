@@ -1,20 +1,19 @@
-import { listTransactions } from '@/actions/transactions';
 import {
     ListTransactionSearchParamsType,
     loadListTransactionsSearchParams,
 } from '@/utils/search-params';
-import { type SearchParams } from 'nuqs/server';
 import AccountsList from './_components/accounts-list';
 import TransactionsList from './_components/transactions-list';
+import { WithSearchParams } from '@/types/params';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
+import { TTransactionDeserialized } from '@/types/resources';
+import { itemsPerPage } from '@/services/api-endpoints';
+import { listTransactions } from '@/actions/transactions/list';
 
-type Props = {
-    searchParams: Promise<SearchParams>;
-};
-
-async function getTransactions(params: ListTransactionSearchParamsType) {
+async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
         sort: params.sort ?? undefined,
-        page: { size: 50, number: 1 },
+        page: { size: itemsPerPage, number: params.page },
         filter: params.accountId ? { financeAccountId: params.accountId } : {},
         include: ['financeAccount'],
         fields: { 'finance-accounts': ['title', 'iban', 'bic'] },
@@ -23,15 +22,23 @@ async function getTransactions(params: ListTransactionSearchParamsType) {
     return response || [];
 }
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListTransactionsSearchParams(searchParams);
-    const transactions = await getTransactions(params);
+    const response = await getTransactionsFromApi(params);
+    const transactions = deserialize(
+        response as DocumentObject,
+    ) as TTransactionDeserialized[];
+    const meta = (response as any).meta;
+    const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
     return (
         <div className="flex gap-6">
             <AccountsList />
 
-            <TransactionsList transactions={transactions} />
+            <TransactionsList
+                transactions={transactions}
+                totalPages={totalPages}
+            />
         </div>
     );
 }

@@ -310,6 +310,40 @@ export interface paths {
         patch: operations["clubs.financeAccounts.update"];
         trace?: never;
     };
+    "/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all users */
+        get: operations["users.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users/{user}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show one user */
+        get: operations["users.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/finance-contacts": {
         parameters: {
             query?: never;
@@ -319,6 +353,23 @@ export interface paths {
         };
         /** Get all finance-contacts */
         get: operations["finance-contacts.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/finance-contacts/{finance_contact}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show one finance-contact */
+        get: operations["finance-contacts.show"];
         put?: never;
         post?: never;
         delete?: never;
@@ -595,6 +646,20 @@ export interface components {
              * @example 1.0
              */
             version: string;
+        };
+        "meta.page": {
+            /** @example 1 */
+            currentPage?: number;
+            /** @example 1 */
+            from?: number;
+            /** @example 20 */
+            lastPage?: number;
+            /** @example 10 */
+            perPage?: number;
+            /** @example 2 */
+            to?: number;
+            /** @example 2 */
+            total?: number;
         };
         /** Resource/Club/Relationship/Divisions/Attach */
         "resources.clubs.relationship.divisions.attach": {
@@ -1705,17 +1770,22 @@ export interface components {
             id: string;
             attributes: {
                 /**
-                 * last_name
-                 * @example Marks
+                 * lastName
+                 * @example Pfeffer
                  */
-                last_name?: string;
+                lastName?: string;
                 /**
-                 * first_name
-                 * @example Stanford
+                 * firstName
+                 * @example Jewel
                  */
-                first_name?: string;
-                /** company_name */
-                company_name?: string;
+                firstName?: string;
+                /**
+                 * fullName
+                 * @example Jewel Pfeffer
+                 */
+                fullName?: string;
+                /** companyName */
+                companyName?: string;
                 /**
                  * gender
                  * @example female
@@ -1723,32 +1793,32 @@ export interface components {
                 gender?: string;
                 /**
                  * address
-                 * @example 7128 Moore Pines
+                 * @example 5096 Reynolds Shore Apt. 863
                  */
                 address?: string;
                 /**
-                 * zip_code
-                 * @example 23330-1505
+                 * zipCode
+                 * @example 65642-4518
                  */
-                zip_code?: string;
+                zipCode?: string;
                 /**
                  * city
-                 * @example Crawfordfort
+                 * @example Amandaport
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Suriname
+                 * @example Faroe Islands
                  */
                 country?: string;
                 /**
-                 * phone_number
-                 * @example +18704972276
+                 * phoneNumber
+                 * @example +14582898852
                  */
-                phone_number?: string;
+                phoneNumber?: string;
                 /**
                  * email
-                 * @example bill62@example.com
+                 * @example haley.luigi@example.org
                  */
                 email?: string;
                 /**
@@ -1758,12 +1828,12 @@ export interface components {
                 type?: string;
                 /**
                  * createdAt
-                 * @example 2025-07-07T07:54:32.000000Z
+                 * @example 2025-07-07T10:04:26.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-07-07T07:54:32.000000Z
+                 * @example 2025-07-07T10:04:26.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2833,6 +2903,45 @@ export interface components {
                         self?: string;
                     };
                 };
+            };
+        };
+        /** Resource/User/Fetch */
+        "resources.users.resource.fetch": {
+            /**
+             * type
+             * @default users
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example Miss Lauren Ebert DVM
+                 */
+                name?: string;
+                /**
+                 * email
+                 * @example hello@vereinfacht.digital
+                 */
+                email?: string;
+                /** role */
+                role?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * createdAt
+                 * @example 2025-07-18T08:29:02.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-07-18T08:29:02.000000Z
+                 */
+                readonly updatedAt?: string;
             };
         };
     };
@@ -4183,6 +4292,79 @@ export interface operations {
             422: components["responses"]["422"];
         };
     };
+    "users.index": {
+        parameters: {
+            query?: {
+                /** @description The page size for paginated results */
+                "page[size]"?: number;
+                /** @description The page number for paginated results */
+                "page[number]"?: number;
+                sort?: ("id" | "-id" | "name" | "-name" | "role" | "-role" | "preferredLocale" | "-preferredLocale" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+        };
+    };
+    "users.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "finance-contacts.index": {
         parameters: {
             query?: {
@@ -4190,7 +4372,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "companyName" | "-companyName" | "city" | "-city" | "fullName" | "-fullName" | "fullName" | "-fullName")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
             };
@@ -4220,6 +4402,40 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "finance-contacts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
     "finance-accounts.index": {
@@ -4901,6 +5117,9 @@ export interface operations {
                 };
                 content: {
                     "application/vnd.api+json": {
+                        meta?: {
+                            page?: components["schemas"]["meta.page"];
+                        };
                         jsonapi: {
                             /**
                              * version

@@ -61,13 +61,15 @@ export class MembershipTypeResource extends Resource<MembershipType> {
         ] as ColumnDef<MembershipType, unknown>[];
     }
 
-    getShowResource(_query: Query = {}, id: string) {
-        return getOne<MembershipType>(
+    async getShowResource(_query: Query = {}, id: string) {
+        const [response] = await getOne<MembershipType>(
             this.name,
             id,
             { include: ['divisionMembershipTypes.division'] },
             this.locale,
         );
+
+        return response;
     }
 
     getDetailFields(_t: Translate): DetailFieldDef<MembershipType>[] {

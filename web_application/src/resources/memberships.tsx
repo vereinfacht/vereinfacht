@@ -1,4 +1,14 @@
+import { getOne } from '@/actions/fetchAdminResources';
+import { membershipStatusOptions } from '@/actions/memberships/list.schema';
+import {
+    getUpdateMembershipSchema,
+    updateMembership,
+} from '@/actions/memberships/update';
+import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
+import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import TextCell from '@/app/components/Table/TextCell';
+import { Query } from '@/services/api-endpoints';
 import {
     Member,
     Membership,
@@ -10,13 +20,11 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { BelongsToDetailFieldDef, DetailFieldDef, Resource } from './resource';
 import {
-    getUpdateMembershipSchema,
-    updateMembership,
-} from '@/actions/memberships/update';
-import { getOne } from '@/actions/fetchAdminResources';
-import { Query } from '@/services/api-endpoints';
-import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
-import CurrencyCell from '@/app/components/Table/CurrencyCell';
+    listMembershipSearchParams,
+    loadListMembershipsSearchParams,
+} from '@/utils/search-params';
+import HeaderSort from '@/app/components/Table/HeaderSort';
+import { SearchParams } from 'nuqs';
 
 export class MembershipResource extends Resource<Membership> {
     constructor() {
@@ -30,8 +38,9 @@ export class MembershipResource extends Resource<Membership> {
         this.updateAction = updateMembership;
     }
 
-    getIndexResources() {
+    async getIndexResources(query: Query = {}) {
         return super.getIndexResources({
+            ...query,
             include: ['membershipType', 'owner', 'paymentPeriod'],
             fields: {
                 memberships: [
@@ -49,6 +58,10 @@ export class MembershipResource extends Resource<Membership> {
                 members: ['firstName', 'lastName'],
             },
         });
+    }
+
+    async loadIndexParams(searchParams: Promise<SearchParams>) {
+        return await loadListMembershipsSearchParams(searchParams);
     }
 
     getIndexColumns(t: Translate) {
@@ -80,7 +93,13 @@ export class MembershipResource extends Resource<Membership> {
                 },
             }),
             columnHelper.accessor('startedAt', {
-                header: t('membership:started_at.label'),
+                header: ({ column }) => (
+                    <HeaderSort
+                        parser={listMembershipSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('membership:started_at.label')}
+                    />
+                ),
                 cell: (cell) => (
                     <TextCell>
                         {formatDate(cell.getValue(), this.locale)}
@@ -108,7 +127,14 @@ export class MembershipResource extends Resource<Membership> {
                 cell: (cell) => <TextCell>{cell.getValue()}</TextCell>,
             }),
             columnHelper.accessor('status', {
-                header: t('membership:status.label'),
+                header: ({}) => (
+                    <HeaderOptionFilter
+                        options={membershipStatusOptions ?? []}
+                        parser={listMembershipSearchParams['filter[status]']}
+                        paramKey={'filter[status]'}
+                        translationKey={'membership:status'}
+                    />
+                ),
                 cell: (cell) => {
                     const status = cell.getValue();
 
@@ -122,7 +148,13 @@ export class MembershipResource extends Resource<Membership> {
                 },
             }),
             columnHelper.accessor('createdAt', {
-                header: t('resource:fields.created_at'),
+                header: ({ column }) => (
+                    <HeaderSort
+                        parser={listMembershipSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('resource:fields.created_at')}
+                    />
+                ),
                 cell: (cell) => (
                     <TextCell>
                         {formatDate(cell.getValue(), this.locale)}
@@ -132,13 +164,15 @@ export class MembershipResource extends Resource<Membership> {
         ] as ColumnDef<Membership, unknown>[];
     }
 
-    getShowResource(_query: Query = {}, id: string) {
-        return getOne<Membership>(
+    async getShowResource(_query: Query = {}, id: string) {
+        const [response] = await getOne<Membership>(
             this.name,
             id,
             { include: ['membershipType', 'owner', 'paymentPeriod'] },
             this.locale,
         );
+
+        return response;
     }
 
     getDetailFields(t: Translate): DetailFieldDef<Membership>[] {

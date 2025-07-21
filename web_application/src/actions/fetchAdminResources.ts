@@ -51,7 +51,7 @@ export async function getAny<T>(
 
     const response = await method(query, id);
 
-    return deserialize<T>(response) as T;
+    return [deserialize<T>(response) as T, response.meta];
 
     // @TODO: handle errors (toast or error box)
     // try {

@@ -1,4 +1,3 @@
-import 'server-only';
 import { ApiEndpoints } from './api-endpoints';
 
 class ClubApi extends ApiEndpoints {

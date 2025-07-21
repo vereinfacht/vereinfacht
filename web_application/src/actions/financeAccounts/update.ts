@@ -1,4 +1,3 @@
-// import 'server-only';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import { updateFinanceAccountSchema } from './update.schema';
 
@@ -13,6 +12,7 @@ export const updateFinanceAccount = createAuthenticatedAction(
                 params: {
                     path: { finance_account: params.id },
                 },
+                // @ts-expect-error: fix type mismatch between schema and raw api body
                 body: params,
             },
         );

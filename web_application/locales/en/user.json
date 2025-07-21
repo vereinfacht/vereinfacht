@@ -3,5 +3,20 @@
         "one": "User",
         "other": "Users",
         "label": "Name"
+    },
+    "email": {
+        "label": "Email"
+    },
+    "role": {
+        "label": "Role"
+    },
+    "created_at": {
+        "label": "Created at"
+    },
+    "updated_at": {
+        "label": "Updated at"
+    },
+    "preferred_locale": {
+        "label": "Preferred language"
     }
 }
