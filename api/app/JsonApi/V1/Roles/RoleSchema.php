@@ -29,7 +29,6 @@ class RoleSchema extends Schema
             Str::make('name')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
-            HasOne::make('user'),
         ];
     }
 
