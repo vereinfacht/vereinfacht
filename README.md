@@ -183,7 +183,7 @@ You can also test the current frontend build by changing the `baseUrl` value via
 
 ## License
 
-Distributed under the **tbd**. See [`LICENSE`](LICENSE) for more information.
+Distributed under the MIT license. See [`LICENSE`](LICENSE) for more information.
 
 ## Contributing
 
