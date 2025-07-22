@@ -64,13 +64,6 @@ export default function UserTable({ users }: Props) {
             },
         },
         {
-            accessorKey: 'preferredLocale',
-            header: t('preferred_locale.label'),
-            cell: ({ row }) => (
-                <TextCell>{row.getValue('preferredLocale')}</TextCell>
-            ),
-        },
-        {
             accessorKey: 'createdAt',
             header: t('created_at.label'),
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
