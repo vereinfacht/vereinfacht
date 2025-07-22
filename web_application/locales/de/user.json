@@ -9,8 +9,9 @@
     },
     "role": {
         "label": "Rolle",
-        "super admin": "Superadministrator",
-        "club admin": "Vereinsadministrator"
+        "super admin": "Super Admin",
+        "club admin": "Administrator",
+        "club treasurer": "Kassenwart"
     },
     "created_at": {
         "label": "Erstellt am"
