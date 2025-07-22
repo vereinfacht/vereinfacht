@@ -56,7 +56,7 @@ export default function UserTable({ users }: Props) {
                     <>
                         {roles.map((role: { name: string }, index: number) => (
                             <Badge key={index} variant="primary">
-                                {role.name}
+                                {t(`role.${role.name}`)}
                             </Badge>
                         ))}
                     </>

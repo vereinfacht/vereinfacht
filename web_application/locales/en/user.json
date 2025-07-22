@@ -8,7 +8,9 @@
         "label": "Email"
     },
     "role": {
-        "label": "Role"
+        "label": "Role",
+        "super admin": "Super Administrator",
+        "club admin": "Club Administrator"
     },
     "created_at": {
         "label": "Created at"
