@@ -9,6 +9,7 @@ import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../components/Fields/Detail/DateField';
+import { Badge } from '@/app/components/ui/badge';
 
 interface Props {
     users: TUserDeserialized[];
@@ -42,7 +43,25 @@ export default function UserTable({ users }: Props) {
         {
             accessorKey: 'role',
             header: t('role.label'),
-            cell: () => <TextCell>club admin</TextCell>,
+            cell: ({ row }) => {
+                const roles = row.original.roles as
+                    | { name: string }[]
+                    | undefined;
+
+                if (!roles || roles.length === 0) {
+                    return <TextCell>-</TextCell>;
+                }
+
+                return (
+                    <>
+                        {roles.map((role: { name: string }, index: number) => (
+                            <Badge key={index} variant="primary">
+                                {role.name}
+                            </Badge>
+                        ))}
+                    </>
+                );
+            },
         },
         {
             accessorKey: 'preferredLocale',
