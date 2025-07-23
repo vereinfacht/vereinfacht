@@ -55,7 +55,18 @@ export default function UserTable({ users }: Props) {
                 return (
                     <>
                         {roles.map((role: { name: string }, index: number) => (
-                            <Badge key={index} variant="primary">
+                            <Badge
+                                key={index}
+                                variant={
+                                    role.name === 'super admin'
+                                        ? 'secondary'
+                                        : role.name === 'club admin'
+                                          ? 'primary'
+                                          : role.name === 'club treasurer'
+                                            ? 'default'
+                                            : 'default'
+                                }
+                            >
                                 {t(`role.${role.name}`)}
                             </Badge>
                         ))}

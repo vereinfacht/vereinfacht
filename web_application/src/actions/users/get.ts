@@ -11,6 +11,9 @@ export const getUser = createAuthenticatedAction(
         const response = await client.GET('/users/{user}', {
             params: {
                 path: { user: params.id },
+                query: params.include
+                    ? ({ include: params.include.join(',') } as any)
+                    : {},
             },
         });
 

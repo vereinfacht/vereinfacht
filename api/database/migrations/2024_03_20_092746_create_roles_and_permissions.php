@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     protected $superAdminRoleName = 'super admin';
-
     protected $clubAdminRoleName = 'club admin';
+    protected $clubTreasurerRoleName = 'club treasurer';
 
     protected $clubAdminPermissions = [
         'view clubs',
@@ -36,7 +36,10 @@ return new class extends Migration
         ], $timestamps), array_merge([
             'name' => $this->clubAdminRoleName,
             'guard_name' => $this->guardName,
-        ], $timestamps)]);
+        ], $timestamps), array_merge([
+            'name' => $this->clubTreasurerRoleName,
+            'guard_name' => $this->guardName,
+        ], $timestamps),]);
 
         $superAdminRole = DB::table('roles')->where('name', $this->superAdminRoleName)->first();
         $superAdminUser = DB::table('users')->where('email', 'hello@vereinfacht.digital')->first();
@@ -87,6 +90,7 @@ return new class extends Migration
         DB::table('roles')->whereIn('name', [
             $this->superAdminRoleName,
             $this->clubAdminRoleName,
+            $this->clubTreasurerRoleName,
         ])->delete();
 
         DB::table('model_has_roles')->where('role_id', $superAdminRoleId)->delete();

@@ -12,6 +12,7 @@ use App\JsonApi\V1\Members\MemberSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
 use App\JsonApi\V1\PaymentPeriods\PaymentPeriodSchema;
+use App\JsonApi\V1\Permissions\PermissionSchema;
 use App\JsonApi\V1\Transactions\TransactionSchema;
 use App\JsonApi\V1\Roles\RoleSchema;
 use App\JsonApi\V1\Users\UserSchema;
@@ -114,6 +115,7 @@ class Server extends BaseServer
             TransactionSchema::class,
             FinanceContactSchema::class,
             RoleSchema::class,
+            PermissionSchema::class,
         ];
     }
 
