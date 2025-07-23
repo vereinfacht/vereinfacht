@@ -11,6 +11,8 @@ use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserSchema extends Schema
 {
@@ -51,6 +53,13 @@ class UserSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function indexQuery(?Request $request, Builder $query): Builder
+    {
+        return $query->whereDoesntHave('roles', function (Builder $query) {
+            $query->where('name', 'super admin');
+        });
     }
 
     public function includePaths(): array
