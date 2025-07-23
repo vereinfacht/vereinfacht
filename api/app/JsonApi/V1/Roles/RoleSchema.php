@@ -9,7 +9,6 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use Spatie\Permission\Models\Role;
 use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 
 class RoleSchema extends Schema
