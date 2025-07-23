@@ -5,13 +5,17 @@ import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import { getUser } from '@/actions/users/get';
 import DetailField from '../../components/Fields/DetailField';
+import RolesTable from '../_components/roles-table';
 
 interface Props {
     params: ShowPageParams;
 }
 
 export default async function UserShowPage({ params }: Props) {
-    const user = await getUser({ id: params.id });
+    const user = await getUser({
+        id: params.id,
+        include: ['roles.permissions'],
+    });
 
     if (!user) {
         notFound();
@@ -30,11 +34,6 @@ export default async function UserShowPage({ params }: Props) {
         {
             label: t('email.label'),
             attribute: 'email',
-        },
-        {
-            label: t('role.label'),
-            attribute: 'role',
-            value: 'club admin',
         },
         {
             label: t('preferred_locale.label'),
@@ -57,18 +56,15 @@ export default async function UserShowPage({ params }: Props) {
             <EditButton href={`/admin/users/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
-                    // @ts-ignore
                     <DetailField
                         key={index}
                         {...field}
                         resourceName={'users' as ResourceName}
-                        value={
-                            field.value ??
-                            user[field.attribute as keyof typeof user]
-                        }
+                        value={user[field.attribute as keyof typeof user]}
                     />
                 ))}
             </ul>
+            <RolesTable roles={user.roles ?? []} />
         </div>
     );
 }

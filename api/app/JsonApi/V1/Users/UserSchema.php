@@ -52,4 +52,12 @@ class UserSchema extends Schema
     {
         return PagePagination::make();
     }
+
+    public function includePaths(): array
+    {
+        return [
+            'roles',
+            'roles.permissions',
+        ];
+    }
 }

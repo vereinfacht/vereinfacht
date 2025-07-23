@@ -59,6 +59,9 @@ JsonApiRoute::server('v1')
             });
 
         $server->resource('roles', JsonApiController::class)
+            ->relationships(function ($relations) {
+                $relations->hasMany('permissions', JsonApiController::class);
+            })
             ->only('index', 'show');
 
         $server->resource('finance-contacts', JsonApiController::class)
