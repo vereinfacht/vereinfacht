@@ -6,6 +6,9 @@ import EditButton from '../../components/EditButton';
 import { getUser } from '@/actions/users/get';
 import DetailField from '../../components/Fields/DetailField';
 import RolesTable from '../_components/roles-table';
+import { listPermissions } from '@/actions/permissions/list';
+import { TPermissionDeserialized } from '@/types/resources';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 
 interface Props {
     params: ShowPageParams;
@@ -21,12 +24,16 @@ export default async function UserShowPage({ params }: Props) {
         notFound();
     }
 
+    const premissionResponse = await listPermissions({
+        sort: ['name'],
+    });
+
+    const permissions = deserialize(
+        premissionResponse as DocumentObject,
+    ) as TPermissionDeserialized[];
+
     const { t } = createTranslation('user');
     const fields = [
-        {
-            label: 'ID',
-            attribute: 'id',
-        },
         {
             label: t('title.label'),
             attribute: 'name',
@@ -64,7 +71,10 @@ export default async function UserShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
-            <RolesTable roles={user.roles ?? []} />
+            <RolesTable
+                roles={user.roles ?? []}
+                defaultPermissions={permissions ?? []}
+            />
         </div>
     );
 }

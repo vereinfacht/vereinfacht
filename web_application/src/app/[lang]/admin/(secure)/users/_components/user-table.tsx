@@ -20,11 +20,6 @@ export default function UserTable({ users }: Props) {
 
     const columns: ColumnDef<TUserDeserialized>[] = [
         {
-            accessorKey: 'id',
-            header: 'ID',
-            cell: ({ row }) => <TextCell>{row.getValue('id')}</TextCell>,
-        },
-        {
             accessorKey: 'name',
             header: ({ column }) => (
                 <HeaderSort
@@ -42,7 +37,7 @@ export default function UserTable({ users }: Props) {
         },
         {
             accessorKey: 'role',
-            header: t('role.label'),
+            header: t('role.other'),
             cell: ({ row }) => {
                 const roles = row.original.roles as
                     | { name: string }[]
@@ -53,24 +48,19 @@ export default function UserTable({ users }: Props) {
                 }
 
                 return (
-                    <>
-                        {roles.map((role: { name: string }, index: number) => (
+                    <div className="flex flex-wrap gap-2">
+                        {roles.map((role: { name: string }) => (
                             <Badge
-                                key={index}
                                 variant={
-                                    role.name === 'super admin'
+                                    role.name === 'club admin'
                                         ? 'secondary'
-                                        : role.name === 'club admin'
-                                          ? 'primary'
-                                          : role.name === 'club treasurer'
-                                            ? 'default'
-                                            : 'default'
+                                        : 'default'
                                 }
                             >
                                 {t(`role.${role.name}`)}
                             </Badge>
                         ))}
-                    </>
+                    </div>
                 );
             },
         },

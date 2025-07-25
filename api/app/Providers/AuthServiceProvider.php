@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \Spatie\Permission\Models\Role::class => \App\Policies\RolePolicy::class,
+        \Spatie\Permission\Models\Permission::class => \App\Policies\PermissionPolicy::class,
     ];
 
     /**
@@ -23,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Implicitly grant "super admin" role all permissions
-        Gate::before(static function ($user, $ability) {
+        Gate::before(static function ($user) {
             if ($user instanceof User && $user->isSuperAdmin()) {
                 return true;
             }

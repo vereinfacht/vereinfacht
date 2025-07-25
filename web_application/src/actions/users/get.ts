@@ -12,7 +12,7 @@ export const getUser = createAuthenticatedAction(
             params: {
                 path: { user: params.id },
                 query: params.include
-                    ? ({ include: params.include.join(',') } as any)
+                    ? { include: params.include.join(',') }
                     : {},
             },
         });
