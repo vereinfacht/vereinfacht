@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     protected $clubTreasurerRoleName = 'club treasurer';
+
     protected $clubTreasurerPermissions = [
         'view memberships',
         'view membershipTypes',
@@ -37,7 +38,6 @@ return new class extends Migration
 
         $clubTreasurerRole = DB::table('roles')->where('name', $this->clubTreasurerRoleName)->first();
         foreach ($this->clubTreasurerPermissions as $permission) {
-            // insert permission if it does not exist
             if (!DB::table('permissions')->where('name', $permission)->exists()) {
                 DB::table('permissions')->insert(array_merge([
                     'name' => $permission,
