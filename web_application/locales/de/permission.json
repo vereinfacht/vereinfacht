@@ -1,0 +1,12 @@
+{
+    "action": {
+        "create": "Erstellen",
+        "view": "Lesen",
+        "update": "Bearbeiten",
+        "delete": "Löschen"
+    },
+    "title": {
+        "one": "Berechtigung",
+        "other": "Berechtigungen"
+    }
+}

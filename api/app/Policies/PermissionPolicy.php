@@ -26,7 +26,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission): bool
     {
-        return true;
+        return false;
     }
 
     /**

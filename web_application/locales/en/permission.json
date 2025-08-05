@@ -1,0 +1,12 @@
+{
+    "action": {
+        "create": "Create",
+        "view": "Read",
+        "update": "Update",
+        "delete": "Delete"
+    },
+    "title": {
+        "one": "Permission",
+        "other": "Permissions"
+    }
+}

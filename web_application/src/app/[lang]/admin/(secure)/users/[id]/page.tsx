@@ -15,21 +15,22 @@ interface Props {
 }
 
 export default async function UserShowPage({ params }: Props) {
-    const user = await getUser({
-        id: params.id,
-        include: ['roles.permissions'],
-    });
+    const [user, permissionResponse] = await Promise.all([
+        getUser({
+            id: params.id,
+            include: ['roles.permissions'],
+        }),
+        listPermissions({
+            sort: ['name'],
+        }),
+    ]);
 
     if (!user) {
         notFound();
     }
 
-    const premissionResponse = await listPermissions({
-        sort: ['name'],
-    });
-
     const permissions = deserialize(
-        premissionResponse as DocumentObject,
+        permissionResponse as DocumentObject,
     ) as TPermissionDeserialized[];
 
     const { t } = createTranslation('user');

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function UserTable({ users }: Props) {
-    const { t } = useTranslation('user');
+    const { t } = useTranslation();
 
     const columns: ColumnDef<TUserDeserialized>[] = [
         {
@@ -25,19 +25,19 @@ export default function UserTable({ users }: Props) {
                 <HeaderSort
                     parser={listUserSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('title.label')}
+                    columnTitle={t('user:title.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
         },
         {
             accessorKey: 'email',
-            header: t('email.label'),
+            header: t('user:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'role',
-            header: t('role.other'),
+            header: t('role:title.other'),
             cell: ({ row }) => {
                 const roles = row.original.roles as
                     | { name: string }[]
@@ -57,7 +57,7 @@ export default function UserTable({ users }: Props) {
                                         : 'default'
                                 }
                             >
-                                {t(`role.${role.name}`)}
+                                {t(`role:${role.name}`)}
                             </Badge>
                         ))}
                     </div>
@@ -66,12 +66,12 @@ export default function UserTable({ users }: Props) {
         },
         {
             accessorKey: 'createdAt',
-            header: t('created_at.label'),
+            header: t('user:created_at.label'),
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
         },
         {
             accessorKey: 'updatedAt',
-            header: t('updated_at.label'),
+            header: t('user:updated_at.label'),
             cell: ({ row }) => <DateField value={row.getValue('updatedAt')} />,
         },
     ];

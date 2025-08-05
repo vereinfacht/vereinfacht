@@ -7,16 +7,6 @@
     "email": {
         "label": "E-Mail"
     },
-    "role": {
-        "label": "Rolle",
-        "other": "Rollen",
-        "super admin": "Super Admin",
-        "club admin": "Administrator",
-        "club treasurer": "Kassenwart"
-    },
-    "permissions": {
-        "label": "Berechtigungen"
-    },
     "created_at": {
         "label": "Erstellt am"
     },

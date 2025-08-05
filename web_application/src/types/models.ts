@@ -1,6 +1,7 @@
 import { TranslatableAttribute } from './jsonapi-models';
 
 export interface Model {
+    permissions: Model[];
     id?: string;
     createdAt?: string;
     updatedAt?: string;
