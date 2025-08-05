@@ -3,33 +3,37 @@
 namespace Database\Seeders;
 
 use App\Models\Club;
+use Faker\Generator;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 
 class DemoClubSeeder extends Seeder
 {
+    protected $faker;
+
     protected $clubTitle = 'TSV Muster';
 
     protected $slug = 'tsv-muster';
+
+    public function __construct(Generator $faker)
+    {
+        $this->faker = $faker;
+    }
 
     public function run(): void
     {
         if (Club::where('title', $this->clubTitle)->exists()) {
             $this->command->warn(
-                'Demo club already exists. Aborted seeding '.self::class.'.'
+                'Demo club already exists. Aborted seeding ' . self::class . '.'
             );
 
             return;
         }
 
-        $club = $this->seedDemoClub();
-
-        $this->command->comment('Created demo club:');
-        $this->command->info('Admin login: '.env('APP_URL').'/admin');
-        $this->command->info('Application form: '.$club->apply_url);
+        $this->seedDemoClub();
     }
 
-    protected function seedDemoClub(): Club
+    protected function seedDemoClub()
     {
         $club = Club::factory()->create($this->getClubData());
 
@@ -43,7 +47,12 @@ class DemoClubSeeder extends Seeder
 
         $this->attachDivisionsToMembershipTypes($club);
 
-        return $club;
+        $fakeClubsSeeder = new FakeClubsSeeder($this->faker);
+        $fakeClubsSeeder->attachPaymentPeriods($club);
+        $fakeClubsSeeder->createClubMemberships($club);
+        $fakeClubsSeeder->attachMembersToDivision($club);
+        $fakeClubsSeeder->assignClubAdminRole($club, "Jane Doe");
+        $fakeClubsSeeder->assignSuperAdminRole($club);
     }
 
     protected function attachDivisionsToMembershipTypes(Club $club): void
@@ -53,10 +62,10 @@ class DemoClubSeeder extends Seeder
         $membershipTypes = $club->membershipTypes();
 
         $divisions->each(
-            fn ($division, $divisionIndex) => $membershipTypes->each(function ($membershipType, $membershipTypeIndex) use ($division, $divisionsData, $divisionIndex) {
+            fn($division, $divisionIndex) => $membershipTypes->each(function ($membershipType, $membershipTypeIndex) use ($division, $divisionsData, $divisionIndex) {
                 $divisionData = $divisionsData[$divisionIndex];
 
-                if (! $divisionData['membership_types'][$membershipTypeIndex]) {
+                if (!$divisionData['membership_types'][$membershipTypeIndex]) {
                     return;
                 }
 
@@ -84,7 +93,7 @@ class DemoClubSeeder extends Seeder
             'country' => 'Germany',
             'preferred_locale' => 'de',
             'website_url' => 'https://vereinfacht.digital',
-            'primary_color' => '#0059ff',
+            'primary_color' => '#00b0ff',
             'logo_url' => 'https://vereinfacht.digital/assets/logo-tsv-muster.png',
             'membership_start_cycle_type' => 'daily',
             'allow_voluntary_contribution' => true,

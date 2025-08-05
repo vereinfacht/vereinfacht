@@ -1,0 +1,78 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: "0.2"
+name: vereinfacht
+url: "https://github.com/vereinfacht/vereinfacht"
+landingURL: "https://vereinfacht.digital/"
+roadmap: "https://github.com/vereinfacht/vereinfacht/projects"
+developmentStatus: development
+logo: .opencode/logo.svg
+platforms:
+- web
+softwareType: standalone/web
+categories:
+- accounting
+- billing-and-invoicing
+- financial-reporting
+dependsOn:
+  open:
+  - name: PHP
+    versionMin: "8.2"
+  - name: MariaDB
+    versionMin: "10.7"
+  - name: Node.js
+  - name: Alpine
+    versionMin: "3.17"
+releaseDate: "2025-12-31"
+maintenance:
+  type: internal
+  contacts:
+  - name: visuellverstehen GmbH
+    email: hello@visuellverstehen.de
+legal:
+  license: MIT
+  repoOwner: visuellverstehen GmbH
+localisation:
+  localisationReady: true
+  availableLanguages:
+  - de
+  - en
+description:
+  de:
+    genericName: Vereinsverwaltung
+    shortDescription: >-
+      Webbasierte Vereinsverwaltungssoftware zur Digitalisierung zentraler organisatorischer Aufgaben für gemeinnützige und ehrenamtlich geführte Vereine.
+    longDescription: >
+      **vereinfacht** ist eine Open-Source, webbasierte Vereinsverwaltungssoftware, die darauf abzielt, zentrale organisatorische Aufgaben für gemeinnützige und ehrenamtlich geführte Vereine zu digitalisieren. Sie ersetzt Papierformulare und manuelle Prozesse durch flexible, mehrsprachige Online-Mitgliedsanträge, die an das Branding, die Struktur und die Mitgliederbedürfnisse jedes Vereins anpassbar sind. Sie umfasst eine beschreibende Verwaltungsoberfläche und basiert auf Open-Source-Tools und -Abhängigkeiten, die eine reibungslose Integration und Selbsthosting ohne Kosten unterstützen. 
+    features:
+    - Online-Antragsformular
+    - Import und Verwaltung von Transaktionen
+    - Erstellung und Verwaltung von Belegen
+    - Zuweisung von Rollen an Vereinsfunktionäre
+    - Buchhaltungsberichte ansehen
+    - Dokumentierte API zur einfachen Erweiterung und Anpassung
+    screenshots:
+    - .opencode/screenshots/de/01_memberships.png
+    - .opencode/screenshots/de/02_club.png
+    - .opencode/screenshots/de/03_transactions.png
+    - .opencode/screenshots/de/04_contacts.png
+  en:
+    genericName: Club management
+    shortDescription: >-
+      Web‑based club management software, designed to digitize core organizational tasks for nonprofit and volunteer-based associations.
+    longDescription: >
+      **vereinfacht** is an open‑source, web‑based club management software, designed to digitize core organizational tasks for nonprofit and volunteer-based associations. It replaces paper forms and manual processes with flexible, multilingual online membership applications, customizable to each club's branding, structure, and member‑type needs. It includes an descriptive management interface and is built on an open source tools and dependencies, supporting smooth integration and self‑hosting at no cost.
+    features:
+    - Online application form
+    - Import and manage financial transactions
+    - Create and manage receipts
+    - Assign roles to club officials
+    - View accounting reports
+    - Documented API for easy extension and customisation
+    screenshots:
+    - .opencode/screenshots/en/01_memberships.png
+    - .opencode/screenshots/en/02_club.png
+    - .opencode/screenshots/en/03_transactions.png
+    - .opencode/screenshots/en/04_contacts.png

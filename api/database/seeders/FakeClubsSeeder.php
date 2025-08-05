@@ -28,21 +28,21 @@ class FakeClubsSeeder extends Seeder
             ->hasDivisions(5)
             ->hasMembershipTypes(3)
             ->create()
-            ->each(fn ($club) => $this->attachDivisionsToMembershipTypes($club))
-            ->each(fn ($club) => $this->attachPaymentPeriods($club))
-            ->each(fn ($club) => $this->createClubMemberships($club))
-            ->each(fn ($club) => $this->attachMembersToDivision($club))
-            ->each(fn ($club) => $this->assignClubAdminRole($club))
-            ->each(fn ($club) => $this->assignSuperAdminRole($club));
+            ->each(fn($club) => $this->attachDivisionsToMembershipTypes($club))
+            ->each(fn($club) => $this->attachPaymentPeriods($club))
+            ->each(fn($club) => $this->createClubMemberships($club))
+            ->each(fn($club) => $this->attachMembersToDivision($club))
+            ->each(fn($club) => $this->assignClubAdminRole($club))
+            ->each(fn($club) => $this->assignSuperAdminRole($club));
     }
 
-    protected function attachDivisionsToMembershipTypes($club)
+    protected function attachDivisionsToMembershipTypes($club): void
     {
         $divisions = $club->divisions()->get();
 
         $club->membershipTypes()->each(function ($membershipType) use ($divisions) {
             $divisions->random($this->faker->numberBetween(0, $divisions->count()))->each(
-                fn ($division) => $membershipType
+                fn($division) => $membershipType
                     ->divisions()
                     ->attach(
                         $division->id,
@@ -52,7 +52,7 @@ class FakeClubsSeeder extends Seeder
         });
     }
 
-    protected function createClubMemberships($club)
+    public function createClubMemberships($club): void
     {
         Membership::factory(10)
             ->make([
@@ -65,10 +65,10 @@ class FakeClubsSeeder extends Seeder
                 $membership->save();
             });
 
-        $club->memberships()->each(fn ($membership) => $this->createMembershipMembers($membership, $club));
+        $club->memberships()->each(fn($membership) => $this->createMembershipMembers($membership, $club));
     }
 
-    protected function createMembershipMembers($membership, $club)
+    protected function createMembershipMembers($membership, $club): void
     {
         $maxMembers = $membership->membershipType()->first()->maximum_number_of_members;
 
@@ -81,7 +81,7 @@ class FakeClubsSeeder extends Seeder
         $membership->save();
     }
 
-    protected function attachPaymentPeriods($club)
+    public function attachPaymentPeriods($club): void
     {
         $paymentPeriods = PaymentPeriod::inRandomOrder()->get();
 
@@ -90,21 +90,27 @@ class FakeClubsSeeder extends Seeder
         }
     }
 
-    protected function attachMembersToDivision($club)
+    public function attachMembersToDivision($club): void
     {
         $divisions = $club->divisions()->get(['id']);
         $club->members()
             ->get()
-            ->each(fn ($member) => $member->divisions()->attach($divisions->random()->id));
+            ->each(fn($member) => $member->divisions()->attach($divisions->random()->id));
     }
 
-    protected function assignClubAdminRole($club)
+    public function assignClubAdminRole($club, $name = null): void
     {
         setPermissionsTeamId($club);
 
-        User::factory([
+        $clubAdminData = [
             'email' => "club-admin-{$club->getKey()}@example.org",
-        ])->create()->assignRole('club admin');
+        ];
+
+        if ($name) {
+            $clubAdminData['name'] = $name;
+        }
+
+        User::factory($clubAdminData)->create()->assignRole('club admin');
 
         $additionalClubAdmins = $this->faker->numberBetween(5, 10);
 
@@ -113,7 +119,7 @@ class FakeClubsSeeder extends Seeder
         }
     }
 
-    protected function assignSuperAdminRole($club)
+    public function assignSuperAdminRole($club): void
     {
         setPermissionsTeamId($club);
         User::where('email', 'hello@vereinfacht.digital')->first()->assignRole('super admin');
