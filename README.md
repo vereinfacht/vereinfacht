@@ -2,7 +2,7 @@
 
 # vereinfacht
 
-**vereinfacht** is an open‑source, web‑based club management platform, designed to digitize core organizational tasks for nonprofit and volunteer-based associations. It replaces paper forms and manual processes with flexible, multilingual online membership applications, customizable to each club's branding, structure, and member‑type needs. It includes an descriptive management interface and is built on an open source tools and dependencies, supporting smooth integration and self‑hosting at no cost.
+**vereinfacht** is an open‑source, web‑based club management software, designed to digitize core organizational tasks for nonprofit and volunteer-based associations. It replaces paper forms and manual processes with flexible, multilingual online membership applications, customizable to each club's branding, structure, and member‑type needs. It includes an descriptive management interface and is built on an open source tools and dependencies, supporting smooth integration and self‑hosting at no cost.
 
 This project still being actively developed and is in an early-adoption phase. It is is also [available as Software as a service](https://vereinfacht.digital/).
 
