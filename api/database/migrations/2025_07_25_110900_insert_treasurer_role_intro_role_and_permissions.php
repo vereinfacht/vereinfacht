@@ -61,9 +61,15 @@ return new class extends Migration
      */
     public function down(): void
     {
+        $role = DB::table('roles')->where('name', $this->clubTreasurerRoleName)->first();
+
+        if ($role) {
+            DB::table('role_has_permissions')->where('role_id', $role->id)->delete();
+            DB::table('roles')->where('id', $role->id)->delete();
+        }
+
         DB::table('permissions')->whereIn('name', $this->clubTreasurerPermissions)->delete();
-        DB::table('roles')->where('name', $this->clubTreasurerRoleName)->delete();
-        DB::table('role_has_permissions')->where('role_id', DB::table('roles')->where('name', $this->clubTreasurerRoleName)->first()->id)->delete();
+
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
     }
 };
