@@ -8,5 +8,25 @@
     "title": {
         "one": "Permission",
         "other": "Permissions"
+    },
+    "resource": {
+        "financeContacts": {
+            "title": {
+                "one": "Finance Contact",
+                "other": "Finance Contacts"
+            }
+        },
+        "members": {
+            "title": {
+                "one": "Member",
+                "other": "Members"
+            }
+        },
+        "own club": {
+            "title": {
+                "one": "Own Club",
+                "other": "Own Clubs"
+            }
+        }
     }
 }

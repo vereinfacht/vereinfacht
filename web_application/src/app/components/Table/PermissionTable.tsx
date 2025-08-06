@@ -3,7 +3,7 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import Text from '@/app/components/Text/Text';
 import { ResourceName } from '@/resources/resource';
 import { TPermissionDeserialized } from '@/types/resources';
-import { camelCaseToSnakeCase } from '@/utils/strings';
+import { resourceNameToTranslateKey } from '@/utils/strings';
 import { ColumnDef } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
@@ -25,40 +25,45 @@ const ACTIONS: (keyof PermissionTable)[] = [
     'create',
     'update',
     'delete',
-];
+] as const;
 
-export default async function PermissionTable({
+export default function PermissionTable({
     activePermissions,
     allPermissions,
     isForm = false,
 }: Props) {
     const { t } = useTranslation();
 
-    const resourceNames = Array.from(
-        new Set(
-            allPermissions.map((permission) =>
-                permission.name.split(' ').slice(1).join(' '),
-            ) ?? [],
-        ),
-    );
     const tableData = () => {
         const activePermissionSet = new Set(
-            activePermissions?.map(
-                (permission: TPermissionDeserialized) => permission.name,
-            ),
-        );
-        const permissions: PermissionTable[] = resourceNames.map(
-            (resourceName) => ({
-                resource: resourceName,
-                view: activePermissionSet.has(`view ${resourceName}`),
-                create: activePermissionSet.has(`create ${resourceName}`),
-                update: activePermissionSet.has(`update ${resourceName}`),
-                delete: activePermissionSet.has(`delete ${resourceName}`),
-            }),
+            activePermissions.map((permission) => permission.name),
         );
 
+        const resourceMap = new Map<string, PermissionTable>();
+
+        allPermissions.forEach((permission) => {
+            const [action, ...resourceParts] = permission.name.split(' ');
+            const resource = resourceParts.join(' ');
+
+            if (!resourceMap.has(resource)) {
+                resourceMap.set(resource, {
+                    resource,
+                    view: false,
+                    create: false,
+                    update: false,
+                    delete: false,
+                });
+            }
+
+            const permissionObj = resourceMap.get(resource)!;
+            if (ACTIONS.includes(action as keyof PermissionTable)) {
+                permissionObj[action as keyof PermissionTable] =
+                    activePermissionSet.has(permission.name);
+            }
+        });
+
         return {
-            permissions,
+            permissions: Array.from(resourceMap.values()),
         };
     };
 
@@ -67,12 +72,19 @@ export default async function PermissionTable({
             accessorKey: 'resource',
             header: t('resource:title.other'),
             cell: ({ row }) => {
-                const singularResource = row.original.resource.replace(
-                    /s$/,
-                    '',
+                const resource = row.original.resource;
+                const translated = t(
+                    `${resourceNameToTranslateKey(resource)}:title.one`,
                 );
-                const resourceKey = camelCaseToSnakeCase(singularResource);
-                return <Text>{t(`${resourceKey}:title.one`)}</Text>;
+
+                return (
+                    <Text>
+                        {translated ===
+                        `${resourceNameToTranslateKey(resource)}:title.one`
+                            ? t(`permission:resource.${resource}.title.one`)
+                            : translated}
+                    </Text>
+                );
             },
         },
         ...ACTIONS.map((action) => ({

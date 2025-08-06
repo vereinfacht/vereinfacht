@@ -1,12 +1,32 @@
 {
     "action": {
         "create": "Erstellen",
-        "view": "Lesen",
+        "view": "Ansehen",
         "update": "Bearbeiten",
         "delete": "Löschen"
     },
     "title": {
         "one": "Berechtigung",
         "other": "Berechtigungen"
+    },
+    "resource": {
+        "financeContacts": {
+            "title": {
+                "one": "Finance Contact",
+                "other": "Finance Contacts"
+            }
+        },
+        "members": {
+            "title": {
+                "one": "Mitglied",
+                "other": "Mitglieder"
+            }
+        },
+        "own club": {
+            "title": {
+                "one": "Eigenes Club",
+                "other": "Eigene Clubs"
+            }
+        }
     }
 }
