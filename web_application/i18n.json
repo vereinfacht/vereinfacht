@@ -27,7 +27,9 @@
             "finance_account",
             "transaction",
             "receipt",
-            "user"
+            "user",
+            "role",
+            "permission"
         ],
         "rgx:/admin/[resource]/.*": ["admin", "auth", "membership"]
     }
