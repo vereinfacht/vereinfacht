@@ -3,8 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Club;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Foundation\Auth\User;
 use Spatie\Permission\Models\Permission;
 
 class PermissionPolicy
