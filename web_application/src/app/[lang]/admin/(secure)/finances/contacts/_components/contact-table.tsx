@@ -1,6 +1,7 @@
 'use client';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
+import Button from '@/app/components/Button/Button';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -9,8 +10,9 @@ import { ResourceName } from '@/resources/resource';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import { Building2, CircleUserRound } from 'lucide-react';
+import { Building2, CircleUserRound, Plus } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
+import EditButton from '../../../components/EditButton';
 
 interface Props {
     contacts: TFinanceContactDeserialized[];
@@ -79,13 +81,21 @@ export default function ContactTable({ contacts, totalPages }: Props) {
     ];
 
     return (
-        <DataTable
-            data={contacts}
-            columns={columns}
-            resourceName={'finances/contacts' as ResourceName}
-            totalPages={totalPages}
-            canEdit={true}
-            canView={true}
-        />
+        <>
+            <Button
+                className="mb-6 w-fit"
+                href={`/admin/finances/contacts/create/`}
+            >
+                <Plus className="h-4 w-4" />
+            </Button>
+            <DataTable
+                data={contacts}
+                columns={columns}
+                resourceName={'finances/contacts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+            />
+        </>
     );
 }

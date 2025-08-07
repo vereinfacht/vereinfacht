@@ -39,11 +39,13 @@
     "updated_at": {
         "label": "Updated At"
     },
-    "gender": "Gender",
-    "gender_options": {
-        "female": "female",
-        "male": "male",
-        "none": "not specified",
-        "other": "diverse"
+    "gender": {
+        "label": "Gender",
+        "option": {
+            "female": "female",
+            "male": "male",
+            "none": "not specified",
+            "other": "diverse"
+        }
     }
 }
