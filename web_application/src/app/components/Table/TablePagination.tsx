@@ -53,8 +53,8 @@ export default function TablePagination({ totalPages }: Props) {
             return items;
         }
 
-        // If total pages less than 5, just show all pages
-        if (totalPages < 5) {
+        // If total pages equal or less than 5, just show all pages
+        if (totalPages <= 5) {
             for (let i = 1; i <= totalPages; i++) {
                 items.push({
                     type: 'page',
