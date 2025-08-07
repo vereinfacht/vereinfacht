@@ -12,8 +12,8 @@
     "resource": {
         "financeContacts": {
             "title": {
-                "one": "Finance Contact",
-                "other": "Finance Contacts"
+                "one": "Finance contact",
+                "other": "Finance contacts"
             }
         },
         "members": {
@@ -24,8 +24,8 @@
         },
         "own club": {
             "title": {
-                "one": "Own Club",
-                "other": "Own Clubs"
+                "one": "Own club",
+                "other": "Own clubs"
             }
         }
     }

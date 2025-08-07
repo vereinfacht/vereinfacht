@@ -24,8 +24,8 @@
         },
         "own club": {
             "title": {
-                "one": "Eigenes Club",
-                "other": "Eigene Clubs"
+                "one": "Eigenes club",
+                "other": "Eigene clubs"
             }
         }
     }
