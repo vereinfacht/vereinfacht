@@ -12,8 +12,8 @@
     "resource": {
         "financeContacts": {
             "title": {
-                "one": "Finance Contact",
-                "other": "Finance Contacts"
+                "one": "Kontakt",
+                "other": "Kontakte"
             }
         },
         "members": {
