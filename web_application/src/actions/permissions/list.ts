@@ -4,12 +4,12 @@ import {
     createAuthenticatedActionWithOptionalParams,
     handleApiResponse,
 } from '@/lib/api/utils';
-import { listpermissionsSchema } from './list.schema';
+import { listPermissionsSchema } from './list.schema';
 
 export const listPermissions = createAuthenticatedActionWithOptionalParams(
     'view',
     'permissions',
-    listpermissionsSchema,
+    listPermissionsSchema,
     async (query, client) => {
         const response = await client.GET('/permissions', {
             params: {
