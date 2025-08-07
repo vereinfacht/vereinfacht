@@ -71,14 +71,4 @@ class UserPolicy
     {
         return false;
     }
-
-    public function viewRoles(User $user, UserModel $model): bool
-    {
-        if ($user instanceof Club) {
-            return $model->clubs->contains('id', $user->id);
-        }
-
-        return $user->can('view roles') &&
-            $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
-    }
 }
