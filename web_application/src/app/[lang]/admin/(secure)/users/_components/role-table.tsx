@@ -39,7 +39,9 @@ export default function RolesTable({ roles, defaultPermissions }: Props) {
             cell: ({ row }) => (
                 <PermissionTable
                     allPermissions={defaultPermissions ?? []}
-                    activePermissions={row.original.permissions}
+                    activePermissions={
+                        row.original.permissions as TPermissionDeserialized[]
+                    }
                 />
             ),
         },

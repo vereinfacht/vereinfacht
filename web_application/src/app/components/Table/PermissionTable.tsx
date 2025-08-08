@@ -4,10 +4,9 @@ import Text from '@/app/components/Text/Text';
 import { ResourceName } from '@/resources/resource';
 import { TPermissionDeserialized } from '@/types/resources';
 import { resourceNameToTranslateKey } from '@/utils/strings';
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef, Row } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 interface Props {
     allPermissions: TPermissionDeserialized[];
@@ -42,7 +41,8 @@ export default function PermissionTable({
         const resourceMap = new Map<string, PermissionTable>();
 
         allPermissions.forEach((permission) => {
-            const [action, ...resourceParts] = permission.name.split(' ');
+            const [action, ...resourceParts] =
+                permission.name?.split(' ') || [];
             const resource = resourceParts.join(' ');
 
             if (!resourceMap.has(resource)) {
@@ -91,7 +91,7 @@ export default function PermissionTable({
         ...ACTIONS.map((action) => ({
             accessorKey: action,
             header: t(`permission:action.${action}`),
-            cell: ({ row }) =>
+            cell: ({ row }: { row: Row<PermissionTable> }) =>
                 isForm ? (
                     <Checkbox
                         id={`${row.index}-${action}`}
@@ -107,9 +107,9 @@ export default function PermissionTable({
     ];
 
     return (
-        <DataTable
+        <DataTable<any, TPermissionDeserialized>
             data={tableData().permissions}
-            columns={columns as any[]}
+            columns={columns}
             resourceName={'permissions' as ResourceName}
         />
     );

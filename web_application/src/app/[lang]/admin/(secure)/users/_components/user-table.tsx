@@ -3,13 +3,13 @@
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TUserDeserialized } from '@/types/resources';
 import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../components/Fields/Detail/DateField';
-import { Badge } from '@/app/components/ui/badge';
 
 interface Props {
     users: TUserDeserialized[];
