@@ -5,7 +5,7 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import EditButton from '../../../components/EditButton';
 import DetailField from '../../../components/Fields/DetailField';
-import ReceiptsTable from '../_components/receipts-table';
+import ReceiptsTable from '../_components/receipt-table';
 import createTranslation from 'next-translate/createTranslation';
 
 interface Props {

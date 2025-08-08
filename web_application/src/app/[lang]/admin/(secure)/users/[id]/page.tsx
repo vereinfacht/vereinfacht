@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import { getUser } from '@/actions/users/get';
 import DetailField from '../../components/Fields/DetailField';
-import RolesTable from '../_components/roles-table';
+import RolesTable from '../_components/role-table';
 import { listPermissions } from '@/actions/permissions/list';
 import { TPermissionDeserialized } from '@/types/resources';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
