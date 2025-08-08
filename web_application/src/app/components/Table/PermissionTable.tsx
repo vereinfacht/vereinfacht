@@ -56,6 +56,7 @@ export default function PermissionTable({
             }
 
             const permissionObj = resourceMap.get(resource)!;
+            
             if (ACTIONS.includes(action as keyof PermissionTable)) {
                 permissionObj[action as keyof PermissionTable] =
                     activePermissionSet.has(permission.name);
