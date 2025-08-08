@@ -51,6 +51,7 @@ export default function UserTable({ users }: Props) {
                     <div className="flex flex-wrap gap-2">
                         {roles.map((role: { name: string }) => (
                             <Badge
+                                key={role.name}
                                 variant={
                                     role.name === 'club admin'
                                         ? 'secondary'
