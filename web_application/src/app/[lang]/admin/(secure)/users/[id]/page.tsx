@@ -1,14 +1,14 @@
+import { listPermissions } from '@/actions/permissions/list';
+import { getUser } from '@/actions/users/get';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
+import { TPermissionDeserialized } from '@/types/resources';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
-import { getUser } from '@/actions/users/get';
 import DetailField from '../../components/Fields/DetailField';
 import RolesTable from '../_components/role-table';
-import { listPermissions } from '@/actions/permissions/list';
-import { TPermissionDeserialized } from '@/types/resources';
-import { deserialize, DocumentObject } from 'jsonapi-fractal';
 
 interface Props {
     params: ShowPageParams;
