@@ -122,9 +122,9 @@ export default async function ContactShowPage({ params }: Props) {
             value: contact.companyName,
         },
         {
-            label: t('gender'),
+            label: t('gender.label'),
             attribute: 'gender',
-            value: contact.gender ? t('gender_options.' + contact.gender) : '',
+            value: contact.gender ? t('gender.option.' + contact.gender) : '',
         },
         {
             label: t('email.label'),
