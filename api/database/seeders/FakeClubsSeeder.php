@@ -112,11 +112,9 @@ class FakeClubsSeeder extends Seeder
 
         User::factory($clubAdminData)->create()->assignRole('club admin');
 
-        $additionalClubAdmins = $this->faker->numberBetween(5, 10);
-
-        for ($i = 0; $i < $additionalClubAdmins; $i++) {
-            User::factory()->create()->assignRole('club admin');
-        }
+        User::factory(2)
+            ->create()
+            ->each(fn($user) => $user->assignRole('club treasurer'));
     }
 
     public function assignSuperAdminRole($club): void

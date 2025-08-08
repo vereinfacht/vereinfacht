@@ -1,0 +1,32 @@
+{
+    "action": {
+        "create": "Create",
+        "view": "Read",
+        "update": "Update",
+        "delete": "Delete"
+    },
+    "title": {
+        "one": "Permission",
+        "other": "Permissions"
+    },
+    "resource": {
+        "financeContacts": {
+            "title": {
+                "one": "Finance contact",
+                "other": "Finance contacts"
+            }
+        },
+        "members": {
+            "title": {
+                "one": "Member",
+                "other": "Members"
+            }
+        },
+        "own club": {
+            "title": {
+                "one": "Own club",
+                "other": "Own clubs"
+            }
+        }
+    }
+}

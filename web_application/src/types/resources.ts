@@ -10,8 +10,21 @@ export type TFinanceContactRaw =
 export type TTransactionRaw =
     components['schemas']['resources.transactions.resource.fetch'];
 export type TUserRaw = components['schemas']['resources.users.resource.fetch'];
+export type TRoleRaw = components['schemas']['resources.roles.resource.fetch'];
+export type TPermissionRaw =
+    components['schemas']['resources.permissions.resource.fetch'];
 
 export type TUserDeserialized = TUserRaw['attributes'] & {
+    id: string;
+    roles?: TRoleDeserialized[];
+};
+
+export type TRoleDeserialized = TRoleRaw['attributes'] & {
+    id: string;
+    permissions?: TPermissionDeserialized[];
+};
+
+export type TPermissionDeserialized = TPermissionRaw['attributes'] & {
     id: string;
 };
 

@@ -71,7 +71,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
 
         self::created(function ($model) {
             // make our global super admin user a super admin on club creation
-            // see App\Models\User.php: isSuperAdminUser() for more information
+            // see App\Models\User.php: isSuperAdmin() for more information
             $session_team_id = getPermissionsTeamId() ?? Filament::getTenant()?->id;
 
             setPermissionsTeamId($model);

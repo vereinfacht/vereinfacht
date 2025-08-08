@@ -1,0 +1,10 @@
+{
+    "title": {
+        "one": "Rolle",
+        "other": "Rollen",
+        "label": "Rolle"
+    },
+    "super admin": "Super Admin",
+    "club admin": "Admin",
+    "club treasurer": "Kassenwart"
+}

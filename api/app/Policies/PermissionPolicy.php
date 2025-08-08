@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Club;
-use App\Models\User as UserModel;
 use Illuminate\Foundation\Auth\User;
+use Spatie\Permission\Models\Permission;
 
-class UserPolicy
+class PermissionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -17,19 +17,15 @@ class UserPolicy
             return true;
         }
 
-        return $user->can('view users');
+        return $user->can('view permissions');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, UserModel $model): bool
+    public function view(User $user, Permission $permission): bool
     {
-        if ($user instanceof Club) {
-            return $model->clubs->contains('id', $user->id);
-        }
-
-        return $user->can('view users') && $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
+        return false;
     }
 
     /**
@@ -43,7 +39,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, UserModel $model): bool
+    public function update(User $user, Permission $permission): bool
     {
         return false;
     }
@@ -51,7 +47,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, UserModel $model): bool
+    public function delete(User $user, Permission $permission): bool
     {
         return false;
     }
@@ -59,7 +55,7 @@ class UserPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, UserModel $model): bool
+    public function restore(User $user, Permission $permission): bool
     {
         return false;
     }
@@ -67,7 +63,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, UserModel $model): bool
+    public function forceDelete(User $user, Permission $permission): bool
     {
         return false;
     }

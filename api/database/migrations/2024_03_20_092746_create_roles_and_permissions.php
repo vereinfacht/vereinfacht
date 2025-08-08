@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     protected $superAdminRoleName = 'super admin';
-
     protected $clubAdminRoleName = 'club admin';
 
     protected $clubAdminPermissions = [
@@ -30,13 +29,16 @@ return new class extends Migration
             'updated_at' => now(),
         ];
 
-        DB::table('roles')->insert([array_merge([
-            'name' => $this->superAdminRoleName,
-            'guard_name' => $this->guardName,
-        ], $timestamps), array_merge([
-            'name' => $this->clubAdminRoleName,
-            'guard_name' => $this->guardName,
-        ], $timestamps)]);
+        DB::table('roles')->insert([
+            array_merge([
+                'name' => $this->superAdminRoleName,
+                'guard_name' => $this->guardName,
+            ], $timestamps),
+            array_merge([
+                'name' => $this->clubAdminRoleName,
+                'guard_name' => $this->guardName,
+            ], $timestamps)
+        ]);
 
         $superAdminRole = DB::table('roles')->where('name', $this->superAdminRoleName)->first();
         $superAdminUser = DB::table('users')->where('email', 'hello@vereinfacht.digital')->first();

@@ -6,5 +6,9 @@
         "currency": {
             "help": "In EUR"
         }
+    },
+    "title": {
+        "one": "Resource",
+        "other": "Resources"
     }
 }

@@ -12,10 +12,11 @@ class ClubPermission
     public function handle($request, \Closure $next)
     {
         $authenticable = Auth::guard('sanctum')->user();
-        if (! empty($authenticable)) {
+
+        if (!empty($authenticable)) {
             $clubId = $this->getCurrentPermissionsClubId($authenticable);
 
-            if (! $clubId) {
+            if (!$clubId) {
                 return abort(403);
             }
 
