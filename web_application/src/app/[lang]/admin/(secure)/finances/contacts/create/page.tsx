@@ -121,7 +121,7 @@ export default async function CreateContact() {
                         required
                     />
                 </div>
-                <SubmitButton title={t('submit')} />
+                <SubmitButton title={t('create')} />
             </form>
 
             {formState && (

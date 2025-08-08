@@ -47,5 +47,6 @@
             "none": "not specified",
             "other": "diverse"
         }
-    }
+    },
+    "create": "Create user"
 }
