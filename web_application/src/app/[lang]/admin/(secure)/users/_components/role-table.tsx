@@ -1,7 +1,7 @@
 'use client';
 
 import { DataTable } from '@/app/components/Table/DataTable';
-import PermissionTable from '@/app/components/Table/permissionTable';
+import PermissionTable from '@/app/components/Table/PermissionTable';
 import Text from '@/app/components/Text/Text';
 import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
