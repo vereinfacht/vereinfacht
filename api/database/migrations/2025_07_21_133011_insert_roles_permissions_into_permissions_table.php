@@ -5,9 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     protected $permissionNames = [
         'view roles',
-        'create roles',
-        'update roles',
-        'delete roles',
     ];
 
     public function up(): void
