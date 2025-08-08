@@ -53,6 +53,18 @@ export default function TablePagination({ totalPages }: Props) {
             return items;
         }
 
+        // If total pages equal or less than 5, just show all pages
+        if (totalPages <= 5) {
+            for (let i = 1; i <= totalPages; i++) {
+                items.push({
+                    type: 'page',
+                    index: i,
+                    disabled: i === currentPage,
+                });
+            }
+            return items;
+        }
+
         // start ellipsis and first page
         if (currentPage > totalPages - 2) {
             items.push({
@@ -67,17 +79,23 @@ export default function TablePagination({ totalPages }: Props) {
 
         // previous page
         if (currentPage > 1) {
-            if (currentPage === totalPages || currentPage === totalPages - 2) {
+            if (
+                (currentPage === totalPages ||
+                    currentPage === totalPages - 2) &&
+                currentPage - 2 >= 1
+            ) {
                 items.push({
                     type: 'page',
                     index: currentPage - 2,
                 });
             }
 
-            items.push({
-                type: 'page',
-                index: currentPage - 1,
-            });
+            if (currentPage - 1 >= 1) {
+                items.push({
+                    type: 'page',
+                    index: currentPage - 1,
+                });
+            }
         }
 
         // current page
