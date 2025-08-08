@@ -84,7 +84,7 @@ export default async function CreateContact() {
                     required
                     min={2}
                 />
-                <div className="flex w-full gap-4">
+                <div className="grid grid-cols-4 gap-4">
                     <TextInput
                         id="address"
                         name="address"
@@ -103,7 +103,7 @@ export default async function CreateContact() {
                         required
                     />
                 </div>
-                <div className="flex w-full gap-4">
+                <div className="grid grid-cols-4 gap-4">
                     <TextInput
                         id="city"
                         name="city"
