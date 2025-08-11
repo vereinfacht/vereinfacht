@@ -96,7 +96,7 @@ export default function CreateContact() {
                         name="phoneNumber"
                         label={t('contact:phone_number.label')}
                         autoComplete="phoneNumber"
-                        min={2}
+                        minLength={2}
                     />
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
@@ -123,7 +123,7 @@ export default function CreateContact() {
                         label={t('contact:city.label')}
                         autoComplete="city"
                         required
-                        min={2}
+                        minLength={2}
                     />
                     <TextInput
                         id="country"
@@ -131,7 +131,7 @@ export default function CreateContact() {
                         label={t('contact:country.label')}
                         autoComplete="country"
                         required
-                        min={2}
+                        minLength={2}
                     />
                 </div>
                 <div className="flex gap-4 self-end">
