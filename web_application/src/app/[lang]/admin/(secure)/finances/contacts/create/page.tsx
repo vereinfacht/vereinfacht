@@ -5,6 +5,8 @@ import TextInput from '@/app/components/Input/TextInput';
 import useTranslation from 'next-translate/useTranslation';
 import SubmitButton from '../../../components/Form/SubmitButton';
 import { useState } from 'react';
+import CancelButton from '../../../components/Form/CancelButton';
+import { capitalizeFirstLetter } from '@/utils/strings';
 
 export default async function CreateContact() {
     const { t } = useTranslation('contact');
@@ -129,6 +131,9 @@ export default async function CreateContact() {
                 </div>
 
                 <div className="flex gap-4 self-end">
+                    <CancelButton
+                        title={capitalizeFirstLetter(t('general:cancel'))}
+                    />
                     <SubmitButton title={t('create')} />
                 </div>
             </form>
