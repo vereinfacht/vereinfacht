@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         $valuedAt = $this->faker->dateTimeBetween('-1 year', 'now');
-        $bookedAt = $valuedAt->modify('+' . $this->faker->numberBetween(0, 2) . ' days');
+        $bookedAt = $valuedAt->modify('+'.$this->faker->numberBetween(0, 2).' days');
 
         return [
             'name' => $this->faker->name(),

@@ -64,7 +64,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
     protected static function booted(): void
     {
         static::creating(function (Club $club) {
-            if (!$club->slug) {
+            if (! $club->slug) {
                 $club->slug = Str::slug($club->title);
             }
         });
@@ -137,8 +137,8 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $sanitizer = new Sanitizer;
 
         return Attribute::make(
-            get: fn(?string $value) => $value ? $sanitizer->get($value) : null,
-            set: fn(?string $value) => $value ? $sanitizer->get($value) : null,
+            get: fn (?string $value) => $value ? $sanitizer->get($value) : null,
+            set: fn (?string $value) => $value ? $sanitizer->get($value) : null,
         );
     }
 
@@ -150,7 +150,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $url .= '/apply';
 
         return Attribute::make(
-            get: fn() => $url,
+            get: fn () => $url,
         );
     }
 

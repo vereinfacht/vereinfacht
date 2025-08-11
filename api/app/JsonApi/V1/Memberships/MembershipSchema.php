@@ -36,7 +36,7 @@ class MembershipSchema extends Schema
             Str::make('notes'),
             Str::make('status'),
             Str::make('monthlyFee')->extractUsing(
-                static fn($model) => $model->getMonthlyFee()
+                static fn ($model) => $model->getMonthlyFee()
             )->readOnly(),
             Number::make('voluntaryContribution'),
             DateTime::make('startedAt')->sortable(),

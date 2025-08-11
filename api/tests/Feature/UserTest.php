@@ -35,7 +35,7 @@ class UserTest extends TestCase
             ->actingAs($club)
             ->jsonApi()
             ->expects('users')
-            ->get("/api/v1/users");
+            ->get('/api/v1/users');
 
         $response
             ->assertOk()

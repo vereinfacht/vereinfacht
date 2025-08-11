@@ -20,7 +20,7 @@ export function getDefaultMetadata(): Metadata {
         description,
         icons,
         manifest: '/manifest.json',
-        authors: [{ name: 'visuellverstehen' }],
+        authors: [{ name: 'vereinfacht' }],
         openGraph: {
             title,
             description,

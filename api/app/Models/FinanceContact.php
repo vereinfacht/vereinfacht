@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class FinanceContact extends Model
 {
@@ -44,7 +44,7 @@ class FinanceContact extends Model
         $fullName = trim("{$this->first_name} {$this->last_name}");
 
         return Attribute::make(
-            get: fn() => $fullName,
+            get: fn () => $fullName,
         );
     }
 }

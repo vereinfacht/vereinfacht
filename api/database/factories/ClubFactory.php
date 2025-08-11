@@ -21,7 +21,7 @@ class ClubFactory extends Factory
 
         $attributes = [
             'title' => $this->faker->unique()->company(),
-            'extended_title' => $this->faker->company() . ' ' . $this->faker->companySuffix(),
+            'extended_title' => $this->faker->company().' '.$this->faker->companySuffix(),
             'address' => $this->faker->streetAddress(),
             'zip_code' => $this->faker->postcode(),
             'city' => $this->faker->city(),

@@ -26,7 +26,7 @@ class FinanceContactTest extends TestCase
             ->actingAs($club)
             ->jsonApi()
             ->expects('finance-contacts')
-            ->get("/api/v1/finance-contacts");
+            ->get('/api/v1/finance-contacts');
 
         $response
             ->assertOk()
