@@ -103,67 +103,69 @@ export default async function ContactShowPage({ params }: Props) {
         notFound();
     }
 
-    const { t } = createTranslation('contact');
+    const { t } = createTranslation();
     const fields = [
         {
-            label: t('type.label'),
+            label: t('contact:type.label'),
             attribute: 'type',
             value:
                 contact.type === 'person' ? <CircleUserRound /> : <Building2 />,
         },
         {
-            label: t('title.label'),
+            label: t('contact:title.label'),
             attribute: 'name',
             value: contact.fullName,
         },
         {
-            label: t('company_name.label'),
+            label: t('contact:company_name.label'),
             attribute: 'companyName',
             value: contact.companyName,
         },
         {
-            label: t('gender.label'),
+            label: t('general:gender.label'),
             attribute: 'gender',
-            value: contact.gender ? t('gender.option.' + contact.gender) : '',
+            value: contact.gender
+                ? t('general:gender.options.' + contact.gender)
+                : '',
         },
         {
-            label: t('email.label'),
+            label: t('contact:email.label'),
             attribute: 'email',
             value: contact.email,
         },
         {
-            label: t('phone_number.label'),
+            label: t('contact:phone_number.label'),
             attribute: 'phoneNumber',
             value: contact.phoneNumber,
         },
         {
-            label: t('address.label'),
+            label: t('contact:address.label'),
             attribute: 'address',
             value: contact.address,
         },
         {
-            label: t('zip_code.label'),
+            label: t('contact:zip_code.label'),
             attribute: 'zipCode',
             value: contact.zipCode,
         },
         {
-            label: t('city.label'),
+            label: t('contact:city.label'),
             attribute: 'city',
             value: contact.city,
         },
         {
-            label: t('country.label'),
+            label: t('contact:country.label'),
             attribute: 'country',
             value: contact.country,
         },
         {
-            label: t('created_at.label'),
+            label: t('contact:created_at.label'),
             attribute: 'createdAt',
             type: 'date',
             value: contact.createdAt,
         },
         {
-            label: t('updated_at.label'),
+            label: t('contact:updated_at.label'),
             attribute: 'updatedAt',
             type: 'date',
             value: contact.updatedAt,

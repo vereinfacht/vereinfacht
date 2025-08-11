@@ -24,5 +24,15 @@
     "pagination": {
         "previous": "Previous page",
         "next": "Next page"
+    },
+
+    "gender": {
+        "label": "Gender",
+        "options": {
+            "female": "female",
+            "male": "male",
+            "none": "not specified",
+            "other": "diverse"
+        }
     }
 }

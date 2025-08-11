@@ -39,14 +39,5 @@
     "updated_at": {
         "label": "Updated At"
     },
-    "gender": {
-        "label": "Gender",
-        "option": {
-            "female": "female",
-            "male": "male",
-            "none": "not specified",
-            "other": "diverse"
-        }
-    },
-    "create": "Create user"
+    "create": "Create contact"
 }

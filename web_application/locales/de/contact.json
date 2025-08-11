@@ -39,14 +39,5 @@
     "updated_at": {
         "label": "Aktualisiert am"
     },
-    "gender": {
-        "label": "Geschlecht",
-        "option": {
-            "female": "weiblich",
-            "male": "männlich",
-            "none": "keine Angabe",
-            "other": "divers"
-        }
-    },
-    "create": "Benutzer erstellen"
+    "create": "Kontakt erstellen"
 }

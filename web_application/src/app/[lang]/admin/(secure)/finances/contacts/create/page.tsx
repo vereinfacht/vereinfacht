@@ -9,21 +9,21 @@ import CancelButton from '../../../components/Form/CancelButton';
 import SubmitButton from '../../../components/Form/SubmitButton';
 
 export default async function CreateContact() {
-    const { t } = useTranslation('contact');
+    const { t } = useTranslation();
     const [formState, setFormState] = useState<Record<
         string,
         FormDataEntryValue
     > | null>(null);
 
     const financeContactTypeOptions: Option[] = [
-        { label: t('type.person'), value: 'person' },
-        { label: t('type.company'), value: 'company' },
+        { label: t('contact:type.person'), value: 'person' },
+        { label: t('contact:type.company'), value: 'company' },
     ];
 
     const financeContactGenderOptions: Option[] = [
-        { label: t('gender.option.male'), value: 'male' },
-        { label: t('gender.option.female'), value: 'female' },
-        { label: t('gender.option.other'), value: 'other' },
+        { label: t('general:gender.options.male'), value: 'male' },
+        { label: t('general:gender.options.female'), value: 'female' },
+        { label: t('general:gender.options.other'), value: 'other' },
     ];
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +42,7 @@ export default async function CreateContact() {
                     <SelectInput
                         id="type"
                         name="type"
-                        label={t('type.label')}
+                        label={t('contact:type.label')}
                         options={financeContactTypeOptions}
                         required
                     />
@@ -50,7 +50,7 @@ export default async function CreateContact() {
                         id="fullname"
                         name="fullname"
                         defaultValue=""
-                        label={t('title.label')}
+                        label={t('contact:title.label')}
                         autoComplete="name"
                         required
                         min={2}
@@ -61,14 +61,14 @@ export default async function CreateContact() {
                         id="companyName"
                         name="companyName"
                         defaultValue=""
-                        label={t('company_name.label')}
+                        label={t('contact:company_name.label')}
                         autoComplete="organization"
                         min={2}
                     />
                     <SelectInput
                         id="gender"
                         name="gender"
-                        label={t('gender.label')}
+                        label={t('general:gender.label')}
                         options={financeContactGenderOptions}
                     />
                 </div>
@@ -77,7 +77,7 @@ export default async function CreateContact() {
                         id="email"
                         name="email"
                         defaultValue=""
-                        label={t('email.label')}
+                        label={t('contact:email.label')}
                         autoComplete="email"
                         required
                         min={2}
@@ -86,7 +86,7 @@ export default async function CreateContact() {
                         id="phoneNumber"
                         name="phoneNumber"
                         defaultValue=""
-                        label={t('phone_number.label')}
+                        label={t('contact:phone_number.label')}
                         autoComplete="phoneNumber"
                         required
                         min={2}
@@ -97,7 +97,7 @@ export default async function CreateContact() {
                         id="address"
                         name="address"
                         defaultValue=""
-                        label={t('address.label')}
+                        label={t('contact:address.label')}
                         autoComplete="address"
                         required
                         className="flex-1"
@@ -106,7 +106,7 @@ export default async function CreateContact() {
                         id="zip_code"
                         name="zip_code"
                         defaultValue=""
-                        label={t('zip_code.label')}
+                        label={t('contact:zip_code.label')}
                         autoComplete="zip_code"
                         required
                     />
@@ -116,7 +116,7 @@ export default async function CreateContact() {
                         id="city"
                         name="city"
                         defaultValue=""
-                        label={t('city.label')}
+                        label={t('contact:city.label')}
                         autoComplete="city"
                         required
                     />
@@ -124,7 +124,7 @@ export default async function CreateContact() {
                         id="country"
                         name="country"
                         defaultValue=""
-                        label={t('country.label')}
+                        label={t('contact:country.label')}
                         autoComplete="country"
                         required
                     />
@@ -133,7 +133,7 @@ export default async function CreateContact() {
                     <CancelButton
                         title={capitalizeFirstLetter(t('general:cancel'))}
                     />
-                    <SubmitButton title={t('create')} />
+                    <SubmitButton title={t('contact:create')} />
                 </div>
             </form>
 
