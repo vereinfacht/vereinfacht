@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/app/components/Button/Button';
+import { capitalizeFirstLetter } from '@/utils/strings';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -12,7 +13,7 @@ export default function CancelButton({ title }: Props) {
 
     return (
         <Button onClick={() => router.back()} preset="secondary">
-            {title}
+            {capitalizeFirstLetter(title)}
         </Button>
     );
 }

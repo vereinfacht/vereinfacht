@@ -2,7 +2,6 @@
 
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
-import { capitalizeFirstLetter } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import CancelButton from '../../../components/Form/CancelButton';
@@ -130,9 +129,7 @@ export default async function CreateContact() {
                     />
                 </div>
                 <div className="flex gap-4 self-end">
-                    <CancelButton
-                        title={capitalizeFirstLetter(t('general:cancel'))}
-                    />
+                    <CancelButton title={t('general:cancel')} />
                     <SubmitButton title={t('contact:create')} />
                 </div>
             </form>
