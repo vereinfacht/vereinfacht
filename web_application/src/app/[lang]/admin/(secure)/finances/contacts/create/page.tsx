@@ -7,12 +7,8 @@ import { useState } from 'react';
 import CancelButton from '../../../components/Form/CancelButton';
 import SubmitButton from '../../../components/Form/SubmitButton';
 
-export default async function CreateContact() {
+export default function CreateContact() {
     const { t } = useTranslation();
-    const [formState, setFormState] = useState<Record<
-        string,
-        FormDataEntryValue
-    > | null>(null);
 
     const financeContactTypeOptions: Option[] = [
         { label: t('contact:type.person'), value: 'person' },
@@ -24,6 +20,13 @@ export default async function CreateContact() {
         { label: t('general:gender.options.female'), value: 'female' },
         { label: t('general:gender.options.other'), value: 'other' },
     ];
+
+    const [contactType, setContactType] = useState<string>('');
+
+    const [formState, setFormState] = useState<Record<
+        string,
+        FormDataEntryValue
+    > | null>(null);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -41,6 +44,11 @@ export default async function CreateContact() {
                     <SelectInput
                         id="type"
                         name="type"
+                        handleChange={(e) => {
+                            setContactType(
+                                (e.target as HTMLSelectElement).value,
+                            );
+                        }}
                         label={t('contact:type.label')}
                         options={financeContactTypeOptions}
                         required
@@ -48,10 +56,14 @@ export default async function CreateContact() {
                     <TextInput
                         id="fullName"
                         name="fullName"
-                        label={t('contact:title.label')}
+                        label={
+                            contactType === 'company'
+                                ? t('contact:contact_person.label')
+                                : t('contact:title.label')
+                        }
                         autoComplete="fullName"
-                        required
-                        min={2}
+                        required={contactType === 'person'}
+                        minLength={contactType === 'person' ? 2 : undefined}
                     />
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
@@ -60,7 +72,8 @@ export default async function CreateContact() {
                         name="companyName"
                         label={t('contact:company_name.label')}
                         autoComplete="companyName"
-                        min={2}
+                        required={contactType === 'company'}
+                        minLength={contactType === 'company' ? 2 : undefined}
                     />
                     <SelectInput
                         id="gender"
@@ -83,6 +96,7 @@ export default async function CreateContact() {
                         name="phoneNumber"
                         label={t('contact:phone_number.label')}
                         autoComplete="phoneNumber"
+                        min={2}
                     />
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
