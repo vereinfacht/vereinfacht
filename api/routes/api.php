@@ -49,9 +49,6 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'update');
 
         $server->resource('users', UserController::class)
-            ->relationships(function ($relations) {
-                $relations->hasMany('roles', JsonApiController::class);
-            })
             ->only('index', 'show', 'login', 'logout')
             ->actions(function (ActionRegistrar $actions) {
                 $actions->post('login');
