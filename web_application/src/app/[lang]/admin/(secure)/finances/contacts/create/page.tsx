@@ -78,8 +78,8 @@ export default async function CreateContact() {
                         defaultValue=""
                         label={t('contact:email.label')}
                         autoComplete="email"
+                        type="email"
                         required
-                        min={2}
                     />
                     <TextInput
                         id="phoneNumber"
