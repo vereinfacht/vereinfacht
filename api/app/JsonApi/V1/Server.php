@@ -78,16 +78,16 @@ class Server extends BaseServer
             return $model->club()->associate($club->getKey());
         }
 
-        if (!$club && $user instanceof Club) {
+        if (! $club && $user instanceof Club) {
             return $model->club()->associate($user->id);
         }
 
-        if (!$club && getPermissionsTeamId()) {
+        if (! $club && getPermissionsTeamId()) {
             return $model->club()->associate(getPermissionsTeamId());
         }
 
         // currently only used for club form and should be handled in another way
-        if (!$club && $user->hasRole('super admin')) {
+        if (! $club && $user->hasRole('super admin')) {
             return $model->club()->associate($user->current_club_id);
         }
 

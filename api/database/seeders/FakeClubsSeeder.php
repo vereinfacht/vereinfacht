@@ -36,7 +36,7 @@ class FakeClubsSeeder extends Seeder
             ->each(fn($club) => $this->assignSuperAdminRole($club));
     }
 
-    protected function attachDivisionsToMembershipTypes($club)
+    protected function attachDivisionsToMembershipTypes($club): void
     {
         $divisions = $club->divisions()->get();
 
@@ -52,7 +52,7 @@ class FakeClubsSeeder extends Seeder
         });
     }
 
-    protected function createClubMemberships($club)
+    public function createClubMemberships($club): void
     {
         Membership::factory(10)
             ->make([
@@ -68,7 +68,7 @@ class FakeClubsSeeder extends Seeder
         $club->memberships()->each(fn($membership) => $this->createMembershipMembers($membership, $club));
     }
 
-    protected function createMembershipMembers($membership, $club)
+    protected function createMembershipMembers($membership, $club): void
     {
         $maxMembers = $membership->membershipType()->first()->maximum_number_of_members;
 
@@ -81,7 +81,7 @@ class FakeClubsSeeder extends Seeder
         $membership->save();
     }
 
-    protected function attachPaymentPeriods($club)
+    public function attachPaymentPeriods($club): void
     {
         $paymentPeriods = PaymentPeriod::inRandomOrder()->get();
 
@@ -90,7 +90,7 @@ class FakeClubsSeeder extends Seeder
         }
     }
 
-    protected function attachMembersToDivision($club)
+    public function attachMembersToDivision($club): void
     {
         $divisions = $club->divisions()->get(['id']);
         $club->members()
@@ -98,20 +98,26 @@ class FakeClubsSeeder extends Seeder
             ->each(fn($member) => $member->divisions()->attach($divisions->random()->id));
     }
 
-    protected function assignClubAdminRole($club)
+    public function assignClubAdminRole($club, $name = null): void
     {
         setPermissionsTeamId($club);
 
-        User::factory([
+        $clubAdminData = [
             'email' => "club-admin-{$club->getKey()}@example.org",
-        ])->create()->assignRole('club admin');
+        ];
+
+        if ($name) {
+            $clubAdminData['name'] = $name;
+        }
+
+        User::factory($clubAdminData)->create()->assignRole('club admin');
 
         User::factory(2)
             ->create()
             ->each(fn($user) => $user->assignRole('club treasurer'));
     }
 
-    protected function assignSuperAdminRole($club)
+    public function assignSuperAdminRole($club): void
     {
         setPermissionsTeamId($club);
         User::where('email', 'hello@vereinfacht.digital')->first()->assignRole('super admin');
