@@ -48,9 +48,8 @@ export default async function CreateContact() {
                     <TextInput
                         id="fullName"
                         name="fullName"
-                        defaultValue=""
                         label={t('contact:title.label')}
-                        autoComplete="name"
+                        autoComplete="fullName"
                         required
                         min={2}
                     />
@@ -59,9 +58,8 @@ export default async function CreateContact() {
                     <TextInput
                         id="companyName"
                         name="companyName"
-                        defaultValue=""
                         label={t('contact:company_name.label')}
-                        autoComplete="organization"
+                        autoComplete="companyName"
                         min={2}
                     />
                     <SelectInput
@@ -75,7 +73,6 @@ export default async function CreateContact() {
                     <TextInput
                         id="email"
                         name="email"
-                        defaultValue=""
                         label={t('contact:email.label')}
                         autoComplete="email"
                         type="email"
@@ -84,7 +81,6 @@ export default async function CreateContact() {
                     <TextInput
                         id="phoneNumber"
                         name="phoneNumber"
-                        defaultValue=""
                         label={t('contact:phone_number.label')}
                         autoComplete="phoneNumber"
                         required
@@ -95,18 +91,16 @@ export default async function CreateContact() {
                     <TextInput
                         id="address"
                         name="address"
-                        defaultValue=""
                         label={t('contact:address.label')}
                         autoComplete="address"
                         required
                         className="flex-1"
                     />
                     <TextInput
-                        id="zip_code"
-                        name="zip_code"
-                        defaultValue=""
+                        id="zipCode"
+                        name="zipCode"
                         label={t('contact:zip_code.label')}
-                        autoComplete="zip_code"
+                        autoComplete="zipCode"
                         required
                     />
                 </div>
@@ -114,7 +108,6 @@ export default async function CreateContact() {
                     <TextInput
                         id="city"
                         name="city"
-                        defaultValue=""
                         label={t('contact:city.label')}
                         autoComplete="city"
                         required
@@ -122,7 +115,6 @@ export default async function CreateContact() {
                     <TextInput
                         id="country"
                         name="country"
-                        defaultValue=""
                         label={t('contact:country.label')}
                         autoComplete="country"
                         required
