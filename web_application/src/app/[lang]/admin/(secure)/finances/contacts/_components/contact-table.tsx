@@ -86,7 +86,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 className="mb-6 w-fit"
                 href={`/admin/finances/contacts/create/`}
             >
-                {capitalizeFirstLetter(t('general:add'))}
+                {capitalizeFirstLetter(t('general:create'))}
             </Button>
             <DataTable
                 data={contacts}
