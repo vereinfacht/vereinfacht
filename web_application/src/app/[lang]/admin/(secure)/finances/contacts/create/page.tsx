@@ -46,8 +46,8 @@ export default async function CreateContact() {
                         required
                     />
                     <TextInput
-                        id="fullname"
-                        name="fullname"
+                        id="fullName"
+                        name="fullName"
                         defaultValue=""
                         label={t('contact:title.label')}
                         autoComplete="name"
