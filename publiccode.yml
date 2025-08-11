@@ -8,7 +8,7 @@ url: "https://github.com/vereinfacht/vereinfacht"
 landingURL: "https://vereinfacht.digital/"
 roadmap: "https://github.com/vereinfacht/vereinfacht/projects"
 developmentStatus: development
-logo: .opencode/logo.svg
+logo: logo.png
 platforms:
 - web
 softwareType: standalone/web
