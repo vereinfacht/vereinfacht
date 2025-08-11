@@ -11,7 +11,7 @@ export const getUser = createAuthenticatedAction(
         const response = await client.GET('/users/{user}', {
             params: {
                 path: { user: params.id },
-                // @ts-expect-error query is not allowed in the schema
+                // @ts-expect-error: `include` is supported by the API but not documented in the spec
                 query: params.include
                     ? { include: params.include.join(',') }
                     : {},
