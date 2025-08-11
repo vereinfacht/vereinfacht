@@ -129,7 +129,6 @@ export default async function CreateContact() {
                         required
                     />
                 </div>
-
                 <div className="flex gap-4 self-end">
                     <CancelButton
                         title={capitalizeFirstLetter(t('general:cancel'))}
