@@ -83,8 +83,6 @@ export default async function CreateContact() {
                         name="phoneNumber"
                         label={t('contact:phone_number.label')}
                         autoComplete="phoneNumber"
-                        required
-                        min={2}
                     />
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
