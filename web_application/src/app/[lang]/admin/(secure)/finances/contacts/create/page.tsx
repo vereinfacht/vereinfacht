@@ -111,6 +111,7 @@ export default async function CreateContact() {
                         label={t('contact:city.label')}
                         autoComplete="city"
                         required
+                        min={2}
                     />
                     <TextInput
                         id="country"
@@ -118,6 +119,7 @@ export default async function CreateContact() {
                         label={t('contact:country.label')}
                         autoComplete="country"
                         required
+                        min={2}
                     />
                 </div>
                 <div className="flex gap-4 self-end">
