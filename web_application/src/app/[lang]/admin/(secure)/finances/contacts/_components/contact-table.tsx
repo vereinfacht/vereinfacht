@@ -9,10 +9,10 @@ import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import { listFinanceContactSearchParams } from '@/utils/search-params';
+import { capitalizeFirstLetter } from '@/utils/strings';
 import { ColumnDef } from '@tanstack/react-table';
-import { Building2, CircleUserRound, Plus } from 'lucide-react';
+import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
-import EditButton from '../../../components/EditButton';
 
 interface Props {
     contacts: TFinanceContactDeserialized[];
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function ContactTable({ contacts, totalPages }: Props) {
-    const { t } = useTranslation('contact');
+    const { t } = useTranslation();
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
@@ -44,7 +44,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('full_name.label')}
+                    columnTitle={t('contact:full_name.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
@@ -55,7 +55,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('company_name.label')}
+                    columnTitle={t('contact:company_name.label')}
                 />
             ),
             cell: ({ row }) => (
@@ -68,14 +68,14 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('city.label')}
+                    columnTitle={t('contact:city.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('city')}</TextCell>,
         },
         {
             accessorKey: 'email',
-            header: t('email.label'),
+            header: t('contact:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
     ];
@@ -86,7 +86,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 className="mb-6 w-fit"
                 href={`/admin/finances/contacts/create/`}
             >
-                <Plus className="h-4 w-4" />
+                {capitalizeFirstLetter(t('general:add'))}
             </Button>
             <DataTable
                 data={contacts}

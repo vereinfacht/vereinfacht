@@ -36,55 +36,61 @@ export default async function CreateContact() {
     return (
         <>
             <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-                <SelectInput
-                    id="type"
-                    name="type"
-                    label={t('type.label')}
-                    options={financeContactTypeOptions}
-                    required
-                />
-                <TextInput
-                    id="fullname"
-                    name="fullname"
-                    defaultValue=""
-                    label={t('title.label')}
-                    autoComplete="name"
-                    required
-                    min={2}
-                />
-                <TextInput
-                    id="companyName"
-                    name="companyName"
-                    defaultValue=""
-                    label={t('company_name.label')}
-                    autoComplete="organization"
-                    min={2}
-                />
-                <SelectInput
-                    id="gender"
-                    name="gender"
-                    label={t('gender.label')}
-                    options={financeContactGenderOptions}
-                />
-                <TextInput
-                    id="email"
-                    name="email"
-                    defaultValue=""
-                    label={t('email.label')}
-                    autoComplete="email"
-                    required
-                    min={2}
-                />
-                <TextInput
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    defaultValue=""
-                    label={t('phone_number.label')}
-                    autoComplete="phoneNumber"
-                    required
-                    min={2}
-                />
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
+                    <SelectInput
+                        id="type"
+                        name="type"
+                        label={t('type.label')}
+                        options={financeContactTypeOptions}
+                        required
+                    />
+                    <TextInput
+                        id="fullname"
+                        name="fullname"
+                        defaultValue=""
+                        label={t('title.label')}
+                        autoComplete="name"
+                        required
+                        min={2}
+                    />
+                </div>
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
+                    <TextInput
+                        id="companyName"
+                        name="companyName"
+                        defaultValue=""
+                        label={t('company_name.label')}
+                        autoComplete="organization"
+                        min={2}
+                    />
+                    <SelectInput
+                        id="gender"
+                        name="gender"
+                        label={t('gender.label')}
+                        options={financeContactGenderOptions}
+                    />
+                </div>
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
+                    <TextInput
+                        id="email"
+                        name="email"
+                        defaultValue=""
+                        label={t('email.label')}
+                        autoComplete="email"
+                        required
+                        min={2}
+                    />
+                    <TextInput
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        defaultValue=""
+                        label={t('phone_number.label')}
+                        autoComplete="phoneNumber"
+                        required
+                        min={2}
+                    />
+                </div>
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
                     <TextInput
                         id="address"
                         name="address"
@@ -103,7 +109,7 @@ export default async function CreateContact() {
                         required
                     />
                 </div>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
                     <TextInput
                         id="city"
                         name="city"
@@ -121,7 +127,10 @@ export default async function CreateContact() {
                         required
                     />
                 </div>
-                <SubmitButton title={t('create')} />
+
+                <div className="flex gap-4 self-end">
+                    <SubmitButton title={t('create')} />
+                </div>
             </form>
 
             {formState && (
