@@ -106,7 +106,6 @@ export default function CreateContact() {
                         label={t('contact:address.label')}
                         autoComplete="address"
                         required
-                        className="flex-1"
                     />
                     <TextInput
                         id="zipCode"
