@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/app/components/Button/Button';
+import { capitalizeFirstLetter } from '@/utils/strings';
 import { useFormStatus } from 'react-dom';
 
 interface Props {
@@ -12,7 +13,7 @@ export default function SubmitButton({ title }: Props) {
 
     return (
         <Button type="submit" isLoading={pending}>
-            {title}
+            {capitalizeFirstLetter(title)}
         </Button>
     );
 }
