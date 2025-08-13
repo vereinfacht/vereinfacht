@@ -16,10 +16,10 @@ export default function CreateContact() {
     ];
 
     const financeContactGenderOptions: Option[] = [
-        { label: t('general:gender.options.none'), value: 'none' },
+        { label: t('general:gender.options.other'), value: 'other' },
+        { label: t('general:gender.options.none'), value: '' },
         { label: t('general:gender.options.male'), value: 'male' },
         { label: t('general:gender.options.female'), value: 'female' },
-        { label: t('general:gender.options.other'), value: 'other' },
     ];
 
     const [contactType, setContactType] = useState<string>('');
