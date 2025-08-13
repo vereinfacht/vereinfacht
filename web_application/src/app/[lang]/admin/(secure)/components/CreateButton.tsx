@@ -1,7 +1,7 @@
 import { capitalizeFirstLetter } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes } from 'react';
-import Button from './Button';
+import Button from '../../../../components/Button/Button';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     href: string;
