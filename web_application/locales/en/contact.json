@@ -16,7 +16,7 @@
         "label": "Name"
     },
     "contact_person": {
-        "label": "Contact Person"
+        "label": "Contact person"
     },
     "email": {
         "label": "E-Mail"
@@ -28,7 +28,7 @@
         "label": "Street"
     },
     "zip_code": {
-        "label": "Postal Code"
+        "label": "Zip code"
     },
     "city": {
         "label": "City"
@@ -37,10 +37,9 @@
         "label": "Country"
     },
     "created_at": {
-        "label": "Created At"
+        "label": "Created at"
     },
     "updated_at": {
-        "label": "Updated At"
-    },
-    "create": "Create contact"
+        "label": "Updated at"
+    }
 }

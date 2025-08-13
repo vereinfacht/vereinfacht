@@ -16,7 +16,7 @@
         "label": "Name"
     },
     "contact_person": {
-        "label": "Name Ansprechpartner"
+        "label": "Name Ansprechperson"
     },
     "email": {
         "label": "E-Mail"
@@ -41,6 +41,5 @@
     },
     "updated_at": {
         "label": "Aktualisiert am"
-    },
-    "create": "Kontakt erstellen"
+    }
 }

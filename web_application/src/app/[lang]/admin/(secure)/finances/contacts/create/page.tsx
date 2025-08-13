@@ -136,7 +136,7 @@ export default function CreateContact() {
                 </div>
                 <div className="flex gap-4 self-end">
                     <CancelButton title={t('general:cancel')} />
-                    <SubmitButton title={t('contact:create')} />
+                    <SubmitButton title={t('general:save')} />
                 </div>
             </form>
 
