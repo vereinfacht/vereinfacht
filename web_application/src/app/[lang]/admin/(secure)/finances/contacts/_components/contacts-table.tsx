@@ -18,7 +18,7 @@ interface Props {
     totalPages: number;
 }
 
-export default function ContactTable({ contacts, totalPages }: Props) {
+export default function ContactsTable({ contacts, totalPages }: Props) {
     const { t } = useTranslation();
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
