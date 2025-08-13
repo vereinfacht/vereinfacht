@@ -1,4 +1,4 @@
-import ContactTable from './_components/contacts-table';
+import ContactTable from './_components/contact-table';
 import {
     ListFinanceContactSearchParamsType,
     loadListFinanceContactsSearchParams,
