@@ -8,7 +8,7 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import DetailField from '../../components/Fields/DetailField';
-import RolesTable from '../_components/role-table';
+import RolesTable from '../_components/roles-table';
 
 interface Props {
     params: ShowPageParams;

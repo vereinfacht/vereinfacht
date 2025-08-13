@@ -15,7 +15,7 @@ interface Props {
     users: TUserDeserialized[];
 }
 
-export default function UserTable({ users }: Props) {
+export default function UsersTable({ users }: Props) {
     const { t } = useTranslation();
 
     const columns: ColumnDef<TUserDeserialized>[] = [
