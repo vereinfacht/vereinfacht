@@ -9,6 +9,7 @@ import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../components/Fields/Detail/DateField';
+import CreateButton from '../../components/CreateButton';
 
 interface Props {
     users: TUserDeserialized[];
@@ -64,12 +65,15 @@ export default function UserTable({ users }: Props) {
     ];
 
     return (
-        <DataTable
-            data={users}
-            columns={columns}
-            resourceName={'users' as ResourceName}
-            canView={true}
-            canEdit={true}
-        />
+        <>
+            <CreateButton href={`/admin/users/create/`} />
+            <DataTable
+                data={users}
+                columns={columns}
+                resourceName={'users' as ResourceName}
+                canView={true}
+                canEdit={true}
+            />
+        </>
     );
 }
