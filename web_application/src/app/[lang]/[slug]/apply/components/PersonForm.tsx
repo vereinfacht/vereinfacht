@@ -30,19 +30,19 @@ export default function PersonForm({
     const sortedGenderOptions = sortOptions([
         {
             value: '',
-            label: t('member:gender_options.none'),
+            label: t('general:gender.options.none'),
         },
         {
             value: 'male',
-            label: t('member:gender_options.male'),
+            label: t('general:gender.options.male'),
         },
         {
             value: 'female',
-            label: t('member:gender_options.female'),
+            label: t('general:gender.options.female'),
         },
         {
             value: 'other',
-            label: t('member:gender_options.other'),
+            label: t('general:gender.options.other'),
         },
     ]);
 
@@ -90,7 +90,7 @@ export default function PersonForm({
                         <SelectInput
                             id={`gender-${index}`}
                             name={`members.${index}.gender`}
-                            label={t('member:gender')}
+                            label={t('general:gender.label')}
                             defaultValue={formData.gender}
                             autoComplete="sex"
                             options={sortedGenderOptions}
