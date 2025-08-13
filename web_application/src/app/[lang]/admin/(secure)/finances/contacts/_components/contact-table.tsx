@@ -1,7 +1,7 @@
 'use client';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
-import Button from '@/app/components/Button/Button';
+import CreateButton from '@/app/components/Button/CreateButton';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -9,7 +9,6 @@ import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import { listFinanceContactSearchParams } from '@/utils/search-params';
-import { capitalizeFirstLetter } from '@/utils/strings';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
@@ -82,12 +81,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
 
     return (
         <>
-            <Button
-                className="mb-6 w-fit"
-                href={`/admin/finances/contacts/create/`}
-            >
-                {capitalizeFirstLetter(t('general:create'))}
-            </Button>
+            <CreateButton href={`/admin/finances/contacts/create/`} />
             <DataTable
                 data={contacts}
                 columns={columns}
