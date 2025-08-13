@@ -1,6 +1,7 @@
 'use client';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
+import CreateButton from '@/app/[lang]/admin/(secure)/components/CreateButton';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -17,8 +18,8 @@ interface Props {
     totalPages: number;
 }
 
-export default function ContactsTable({ contacts, totalPages }: Props) {
-    const { t } = useTranslation('contact');
+export default function ContactTable({ contacts, totalPages }: Props) {
+    const { t } = useTranslation();
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
@@ -42,7 +43,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('full_name.label')}
+                    columnTitle={t('contact:full_name.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
@@ -53,7 +54,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('company_name.label')}
+                    columnTitle={t('contact:company_name.label')}
                 />
             ),
             cell: ({ row }) => (
@@ -66,26 +67,29 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('city.label')}
+                    columnTitle={t('contact:city.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('city')}</TextCell>,
         },
         {
             accessorKey: 'email',
-            header: t('email.label'),
+            header: t('contact:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
     ];
 
     return (
-        <DataTable
-            data={contacts}
-            columns={columns}
-            resourceName={'finances/contacts' as ResourceName}
-            totalPages={totalPages}
-            canEdit={true}
-            canView={true}
-        />
+        <>
+            <CreateButton href={`/admin/finances/contacts/create/`} />
+            <DataTable
+                data={contacts}
+                columns={columns}
+                resourceName={'finances/contacts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+            />
+        </>
     );
 }

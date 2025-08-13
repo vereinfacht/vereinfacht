@@ -1,18 +1,17 @@
 'use client';
 
 import { ActionState, UpdateAction } from '@/actions/validateForm';
-import { capitalizeFirstLetter } from '@/utils/strings';
-import useTranslation from 'next-translate/useTranslation';
-import { ReactElement, useEffect } from 'react';
-import { useFormState } from 'react-dom';
-import FormField from './FormField';
-import SubmitButton from './SubmitButton';
 import MessageBox from '@/app/components/MessageBox';
-import CancelButton from './CancelButton';
 import { useToast } from '@/hooks/toast/use-toast';
-import { useRouter } from 'next/navigation';
 import { ResourceName } from '@/resources/resource';
 import { getI18nNamespace } from '@/utils/localization';
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/navigation';
+import { ReactElement, useEffect } from 'react';
+import { useFormState } from 'react-dom';
+import CancelButton from './CancelButton';
+import FormField from './FormField';
+import SubmitButton from './SubmitButton';
 
 interface Props {
     id: string;
@@ -83,12 +82,8 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
                 />
             )}
             <div className="flex gap-4 self-end">
-                <CancelButton
-                    title={capitalizeFirstLetter(t('general:cancel'))}
-                />
-                <SubmitButton
-                    title={capitalizeFirstLetter(t('general:save'))}
-                />
+                <CancelButton />
+                <SubmitButton title={t('general:save')} />
             </div>
         </form>
     );

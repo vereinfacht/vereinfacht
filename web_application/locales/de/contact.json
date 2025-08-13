@@ -15,6 +15,9 @@
     "full_name": {
         "label": "Name"
     },
+    "contact_person": {
+        "label": "Name Ansprechperson"
+    },
     "email": {
         "label": "E-Mail"
     },
@@ -38,12 +41,5 @@
     },
     "updated_at": {
         "label": "Aktualisiert am"
-    },
-    "gender": "Geschlecht",
-    "gender_options": {
-        "female": "weiblich",
-        "male": "männlich",
-        "none": "keine Angabe",
-        "other": "divers"
     }
 }

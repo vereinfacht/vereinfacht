@@ -1,18 +1,17 @@
 'use client';
 
 import Button from '@/app/components/Button/Button';
+import { capitalizeFirstLetter } from '@/utils/strings';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/navigation';
 
-interface Props {
-    title: string;
-}
-
-export default function CancelButton({ title }: Props) {
+export default function CancelButton() {
+    const { t } = useTranslation('general');
     const router = useRouter();
 
     return (
         <Button onClick={() => router.back()} preset="secondary">
-            {title}
+            {capitalizeFirstLetter(t('cancel'))}
         </Button>
     );
 }

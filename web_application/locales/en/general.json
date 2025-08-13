@@ -6,6 +6,7 @@
     "cancel": "cancel",
     "view": "view",
     "back": "back",
+    "create": "create",
 
     "imprint": "Imprint",
     "made_with": "Digital product by",
@@ -24,5 +25,15 @@
     "pagination": {
         "previous": "Previous page",
         "next": "Next page"
+    },
+
+    "gender": {
+        "label": "Gender",
+        "options": {
+            "female": "female",
+            "male": "male",
+            "none": "not specified",
+            "other": "diverse"
+        }
     }
 }

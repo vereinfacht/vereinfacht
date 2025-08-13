@@ -15,6 +15,9 @@
     "full_name": {
         "label": "Name"
     },
+    "contact_person": {
+        "label": "Contact person"
+    },
     "email": {
         "label": "E-Mail"
     },
@@ -25,7 +28,7 @@
         "label": "Street"
     },
     "zip_code": {
-        "label": "Postal Code"
+        "label": "Zip code"
     },
     "city": {
         "label": "City"
@@ -34,16 +37,9 @@
         "label": "Country"
     },
     "created_at": {
-        "label": "Created At"
+        "label": "Created at"
     },
     "updated_at": {
-        "label": "Updated At"
-    },
-    "gender": "Gender",
-    "gender_options": {
-        "female": "female",
-        "male": "male",
-        "none": "not specified",
-        "other": "diverse"
+        "label": "Updated at"
     }
 }

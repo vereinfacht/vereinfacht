@@ -10,13 +10,6 @@
     "first_name": {
         "label": "First name"
     },
-    "gender": "Gender",
-    "gender_options": {
-        "female": "female",
-        "male": "male",
-        "none": "prefer not to say",
-        "other": "other"
-    },
     "label_identical_information": "Contact and address information is identical to {{name}}",
     "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
     "last_name": {
