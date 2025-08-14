@@ -80,7 +80,7 @@ export default function CreateUser() {
                     <MultiselectInput
                         id="role"
                         name="role"
-                        label={t('user:role.label')}
+                        label={t('role:title.other')}
                         options={roleOptions}
                         required
                     />
