@@ -66,7 +66,11 @@ export default function MultiselectInput({
         <div className="flex flex-col items-start">
             {label ? (
                 typeof label === 'string' ? (
-                    <InputLabel forInput={id} value={label} />
+                    <InputLabel
+                        forInput={id}
+                        value={label}
+                        required={required}
+                    />
                 ) : (
                     label
                 )
