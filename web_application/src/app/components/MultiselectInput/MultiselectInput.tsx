@@ -109,7 +109,6 @@ export default function MultiselectInput({
                                           )
                                         : ''
                                 }
-                                required
                             />
                         )}
                     </>
