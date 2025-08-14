@@ -1,20 +1,22 @@
-import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
+import {
+    createAuthenticatedActionWithOptionalParams,
+    handleApiResponse,
+} from '@/lib/api/utils';
 import { TUserDeserialized } from '@/types/resources';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { baseGetSchema } from '../base/get.schema';
 
-export const getUser = createAuthenticatedAction(
+export const getUser = createAuthenticatedActionWithOptionalParams(
     'view',
     'users',
     baseGetSchema,
-    async (params, client) => {
+    async (query, client) => {
         const response = await client.GET('/users/{user}', {
             params: {
-                path: { user: params.id },
-                // @ts-expect-error: `include` is supported by the API but not documented in the spec
-                query: params.include
-                    ? { include: params.include.join(',') }
-                    : {},
+                // @ts-expect-error: prepareQuery() does not return the expected type
+                query,
+                // @ts-expect-error: prepareQuery() does not return the expected type
+                path: { user: query.id },
             },
         });
 
