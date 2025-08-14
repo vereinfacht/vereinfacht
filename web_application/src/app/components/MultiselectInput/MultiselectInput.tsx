@@ -98,7 +98,7 @@ export default function MultiselectInput({
                         )}
                         {required && (
                             <input
-                                type="hidden"
+                                type="text"
                                 name={name}
                                 value={
                                     selected.length
@@ -109,6 +109,13 @@ export default function MultiselectInput({
                                           )
                                         : ''
                                 }
+                                required
+                                style={{
+                                    position: 'absolute',
+                                    opacity: 0,
+                                    pointerEvents: 'none',
+                                }}
+                                tabIndex={-1}
                             />
                         )}
                     </>
