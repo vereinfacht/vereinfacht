@@ -110,11 +110,7 @@ export default function MultiselectInput({
                                         : ''
                                 }
                                 required
-                                style={{
-                                    position: 'absolute',
-                                    opacity: 0,
-                                    pointerEvents: 'none',
-                                }}
+                                className="pointer-events-none absolute opacity-0"
                                 tabIndex={-1}
                             />
                         )}
