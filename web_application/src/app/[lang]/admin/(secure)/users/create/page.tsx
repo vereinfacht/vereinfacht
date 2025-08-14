@@ -7,6 +7,7 @@ import { useState } from 'react';
 import CancelButton from '../../components/Form/CancelButton';
 import SubmitButton from '../../components/Form/SubmitButton';
 import MultiselectInput from '@/app/components/MultiselectInput/MultiselectInput';
+import Text from '@/app/components/Text/Text';
 
 export default function CreateUser() {
     const { t } = useTranslation();
@@ -83,9 +84,9 @@ export default function CreateUser() {
                         minLength={8}
                     />
                     {passwordMismatch && (
-                        <p className="text-red-500">
+                        <Text className="text-red-500">
                             {t('general:password_mismatch')}
-                        </p>
+                        </Text>
                     )}
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
