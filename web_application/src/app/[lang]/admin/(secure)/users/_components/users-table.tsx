@@ -3,6 +3,7 @@
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TUserDeserialized } from '@/types/resources';
 import { listUserSearchParams } from '@/utils/search-params';
@@ -14,51 +15,64 @@ interface Props {
     users: TUserDeserialized[];
 }
 
-export default function UserTable({ users }: Props) {
-    const { t } = useTranslation('user');
+export default function UsersTable({ users }: Props) {
+    const { t } = useTranslation();
 
     const columns: ColumnDef<TUserDeserialized>[] = [
-        {
-            accessorKey: 'id',
-            header: 'ID',
-            cell: ({ row }) => <TextCell>{row.getValue('id')}</TextCell>,
-        },
         {
             accessorKey: 'name',
             header: ({ column }) => (
                 <HeaderSort
                     parser={listUserSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('title.label')}
+                    columnTitle={t('user:title.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
         },
         {
             accessorKey: 'email',
-            header: t('email.label'),
+            header: t('user:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'role',
-            header: t('role.label'),
-            cell: () => <TextCell>club admin</TextCell>,
-        },
-        {
-            accessorKey: 'preferredLocale',
-            header: t('preferred_locale.label'),
-            cell: ({ row }) => (
-                <TextCell>{row.getValue('preferredLocale')}</TextCell>
-            ),
+            header: t('role:title.other'),
+            cell: ({ row }) => {
+                const roles = row.original.roles as
+                    | { name: string }[]
+                    | undefined;
+
+                if (!roles || roles.length === 0) {
+                    return <TextCell>-</TextCell>;
+                }
+
+                return (
+                    <div className="flex flex-wrap gap-2">
+                        {roles.map((role: { name: string }) => (
+                            <Badge
+                                key={role.name}
+                                variant={
+                                    role.name === 'club admin'
+                                        ? 'secondary'
+                                        : 'default'
+                                }
+                            >
+                                {t(`role:${role.name}`)}
+                            </Badge>
+                        ))}
+                    </div>
+                );
+            },
         },
         {
             accessorKey: 'createdAt',
-            header: t('created_at.label'),
+            header: t('user:created_at.label'),
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
         },
         {
             accessorKey: 'updatedAt',
-            header: t('updated_at.label'),
+            header: t('user:updated_at.label'),
             cell: ({ row }) => <DateField value={row.getValue('updatedAt')} />,
         },
     ];

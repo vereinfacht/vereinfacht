@@ -2,7 +2,6 @@
 
 namespace App\Models\Behaviors;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles as PackageHasRoles;
@@ -23,21 +22,9 @@ trait HasRoles
         )->withPivot(app(PermissionRegistrar::class)->teamsKey);
         // ENDCUSTOM
 
-        // CUSTOM: allow roles management for super admin user by
-        // returning the relation without any further club filtering
-        $user = request()->user();
-        $isSuperAdminUser = $user instanceof User
-            && $user->isSuperAdmin()
-            && ! getPermissionsTeamId();
-
-        if (! app(PermissionRegistrar::class)->teams || $isSuperAdminUser) {
-            return $relation;
-        }
-        // ENDCUSTOM
-
-        $teamField = config('permission.table_names.roles').'.'.app(PermissionRegistrar::class)->teamsKey;
+        $teamField = config('permission.table_names.roles') . '.' . app(PermissionRegistrar::class)->teamsKey;
 
         return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
-            ->where(fn ($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
+            ->where(fn($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
     }
 }

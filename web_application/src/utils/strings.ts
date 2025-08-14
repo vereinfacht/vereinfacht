@@ -29,3 +29,8 @@ export function camelCaseToSnakeCase(string: string) {
 export function camelCaseToKebabCase(string: string) {
     return string.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 }
+
+export function resourceNameToTranslateKey(resourceName: string) {
+    const singularResource = singularize(resourceName);
+    return camelCaseToSnakeCase(singularResource);
+}

@@ -12,7 +12,9 @@ use App\JsonApi\V1\Members\MemberSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
 use App\JsonApi\V1\PaymentPeriods\PaymentPeriodSchema;
+use App\JsonApi\V1\Permissions\PermissionSchema;
 use App\JsonApi\V1\Transactions\TransactionSchema;
+use App\JsonApi\V1\Roles\RoleSchema;
 use App\JsonApi\V1\Users\UserSchema;
 use App\Models\Club;
 use App\Models\Division;
@@ -23,6 +25,7 @@ use App\Models\Membership;
 use App\Models\MembershipType;
 use App\Models\Scopes\ClubScope;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaravelJsonApi\Core\Document\Error;
@@ -101,17 +104,19 @@ class Server extends BaseServer
     {
         return [
             ClubSchema::class,
-            MembershipTypeSchema::class,
-            MemberSchema::class,
-            MembershipSchema::class,
-            DivisionSchema::class,
-            DivisionMembershipTypeSchema::class,
             UserSchema::class,
-            PaymentPeriodSchema::class,
-            FinanceAccountSchema::class,
-            FinanceAccountTypeSchema::class,
+            MemberSchema::class,
+            DivisionSchema::class,
+            MembershipSchema::class,
             TransactionSchema::class,
+            MembershipTypeSchema::class,
+            FinanceAccountSchema::class,
             FinanceContactSchema::class,
+            DivisionMembershipTypeSchema::class,
+            RoleSchema::class,
+            PermissionSchema::class,
+            PaymentPeriodSchema::class,
+            FinanceAccountTypeSchema::class,
         ];
     }
 
@@ -122,6 +127,7 @@ class Server extends BaseServer
         // or club admin, remember to add the ClubScope to relevant
         // models. See ClubScope for more information.
         Club::addGlobalScope(new ClubScope);
+        User::addGlobalScope(new ClubScope);
         Member::addGlobalScope(new ClubScope);
         Division::addGlobalScope(new ClubScope);
         Membership::addGlobalScope(new ClubScope);
