@@ -7,9 +7,6 @@
     "email": {
         "label": "Email"
     },
-    "role": {
-        "label": "Role"
-    },
     "created_at": {
         "label": "Created at"
     },

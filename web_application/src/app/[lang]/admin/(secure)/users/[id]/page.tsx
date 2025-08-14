@@ -1,28 +1,40 @@
+import { listPermissions } from '@/actions/permissions/list';
+import { getUser } from '@/actions/users/get';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
+import { TPermissionDeserialized } from '@/types/resources';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
-import { getUser } from '@/actions/users/get';
 import DetailField from '../../components/Fields/DetailField';
+import RolesTable from '../_components/roles-table';
 
 interface Props {
     params: ShowPageParams;
 }
 
 export default async function UserShowPage({ params }: Props) {
-    const user = await getUser({ id: params.id });
+    const [user, permissionResponse] = await Promise.all([
+        getUser({
+            id: params.id,
+            include: ['roles.permissions'],
+        }),
+        listPermissions({
+            sort: ['name'],
+        }),
+    ]);
 
     if (!user) {
         notFound();
     }
 
+    const permissions = deserialize(
+        permissionResponse as DocumentObject,
+    ) as TPermissionDeserialized[];
+
     const { t } = createTranslation('user');
     const fields = [
-        {
-            label: 'ID',
-            attribute: 'id',
-        },
         {
             label: t('title.label'),
             attribute: 'name',
@@ -30,11 +42,6 @@ export default async function UserShowPage({ params }: Props) {
         {
             label: t('email.label'),
             attribute: 'email',
-        },
-        {
-            label: t('role.label'),
-            attribute: 'role',
-            value: 'club admin',
         },
         {
             label: t('preferred_locale.label'),
@@ -57,17 +64,19 @@ export default async function UserShowPage({ params }: Props) {
             <EditButton href={`/admin/users/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
+                    // @ts-expect-error: value type as element mismatch
                     <DetailField
                         key={index}
                         {...field}
                         resourceName={'users' as ResourceName}
-                        value={
-                            field.value ??
-                            user[field.attribute as keyof typeof user]
-                        }
+                        value={user[field.attribute as keyof typeof user]}
                     />
                 ))}
             </ul>
+            <RolesTable
+                roles={user.roles ?? []}
+                defaultPermissions={permissions ?? []}
+            />
         </div>
     );
 }

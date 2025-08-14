@@ -55,6 +55,9 @@ JsonApiRoute::server('v1')
                 $actions->post('logout');
             });
 
+        $server->resource('permissions', JsonApiController::class)
+            ->only('index');
+
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show');
 

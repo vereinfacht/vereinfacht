@@ -344,6 +344,60 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/users/{user}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show roles */
+        get: operations["users.roles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users/{user}/relationships/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show roles relation */
+        get: operations["users.roles.show"];
+        put?: never;
+        /** Attach roles relation */
+        post: operations["users.roles.attach"];
+        /** Detach roles relation */
+        delete: operations["users.roles.detach"];
+        options?: never;
+        head?: never;
+        /** Update roles relation */
+        patch: operations["users.roles.update"];
+        trace?: never;
+    };
+    "/permissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all permissions */
+        get: operations["permissions.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/finance-contacts": {
         parameters: {
             query?: never;
@@ -2751,6 +2805,77 @@ export interface components {
                 };
             };
         };
+        /** Resource/Permission/Fetch */
+        "resources.permissions.resource.fetch": {
+            /**
+             * type
+             * @default permissions
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example view clubs
+                 */
+                name?: string;
+                /**
+                 * createdAt
+                 * @example 2025-07-23T10:04:18.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-07-23T10:04:18.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+        };
+        /** Resource/Role/Fetch */
+        "resources.roles.resource.fetch": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example super admin
+                 */
+                name?: string;
+                /**
+                 * createdAt
+                 * @example 2025-07-23T10:04:18.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-07-23T10:04:18.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** permissions */
+                permissions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/permissions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/permissions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
         /** Resource/Transaction/Relationship/FinanceAccount/Fetch */
         "resources.transactions.relationship.financeAccount.fetch": {
             /**
@@ -2905,6 +3030,58 @@ export interface components {
                 };
             };
         };
+        /** Resource/User/Relationship/Roles/Attach */
+        "resources.users.relationship.roles.attach": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/User/Relationship/Roles/Detach */
+        "resources.users.relationship.roles.detach": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/User/Relationship/Roles/Fetch */
+        "resources.users.relationship.roles.fetch": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        };
+        /** Resource/User/Relationship/Roles/Update */
+        "resources.users.relationship.roles.update": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
         /** Resource/User/Fetch */
         "resources.users.resource.fetch": {
             /**
@@ -2917,7 +3094,7 @@ export interface components {
             attributes: {
                 /**
                  * name
-                 * @example Miss Lauren Ebert DVM
+                 * @example Ricky Douglas
                  */
                 name?: string;
                 /**
@@ -2925,23 +3102,38 @@ export interface components {
                  * @example hello@vereinfacht.digital
                  */
                 email?: string;
-                /** role */
-                role?: string;
                 /**
                  * preferredLocale
-                 * @example en
+                 * @example de
                  */
                 preferredLocale?: string;
                 /**
                  * createdAt
-                 * @example 2025-07-18T08:29:02.000000Z
+                 * @example 2025-07-23T10:04:18.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-07-18T08:29:02.000000Z
+                 * @example 2025-07-23T10:04:18.000000Z
                  */
                 readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** roles */
+                roles?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        self?: string;
+                    };
+                };
             };
         };
     };
@@ -4299,7 +4491,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "name" | "-name" | "role" | "-role" | "preferredLocale" | "-preferredLocale" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "name" | "-name" | "preferredLocale" | "-preferredLocale" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
             };
@@ -4363,6 +4555,235 @@ export interface operations {
             400: components["responses"]["400"];
             401: components["responses"]["401"];
             404: components["responses"]["404"];
+        };
+    };
+    "users.roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description ShowRelated users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.roles.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.roles.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.relationship.roles.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.roles.attach": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.relationship.roles.attach"];
+                };
+            };
+        };
+        responses: {
+            /** @description Attach users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.relationship.roles.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+            422: components["responses"]["422"];
+        };
+    };
+    "users.roles.detach": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.relationship.roles.detach"];
+                };
+            };
+        };
+        responses: {
+            /** @description Detach users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.relationship.roles.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.roles.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.relationship.roles.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.relationship.roles.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+            422: components["responses"]["422"];
+        };
+    };
+    "permissions.index": {
+        parameters: {
+            query?: {
+                /** @description The page size for paginated results */
+                "page[size]"?: number;
+                /** @description The page number for paginated results */
+                "page[number]"?: number;
+                sort?: ("id" | "-id" | "name" | "-name" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index permissions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.permissions.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
         };
     };
     "finance-contacts.index": {

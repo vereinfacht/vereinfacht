@@ -47,17 +47,18 @@ export default function Checkbox({
                     value={checked ? 'true' : 'false'}
                     checked={checked}
                     type="checkbox"
-                    className="focus:slate-600 transition-color h-5 w-5 appearance-none rounded-md border-2 border-slate-600 bg-slate-300 text-slate-600 checked:bg-slate-600"
+                    className="focus:slate-600 transition-color h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-slate-600 bg-slate-300 text-slate-600 checked:bg-slate-600 disabled:cursor-not-allowed"
                     onChange={onChange}
                 />
                 {Boolean(checked) && (
                     <IconCheck className="pointer-events-none absolute inset-0 h-5 w-5 animate-move-up border-2 border-transparent stroke-white stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                 )}
-
-                <Text preset="body-sm" className="ml-3 flex-1">
-                    {props.required && '* '}
-                    {children || label || ''}
-                </Text>
+                {children || label ? (
+                    <Text preset="body-sm" className="ml-3 flex-1">
+                        {props.required && '* '}
+                        {children || label || ''}
+                    </Text>
+                ) : null}
             </label>
             {help != null && <HelpText text={help} className="mt-0.5" />}
         </>

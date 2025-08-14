@@ -16,13 +16,16 @@ class ClubScope implements Scope
     {
         $user = Auth::user();
 
-        if (! $user) {
+        if (!$user) {
             $builder->take(0);
 
             return;
         }
 
-        if ($user instanceof User && $user->isSuperAdmin()) {
+        if (
+            $user instanceof User
+            && $user->isSuperAdmin()
+        ) {
             return;
         }
 
@@ -40,7 +43,7 @@ class ClubScope implements Scope
         // see: https://laraveljsonapi.io/docs/1.0/requests/authorization.html#hiding-entire-resources
         $clubId = getPermissionsTeamId();
 
-        if (! $clubId) {
+        if (!$clubId) {
             $builder->take(0);
 
             return;
@@ -53,6 +56,14 @@ class ClubScope implements Scope
     {
         if ($model instanceof Club) {
             $builder->where('id', $clubId);
+
+            return;
+        }
+
+        if ($model instanceof User) {
+            $builder->whereHas('roles', function ($query) use ($clubId) {
+                $query->where('model_has_roles.club_id', $clubId);
+            });
 
             return;
         }

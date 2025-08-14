@@ -37,5 +37,9 @@ export function prepareQuery(params: any) {
         });
     }
 
+    if (params.id) {
+        queryParams.id = params.id.toString();
+    }
+
     return Object.keys(queryParams).length > 0 ? queryParams : {};
 }

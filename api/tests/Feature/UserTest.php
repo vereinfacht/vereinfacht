@@ -13,14 +13,23 @@ class UserTest extends TestCase
 
     public function test_club_can_only_get_own_users(): void
     {
-        $club = Club::factory()->create();
         $otherClub = Club::factory()->create();
-        $user = User::factory(2)->create([
-            'current_club_id' => $club->getKey(),
-        ]);
-        $otherUser = User::factory()->create([
-            'current_club_id' => $otherClub->getKey(),
-        ]);
+        $otherUser = User::factory()->create();
+
+        setPermissionsTeamId($otherClub);
+        $otherUser->assignRole('club admin');
+
+        $club = Club::factory()->create();
+        setPermissionsTeamId($club);
+
+        // for some reason the application crashes, when assigning roles within
+        // a collections each() callback.
+        for ($i = 0; $i < 2; $i++) {
+            User::factory()->create([
+                'name' => 'user1'
+            ])->assignRole('club admin');
+        }
+        $users = User::where('name', 'user1')->get();
 
         $response = $this
             ->actingAs($club)
@@ -30,7 +39,7 @@ class UserTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertFetchedMany($user)
+            ->assertFetchedMany($users)
             ->assertJsonMissing([
                 'data' => [
                     [

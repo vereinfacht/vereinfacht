@@ -1,6 +1,6 @@
 import { listUsers } from '@/actions/users/list';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
-import UserTable from './_components/user-table';
+import UserTable from './_components/users-table';
 import { TUserDeserialized } from '@/types/resources';
 import { WithSearchParams } from '@/types/params';
 import {
@@ -11,6 +11,7 @@ import {
 async function getUsersFromApi(params: ListUserSearchParamsType) {
     const response = await listUsers({
         sort: params.sort ?? undefined,
+        include: ['roles'],
     });
 
     return response || [];
