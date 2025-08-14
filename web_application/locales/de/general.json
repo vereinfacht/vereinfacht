@@ -18,6 +18,8 @@
     "title": "Titel",
     "email": "E-Mail",
     "password": "Passwort",
+    "confirm_password": "Passwort bestätigen",
+    "password_mismatch": "Die Passwörter stimmen nicht überein",
 
     "yes": "ja",
     "no": "nein",

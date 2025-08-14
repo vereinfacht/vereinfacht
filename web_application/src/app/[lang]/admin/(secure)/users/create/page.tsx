@@ -22,6 +22,8 @@ export default function CreateUser() {
         { label: t('role:club treasurer'), value: 'club treasurer' },
     ];
 
+    const [passwordMismatch, setPasswordMismatch] = useState(false);
+
     const [formState, setFormState] = useState<Record<
         string,
         FormDataEntryValue
@@ -32,6 +34,10 @@ export default function CreateUser() {
 
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData.entries());
+
+        if (data.password !== data.confirm_password) {
+            setPasswordMismatch(true);
+        }
 
         setFormState(data);
     };
@@ -67,6 +73,22 @@ export default function CreateUser() {
                         required
                         minLength={8}
                     />
+                    <TextInput
+                        id="confirm_password"
+                        name="confirm_password"
+                        label={t('general:confirm_password')}
+                        autoComplete="password"
+                        type="password"
+                        required
+                        minLength={8}
+                    />
+                    {passwordMismatch && (
+                        <p className="text-red-500">
+                            {t('general:password_mismatch')}
+                        </p>
+                    )}
+                </div>
+                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
                     <SelectInput
                         id="preferred_locale"
                         name="preferred_locale"
@@ -75,8 +97,6 @@ export default function CreateUser() {
                         required
                         maxLength={2}
                     />
-                </div>
-                <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
                     <MultiselectInput
                         id="role"
                         name="role"
