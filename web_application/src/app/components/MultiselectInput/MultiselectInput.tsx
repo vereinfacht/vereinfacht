@@ -83,13 +83,29 @@ export default function MultiselectInput({
                 {({ open }) => (
                     <>
                         <div className="relative mt-1 w-full">
-                            <Input setQuery={setQuery} required={required} />
+                            <Input setQuery={setQuery} />
                             {open && <Options options={filteredOptions} />}
                         </div>
                         {selected.length > 0 && (
                             <SelectedOptions
                                 options={selected}
                                 handleRemove={handleRemove}
+                            />
+                        )}
+                        {required && (
+                            <input
+                                type="hidden"
+                                name={name}
+                                value={
+                                    selected.length
+                                        ? JSON.stringify(
+                                              selected.map(
+                                                  (option) => option.value,
+                                              ),
+                                          )
+                                        : ''
+                                }
+                                required
                             />
                         )}
                     </>
