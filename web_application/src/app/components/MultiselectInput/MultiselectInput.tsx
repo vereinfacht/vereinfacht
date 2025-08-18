@@ -66,7 +66,11 @@ export default function MultiselectInput({
         <div className="flex flex-col items-start">
             {label ? (
                 typeof label === 'string' ? (
-                    <InputLabel forInput={id} value={label} />
+                    <InputLabel
+                        forInput={id}
+                        value={label}
+                        required={required}
+                    />
                 ) : (
                     label
                 )
@@ -83,13 +87,31 @@ export default function MultiselectInput({
                 {({ open }) => (
                     <>
                         <div className="relative mt-1 w-full">
-                            <Input setQuery={setQuery} required={required} />
+                            <Input setQuery={setQuery} />
                             {open && <Options options={filteredOptions} />}
                         </div>
                         {selected.length > 0 && (
                             <SelectedOptions
                                 options={selected}
                                 handleRemove={handleRemove}
+                            />
+                        )}
+                        {required && (
+                            <input
+                                type="text"
+                                name={name}
+                                value={
+                                    selected.length
+                                        ? JSON.stringify(
+                                              selected.map(
+                                                  (option) => option.value,
+                                              ),
+                                          )
+                                        : ''
+                                }
+                                required
+                                className="pointer-events-none absolute opacity-0"
+                                tabIndex={-1}
                             />
                         )}
                     </>
