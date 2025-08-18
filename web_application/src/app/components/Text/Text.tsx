@@ -31,6 +31,7 @@ export default function Text({
     preset,
     style,
     suppressHydrationWarning = false,
+    ...props
 }: TextProps) {
     const CustomTag: keyof JSX.IntrinsicElements = tag ?? 'p';
     const presetClassNames = preset
@@ -44,6 +45,7 @@ export default function Text({
             suppressHydrationWarning={suppressHydrationWarning}
             className={[presetClassNames, classOverrides].join(' ')}
             style={style}
+            {...props}
         >
             {children}
         </CustomTag>

@@ -19,6 +19,7 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
             {columnTitle}
             <Button
                 variant="ghost"
+                data-cy={`sort-${columnId}`}
                 onClick={() =>
                     setSort((prev) => {
                         const newSorting = `-${columnId}`;
