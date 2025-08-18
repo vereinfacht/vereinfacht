@@ -194,11 +194,13 @@ export default function TransactionsList({
                                     data-state={
                                         row.getIsSelected() && 'selected'
                                     }
+                                    data-cy={`transaction-table-row-${row.id}`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
                                             key={cell.id}
                                             suppressHydrationWarning
+                                            data-cy={`transaction-table-cell-${cell.id}`}
                                         >
                                             {flexRender(
                                                 cell.column.columnDef.cell,

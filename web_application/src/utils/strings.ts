@@ -30,6 +30,14 @@ export function camelCaseToKebabCase(string: string) {
     return string.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 }
 
+export function toKebabCase(string: string) {
+    return string
+        .replace(/\W+/g, ' ')
+        .split(/ |\B(?=[A-Z])/)
+        .map((word) => word.toLowerCase())
+        .join('-');
+}
+
 export function resourceNameToTranslateKey(resourceName: string) {
     const singularResource = singularize(resourceName);
     return camelCaseToSnakeCase(singularResource);

@@ -152,6 +152,7 @@ export default function TablePagination({ totalPages }: Props) {
                         }
                         variant="default"
                         disabled={currentPage <= 1}
+                        data-cy="table-pagination-previous-button"
                     >
                         {t('pagination.previous')}
                     </Button>
@@ -173,6 +174,7 @@ export default function TablePagination({ totalPages }: Props) {
                                 }
                                 variant={item.disabled ? 'default' : 'outline'}
                                 disabled={item.disabled ?? false}
+                                data-cy={`table-pagination-button-${item.index}`}
                             >
                                 {item.index}
                             </Button>
@@ -187,6 +189,7 @@ export default function TablePagination({ totalPages }: Props) {
                         }
                         variant="default"
                         disabled={currentPage >= totalPages}
+                        data-cy="table-pagination-next-button"
                     >
                         {t('pagination.next')}
                     </Button>

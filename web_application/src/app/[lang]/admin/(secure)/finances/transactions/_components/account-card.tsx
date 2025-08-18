@@ -44,12 +44,14 @@ export default function AccountCard({ balance, account, title }: Props) {
                         tag="h3"
                         preset="headline"
                         className="text-base group-[.is-selected]:text-blue-500"
+                        data-cy={`account-card-title-${cardId ? cardId : 'all'}`}
                     >
                         {title}
                     </Text>
                     <button
                         onClick={() => setAccountId(cardId)}
                         className="p-1"
+                        data-cy={`select-account-${cardId ? cardId : 'all'}`}
                     >
                         <div className="flex size-5 items-center justify-center rounded-full border bg-white transition-colors hover:border-blue-500 hover:bg-blue-200 group-[.is-selected]:border-transparent group-[.is-selected]:ring-2 group-[.is-selected]:ring-blue-500">
                             {isSelected && (
