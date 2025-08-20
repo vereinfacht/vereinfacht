@@ -31,9 +31,7 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
     );
 
     useEffect(() => {
-        if (pending) {
-            return;
-        }
+        if (pending) return;
 
         if (state.message === 'success') {
             toast({
@@ -60,7 +58,7 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
             return;
         }
         // api errors are handled by the api service and currently render general error page
-    }, [state, pending, t, toast, router, id, resourceName]);
+    }, [state, pending, router, id, resourceName]);
 
     return (
         <form action={formAction} className="flex flex-col gap-8">
