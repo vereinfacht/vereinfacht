@@ -24,7 +24,9 @@ class ReceiptFactory extends Factory
             'document_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'amount' => $this->faker->randomFloat(2, 99, 9999),
 
-            'transaction_id' => Transaction::factory(),
+            'transaction_id' => $this->faker->boolean(70)
+                ? Transaction::factory()
+                : null,
             'club_id' => Club::factory(),
         ];
     }

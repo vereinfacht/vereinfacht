@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('amount');
 
             $table->foreignId('transaction_id')
+                ->nullable()
                 ->constrained('transactions')
                 ->cascadeOnDelete();
 
