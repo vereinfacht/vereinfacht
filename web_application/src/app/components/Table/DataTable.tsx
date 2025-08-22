@@ -80,7 +80,7 @@ export function DataTable<TData extends Model, TValue>({
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
                                             key={cell.id}
-                                            data-cy={`cell-${cell.id}`}
+                                            data-cy={`${cell.id}-cell`}
                                         >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
