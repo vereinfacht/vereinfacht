@@ -29,6 +29,6 @@ export default async function Page({ searchParams }: WithSearchParams) {
     ) as TReceiptDeserialized[];
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
-    console.log('receipts', receipts);
+
     return <ReceiptsTable receipts={receipts} totalPages={totalPages} />;
 }
