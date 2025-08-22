@@ -36,7 +36,7 @@ export default function TranslationField({
                 <TextInput
                     key={`${id}[${locale}]`}
                     {...props}
-                    id={id}
+                    id={`${id}-${locale}`}
                     defaultValue={
                         defaultValue?.find((item) => item.locale === locale)
                             ?.value

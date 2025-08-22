@@ -43,7 +43,11 @@ export function HeaderOptionFilter({
             {t(`${translationKey}.label`)}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="relative" variant="ghost">
+                    <Button
+                        data-cy={`${paramKey}-button`}
+                        className="relative"
+                        variant="ghost"
+                    >
                         <ListFilter
                             className={[
                                 'ml-auto h-4 w-4 text-gray-400',
@@ -71,9 +75,8 @@ export function HeaderOptionFilter({
                         >
                             <Checkbox
                                 type="checkbox"
-                                id={option}
+                                id={`option-${option}`}
                                 value={option}
-                                key={option}
                                 label={t(`${translationKey}.${option}`)}
                                 defaultValue={
                                     filterQueryParam?.includes(option) ?? false

@@ -54,7 +54,11 @@ export default function Checkbox({
                     <IconCheck className="pointer-events-none absolute inset-0 h-5 w-5 animate-move-up border-2 border-transparent stroke-white stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                 )}
                 {children || label ? (
-                    <Text preset="body-sm" className="ml-3 flex-1">
+                    <Text
+                        preset="body-sm"
+                        className="ml-3 flex-1"
+                        data-cy={`${id}-label`}
+                    >
                         {props.required && '* '}
                         {children || label || ''}
                     </Text>
