@@ -30,7 +30,7 @@ export default function TranslationField({ value }: Props) {
                         </Text>
                         <div className="flex-1">
                             {translation ? (
-                                <Text data-cy={`translation-${locale}`}>
+                                <Text data-cy={`${locale}-translation-text`}>
                                     {translation}
                                 </Text>
                             ) : (
