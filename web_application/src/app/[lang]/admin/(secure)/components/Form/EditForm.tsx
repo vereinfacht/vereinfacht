@@ -60,7 +60,7 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
             return;
         }
         // api errors are handled by the api service and currently render general error page
-    }, [state, pending, router, id, resourceName]);
+    }, [state, pending, toast, router, id, resourceName]);
 
     return (
         <form action={formAction} className="flex flex-col gap-8">
