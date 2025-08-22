@@ -31,7 +31,9 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
     );
 
     useEffect(() => {
-        if (pending) return;
+        if (pending) {
+            return;
+        }
 
         if (state.message === 'success') {
             toast({
