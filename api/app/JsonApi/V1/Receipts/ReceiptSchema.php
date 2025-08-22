@@ -27,9 +27,9 @@ class ReceiptSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('reference_number')->sortable(),
+            Str::make('referenceNumber')->sortable(),
             Str::make('type'),
-            DateTime::make('documented_at')->sortable(),
+            DateTime::make('documentedAt')->sortable(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
