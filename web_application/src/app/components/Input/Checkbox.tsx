@@ -57,7 +57,7 @@ export default function Checkbox({
                     <Text
                         preset="body-sm"
                         className="ml-3 flex-1"
-                        data-cy={`label-${id}`}
+                        data-cy={`${id}-label`}
                     >
                         {props.required && '* '}
                         {children || label || ''}
