@@ -44,7 +44,7 @@ export function HeaderOptionFilter({
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
-                        data-cy={paramKey}
+                        data-cy={`${paramKey}-button`}
                         className="relative"
                         variant="ghost"
                     >
