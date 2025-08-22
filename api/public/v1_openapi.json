@@ -3992,6 +3992,231 @@
                 }
             }
         },
+        "\/receipts": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Get all receipts",
+                "description": "",
+                "operationId": "receipts.index",
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The page size for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "referenceNumber",
+                                    "-referenceNumber",
+                                    "documentedAt",
+                                    "-documentedAt",
+                                    "amount",
+                                    "-amount"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            },
+                            "2": {
+                                "value": [
+                                    "2"
+                                ]
+                            },
+                            "3": {
+                                "value": [
+                                    "3"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[type]",
+                        "in": "query",
+                        "description": "A list of types to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": {
+                                "value": []
+                            },
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "expense": {
+                                "value": "expense"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
+        "\/receipts\/{receipt}": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Show one receipt",
+                "description": "",
+                "operationId": "receipts.show",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
         "\/finance-accounts": {
             "get": {
                 "tags": [
@@ -9111,8 +9336,8 @@
                     }
                 }
             },
-            "resources.roles.resource.fetch": {
-                "title": "Resource\/Role\/Fetch",
+            "resources.receipts.resource.fetch": {
+                "title": "Resource\/Receipt\/Fetch",
                 "type": "object",
                 "required": [
                     "type",
@@ -9122,7 +9347,7 @@
                 "properties": {
                     "type": {
                         "title": "type",
-                        "default": "roles",
+                        "default": "receipts",
                         "type": "string"
                     },
                     "id": {
@@ -9132,30 +9357,44 @@
                     "attributes": {
                         "type": "object",
                         "properties": {
-                            "name": {
-                                "title": "name",
+                            "referenceNumber": {
+                                "title": "referenceNumber",
                                 "type": "string",
-                                "example": "super admin"
+                                "example": "REF-34744"
+                            },
+                            "type": {
+                                "title": "type",
+                                "type": "string",
+                                "example": "expense"
+                            },
+                            "documentedAt": {
+                                "title": "documentedAt",
+                                "type": "string"
+                            },
+                            "amount": {
+                                "title": "amount",
+                                "type": "string",
+                                "example": 5756
                             },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-23T10:04:18.000000Z"
+                                "example": "2025-08-22T08:28:37.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-07-23T10:04:18.000000Z"
+                                "example": "2025-08-22T08:28:37.000000Z"
                             }
                         }
                     },
                     "relationships": {
                         "type": "object",
                         "properties": {
-                            "permissions": {
-                                "title": "permissions",
+                            "club": {
+                                "title": "club",
                                 "type": "object",
                                 "properties": {
                                     "links": {
@@ -9164,12 +9403,34 @@
                                             "related": {
                                                 "title": "related",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/permissions\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
                                             },
                                             "self": {
                                                 "title": "self",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/permissions\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "transaction": {
+                                "title": "transaction",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
                                             }
                                         },
                                         "readOnly": true
