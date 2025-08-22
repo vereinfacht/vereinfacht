@@ -9,17 +9,10 @@ interface Props {
     href?: string;
     onClick?: () => void;
     type?: 'view' | 'edit';
-    resourceName?: string;
     id?: string | number;
 }
 
-export function TableAction({
-    type = 'view',
-    onClick,
-    href,
-    resourceName,
-    id,
-}: Props) {
+export function TableAction({ type = 'view', onClick, href, id }: Props) {
     const { t } = useTranslation();
     const iconProps = {
         className:
@@ -44,11 +37,9 @@ export function TableAction({
 
     return (
         <Link
-            data-cy={`${type}-${resourceName}-${id}-button`}
+            data-cy={`${type}-${id}-button`}
             href={href ?? ''}
-            title={
-                t(`general:${type}`) + (resourceName ? ` ${resourceName}` : '')
-            }
+            title={t(`general:${type}`)}
             onClick={onClick}
             className="transition-color text-blue-500 duration-300 hover:text-blue-500/50"
         >

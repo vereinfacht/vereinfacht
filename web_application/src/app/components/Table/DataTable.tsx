@@ -97,7 +97,6 @@ export function DataTable<TData extends Model, TValue>({
                                                 <TableAction
                                                     type="edit"
                                                     href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                    resourceName={resourceName}
                                                     id={row.original.id}
                                                 />
                                             )}
@@ -105,7 +104,6 @@ export function DataTable<TData extends Model, TValue>({
                                                 <TableAction
                                                     type="view"
                                                     href={`/admin/${resourceName}/${row.original.id}`}
-                                                    resourceName={resourceName}
                                                     id={row.original.id}
                                                 />
                                             )}
