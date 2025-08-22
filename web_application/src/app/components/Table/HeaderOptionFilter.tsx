@@ -76,9 +76,6 @@ export function HeaderOptionFilter({
                             <Checkbox
                                 type="checkbox"
                                 id={`option-${option}`}
-                                data-translation={t(
-                                    `${translationKey}.${option}`,
-                                )}
                                 value={option}
                                 label={t(`${translationKey}.${option}`)}
                                 defaultValue={
