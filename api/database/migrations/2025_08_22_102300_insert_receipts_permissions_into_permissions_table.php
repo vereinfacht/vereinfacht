@@ -6,6 +6,9 @@ return new class extends Migration
 {
     protected $permissionNames = [
         'view receipts',
+        'create receipts',
+        'edit receipts',
+        'delete receipts',
     ];
 
     public function up(): void

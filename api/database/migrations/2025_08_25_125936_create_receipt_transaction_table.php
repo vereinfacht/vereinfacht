@@ -11,17 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('receipts', function (Blueprint $table) {
+        Schema::create('receipt_transaction', function (Blueprint $table) {
             $table->id();
-            $table->string('reference_number');
-            $table->string('type');
-            $table->timestamp('document_date');
-            $table->integer('amount');
-
-            $table->foreignId('club_id')
-                ->constrained('clubs')
-                ->cascadeOnDelete();
-
+            $table->foreignId('receipt_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('receipts');
+        Schema::dropIfExists('receipt_transaction');
     }
 };

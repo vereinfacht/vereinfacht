@@ -15,7 +15,6 @@ class Receipt extends Model
         'type',
         'document_date',
         'amount',
-        'transaction_id',
         'club_id',
     ];
 
@@ -32,8 +31,8 @@ class Receipt extends Model
         return $this->belongsTo(Club::class);
     }
 
-    public function transaction()
+    public function transactions()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsToMany(Transaction::class, 'receipt_transaction');
     }
 }

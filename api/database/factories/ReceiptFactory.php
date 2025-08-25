@@ -25,23 +25,6 @@ class ReceiptFactory extends Factory
             'type' => $type,
             'document_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'amount' => $type === 'expense' ? -$amount : $amount,
-            'transaction_id' => null,
         ];
-    }
-
-    /**
-     * Attach a transaction from the same club.
-     */
-    public function withTransactionFromClub(int $clubId)
-    {
-        return $this->state(function () use ($clubId) {
-            $transaction = $this->faker->boolean(70)
-                ?  Transaction::where('club_id', $clubId)->inRandomOrder()->first()
-                : null;
-
-            return [
-                'transaction_id' => $transaction?->id,
-            ];
-        });
     }
 }

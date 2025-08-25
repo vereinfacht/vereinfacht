@@ -15,12 +15,20 @@ class FakeReceiptSeeder extends Seeder
     public function run(): void
     {
         Club::all()->each(function ($club) {
-            Receipt::factory()
+            $receipts = Receipt::factory()
                 ->count(50)
-                ->withTransactionFromClub($club->id)
                 ->create([
                     'club_id' => $club->id,
                 ]);
+
+            $transactions = Transaction::where('club_id', $club->id)->get();
+
+            // Attach random transactions to each receipt
+            $receipts->each(function ($receipt) use ($transactions) {
+                $receipt->transactions()->attach(
+                    $transactions->random(rand(1, 3))->pluck('id')->toArray()
+                );
+            });
         });
     }
 }
