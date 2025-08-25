@@ -2,10 +2,8 @@ import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
 
 export const receiptSortingOptions = [
-    'referenceNumber',
-    '-referenceNumber',
-    'documentedAt',
-    '-documentedAt',
+    'documentDate',
+    '-documentDate',
     'amount',
     '-amount',
 ] as const;

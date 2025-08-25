@@ -18,11 +18,14 @@ class ReceiptFactory extends Factory
      */
     public function definition(): array
     {
+        $type = $this->faker->randomElement(['income', 'expense']);
+        $amount = $this->faker->randomFloat(2, 10, 999);
+
         return [
             'reference_number' => $this->faker->unique()->numerify('REF-#####'),
-            'type' => $this->faker->randomElement(['income', 'expense']),
+            'type' => $type,
             'document_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $this->faker->randomFloat(2, 99, 9999),
+            'amount' => $type === 'expense' ? -$amount : $amount,
 
             'transaction_id' => $this->faker->boolean(70)
                 ? Transaction::factory()

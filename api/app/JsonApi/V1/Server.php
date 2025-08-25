@@ -5,6 +5,7 @@ namespace App\JsonApi\V1;
 use App\Models\Club;
 use App\Models\User;
 use App\Models\Member;
+use App\Models\Receipt;
 use App\Models\Division;
 use App\Models\Membership;
 use App\Models\Transaction;
@@ -137,5 +138,6 @@ class Server extends BaseServer
         MembershipType::addGlobalScope(new ClubScope);
         FinanceAccount::addGlobalScope(new ClubScope);
         FinanceContact::addGlobalScope(new ClubScope);
+        Receipt::addGlobalScope(new ClubScope);
     }
 }

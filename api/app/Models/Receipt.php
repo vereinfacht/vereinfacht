@@ -13,7 +13,7 @@ class Receipt extends Model
     protected $fillable = [
         'reference_number',
         'type',
-        'documented_at',
+        'document_date',
         'amount',
         'transaction_id',
         'club_id',

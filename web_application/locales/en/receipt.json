@@ -3,5 +3,19 @@
         "one": "Receipt",
         "other": "Receipts",
         "label": "Name"
+    },
+    "type": {
+        "label": "Type",
+        "income": "Income",
+        "expense": "Expense"
+    },
+    "document_date": {
+        "label": "Document Date"
+    },
+    "reference_number": {
+        "label": "Reference Number"
+    },
+    "amount": {
+        "label": "Amount"
     }
 }
