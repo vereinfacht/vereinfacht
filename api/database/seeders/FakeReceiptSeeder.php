@@ -15,9 +15,12 @@ class FakeReceiptSeeder extends Seeder
     public function run(): void
     {
         Club::all()->each(function ($club) {
-            Receipt::factory()->count(50)->create([
-                'club_id' => $club->id,
-            ]);
+            Receipt::factory()
+                ->count(50)
+                ->withTransactionFromClub($club->id)
+                ->create([
+                    'club_id' => $club->id,
+                ]);
         });
     }
 }
