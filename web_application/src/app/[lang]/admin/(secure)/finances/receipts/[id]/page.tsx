@@ -3,6 +3,7 @@ import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     params: ShowPageParams;
@@ -19,9 +20,12 @@ export default async function ReceiptShowPage({ params }: Props) {
         notFound();
     }
 
+    const { t } = useTranslation('receipt');
+
     const fields = [
         {
             attribute: 'type',
+            value: t(`type.${receipt[0]?.type}`),
         },
         {
             attribute: 'referenceNumber',
