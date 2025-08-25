@@ -1,9 +1,9 @@
 import { getReceipt } from '@/actions/receipts/get';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
+import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
-import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     params: ShowPageParams;
@@ -20,7 +20,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         notFound();
     }
 
-    const { t } = useTranslation('receipt');
+    const { t } = createTranslation('receipt');
 
     const fields = [
         {
