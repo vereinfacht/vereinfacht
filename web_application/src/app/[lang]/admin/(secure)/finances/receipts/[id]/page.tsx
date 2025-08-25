@@ -29,6 +29,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         },
         {
             attribute: 'referenceNumber',
+            value: receipt[0]?.referenceNumber,
         },
         {
             attribute: 'document_date',
@@ -50,7 +51,7 @@ export default async function ReceiptShowPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName={'receipts' as ResourceName}
-                        value={field.value ?? receipt[0]?.[field.attribute]}
+                        value={field.value}
                     />
                 ))}
             </ul>
