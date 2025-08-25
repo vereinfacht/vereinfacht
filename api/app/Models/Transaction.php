@@ -45,4 +45,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(FinanceAccount::class);
     }
+
+    public function receipts()
+    {
+        return $this->belongsToMany(Receipt::class, 'receipt_transaction');
+    }
 }

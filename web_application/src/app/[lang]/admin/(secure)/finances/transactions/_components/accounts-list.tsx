@@ -19,7 +19,7 @@ export default async function AccountsList() {
     return (
         <ul className="flex flex-col space-y-3 md:w-96">
             <AccountCard
-                title={t('transaction:all_accounts')}
+                title={t('transaction:all_sources')}
                 balance={totalAmount}
             />
             {accounts.map((account) => {

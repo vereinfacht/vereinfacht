@@ -1,11 +1,15 @@
 import {
-    financeContactTypeOptions,
     financeContactSortingOptions,
+    financeContactTypeOptions,
 } from '@/actions/financeContacts/list.schema';
 import {
     membershipSortingOptions,
     membershipStatusOptions,
 } from '@/actions/memberships/list.schema';
+import {
+    receiptSortingOptions,
+    receiptTypeOptions,
+} from '@/actions/receipts/list.schema';
 import { transactionSortingOptions } from '@/actions/transactions/list.schema';
 import { userSortingOptions } from '@/actions/users/list.schema';
 import {
@@ -61,6 +65,20 @@ export const listFinanceContactSearchParams = {
         }),
 };
 
+export const listReceiptSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(receiptSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+    type: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
+};
+
 export const listUserSearchParams = {
     page: paginationSearchParamParser,
     sort: parseAsArrayOf(parseAsStringLiteral(userSortingOptions)).withOptions({
@@ -84,6 +102,10 @@ export const loadListFinanceContactsSearchParams = createLoader(
     listFinanceContactSearchParams,
 );
 
+export const loadListReceiptsSearchParams = createLoader(
+    listReceiptSearchParams,
+);
+
 export const loadListUsersSearchParams = createLoader(listUserSearchParams);
 
 export type ListMembershipSearchParamsType = inferParserType<
@@ -100,4 +122,8 @@ export type ListFinanceContactSearchParamsType = inferParserType<
 
 export type ListUserSearchParamsType = inferParserType<
     typeof listUserSearchParams
+>;
+
+export type ListReceiptSearchParamsType = inferParserType<
+    typeof listReceiptSearchParams
 >;

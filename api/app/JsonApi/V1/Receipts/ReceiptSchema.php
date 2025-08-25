@@ -1,26 +1,25 @@
 <?php
 
-namespace App\JsonApi\V1\Transactions;
+namespace App\JsonApi\V1\Receipts;
 
-use App\Models\Transaction;
+use App\Models\Receipt;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Fields\Number;
-use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
-class TransactionSchema extends Schema
+class ReceiptSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
      */
-    public static string $model = Transaction::class;
+    public static string $model = Receipt::class;
 
     /**
      * Get the resource fields.
@@ -29,15 +28,14 @@ class TransactionSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
-            Str::make('description'),
-            Number::make('amount')->sortable(),
-            DateTime::make('valuedAt')->sortable(),
-            DateTime::make('bookedAt')->sortable(),
-            DateTime::make('createdAt')->sortable()->readOnly(),
-            DateTime::make('updatedAt')->sortable()->readOnly(),
-            HasOne::make('financeAccount'),
-            BelongsToMany::make('receipts'),
+            Str::make('referenceNumber'),
+            Str::make('type'),
+            DateTime::make('documentDate')->sortable(),
+            Str::make('amount')->sortable(),
+            DateTime::make('createdAt')->readOnly(),
+            DateTime::make('updatedAt')->readOnly(),
+            BelongsTo::make('club')->type('clubs'),
+            BelongsToMany::make('transactions'),
         ];
     }
 
@@ -48,7 +46,7 @@ class TransactionSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            Where::make('financeAccountId', 'finance_account_id')->using('='),
+            WhereIn::make('type')->delimiter(','),
         ];
     }
 
