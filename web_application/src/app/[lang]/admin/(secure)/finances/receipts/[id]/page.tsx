@@ -1,8 +1,8 @@
 import { getReceipt } from '@/actions/receipts/get';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
-import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
+import DetailField from '../../../components/Fields/DetailField';
 
 interface Props {
     params: ShowPageParams;
@@ -19,11 +19,22 @@ export default async function ReceiptShowPage({ params }: Props) {
         notFound();
     }
 
-    const { t } = createTranslation('receipt');
     const fields = [
         {
-            label: t('type.label'),
             attribute: 'type',
+        },
+        {
+            attribute: 'referenceNumber',
+        },
+        {
+            attribute: 'document_date',
+            type: 'date',
+            value: receipt[0]?.documentDate,
+        },
+        {
+            attribute: 'amount',
+            type: 'currency',
+            value: receipt[0]?.amount,
         },
     ];
 
@@ -31,12 +42,11 @@ export default async function ReceiptShowPage({ params }: Props) {
         <div className="container flex flex-col gap-12">
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
-                    // @ts-expect-error: value type as element mismatch
                     <DetailField
                         key={index}
                         {...field}
                         resourceName={'receipts' as ResourceName}
-                        value={receipt[field.attribute as keyof typeof receipt]}
+                        value={field.value ?? receipt[0]?.[field.attribute]}
                     />
                 ))}
             </ul>
