@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Club;
 use App\Models\Receipt;
 use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class FakeReceiptSeeder extends Seeder
