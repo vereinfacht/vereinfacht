@@ -1,5 +1,6 @@
 import { getFinanceContact } from '@/actions/financeContacts/get';
 import { ResourceName } from '@/resources/resource';
+import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
 import { TReceiptDeserialized } from '@/types/resources';
 import { Building2, CircleUserRound } from 'lucide-react';
@@ -93,7 +94,7 @@ export default async function ContactShowPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-12">
+        <div className="container flex flex-col gap-6">
             <EditButton href={`/admin/finances/contacts/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
@@ -107,10 +108,17 @@ export default async function ContactShowPage({ params }: Props) {
                 ))}
             </ul>
             {contact.receipts ? (
-                <ReceiptsTable
-                    receipts={contact.receipts as TReceiptDeserialized[]}
-                    totalPages={Math.ceil((contact.receipts?.length ?? 0) / 10)}
-                />
+                <>
+                    <Text preset="headline" tag="h2" className="mt-6">
+                        {t('receipt:title.other')}
+                    </Text>
+                    <ReceiptsTable
+                        receipts={contact.receipts as TReceiptDeserialized[]}
+                        totalPages={Math.ceil(
+                            (contact.receipts?.length ?? 0) / 10,
+                        )}
+                    />
+                </>
             ) : null}
         </div>
     );
