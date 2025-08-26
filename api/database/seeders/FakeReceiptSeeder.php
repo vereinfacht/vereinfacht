@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Club;
 use App\Models\Receipt;
 use App\Models\Transaction;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class FakeReceiptSeeder extends Seeder
@@ -15,9 +14,7 @@ class FakeReceiptSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
-
-        Club::all()->each(function ($club) use ($faker) {
+        Club::all()->each(function ($club) {
             $receipts = Receipt::factory()
                 ->count(50)
                 ->create([
@@ -25,12 +22,16 @@ class FakeReceiptSeeder extends Seeder
                 ]);
 
             $transactions = Transaction::where('club_id', $club->id)->get();
-            $receipts->each(function ($receipt) use ($transactions, $faker) {
-                if ($faker->boolean(80)) {
-                    $receipt->transactions()->attach(
-                        $transactions->random(rand(1, 3))->pluck('id')->toArray()
-                    );
+            $noTransactionReceipts = $receipts->random(max(1, floor($receipts->count() * 0.3)));
+
+            $receipts->each(function ($receipt) use ($transactions, $noTransactionReceipts) {
+                if ($noTransactionReceipts->contains($receipt)) {
+                    return;
                 }
+
+                $receipt->transactions()->attach(
+                    $transactions->random(rand(1, 3))->pluck('id')->toArray()
+                );
             });
         });
     }
