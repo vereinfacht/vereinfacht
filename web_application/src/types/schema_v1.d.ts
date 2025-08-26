@@ -432,43 +432,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/finance-contacts/{finance_contact}/receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show receipts */
-        get: operations["finance-contacts.receipts"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/finance-contacts/{finance_contact}/relationships/receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show receipts relation */
-        get: operations["finance-contacts.receipts.show"];
-        put?: never;
-        /** Attach receipts relation */
-        post: operations["finance-contacts.receipts.attach"];
-        /** Detach receipts relation */
-        delete: operations["finance-contacts.receipts.detach"];
-        options?: never;
-        head?: never;
-        /** Update receipts relation */
-        patch: operations["finance-contacts.receipts.update"];
-        trace?: never;
-    };
     "/receipts": {
         parameters: {
             query?: never;
@@ -2030,6 +1993,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** receipts */
+                receipts?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/receipts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/receipts/1
+                         */
+                        self?: string;
+                    };
+                };
             };
         };
         /** Resource/Member/Relationship/Divisions/Attach */
@@ -2999,58 +2977,6 @@ export interface components {
                 };
             };
         };
-        /** Resource/Receipt/Relationship/Transactions/Attach */
-        "resources.receipts.relationship.transactions.attach": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        }[];
-        /** Resource/Receipt/Relationship/Transactions/Detach */
-        "resources.receipts.relationship.transactions.detach": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        }[];
-        /** Resource/Receipt/Relationship/Transactions/Fetch */
-        "resources.receipts.relationship.transactions.fetch": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        };
-        /** Resource/Receipt/Relationship/Transactions/Update */
-        "resources.receipts.relationship.transactions.update": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        }[];
         /** Resource/Receipt/Fetch */
         "resources.receipts.resource.fetch": {
             /**
@@ -5173,196 +5099,6 @@ export interface operations {
             400: components["responses"]["400"];
             401: components["responses"]["401"];
             404: components["responses"]["404"];
-        };
-    };
-    "finance-contacts.receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description ShowRelated finance-contacts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.resource.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-contacts.receipts.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Show finance-contacts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-contacts.receipts.attach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.attach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Attach finance-contacts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
-        };
-    };
-    "finance-contacts.receipts.detach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.detach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Detach finance-contacts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-contacts.receipts.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update finance-contacts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
         };
     };
     "receipts.index": {
