@@ -9,10 +9,14 @@ export const getFinanceContact = createAuthenticatedAction(
     baseGetSchema,
     async (params, client) => {
         const response = await client.GET(
-            '/finance-contacts/{finance_contact}?include=receipts',
+            '/finance-contacts/{finance_contact}',
             {
                 params: {
                     path: { finance_contact: params.id },
+                    // @ts-expect-error: prepareQuery() does not return the expected type
+                    query: {
+                        include: params.include?.join(','),
+                    },
                 },
             },
         );
