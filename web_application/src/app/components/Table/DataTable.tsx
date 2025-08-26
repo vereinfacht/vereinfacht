@@ -78,7 +78,10 @@ export function DataTable<TData extends Model, TValue>({
                                     }
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell
+                                            key={cell.id}
+                                            data-cy={`${cell.id}-cell`}
+                                        >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),
@@ -94,12 +97,14 @@ export function DataTable<TData extends Model, TValue>({
                                                 <TableAction
                                                     type="edit"
                                                     href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                    id={row.original.id}
                                                 />
                                             )}
                                             {canView && (
                                                 <TableAction
                                                     type="view"
                                                     href={`/admin/${resourceName}/${row.original.id}`}
+                                                    id={row.original.id}
                                                 />
                                             )}
                                         </TableCell>

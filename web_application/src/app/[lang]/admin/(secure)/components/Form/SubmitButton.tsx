@@ -12,7 +12,7 @@ export default function SubmitButton({ title }: Props) {
     const { pending } = useFormStatus();
 
     return (
-        <Button type="submit" isLoading={pending}>
+        <Button type="submit" isLoading={pending} data-cy="submit-button">
             {capitalizeFirstLetter(title)}
         </Button>
     );

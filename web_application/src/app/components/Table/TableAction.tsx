@@ -9,9 +9,10 @@ interface Props {
     href?: string;
     onClick?: () => void;
     type?: 'view' | 'edit';
+    id?: string | number;
 }
 
-export function TableAction({ type = 'view', onClick, href }: Props) {
+export function TableAction({ type = 'view', onClick, href, id }: Props) {
     const { t } = useTranslation();
     const iconProps = {
         className:
@@ -36,6 +37,7 @@ export function TableAction({ type = 'view', onClick, href }: Props) {
 
     return (
         <Link
+            data-cy={`${type}-${id}-button`}
             href={href ?? ''}
             title={t(`general:${type}`)}
             onClick={onClick}
