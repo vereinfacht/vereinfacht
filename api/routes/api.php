@@ -61,6 +61,9 @@ JsonApiRoute::server('v1')
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show');
 
+        $server->resource('receipts', JsonApiController::class)
+            ->only('index', 'show');
+
         $server->resource('finance-accounts', JsonApiController::class)
             ->relationships(function ($relations) {
                 $relations->hasOne('club', JsonApiController::class);

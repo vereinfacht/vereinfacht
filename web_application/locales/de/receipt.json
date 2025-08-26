@@ -5,18 +5,17 @@
         "label": "Name"
     },
     "type": {
-        "invoice": "Rechnung",
-        "ingoing_payment": "Eingangszahlung",
-        "outgoing_payment": "Ausgangszahlung",
-        "label": "Typ"
+        "label": "Typ",
+        "income": "Einnahme",
+        "expense": "Ausgabe"
     },
-    "name": {
-        "label": "Name"
+    "document_date": {
+        "label": "Belegdatum"
     },
-    "number": {
-        "label": "Nummer"
+    "reference_number": {
+        "label": "Referenznummer"
     },
-    "total_amount": {
-        "label": "Gesamtbetrag"
+    "amount": {
+        "label": "Betrag"
     }
 }

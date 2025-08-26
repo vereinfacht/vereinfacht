@@ -3992,6 +3992,658 @@
                 }
             }
         },
+        "\/receipts": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Get all receipts",
+                "description": "",
+                "operationId": "receipts.index",
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The page size for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "documentDate",
+                                    "-documentDate",
+                                    "amount",
+                                    "-amount"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            },
+                            "2": {
+                                "value": [
+                                    "2"
+                                ]
+                            },
+                            "3": {
+                                "value": [
+                                    "3"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[type]",
+                        "in": "query",
+                        "description": "A list of types to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": {
+                                "value": []
+                            },
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "income": {
+                                "value": "income"
+                            },
+                            "expense": {
+                                "value": "expense"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
+        "\/receipts\/{receipt}": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Show one receipt",
+                "description": "",
+                "operationId": "receipts.show",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/receipts\/{receipt}\/transactions": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Show transactions",
+                "description": "",
+                "operationId": "receipts.transactions",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ShowRelated receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.transactions.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/receipts\/{receipt}\/relationships\/transactions": {
+            "get": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Show transactions relation",
+                "description": "",
+                "operationId": "receipts.transactions.show",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Update transactions relation",
+                "description": "",
+                "operationId": "receipts.transactions.update",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/422"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Attach transactions relation",
+                "description": "",
+                "operationId": "receipts.transactions.attach",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.attach"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Attach receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/422"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Detach transactions relation",
+                "description": "",
+                "operationId": "receipts.transactions.detach",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.detach"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Detach receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.relationship.transactions.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
         "\/finance-accounts": {
             "get": {
                 "tags": [
@@ -5999,6 +6651,432 @@
                     },
                     "422": {
                         "$ref": "#\/components\/responses\/422"
+                    }
+                }
+            }
+        },
+        "\/transactions\/{transaction}\/receipts": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Show receipts",
+                "description": "",
+                "operationId": "transactions.receipts",
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ShowRelated transactions",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/transactions\/{transaction}\/relationships\/receipts": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Show receipts relation",
+                "description": "",
+                "operationId": "transactions.receipts.show",
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show transactions",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Update receipts relation",
+                "description": "",
+                "operationId": "transactions.receipts.update",
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update transactions",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/422"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Attach receipts relation",
+                "description": "",
+                "operationId": "transactions.receipts.attach",
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.attach"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Attach transactions",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/422"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Detach receipts relation",
+                "description": "",
+                "operationId": "transactions.receipts.detach",
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.detach"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Detach transactions",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.transactions.relationship.receipts.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
                     }
                 }
             }
@@ -9180,6 +10258,204 @@
                     }
                 }
             },
+            "resources.receipts.relationship.transactions.attach": {
+                "title": "Resource\/Receipt\/Relationship\/Transactions\/Attach",
+                "type": "array",
+                "items": {
+                    "title": "transactions",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "transactions",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                }
+            },
+            "resources.receipts.relationship.transactions.detach": {
+                "title": "Resource\/Receipt\/Relationship\/Transactions\/Detach",
+                "type": "array",
+                "items": {
+                    "title": "transactions",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "transactions",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                }
+            },
+            "resources.receipts.relationship.transactions.fetch": {
+                "title": "Resource\/Receipt\/Relationship\/Transactions\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "transactions",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "id",
+                        "type": "string",
+                        "example": "1"
+                    }
+                }
+            },
+            "resources.receipts.relationship.transactions.update": {
+                "title": "Resource\/Receipt\/Relationship\/Transactions\/Update",
+                "type": "array",
+                "items": {
+                    "title": "transactions",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "transactions",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                }
+            },
+            "resources.receipts.resource.fetch": {
+                "title": "Resource\/Receipt\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "referenceNumber": {
+                                "title": "referenceNumber",
+                                "type": "string",
+                                "example": "REF-26050"
+                            },
+                            "type": {
+                                "title": "type",
+                                "type": "string",
+                                "example": "income"
+                            },
+                            "documentDate": {
+                                "title": "documentDate",
+                                "type": "string",
+                                "example": "2024-08-27 15:39:37"
+                            },
+                            "amount": {
+                                "title": "amount",
+                                "type": "string",
+                                "example": 828
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-08-25T13:06:27.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-08-25T13:06:27.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "transactions": {
+                                "title": "transactions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "resources.transactions.relationship.financeAccount.fetch": {
                 "title": "Resource\/Transaction\/Relationship\/FinanceAccount\/Fetch",
                 "type": "object",
@@ -9217,6 +10493,98 @@
                         "title": "id",
                         "type": "string",
                         "example": "1"
+                    }
+                }
+            },
+            "resources.transactions.relationship.receipts.attach": {
+                "title": "Resource\/Transaction\/Relationship\/Receipts\/Attach",
+                "type": "array",
+                "items": {
+                    "title": "receipts",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "receipts",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                }
+            },
+            "resources.transactions.relationship.receipts.detach": {
+                "title": "Resource\/Transaction\/Relationship\/Receipts\/Detach",
+                "type": "array",
+                "items": {
+                    "title": "receipts",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "receipts",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                }
+            },
+            "resources.transactions.relationship.receipts.fetch": {
+                "title": "Resource\/Transaction\/Relationship\/Receipts\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "id",
+                        "type": "string",
+                        "example": "1"
+                    }
+                }
+            },
+            "resources.transactions.relationship.receipts.update": {
+                "title": "Resource\/Transaction\/Relationship\/Receipts\/Update",
+                "type": "array",
+                "items": {
+                    "title": "receipts",
+                    "type": "object",
+                    "required": [
+                        "type",
+                        "id"
+                    ],
+                    "properties": {
+                        "type": {
+                            "title": "type",
+                            "default": "receipts",
+                            "type": "string"
+                        },
+                        "id": {
+                            "title": "id",
+                            "type": "string",
+                            "example": "1"
+                        }
                     }
                 }
             },
@@ -9299,6 +10667,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-accounts\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "receipts": {
+                                "title": "receipts",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
                                             }
                                         },
                                         "readOnly": true
