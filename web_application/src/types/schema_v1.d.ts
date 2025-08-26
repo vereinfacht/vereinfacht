@@ -432,6 +432,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/finance-contacts/{finance_contact}/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show receipts */
+        get: operations["finance-contacts.receipts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/finance-contacts/{finance_contact}/relationships/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show receipts relation */
+        get: operations["finance-contacts.receipts.show"];
+        put?: never;
+        /** Attach receipts relation */
+        post: operations["finance-contacts.receipts.attach"];
+        /** Detach receipts relation */
+        delete: operations["finance-contacts.receipts.detach"];
+        options?: never;
+        head?: never;
+        /** Update receipts relation */
+        patch: operations["finance-contacts.receipts.update"];
+        trace?: never;
+    };
     "/receipts": {
         parameters: {
             query?: never;
@@ -464,43 +501,6 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
-        trace?: never;
-    };
-    "/receipts/{receipt}/transactions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show transactions */
-        get: operations["receipts.transactions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/receipts/{receipt}/relationships/transactions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show transactions relation */
-        get: operations["receipts.transactions.show"];
-        put?: never;
-        /** Attach transactions relation */
-        post: operations["receipts.transactions.attach"];
-        /** Detach transactions relation */
-        delete: operations["receipts.transactions.detach"];
-        options?: never;
-        head?: never;
-        /** Update transactions relation */
-        patch: operations["receipts.transactions.update"];
         trace?: never;
     };
     "/finance-accounts": {
@@ -749,43 +749,6 @@ export interface paths {
         head?: never;
         /** Update financeAccount relation */
         patch: operations["transactions.financeAccount.update"];
-        trace?: never;
-    };
-    "/transactions/{transaction}/receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show receipts */
-        get: operations["transactions.receipts"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/transactions/{transaction}/relationships/receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show receipts relation */
-        get: operations["transactions.receipts.show"];
-        put?: never;
-        /** Attach receipts relation */
-        post: operations["transactions.receipts.attach"];
-        /** Detach receipts relation */
-        delete: operations["transactions.receipts.detach"];
-        options?: never;
-        head?: never;
-        /** Update receipts relation */
-        patch: operations["transactions.receipts.update"];
         trace?: never;
     };
 }
@@ -1921,6 +1884,58 @@ export interface components {
                 };
             };
         };
+        /** Resource/Finance-contact/Relationship/Receipts/Attach */
+        "resources.finance-contacts.relationship.receipts.attach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Finance-contact/Relationship/Receipts/Detach */
+        "resources.finance-contacts.relationship.receipts.detach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
+        "resources.finance-contacts.relationship.receipts.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        };
+        /** Resource/Finance-contact/Relationship/Receipts/Update */
+        "resources.finance-contacts.relationship.receipts.update": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
         /** Resource/Finance-contact/Fetch */
         "resources.finance-contacts.resource.fetch": {
             /**
@@ -5160,6 +5175,196 @@ export interface operations {
             404: components["responses"]["404"];
         };
     };
+    "finance-contacts.receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description ShowRelated finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.receipts.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.receipts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.receipts.attach": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.attach"];
+                };
+            };
+        };
+        responses: {
+            /** @description Attach finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+            422: components["responses"]["422"];
+        };
+    };
+    "finance-contacts.receipts.detach": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.detach"];
+                };
+            };
+        };
+        responses: {
+            /** @description Detach finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.receipts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.relationship.receipts.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+            422: components["responses"]["422"];
+        };
+    };
     "receipts.index": {
         parameters: {
             query?: {
@@ -5233,196 +5438,6 @@ export interface operations {
             400: components["responses"]["400"];
             401: components["responses"]["401"];
             404: components["responses"]["404"];
-        };
-    };
-    "receipts.transactions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                receipt: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description ShowRelated receipts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.resource.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "receipts.transactions.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                receipt: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Show receipts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.relationship.transactions.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "receipts.transactions.attach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                receipt: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.receipts.relationship.transactions.attach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Attach receipts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.relationship.transactions.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
-        };
-    };
-    "receipts.transactions.detach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                receipt: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.receipts.relationship.transactions.detach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Detach receipts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.relationship.transactions.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "receipts.transactions.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                receipt: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.receipts.relationship.transactions.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update receipts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.relationship.transactions.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
         };
     };
     "finance-accounts.index": {
@@ -6296,196 +6311,6 @@ export interface operations {
                             version?: string;
                         };
                         data: components["schemas"]["resources.transactions.relationship.financeAccount.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
-        };
-    };
-    "transactions.receipts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description ShowRelated transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.receipts.resource.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "transactions.receipts.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Show transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "transactions.receipts.attach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.relationship.receipts.attach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Attach transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
-        };
-    };
-    "transactions.receipts.detach": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.relationship.receipts.detach"];
-                };
-            };
-        };
-        responses: {
-            /** @description Detach transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.relationship.receipts.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "transactions.receipts.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.relationship.receipts.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.relationship.receipts.fetch"][];
                     };
                 };
             };
