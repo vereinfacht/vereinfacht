@@ -10,10 +10,10 @@
         "expense": "Expense"
     },
     "document_date": {
-        "label": "Document Date"
+        "label": "Document date"
     },
     "reference_number": {
-        "label": "Reference Number"
+        "label": "Reference number"
     },
     "amount": {
         "label": "Amount"
