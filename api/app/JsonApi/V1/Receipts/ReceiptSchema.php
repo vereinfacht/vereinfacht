@@ -35,6 +35,7 @@ class ReceiptSchema extends Schema
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
+            BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
         ];
     }

@@ -9,7 +9,7 @@ export const getFinanceContact = createAuthenticatedAction(
     baseGetSchema,
     async (params, client) => {
         const response = await client.GET(
-            '/finance-contacts/{finance_contact}',
+            '/finance-contacts/{finance_contact}?include=receipts',
             {
                 params: {
                     path: { finance_contact: params.id },

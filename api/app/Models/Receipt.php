@@ -16,6 +16,7 @@ class Receipt extends Model
         'document_date',
         'amount',
         'club_id',
+        'finance_contact_id',
     ];
 
     public function casts()
@@ -29,6 +30,11 @@ class Receipt extends Model
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    public function financeContact()
+    {
+        return $this->belongsTo(FinanceContact::class);
     }
 
     public function transactions()
