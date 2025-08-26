@@ -10,7 +10,7 @@
         "expense": "Ausgabe"
     },
     "document_date": {
-        "label": "Dokumentdatum"
+        "label": "Belegdatum"
     },
     "reference_number": {
         "label": "Referenznummer"
