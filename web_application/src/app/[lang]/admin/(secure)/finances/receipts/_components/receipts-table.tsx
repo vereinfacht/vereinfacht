@@ -33,7 +33,6 @@ export default function ReceiptsTable({
     extended = false,
 }: Props) {
     const { t } = useTranslation();
-    console.log(receipts[0].financeContact);
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
             accessorKey: 'type',

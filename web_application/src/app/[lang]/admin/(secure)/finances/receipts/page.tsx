@@ -15,6 +15,7 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
         page: { size: itemsPerPage, number: params.page },
         filter: {
             type: params.type ? params.type : undefined,
+            status: params.status ? params.status : undefined,
         },
         include: ['financeContact'],
     });
