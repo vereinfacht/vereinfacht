@@ -10,6 +10,12 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/app/components/ui/tooltip';
 import { ResourceName } from '@/resources/resource';
 import {
     TFinanceContactDeserialized,
@@ -25,12 +31,6 @@ import {
 } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../../components/Fields/Detail/DateField';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@radix-ui/react-tooltip';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -96,22 +96,18 @@ export default function ReceiptsTable({
                 );
 
                 return (
-                    <Tooltip>
-                        <TooltipTrigger className="cursor-help">
-                            {status === 'incompleted' ? (
-                                <CircleDashed />
-                            ) : (
-                                <CircleCheck color="green" />
-                            )}
-                        </TooltipTrigger>
-                        <TooltipContent
-                            side="top"
-                            align="center"
-                            className="mb-2 rounded-md border border-slate-500 bg-white px-3 py-2 text-sm text-black shadow-sm"
-                        >
-                            {statusDescription}
-                        </TooltipContent>
-                    </Tooltip>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger className="cursor-help">
+                                {status === 'incompleted' ? (
+                                    <CircleDashed />
+                                ) : (
+                                    <CircleCheck color="green" />
+                                )}
+                            </TooltipTrigger>
+                            <TooltipContent>{statusDescription}</TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 );
             },
         },
@@ -161,15 +157,13 @@ export default function ReceiptsTable({
     }
 
     return (
-        <TooltipProvider>
-            <DataTable
-                data={receipts}
-                columns={columns}
-                resourceName={'finances/receipts' as ResourceName}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-            />
-        </TooltipProvider>
+        <DataTable
+            data={receipts}
+            columns={columns}
+            resourceName={'finances/receipts' as ResourceName}
+            totalPages={totalPages}
+            canEdit={true}
+            canView={true}
+        />
     );
 }
