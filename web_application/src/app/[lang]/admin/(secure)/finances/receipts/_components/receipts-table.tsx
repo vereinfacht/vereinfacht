@@ -4,6 +4,7 @@ import {
     receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
@@ -16,9 +17,9 @@ import {
 } from '@/types/resources';
 import { listReceiptSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
+import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../../components/Fields/Detail/DateField';
-import BelongsToField from '../../../components/Fields/Index/BelongsToField';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -31,7 +32,7 @@ export default function ReceiptsTable({
     totalPages,
     extended = false,
 }: Props) {
-    const { t } = useTranslation('receipt');
+    const { t } = useTranslation();
     console.log(receipts[0].financeContact);
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
@@ -45,12 +46,12 @@ export default function ReceiptsTable({
                 />
             ),
             cell: ({ row }) => (
-                <TextCell>{t('type.' + row.getValue('type'))}</TextCell>
+                <TextCell>{t('receipt:type.' + row.getValue('type'))}</TextCell>
             ),
         },
         {
             accessorKey: 'referenceNumber',
-            header: t('reference_number.label'),
+            header: t('receipt:reference_number.label'),
             cell: ({ row }) => (
                 <TextCell>{row.getValue('referenceNumber')}</TextCell>
             ),
@@ -61,7 +62,7 @@ export default function ReceiptsTable({
                 <HeaderSort
                     parser={listReceiptSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('document_date.label')}
+                    columnTitle={t('receipt:document_date.label')}
                 />
             ),
             cell: ({ row }) => (
@@ -80,7 +81,7 @@ export default function ReceiptsTable({
             ),
             cell: ({ row }) => {
                 const status = row.getValue('status');
-                return <TextCell>{t('status.' + status)}</TextCell>;
+                return <TextCell>{t('receipt:status.' + status)}</TextCell>;
             },
         },
         {
@@ -89,7 +90,7 @@ export default function ReceiptsTable({
                 <HeaderSort
                     parser={listReceiptSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('amount.label')}
+                    columnTitle={t('receipt:amount.label')}
                 />
             ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
@@ -99,18 +100,26 @@ export default function ReceiptsTable({
     if (extended) {
         const financeContactColumn: ColumnDef<TReceiptDeserialized> = {
             accessorKey: 'financeContact',
-            header: t('finance_contact.label'),
+            header: t('contact:title.one'),
             cell: (cell) => {
                 const financeContact =
                     cell.getValue() as TFinanceContactDeserialized;
                 return (
-                    <BelongsToField
+                    <BelongsToCell
                         id={financeContact.id}
-                        title={
-                            financeContact.companyName ??
-                            (financeContact.fullName as string)
+                        content={
+                            financeContact.companyName ? (
+                                <>
+                                    <Building2 /> {financeContact.companyName}
+                                </>
+                            ) : (
+                                <>
+                                    {<CircleUserRound />}{' '}
+                                    {financeContact.fullName ?? ''}
+                                </>
+                            )
                         }
-                        resourceName={'financeContacts' as ResourceName}
+                        path={'/admin/finances/contacts'}
                     />
                 );
             },
