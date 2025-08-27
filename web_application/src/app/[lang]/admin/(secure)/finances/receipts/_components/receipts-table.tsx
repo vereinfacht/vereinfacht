@@ -17,9 +17,20 @@ import {
 } from '@/types/resources';
 import { listReceiptSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import { Building2, CircleUserRound } from 'lucide-react';
+import {
+    Building2,
+    CircleCheck,
+    CircleDashed,
+    CircleUserRound,
+} from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../../components/Fields/Detail/DateField';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@radix-ui/react-tooltip';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -80,16 +91,27 @@ export default function ReceiptsTable({
             ),
             cell: ({ row }) => {
                 const status = row.getValue('status');
+                const statusDescription = t(
+                    'receipt:status.description.' + status,
+                );
+
                 return (
-                    <TextCell
-                        className={
-                            status === 'incompleted'
-                                ? 'text-grey-500'
-                                : 'text-grey-300'
-                        }
-                    >
-                        {t('receipt:status.' + status)}
-                    </TextCell>
+                    <Tooltip>
+                        <TooltipTrigger className="cursor-help">
+                            {status === 'incompleted' ? (
+                                <CircleDashed />
+                            ) : (
+                                <CircleCheck color="green" />
+                            )}
+                        </TooltipTrigger>
+                        <TooltipContent
+                            side="top"
+                            align="center"
+                            className="mb-2 rounded-md border border-slate-500 bg-white px-3 py-2 text-sm text-black shadow-sm"
+                        >
+                            {statusDescription}
+                        </TooltipContent>
+                    </Tooltip>
                 );
             },
         },
@@ -139,13 +161,15 @@ export default function ReceiptsTable({
     }
 
     return (
-        <DataTable
-            data={receipts}
-            columns={columns}
-            resourceName={'finances/receipts' as ResourceName}
-            totalPages={totalPages}
-            canEdit={true}
-            canView={true}
-        />
+        <TooltipProvider>
+            <DataTable
+                data={receipts}
+                columns={columns}
+                resourceName={'finances/receipts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+            />
+        </TooltipProvider>
     );
 }

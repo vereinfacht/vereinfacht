@@ -20,7 +20,11 @@
     },
     "status": {
         "label": "Status",
+        "completed": "Vollständig",
         "incompleted": "Unvollständig",
-        "completed": "Vollständig"
+        "description": {
+            "completed": "Der Beleg ist vollständig.",
+            "incompleted": "Der Beleg ist noch unvollständig: Es muss mindestens eine Transaktion zugeordnet werden."
+        }
     }
 }
