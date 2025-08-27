@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReceiptStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,7 +30,7 @@ class Receipt extends Model
 
     public function getStatusAttribute(): string
     {
-        return $this->transactions()->exists() ? 'completed' : 'open';
+        return $this->transactions()->exists() ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
     }
 
     public function club()

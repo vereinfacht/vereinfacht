@@ -20,7 +20,7 @@
     },
     "status": {
         "label": "Status",
-        "open": "Open",
+        "incompleted": "Incompleted",
         "completed": "Completed"
     }
 }

@@ -83,9 +83,9 @@ export default function ReceiptsTable({
                 return (
                     <TextCell
                         className={
-                            status === 'open'
-                                ? 'text-green-500'
-                                : 'text-red-500'
+                            status === 'incompleted'
+                                ? 'text-grey-500'
+                                : 'text-grey-300'
                         }
                     >
                         {t('receipt:status.' + status)}
@@ -114,22 +114,18 @@ export default function ReceiptsTable({
                 const financeContact =
                     cell.getValue() as TFinanceContactDeserialized;
 
-                if (!financeContact) {
-                    return null;
-                }
-
                 return (
                     <BelongsToCell
-                        id={financeContact.id}
+                        resource={financeContact}
                         content={
-                            financeContact.companyName ? (
+                            financeContact?.companyName ? (
                                 <>
-                                    <Building2 /> {financeContact.companyName}
+                                    <Building2 /> {financeContact?.companyName}
                                 </>
                             ) : (
                                 <>
                                     <CircleUserRound />
-                                    {financeContact.fullName ?? ''}
+                                    {financeContact?.fullName}
                                 </>
                             )
                         }

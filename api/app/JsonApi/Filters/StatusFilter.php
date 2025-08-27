@@ -2,10 +2,11 @@
 
 namespace App\JsonApi\Filters;
 
+use App\Enums\ReceiptStatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Contracts\Filter;
-use LaravelJsonApi\Eloquent\Filters\Concerns\DeserializesValue;
 use LaravelJsonApi\Eloquent\Filters\Concerns\IsSingular;
+use LaravelJsonApi\Eloquent\Filters\Concerns\DeserializesValue;
 
 class StatusFilter implements Filter
 {
@@ -69,10 +70,10 @@ class StatusFilter implements Filter
         }
 
         $query->where(function (Builder $builder) use ($statuses) {
-            if (in_array('open', $statuses, true)) {
+            if (in_array(ReceiptStatusEnum::INCOMPLETED->value, $statuses, true)) {
                 $builder->orDoesntHave('transactions');
             }
-            if (in_array('completed', $statuses, true)) {
+            if (in_array(ReceiptStatusEnum::COMPLETED->value, $statuses, true)) {
                 $builder->orHas('transactions');
             }
         });

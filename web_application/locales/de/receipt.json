@@ -20,7 +20,7 @@
     },
     "status": {
         "label": "Status",
-        "open": "Offen",
-        "completed": "Abgeschlossen"
+        "incompleted": "Unvollständig",
+        "completed": "Vollständig"
     }
 }
