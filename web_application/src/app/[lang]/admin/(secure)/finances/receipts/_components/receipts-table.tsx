@@ -113,6 +113,11 @@ export default function ReceiptsTable({
             cell: (cell) => {
                 const financeContact =
                     cell.getValue() as TFinanceContactDeserialized;
+
+                if (!financeContact) {
+                    return null;
+                }
+
                 return (
                     <BelongsToCell
                         id={financeContact.id}

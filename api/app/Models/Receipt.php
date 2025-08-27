@@ -24,7 +24,6 @@ class Receipt extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
-            'document_date' => 'datetime',
         ];
     }
 
