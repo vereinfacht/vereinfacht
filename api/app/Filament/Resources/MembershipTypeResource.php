@@ -72,12 +72,14 @@ class MembershipTypeResource extends Resource
                     ->label(__('membership-type.minimum_number_of_members'))
                     ->integer()
                     ->required()
-                    ->rules(['numeric', 'min:0', 'lte:maximum_number_of_members']),
+                    ->lte('maximum_number_of_members')
+                    ->rules(['numeric', 'min:0']),
                 TextInput::make('maximum_number_of_members')
                     ->label(__('membership-type.maximum_number_of_members'))
                     ->integer()
                     ->required()
-                    ->rules(['numeric', 'min:0', 'gte:minimum_number_of_members']),
+                    ->gte('minimum_number_of_members')
+                    ->rules(['numeric', 'min:0']),
                 DateTimePicker::make('updated_at')
                     ->label(__('validation.attributes.updated_at'))
                     ->disabled(),
