@@ -17,5 +17,10 @@
     },
     "amount": {
         "label": "Betrag"
+    },
+    "status": {
+        "label": "Status",
+        "open": "Offen",
+        "completed": "Abgeschlossen"
     }
 }

@@ -46,6 +46,7 @@ export type TFinanceContactDeserialized = TFinanceContactRaw['attributes'] & {
 export type TReceiptDeserialized = TReceiptRaw['attributes'] & {
     id: string;
     transactions?: TTransactionDeserialized[];
+    financeContact?: TFinanceContactRaw['attributes'];
 };
 
 export type TFinanceAccountTypeDeserialized =

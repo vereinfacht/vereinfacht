@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -31,6 +32,7 @@ class ReceiptSchema extends Schema
             Str::make('referenceNumber'),
             Str::make('type'),
             DateTime::make('documentDate')->sortable(),
+            Str::make('status')->readOnly(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
@@ -48,6 +50,7 @@ class ReceiptSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('type')->delimiter(','),
+            StatusFilter::make('status'),
         ];
     }
 

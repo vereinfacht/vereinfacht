@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Receipt extends Model
 {
@@ -24,7 +24,13 @@ class Receipt extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'document_date' => 'datetime',
         ];
+    }
+
+    public function getStatusAttribute(): string
+    {
+        return $this->transactions()->exists() ? 'completed' : 'open';
     }
 
     public function club()
