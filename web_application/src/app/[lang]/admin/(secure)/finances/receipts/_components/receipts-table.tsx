@@ -98,7 +98,7 @@ export default function ReceiptsTable({
                 return (
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger className="cursor-help">
+                            <TooltipTrigger asChild className="cursor-help">
                                 {status === 'incompleted' ? (
                                     <CircleDashed />
                                 ) : (
