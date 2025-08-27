@@ -114,7 +114,7 @@ export default function ReceiptsTable({
                                 </>
                             ) : (
                                 <>
-                                    {<CircleUserRound />}{' '}
+                                    <CircleUserRound />
                                     {financeContact.fullName ?? ''}
                                 </>
                             )
