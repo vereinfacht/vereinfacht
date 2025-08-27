@@ -81,7 +81,17 @@ export default function ReceiptsTable({
             ),
             cell: ({ row }) => {
                 const status = row.getValue('status');
-                return <TextCell>{t('receipt:status.' + status)}</TextCell>;
+                return (
+                    <TextCell
+                        className={
+                            status === 'open'
+                                ? 'text-green-500'
+                                : 'text-red-500'
+                        }
+                    >
+                        {t('receipt:status.' + status)}
+                    </TextCell>
+                );
             },
         },
         {
