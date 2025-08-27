@@ -100,9 +100,9 @@ export default function ReceiptsTable({
                         <Tooltip>
                             <TooltipTrigger asChild className="cursor-help">
                                 {status === 'incompleted' ? (
-                                    <CircleDashed />
+                                    <CircleDashed className="text-slate-600" />
                                 ) : (
-                                    <CircleCheck color="green" />
+                                    <CircleCheck className="text-green-600" />
                                 )}
                             </TooltipTrigger>
                             <TooltipContent>{statusDescription}</TooltipContent>
