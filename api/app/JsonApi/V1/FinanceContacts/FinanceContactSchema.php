@@ -2,17 +2,18 @@
 
 namespace App\JsonApi\V1\FinanceContacts;
 
-use App\JsonApi\Sorting\FullNameSort;
 use App\Models\FinanceContact;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\DateTime;
-use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Filters\WhereIn;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Sorting\FullNameSort;
+use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Filters\WhereIn;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 
 class FinanceContactSchema extends Schema
 {
@@ -43,6 +44,7 @@ class FinanceContactSchema extends Schema
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
+            HasMany::make('receipts')->type('receipts'),
         ];
     }
 
@@ -69,6 +71,13 @@ class FinanceContactSchema extends Schema
     {
         return [
             FullNameSort::make('fullName'),
+        ];
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'receipts',
         ];
     }
 }

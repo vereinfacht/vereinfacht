@@ -22,6 +22,11 @@ return new class extends Migration
                 ->constrained('clubs')
                 ->cascadeOnDelete();
 
+            $table->foreignId('finance_contact_id')
+                ->nullable()
+                ->constrained('finance_contacts')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

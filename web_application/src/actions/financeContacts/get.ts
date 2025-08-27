@@ -13,6 +13,10 @@ export const getFinanceContact = createAuthenticatedAction(
             {
                 params: {
                     path: { finance_contact: params.id },
+                    // @ts-expect-error: prepareQuery() does not return the expected type
+                    query: {
+                        include: params.include?.join(','),
+                    },
                 },
             },
         );
