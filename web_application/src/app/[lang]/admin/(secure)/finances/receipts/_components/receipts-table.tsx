@@ -48,14 +48,17 @@ export default function ReceiptsTable({
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
             accessorKey: 'type',
-            header: ({ column }) => (
-                <HeaderOptionFilter
-                    options={receiptTypeOptions ?? []}
-                    parser={listReceiptSearchParams.type}
-                    paramKey={column.id}
-                    translationKey={'receipt:type'}
-                />
-            ),
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderOptionFilter
+                        options={receiptTypeOptions ?? []}
+                        parser={listReceiptSearchParams.type}
+                        paramKey={column.id}
+                        translationKey={'receipt:type'}
+                    />
+                ) : (
+                    t('receipt:type.label')
+                ),
             cell: ({ row }) => (
                 <TextCell>{t('receipt:type.' + row.getValue('type'))}</TextCell>
             ),
@@ -69,27 +72,33 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'documentDate',
-            header: ({ column }) => (
-                <HeaderSort
-                    parser={listReceiptSearchParams.sort}
-                    columnId={column.id}
-                    columnTitle={t('receipt:document_date.label')}
-                />
-            ),
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderSort
+                        parser={listReceiptSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('receipt:document_date.label')}
+                    />
+                ) : (
+                    t('receipt:document_date.label')
+                ),
             cell: ({ row }) => (
                 <DateField value={row.getValue('documentDate')} />
             ),
         },
         {
             accessorKey: 'status',
-            header: ({ column }) => (
-                <HeaderOptionFilter
-                    options={receiptStatusOptions ?? []}
-                    parser={listReceiptSearchParams.status}
-                    paramKey={column.id}
-                    translationKey={'receipt:status'}
-                />
-            ),
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderOptionFilter
+                        options={receiptStatusOptions ?? []}
+                        parser={listReceiptSearchParams.status}
+                        paramKey={column.id}
+                        translationKey={'receipt:status'}
+                    />
+                ) : (
+                    t('receipt:status.label')
+                ),
             cell: ({ row }) => {
                 const status = row.getValue('status');
                 const statusDescription = t(
@@ -126,13 +135,16 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'amount',
-            header: ({ column }) => (
-                <HeaderSort
-                    parser={listReceiptSearchParams.sort}
-                    columnId={column.id}
-                    columnTitle={t('receipt:amount.label')}
-                />
-            ),
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderSort
+                        parser={listReceiptSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('receipt:amount.label')}
+                    />
+                ) : (
+                    t('receipt:amount.label')
+                ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
     ];
