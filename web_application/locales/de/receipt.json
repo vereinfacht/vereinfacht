@@ -17,5 +17,14 @@
     },
     "amount": {
         "label": "Betrag"
+    },
+    "status": {
+        "label": "Status",
+        "completed": "Vollständig",
+        "incompleted": "Unvollständig",
+        "description": {
+            "completed": "Der Beleg ist vollständig.",
+            "incompleted": "Der Beleg ist noch unvollständig: Es muss mindestens eine Transaktion zugeordnet werden."
+        }
     }
 }

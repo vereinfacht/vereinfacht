@@ -15,7 +15,9 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
         page: { size: itemsPerPage, number: params.page },
         filter: {
             type: params.type ? params.type : undefined,
+            status: params.status ? params.status : undefined,
         },
+        include: ['financeContact'],
     });
 
     return response || [];
@@ -30,5 +32,11 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
-    return <ReceiptsTable receipts={receipts} totalPages={totalPages} />;
+    return (
+        <ReceiptsTable
+            receipts={receipts}
+            totalPages={totalPages}
+            extended={true}
+        />
+    );
 }

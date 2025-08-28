@@ -20,7 +20,9 @@ class FakeReceiptSeeder extends Seeder
                 ->count(50)
                 ->make(['club_id' => $club->id])
                 ->each(function ($receipt) use ($financeContacts) {
-                    $receipt->finance_contact_id = $financeContacts->random()->id;
+                    if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
+                        $receipt->finance_contact_id = $financeContacts->random()->id;
+                    }
                     $receipt->save();
                 });
 

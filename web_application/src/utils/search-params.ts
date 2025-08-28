@@ -8,6 +8,7 @@ import {
 } from '@/actions/memberships/list.schema';
 import {
     receiptSortingOptions,
+    receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
 import { transactionSortingOptions } from '@/actions/transactions/list.schema';
@@ -73,6 +74,11 @@ export const listReceiptSearchParams = {
         shallow: false,
     }),
     type: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
+    status: parseAsArrayOf(parseAsStringLiteral(receiptStatusOptions))
         .withDefault([])
         .withOptions({
             shallow: false,
