@@ -13,6 +13,7 @@ import TextCell from '@/app/components/Table/TextCell';
 import {
     Tooltip,
     TooltipContent,
+    TooltipPrimitive,
     TooltipProvider,
     TooltipTrigger,
 } from '@/app/components/ui/tooltip';
@@ -94,18 +95,30 @@ export default function ReceiptsTable({
                 const statusDescription = t(
                     'receipt:status.description.' + status,
                 );
+                const tooltipId = `status-tooltip-${row.id}`;
 
                 return (
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger asChild className="cursor-help">
+                            <TooltipTrigger
+                                asChild
+                                className="cursor-help"
+                                aria-describedby={tooltipId}
+                            >
                                 {status === 'incompleted' ? (
                                     <CircleDashed className="text-slate-600" />
                                 ) : (
                                     <CircleCheck className="text-green-600" />
                                 )}
                             </TooltipTrigger>
-                            <TooltipContent>{statusDescription}</TooltipContent>
+                            <TooltipContent role="tooltip" id={tooltipId}>
+                                {statusDescription}
+                                <TooltipPrimitive.Arrow
+                                    fill="white"
+                                    width={11}
+                                    height={5}
+                                />
+                            </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
                 );
