@@ -79,16 +79,17 @@ export default function BelongsToMultiInput({
                 }) => ({
                     value: item.id,
                     label: (
-                        <div className="flex items-end justify-between gap-4">
-                            <div className="w-10/12">
-                                <Text className="font-semibold">
-                                    {item.attributes.name}
-                                </Text>
-                                <Text className="line-clamp-1 truncate font-normal">
-                                    {item.attributes.description}
-                                </Text>
-                            </div>
-                            <CurrencyText value={item.attributes.amount} />
+                        <div className="grid grid-cols-[1fr_auto] gap-x-4">
+                            <Text className="col-start-1 row-start-1 font-semibold">
+                                {item.attributes.name}
+                            </Text>
+                            <Text className="col-start-1 row-start-2 line-clamp-1 truncate font-normal">
+                                {item.attributes.description}
+                            </Text>
+                            <CurrencyText
+                                className="col-start-2 row-span-2 self-end"
+                                value={item.attributes.amount}
+                            />
                         </div>
                     ),
                 }),
