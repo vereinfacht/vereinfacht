@@ -58,7 +58,7 @@ export default function BelongsToMultiInput({
                     headers: {
                         Accept: 'application/vnd.api+json',
                         'Content-Type': 'application/vnd.api+json',
-                        Authorization: `Bearer `,
+                        Authorization: `Bearer`,
                     },
                 },
             );
@@ -80,11 +80,11 @@ export default function BelongsToMultiInput({
                     value: item.id,
                     label: (
                         <div className="flex items-end justify-between gap-4">
-                            <div>
+                            <div className="w-10/12">
                                 <Text className="font-semibold">
                                     {item.attributes.name}
                                 </Text>
-                                <Text className="line-clamp-1 font-normal">
+                                <Text className="line-clamp-1 truncate font-normal">
                                     {item.attributes.description}
                                 </Text>
                             </div>
