@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\Transactions;
 
 use App\Models\Transaction;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\Number;
@@ -49,6 +50,7 @@ class TransactionSchema extends Schema
         return [
             WhereIdIn::make($this),
             Where::make('financeAccountId', 'finance_account_id')->using('='),
+            QueryFilter::make('query'),
         ];
     }
 

@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import DateField from '../../../components/Fields/Detail/DateField';
+import CreateButton from '../../../components/CreateButton';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -182,13 +183,18 @@ export default function ReceiptsTable({
     }
 
     return (
-        <DataTable
-            data={receipts}
-            columns={columns}
-            resourceName={'finances/receipts' as ResourceName}
-            totalPages={totalPages}
-            canEdit={true}
-            canView={true}
-        />
+        <>
+            {extended && (
+                <CreateButton href="/admin/finances/receipts/create" />
+            )}
+            <DataTable
+                data={receipts}
+                columns={columns}
+                resourceName={'finances/receipts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+            />
+        </>
     );
 }
