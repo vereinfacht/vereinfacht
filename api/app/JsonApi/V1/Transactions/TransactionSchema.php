@@ -50,7 +50,7 @@ class TransactionSchema extends Schema
         return [
             WhereIdIn::make($this),
             Where::make('financeAccountId', 'finance_account_id')->using('='),
-            QueryFilter::make('query'),
+            QueryFilter::make('query', ['name', 'description', 'amount']),
         ];
     }
 

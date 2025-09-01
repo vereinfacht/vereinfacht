@@ -17,29 +17,32 @@ class QueryFilter implements Filter
     private string $name;
 
     /**
-     * @var string
+     * @var array
      */
-    private string $column;
+    private array $columns;
 
     /**
      * Create a new filter.
      *
      * @param string $name
+     * @param array $columns
      * @return QueryFilter
      */
-    public static function make(string $name): self
+    public static function make(string $name, array $columns = []): self
     {
-        return new static($name);
+        return new static($name, $columns);
     }
 
     /**
      * QueryFilter constructor.
      *
      * @param string $name
+     * @param array $columns
      */
-    public function __construct(string $name)
+    public function __construct(string $name, array $columns = [])
     {
         $this->name = $name;
+        $this->columns = $columns;
     }
 
     /**
@@ -61,8 +64,18 @@ class QueryFilter implements Filter
      */
     public function apply($query, $value)
     {
-        $query->where('name', 'like', "%{$value}%")
-            ->orWhere('description', 'like', "%{$value}%")
-            ->orWhere('amount', 'like', "%{$value}%");
+        if (empty($this->columns)) {
+            return $query;
+        }
+
+        return $query->where(function ($query) use ($value) {
+            foreach ($this->columns as $index => $column) {
+                if ($index === 0) {
+                    $query->where($column, 'like', "%{$value}%");
+                } else {
+                    $query->orWhere($column, 'like', "%{$value}%");
+                }
+            }
+        });
     }
 }
