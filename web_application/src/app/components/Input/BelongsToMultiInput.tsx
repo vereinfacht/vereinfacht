@@ -1,19 +1,15 @@
 'use client';
 
-import { Combobox } from '@headlessui/react';
-import { ReactNode, useEffect, useState } from 'react';
-import InputLabel from '../Input/InputLabel';
+import { useEffect, useState } from 'react';
+import MultiselectInput from '../MultiselectInput/MultiselectInput';
 import { Option } from '../Input/SelectInput';
-import Input from '../MultiselectInput/Input';
-import Options from '../MultiselectInput/Options';
-import SelectedOptions from '../MultiselectInput/SelectedOptions';
 import CurrencyText from '../Text/CurrencyText';
 import Text from '../Text/Text';
 
 interface Props {
     id: string;
     name?: string;
-    label?: string | ReactNode;
+    label?: string | React.ReactNode;
     defaultValue?: Option[];
     onChange?: (selected: Option[]) => void;
     required?: boolean;
@@ -29,9 +25,10 @@ export default function BelongsToMultiInput({
     required = false,
     resource,
 }: Props) {
-    const [selected, setSelected] = useState<Option[]>(defaultValue || []);
-    const [query, setQuery] = useState('');
+    if (!resource) return null;
+
     const [options, setOptions] = useState<Option[]>([]);
+    const [query, setQuery] = useState('');
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -44,16 +41,12 @@ export default function BelongsToMultiInput({
         fetchOptions('');
     }, []);
 
-    useEffect(() => {
-        if (onChange) {
-            onChange(selected);
-        }
-    }, [selected, onChange]);
-
     const fetchOptions = async (searchTerm: string) => {
         try {
             const response = await fetch(
-                `http://api.verein.localhost/api/v1/${resource}?filter[query]=${encodeURIComponent(searchTerm)}`,
+                `http://api.verein.localhost/api/v1/${resource}?filter[query]=${encodeURIComponent(
+                    searchTerm,
+                )}`,
                 {
                     headers: {
                         Accept: 'application/vnd.api+json',
@@ -63,9 +56,7 @@ export default function BelongsToMultiInput({
                 },
             );
 
-            if (!response.ok) {
-                throw new Error(`API error: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`API error: ${response.status}`);
 
             const json = await response.json();
             const newOptions: Option[] = json.data.map(
@@ -102,69 +93,16 @@ export default function BelongsToMultiInput({
         }
     };
 
-    const handleRemove = (removedOption: Option) => {
-        setSelected(
-            selected.filter((option) => option.value !== removedOption.value),
-        );
-    };
-
     return (
-        <div className="flex flex-col items-start">
-            {label ? (
-                typeof label === 'string' ? (
-                    <InputLabel
-                        forInput={id}
-                        value={label}
-                        required={required}
-                    />
-                ) : (
-                    label
-                )
-            ) : null}
-
-            <Combobox
-                value={selected}
-                onChange={setSelected}
-                name={name}
-                multiple
-                by="value"
-                onClose={() => setQuery('')}
-            >
-                {({ open }) => (
-                    <>
-                        <div className="relative mt-1 w-full">
-                            <Input setQuery={setQuery} />
-                            {open && <Options options={options} />}
-                        </div>
-
-                        {selected.length > 0 && (
-                            <SelectedOptions
-                                options={selected}
-                                handleRemove={handleRemove}
-                            />
-                        )}
-
-                        {required && (
-                            <input
-                                type="text"
-                                name={name}
-                                value={
-                                    selected.length
-                                        ? JSON.stringify(
-                                              selected.map(
-                                                  (option) => option.value,
-                                              ),
-                                          )
-                                        : ''
-                                }
-                                required
-                                className="pointer-events-none absolute opacity-0"
-                                tabIndex={-1}
-                            />
-                        )}
-                    </>
-                )}
-            </Combobox>
-        </div>
+        <MultiselectInput
+            id={id}
+            name={name}
+            label={label}
+            options={options}
+            defaultValue={defaultValue}
+            onChange={onChange}
+            required={required}
+            onQueryChange={setQuery}
+        />
     );
 }
