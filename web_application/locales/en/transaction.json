@@ -3,7 +3,7 @@
         "one": "Transaction",
         "other": "Transactions",
         "label": "Name",
-        "no_receipts": "Transactions without Receipts"
+        "no_receipts": "Transactions without receipts"
     },
 
     "purpose": {
