@@ -68,6 +68,7 @@ export default function CreateUser() {
                     <TextInput
                         id="referenceNumber"
                         name="referenceNumber"
+                        label={t('receipt:reference_number.label')}
                         required
                         minLength={2}
                     />
