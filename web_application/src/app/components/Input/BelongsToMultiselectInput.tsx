@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import MultiselectInput from '../MultiselectInput/MultiselectInput';
-import { Option } from '../Input/SelectInput';
+import { Option } from './SelectInput';
 import CurrencyText from '../Text/CurrencyText';
 import Text from '../Text/Text';
 
@@ -16,7 +16,7 @@ interface Props {
     resource?: string;
 }
 
-export default function BelongsToMultiInput({
+export default function BelongsToMultiselectInput({
     id,
     name,
     label,
@@ -71,30 +71,15 @@ export default function BelongsToMultiInput({
                     value: item.id,
                     label: (
                         <div className="flex justify-between">
-                            <div className="flex w-10/12 gap-2 overflow-hidden">
-                                <Text
-                                    className={`font-semibold ${
-                                        item.attributes.name.length > 80
-                                            ? 'truncate'
-                                            : ''
-                                    }`}
-                                >
+                            <div className="flex w-10/12 gap-2">
+                                <Text className="min-w-fit font-medium">
                                     {item.attributes.name}
                                 </Text>
-                                <Text
-                                    className={`font-normal ${
-                                        item.attributes.description.length > 40
-                                            ? 'truncate'
-                                            : ''
-                                    }`}
-                                >
+                                <Text className="truncate">
                                     {item.attributes.description}
                                 </Text>
                             </div>
-                            <CurrencyText
-                                className="self-end"
-                                value={item.attributes.amount}
-                            />
+                            <CurrencyText value={item.attributes.amount} />
                         </div>
                     ),
                 }),

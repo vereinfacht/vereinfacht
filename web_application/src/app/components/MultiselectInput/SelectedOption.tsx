@@ -10,7 +10,7 @@ interface Props {
 export default function SelectedOption({ option, handleRemove }: Props) {
     return (
         <li className="mt-1 flex items-end justify-between gap-4 border-b border-dashed border-b-slate-600">
-            <Text preset="label" className="w-full">
+            <Text preset="label" className="w-11/12">
                 {option.label}
             </Text>
             <IconTrash

@@ -1,6 +1,6 @@
 'use client';
 
-import BelongsToMultiInput from '@/app/components/Input/BelongsToMultiInput';
+import BelongsToMultiInput from '@/app/components/Input/BelongsToMultiselectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import useTranslation from 'next-translate/useTranslation';
