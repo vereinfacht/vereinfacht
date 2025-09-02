@@ -1,6 +1,6 @@
 'use client';
 
-import BelongsToMultiInput from '@/app/components/Input/BelongsToMultiselectInput';
+import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import useTranslation from 'next-translate/useTranslation';
@@ -82,7 +82,7 @@ export default function CreateUser() {
                     />
                 </div>
                 <div className="grid gap-x-12 gap-y-4 lg:grid-cols-2">
-                    <BelongsToMultiInput
+                    <BelongsToMultiselectInput
                         id="transactions"
                         name="transactions"
                         label={t('transaction:title.no_receipts')}
