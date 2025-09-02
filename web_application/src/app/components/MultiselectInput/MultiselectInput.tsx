@@ -52,7 +52,9 @@ export default function MultiselectInput({
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
     const [query, setQuery] = useState('');
-    const filteredOptions = filterOptionsByQuery(options, query);
+    const filteredOptions = onQueryChange
+        ? options
+        : filterOptionsByQuery(options, query);
 
     useEffect(() => {
         if (onChange) {
