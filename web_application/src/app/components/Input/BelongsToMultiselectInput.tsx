@@ -28,6 +28,7 @@ export default function BelongsToMultiselectInput({
     const [options, setOptions] = useState<Option[]>([]);
     const [query, setQuery] = useState('');
 
+    // @todo: use server action or other fetch handling
     const fetchOptions = useCallback(
         async (searchTerm: string) => {
             if (!resource) return;
