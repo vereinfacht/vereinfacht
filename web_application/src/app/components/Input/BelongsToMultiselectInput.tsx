@@ -46,7 +46,7 @@ export default function BelongsToMultiselectInput({
             const response = await fetch(
                 `http://api.verein.localhost/api/v1/${resource}?filter[query]=${encodeURIComponent(
                     searchTerm,
-                )}`,
+                )}&filter[withoutReceipts]=true`,
                 {
                     headers: {
                         Accept: 'application/vnd.api+json',

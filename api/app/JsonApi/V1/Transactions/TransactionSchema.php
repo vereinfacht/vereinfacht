@@ -10,6 +10,7 @@ use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
+use App\JsonApi\Filters\WithoutRelationFilter;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
@@ -51,6 +52,7 @@ class TransactionSchema extends Schema
             WhereIdIn::make($this),
             Where::make('financeAccountId', 'finance_account_id')->using('='),
             QueryFilter::make('query', ['name', 'description', 'amount']),
+            WithoutRelationFilter::make('withoutReceipts', 'receipts'),
         ];
     }
 

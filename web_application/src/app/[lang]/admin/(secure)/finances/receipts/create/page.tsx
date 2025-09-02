@@ -85,7 +85,7 @@ export default function CreateUser() {
                     <BelongsToMultiInput
                         id="transactions"
                         name="transactions"
-                        label={t('transaction:title.other')}
+                        label={t('transaction:title.no_receipts')}
                         resource="transactions"
                         onChange={(vals: any[]) => setTransactions(vals)}
                     />
