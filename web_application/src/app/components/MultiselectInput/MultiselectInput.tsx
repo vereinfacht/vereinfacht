@@ -94,7 +94,9 @@ export default function MultiselectInput({
                             <Input
                                 setQuery={(query) => {
                                     setQuery(query);
-                                    if (onQueryChange) onQueryChange(query);
+                                    if (onQueryChange) {
+                                        onQueryChange(query);
+                                    }
                                 }}
                             />
                             {open && <Options options={filteredOptions} />}
