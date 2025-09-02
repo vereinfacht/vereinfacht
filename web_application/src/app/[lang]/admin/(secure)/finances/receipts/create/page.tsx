@@ -50,7 +50,6 @@ export default function CreateUser() {
                         id="amount"
                         name="amount"
                         label={t('receipt:amount.label')}
-                        autoComplete="amount"
                         type="number"
                         required
                         onChange={(e) => setAmount(Number(e.target.value))}
@@ -69,8 +68,6 @@ export default function CreateUser() {
                     <TextInput
                         id="referenceNumber"
                         name="referenceNumber"
-                        label={t('receipt:reference_number.label')}
-                        autoComplete="reference-number"
                         required
                         minLength={2}
                     />
@@ -78,7 +75,6 @@ export default function CreateUser() {
                         id="documentDate"
                         name="documentDate"
                         label={t('receipt:document_date.label')}
-                        autoComplete="document-date"
                         type="date"
                         required
                         minLength={8}
