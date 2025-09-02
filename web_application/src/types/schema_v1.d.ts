@@ -5845,6 +5845,8 @@ export interface operations {
                 "filter[financeAccountId]"?: string;
                 /** @description Filters the records */
                 "filter[query]"?: string;
+                /** @description Filters the records */
+                "filter[withoutReceipts]"?: string;
             };
             header?: never;
             path?: never;

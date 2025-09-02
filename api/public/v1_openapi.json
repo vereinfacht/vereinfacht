@@ -5810,6 +5810,16 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[withoutReceipts]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
