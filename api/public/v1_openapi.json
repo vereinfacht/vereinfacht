@@ -3918,6 +3918,71 @@
                         "$ref": "#\/components\/responses\/401"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Store one finance-contact",
+                "description": "",
+                "operationId": "finance-contacts.store",
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.store"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Store finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         },
         "\/finance-contacts\/{finance_contact}": {
@@ -3953,6 +4018,93 @@
                 "responses": {
                     "200": {
                         "description": "Show finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Update one finance-contact",
+                "description": "",
+                "operationId": "finance-contacts.update",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.finance-contacts.resource.update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update finance-contacts",
                         "content": {
                             "application\/vnd.api+json": {
                                 "schema": {
@@ -7755,8 +7907,8 @@
                                 "type": "string",
                                 "example": "haley.luigi@example.org"
                             },
-                            "type": {
-                                "title": "type",
+                            "contactType": {
+                                "title": "contactType",
                                 "type": "string",
                                 "example": "person"
                             },
@@ -7771,6 +7923,248 @@
                                 "type": "string",
                                 "readOnly": true,
                                 "example": "2025-07-07T10:04:26.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.finance-contacts.resource.store": {
+                "title": "Resource\/Finance-contact\/Store",
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "finance-contacts",
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": {
+                                "title": "lastName",
+                                "type": "string",
+                                "example": "Crooks"
+                            },
+                            "firstName": {
+                                "title": "firstName",
+                                "type": "string",
+                                "example": "Kieran"
+                            },
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Kieran Crooks"
+                            },
+                            "companyName": {
+                                "title": "companyName",
+                                "type": "string"
+                            },
+                            "gender": {
+                                "title": "gender",
+                                "type": "string",
+                                "example": "other"
+                            },
+                            "address": {
+                                "title": "address",
+                                "type": "string",
+                                "example": "86280 Brakus Throughway Suite 121"
+                            },
+                            "zipCode": {
+                                "title": "zipCode",
+                                "type": "string",
+                                "example": "01637-4772"
+                            },
+                            "city": {
+                                "title": "city",
+                                "type": "string",
+                                "example": "New Israel"
+                            },
+                            "country": {
+                                "title": "country",
+                                "type": "string",
+                                "example": "Libyan Arab Jamahiriya"
+                            },
+                            "phoneNumber": {
+                                "title": "phoneNumber",
+                                "type": "string",
+                                "example": "+18649861189"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "elyssa.stoltenberg@example.com"
+                            },
+                            "contactType": {
+                                "title": "contactType",
+                                "type": "string",
+                                "example": "person"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-08-15T09:33:58.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-08-15T09:33:58.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.finance-contacts.resource.update": {
+                "title": "Resource\/Finance-contact\/Update",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "finance-contacts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": {
+                                "title": "lastName",
+                                "type": "string",
+                                "example": "Cormier"
+                            },
+                            "firstName": {
+                                "title": "firstName",
+                                "type": "string",
+                                "example": "Louie"
+                            },
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Louie Cormier"
+                            },
+                            "companyName": {
+                                "title": "companyName",
+                                "type": "string",
+                                "example": "asdff"
+                            },
+                            "gender": {
+                                "title": "gender",
+                                "type": "string",
+                                "example": "female"
+                            },
+                            "address": {
+                                "title": "address",
+                                "type": "string",
+                                "example": "24190 Nikolaus Vista"
+                            },
+                            "zipCode": {
+                                "title": "zipCode",
+                                "type": "string",
+                                "example": "16942-8890"
+                            },
+                            "city": {
+                                "title": "city",
+                                "type": "string",
+                                "example": "Myrticechester"
+                            },
+                            "country": {
+                                "title": "country",
+                                "type": "string",
+                                "example": "Haiti"
+                            },
+                            "phoneNumber": {
+                                "title": "phoneNumber",
+                                "type": "string",
+                                "example": "+17072014089"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "franco.satterfield@example.org"
+                            },
+                            "contactType": {
+                                "title": "contactType",
+                                "type": "string",
+                                "example": "company"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-01T11:15:29.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-03T11:08:00.000000Z"
                             }
                         }
                     },

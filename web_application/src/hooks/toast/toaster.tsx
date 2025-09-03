@@ -31,7 +31,11 @@ export function Toaster() {
                 ...props
             }) {
                 return (
-                    <Toast key={id} {...props}>
+                    <Toast
+                        key={id}
+                        data-cy={props.variant + '-toast'}
+                        {...props}
+                    >
                         <div className="grid gap-1">
                             <div className="flex items-center gap-x-2">
                                 <StatusDot

@@ -54,7 +54,7 @@ export const listFinanceContactSearchParams = {
     ).withOptions({
         shallow: false,
     }),
-    type: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
+    contactType: parseAsArrayOf(parseAsStringLiteral(financeContactTypeOptions))
         .withDefault([])
         .withOptions({
             shallow: false,

@@ -64,9 +64,13 @@ export default function SelectInput({
                 >
                     {props.children ?? (
                         <>
-                            <option value="" disabled hidden>
-                                {t('select')}
-                            </option>
+                            {!options?.find(
+                                (option) => option.value === '',
+                            ) && (
+                                <option value="" disabled hidden>
+                                    {t('select')}
+                                </option>
+                            )}
                             {options?.map((option, index) => (
                                 <option key={index} value={option.value}>
                                     {option.label}

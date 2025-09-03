@@ -1,20 +1,5 @@
 {
-    "address": "Address",
     "birthday": "Birthday",
-    "city": "City",
-    "country": "Country",
-    "country_options": {
-        "denmark": "Denmark",
-        "germany": "Germany"
-    },
-    "first_name": {
-        "label": "First name"
-    },
     "label_identical_information": "Contact and address information is identical to {{name}}",
-    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
-    "last_name": {
-        "label": "Last name"
-    },
-    "phone": "Phone",
-    "zip_code": "Zip code"
+    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press."
 }

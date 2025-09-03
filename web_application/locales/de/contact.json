@@ -4,7 +4,7 @@
         "other": "Kontakte",
         "label": "Name"
     },
-    "type": {
+    "contact_type": {
         "person": "Person",
         "company": "Firma",
         "label": "Typ"
@@ -12,11 +12,20 @@
     "company_name": {
         "label": "Firma"
     },
-    "full_name": {
+    "name": {
         "label": "Name"
     },
+    "personal_information": {
+        "label": "Persönliche Angaben"
+    },
     "contact_person": {
-        "label": "Name Ansprechperson"
+        "label": "Ansprechperson"
+    },
+    "first_name": {
+        "label": "Vorname"
+    },
+    "last_name": {
+        "label": "Nachname"
     },
     "email": {
         "label": "E-Mail"
@@ -35,6 +44,10 @@
     },
     "country": {
         "label": "Land"
+    },
+    "country_options": {
+        "denmark": "Dänemark",
+        "germany": "Deutschland"
     },
     "created_at": {
         "label": "Erstellt am"

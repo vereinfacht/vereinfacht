@@ -39,7 +39,7 @@ class FinanceContactSchema extends Schema
             Str::make('country'),
             Str::make('phoneNumber'),
             Str::make('email'),
-            Str::make('type'),
+            Str::make('contactType'),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
@@ -53,7 +53,7 @@ class FinanceContactSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            WhereIn::make('type')->delimiter(','),
+            WhereIn::make('contactType')->delimiter(','),
         ];
     }
 

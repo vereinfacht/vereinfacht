@@ -96,7 +96,7 @@ const receipts: Receipt[] = [
     },
 ];
 
-export default async function ContactShowPage({ params }: Props) {
+export default async function Page({ params }: Props) {
     const contact = await getFinanceContact({ id: params.id });
 
     if (!contact) {

@@ -28,7 +28,7 @@ class FinanceContactFactory extends Factory
             'phone_number' => $this->faker->e164PhoneNumber(),
             'email' => $this->faker->safeEmail(),
             'club_id' => Club::factory(),
-            'type' => 'person',
+            'contact_type' => 'person',
         ];
     }
 
@@ -41,7 +41,7 @@ class FinanceContactFactory extends Factory
                 'first_name' => $hasPersonName ? $attributes['first_name'] : null,
                 'last_name' => $hasPersonName ? $attributes['last_name'] : null,
                 'company_name' => $this->faker->company(),
-                'type' => 'company',
+                'contact_type' => 'company',
             ];
         });
     }

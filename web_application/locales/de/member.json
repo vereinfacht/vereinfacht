@@ -1,20 +1,5 @@
 {
-    "address": "Adresse",
     "birthday": "Geburtstag",
-    "city": "Stadt / Ort",
-    "country": "Land",
-    "country_options": {
-        "denmark": "Dänemark",
-        "germany": "Deutschland"
-    },
-    "first_name": {
-        "label": "Vorname"
-    },
     "label_identical_information": "Kontakt- und Adressinformationen identisch mit {{name}}",
-    "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden.",
-    "last_name": {
-        "label": "Nachname"
-    },
-    "phone": "Telefonnummer",
-    "zip_code": "PLZ"
+    "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden."
 }

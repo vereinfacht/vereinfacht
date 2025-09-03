@@ -22,7 +22,7 @@ class FinanceContact extends Model
         'country',
         'phone_number',
         'email',
-        'type',
+        'contact_type',
         'club_id',
     ];
 
@@ -44,7 +44,7 @@ class FinanceContact extends Model
         $fullName = trim("{$this->first_name} {$this->last_name}");
 
         return Attribute::make(
-            get: fn () => $fullName,
+            get: fn() => $fullName,
         );
     }
 }

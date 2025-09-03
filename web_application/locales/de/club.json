@@ -15,18 +15,6 @@
     "apply_url": {
         "label": "Link zum Antragsformular"
     },
-    "address": {
-        "label": "Adresse"
-    },
-    "zip_code": {
-        "label": "Postleitzahl"
-    },
-    "city": {
-        "label": "Ort"
-    },
-    "country": {
-        "label": "Land"
-    },
     "email": {
         "label": "E-Mail",
         "help": "An diese E-Mail-Adresse werden die ausgefüllten Antragsformulare verschickt"

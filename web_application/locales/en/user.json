@@ -4,15 +4,6 @@
         "other": "Users",
         "label": "Name"
     },
-    "email": {
-        "label": "Email"
-    },
-    "created_at": {
-        "label": "Created at"
-    },
-    "updated_at": {
-        "label": "Updated at"
-    },
     "preferred_locale": {
         "label": "Preferred language"
     }

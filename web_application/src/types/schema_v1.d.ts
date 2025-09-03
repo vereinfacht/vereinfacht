@@ -408,7 +408,8 @@ export interface paths {
         /** Get all finance-contacts */
         get: operations["finance-contacts.index"];
         put?: never;
-        post?: never;
+        /** Store one finance-contact */
+        post: operations["finance-contacts.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -429,7 +430,8 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        patch?: never;
+        /** Update one finance-contact */
+        patch: operations["finance-contacts.update"];
         trace?: never;
     };
     "/finance-accounts": {
@@ -1876,10 +1878,10 @@ export interface components {
                  */
                 email?: string;
                 /**
-                 * type
+                 * contactType
                  * @example person
                  */
-                type?: string;
+                contactType?: string;
                 /**
                  * createdAt
                  * @example 2025-07-07T10:04:26.000000Z
@@ -1888,6 +1890,199 @@ export interface components {
                 /**
                  * updatedAt
                  * @example 2025-07-07T10:04:26.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Finance-contact/Store */
+        "resources.finance-contacts.resource.store": {
+            /**
+             * type
+             * @default finance-contacts
+             */
+            type: string;
+            attributes: {
+                /**
+                 * lastName
+                 * @example Crooks
+                 */
+                lastName?: string;
+                /**
+                 * firstName
+                 * @example Kieran
+                 */
+                firstName?: string;
+                /**
+                 * fullName
+                 * @example Kieran Crooks
+                 */
+                fullName?: string;
+                /** companyName */
+                companyName?: string;
+                /**
+                 * gender
+                 * @example other
+                 */
+                gender?: string;
+                /**
+                 * address
+                 * @example 86280 Brakus Throughway Suite 121
+                 */
+                address?: string;
+                /**
+                 * zipCode
+                 * @example 01637-4772
+                 */
+                zipCode?: string;
+                /**
+                 * city
+                 * @example New Israel
+                 */
+                city?: string;
+                /**
+                 * country
+                 * @example Libyan Arab Jamahiriya
+                 */
+                country?: string;
+                /**
+                 * phoneNumber
+                 * @example +18649861189
+                 */
+                phoneNumber?: string;
+                /**
+                 * email
+                 * @example elyssa.stoltenberg@example.com
+                 */
+                email?: string;
+                /**
+                 * contactType
+                 * @example person
+                 */
+                contactType?: string;
+                /**
+                 * createdAt
+                 * @example 2025-08-15T09:33:58.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-08-15T09:33:58.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Finance-contact/Update */
+        "resources.finance-contacts.resource.update": {
+            /**
+             * type
+             * @default finance-contacts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * lastName
+                 * @example Cormier
+                 */
+                lastName?: string;
+                /**
+                 * firstName
+                 * @example Louie
+                 */
+                firstName?: string;
+                /**
+                 * fullName
+                 * @example Louie Cormier
+                 */
+                fullName?: string;
+                /**
+                 * companyName
+                 * @example asdff
+                 */
+                companyName?: string;
+                /**
+                 * gender
+                 * @example female
+                 */
+                gender?: string;
+                /**
+                 * address
+                 * @example 24190 Nikolaus Vista
+                 */
+                address?: string;
+                /**
+                 * zipCode
+                 * @example 16942-8890
+                 */
+                zipCode?: string;
+                /**
+                 * city
+                 * @example Myrticechester
+                 */
+                city?: string;
+                /**
+                 * country
+                 * @example Haiti
+                 */
+                country?: string;
+                /**
+                 * phoneNumber
+                 * @example +17072014089
+                 */
+                phoneNumber?: string;
+                /**
+                 * email
+                 * @example franco.satterfield@example.org
+                 */
+                email?: string;
+                /**
+                 * contactType
+                 * @example company
+                 */
+                contactType?: string;
+                /**
+                 * createdAt
+                 * @example 2025-09-01T11:15:29.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-09-03T11:08:00.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4825,6 +5020,44 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "finance-contacts.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "finance-contacts.show": {
         parameters: {
             query?: never;
@@ -4837,6 +5070,46 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update finance-contacts */
             200: {
                 headers: {
                     [name: string]: unknown;

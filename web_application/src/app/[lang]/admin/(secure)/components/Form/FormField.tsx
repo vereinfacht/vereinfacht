@@ -1,7 +1,7 @@
 'use client';
 
-import Text from '@/app/components/Text/Text';
 import { PropsWithChildren } from 'react';
+import Error from '../Fields/Error';
 
 interface Props extends PropsWithChildren {
     errors?: string[];
@@ -14,9 +14,7 @@ export default function FormField({ errors, children }: Props) {
             {errors &&
                 errors.length > 0 &&
                 errors.map((error, index) => (
-                    <Text key={index} preset="error" className="pl-2">
-                        {error}
-                    </Text>
+                    <Error key={index} error={error} />
                 ))}
         </div>
     );

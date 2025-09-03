@@ -1,9 +1,10 @@
-import { auth } from '@/utils/auth';
-import { mockHasPermission } from '@/lib/permissions';
 import { createServerClient } from '@/lib/api/server-client';
+import { mockHasPermission } from '@/lib/permissions';
+import { auth } from '@/utils/auth';
+import { prepareQuery } from '@/utils/query-params';
+import createTranslation from 'next-translate/createTranslation';
 import { notFound, redirect } from 'next/navigation';
 import { z } from 'zod';
-import { prepareQuery } from '@/utils/query-params';
 
 // Types for permission actions and resources
 type PermissionAction = 'view' | 'create' | 'update' | 'delete';
@@ -111,15 +112,7 @@ export function createAuthenticatedAction<TInput, TOutput>(
         } catch (error) {
             console.error(`Error ${action}ing ${resource}:`, error);
 
-            // Re-throw validation errors and known errors
-            if (error instanceof Error) {
-                throw error;
-            }
-
-            // Handle unknown errors
-            throw new Error(
-                `An unexpected error occurred while ${action}ing the ${resource}`,
-            );
+            throw new Error(createTranslation().t('error:unknown'));
         }
     };
 }
@@ -158,15 +151,7 @@ export function createAuthenticatedActionWithOptionalParams<TInput, TOutput>(
         } catch (error) {
             console.error(`Error ${action}ing ${resource}:`, error);
 
-            // Re-throw validation errors and known errors
-            if (error instanceof Error) {
-                throw error;
-            }
-
-            // Handle unknown errors
-            throw new Error(
-                `An unexpected error occurred while ${action}ing ${resource}`,
-            );
+            throw new Error(createTranslation().t('error:unknown'));
         }
     };
 }
@@ -197,15 +182,7 @@ export function createSimpleAuthenticatedAction<TOutput>(
         } catch (error) {
             console.error(`Error ${action}ing ${resource}:`, error);
 
-            // Re-throw validation errors and known errors
-            if (error instanceof Error) {
-                throw error;
-            }
-
-            // Handle unknown errors
-            throw new Error(
-                `An unexpected error occurred while ${action}ing the ${resource}`,
-            );
+            throw new Error(createTranslation().t('error:unknown'));
         }
     };
 }

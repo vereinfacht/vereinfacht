@@ -10,6 +10,10 @@
         "update": {
             "success": "{{resource}} wurde aktualisiert",
             "error": "{{resource}} konnte nicht aktualisiert werden"
+        },
+        "create": {
+            "success": "{{resource}} wurde erstellt",
+            "error": "{{resource}} konnte nicht erstellt werden"
         }
     }
 }

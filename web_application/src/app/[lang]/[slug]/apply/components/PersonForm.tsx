@@ -56,7 +56,7 @@ export default function PersonForm({
         <div className="md:flex md:gap-12" key={`persons-${index}`}>
             <div className="flex-1 space-y-4">
                 <TextInput
-                    label={t('member:first_name.label')}
+                    label={t('contact:first_name.label')}
                     id={`firstName-${index}`}
                     name={`members.${index}.firstName`}
                     value={formData.firstName}
@@ -66,7 +66,7 @@ export default function PersonForm({
                 />
                 <TextInput
                     id={`lastName-${index}`}
-                    label={t('member:last_name.label')}
+                    label={t('contact:last_name.label')}
                     name={`members.${index}.lastName`}
                     value={formData.lastName}
                     onChange={handleInputChange}
@@ -159,7 +159,7 @@ export default function PersonForm({
                         />
                         <TextInput
                             id={`phoneNumber-${index}`}
-                            label={t('member:phone')}
+                            label={t('contact:phone_number.label')}
                             name={`members.${index}.phoneNumber`}
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
@@ -168,7 +168,7 @@ export default function PersonForm({
 
                         <TextInput
                             id={`address-${index}`}
-                            label={t('member:address')}
+                            label={t('contact:address.label')}
                             name={`members.${index}.address`}
                             value={formData.address}
                             onChange={handleInputChange}
@@ -179,7 +179,7 @@ export default function PersonForm({
                             <div className="w-1/3">
                                 <TextInput
                                     id={`zipCode-${index}`}
-                                    label={t('member:zip_code')}
+                                    label={t('contact:zip_code.label')}
                                     name={`members.${index}.zipCode`}
                                     value={formData.zipCode}
                                     onChange={handleInputChange}
@@ -190,7 +190,7 @@ export default function PersonForm({
                             <div className="w-2/3 pl-5">
                                 <TextInput
                                     id={`city-${index}`}
-                                    label={t('member:city')}
+                                    label={t('contact:city.label')}
                                     name={`members.${index}.city`}
                                     value={formData.city}
                                     onChange={handleInputChange}
@@ -203,18 +203,18 @@ export default function PersonForm({
                             id={`country-${index}`}
                             name={`members.${index}.country`}
                             defaultValue={formData.country}
-                            label={t('member:country')}
+                            label={t('contact:country.label')}
                             className="w-full"
                             autoComplete="country-name"
                             required
                             options={[
                                 {
                                     value: 'germany',
-                                    label: t('member:country_options.germany'),
+                                    label: t('contact:country_options.germany'),
                                 },
                                 {
                                     value: 'denmark',
-                                    label: t('member:country_options.denmark'),
+                                    label: t('contact:country_options.denmark'),
                                 },
                             ]}
                         />

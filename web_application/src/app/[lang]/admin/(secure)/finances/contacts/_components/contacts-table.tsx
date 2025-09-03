@@ -18,23 +18,27 @@ interface Props {
     totalPages: number;
 }
 
-export default function ContactTable({ contacts, totalPages }: Props) {
+export default function ContactsTable({ contacts, totalPages }: Props) {
     const { t } = useTranslation();
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
-            accessorKey: 'type',
+            accessorKey: 'contactType',
             header: ({ column }) => (
                 <HeaderOptionFilter
                     options={financeContactTypeOptions ?? []}
-                    parser={listFinanceContactSearchParams.type}
+                    parser={listFinanceContactSearchParams.contactType}
                     paramKey={column.id}
-                    translationKey={'contact:type'}
+                    translationKey={'contact:contact_type'}
                 />
             ),
             cell: ({ row }) => {
-                const { type } = row.original;
-                return type === 'person' ? <CircleUserRound /> : <Building2 />;
+                const { contactType } = row.original;
+                return contactType === 'person' ? (
+                    <CircleUserRound />
+                ) : (
+                    <Building2 />
+                );
             },
         },
         {
@@ -43,7 +47,7 @@ export default function ContactTable({ contacts, totalPages }: Props) {
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('contact:full_name.label')}
+                    columnTitle={t('contact:name.label')}
                 />
             ),
             cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,

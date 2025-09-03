@@ -59,7 +59,7 @@ JsonApiRoute::server('v1')
             ->only('index');
 
         $server->resource('finance-contacts', JsonApiController::class)
-            ->only('index', 'show');
+            ->only('index', 'show', 'store', 'update');
 
         $server->resource('finance-accounts', JsonApiController::class)
             ->relationships(function ($relations) {
