@@ -4,7 +4,9 @@ namespace App\JsonApi\V1\Transactions;
 
 use App\Models\Transaction;
 use LaravelJsonApi\Eloquent\Schema;
+use App\Enums\TransactionStatusEnum;
 use App\JsonApi\Filters\QueryFilter;
+use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\Number;
@@ -38,6 +40,7 @@ class TransactionSchema extends Schema
             DateTime::make('bookedAt')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
+            Str::make('status')->readOnly(),
             HasOne::make('financeAccount'),
             BelongsToMany::make('receipts'),
         ];
@@ -53,6 +56,15 @@ class TransactionSchema extends Schema
             Where::make('financeAccountId', 'finance_account_id')->using('='),
             QueryFilter::make('query', ['name', 'description', 'amount']),
             WithoutRelationFilter::make('withoutReceipts', 'receipts'),
+            StatusFilter::make(
+                'status',
+                null,
+                'receipts',
+                [
+                    TransactionStatusEnum::COMPLETED->value => 'has',
+                    TransactionStatusEnum::INCOMPLETED->value => 'doesnt_have',
+                ]
+            ),
         ];
     }
 

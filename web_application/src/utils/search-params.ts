@@ -11,7 +11,10 @@ import {
     receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
-import { transactionSortingOptions } from '@/actions/transactions/list.schema';
+import {
+    transactionSortingOptions,
+    transactionStatusOptions,
+} from '@/actions/transactions/list.schema';
 import { userSortingOptions } from '@/actions/users/list.schema';
 import {
     createLoader,
@@ -49,6 +52,11 @@ export const listTransactionSearchParams = {
     ).withOptions({
         shallow: false,
     }),
+    status: parseAsArrayOf(parseAsStringLiteral(transactionStatusOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
     accountId: parseAsString,
 };
 

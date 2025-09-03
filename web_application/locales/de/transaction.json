@@ -24,6 +24,16 @@
     "bic": {
         "label": "BIC"
     },
+    "status": {
+        "label": "Status",
+        "completed": "Vollständig",
+        "incompleted": "Unvollständig",
+        "description": {
+            "completed": "Die Transaction ist vollständig.",
+            "incompleted": "Die Transaction ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
+        }
+
+    },
 
     "all_sources": "Alle Quellen"
 }

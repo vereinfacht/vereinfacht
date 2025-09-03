@@ -1,7 +1,9 @@
 'use client';
 
+import { transactionStatusOptions } from '@/actions/transactions/list.schema';
 import Empty from '@/app/components/Empty';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import { TableAction } from '@/app/components/Table/TableAction';
 import TablePagination from '@/app/components/Table/TablePagination';
@@ -15,6 +17,13 @@ import {
     TableHeader,
     TableRow,
 } from '@/app/components/ui/table';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipPrimitive,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/app/components/ui/tooltip';
 import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
@@ -25,6 +34,7 @@ import {
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table';
+import { CircleCheck, CircleDashed } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
@@ -86,6 +96,50 @@ export default function TransactionsList({
                     {formatDate(row.getValue('bookedAt'), lang, 'dd.MM.yyyy')}
                 </TextCell>
             ),
+        },
+        {
+            accessorKey: 'status',
+            header: ({ column }) => (
+                <HeaderOptionFilter
+                    options={transactionStatusOptions ?? []}
+                    parser={listTransactionSearchParams.status}
+                    paramKey={column.id}
+                    translationKey={'transaction:status'}
+                />
+            ),
+            cell: ({ row }) => {
+                const status = row.getValue('status');
+                const statusDescription = t(
+                    'transaction:status.description.' + status,
+                );
+                const tooltipId = `status-tooltip-${row.id}`;
+
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger
+                                asChild
+                                className="cursor-help"
+                                aria-describedby={tooltipId}
+                            >
+                                {status === 'incompleted' ? (
+                                    <CircleDashed className="text-slate-600" />
+                                ) : (
+                                    <CircleCheck className="text-green-600" />
+                                )}
+                            </TooltipTrigger>
+                            <TooltipContent role="tooltip" id={tooltipId}>
+                                {statusDescription}
+                                <TooltipPrimitive.Arrow
+                                    fill="white"
+                                    width={11}
+                                    height={5}
+                                />
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                );
+            },
         },
         {
             accessorKey: 'financeAccount.title',
