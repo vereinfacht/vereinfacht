@@ -3,6 +3,7 @@
     "locales": ["en", "de"],
     "pages": {
         "*": [
+            "contact",
             "general",
             "member",
             "membership",

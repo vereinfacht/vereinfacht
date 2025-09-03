@@ -30,7 +30,11 @@ export default async function ContactShowPage({ params }: Props) {
             label: t('contact:type.label'),
             attribute: 'type',
             value:
-                contact.type === 'person' ? <CircleUserRound /> : <Building2 />,
+                contact.contactType === 'person' ? (
+                    <CircleUserRound />
+                ) : (
+                    <Building2 />
+                ),
         },
         {
             label: t('contact:title.label'),

@@ -4,7 +4,7 @@
         "other": "Contacts",
         "label": "Name"
     },
-    "type": {
+    "contact_type": {
         "person": "Individual",
         "company": "Company",
         "label": "Type"
@@ -12,11 +12,17 @@
     "company_name": {
         "label": "Company"
     },
-    "full_name": {
+    "name": {
         "label": "Name"
     },
+    "personal_information": {
+        "label": "Persönliche Angaben"
+    },
     "contact_person": {
-        "label": "Contact person"
+        "label": "Ansprechperson"
+    },
+    "full_name": {
+        "label": "Name"
     },
     "email": {
         "label": "E-Mail"

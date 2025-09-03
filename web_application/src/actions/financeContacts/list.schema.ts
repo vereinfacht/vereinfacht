@@ -16,7 +16,7 @@ export const listFinanceContactsSchema = baseListSchema.extend({
     sort: z.array(z.enum(financeContactSortingOptions)).optional(),
     filter: z
         .object({
-            type: z.array(z.enum(financeContactTypeOptions)).optional(),
+            contactType: z.array(z.enum(financeContactTypeOptions)).optional(),
         })
         .optional(),
 });

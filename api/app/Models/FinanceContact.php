@@ -23,7 +23,7 @@ class FinanceContact extends Model
         'country',
         'phone_number',
         'email',
-        'type',
+        'contact_type',
         'club_id',
     ];
 

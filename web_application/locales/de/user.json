@@ -4,15 +4,6 @@
         "other": "Benutzer*innen",
         "label": "Name"
     },
-    "email": {
-        "label": "E-Mail"
-    },
-    "created_at": {
-        "label": "Erstellt am"
-    },
-    "updated_at": {
-        "label": "Aktualisiert am"
-    },
     "preferred_locale": {
         "label": "Bevorzugte Sprache"
     }

@@ -163,7 +163,7 @@ export default function SummaryForm({ club }: SummaryFormProps) {
                                 </Text>
                                 <Text className="leading-tight">
                                     {t(
-                                        `member:country_options.${members[0].country}`,
+                                        `contact:country_options.${members[0].country}`,
                                     )}
                                 </Text>
                             </DataDisplay>

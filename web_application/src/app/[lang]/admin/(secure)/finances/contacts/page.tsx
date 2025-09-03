@@ -1,4 +1,4 @@
-import ContactTable from './_components/contacts-table';
+import ContactsTable from './_components/contacts-table';
 import {
     ListFinanceContactSearchParamsType,
     loadListFinanceContactsSearchParams,
@@ -14,7 +14,7 @@ async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
         filter: {
-            type: params.type ? params.type : undefined,
+            contactType: params.contactType ?? undefined,
         },
     });
 
@@ -30,5 +30,5 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
-    return <ContactTable contacts={contacts} totalPages={totalPages} />;
+    return <ContactsTable contacts={contacts} totalPages={totalPages} />;
 }

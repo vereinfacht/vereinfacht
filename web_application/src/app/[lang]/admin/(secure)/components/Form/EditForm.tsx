@@ -25,16 +25,12 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
     const router = useRouter();
     const { toast } = useToast();
     const extendedAction = action.bind(null, id);
-    const [state, formAction, pending] = useFormState<ActionState, FormData>(
+    const [state, formAction] = useFormState<ActionState, FormData>(
         extendedAction,
         {},
     );
 
     useEffect(() => {
-        if (pending) {
-            return;
-        }
-
         if (state.message === 'success') {
             toast({
                 variant: 'success',
@@ -60,7 +56,7 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
             return;
         }
         // api errors are handled by the api service and currently render general error page
-    }, [state, pending, toast, router, id, resourceName]);
+    }, [state.errors, state.message]);
 
     return (
         <form action={formAction} className="flex flex-col gap-8">

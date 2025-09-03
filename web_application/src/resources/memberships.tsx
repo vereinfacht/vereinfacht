@@ -245,11 +245,11 @@ export class MembershipResource extends Resource<Membership> {
                     },
                     {
                         attribute: 'firstName',
-                        label: 'member:first_name.label',
+                        label: 'contact:first_name.label',
                     },
                     {
                         attribute: 'lastName',
-                        label: 'member:last_name.label',
+                        label: 'contact:last_name.label',
                     },
                 ],
             } as BelongsToDetailFieldDef<Membership, Member>,
