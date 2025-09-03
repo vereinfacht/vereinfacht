@@ -5847,6 +5847,8 @@ export interface operations {
                 "filter[query]"?: string;
                 /** @description Filters the records */
                 "filter[withoutReceipts]"?: string;
+                /** @description Filters the records */
+                "filter[status]"?: string;
             };
             header?: never;
             path?: never;
