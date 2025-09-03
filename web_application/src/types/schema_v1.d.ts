@@ -434,6 +434,40 @@ export interface paths {
         patch: operations["finance-contacts.update"];
         trace?: never;
     };
+    "/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all receipts */
+        get: operations["receipts.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/receipts/{receipt}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show one receipt */
+        get: operations["receipts.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/finance-accounts": {
         parameters: {
             query?: never;
@@ -1815,6 +1849,58 @@ export interface components {
                 };
             };
         };
+        /** Resource/Finance-contact/Relationship/Receipts/Attach */
+        "resources.finance-contacts.relationship.receipts.attach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Finance-contact/Relationship/Receipts/Detach */
+        "resources.finance-contacts.relationship.receipts.detach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
+        "resources.finance-contacts.relationship.receipts.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        };
+        /** Resource/Finance-contact/Relationship/Receipts/Update */
+        "resources.finance-contacts.relationship.receipts.update": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
         /** Resource/Finance-contact/Fetch */
         "resources.finance-contacts.resource.fetch": {
             /**
@@ -1905,6 +1991,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** receipts */
+                receipts?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/receipts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/receipts/1
                          */
                         self?: string;
                     };
@@ -3071,6 +3172,80 @@ export interface components {
                 };
             };
         };
+        /** Resource/Receipt/Fetch */
+        "resources.receipts.resource.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * referenceNumber
+                 * @example REF-26050
+                 */
+                referenceNumber?: string;
+                /**
+                 * type
+                 * @example income
+                 */
+                type?: string;
+                /**
+                 * documentDate
+                 * @example 2024-08-27 15:39:37
+                 */
+                documentDate?: string;
+                /**
+                 * amount
+                 * @example 828
+                 */
+                amount?: string;
+                /**
+                 * createdAt
+                 * @example 2025-08-25T13:06:27.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-08-25T13:06:27.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** transactions */
+                transactions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
         /** Resource/Transaction/Relationship/FinanceAccount/Fetch */
         "resources.transactions.relationship.financeAccount.fetch": {
             /**
@@ -3097,6 +3272,58 @@ export interface components {
              */
             id: string;
         };
+        /** Resource/Transaction/Relationship/Receipts/Attach */
+        "resources.transactions.relationship.receipts.attach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Transaction/Relationship/Receipts/Detach */
+        "resources.transactions.relationship.receipts.detach": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
+        /** Resource/Transaction/Relationship/Receipts/Fetch */
+        "resources.transactions.relationship.receipts.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        };
+        /** Resource/Transaction/Relationship/Receipts/Update */
+        "resources.transactions.relationship.receipts.update": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        }[];
         /** Resource/Transaction/Fetch */
         "resources.transactions.resource.fetch": {
             /**
@@ -3155,6 +3382,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** receipts */
+                receipts?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/receipts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/receipts/1
                          */
                         self?: string;
                     };
@@ -5092,24 +5334,26 @@ export interface operations {
             404: components["responses"]["404"];
         };
     };
-    "finance-contacts.update": {
+    "receipts.index": {
         parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_contact: string;
+            query?: {
+                /** @description The page size for paginated results */
+                "page[size]"?: number;
+                /** @description The page number for paginated results */
+                "page[number]"?: number;
+                sort?: ("id" | "-id" | "documentDate" | "-documentDate" | "amount" | "-amount")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+                /** @description A list of types to filter by. */
+                "filter[type]"?: string[];
             };
+            header?: never;
+            path?: never;
             cookie?: never;
         };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.finance-contacts.resource.update"];
-                };
-            };
-        };
+        requestBody?: never;
         responses: {
-            /** @description Update finance-contacts */
+            /** @description Index receipts */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -5123,7 +5367,40 @@ export interface operations {
                              */
                             version?: string;
                         };
-                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                        data: components["schemas"]["resources.receipts.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+        };
+    };
+    "receipts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                receipt: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show receipts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.receipts.resource.fetch"];
                     };
                 };
             };
@@ -5797,6 +6074,12 @@ export interface operations {
                 sort?: ("id" | "-id" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[financeAccountId]"?: string;
+                /** @description Filters the records */
+                "filter[query]"?: string;
+                /** @description Filters the records */
+                "filter[withoutReceipts]"?: string;
             };
             header?: never;
             path?: never;

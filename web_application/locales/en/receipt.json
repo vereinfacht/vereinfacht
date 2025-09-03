@@ -3,5 +3,28 @@
         "one": "Receipt",
         "other": "Receipts",
         "label": "Name"
+    },
+    "type": {
+        "label": "Type",
+        "income": "Income",
+        "expense": "Expense"
+    },
+    "document_date": {
+        "label": "Document date"
+    },
+    "reference_number": {
+        "label": "Reference number"
+    },
+    "amount": {
+        "label": "Amount"
+    },
+    "status": {
+        "label": "Status",
+        "completed": "Completed",
+        "incompleted": "Incompleted",
+        "description": {
+            "completed": "The receipt is complete.",
+            "incompleted": "The receipt is incomplete: At least one transaction must be assigned."
+        }
     }
 }

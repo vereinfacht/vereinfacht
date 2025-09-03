@@ -2,7 +2,8 @@
     "title": {
         "one": "Transaction",
         "other": "Transactions",
-        "label": "Name"
+        "label": "Name",
+        "no_receipts": "Transactions without receipts"
     },
 
     "purpose": {
@@ -24,5 +25,5 @@
         "label": "BIC"
     },
 
-    "all_accounts": "All Accounts"
+    "all_sources": "All sources"
 }

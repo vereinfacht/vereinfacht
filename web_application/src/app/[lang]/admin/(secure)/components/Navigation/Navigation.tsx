@@ -33,6 +33,10 @@ export default async function Navigation() {
                     href: '/admin/finances/transactions',
                     title: t('transaction:title.other'),
                 },
+                {
+                    href: '/admin/finances/receipts',
+                    title: t('receipt:title.other'),
+                },
                 // {
                 //     href: '/admin/dashboard',
                 //     title: t('receipt:title.other'),

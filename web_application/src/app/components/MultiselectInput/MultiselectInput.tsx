@@ -15,7 +15,8 @@ interface Props {
     options: Option[];
     label?: string | ReactNode;
     defaultValue?: Option[];
-    onChange?: () => void;
+    onChange?: (selected: Option[]) => void;
+    onQueryChange?: (query: string) => void;
     required?: boolean;
 }
 
@@ -25,10 +26,12 @@ export function filterOptionsByQuery(options: Option[], query: string) {
     }
 
     return options.filter((option) =>
-        option.label
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, '')),
+        typeof option.label === 'string'
+            ? option.label
+                  .toLowerCase()
+                  .replace(/\s+/g, '')
+                  .includes(query.toLowerCase().replace(/\s+/g, ''))
+            : option.label,
     );
 }
 
@@ -43,16 +46,19 @@ export default function MultiselectInput({
     options: unsortedOptions,
     defaultValue,
     onChange,
+    onQueryChange,
     required = false,
 }: Props) {
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
     const [query, setQuery] = useState('');
-    const filteredOptions = filterOptionsByQuery(options, query);
+    const filteredOptions = onQueryChange
+        ? options
+        : filterOptionsByQuery(options, query);
 
     useEffect(() => {
         if (onChange) {
-            onChange();
+            onChange(selected);
         }
     }, [selected, onChange]);
 
@@ -87,7 +93,14 @@ export default function MultiselectInput({
                 {({ open }) => (
                     <>
                         <div className="relative mt-1 w-full">
-                            <Input setQuery={setQuery} />
+                            <Input
+                                setQuery={(query) => {
+                                    setQuery(query);
+                                    if (onQueryChange) {
+                                        onQueryChange(query);
+                                    }
+                                }}
+                            />
                             {open && <Options options={filteredOptions} />}
                         </div>
                         {selected.length > 0 && (

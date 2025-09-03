@@ -111,7 +111,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Football',
                 ],
                 'membership_types' => [true, true, true],
-                'monthly_fee' => [200, null, null],
+                'monthly_fee' => [2, null, null],
             ],
             [
                 'title' => [
@@ -119,7 +119,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Handball',
                 ],
                 'membership_types' => [true, true, true],
-                'monthly_fee' => [200, null, null],
+                'monthly_fee' => [2, null, null],
             ],
             [
                 'title' => [
@@ -127,7 +127,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Basketball',
                 ],
                 'membership_types' => [true, true, true],
-                'monthly_fee' => [200, null, null],
+                'monthly_fee' => [2, null, null],
             ],
             [
                 'title' => [
@@ -135,7 +135,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Volleyball',
                 ],
                 'membership_types' => [true, true, true],
-                'monthly_fee' => [200, null, null],
+                'monthly_fee' => [2, null, null],
             ],
             [
                 'title' => [
@@ -143,7 +143,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Tennis',
                 ],
                 'membership_types' => [false, true, true],
-                'monthly_fee' => [500, 500, 500],
+                'monthly_fee' => [5, 5, 5],
             ],
             [
                 'title' => [
@@ -151,7 +151,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Golf',
                 ],
                 'membership_types' => [false, true, true],
-                'monthly_fee' => [750, 750, 750],
+                'monthly_fee' => [7.5, 7.5, 7.5],
             ],
             [
                 'title' => [
@@ -159,7 +159,7 @@ class DemoClubSeeder extends Seeder
                     'en' => 'Yoga Classes',
                 ],
                 'membership_types' => [true, true, true],
-                'monthly_fee' => [500, 500, 500],
+                'monthly_fee' => [5, 5, 5],
             ],
             [
                 'title' => [
@@ -187,7 +187,7 @@ class DemoClubSeeder extends Seeder
                 'minimum_number_of_months' => 1,
                 'minimum_number_of_members' => 1,
                 'maximum_number_of_members' => 1,
-                'monthly_fee' => 300,
+                'monthly_fee' => 3,
             ],
             [
                 'title' => [
@@ -201,8 +201,8 @@ class DemoClubSeeder extends Seeder
                 'minimum_number_of_months' => 3,
                 'minimum_number_of_members' => 1,
                 'maximum_number_of_members' => 1,
-                'admission_fee' => 300,
-                'monthly_fee' => 1000,
+                'admission_fee' => 3,
+                'monthly_fee' => 10,
             ],
             [
                 'title' => [
@@ -216,8 +216,8 @@ class DemoClubSeeder extends Seeder
                 'minimum_number_of_months' => 3,
                 'minimum_number_of_members' => 2,
                 'maximum_number_of_members' => 5,
-                'admission_fee' => 500,
-                'monthly_fee' => 2000,
+                'admission_fee' => 5,
+                'monthly_fee' => 20,
             ],
         ];
     }

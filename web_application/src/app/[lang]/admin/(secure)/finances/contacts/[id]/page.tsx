@@ -1,103 +1,24 @@
 import { getFinanceContact } from '@/actions/financeContacts/get';
 import { ResourceName } from '@/resources/resource';
+import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
+import { TReceiptDeserialized } from '@/types/resources';
 import { Building2, CircleUserRound } from 'lucide-react';
+import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../../components/EditButton';
 import DetailField from '../../../components/Fields/DetailField';
-import ReceiptsTable from '../_components/receipts-table';
-import createTranslation from 'next-translate/createTranslation';
+import ReceiptsTable from '../../receipts/_components/receipts-table';
 
 interface Props {
     params: ShowPageParams;
 }
 
-export type Receipt = {
-    id: string;
-    type: 'invoice' | 'ingoing_payment' | 'outgoing_payment';
-    name: string;
-    number: number;
-    total_amount: number;
-    contact_id: string;
-};
-
-const receipts: Receipt[] = [
-    {
-        id: '1',
-        type: 'invoice',
-        name: 'Miete Tennisplatz',
-        number: 123,
-        total_amount: 100.0,
-        contact_id: '1',
-    },
-    {
-        id: '2',
-        type: 'ingoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 456,
-        total_amount: 50.0,
-        contact_id: '1',
-    },
-    {
-        id: '3',
-        type: 'outgoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 456,
-        total_amount: -50.0,
-        contact_id: '1',
-    },
-    {
-        id: '4',
-        type: 'outgoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 789,
-        total_amount: -75.0,
-        contact_id: '2',
-    },
-    {
-        id: '5',
-        type: 'invoice',
-        name: 'Miete Tennisplatz',
-        number: 234,
-        total_amount: 60.0,
-        contact_id: '2',
-    },
-    {
-        id: '6',
-        type: 'ingoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 789,
-        total_amount: 30.0,
-        contact_id: '2',
-    },
-    {
-        id: '7',
-        type: 'invoice',
-        name: 'Miete Tennisplatz',
-        number: 345,
-        total_amount: 80.0,
-        contact_id: '3',
-    },
-    {
-        id: '8',
-        type: 'ingoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 123,
-        total_amount: 40.0,
-        contact_id: '3',
-    },
-    {
-        id: '9',
-        type: 'outgoing_payment',
-        name: 'Miete Tennisplatz',
-        number: 456,
-        total_amount: -20.0,
-        contact_id: '3',
-    },
-];
-
-export default async function Page({ params }: Props) {
-    const contact = await getFinanceContact({ id: params.id });
+export default async function ContactShowPage({ params }: Props) {
+    const contact = await getFinanceContact({
+        id: params.id,
+        include: ['receipts'],
+    });
 
     if (!contact) {
         notFound();
@@ -177,7 +98,7 @@ export default async function Page({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-12">
+        <div className="container flex flex-col gap-6">
             <EditButton href={`/admin/finances/contacts/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
@@ -190,7 +111,19 @@ export default async function Page({ params }: Props) {
                     />
                 ))}
             </ul>
-            <ReceiptsTable receipts={receipts} />
+            {contact.receipts ? (
+                <>
+                    <Text preset="headline" tag="h2" className="mt-6">
+                        {t('receipt:title.other')}
+                    </Text>
+                    <ReceiptsTable
+                        receipts={contact.receipts as TReceiptDeserialized[]}
+                        totalPages={Math.ceil(
+                            (contact.receipts?.length ?? 0) / 10,
+                        )}
+                    />
+                </>
+            ) : null}
         </div>
     );
 }

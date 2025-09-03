@@ -1,0 +1,64 @@
+<?php
+
+namespace App\JsonApi\V1\Receipts;
+
+use App\Models\Receipt;
+use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\StatusFilter;
+use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Filters\WhereIn;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
+
+class ReceiptSchema extends Schema
+{
+    /**
+     * The model the schema corresponds to.
+     */
+    public static string $model = Receipt::class;
+
+    /**
+     * Get the resource fields.
+     */
+    public function fields(): array
+    {
+        return [
+            ID::make(),
+            Str::make('referenceNumber'),
+            Str::make('type'),
+            DateTime::make('documentDate')->sortable(),
+            Str::make('status')->readOnly(),
+            Str::make('amount')->sortable(),
+            DateTime::make('createdAt')->readOnly(),
+            DateTime::make('updatedAt')->readOnly(),
+            BelongsTo::make('club')->type('clubs'),
+            BelongsTo::make('financeContact')->type('finance-contacts'),
+            BelongsToMany::make('transactions'),
+        ];
+    }
+
+    /**
+     * Get the resource filters.
+     */
+    public function filters(): array
+    {
+        return [
+            WhereIdIn::make($this),
+            WhereIn::make('type')->delimiter(','),
+            StatusFilter::make('status'),
+        ];
+    }
+
+    /**
+     * Get the resource paginator.
+     */
+    public function pagination(): ?Paginator
+    {
+        return PagePagination::make();
+    }
+}
