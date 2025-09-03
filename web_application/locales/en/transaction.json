@@ -2,7 +2,8 @@
     "title": {
         "one": "Transaction",
         "other": "Transactions",
-        "label": "Name"
+        "label": "Name",
+        "no_receipts": "Transactions without receipts"
     },
 
     "purpose": {

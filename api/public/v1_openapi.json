@@ -5784,6 +5784,42 @@
                                 ]
                             }
                         }
+                    },
+                    {
+                        "name": "filter[financeAccountId]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": 1
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[withoutReceipts]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

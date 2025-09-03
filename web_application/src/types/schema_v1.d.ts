@@ -5841,6 +5841,12 @@ export interface operations {
                 sort?: ("id" | "-id" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[financeAccountId]"?: string;
+                /** @description Filters the records */
+                "filter[query]"?: string;
+                /** @description Filters the records */
+                "filter[withoutReceipts]"?: string;
             };
             header?: never;
             path?: never;
