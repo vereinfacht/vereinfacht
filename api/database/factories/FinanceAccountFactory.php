@@ -18,8 +18,6 @@ class FinanceAccountFactory extends Factory
      */
     public function definition(): array
     {
-        $financeAccountType = FinanceAccountType::factory()->create();
-
         return [
             'title' => $this->faker->randomElement([
                 'Sommerfest',
@@ -31,12 +29,13 @@ class FinanceAccountFactory extends Factory
                 'Postbank',
                 'Sparkasse',
             ]),
-            'iban' => $financeAccountType->id !== 2 ? $this->faker->iban('DE') : null,
-            'bic' => $financeAccountType->id !== 2 ? $this->faker->swiftBicNumber() : null,
+            'iban' => $this->faker->iban('DE'),
+            'bic' => $this->faker->swiftBicNumber(),
             'starts_at' => $this->faker->dateTime(),
             'initial_balance' => $this->faker->randomFloat(2, -1000, 1000),
             'club_id' => Club::factory(),
-            'finance_account_type_id' => $financeAccountType->id,
+            'finance_account_type_id' => FinanceAccountType::factory(),
+
         ];
     }
 }
