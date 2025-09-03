@@ -29,8 +29,8 @@
         "completed": "Vollständig",
         "incompleted": "Unvollständig",
         "description": {
-            "completed": "Die Transaction ist vollständig.",
-            "incompleted": "Die Transaction ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
+            "completed": "Die Transaktion ist vollständig.",
+            "incompleted": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
 
     },
