@@ -10,11 +10,14 @@ export const transactionSortingOptions = [
     '-amount',
 ] as const;
 
+export const transactionStatusOptions = ['incompleted', 'completed'] as const;
+
 export const listTransactionsSchema = baseListSchema.extend({
     sort: z.array(z.enum(transactionSortingOptions)).optional(),
     filter: z
         .object({
             financeAccountId: z.string().optional(),
+            status: z.array(z.enum(transactionStatusOptions)).optional(),
         })
         .optional(),
 });

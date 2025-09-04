@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
+use App\Enums\ReceiptStatusEnum;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -50,7 +51,15 @@ class ReceiptSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('type')->delimiter(','),
-            StatusFilter::make('status'),
+            StatusFilter::make(
+                'status',
+                null,
+                'transactions',
+                [
+                    ReceiptStatusEnum::COMPLETED->value => 'has',
+                    ReceiptStatusEnum::INCOMPLETED->value => 'doesnt_have',
+                ]
+            ),
         ];
     }
 

@@ -61,7 +61,7 @@ export default function AccountCard({ balance, account, title }: Props) {
                     </button>
                 </div>
             </CardHeader>
-            {readableIban !== undefined && (
+            {readableIban !== undefined && account?.type?.id !== '2' && (
                 <CardContent className="flex w-full items-end justify-between space-x-2 p-4 pb-3 pt-1">
                     <Text
                         preset="body-sm"

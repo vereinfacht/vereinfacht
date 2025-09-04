@@ -5972,6 +5972,16 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[status]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

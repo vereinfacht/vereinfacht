@@ -2,7 +2,6 @@
 
 namespace App\JsonApi\Filters;
 
-use App\Enums\ReceiptStatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Contracts\Filter;
 use LaravelJsonApi\Eloquent\Filters\Concerns\IsSingular;
@@ -13,69 +12,60 @@ class StatusFilter implements Filter
     use DeserializesValue;
     use IsSingular;
 
-    /**
-     * @var string
-     */
     private string $name;
+    private ?string $column = null;
+    private ?string $relationship = null;
+    private ?array $statusMap = null;
 
     /**
-     * @var string
+     * Create a new filter instance.
      */
-    private string $column;
-
-    /**
-     * Create a new filter.
-     *
-     * @param string $name
-     * @return StatusFilter
-     */
-    public static function make(string $name): self
-    {
-        return new static($name);
+    public static function make(
+        string $name,
+        ?string $column = null,
+        ?string $relationship = null,
+        ?array $statusMap = null
+    ): self {
+        return new static($name, $column, $relationship, $statusMap);
     }
 
-    /**
-     * StatusFilter constructor.
-     *
-     * @param string $name
-     */
-    public function __construct(string $name)
-    {
+    public function __construct(
+        string $name,
+        ?string $column = null,
+        ?string $relationship = null,
+        ?array $statusMap = null
+    ) {
         $this->name = $name;
+        $this->column = $column;
+        $this->relationship = $relationship;
+        $this->statusMap = $statusMap;
     }
 
-    /**
-     * Get the key for the filter.
-     *
-     * @return string
-     */
     public function key(): string
     {
         return $this->name;
     }
 
-    /**
-     * Apply the filter to the query.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param mixed $value
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function apply($query, $value)
     {
         $statuses = $this->deserialize($value);
-
         if (!is_array($statuses)) {
             $statuses = [$statuses];
         }
 
-        $query->where(function (Builder $builder) use ($statuses) {
-            if (in_array(ReceiptStatusEnum::INCOMPLETED->value, $statuses, true)) {
-                $builder->orDoesntHave('transactions');
-            }
-            if (in_array(ReceiptStatusEnum::COMPLETED->value, $statuses, true)) {
-                $builder->orHas('transactions');
-            }
-        });
+        if ($this->relationship && $this->statusMap) {
+            $query->where(function (Builder $builder) use ($statuses) {
+                foreach ($statuses as $status) {
+                    $condition = $this->statusMap[$status] ?? null;
+                    if ($condition === 'has') {
+                        $builder->orHas($this->relationship);
+                    } elseif ($condition === 'doesnt_have') {
+                        $builder->orDoesntHave($this->relationship);
+                    }
+                }
+            });
+        } elseif ($this->column) {
+            $query->whereIn($this->column, $statuses);
+        }
     }
 }

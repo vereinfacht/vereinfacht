@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Casts\MoneyCast;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\TransactionStatusEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -30,6 +31,11 @@ class Transaction extends Model
             'updated_at' => 'datetime',
             'amount' => MoneyCast::class,
         ];
+    }
+
+    public function getStatusAttribute(): string
+    {
+        return $this->receipts()->exists() ? TransactionStatusEnum::COMPLETED->value : TransactionStatusEnum::INCOMPLETED->value;
     }
 
     /**
