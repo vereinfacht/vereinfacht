@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use LaravelJsonApi\Core\Document\Error;
-use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Responses\DataResponse;
+use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
 class UserController extends Controller
@@ -53,6 +54,15 @@ class UserController extends Controller
                 'status' => 422,
                 'detail' => "User could not be logged out: {$th->getMessage()}}",
             ]));
+        }
+    }
+
+    protected function creating($request, $model): void
+    {
+        $password = $request->input('data.attributes.password');
+
+        if ($password) {
+            $model->password = Hash::make($password);
         }
     }
 }
