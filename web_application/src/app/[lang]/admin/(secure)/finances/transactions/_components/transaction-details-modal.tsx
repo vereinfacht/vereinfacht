@@ -133,14 +133,6 @@ export default function TransactionDetailsModal({
                                         {transaction.financeAccount?.iban}
                                     </p>
                                 </div>
-                                <div>
-                                    <label className="text-muted-foreground text-sm font-medium">
-                                        {t('transaction:bic.label')}
-                                    </label>
-                                    <p className="bg-muted text-muted-foreground mt-1 rounded font-mono text-sm">
-                                        {transaction.financeAccount?.bic}
-                                    </p>
-                                </div>
                             </div>
                         </CardContent>
                     </Card>

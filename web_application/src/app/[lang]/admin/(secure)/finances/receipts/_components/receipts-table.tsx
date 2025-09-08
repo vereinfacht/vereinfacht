@@ -48,20 +48,22 @@ export default function ReceiptsTable({
     const { t } = useTranslation();
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
-            accessorKey: 'type',
+            accessorKey: 'receiptType',
             header: ({ column }) =>
                 extended ? (
                     <HeaderOptionFilter
                         options={receiptTypeOptions ?? []}
-                        parser={listReceiptSearchParams.type}
+                        parser={listReceiptSearchParams.receiptType}
                         paramKey={column.id}
-                        translationKey={'receipt:type'}
+                        translationKey={'receipt:receipt_type'}
                     />
                 ) : (
-                    t('receipt:type.label')
+                    t('receipt:receipt_type.label')
                 ),
             cell: ({ row }) => (
-                <TextCell>{t('receipt:type.' + row.getValue('type'))}</TextCell>
+                <TextCell>
+                    {t('receipt:receipt_type.' + row.getValue('receiptType'))}
+                </TextCell>
             ),
         },
         {

@@ -444,7 +444,8 @@ export interface paths {
         /** Get all receipts */
         get: operations["receipts.index"];
         put?: never;
-        post?: never;
+        /** Store one receipt */
+        post: operations["receipts.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -465,7 +466,8 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        patch?: never;
+        /** Update one receipt */
+        patch: operations["receipts.update"];
         trace?: never;
     };
     "/finance-accounts": {
@@ -1472,11 +1474,6 @@ export interface components {
                  */
                 iban?: string;
                 /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
-                /**
                  * initialBalance
                  * @example 29976
                  */
@@ -1570,11 +1567,6 @@ export interface components {
                  * @example VG13XCRJ2733001449577688
                  */
                 iban?: string;
-                /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
                 /**
                  * initialBalance
                  * @example 29976
@@ -1671,11 +1663,6 @@ export interface components {
                  * @example VG13XCRJ2733001449577688
                  */
                 iban?: string;
-                /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
                 /**
                  * initialBalance
                  * @example 29976
@@ -3067,32 +3054,37 @@ export interface components {
             attributes: {
                 /**
                  * referenceNumber
-                 * @example REF-26050
+                 * @example REF-51209
                  */
                 referenceNumber?: string;
                 /**
-                 * type
+                 * receiptType
                  * @example income
                  */
-                type?: string;
+                receiptType?: string;
                 /**
                  * documentDate
-                 * @example 2024-08-27 15:39:37
+                 * @example 2024-12-07 10:50:34
                  */
                 documentDate?: string;
                 /**
+                 * status
+                 * @example completed
+                 */
+                readonly status?: string;
+                /**
                  * amount
-                 * @example 828
+                 * @example 169
                  */
                 amount?: string;
                 /**
                  * createdAt
-                 * @example 2025-08-25T13:06:27.000000Z
+                 * @example 2025-09-05T12:41:06.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-08-25T13:06:27.000000Z
+                 * @example 2025-09-05T12:41:06.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3108,6 +3100,192 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** transactions */
+                transactions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Receipt/Store */
+        "resources.receipts.resource.store": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            attributes: {
+                /**
+                 * referenceNumber
+                 * @example REF-51209
+                 */
+                referenceNumber?: string;
+                /**
+                 * receiptType
+                 * @example income
+                 */
+                receiptType?: string;
+                /**
+                 * documentDate
+                 * @example 2024-12-07 10:50:34
+                 */
+                documentDate?: string;
+                /**
+                 * status
+                 * @example completed
+                 */
+                readonly status?: string;
+                /**
+                 * amount
+                 * @example 169
+                 */
+                amount?: string;
+                /**
+                 * createdAt
+                 * @example 2025-09-05T12:41:06.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-09-05T12:41:06.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** financeContact */
+                financeContact?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** transactions */
+                transactions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Receipt/Update */
+        "resources.receipts.resource.update": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * referenceNumber
+                 * @example REF-51209
+                 */
+                referenceNumber?: string;
+                /**
+                 * receiptType
+                 * @example income
+                 */
+                receiptType?: string;
+                /**
+                 * documentDate
+                 * @example 2024-12-07 10:50:34
+                 */
+                documentDate?: string;
+                /**
+                 * status
+                 * @example completed
+                 */
+                readonly status?: string;
+                /**
+                 * amount
+                 * @example 169
+                 */
+                amount?: string;
+                /**
+                 * createdAt
+                 * @example 2025-09-05T12:41:06.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2025-09-05T12:41:06.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** financeContact */
+                financeContact?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/1
                          */
                         self?: string;
                     };
@@ -5267,8 +5445,10 @@ export interface operations {
                 sort?: ("id" | "-id" | "documentDate" | "-documentDate" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
-                /** @description A list of types to filter by. */
-                "filter[type]"?: string[];
+                /** @description Filters the records */
+                "filter[status]"?: string;
+                /** @description A list of receiptTypes to filter by. */
+                "filter[receiptType]"?: string[];
             };
             header?: never;
             path?: never;
@@ -5298,6 +5478,44 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "receipts.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.receipts.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store receipts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.receipts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "receipts.show": {
         parameters: {
             query?: never;
@@ -5310,6 +5528,46 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show receipts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.receipts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "receipts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                receipt: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.receipts.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update receipts */
             200: {
                 headers: {
                     [name: string]: unknown;

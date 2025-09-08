@@ -31,7 +31,7 @@ class ReceiptSchema extends Schema
         return [
             ID::make(),
             Str::make('referenceNumber'),
-            Str::make('type'),
+            Str::make('receiptType'),
             DateTime::make('documentDate')->sortable(),
             Str::make('status')->readOnly(),
             Str::make('amount')->sortable(),
@@ -50,7 +50,6 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            WhereIn::make('type')->delimiter(','),
             StatusFilter::make(
                 'status',
                 null,
@@ -60,6 +59,7 @@ class ReceiptSchema extends Schema
                     ReceiptStatusEnum::INCOMPLETED->value => 'doesnt_have',
                 ]
             ),
+            WhereIn::make('receiptType')->delimiter(','),
         ];
     }
 
@@ -69,5 +69,14 @@ class ReceiptSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+
+    public function includePaths(): array
+    {
+        return [
+            'transactions',
+            'financeContact',
+        ];
     }
 }

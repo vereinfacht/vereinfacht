@@ -4,7 +4,7 @@
         "other": "Receipts",
         "label": "Name"
     },
-    "type": {
+    "receipt_type": {
         "label": "Type",
         "income": "Income",
         "expense": "Expense"
