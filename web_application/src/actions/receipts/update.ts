@@ -10,11 +10,11 @@ export const updateReceipt = createAuthenticatedAction(
     'receipts',
     updateReceiptSchema,
     async (body, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.PATCH('/receipts/{receipt}', {
             params: {
                 path: { receipt: body.data.id },
             },
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 
