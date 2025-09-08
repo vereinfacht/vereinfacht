@@ -1474,11 +1474,6 @@ export interface components {
                  */
                 iban?: string;
                 /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
-                /**
                  * initialBalance
                  * @example 29976
                  */
@@ -1572,11 +1567,6 @@ export interface components {
                  * @example VG13XCRJ2733001449577688
                  */
                 iban?: string;
-                /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
                 /**
                  * initialBalance
                  * @example 29976
@@ -1673,11 +1663,6 @@ export interface components {
                  * @example VG13XCRJ2733001449577688
                  */
                 iban?: string;
-                /**
-                 * bic
-                 * @example DFHONZXJWZ6
-                 */
-                bic?: string;
                 /**
                  * initialBalance
                  * @example 29976

@@ -70,4 +70,13 @@ class ReceiptSchema extends Schema
     {
         return PagePagination::make();
     }
+
+
+    public function includePaths(): array
+    {
+        return [
+            'transactions',
+            'financeContact',
+        ];
+    }
 }

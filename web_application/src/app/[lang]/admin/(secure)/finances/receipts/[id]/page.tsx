@@ -1,9 +1,12 @@
 import { getReceipt } from '@/actions/receipts/get';
+import Text from '@/app/components/Text/Text';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
+import { TTransactionDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
+import TransactionsTable from '../../transactions/_components/transactions-table';
 
 interface Props {
     params: ShowPageParams;
@@ -13,9 +16,9 @@ export default async function ReceiptShowPage({ params }: Props) {
     const receipt = await Promise.all([
         getReceipt({
             id: params.id,
+            include: ['transactions'],
         }),
     ]);
-
     if (!receipt) {
         notFound();
     }
@@ -44,7 +47,7 @@ export default async function ReceiptShowPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-12">
+        <div className="container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
                     <DetailField
@@ -55,6 +58,22 @@ export default async function ReceiptShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
+            {receipt[0]?.transactions ? (
+                <>
+                    <Text preset="headline" tag="h2" className="mt-6">
+                        {t('transaction:title.other')}
+                    </Text>
+                    <TransactionsTable
+                        transactions={
+                            receipt[0]
+                                ?.transactions as TTransactionDeserialized[]
+                        }
+                        totalPages={Math.ceil(
+                            (receipt[0]?.transactions?.length ?? 0) / 10,
+                        )}
+                    />
+                </>
+            ) : null}
         </div>
     );
 }
