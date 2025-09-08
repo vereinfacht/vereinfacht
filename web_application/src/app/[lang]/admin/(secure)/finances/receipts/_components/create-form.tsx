@@ -6,10 +6,18 @@ import TextInput from '@/app/components/Input/TextInput';
 import { TReceiptDeserialized } from '@/types/resources';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
-import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
+import { useState } from 'react';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipPrimitive,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/app/components/ui/tooltip';
+import { CircleCheck, CircleDashed } from 'lucide-react';
 
 interface Props {
     action: (
@@ -27,8 +35,7 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
 
-    const [amount, setAmount] = useState<number>(0);
-    const receiptTypeValue = amount >= 0 ? 'income' : 'expense';
+    const [selectedTransactions, setSelectedTransactions] = useState<number>(0);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         {
@@ -44,22 +51,21 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="receipt"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                <SelectInput
+                    id="receipt-type"
+                    name="receiptType"
+                    label={t('receipt:receipt_type.label')}
+                    options={receiptTypeOptions}
+                    value={data?.receiptType}
+                    required
+                />
                 <TextInput
                     id="amount"
                     name="amount"
                     label={t('receipt:amount.label')}
                     type="number"
                     required
-                    defaultValue={data?.amount ?? 0}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                />
-                <SelectInput
-                    id="receipt-type"
-                    name="receiptType"
-                    label={t('receipt:receipt_type.label')}
-                    options={receiptTypeOptions}
-                    value={data?.receiptType ?? receiptTypeValue}
-                    required
+                    defaultValue={data?.amount}
                 />
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
@@ -86,8 +92,42 @@ export default function CreateForm({ data, action }: Props) {
                 <BelongsToMultiselectInput
                     id="transactions"
                     name="transactions"
-                    label={t('transaction:title.no_receipts')}
                     resource="transactions"
+                    label={
+                        <div className="flex items-center gap-2">
+                            <span>{t('transaction:title.no_receipts')}</span>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger
+                                        asChild
+                                        className="cursor-help"
+                                    >
+                                        {selectedTransactions > 0 ? (
+                                            <CircleCheck className="h-4 w-4 text-green-600" />
+                                        ) : (
+                                            <CircleDashed className="h-4 w-4 text-slate-600" />
+                                        )}
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        {t(
+                                            'receipt:status.description.' +
+                                                (selectedTransactions > 0
+                                                    ? 'completed'
+                                                    : 'incompleted'),
+                                        )}
+                                        <TooltipPrimitive.Arrow
+                                            fill="white"
+                                            width={11}
+                                            height={5}
+                                        />
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        </div>
+                    }
+                    onChange={(selected) =>
+                        setSelectedTransactions(selected.length)
+                    }
                 />
             </div>
         </ActionForm>

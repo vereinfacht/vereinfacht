@@ -109,24 +109,22 @@ export default function MultiselectInput({
                                 handleRemove={handleRemove}
                             />
                         )}
-                        {required && (
-                            <input
-                                type="text"
-                                name={name}
-                                value={
-                                    selected.length
-                                        ? JSON.stringify(
-                                              selected.map(
-                                                  (option) => option.value,
-                                              ),
-                                          )
-                                        : ''
-                                }
-                                required
-                                className="pointer-events-none absolute opacity-0"
-                                tabIndex={-1}
-                            />
-                        )}
+                        <input
+                            type="text"
+                            name={name}
+                            value={
+                                selected.length
+                                    ? JSON.stringify(
+                                          selected.map(
+                                              (option) => option.value,
+                                          ),
+                                      )
+                                    : ''
+                            }
+                            required={required}
+                            className="pointer-events-none absolute opacity-0"
+                            tabIndex={-1}
+                        />
                     </>
                 )}
             </Combobox>
