@@ -540,41 +540,6 @@ export interface paths {
         patch: operations["finance-accounts.club.update"];
         trace?: never;
     };
-    "/finance-accounts/{finance_account}/types": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show types */
-        get: operations["finance-accounts.types"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/finance-accounts/{finance_account}/relationships/types": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show types relation */
-        get: operations["finance-accounts.types.show"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /** Update types relation */
-        patch: operations["finance-accounts.types.update"];
-        trace?: never;
-    };
     "/finance-accounts/{finance_account}/transactions": {
         parameters: {
             query?: never;
@@ -610,40 +575,6 @@ export interface paths {
         head?: never;
         /** Update transactions relation */
         patch: operations["finance-accounts.transactions.update"];
-        trace?: never;
-    };
-    "/finance-account-types": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all finance-account-types */
-        get: operations["finance-account-types.index"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/finance-account-types/{finance_account_type}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show one finance-account-type */
-        get: operations["finance-account-types.show"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
         trace?: never;
     };
     "/transactions": {
@@ -1437,28 +1368,6 @@ export interface components {
                 };
             };
         };
-        /** Resource/Finance-account-type/Fetch */
-        "resources.finance-account-types.resource.fetch": {
-            /**
-             * type
-             * @default finance-account-types
-             */
-            type: string;
-            /** @example 1 */
-            id: string;
-            attributes: {
-                /**
-                 * title
-                 * @example Cashier
-                 */
-                title?: string;
-                /**
-                 * titleTranslations
-                 * @example Cashier
-                 */
-                titleTranslations?: Record<string, never>;
-            };
-        };
         /** Resource/Finance-account/Relationship/Club/Fetch */
         "resources.finance-accounts.relationship.club.fetch": {
             /**
@@ -1537,32 +1446,6 @@ export interface components {
              */
             id: string;
         }[];
-        /** Resource/Finance-account/Relationship/Types/Fetch */
-        "resources.finance-accounts.relationship.types.fetch": {
-            /**
-             * type
-             * @default finance-account-types
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        };
-        /** Resource/Finance-account/Relationship/Types/Update */
-        "resources.finance-accounts.relationship.types.update": {
-            /**
-             * type
-             * @default finance-account-types
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        };
         /** Resource/Finance-account/Fetch */
         "resources.finance-accounts.resource.fetch": {
             /**
@@ -1578,6 +1461,11 @@ export interface components {
                  * @example finance acount voluptas
                  */
                 title?: string;
+                /**
+                 * title
+                 * @example bank_account
+                 */
+                accountType?: string;
                 /**
                  * iban
                  * @example VG13XCRJ2733001449577688
@@ -1672,6 +1560,11 @@ export interface components {
                  * @example finance acount voluptas
                  */
                 title?: string;
+                /**
+                 * title
+                 * @example bank_account
+                 */
+                accountType?: string;
                 /**
                  * iban
                  * @example VG13XCRJ2733001449577688
@@ -1769,6 +1662,11 @@ export interface components {
                  */
                 title?: string;
                 /**
+                 * title
+                 * @example bank_account
+                 */
+                accountType?: string;
+                /**
                  * iban
                  * @example VG13XCRJ2733001449577688
                  */
@@ -1813,21 +1711,6 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/clubs/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** types */
-                types?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/types/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/types/1
                          */
                         self?: string;
                     };
@@ -5334,6 +5217,46 @@ export interface operations {
             404: components["responses"]["404"];
         };
     };
+    "finance-contacts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "receipts.index": {
         parameters: {
             query?: {
@@ -5692,115 +5615,6 @@ export interface operations {
             422: components["responses"]["422"];
         };
     };
-    "finance-accounts.types": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_account: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description ShowRelated finance-accounts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-account-types.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-accounts.types.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_account: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Show finance-accounts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-accounts.relationship.types.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-accounts.types.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_account: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.finance-accounts.relationship.types.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update finance-accounts */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-accounts.relationship.types.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-            422: components["responses"]["422"];
-        };
-    };
     "finance-accounts.transactions": {
         parameters: {
             query?: never;
@@ -5989,79 +5803,6 @@ export interface operations {
             401: components["responses"]["401"];
             404: components["responses"]["404"];
             422: components["responses"]["422"];
-        };
-    };
-    "finance-account-types.index": {
-        parameters: {
-            query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
-                sort?: ("id" | "-id")[];
-                /** @description A list of ids to filter by. */
-                "filter[id]"?: string[];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Index finance-account-types */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-account-types.resource.fetch"][];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-        };
-    };
-    "finance-account-types.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_account_type: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Show finance-account-types */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.finance-account-types.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
         };
     };
     "transactions.index": {

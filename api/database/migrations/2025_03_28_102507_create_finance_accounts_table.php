@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,7 +14,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-
+            $table->string('account_type');
             $table->string('iban')->nullable();
             $table->string('bic')->nullable();
             $table->timestamp('starts_at')->nullable();
@@ -24,10 +23,8 @@ return new class extends Migration
             $table->foreignId('club_id')
                 ->constrained('clubs')
                 ->cascadeOnDelete();
-            $table->foreignId('finance_account_type_id')
-                ->constrained('finance_account_types')
-                ->cascadeOnDelete();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

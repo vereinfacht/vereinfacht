@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use LaravelJsonApi\Eloquent\SoftDeletes;
 
 class FinanceAccount extends Model
 {
     /** @use HasFactory<\Database\Factories\FinanceAccountFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -17,8 +19,8 @@ class FinanceAccount extends Model
         'bic',
         'starts_at',
         'initial_balance',
+        'account_type',
         'club_id',
-        'finance_account_type_id',
     ];
 
     public function casts()
@@ -30,11 +32,6 @@ class FinanceAccount extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
-    }
-
-    public function type()
-    {
-        return $this->belongsTo(FinanceAccountType::class, 'finance_account_type_id');
     }
 
     public function club()

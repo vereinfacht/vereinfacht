@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function AccountCard({ balance, account, title }: Props) {
-    const { lang } = useTranslation();
+    const { t } = useTranslation();
     const [accountId, setAccountId] = useQueryState('accountId', {
         shallow: false,
     });
@@ -61,16 +61,17 @@ export default function AccountCard({ balance, account, title }: Props) {
                     </button>
                 </div>
             </CardHeader>
-            {readableIban !== undefined && account?.type?.id !== '2' && (
-                <CardContent className="flex w-full items-end justify-between space-x-2 p-4 pb-3 pt-1">
-                    <Text
-                        preset="body-sm"
-                        className="whitespace-nowrap text-slate-600"
-                    >
-                        {readableIban}
-                    </Text>
-                </CardContent>
-            )}
+            {readableIban !== undefined &&
+                account?.accountType === 'bank_account' && (
+                    <CardContent className="flex w-full items-end justify-between space-x-2 p-4 pb-3 pt-1">
+                        <Text
+                            preset="body-sm"
+                            className="whitespace-nowrap text-slate-600"
+                        >
+                            {readableIban}
+                        </Text>
+                    </CardContent>
+                )}
             <CardFooter className="flex w-full items-end justify-between space-x-2 p-4 pt-1">
                 {account !== undefined && (
                     <div className="flex items-center space-x-2">
@@ -79,10 +80,12 @@ export default function AccountCard({ balance, account, title }: Props) {
                             className="whitespace-nowrap text-slate-600"
                         >
                             <Text preset="body-sm">
-                                {account.type?.titleTranslations?.[lang]}
+                                {t(
+                                    `finance_account:account_type.${account.accountType}`,
+                                )}
                             </Text>
                         </Badge>
-                        {cardId !== null && <SettingsDropdown />}
+                        <SettingsDropdown account={account} />
                     </div>
                 )}
                 <CurrencyText

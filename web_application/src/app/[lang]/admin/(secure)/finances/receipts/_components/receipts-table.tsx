@@ -179,7 +179,7 @@ export default function ReceiptsTable({
             },
         };
 
-        columns.splice(columns.length - 1, 0, financeContactColumn);
+        columns.splice(columns.length - 2, 0, financeContactColumn);
     }
 
     return (
