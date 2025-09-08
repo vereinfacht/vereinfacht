@@ -4230,9 +4230,19 @@
                         }
                     },
                     {
-                        "name": "filter[type]",
+                        "name": "filter[status]",
                         "in": "query",
-                        "description": "A list of types to filter by.",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[receiptType]",
+                        "in": "query",
+                        "description": "A list of receiptTypes to filter by.",
                         "required": false,
                         "allowEmptyValue": false,
                         "style": "form",
@@ -4249,9 +4259,6 @@
                         "examples": {
                             "income": {
                                 "value": "income"
-                            },
-                            "expense": {
-                                "value": "expense"
                             }
                         }
                     }
@@ -4296,6 +4303,71 @@
                         "$ref": "#\/components\/responses\/401"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Store one receipt",
+                "description": "",
+                "operationId": "receipts.store",
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.receipts.resource.store"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Store receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         },
         "\/receipts\/{receipt}": {
@@ -4331,6 +4403,93 @@
                 "responses": {
                     "200": {
                         "description": "Show receipts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Receipts"
+                ],
+                "summary": "Update one receipt",
+                "description": "",
+                "operationId": "receipts.update",
+                "parameters": [
+                    {
+                        "name": "receipt",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.receipts.resource.update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update receipts",
                         "content": {
                             "application\/vnd.api+json": {
                                 "schema": {
@@ -9984,34 +10143,40 @@
                             "referenceNumber": {
                                 "title": "referenceNumber",
                                 "type": "string",
-                                "example": "REF-26050"
+                                "example": "REF-51209"
                             },
-                            "type": {
-                                "title": "type",
+                            "receiptType": {
+                                "title": "receiptType",
                                 "type": "string",
                                 "example": "income"
                             },
                             "documentDate": {
                                 "title": "documentDate",
                                 "type": "string",
-                                "example": "2024-08-27 15:39:37"
+                                "example": "2024-12-07 10:50:34"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "completed"
                             },
                             "amount": {
                                 "title": "amount",
                                 "type": "string",
-                                "example": 828
+                                "example": 169
                             },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-08-25T13:06:27.000000Z"
+                                "example": "2025-09-05T12:41:06.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-08-25T13:06:27.000000Z"
+                                "example": "2025-09-05T12:41:06.000000Z"
                             }
                         }
                     },
@@ -10034,6 +10199,269 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "transactions": {
+                                "title": "transactions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.receipts.resource.store": {
+                "title": "Resource\/Receipt\/Store",
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "referenceNumber": {
+                                "title": "referenceNumber",
+                                "type": "string",
+                                "example": "REF-51209"
+                            },
+                            "receiptType": {
+                                "title": "receiptType",
+                                "type": "string",
+                                "example": "income"
+                            },
+                            "documentDate": {
+                                "title": "documentDate",
+                                "type": "string",
+                                "example": "2024-12-07 10:50:34"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "completed"
+                            },
+                            "amount": {
+                                "title": "amount",
+                                "type": "string",
+                                "example": 169
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-05T12:41:06.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-05T12:41:06.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "financeContact": {
+                                "title": "financeContact",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-contacts\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-contacts\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "transactions": {
+                                "title": "transactions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.receipts.resource.update": {
+                "title": "Resource\/Receipt\/Update",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "referenceNumber": {
+                                "title": "referenceNumber",
+                                "type": "string",
+                                "example": "REF-51209"
+                            },
+                            "receiptType": {
+                                "title": "receiptType",
+                                "type": "string",
+                                "example": "income"
+                            },
+                            "documentDate": {
+                                "title": "documentDate",
+                                "type": "string",
+                                "example": "2024-12-07 10:50:34"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "completed"
+                            },
+                            "amount": {
+                                "title": "amount",
+                                "type": "string",
+                                "example": 169
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-05T12:41:06.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2025-09-05T12:41:06.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "financeContact": {
+                                "title": "financeContact",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-contacts\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-contacts\/1"
                                             }
                                         },
                                         "readOnly": true
