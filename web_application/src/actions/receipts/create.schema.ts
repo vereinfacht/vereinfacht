@@ -7,9 +7,9 @@ export const createReceiptSchema = z.object({
         type: z.literal('receipts'),
         attributes: z.object({
             receiptType: z.enum(receiptType),
-            referenceNumber: z.string().min(2).max(255).optional(),
-            documentDate: z.date(),
-            amount: z.number(),
+            referenceNumber: z.string().min(2).max(255),
+            documentDate: z.string(),
+            amount: z.string(),
         }),
         relationships: z.object({
             club: z.object({
@@ -18,6 +18,16 @@ export const createReceiptSchema = z.object({
                     type: z.literal('clubs'),
                 }),
             }),
+            transactions: z
+                .object({
+                    data: z.array(
+                        z.object({
+                            id: z.string(),
+                            type: z.literal('transactions'),
+                        }),
+                    ),
+                })
+                .optional(),
         }),
     }),
 });

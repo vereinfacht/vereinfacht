@@ -24,8 +24,8 @@ export default async function ReceiptShowPage({ params }: Props) {
 
     const fields = [
         {
-            attribute: 'type',
-            value: t(`type.${receipt[0]?.type}`),
+            attribute: 'receiptType',
+            value: t(`receipt:receipt_type.${receipt[0]?.receiptType}`),
         },
         {
             attribute: 'referenceNumber',
