@@ -10,6 +10,10 @@ export const BUTTON_PRESETS = {
         'px-9 bg-slate-400 text-slate-900 shadow-button transform hover:shadow-none hover:translate-y-[4px] disabled:shadow-button disabled:translate-y-0',
     secondary:
         'rounded-none px-4 text-slate-600 hover:text-slate-900 disabled:text-slate-600',
+    destructive:
+        'px-9 bg-red-400 text-white shadow-button shadow-red-500/50 transform hover:shadow-none hover:translate-y-[4px] disabled:shadow-button disabled:translate-y-0',
+    outline:
+        'px-4 text-blue-500 hover:bg-blue-500 hover:text-white disabled:text-slate-600 border-blue-500 border-2',
 };
 
 export type ButtonPresets = keyof typeof BUTTON_PRESETS;

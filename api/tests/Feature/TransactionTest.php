@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -16,16 +15,9 @@ class TransactionTest extends TestCase
     public function test_club_can_only_get_own_transactions()
     {
         $club = Club::factory()->create();
-        $financeAccountType = FinanceAccountType::factory()->create([
-            'title' => [
-                'en' => 'Test Account Type',
-                'de' => 'Test Account Type',
-            ],
-        ]);
 
         $financeAccount = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $financeAccountType->id,
+            'club_id' => $club->id
         ]);
         $transactions = Transaction::factory()->count(3)->create([
             'club_id' => $club->id,

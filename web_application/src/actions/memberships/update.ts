@@ -1,15 +1,13 @@
 'use server';
 
-import { ibanPattern } from '@/utils/patterns';
 import { revalidateTag } from 'next/cache';
 import { z } from 'zod';
 import { update } from '../updateAdminResources';
 import { ActionState, validateAndRunAction } from '../validateForm';
+import { ibanSchema } from '../financeAccounts/create.schema';
 
 const updateMembershipSchema = z.object({
-    bankIban: z.string().regex(ibanPattern, {
-        message: 'error:validation.iban',
-    }),
+    bankIban: ibanSchema,
     bankAccountHolder: z.string().min(2).max(255),
     startedAt: z.coerce.date(),
     endedAt: z.coerce.date().optional().or(z.literal('')),

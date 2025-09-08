@@ -4,7 +4,6 @@ namespace Tests\Unit;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -23,21 +22,6 @@ class FinanceAccountTest extends TestCase
 
         $this->assertEquals('Test Account', $financeAccount->title);
         $this->assertEquals($club->id, $financeAccount->club_id);
-    }
-
-    public function test_a_finance_account_has_a_finance_account_type(): void
-    {
-        $club = Club::factory()->create();
-        $financeAccountType = FinanceAccountType::factory()->create([
-            'title' => 'Test Account Type',
-        ]);
-        $financeAccount = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $financeAccountType->id,
-        ]);
-
-        $this->assertEquals('Test Account Type', $financeAccount->type->title);
-        $this->assertEquals($financeAccountType->id, $financeAccount->type->id);
     }
 
     public function test_a_finance_account_has_many_transactions(): void

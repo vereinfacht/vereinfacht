@@ -28,9 +28,9 @@ class FinanceAccountSchema extends Schema
     {
         return [
             ID::make(),
+            Str::make('accountType'),
             Str::make('title'),
             Str::make('iban'),
-            Str::make('bic'),
             Number::make('initialBalance'),
             Number::make('currentBalance')->extractUsing(
                 static fn($model) => $model->getCurrentBalance()
@@ -39,7 +39,6 @@ class FinanceAccountSchema extends Schema
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsTo::make('club')->type('clubs'),
-            BelongsTo::make('type')->type('finance-account-types'),
             HasMany::make('transactions')->type('transactions'),
         ];
     }

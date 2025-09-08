@@ -9,7 +9,7 @@ import SubmitButton from './SubmitButton';
 interface Props extends PropsWithChildren {
     state: FormActionState;
     action: (payload: FormData) => void;
-    isCreate: boolean;
+    type: 'create' | 'update' | 'delete';
     redirectPath?: string;
     translationKey: string;
 }
@@ -17,7 +17,7 @@ interface Props extends PropsWithChildren {
 export default function ActionForm({
     state,
     action,
-    isCreate,
+    type,
     children,
     redirectPath,
     translationKey,
@@ -30,7 +30,7 @@ export default function ActionForm({
                 state={state}
                 translationKey={translationKey}
                 redirectPath={redirectPath}
-                isCreate={isCreate}
+                type={type}
             />
             {children}
             <div className="flex gap-4 self-end">
