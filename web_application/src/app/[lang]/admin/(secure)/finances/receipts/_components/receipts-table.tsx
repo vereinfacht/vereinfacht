@@ -48,7 +48,7 @@ export default function ReceiptsTable({
     const { t } = useTranslation();
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
-            accessorKey: 'type',
+            accessorKey: 'receiptType',
             header: ({ column }) =>
                 extended ? (
                     <HeaderOptionFilter
