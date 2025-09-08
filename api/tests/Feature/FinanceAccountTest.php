@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -16,17 +15,9 @@ class FinanceAccountTest extends TestCase
     public function test_api_can_get_finance_accounts_for_club()
     {
         $club = Club::factory()->create();
-        $type = FinanceAccountType::factory()->create([
-            'title' => [
-                'en' => 'Sparkasse en',
-                'de' => 'Sparkasse de',
-            ],
-        ]);
 
         $financeAccount = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $type->id,
-            'title' => 'Sparkassen Konto',
+            'club_id' => $club->id
         ]);
 
         $this
@@ -41,16 +32,9 @@ class FinanceAccountTest extends TestCase
     public function test_api_can_get_transactions_for_a_finance_account()
     {
         $club = Club::factory()->create();
-        $financeAccountType = FinanceAccountType::factory()->create([
-            'title' => [
-                'en' => 'Test Account Type',
-                'de' => 'Test Account Type',
-            ],
-        ]);
 
         $financeAccount = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $financeAccountType->id,
+            'club_id' => $club->id
         ]);
         $transactions = Transaction::factory()->count(3)->create([
             'club_id' => $club->id,

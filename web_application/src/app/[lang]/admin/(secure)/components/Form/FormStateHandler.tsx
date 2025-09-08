@@ -14,14 +14,16 @@ interface Props {
     state: FormActionState;
     translationKey: string;
     redirectPath?: string;
-    isCreate: boolean;
+    type?: 'create' | 'update' | 'delete';
+    customNotificationTranslationKey?: string;
 }
 
 export default function FormStateHandler({
     state,
-    isCreate,
+    type,
     redirectPath,
     translationKey,
+    customNotificationTranslationKey,
 }: Props) {
     const { toast } = useToast();
     const { t } = useTranslation();
@@ -32,13 +34,19 @@ export default function FormStateHandler({
             toast({
                 variant: 'success',
                 description: t(
-                    `notification:resource.${isCreate ? 'create' : 'update'}.success`,
+                    `${
+                        customNotificationTranslationKey ??
+                        `notification:resource.${type}`
+                    }.success`,
                     {
                         resource: t(`${translationKey}:title.one`),
                     },
                 ),
             });
             if (redirectPath) {
+                if (redirectPath === 'refresh') {
+                    return router.refresh();
+                }
                 redirect(redirectPath);
             } else {
                 router.back();
@@ -49,7 +57,10 @@ export default function FormStateHandler({
             toast({
                 variant: 'error',
                 description: t(
-                    `notification:resource.${isCreate ? 'create' : 'update'}.error`,
+                    `${
+                        customNotificationTranslationKey ??
+                        `notification:resource.${type}`
+                    }.error`,
                     {
                         resource: t(`${translationKey}:title.one`),
                     },

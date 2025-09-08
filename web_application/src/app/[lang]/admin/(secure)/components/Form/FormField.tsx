@@ -9,7 +9,7 @@ interface Props extends PropsWithChildren {
 
 export default function FormField({ errors, children }: Props) {
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex w-full flex-col gap-1">
             {children}
             {errors &&
                 errors.length > 0 &&

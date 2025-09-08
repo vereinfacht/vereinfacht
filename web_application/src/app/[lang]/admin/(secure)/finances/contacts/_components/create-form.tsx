@@ -41,7 +41,7 @@ export default function CreateForm({ data, action }: Props) {
         <ActionForm
             action={formAction}
             state={formState}
-            isCreate={data == null}
+            type={data ? 'create' : 'update'}
             translationKey="contact"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">

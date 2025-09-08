@@ -143,7 +143,7 @@ export default function TablePagination({ totalPages }: Props) {
     }
 
     return (
-        <Pagination className="mt-4">
+        <Pagination>
             <PaginationContent>
                 <PaginationItem>
                     <Button
