@@ -17,14 +17,14 @@ class ReceiptFactory extends Factory
      */
     public function definition(): array
     {
-        $type = $this->faker->randomElement(['income', 'expense']);
+        $receiptType = $this->faker->randomElement(['income', 'expense']);
         $amount = $this->faker->randomFloat(2, 10, 999);
 
         return [
             'reference_number' => $this->faker->unique()->numerify('REF-#####'),
-            'type' => $type,
+            'receipt_type' => $receiptType,
             'document_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $type === 'expense' ? -$amount : $amount,
+            'amount' => $receiptType === 'expense' ? -$amount : $amount,
         ];
     }
 }

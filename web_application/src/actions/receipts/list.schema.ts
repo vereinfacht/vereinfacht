@@ -15,7 +15,7 @@ export const listReceiptsSchema = baseListSchema.extend({
     sort: z.array(z.enum(receiptSortingOptions)).optional(),
     filter: z
         .object({
-            type: z.array(z.enum(receiptTypeOptions)).optional(),
+            receiptType: z.array(z.enum(receiptTypeOptions)).optional(),
             status: z.array(z.enum(receiptStatusOptions)).optional(),
         })
         .optional(),

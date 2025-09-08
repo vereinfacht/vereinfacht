@@ -81,7 +81,7 @@ export const listReceiptSearchParams = {
     ).withOptions({
         shallow: false,
     }),
-    type: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
+    receiptType: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
         .withDefault([])
         .withOptions({
             shallow: false,

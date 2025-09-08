@@ -5334,6 +5334,46 @@ export interface operations {
             404: components["responses"]["404"];
         };
     };
+    "finance-contacts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.finance-contacts.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "receipts.index": {
         parameters: {
             query?: {
