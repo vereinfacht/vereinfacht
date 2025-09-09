@@ -93,38 +93,7 @@ export default function CreateForm({ data, action }: Props) {
                     id="transactions"
                     name="transactions"
                     resource="transactions"
-                    label={
-                        <div className="flex items-center gap-2">
-                            <span>{t('transaction:title.other')}</span>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger
-                                        asChild
-                                        className="cursor-help"
-                                    >
-                                        {selectedTransactions > 0 ? (
-                                            <CircleCheck className="h-4 w-4 text-green-600" />
-                                        ) : (
-                                            <CircleDashed className="h-4 w-4 text-slate-600" />
-                                        )}
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        {t(
-                                            'receipt:status.description.' +
-                                                (selectedTransactions > 0
-                                                    ? 'completed'
-                                                    : 'incompleted'),
-                                        )}
-                                        <TooltipPrimitive.Arrow
-                                            fill="white"
-                                            width={11}
-                                            height={5}
-                                        />
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                        </div>
-                    }
+                    label={t('transaction:title.other')}
                     onChange={(selected) =>
                         setSelectedTransactions(selected.length)
                     }
