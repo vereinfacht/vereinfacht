@@ -95,7 +95,7 @@ export default function CreateForm({ data, action }: Props) {
                     resource="transactions"
                     label={
                         <div className="flex items-center gap-2">
-                            <span>{t('transaction:title.no_receipts')}</span>
+                            <span>{t('transaction:title.other')}</span>
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger
