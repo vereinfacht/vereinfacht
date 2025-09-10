@@ -2,7 +2,7 @@
 
 import { Building2, CircleUserRound } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import SingleselectInput from '../MultiselectInput/SingleselectInput';
+import MultiselectInput from '../MultiselectInput/MultiselectInput';
 import Text from '../Text/Text';
 import { Option } from './SelectInput';
 
@@ -100,7 +100,7 @@ export default function BelongsToSelectInput({
     }, [fetchOptions]);
 
     return (
-        <SingleselectInput
+        <MultiselectInput
             id={id}
             name={name}
             label={label}

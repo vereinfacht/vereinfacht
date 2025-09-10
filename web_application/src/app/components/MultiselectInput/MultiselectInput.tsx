@@ -18,6 +18,7 @@ interface Props {
     onChange?: (selected: Option[]) => void;
     onQueryChange?: (query: string) => void;
     required?: boolean;
+    multiple?: boolean;
 }
 
 export function filterOptionsByQuery(options: Option[], query: string) {
@@ -48,6 +49,7 @@ export default function MultiselectInput({
     onChange,
     onQueryChange,
     required = false,
+    multiple = false,
 }: Props) {
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
@@ -70,8 +72,8 @@ export default function MultiselectInput({
 
     return (
         <div className="flex flex-col items-start">
-            {label ? (
-                typeof label === 'string' ? (
+            {label &&
+                (typeof label === 'string' ? (
                     <InputLabel
                         forInput={id}
                         value={label}
@@ -79,15 +81,25 @@ export default function MultiselectInput({
                     />
                 ) : (
                     label
-                )
-            ) : null}
+                ))}
             <Combobox
-                immediate
                 value={selected}
-                onChange={setSelected}
+                onChange={(value: Option | Option[] | null) => {
+                    if (multiple) {
+                        setSelected((value ?? []) as Option[]);
+                    } else {
+                        setSelected(value ? [value as Option] : []);
+                    }
+                }}
                 name={name}
-                multiple
-                by="value"
+                multiple={multiple}
+                by={(a, b) => {
+                    const getValue = (item: any) =>
+                        Array.isArray(item)
+                            ? undefined
+                            : (item as Option)?.value;
+                    return getValue(a) === getValue(b);
+                }}
                 onClose={() => setQuery('')}
             >
                 {({ open }) => (
@@ -96,9 +108,7 @@ export default function MultiselectInput({
                             <Input
                                 setQuery={(query) => {
                                     setQuery(query);
-                                    if (onQueryChange) {
-                                        onQueryChange(query);
-                                    }
+                                    onQueryChange?.(query);
                                 }}
                             />
                             {open && <Options options={filteredOptions} />}

@@ -106,6 +106,7 @@ export default function BelongsToMultiselectInput({
             defaultValue={defaultValue}
             onChange={onChange}
             required={required}
+            multiple
             onQueryChange={setQuery}
         />
     );
