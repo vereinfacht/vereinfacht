@@ -1,6 +1,7 @@
 'use client';
 
 import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
+import BelongsToSelectInput from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import { TReceiptDeserialized } from '@/types/resources';
@@ -9,15 +10,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
-import { useState } from 'react';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipPrimitive,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/app/components/ui/tooltip';
-import { CircleCheck, CircleDashed } from 'lucide-react';
 
 interface Props {
     action: (
@@ -35,7 +27,6 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
 
-    const [selectedTransactions, setSelectedTransactions] = useState<number>(0);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         {
@@ -94,9 +85,12 @@ export default function CreateForm({ data, action }: Props) {
                     name="transactions"
                     resource="transactions"
                     label={t('transaction:title.other')}
-                    onChange={(selected) =>
-                        setSelectedTransactions(selected.length)
-                    }
+                />
+                <BelongsToSelectInput
+                    id="finance-contacts"
+                    name="financeContacts"
+                    resource="finance-contacts"
+                    label={t('contact:title.other')}
                 />
             </div>
         </ActionForm>
