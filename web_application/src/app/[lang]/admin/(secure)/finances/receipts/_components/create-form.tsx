@@ -91,6 +91,7 @@ export default function CreateForm({ data, action }: Props) {
                     name="financeContacts"
                     resource="finance-contacts"
                     label={t('contact:title.other')}
+                    required
                 />
             </div>
         </ActionForm>
