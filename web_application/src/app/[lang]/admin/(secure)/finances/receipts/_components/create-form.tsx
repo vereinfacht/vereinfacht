@@ -87,8 +87,8 @@ export default function CreateForm({ data, action }: Props) {
                     label={t('transaction:title.other')}
                 />
                 <BelongsToSelectInput
-                    id="finance-contacts"
-                    name="financeContacts"
+                    id="finance-contact"
+                    name="financeContact"
                     resource="finance-contacts"
                     label={t('contact:title.other')}
                     required

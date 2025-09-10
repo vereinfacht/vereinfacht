@@ -18,6 +18,12 @@ export const createReceiptSchema = z.object({
                     type: z.literal('clubs'),
                 }),
             }),
+            financeContact: z.object({
+                data: z.object({
+                    id: z.string(),
+                    type: z.literal('finance-contacts'),
+                }),
+            }),
             transactions: z
                 .object({
                     data: z.array(

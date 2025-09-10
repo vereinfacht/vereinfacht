@@ -2,6 +2,7 @@
 
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
+import { toKebabCase } from '@/utils/strings';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
 
@@ -24,9 +25,22 @@ function parseRelationship(key: string, value: string) {
     if (value.startsWith('[') && value.endsWith(']')) {
         try {
             const ids = JSON.parse(value) as string[];
-            return {
-                [key]: { data: ids.map((id) => ({ id, type: key })) },
-            };
+            const isPlural = key.endsWith('s');
+
+            if (ids.length === 1 && !isPlural) {
+                return {
+                    [key]: {
+                        data: {
+                            id: ids[0],
+                            type: toKebabCase(key) + 's',
+                        },
+                    },
+                };
+            } else if (isPlural) {
+                return {
+                    [key]: { data: ids.map((id) => ({ id, type: key })) },
+                };
+            }
         } catch {
             return null;
         }
@@ -71,6 +85,7 @@ export default async function createFormAction<K>(
     }
 
     body.data.attributes = attributes;
+    console.log('Attributes:', body.data.relationships);
     try {
         await action(body as K);
 
