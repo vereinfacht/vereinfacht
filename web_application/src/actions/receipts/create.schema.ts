@@ -9,7 +9,14 @@ export const createReceiptSchema = z.object({
             receiptType: z.enum(receiptType),
             referenceNumber: z.string().min(2).max(255),
             documentDate: z.string(),
-            amount: z.string(),
+            amount: z
+                .string()
+                .refine((value) => !isNaN(Number(value)), {
+                    message: 'Amount must be a number',
+                })
+                .refine((value) => Number(value) !== 0, {
+                    message: 'Amount must not be zero',
+                }),
         }),
         relationships: z.object({
             club: z.object({
