@@ -76,16 +76,15 @@ export default async function createFormAction<K>(
     for (const [key, raw] of Array.from(formData.entries())) {
         const value = raw.toString();
 
-        const rel = parseRelationship(key, value);
-        if (rel) {
-            Object.assign(body.data.relationships!, rel);
+        const relationships = parseRelationship(key, value);
+        if (relationships) {
+            Object.assign(body.data.relationships!, relationships);
         } else {
             attributes[key] = value === '' ? undefined : value;
         }
     }
 
     body.data.attributes = attributes;
-    console.log('Attributes:', body.data.relationships);
     try {
         await action(body as K);
 
