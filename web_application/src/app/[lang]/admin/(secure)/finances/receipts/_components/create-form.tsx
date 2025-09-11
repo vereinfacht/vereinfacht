@@ -90,7 +90,7 @@ export default function CreateForm({ data, action }: Props) {
                     id="finance-contact"
                     name="financeContact"
                     resource="finance-contacts"
-                    label={t('contact:title.other')}
+                    label={t('contact:title.one')}
                     required
                 />
             </div>

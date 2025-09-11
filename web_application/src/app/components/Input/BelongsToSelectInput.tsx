@@ -64,13 +64,15 @@ export default function BelongsToSelectInput({
                         label: (
                             <div className="flex gap-2">
                                 {item.attributes.contactType === 'person' ? (
-                                    <CircleUserRound />
+                                    <CircleUserRound width={16} />
                                 ) : (
-                                    <Building2 />
+                                    <Building2 width={16} />
                                 )}
-                                <Text className="min-w-fit font-medium">
-                                    {item.attributes.fullName}
-                                </Text>
+                                {item.attributes.fullName && (
+                                    <Text className="min-w-fit font-medium">
+                                        {item.attributes.fullName}
+                                    </Text>
+                                )}
                                 <Text className="truncate">
                                     {item.attributes.companyName}
                                 </Text>

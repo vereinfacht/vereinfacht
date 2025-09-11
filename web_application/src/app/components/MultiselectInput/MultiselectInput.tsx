@@ -84,7 +84,7 @@ export default function MultiselectInput({
                 ))}
             <Combobox
                 immediate
-                value={selected}
+                value={multiple ? selected : (selected[0] ?? undefined)}
                 onChange={(value: Option | Option[] | null) => {
                     if (multiple) {
                         setSelected((value ?? []) as Option[]);
@@ -111,6 +111,7 @@ export default function MultiselectInput({
                                     setQuery(query);
                                     onQueryChange?.(query);
                                 }}
+                                multiple={multiple}
                             />
                             {open && <Options options={filteredOptions} />}
                         </div>
