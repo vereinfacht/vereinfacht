@@ -29,11 +29,7 @@ export default function CreateForm({ data, action }: Props) {
     ];
 
     const [receiptType, setReceiptType] = useState<Option | undefined>(
-        data
-            ? receiptTypeOptions.find(
-                  (option) => option.value === data.receiptType,
-              )
-            : undefined,
+        undefined,
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
@@ -47,7 +43,7 @@ export default function CreateForm({ data, action }: Props) {
         <ActionForm
             action={formAction}
             state={formState}
-            type={data ? 'create' : 'update'}
+            type={data ? 'update' : 'create'}
             translationKey="receipt"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
@@ -56,8 +52,7 @@ export default function CreateForm({ data, action }: Props) {
                     name="receiptType"
                     label={t('receipt:receipt_type.label')}
                     options={receiptTypeOptions}
-                    disabled
-                    value={receiptType?.value}
+                    value={data ? data.receiptType : receiptType?.value}
                     required
                 />
                 <TextInput
