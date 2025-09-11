@@ -83,6 +83,7 @@ export default function MultiselectInput({
                     label
                 ))}
             <Combobox
+                immediate
                 value={selected}
                 onChange={(value: Option | Option[] | null) => {
                     if (multiple) {
