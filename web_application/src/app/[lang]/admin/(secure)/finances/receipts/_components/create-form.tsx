@@ -64,6 +64,7 @@ export default function CreateForm({ data, action }: Props) {
                     id="referenceNumber"
                     name="referenceNumber"
                     label={t('receipt:reference_number.label')}
+                    help={t('receipt:reference_number.help')}
                     defaultValue={data?.referenceNumber ?? ''}
                 />
                 <TextInput

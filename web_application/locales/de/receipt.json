@@ -13,7 +13,8 @@
         "label": "Belegdatum"
     },
     "reference_number": {
-        "label": "Referenznummer"
+        "label": "Referenznummer",
+        "help": "Nummer für die interne Zuordnung, bspw. Mitgliedsnr."
     },
     "amount": {
         "label": "Betrag"
