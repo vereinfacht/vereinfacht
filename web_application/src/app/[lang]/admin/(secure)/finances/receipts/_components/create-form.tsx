@@ -7,6 +7,7 @@ import TextInput from '@/app/components/Input/TextInput';
 import { TReceiptDeserialized } from '@/types/resources';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
+import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
@@ -26,6 +27,14 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.income'), value: 'income' },
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
+
+    const [receiptType, setReceiptType] = useState<Option | undefined>(
+        data
+            ? receiptTypeOptions.find(
+                  (option) => option.value === data.receiptType,
+              )
+            : undefined,
+    );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
@@ -47,16 +56,35 @@ export default function CreateForm({ data, action }: Props) {
                     name="receiptType"
                     label={t('receipt:receipt_type.label')}
                     options={receiptTypeOptions}
-                    value={data?.receiptType}
+                    disabled
+                    value={receiptType?.value}
                     required
                 />
                 <TextInput
                     id="amount"
                     name="amount"
                     label={t('receipt:amount.label')}
+                    help={t('receipt:amount.help')}
                     type="number"
                     required
                     defaultValue={data?.amount}
+                    onChange={(e) => {
+                        const value = parseFloat(e.target.value);
+                        if (!isNaN(value)) {
+                            setReceiptType(
+                                value < 0
+                                    ? receiptTypeOptions.find(
+                                          (option) =>
+                                              option.value === 'expense',
+                                      )
+                                    : receiptTypeOptions.find(
+                                          (option) => option.value === 'income',
+                                      ),
+                            );
+                        } else {
+                            setReceiptType(undefined);
+                        }
+                    }}
                 />
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">

@@ -17,7 +17,8 @@
         "help": "Nummer für die interne Zuordnung, bspw. Mitgliedsnr."
     },
     "amount": {
-        "label": "Betrag"
+        "label": "Betrag",
+        "help": "Betrag kann positiv oder negativ sein."
     },
     "status": {
         "label": "Status",
