@@ -8,6 +8,7 @@ import { Option } from '../Input/SelectInput';
 import Input from './Input';
 import Options from './Options';
 import SelectedOptions from './SelectedOptions';
+import SingleSelectedOption from './SingleSelectedOption';
 
 interface Props {
     id: string;
@@ -94,13 +95,7 @@ export default function MultiselectInput({
                 }}
                 name={name}
                 multiple={multiple}
-                by={(a, b) => {
-                    const getValue = (item: any) =>
-                        Array.isArray(item)
-                            ? undefined
-                            : (item as Option)?.value;
-                    return getValue(a) === getValue(b);
-                }}
+                by={(a, b) => a.value === b.value}
                 onClose={() => setQuery('')}
             >
                 {({ open }) => (
@@ -113,9 +108,17 @@ export default function MultiselectInput({
                                 }}
                                 multiple={multiple}
                             />
+                            {selected.length > 0 && !multiple && (
+                                <SingleSelectedOption
+                                    option={selected[0]}
+                                    handleRemove={() =>
+                                        handleRemove(selected[0])
+                                    }
+                                />
+                            )}
                             {open && <Options options={filteredOptions} />}
                         </div>
-                        {selected.length > 0 && (
+                        {selected.length > 0 && multiple && (
                             <SelectedOptions
                                 options={selected}
                                 handleRemove={handleRemove}
