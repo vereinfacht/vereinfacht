@@ -76,7 +76,7 @@ export default async function createFormAction<K>(
     for (const [key, raw] of Array.from(formData.entries())) {
         const value = raw.toString();
 
-        const relationships = parseRelationship(key, value);
+        const relationships = await parseRelationship(key, value);
         if (relationships) {
             Object.assign(body.data.relationships!, relationships);
         } else {
