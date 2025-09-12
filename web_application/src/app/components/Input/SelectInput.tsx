@@ -6,7 +6,7 @@ import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
 
 export interface Option {
-    label: string;
+    label: string | React.ReactNode;
     value: string | number;
     disabled?: boolean;
 }

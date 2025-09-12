@@ -109,6 +109,12 @@ export default function CreateForm({ data, action }: Props) {
                     name="transactions"
                     resource="transactions"
                     label={t('transaction:title.other')}
+                    defaultValue={(data?.transactions ?? []).map(
+                        (transaction) => ({
+                            label: transaction.name,
+                            value: transaction.id,
+                        }),
+                    )}
                 />
                 <BelongsToSelectInput
                     id="finance-contact"
@@ -116,6 +122,21 @@ export default function CreateForm({ data, action }: Props) {
                     resource="finance-contacts"
                     label={t('contact:title.one')}
                     required
+                    defaultValue={
+                        data?.financeContact
+                            ? [
+                                  {
+                                      label: data.financeContact.fullName
+                                          ? data.financeContact.fullName
+                                          : data.financeContact.companyName,
+                                      value:
+                                          data.financeContact.companyName ??
+                                          data.financeContact.fullName ??
+                                          '',
+                                  },
+                              ]
+                            : undefined
+                    }
                 />
             </div>
         </ActionForm>
