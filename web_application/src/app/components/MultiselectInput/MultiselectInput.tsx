@@ -95,7 +95,13 @@ export default function MultiselectInput({
                 }}
                 name={name}
                 multiple={multiple}
-                by={(a, b) => a.value === b.value}
+                by={(a, b) => {
+                    const getValue = (item: any) =>
+                        Array.isArray(item)
+                            ? undefined
+                            : (item as Option)?.value;
+                    return getValue(a) === getValue(b);
+                }}
                 onClose={() => setQuery('')}
             >
                 {({ open }) => (
