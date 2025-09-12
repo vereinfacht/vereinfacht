@@ -1,6 +1,7 @@
 'use client';
 
 import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
+import BelongsToSelectInput from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import { TReceiptDeserialized } from '@/types/resources';
@@ -27,8 +28,10 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
 
-    const [amount, setAmount] = useState<number>(0);
-    const receiptTypeValue = amount >= 0 ? 'income' : 'expense';
+    const [receiptType, setReceiptType] = useState<Option | undefined>(
+        undefined,
+    );
+
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         {
@@ -40,26 +43,43 @@ export default function CreateForm({ data, action }: Props) {
         <ActionForm
             action={formAction}
             state={formState}
-            type={data ? 'create' : 'update'}
+            type={data ? 'update' : 'create'}
             translationKey="receipt"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <TextInput
-                    id="amount"
-                    name="amount"
-                    label={t('receipt:amount.label')}
-                    type="number"
-                    required
-                    defaultValue={data?.amount ?? 0}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                />
                 <SelectInput
                     id="receipt-type"
                     name="receiptType"
                     label={t('receipt:receipt_type.label')}
                     options={receiptTypeOptions}
-                    value={data?.receiptType ?? receiptTypeValue}
+                    value={data ? data.receiptType : receiptType?.value}
                     required
+                />
+                <TextInput
+                    id="amount"
+                    name="amount"
+                    label={t('receipt:amount.label')}
+                    help={t('receipt:amount.help')}
+                    type="number"
+                    required
+                    defaultValue={data?.amount}
+                    onChange={(e) => {
+                        const value = parseFloat(e.target.value);
+                        if (!isNaN(value)) {
+                            setReceiptType(
+                                value < 0
+                                    ? receiptTypeOptions.find(
+                                          (option) =>
+                                              option.value === 'expense',
+                                      )
+                                    : receiptTypeOptions.find(
+                                          (option) => option.value === 'income',
+                                      ),
+                            );
+                        } else {
+                            setReceiptType(undefined);
+                        }
+                    }}
                 />
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
@@ -67,6 +87,7 @@ export default function CreateForm({ data, action }: Props) {
                     id="referenceNumber"
                     name="referenceNumber"
                     label={t('receipt:reference_number.label')}
+                    help={t('receipt:reference_number.help')}
                     defaultValue={data?.referenceNumber ?? ''}
                 />
                 <TextInput
@@ -86,8 +107,35 @@ export default function CreateForm({ data, action }: Props) {
                 <BelongsToMultiselectInput
                     id="transactions"
                     name="transactions"
-                    label={t('transaction:title.no_receipts')}
                     resource="transactions"
+                    label={t('transaction:title.other')}
+                    defaultValue={(data?.transactions ?? []).map(
+                        (transaction) => ({
+                            label: transaction.name,
+                            value: transaction.id,
+                        }),
+                    )}
+                />
+                <BelongsToSelectInput
+                    id="finance-contact"
+                    name="financeContact"
+                    resource="finance-contacts"
+                    label={t('contact:title.one')}
+                    required
+                    defaultValue={
+                        data?.financeContact
+                            ? [
+                                  {
+                                      label: data.financeContact.fullName
+                                          ? data.financeContact.fullName
+                                          : data.financeContact.companyName,
+                                      value:
+                                          (data.financeContact as any)?.id ??
+                                          '',
+                                  },
+                              ]
+                            : undefined
+                    }
                 />
             </div>
         </ActionForm>

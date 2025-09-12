@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\FinanceContacts;
 
 use App\Models\FinanceContact;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Sorting\FullNameSort;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
@@ -11,9 +12,9 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 
 class FinanceContactSchema extends Schema
 {
@@ -56,6 +57,7 @@ class FinanceContactSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('contactType')->delimiter(','),
+            QueryFilter::make('query', ['first_name', 'last_name', 'company_name']),
         ];
     }
 

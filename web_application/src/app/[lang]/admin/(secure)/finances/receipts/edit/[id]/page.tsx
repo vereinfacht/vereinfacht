@@ -10,7 +10,10 @@ interface Props {
 
 export default async function Page({ params }: Props) {
     const { id } = params;
-    const receipt = await getReceipt({ id });
+    const receipt = await getReceipt({
+        id,
+        include: ['transactions', 'financeContact'],
+    });
     const extendedAction = updateReceiptFormAction.bind(null, id);
 
     if (!receipt) {

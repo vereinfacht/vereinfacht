@@ -1,8 +1,8 @@
 'use client';
 
+import { Building2, CircleUserRound } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import MultiselectInput from '../MultiselectInput/MultiselectInput';
-import CurrencyText from '../Text/CurrencyText';
 import Text from '../Text/Text';
 import { Option } from './SelectInput';
 
@@ -16,7 +16,7 @@ interface Props {
     resource?: string;
 }
 
-export default function BelongsToMultiselectInput({
+export default function BelongsToSelectInput({
     id,
     name,
     label,
@@ -55,23 +55,27 @@ export default function BelongsToMultiselectInput({
                     (item: {
                         id: string;
                         attributes: {
-                            name: string;
-                            description: string;
-                            amount: number;
+                            contactType: string;
+                            fullName: string;
+                            companyName: string;
                         };
                     }) => ({
                         value: item.id,
                         label: (
-                            <div className="flex justify-between">
-                                <div className="flex w-10/12 gap-2">
+                            <div className="flex gap-2">
+                                {item.attributes.contactType === 'person' ? (
+                                    <CircleUserRound width={16} />
+                                ) : (
+                                    <Building2 width={16} />
+                                )}
+                                {item.attributes.fullName && (
                                     <Text className="min-w-fit font-medium">
-                                        {item.attributes.name}
+                                        {item.attributes.fullName}
                                     </Text>
-                                    <Text className="truncate">
-                                        {item.attributes.description}
-                                    </Text>
-                                </div>
-                                <CurrencyText value={item.attributes.amount} />
+                                )}
+                                <Text className="truncate">
+                                    {item.attributes.companyName}
+                                </Text>
                             </div>
                         ),
                     }),
@@ -106,7 +110,6 @@ export default function BelongsToMultiselectInput({
             defaultValue={defaultValue}
             onChange={onChange}
             required={required}
-            multiple
             onQueryChange={setQuery}
         />
     );
