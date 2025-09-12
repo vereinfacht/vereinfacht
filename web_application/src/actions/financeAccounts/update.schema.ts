@@ -1,12 +1,26 @@
 import { z } from 'zod';
+import { idSchema } from '../base/get.schema';
+import {
+    accountTypes,
+    createFinanceAccountSchema,
+    extendZodEffects,
+    financeAccountAttributesSchema,
+} from './create.schema';
 
 export const updateFinanceAccountSchema = z.object({
-    id: z.string().min(1, 'Finance account ID is required'),
-    data: z.object({
+    data: createFinanceAccountSchema.shape.data.extend({
+        id: idSchema,
         type: z.literal('finance-accounts'),
-        id: z.string().min(1),
-        attributes: z.object({}).optional(),
-        relationships: z.object({}).optional(),
+        attributes: extendZodEffects(
+            financeAccountAttributesSchema,
+            z.object({
+                accountType: z.enum(accountTypes).optional(),
+                deletedAt: z
+                    .string()
+                    .optional()
+                    .transform((val) => (val === undefined ? null : val)),
+            }),
+        ),
     }),
 });
 

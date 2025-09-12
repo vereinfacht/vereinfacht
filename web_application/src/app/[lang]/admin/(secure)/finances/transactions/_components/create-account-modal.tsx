@@ -131,6 +131,7 @@ export default function CreateAccountModal() {
                                             'finance_account:initial_balance.label',
                                         )}
                                         type="number"
+                                        step={0.01}
                                         required
                                         help={t(
                                             'resource:fields.currency.help',

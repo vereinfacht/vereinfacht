@@ -69,7 +69,7 @@ JsonApiRoute::server('v1')
                 $relations->hasOne('club', JsonApiController::class);
                 $relations->hasMany('transactions', JsonApiController::class);
             })
-            ->only('index', 'show', 'store', 'delete');
+            ->only('index', 'show', 'store', 'update');
 
         $server->resource('transactions', JsonApiController::class)
             ->relationships(function ($relations) {
