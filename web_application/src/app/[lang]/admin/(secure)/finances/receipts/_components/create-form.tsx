@@ -61,6 +61,7 @@ export default function CreateForm({ data, action }: Props) {
                     label={t('receipt:amount.label')}
                     help={t('receipt:amount.help')}
                     type="number"
+                    step="0.01"
                     required
                     defaultValue={data?.amount}
                     onChange={(e) => {
