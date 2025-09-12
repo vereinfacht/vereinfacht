@@ -21,7 +21,7 @@ export interface BaseBody {
     };
 }
 
-function parseRelationship(key: string, value: string) {
+export async function parseRelationship(key: string, value: string) {
     if (value.startsWith('[') && value.endsWith(']')) {
         try {
             const ids = JSON.parse(value) as string[];

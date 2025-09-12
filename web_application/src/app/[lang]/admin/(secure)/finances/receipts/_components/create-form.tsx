@@ -130,8 +130,7 @@ export default function CreateForm({ data, action }: Props) {
                                           ? data.financeContact.fullName
                                           : data.financeContact.companyName,
                                       value:
-                                          data.financeContact.companyName ??
-                                          data.financeContact.fullName ??
+                                          (data.financeContact as any)?.id ??
                                           '',
                                   },
                               ]
