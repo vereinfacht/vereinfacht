@@ -16,6 +16,10 @@ interface Props {
     resource?: string;
 }
 
+interface TransactionOption extends Option {
+    amount: number;
+}
+
 export default function BelongsToMultiselectInput({
     id,
     name,
@@ -51,7 +55,7 @@ export default function BelongsToMultiselectInput({
                     throw new Error(`API error: ${response.status}`);
 
                 const json = await response.json();
-                const newOptions: Option[] = json.data.map(
+                const newOptions: TransactionOption[] = json.data.map(
                     (item: {
                         id: string;
                         attributes: {
@@ -74,6 +78,7 @@ export default function BelongsToMultiselectInput({
                                 <CurrencyText value={item.attributes.amount} />
                             </div>
                         ),
+                        amount: item.attributes.amount,
                     }),
                 );
 

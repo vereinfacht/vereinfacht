@@ -7,7 +7,7 @@ export interface TextProps {
     className?: string;
     preset?: TextPresets;
     tag?: HTMLElements;
-    style?: StyleHTMLAttributes<HTMLElements>;
+    style?: React.CSSProperties;
     suppressHydrationWarning?: boolean;
 }
 
