@@ -29,11 +29,8 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
 
-    const [receiptType, setReceiptType] = useState<Option | undefined>(
-        undefined,
-    );
     const [amount, setAmount] = useState<number>(
-        data?.amount !== undefined ? Number(data.amount) : 0,
+        Math.abs(Number(data?.amount ?? null)),
     );
     const [selectedTransactions, setSelectedTransactions] = useState<any[]>([]);
 
@@ -63,31 +60,19 @@ export default function CreateForm({ data, action }: Props) {
                             id="amount"
                             name="amount"
                             label={t('receipt:amount.label')}
-                            help={t('receipt:amount.help')}
                             type="number"
+                            min={0}
                             step="0.01"
+                            autoFocus={data ? false : true}
                             required
-                            defaultValue={data?.amount}
+                            defaultValue={Math.abs(
+                                Number(data?.amount ?? undefined),
+                            )}
                             onChange={(e) => {
-                                const value = parseFloat(e.target.value);
+                                const value = Math.abs(
+                                    parseFloat(e.target.value),
+                                );
                                 setAmount(isNaN(value) ? 0 : value);
-
-                                if (!isNaN(value)) {
-                                    setReceiptType(
-                                        value < 0
-                                            ? receiptTypeOptions.find(
-                                                  (option) =>
-                                                      option.value ===
-                                                      'expense',
-                                              )
-                                            : receiptTypeOptions.find(
-                                                  (option) =>
-                                                      option.value === 'income',
-                                              ),
-                                    );
-                                } else {
-                                    setReceiptType(undefined);
-                                }
                             }}
                         />
                         <SelectInput
@@ -95,7 +80,7 @@ export default function CreateForm({ data, action }: Props) {
                             name="receiptType"
                             label={t('receipt:receipt_type.label')}
                             options={receiptTypeOptions}
-                            value={data ? data.receiptType : receiptType?.value}
+                            value={data?.receiptType}
                             required
                         />
                     </div>

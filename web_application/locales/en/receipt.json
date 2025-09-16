@@ -17,8 +17,7 @@
         "help": "Number for internal assignment, e.g. member number."
     },
     "amount": {
-        "label": "Amount",
-        "help": "Amount can be positive or negative."
+        "label": "Amount"
     },
     "status": {
         "label": "Status",
