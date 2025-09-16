@@ -11,7 +11,6 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 export const createFinanceAccount = createAuthenticatedAction(
     'create',
     'finance-Accounts',
-    // @ts-expect-error: schema is correct
     createFinanceAccountSchema,
     async (body, client) => {
         const response = await client.POST('/finance-accounts', {

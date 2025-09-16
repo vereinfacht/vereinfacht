@@ -12,7 +12,8 @@ export const financeContactSortingOptions = [
 
 export const financeContactTypeOptions = ['person', 'company'] as const;
 
-export const listFinanceContactsSchema = baseListSchema.extend({
+export const listFinanceContactsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(financeContactSortingOptions)).optional(),
     filter: z
         .object({

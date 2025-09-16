@@ -9,16 +9,23 @@ import { TranslationSchema } from '@/types/jsonapi-models';
 const updateMembershipTypeSchema = z.object({
     titleTranslations: TranslationSchema,
     descriptionTranslations: TranslationSchema,
-    monthlyFee: z.coerce.number().min(0).step(0.01),
-    admissionFee: z.coerce.number().min(0).step(0.01).optional(),
+    monthlyFee: z.coerce.number().min(0).multipleOf(0.01).meta({ step: 0.01 }),
+    admissionFee: z.coerce
+        .number()
+        .min(0)
+        .multipleOf(0.01)
+        .meta({ step: 0.01 })
+        .optional(),
     minimumNumberOfMonths: z.coerce
-        .number({
-            description: 'membership_type:minimum_number_of_months.help',
-        })
+        .number()
         .int()
         .min(0)
         .max(24)
-        .step(1),
+        .multipleOf(1)
+        .meta({
+            step: 1,
+            description: 'membership_type:minimum_number_of_months.help',
+        }),
     minimumNumberOfMembers: z.coerce.number().int().min(1),
     maximumNumberOfMembers: z.coerce.number().int().min(1),
 });

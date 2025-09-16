@@ -14,7 +14,8 @@ export const membershipSortingOptions = [
     '-startedAt',
 ] as const;
 
-export const listMembershipsSchema = baseListSchema.extend({
+export const listMembershipsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(membershipSortingOptions)).optional(),
 });
 

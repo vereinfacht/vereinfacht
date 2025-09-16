@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
 
-export const listFinanceAccountsSchema = baseListSchema.extend({
+export const listFinanceAccountsSchema = z.object({
+    ...baseListSchema.shape,
     filter: z
         .object({
             'with-trashed': z.boolean().optional(),

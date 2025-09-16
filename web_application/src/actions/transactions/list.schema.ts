@@ -12,7 +12,8 @@ export const transactionSortingOptions = [
 
 export const transactionStatusOptions = ['incompleted', 'completed'] as const;
 
-export const listTransactionsSchema = baseListSchema.extend({
+export const listTransactionsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(transactionSortingOptions)).optional(),
     filter: z
         .object({

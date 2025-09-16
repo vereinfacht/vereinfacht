@@ -5,7 +5,7 @@ export const genderOptions = ['other', 'male', 'female'] as const;
 
 export const financeContactAttributesSchema = z
     .object({
-        firstName: z.string().min(2).max(255).optional(),
+        firstName: z.string().min(3).max(255).optional(),
         lastName: z.string().min(2).max(255).optional(),
         gender: z
             .enum(genderOptions)
@@ -14,7 +14,7 @@ export const financeContactAttributesSchema = z
             .transform((value) => (value === undefined ? null : value)),
         companyName: z.string().min(2).max(255).optional(),
         contactType: z.enum(financeContactTypeOptions),
-        email: z.string().email().optional(),
+        email: z.email().optional(),
         phoneNumber: z.string().min(2).max(255).optional(),
         address: z.string().min(2).max(255),
         zipCode: z.string().min(2).max(255),
@@ -24,7 +24,7 @@ export const financeContactAttributesSchema = z
     .superRefine((data, ctx) => {
         if (data.contactType === 'company' && data.companyName === '') {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 message: 'Company name is required when type is company',
                 path: ['data', 'attributes', 'companyName'],
             });
@@ -32,7 +32,7 @@ export const financeContactAttributesSchema = z
 
         if (data.contactType === 'person' && data.firstName === '') {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 message: 'First name is required when type is person',
                 path: ['data', 'attributes', 'firstName'],
             });
@@ -40,7 +40,7 @@ export const financeContactAttributesSchema = z
 
         if (data.contactType === 'person' && data.lastName === '') {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 message: 'Last name is required when type is person',
                 path: ['data', 'attributes', 'lastName'],
             });
