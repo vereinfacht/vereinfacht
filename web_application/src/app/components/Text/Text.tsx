@@ -1,4 +1,4 @@
-import { ReactNode, StyleHTMLAttributes } from 'react';
+import { ReactNode } from 'react';
 
 type HTMLElements = keyof JSX.IntrinsicElements;
 
