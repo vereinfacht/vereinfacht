@@ -72,9 +72,11 @@ export default function TransactionProgressBar({
                             value={difference}
                         />
                         {isOver ? (
-                            <Text className="w-full">zu viel</Text>
+                            <Text className="whitespace-nowrap">zu viel</Text>
                         ) : (
-                            <Text className="w-full">noch offen</Text>
+                            <Text className="whitespace-nowrap">
+                                noch offen
+                            </Text>
                         )}
                     </div>
                 )}

@@ -142,25 +142,29 @@ export default function CreateForm({ data, action }: Props) {
                     required
                 />
             </div>
-            <BelongsToSelectInput
-                id="finance-contact"
-                name="financeContact"
-                resource="finance-contacts"
-                label={t('contact:title.one')}
-                required
-                defaultValue={
-                    data?.financeContact
-                        ? [
-                              {
-                                  label: data.financeContact.fullName
-                                      ? data.financeContact.fullName
-                                      : data.financeContact.companyName,
-                                  value: (data.financeContact as any)?.id ?? '',
-                              },
-                          ]
-                        : undefined
-                }
-            />
+            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                <BelongsToSelectInput
+                    id="finance-contact"
+                    name="financeContact"
+                    resource="finance-contacts"
+                    label={t('contact:title.one')}
+                    required
+                    defaultValue={
+                        data?.financeContact
+                            ? [
+                                  {
+                                      label: data.financeContact.fullName
+                                          ? data.financeContact.fullName
+                                          : data.financeContact.companyName,
+                                      value:
+                                          (data.financeContact as any)?.id ??
+                                          '',
+                                  },
+                              ]
+                            : undefined
+                    }
+                />
+            </div>
         </ActionForm>
     );
 }
