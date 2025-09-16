@@ -18,7 +18,10 @@ export default function TransactionProgressBar({
     const difference = Math.abs(totalTransactionAmount - amount);
     const isOver = Math.abs(totalTransactionAmount) > Math.abs(amount);
     const isUnder = Math.abs(totalTransactionAmount) < Math.abs(amount);
-    const isMatch = totalTransactionAmount === amount;
+    const isMatch =
+        totalTransactionAmount === amount &&
+        amount !== 0 &&
+        totalTransactionAmount !== 0;
 
     const progressValue = useMemo(() => {
         if (amount === 0) return 0;

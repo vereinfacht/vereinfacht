@@ -112,12 +112,10 @@ export default function CreateForm({ data, action }: Props) {
                             setSelectedTransactions(selected || []);
                         }}
                     />
-                    {amount != 0 && totalTransactionAmount != 0 && (
-                        <TransactionProgressBar
-                            amount={amount}
-                            totalTransactionAmount={totalTransactionAmount}
-                        />
-                    )}
+                    <TransactionProgressBar
+                        amount={amount}
+                        totalTransactionAmount={totalTransactionAmount}
+                    />
                 </fieldset>
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
