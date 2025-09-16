@@ -80,7 +80,7 @@ export default function CreateForm({ data, action }: Props) {
                             name="receiptType"
                             label={t('receipt:receipt_type.label')}
                             options={receiptTypeOptions}
-                            value={data?.receiptType}
+                            defaultValue={data?.receiptType}
                             required
                         />
                     </div>
