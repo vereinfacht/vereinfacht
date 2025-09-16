@@ -76,10 +76,13 @@ export default function CreateForm({ data, action }: Props) {
                                     setReceiptType(
                                         value < 0
                                             ? receiptTypeOptions.find(
-                                                  (o) => o.value === 'expense',
+                                                  (option) =>
+                                                      option.value ===
+                                                      'expense',
                                               )
                                             : receiptTypeOptions.find(
-                                                  (o) => o.value === 'income',
+                                                  (option) =>
+                                                      option.value === 'income',
                                               ),
                                     );
                                 } else {
