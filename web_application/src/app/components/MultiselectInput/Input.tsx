@@ -24,7 +24,7 @@ export default function Input({
             <ComboboxInput
                 className="w-full border-none bg-transparent p-3 pr-10 outline-none"
                 displayValue={(option: Option) =>
-                    typeof option.label === 'string' ? option.label : ''
+                    typeof option?.label === 'string' ? option.label : ''
                 }
                 placeholder={
                     multiple
