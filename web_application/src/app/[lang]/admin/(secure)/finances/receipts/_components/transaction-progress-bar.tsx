@@ -1,10 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
 import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import ProgressBar from '@/app/components/ui/progress-bar';
 import { CircleCheck } from 'lucide-react';
+import { useMemo } from 'react';
 
 interface Props {
     amount: number;
@@ -36,9 +36,13 @@ export default function TransactionProgressBar({
     }, [amount, totalTransactionAmount]);
 
     return (
-        <div className="mt-12 flex gap-8">
+        <div className="flex gap-8 pt-12">
             <aside className="relative w-full">
-                <ProgressBar value={progressValue} over={isOver} />
+                <ProgressBar
+                    value={progressValue}
+                    over={isOver}
+                    ariaLabel="Transaction Progress"
+                />
                 {totalTransactionAmount !== 0 && (
                     <CurrencyText
                         className="absolute bottom-0 -translate-x-1/2 -translate-y-6"

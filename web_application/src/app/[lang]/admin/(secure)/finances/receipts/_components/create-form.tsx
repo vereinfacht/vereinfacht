@@ -38,7 +38,7 @@ export default function CreateForm({ data, action }: Props) {
     const [selectedTransactions, setSelectedTransactions] = useState<any[]>([]);
 
     const totalTransactionAmount = selectedTransactions.reduce(
-        (sum, tx) => sum + (tx.amount || 0),
+        (sum, transaction) => sum + (transaction.amount || 0),
         0,
     );
 
