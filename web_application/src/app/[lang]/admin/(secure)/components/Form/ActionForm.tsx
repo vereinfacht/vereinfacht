@@ -10,7 +10,6 @@ interface Props extends PropsWithChildren {
     state: FormActionState;
     action: (payload: FormData) => void;
     type: 'create' | 'update' | 'delete';
-    redirectPath?: string;
     translationKey: string;
 }
 
@@ -19,7 +18,6 @@ export default function ActionForm({
     action,
     type,
     children,
-    redirectPath,
     translationKey,
 }: Props) {
     const { t } = useTranslation();
@@ -29,7 +27,6 @@ export default function ActionForm({
             <FormStateHandler
                 state={state}
                 translationKey={translationKey}
-                redirectPath={redirectPath}
                 type={type}
             />
             {children}

@@ -121,7 +121,7 @@ export default function SettingsDropdown({ account }: Props) {
                     </DialogDescription>
                 </DialogHeader>
                 {formType === 'edit' ? (
-                    <EditAccountForm account={account} />
+                    <EditAccountForm account={account} setIsOpen={setIsOpen} />
                 ) : (
                     <ActivationForm account={account} setIsOpen={setIsOpen} />
                 )}

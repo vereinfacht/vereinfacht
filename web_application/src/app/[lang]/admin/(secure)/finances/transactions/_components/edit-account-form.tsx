@@ -13,13 +13,16 @@ import FormStateHandler, {
     FormActionState,
 } from '../../../components/Form/FormStateHandler';
 import SubmitButton from '../../../components/Form/SubmitButton';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     account: TFinanceAccountDeserialized;
+    setIsOpen: (open: boolean) => void;
 }
 
-export default function EditAccountForm({ account }: Props) {
+export default function EditAccountForm({ account, setIsOpen }: Props) {
     const { t } = useTranslation();
+    const router = useRouter();
     const { id } = account;
     const extendedFormAction = updateFinanceAccountFormAction.bind(null, id);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
@@ -35,7 +38,10 @@ export default function EditAccountForm({ account }: Props) {
                 state={formState}
                 translationKey="finance_account"
                 type="update"
-                redirectPath="refresh"
+                onSuccess={() => {
+                    setIsOpen(false);
+                    router.refresh();
+                }}
             />
             <div className="flex min-w-[24rem] flex-col items-center gap-4 self-center">
                 <FormField errors={formState.errors?.['title']}>

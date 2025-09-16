@@ -2,7 +2,7 @@
 
 import { useToast } from '@/hooks/toast/use-toast';
 import useTranslation from 'next-translate/useTranslation';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export interface FormActionState {
@@ -13,17 +13,17 @@ export interface FormActionState {
 interface Props {
     state: FormActionState;
     translationKey: string;
-    redirectPath?: string;
     type?: 'create' | 'update' | 'delete';
     customNotificationTranslationKey?: string;
+    onSuccess?: () => void;
 }
 
 export default function FormStateHandler({
     state,
     type,
-    redirectPath,
     translationKey,
     customNotificationTranslationKey,
+    onSuccess,
 }: Props) {
     const { toast } = useToast();
     const { t } = useTranslation();
@@ -43,11 +43,9 @@ export default function FormStateHandler({
                     },
                 ),
             });
-            if (redirectPath) {
-                if (redirectPath === 'refresh') {
-                    return router.refresh();
-                }
-                redirect(redirectPath);
+            if (onSuccess) {
+                onSuccess();
+                return;
             } else {
                 router.back();
             }

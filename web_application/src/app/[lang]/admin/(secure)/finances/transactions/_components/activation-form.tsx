@@ -11,6 +11,7 @@ import FormStateHandler, {
     FormActionState,
 } from '../../../components/Form/FormStateHandler';
 import SubmitButton from '../../../components/Form/SubmitButton';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     account: TFinanceAccountDeserialized;
@@ -20,6 +21,7 @@ interface Props {
 export default function ActivationForm({ account, setIsOpen }: Props) {
     const { t } = useTranslation();
     const { id } = account;
+    const router = useRouter();
     const accountStatus =
         account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
     const extendedFormAction = updateFinanceAccountFormAction.bind(null, id);
@@ -40,7 +42,10 @@ export default function ActivationForm({ account, setIsOpen }: Props) {
                         ? 'finance_account:deactivate_modal.notification.deactivate'
                         : 'finance_account:activate_modal.notification.activate'
                 }
-                redirectPath="refresh"
+                onSuccess={() => {
+                    setIsOpen(false);
+                    router.refresh();
+                }}
             />
             <input
                 type="hidden"
