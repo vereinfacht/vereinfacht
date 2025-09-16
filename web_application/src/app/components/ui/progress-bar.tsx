@@ -17,7 +17,7 @@ export default function ProgressBar({ value, over = false }: ProgressBarProps) {
             style={{ transform: 'translateZ(0)' }}
         >
             <ProgressPrimitive.Indicator
-                className="duration-[660ms] h-full bg-green-400 transition-transform ease-in-out"
+                className="h-full bg-green-400 transition-transform duration-300 ease-in-out"
                 style={{
                     transform: `translateX(-${100 - value}%)`,
                 }}
