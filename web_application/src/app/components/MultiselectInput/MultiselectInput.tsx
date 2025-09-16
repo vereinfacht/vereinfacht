@@ -50,7 +50,7 @@ export default function MultiselectInput({
     onChange,
     onQueryChange,
     required = false,
-    multiple = false,
+    multiple = true,
 }: Props) {
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
@@ -114,17 +114,9 @@ export default function MultiselectInput({
                                 }}
                                 multiple={multiple}
                             />
-                            {selected.length > 0 && !multiple && (
-                                <SingleSelectedOption
-                                    option={selected[0]}
-                                    handleRemove={() =>
-                                        handleRemove(selected[0])
-                                    }
-                                />
-                            )}
                             {open && <Options options={filteredOptions} />}
                         </div>
-                        {selected.length > 0 && multiple && (
+                        {selected.length > 0 && (
                             <SelectedOptions
                                 options={selected}
                                 handleRemove={handleRemove}

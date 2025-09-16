@@ -111,6 +111,7 @@ export default function BelongsToSelectInput({
             onChange={onChange}
             required={required}
             onQueryChange={setQuery}
+            multiple={false}
         />
     );
 }
