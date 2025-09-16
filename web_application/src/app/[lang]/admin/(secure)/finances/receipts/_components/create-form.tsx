@@ -57,7 +57,7 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="receipt"
         >
             <div>
-                <fieldset className="relative row-span-4 flex flex-col gap-2 rounded-lg border border-slate-200 p-4">
+                <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
                     <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                         <TextInput
                             id="amount"
@@ -96,6 +96,10 @@ export default function CreateForm({ data, action }: Props) {
                             required
                         />
                     </div>
+                    <TransactionProgressBar
+                        amount={amount}
+                        totalTransactionAmount={totalTransactionAmount}
+                    />
                     <BelongsToMultiselectInput
                         id="transactions"
                         name="transactions"
@@ -111,10 +115,6 @@ export default function CreateForm({ data, action }: Props) {
                         onChange={(selected) => {
                             setSelectedTransactions(selected || []);
                         }}
-                    />
-                    <TransactionProgressBar
-                        amount={amount}
-                        totalTransactionAmount={totalTransactionAmount}
                     />
                 </fieldset>
             </div>

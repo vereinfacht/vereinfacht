@@ -36,7 +36,7 @@ export default function TransactionProgressBar({
     }, [amount, totalTransactionAmount]);
 
     return (
-        <div className="flex gap-8 pt-12">
+        <div className="flex gap-4 pt-4">
             <aside className="relative w-full">
                 <ProgressBar
                     value={progressValue}
@@ -70,10 +70,8 @@ export default function TransactionProgressBar({
                 )}
             </aside>
 
-            <div className="flex items-center justify-end gap-2">
-                <CurrencyText value={amount} />
-                {isMatch && <CircleCheck className="text-green-400" />}
-            </div>
+            <CurrencyText colorized={isMatch} value={amount} />
+            {isMatch && <CircleCheck className="text-green-400" />}
         </div>
     );
 }
