@@ -35,6 +35,16 @@ export default function TransactionProgressBar({
         return 100;
     }, [amount, totalTransactionAmount]);
 
+    function getAlignClass(progressValue: number) {
+        if (progressValue < 10) {
+            return 'translate-x-0';
+        }
+        if (progressValue > 90) {
+            return '-translate-x-full';
+        }
+        return '-translate-x-1/2';
+    }
+
     return (
         <div className="flex gap-4 pt-4">
             <aside className="relative w-full">
@@ -45,14 +55,14 @@ export default function TransactionProgressBar({
                 />
                 {totalTransactionAmount !== 0 && (
                     <CurrencyText
-                        className="absolute bottom-0 -translate-x-1/2 -translate-y-6"
+                        className={`absolute bottom-0 -translate-y-6 ${getAlignClass(progressValue)}`}
                         style={{ left: `${progressValue / 2}%` }}
                         value={totalTransactionAmount}
                     />
                 )}
                 {totalTransactionAmount !== amount && (
                     <div
-                        className="absolute bottom-0 flex -translate-x-1/2 -translate-y-6 items-end gap-2 text-orange-400"
+                        className={`absolute bottom-0 flex -translate-y-6 items-end gap-2 text-orange-400 ${getAlignClass(progressValue)}`}
                         style={{
                             left: `${progressValue + (100 - progressValue) / 2}%`,
                         }}
@@ -62,9 +72,9 @@ export default function TransactionProgressBar({
                             value={difference}
                         />
                         {isOver ? (
-                            <Text>zu viel</Text>
+                            <Text className="w-full">zu viel</Text>
                         ) : (
-                            <Text>noch offen</Text>
+                            <Text className="w-full">noch offen</Text>
                         )}
                     </div>
                 )}
