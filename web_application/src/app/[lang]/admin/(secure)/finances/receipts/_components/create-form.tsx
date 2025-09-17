@@ -32,6 +32,11 @@ export default function CreateForm({ data, action }: Props) {
     const [amount, setAmount] = useState<number>(
         Math.abs(Number(data?.amount ?? null)),
     );
+
+    const [receiptType, setReceiptType] = useState<string>(
+        data?.receiptType ?? '',
+    );
+
     const [selectedTransactions, setSelectedTransactions] = useState<any[]>([]);
 
     const totalTransactionAmount = selectedTransactions.reduce(
@@ -56,6 +61,20 @@ export default function CreateForm({ data, action }: Props) {
             <div>
                 <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
                     <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                        <SelectInput
+                            id="receipt-type"
+                            name="receiptType"
+                            label={t('receipt:receipt_type.label')}
+                            options={receiptTypeOptions}
+                            defaultValue={data?.receiptType}
+                            handleChange={(e) =>
+                                setReceiptType(
+                                    (e.target as HTMLSelectElement).value,
+                                )
+                            }
+                            autoFocus={data ? false : true}
+                            required
+                        />
                         <TextInput
                             id="amount"
                             name="amount"
@@ -63,7 +82,6 @@ export default function CreateForm({ data, action }: Props) {
                             type="number"
                             min={0}
                             step="0.01"
-                            autoFocus={data ? false : true}
                             required
                             defaultValue={Math.abs(
                                 Number(data?.amount ?? undefined),
@@ -75,17 +93,10 @@ export default function CreateForm({ data, action }: Props) {
                                 setAmount(isNaN(value) ? 0 : value);
                             }}
                         />
-                        <SelectInput
-                            id="receipt-type"
-                            name="receiptType"
-                            label={t('receipt:receipt_type.label')}
-                            options={receiptTypeOptions}
-                            defaultValue={data?.receiptType}
-                            required
-                        />
                     </div>
                     <TransactionProgressBar
                         amount={amount}
+                        receiptType={receiptType}
                         totalTransactionAmount={totalTransactionAmount}
                     />
                     <BelongsToMultiselectInput

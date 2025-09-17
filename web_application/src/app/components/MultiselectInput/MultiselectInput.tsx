@@ -8,7 +8,6 @@ import { Option } from '../Input/SelectInput';
 import Input from './Input';
 import Options from './Options';
 import SelectedOptions from './SelectedOptions';
-import SingleSelectedOption from './SingleSelectedOption';
 
 interface Props {
     id: string;

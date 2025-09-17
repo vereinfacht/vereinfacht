@@ -8,19 +8,25 @@ import { useMemo } from 'react';
 
 interface Props {
     amount: number;
+    receiptType: string;
     totalTransactionAmount: number;
 }
 
 export default function TransactionProgressBar({
     amount,
+    receiptType,
     totalTransactionAmount,
 }: Props) {
-    const difference = Math.abs(totalTransactionAmount - amount);
-    const isOver = Math.abs(totalTransactionAmount) > Math.abs(amount);
-    const isUnder = Math.abs(totalTransactionAmount) < Math.abs(amount);
+    const calculationAmount = receiptType === 'expense' ? -amount : amount;
+
+    const difference = Math.abs(totalTransactionAmount - calculationAmount);
+    const isOver =
+        Math.abs(totalTransactionAmount) > Math.abs(calculationAmount);
+    const isUnder =
+        Math.abs(totalTransactionAmount) < Math.abs(calculationAmount);
 
     const isMatch =
-        totalTransactionAmount === amount &&
+        totalTransactionAmount === calculationAmount &&
         amount !== 0 &&
         totalTransactionAmount !== 0;
 
