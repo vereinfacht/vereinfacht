@@ -18,6 +18,7 @@ interface Props {
     onChange?: (selected: Option[]) => void;
     onQueryChange?: (query: string) => void;
     required?: boolean;
+    multiple?: boolean;
 }
 
 export function filterOptionsByQuery(options: Option[], query: string) {
@@ -48,6 +49,7 @@ export default function MultiselectInput({
     onChange,
     onQueryChange,
     required = false,
+    multiple = true,
 }: Props) {
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
@@ -70,8 +72,8 @@ export default function MultiselectInput({
 
     return (
         <div className="flex flex-col items-start">
-            {label ? (
-                typeof label === 'string' ? (
+            {label &&
+                (typeof label === 'string' ? (
                     <InputLabel
                         forInput={id}
                         value={label}
@@ -79,15 +81,26 @@ export default function MultiselectInput({
                     />
                 ) : (
                     label
-                )
-            ) : null}
+                ))}
             <Combobox
                 immediate
-                value={selected}
-                onChange={setSelected}
+                value={multiple ? selected : (selected[0] ?? null)}
+                onChange={(value: Option | Option[] | null) => {
+                    if (multiple) {
+                        setSelected((value ?? []) as Option[]);
+                    } else {
+                        setSelected(value ? [value as Option] : []);
+                    }
+                }}
                 name={name}
-                multiple
-                by="value"
+                multiple={multiple}
+                by={(a, b) => {
+                    const getValue = (item: any) =>
+                        Array.isArray(item)
+                            ? undefined
+                            : (item as Option)?.value;
+                    return getValue(a) === getValue(b);
+                }}
                 onClose={() => setQuery('')}
             >
                 {({ open }) => (
@@ -96,10 +109,9 @@ export default function MultiselectInput({
                             <Input
                                 setQuery={(query) => {
                                     setQuery(query);
-                                    if (onQueryChange) {
-                                        onQueryChange(query);
-                                    }
+                                    onQueryChange?.(query);
                                 }}
+                                multiple={multiple}
                             />
                             {open && <Options options={filteredOptions} />}
                         </div>
@@ -109,24 +121,23 @@ export default function MultiselectInput({
                                 handleRemove={handleRemove}
                             />
                         )}
-                        {required && (
-                            <input
-                                type="text"
-                                name={name}
-                                value={
-                                    selected.length
-                                        ? JSON.stringify(
-                                              selected.map(
-                                                  (option) => option.value,
-                                              ),
-                                          )
-                                        : ''
-                                }
-                                required
-                                className="pointer-events-none absolute opacity-0"
-                                tabIndex={-1}
-                            />
-                        )}
+                        <input
+                            type="text"
+                            name={name}
+                            value={
+                                selected.length
+                                    ? JSON.stringify(
+                                          selected.map(
+                                              (option) => option.value,
+                                          ),
+                                      )
+                                    : ''
+                            }
+                            required={required}
+                            className="pointer-events-none absolute opacity-0"
+                            tabIndex={-1}
+                            readOnly
+                        />
                     </>
                 )}
             </Combobox>

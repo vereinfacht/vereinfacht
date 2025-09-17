@@ -1,6 +1,7 @@
 'use client';
 
 import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
+import BelongsToSelectInput from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import { TReceiptDeserialized } from '@/types/resources';
@@ -10,6 +11,7 @@ import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
+import ReceiptProgressBar from './receipt-progress-bar';
 
 interface Props {
     action: (
@@ -27,46 +29,112 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('receipt:receipt_type.expense'), value: 'expense' },
     ];
 
-    const [amount, setAmount] = useState<number>(0);
-    const receiptTypeValue = amount >= 0 ? 'income' : 'expense';
+    const [amount, setAmount] = useState<number>(
+        Math.abs(Number(data?.amount ?? null)),
+    );
+
+    const [receiptType, setReceiptType] = useState<string>(
+        data?.receiptType ?? '',
+    );
+
+    const [selectedTransactions, setSelectedTransactions] = useState<any[]>([]);
+
+    const totalTransactionAmount = selectedTransactions.reduce(
+        (sum, transaction) => sum + (transaction.amount || 0),
+        0,
+    );
+
     const [formState, formAction] = useFormState<FormActionState, FormData>(
-        action,
-        {
-            success: false,
+        // @todo: try to optimise this after Zod upgrade
+        async (state, formData) => {
+            const parsedAmount = parseFloat(formData.get('amount') as string);
+            formData.set(
+                'amount',
+                (receiptType === 'expense'
+                    ? -Math.abs(parsedAmount)
+                    : Math.abs(parsedAmount)
+                ).toString(),
+            );
+
+            return action(state, formData);
         },
+        { success: false },
     );
 
     return (
         <ActionForm
             action={formAction}
             state={formState}
-            type={data ? 'create' : 'update'}
+            type={data ? 'update' : 'create'}
             translationKey="receipt"
         >
-            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <TextInput
-                    id="amount"
-                    name="amount"
-                    label={t('receipt:amount.label')}
-                    type="number"
-                    required
-                    defaultValue={data?.amount ?? 0}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                />
-                <SelectInput
-                    id="receipt-type"
-                    name="receiptType"
-                    label={t('receipt:receipt_type.label')}
-                    options={receiptTypeOptions}
-                    value={data?.receiptType ?? receiptTypeValue}
-                    required
-                />
+            <div>
+                <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
+                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                        <SelectInput
+                            id="receipt-type"
+                            name="receiptType"
+                            label={t('receipt:receipt_type.label')}
+                            options={receiptTypeOptions}
+                            defaultValue={data?.receiptType}
+                            handleChange={(e) =>
+                                setReceiptType(
+                                    (e.target as HTMLSelectElement).value,
+                                )
+                            }
+                            autoFocus={data ? false : true}
+                            required
+                        />
+                        <TextInput
+                            id="amount"
+                            name="amount"
+                            label={t('receipt:amount.label')}
+                            type="number"
+                            min={0}
+                            step="0.01"
+                            required
+                            defaultValue={
+                                data
+                                    ? Math.abs(Number(data?.amount))
+                                    : undefined
+                            }
+                            onChange={(e) => {
+                                const value = Math.abs(
+                                    parseFloat(e.target.value),
+                                );
+                                setAmount(isNaN(value) ? 0 : value);
+                            }}
+                        />
+                    </div>
+                    <ReceiptProgressBar
+                        amount={amount}
+                        receiptType={receiptType}
+                        totalTransactionAmount={totalTransactionAmount}
+                    />
+                    <BelongsToMultiselectInput
+                        id="transactions"
+                        name="transactions"
+                        resource="transactions"
+                        label={t('transaction:title.other')}
+                        defaultValue={(data?.transactions ?? []).map(
+                            (transaction) => ({
+                                label: transaction.name,
+                                value: transaction.id,
+                                amount: transaction.amount,
+                            }),
+                        )}
+                        onChange={(selected) => {
+                            setSelectedTransactions(selected || []);
+                        }}
+                    />
+                </fieldset>
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                 <TextInput
                     id="referenceNumber"
                     name="referenceNumber"
                     label={t('receipt:reference_number.label')}
+                    help={t('receipt:reference_number.help')}
                     defaultValue={data?.referenceNumber ?? ''}
                 />
                 <TextInput
@@ -83,11 +151,26 @@ export default function CreateForm({ data, action }: Props) {
                 />
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <BelongsToMultiselectInput
-                    id="transactions"
-                    name="transactions"
-                    label={t('transaction:title.no_receipts')}
-                    resource="transactions"
+                <BelongsToSelectInput
+                    id="finance-contact"
+                    name="financeContact"
+                    resource="finance-contacts"
+                    label={t('contact:title.one')}
+                    required
+                    defaultValue={
+                        data?.financeContact
+                            ? [
+                                  {
+                                      label: data.financeContact.fullName
+                                          ? data.financeContact.fullName
+                                          : data.financeContact.companyName,
+                                      value:
+                                          (data.financeContact as any)?.id ??
+                                          '',
+                                  },
+                              ]
+                            : undefined
+                    }
                 />
             </div>
         </ActionForm>

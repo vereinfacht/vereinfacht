@@ -2,6 +2,7 @@
 
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
+import { toKebabCase } from '@/utils/strings';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
 
@@ -9,8 +10,42 @@ export interface BaseBody {
     data: {
         type: string;
         attributes?: Record<string, any>;
-        relationships?: Record<string, { data: { type: string; id: string } }>;
+        relationships?: Record<
+            string,
+            {
+                data:
+                    | { type: string; id: string }
+                    | { type: string; id: string }[];
+            }
+        >;
     };
+}
+
+export async function parseRelationship(key: string, value: string) {
+    if (value.startsWith('[') && value.endsWith(']')) {
+        try {
+            const ids = JSON.parse(value) as string[];
+            const isPlural = key.endsWith('s');
+
+            if (ids.length === 1 && !isPlural) {
+                return {
+                    [key]: {
+                        data: {
+                            id: ids[0],
+                            type: toKebabCase(key) + 's',
+                        },
+                    },
+                };
+            } else if (isPlural) {
+                return {
+                    [key]: { data: ids.map((id) => ({ id, type: key })) },
+                };
+            }
+        } catch {
+            return null;
+        }
+    }
+    return null;
 }
 
 export default async function createFormAction<K>(
@@ -36,14 +71,20 @@ export default async function createFormAction<K>(
         body.data.relationships = relationships;
     }
 
-    body.data.attributes = Object.fromEntries(formData.entries());
-    body.data.attributes = Object.fromEntries(
-        Object.entries(body.data.attributes).map(([key, value]) => [
-            key,
-            value === '' ? undefined : value,
-        ]),
-    );
+    const attributes: Record<string, any> = {};
 
+    for (const [key, raw] of Array.from(formData.entries())) {
+        const value = raw.toString();
+
+        const relationships = await parseRelationship(key, value);
+        if (relationships) {
+            Object.assign(body.data.relationships || {}, relationships);
+        } else {
+            attributes[key] = value === '' ? undefined : value;
+        }
+    }
+
+    body.data.attributes = attributes;
     try {
         await action(body as K);
 
