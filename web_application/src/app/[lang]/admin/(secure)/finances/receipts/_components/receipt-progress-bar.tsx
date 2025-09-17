@@ -31,7 +31,9 @@ export default function ReceiptProgressBar({
         totalTransactionAmount !== 0;
 
     const progressValue = useMemo(() => {
-        if (amount === 0 || totalTransactionAmount === 0) return 0;
+        if (amount === 0 || totalTransactionAmount === 0) {
+            return 0;
+        }
         if (isOver || isUnder) {
             return Math.min(
                 (Math.abs(amount) / (Math.abs(amount) + difference)) * 100,
