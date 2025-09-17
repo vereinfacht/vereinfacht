@@ -23,14 +23,14 @@ export default function ActionForm({
     const { t } = useTranslation();
 
     return (
-        <form action={action} className="container flex flex-col gap-8">
+        <form action={action} className="container flex h-full flex-col gap-8">
             <FormStateHandler
                 state={state}
                 translationKey={translationKey}
                 type={type}
             />
             {children}
-            <div className="flex gap-4 self-end">
+            <div className="mt-auto flex gap-4 self-end">
                 <CancelButton />
                 <SubmitButton title={t('general:save')} />
             </div>

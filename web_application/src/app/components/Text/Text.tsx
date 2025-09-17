@@ -1,4 +1,4 @@
-import { ReactNode, StyleHTMLAttributes } from 'react';
+import { ReactNode } from 'react';
 
 type HTMLElements = keyof JSX.IntrinsicElements;
 
@@ -7,7 +7,7 @@ export interface TextProps {
     className?: string;
     preset?: TextPresets;
     tag?: HTMLElements;
-    style?: StyleHTMLAttributes<HTMLElements>;
+    style?: React.CSSProperties;
     suppressHydrationWarning?: boolean;
 }
 

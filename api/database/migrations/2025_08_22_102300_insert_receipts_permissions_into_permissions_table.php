@@ -7,7 +7,7 @@ return new class extends Migration
     protected $permissionNames = [
         'view receipts',
         'create receipts',
-        'edit receipts',
+        'update receipts',
         'delete receipts',
     ];
 

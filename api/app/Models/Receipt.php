@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use App\Enums\ReceiptStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,7 @@ class Receipt extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'amount' => MoneyCast::class,
         ];
     }
 
