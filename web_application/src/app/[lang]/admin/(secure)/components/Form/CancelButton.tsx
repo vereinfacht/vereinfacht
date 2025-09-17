@@ -10,7 +10,7 @@ export default function CancelButton() {
     const router = useRouter();
 
     return (
-        <Button onClick={() => router.back()} preset="secondary">
+        <Button type="button" onClick={() => router.back()} preset="secondary">
             {capitalizeFirstLetter(t('cancel'))}
         </Button>
     );
