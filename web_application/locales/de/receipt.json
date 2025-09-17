@@ -14,7 +14,7 @@
     },
     "reference_number": {
         "label": "Referenznummer",
-        "help": "Nummer für die interne Zuordnung, bspw. Mitgliedsnr."
+        "help": "Bezeichnung für die interne Zuordnung (bspw. Mitgliedsnummer)"
     },
     "amount": {
         "label": "Betrag"
