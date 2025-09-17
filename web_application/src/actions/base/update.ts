@@ -17,22 +17,11 @@ export default async function updateFormAction<K>(
     action: (payload: K) => Promise<any>,
     formData: FormData,
     body: UpdateFormBody,
-    setClubId: boolean = true,
 ): Promise<FormActionState> {
     const session = await auth();
 
     if (!session?.accessToken) {
         redirect('/admin/auth/login');
-    }
-
-    if (setClubId) {
-        const relationships = body.data.relationships || {};
-
-        relationships.club = {
-            data: { type: 'clubs', id: session.club_id.toString() },
-        };
-
-        body.data.relationships = relationships;
     }
 
     const attributes: Record<string, any> = {};

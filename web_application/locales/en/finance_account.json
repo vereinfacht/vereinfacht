@@ -13,12 +13,27 @@
         "bank_account": "Bank account"
     },
     "rename": "Rename",
+    "activate": "Activate",
     "deactivate": "Deactivate",
+    "deactivated": "Deactivated sources",
     "import_transactions": "Import transactions",
     "create_modal": {
         "title": "Create new transaction source",
         "choose_type": "Choose type",
         "edit_type": "Set up {{type}}"
+    },
+    "edit_modal": {
+        "description": "Adjust the settings of the transaction source."
+    },
+    "activate_modal": {
+        "title": "Activate transaction source",
+        "description": "<0>Do you want to activate the source <1>{{name}}</1>?</0>",
+        "notification": {
+            "activate": {
+                "success": "{{resource}} has been activated",
+                "error": "{{resource}} could not be activated"
+            }
+        }
     },
     "deactivate_modal": {
         "title": "Deactivate transaction source",

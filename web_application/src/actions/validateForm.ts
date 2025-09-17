@@ -1,6 +1,6 @@
 'use server';
 
-import { SomeZodObject } from 'zod';
+import { ZodObject } from 'zod';
 import { supportedLocales } from '@/utils/localization';
 
 export type ActionState = {
@@ -19,7 +19,7 @@ export interface UpdateAction {
     ): Promise<ActionState>;
 }
 
-function getFormData(schema: SomeZodObject, formData: FormData) {
+function getFormData(schema: ZodObject, formData: FormData) {
     const result: { [key: string]: string | object } = {};
 
     for (const key in schema.shape) {
@@ -51,7 +51,7 @@ function getTranslationFieldData(data: FormDataEntryValue[]) {
 }
 
 export async function validateAndRunAction(
-    schema: SomeZodObject,
+    schema: ZodObject,
     formData: FormData,
     action: (data: object) => void,
     onSuccess?: () => void,

@@ -1,5 +1,6 @@
 {
     "no_resources_found": "Keine {{name}} gefunden.",
+    "edit_resource": "{{resource}} bearbeiten",
 
     "fields": {
         "created_at": "Erstellt am",

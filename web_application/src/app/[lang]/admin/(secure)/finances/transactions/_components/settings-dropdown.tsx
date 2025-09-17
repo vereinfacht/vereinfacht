@@ -1,6 +1,5 @@
 'use client';
 
-import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -17,34 +16,30 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/app/components/ui/dialog';
+import { TFinanceAccountDeserialized } from '@/types/resources';
+import { capitalizeFirstLetter } from '@/utils/strings';
+import { isPast } from 'date-fns';
 import { Settings } from 'lucide-react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useFormState } from 'react-dom';
-import CancelButton from '../../../components/Form/CancelButton';
-import FormStateHandler, {
-    FormActionState,
-} from '../../../components/Form/FormStateHandler';
-import SubmitButton from '../../../components/Form/SubmitButton';
-import { TFinanceAccountDeserialized } from '@/types/resources';
+import { useState } from 'react';
+import ActivationForm from './activation-form';
+import EditAccountForm from './edit-account-form';
 
 interface Props {
     account: TFinanceAccountDeserialized;
 }
 
 export default function SettingsDropdown({ account }: Props) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [formType, setFormType] = useState<'edit' | 'activation'>('edit');
     const { t } = useTranslation();
-    const { title, id } = account;
-    const extendedDeleteAction = deleteFinanceAccountFormAction.bind(null, id);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
-        extendedDeleteAction,
-        {
-            success: false,
-        },
-    );
+    const { title } = account;
+    const accountStatus =
+        account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenu>
                 <DropdownMenuTrigger className="p-1">
                     <Settings className="ml-auto h-4 w-4 text-gray-400" />
@@ -53,14 +48,32 @@ export default function SettingsDropdown({ account }: Props) {
                     <DropdownMenuItem>
                         {t('finance_account:import_transactions')}
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        {t('finance_account:rename')}
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DialogTrigger asChild>
-                        <DropdownMenuItem className="text-red-600">
-                            {t('finance_account:deactivate')}
+                    <DialogTrigger
+                        asChild
+                        onClick={() => {
+                            setFormType('edit');
+                        }}
+                    >
+                        <DropdownMenuItem>
+                            {capitalizeFirstLetter(t('general:edit'))}
                         </DropdownMenuItem>
+                    </DialogTrigger>
+                    <DropdownMenuSeparator />
+                    <DialogTrigger
+                        asChild
+                        onClick={() => {
+                            setFormType('activation');
+                        }}
+                    >
+                        {accountStatus === 'active' ? (
+                            <DropdownMenuItem className="text-red-600">
+                                {t('finance_account:deactivate')}
+                            </DropdownMenuItem>
+                        ) : (
+                            <DropdownMenuItem>
+                                {t('finance_account:activate')}
+                            </DropdownMenuItem>
+                        )}
                     </DialogTrigger>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -68,40 +81,50 @@ export default function SettingsDropdown({ account }: Props) {
                 <DialogHeader>
                     <DialogTitle asChild>
                         <Text preset="headline">
-                            {t('finance_account:deactivate_modal.title')}
+                            {formType === 'edit'
+                                ? t('resource:edit_resource', {
+                                      resource: t('finance_account:title.one'),
+                                  })
+                                : accountStatus === 'active'
+                                  ? t('finance_account:deactivate_modal.title')
+                                  : t('finance_account:activate_modal.title')}
                         </Text>
                     </DialogTitle>
                     <DialogDescription asChild className="mt-2">
-                        <Trans
-                            i18nKey="finance_account:deactivate_modal.description"
-                            components={[
-                                <Text key="0" preset="default" />,
-                                <span key="1" className="font-semibold" />,
-                            ]}
-                            values={{
-                                name: title,
-                            }}
-                        />
+                        {formType === 'edit' ? (
+                            <Text>
+                                {t('finance_account:edit_modal.description')}
+                            </Text>
+                        ) : accountStatus === 'active' ? (
+                            <Trans
+                                i18nKey="finance_account:deactivate_modal.description"
+                                components={[
+                                    <Text key="0" preset="default" />,
+                                    <span key="1" className="font-semibold" />,
+                                ]}
+                                values={{
+                                    name: title,
+                                }}
+                            />
+                        ) : (
+                            <Trans
+                                i18nKey="finance_account:activate_modal.description"
+                                components={[
+                                    <Text key="0" preset="default" />,
+                                    <span key="1" className="font-semibold" />,
+                                ]}
+                                values={{
+                                    name: title,
+                                }}
+                            />
+                        )}
                     </DialogDescription>
                 </DialogHeader>
-                <form
-                    action={formAction}
-                    className="container flex flex-col gap-8"
-                >
-                    <FormStateHandler
-                        state={formState}
-                        translationKey="finance_account"
-                        customNotificationTranslationKey="finance_account:deactivate_modal.notification.deactivate"
-                        redirectPath="refresh"
-                    />
-                    <div className="flex gap-4 self-end">
-                        <CancelButton />
-                        <SubmitButton
-                            preset="destructive"
-                            title={t('finance_account:deactivate')}
-                        />
-                    </div>
-                </form>
+                {formType === 'edit' ? (
+                    <EditAccountForm account={account} setIsOpen={setIsOpen} />
+                ) : (
+                    <ActivationForm account={account} setIsOpen={setIsOpen} />
+                )}
             </DialogContent>
         </Dialog>
     );

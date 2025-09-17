@@ -24,10 +24,13 @@ import FormStateHandler, {
 } from '../../../components/Form/FormStateHandler';
 import SubmitButton from '../../../components/Form/SubmitButton';
 import AccountTypeCard from './account-type-card';
+import { useRouter } from 'next/navigation';
 
 export default function CreateAccountModal() {
     const { t } = useTranslation();
+    const router = useRouter();
     const [type, setType] = useState<string | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         createFinanceAccountFormAction,
         {
@@ -35,12 +38,13 @@ export default function CreateAccountModal() {
         },
     );
 
-    function handleOpenChange() {
+    function handleOpenChange(open: boolean) {
         setType(null);
+        setIsOpen(open);
     }
 
     return (
-        <Dialog onOpenChange={handleOpenChange}>
+        <Dialog onOpenChange={handleOpenChange} open={isOpen}>
             <DialogTrigger asChild>
                 <ShadCNButton variant="outline">+</ShadCNButton>
             </DialogTrigger>
@@ -91,7 +95,10 @@ export default function CreateAccountModal() {
                             state={formState}
                             translationKey="finance_account"
                             type="create"
-                            redirectPath="refresh"
+                            onSuccess={() => {
+                                setIsOpen(false);
+                                router.refresh();
+                            }}
                         />
                         <input type="hidden" name="accountType" value={type} />
                         <div className="flex min-w-[24rem] flex-col items-center gap-4 self-center">
@@ -131,6 +138,7 @@ export default function CreateAccountModal() {
                                             'finance_account:initial_balance.label',
                                         )}
                                         type="number"
+                                        step={0.01}
                                         required
                                         help={t(
                                             'resource:fields.currency.help',

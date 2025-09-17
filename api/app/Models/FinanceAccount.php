@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use LaravelJsonApi\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FinanceAccount extends Model
 {
@@ -20,7 +20,7 @@ class FinanceAccount extends Model
         'starts_at',
         'initial_balance',
         'account_type',
-        'club_id',
+        'club_id'
     ];
 
     public function casts()
@@ -31,6 +31,7 @@ class FinanceAccount extends Model
             'starts_at' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

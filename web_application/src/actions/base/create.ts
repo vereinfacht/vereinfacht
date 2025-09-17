@@ -105,7 +105,7 @@ export async function handleZodError(error: ZodError) {
         success: false,
         errors: error.issues.reduce(
             (acc, err) => {
-                const attribute = err.path[err.path.length - 1];
+                const attribute = err.path[err.path.length - 1] as string;
 
                 if (!acc[attribute]) {
                     acc[attribute] = [];

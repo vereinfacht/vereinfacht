@@ -12,12 +12,27 @@
         "bank_account": "Bankkonto"
     },
     "rename": "Umbenennen",
+    "activate": "Aktivieren",
     "deactivate": "Deaktivieren",
+    "deactivated": "Deaktivierte Quellen",
     "import_transactions": "Transaktionen importieren",
     "create_modal": {
         "title": "Neue Transaktionsquelle erstellen",
         "choose_type": "Typ wählen",
         "edit_type": "{{type}} einrichten"
+    },
+    "edit_modal": {
+        "description": "Passen Sie die Einstellungen der Transaktionsquelle an."
+    },
+    "activate_modal": {
+        "title": "Transaktionsquelle reaktivieren",
+        "description": "<0>Möchten Sie die Quelle <1>{{name}}</1> reaktivieren?</0>",
+        "notification": {
+            "activate": {
+                "success": "{{resource}} wurde reaktiviert",
+                "error": "{{resource}} konnte nicht reaktiviert werden"
+            }
+        }
     },
     "deactivate_modal": {
         "title": "Transaktionsquelle deaktivieren",

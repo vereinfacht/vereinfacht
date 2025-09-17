@@ -7419,6 +7419,11 @@
                                 "type": "string",
                                 "readOnly": true,
                                 "example": "2025-05-14T08:40:44.000000Z"
+                            },
+                            "deletedAt": {
+                                "title": "deletedAt",
+                                "type": "string",
+                                "example": "2025-05-14T08:40:44.000000Z"
                             }
                         }
                     },
@@ -7551,6 +7556,11 @@
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
+                                "example": "2025-05-14T08:40:44.000000Z"
+                            },
+                            "deletedAt": {
+                                "title": "deletedAt",
+                                "type": "string",
                                 "example": "2025-05-14T08:40:44.000000Z"
                             }
                         }
@@ -7689,6 +7699,11 @@
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
+                                "example": "2025-05-14T08:40:44.000000Z"
+                            },
+                            "deletedAt": {
+                                "title": "deletedAt",
+                                "type": "string",
                                 "example": "2025-05-14T08:40:44.000000Z"
                             }
                         }

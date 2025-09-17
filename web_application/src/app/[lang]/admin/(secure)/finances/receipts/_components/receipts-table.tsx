@@ -118,9 +118,9 @@ export default function ReceiptsTable({
                                 aria-describedby={tooltipId}
                             >
                                 {status === 'incompleted' ? (
-                                    <CircleDashed className="text-slate-600" />
+                                    <CircleDashed className="text-slate-500" />
                                 ) : (
-                                    <CircleCheck className="text-green-600" />
+                                    <CircleCheck className="text-green-500" />
                                 )}
                             </TooltipTrigger>
                             <TooltipContent role="tooltip" id={tooltipId}>

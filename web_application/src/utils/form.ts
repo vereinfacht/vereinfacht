@@ -3,7 +3,7 @@ import { Option } from '@/app/components/Input/SelectInput';
 import { TranslationSchemaType } from '@/types/jsonapi-models';
 import { camelCaseToSnakeCase } from '@/utils/strings';
 import { Translate } from 'next-translate';
-import { z } from 'zod';
+import { z, ZodCustomStringFormat } from 'zod';
 import { getI18nNamespace } from './localization';
 import { ResourceName } from '@/resources/resource';
 
@@ -65,22 +65,11 @@ function generateFieldFromSchemaDefinition(
 
 function getInputProps(
     key: string,
-    zodType: z.ZodType<any>,
+    field: z.ZodType<any>,
     resourceName: ResourceName,
     t: Translate,
 ): FieldProps {
     let type: FieldType = 'default';
-
-    // peel back the Zod wrappers to get to the underlying field type
-    let field = zodType;
-
-    if (field instanceof z.ZodUnion) {
-        field = field._def.options[0];
-    }
-
-    if (field instanceof z.ZodOptional) {
-        field = field._def.innerType;
-    }
 
     if (field instanceof z.ZodDate) {
         type = 'date';
@@ -90,21 +79,24 @@ function getInputProps(
         type = 'number';
     }
 
-    if (field instanceof z.ZodEffects) {
-        field = field._def.schema;
-    }
-
     if (field instanceof z.ZodBoolean) {
         type = 'checkbox';
     }
+
+    const meta = (field.meta() ?? {}) as {
+        label?: string;
+        description?: string;
+    };
 
     let inputProps: FieldProps = {
         id: key,
         name: key,
         type,
-        required: !zodType.isOptional(),
-        label: getLabel(key.toString(), resourceName, t),
-        help: t(field._def.description ?? ''),
+        required: !field.isOptional(),
+        label: meta.label
+            ? t(meta.label)
+            : getLabel(key.toString(), resourceName, t),
+        help: t(meta.description ?? ''),
     };
 
     if (field instanceof z.ZodEnum) {
@@ -123,7 +115,7 @@ function getEnumProps(
     t: Translate,
 ) {
     const isCheckbox =
-        JSON.stringify(field._def.values) ===
+        JSON.stringify(field.options) ===
         JSON.stringify(['0', '1', 'true', 'false']);
 
     if (isCheckbox) {
@@ -131,7 +123,7 @@ function getEnumProps(
         inputProps.required = false; // Checking for dynamic optional rule requires an additional ZodOptional check. As long as we don't need an force accept boolean field, we can assume it's always optional.
     } else {
         inputProps.type = 'select';
-        inputProps.options = field._def.values.map((value: any) => ({
+        inputProps.options = field.options.map((value: string) => ({
             value,
             label: t(
                 `${getI18nNamespace(resourceName)}:${camelCaseToSnakeCase(inputProps.id)}.${value}`,
@@ -144,41 +136,34 @@ function getEnumProps(
 
 function addChecks(inputProps: FieldProps, field: any) {
     if (field instanceof z.ZodString) {
-        const checks = field._def.checks;
+        if (field.minLength != null) {
+            inputProps.minLength = field.minLength;
+        }
 
-        checks.forEach((check) => {
-            if (check.kind === 'min') {
-                inputProps.minLength = check.value;
-            }
+        if (field.maxLength != null) {
+            inputProps.maxLength = field.maxLength;
+        }
+    }
 
-            if (check.kind === 'max') {
-                inputProps.maxLength = check.value;
-            }
-
-            if (check.kind === 'regex') {
-                inputProps.pattern = check.regex.source;
-            }
-        });
+    if (field instanceof ZodCustomStringFormat) {
+        inputProps.pattern = field.def.pattern?.toString();
     }
 
     if (field instanceof z.ZodNumber) {
-        const checks = field._def.checks;
-
         inputProps.type = 'number';
 
-        checks.forEach((check) => {
-            if (check.kind === 'min') {
-                inputProps.min = check.value;
-            }
+        if (field.minValue != null) {
+            inputProps.min = field.minValue;
+        }
 
-            if (check.kind === 'max') {
-                inputProps.max = check.value;
-            }
+        if (field.maxValue != null) {
+            inputProps.max = field.maxValue;
+        }
 
-            if (check.kind === 'multipleOf') {
-                inputProps.step = check.value;
-            }
-        });
+        // after upgrading to Zod v4 we can no longer access the multipleOf / step value directly and we are using meta to pass the step value
+        if (field.meta()?.step) {
+            inputProps.step = (field.meta() as { step: number }).step;
+        }
     }
 
     return inputProps;
@@ -190,9 +175,9 @@ function configureTranslationProps(
 ) {
     props.type = 'translation';
 
-    const firstShape = field._def.shape() ?? {};
+    const firstShape = field.def.shape ?? {};
     const firstFieldKey = Object.keys(firstShape)[0];
-    const firstField = firstShape[firstFieldKey]._def.innerType._def.options[0];
+    const firstField = firstShape[firstFieldKey].def.innerType.def.options[0];
 
     if (firstField) {
         props = addChecks(props, firstField);

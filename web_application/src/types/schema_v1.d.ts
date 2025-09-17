@@ -1495,6 +1495,11 @@ export interface components {
                  * @example 2025-05-14T08:40:44.000000Z
                  */
                 readonly updatedAt?: string;
+                /**
+                 * deletedAt
+                 * @example 2025-05-14T08:40:44.000000Z
+                 */
+                deletedAt?: string;
             };
             relationships?: {
                 /** club */
@@ -1589,6 +1594,11 @@ export interface components {
                  * @example 2025-05-14T08:40:44.000000Z
                  */
                 readonly updatedAt?: string;
+                /**
+                 * deletedAt
+                 * @example 2025-05-14T08:40:44.000000Z
+                 */
+                deletedAt?: string;
             };
             relationships?: {
                 /** club */
@@ -1685,6 +1695,11 @@ export interface components {
                  * @example 2025-05-14T08:40:44.000000Z
                  */
                 readonly updatedAt?: string;
+                /**
+                 * deletedAt
+                 * @example 2025-05-14T08:40:44.000000Z
+                 */
+                deletedAt?: string;
             };
             relationships?: {
                 /** club */

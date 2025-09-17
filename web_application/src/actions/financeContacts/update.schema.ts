@@ -1,12 +1,14 @@
 import { z } from 'zod';
-import { createFinanceContactSchema } from './create.schema';
 import { idSchema } from '../base/get.schema';
+import { financeContactAttributesSchema } from './create.schema';
 
 export const genderOptions = ['other', 'male', 'female'] as const;
 
-export const updateFinanceContactSchema = createFinanceContactSchema.extend({
-    data: createFinanceContactSchema.shape.data.extend({
+export const updateFinanceContactSchema = z.object({
+    data: z.object({
         id: idSchema,
+        type: z.literal('finance-contacts'),
+        attributes: financeContactAttributesSchema,
     }),
 });
 

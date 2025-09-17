@@ -1,15 +1,16 @@
 'use client';
 
+import Card from '@/app/components/Card/Card';
 import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
+import { Badge } from '@/app/components/ui/badge';
 import { CardContent, CardFooter, CardHeader } from '@/app/components/ui/card';
 import { TFinanceAccountDeserialized } from '@/types/resources';
+import { isPast } from 'date-fns';
+import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 import SettingsDropdown from './settings-dropdown';
-import { Badge } from '@/app/components/ui/badge';
 import IconCheck from '/public/svg/check.svg';
-import Card from '@/app/components/Card/Card';
-import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     title: string;
@@ -23,6 +24,8 @@ export default function AccountCard({ balance, account, title }: Props) {
         shallow: false,
     });
     const cardId = account ? account.id : null;
+    const type =
+        account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
     const isSelected = cardId === accountId;
     const readableIban = account?.iban
         ? account.iban.replace(/(.{4})/g, '$1 ').trim() // adds a space every 4 characters
@@ -32,9 +35,13 @@ export default function AccountCard({ balance, account, title }: Props) {
         <Card
             hoverAnimations={false}
             className={[
-                'group flex h-auto w-full flex-col bg-white',
+                'group flex h-auto w-full flex-col border-2 border-transparent',
                 isSelected
-                    ? 'is-selected ring-2 ring-blue-500 transition-none'
+                    ? 'is-selected !border-blue-500 transition-none'
+                    : '',
+                type === 'deactivated' && 'shadow-none',
+                type === 'deactivated' && !isSelected
+                    ? '!border-slate-200'
                     : '',
             ].join(' ')}
         >
@@ -53,7 +60,7 @@ export default function AccountCard({ balance, account, title }: Props) {
                         className="p-1"
                         data-cy={`select-account-${cardId ? cardId : 'all'}`}
                     >
-                        <div className="flex size-5 items-center justify-center rounded-full border bg-white transition-colors hover:border-blue-500 hover:bg-blue-200 group-[.is-selected]:border-transparent group-[.is-selected]:ring-2 group-[.is-selected]:ring-blue-500">
+                        <div className="flex size-5 items-center justify-center rounded-full bg-white ring-2 ring-slate-200 transition-all hover:bg-blue-200 hover:ring-blue-500 group-[.is-selected]:border-transparent group-[.is-selected]:ring-2 group-[.is-selected]:ring-blue-500">
                             {isSelected && (
                                 <IconCheck className="w-3 stroke-blue-500 stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                             )}

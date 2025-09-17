@@ -1,5 +1,6 @@
 {
     "no_resources_found": "No {{name}} found.",
+    "edit_resource": "Edit {{resource}}",
 
     "fields": {
         "created_at": "Created at",

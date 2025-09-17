@@ -11,7 +11,8 @@ export const receiptSortingOptions = [
 export const receiptTypeOptions = ['income', 'expense'] as const;
 export const receiptStatusOptions = ['incompleted', 'completed'] as const;
 
-export const listReceiptsSchema = baseListSchema.extend({
+export const listReceiptsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(receiptSortingOptions)).optional(),
     filter: z
         .object({

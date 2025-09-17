@@ -7,48 +7,53 @@ import { ActionState, validateAndRunAction } from '../validateForm';
 
 const updateClubSchema = z.object({
     title: z.string().min(2).max(255),
-    extendedTitle: z
-        .string({
-            description: 'club:extended_title.help',
-        })
-        .min(2)
-        .max(255),
-    address: z.string().min(2).max(255),
-    zipCode: z.string().min(2).max(255),
-    city: z.string().min(2).max(255),
-    country: z.string().min(2).max(255),
+    extendedTitle: z.string().min(2).max(255).meta({
+        description: 'club:extended_title.help',
+    }),
+    address: z.string().min(2).max(255).meta({
+        label: 'contact:address.label',
+    }),
+    zipCode: z.string().min(2).max(255).meta({
+        label: 'contact:zip_code.label',
+    }),
+    city: z.string().min(2).max(255).meta({
+        label: 'contact:city.label',
+    }),
+    country: z.string().min(2).max(255).meta({
+        label: 'contact:country.label',
+    }),
     email: z.string().email(),
     websiteUrl: z
-        .string({
+        .url()
+        .meta({
             description: 'club:website_url.help',
         })
-        .max(1000)
-        .url(),
+        .max(1000),
     logoUrl: z
-        .string({
+        .url()
+        .meta({
             description: 'club:logo_url.help',
         })
-        .max(1000)
-        .url(),
+        .max(1000),
     privacyStatementUrl: z
-        .string({
+        .url()
+        .meta({
             description: 'club:privacy_statement_url.help',
         })
-        .max(1000)
-        .url(),
+        .max(1000),
     contributionStatementUrl: z
-        .string({
+        .url()
+        .meta({
             description: 'club:contribution_statement_url.help',
         })
-        .max(1000)
-        .url(),
+        .max(1000),
     constitutionUrl: z
-        .string({
+        .url()
+        .meta({
             description: 'club:constitution_url.help',
         })
-        .max(1000)
-        .url(),
-    membershipStartCycleType: z.enum(['daily', 'monthly'], {
+        .max(1000),
+    membershipStartCycleType: z.enum(['daily', 'monthly']).meta({
         description: 'club:membership_start_cycle_type.help',
     }),
     // why we are using a boolean / checkbox type this way? see: https://github.com/colinhacks/zod/issues/1630
@@ -56,7 +61,8 @@ const updateClubSchema = z.object({
         .enum(['0', '1', 'true', 'false'])
         .transform((value) => value === 'true' || value === '1'),
     hasConsentedMediaPublicationIsRequired: z
-        .enum(['0', '1', 'true', 'false'], {
+        .enum(['0', '1', 'true', 'false'])
+        .meta({
             description:
                 'club:has_consented_media_publication_is_required.help',
         })

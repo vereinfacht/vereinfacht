@@ -16,6 +16,7 @@
     "dependencies": {
         "@formatjs/intl-localematcher": "^0.5.4",
         "@headlessui/react": "^2.2.0",
+        "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-collapsible": "^1.1.10",
         "@radix-ui/react-dialog": "^1.1.14",
         "@radix-ui/react-dropdown-menu": "^2.0.6",
@@ -49,7 +50,7 @@
         "tailwind-merge": "^2.2.2",
         "tailwindcss-animate": "^1.0.7",
         "typescript": "^5.2.2",
-        "zod": "^3.23.8"
+        "zod": "^4.1.8"
     },
     "devDependencies": {
         "@svgr/webpack": "^8.1.0",

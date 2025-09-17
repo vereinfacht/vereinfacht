@@ -87,7 +87,7 @@ export function handleApiResponse<T>(
 export function createAuthenticatedAction<TInput, TOutput>(
     action: PermissionAction,
     resource: PermissionResource,
-    schema: z.ZodSchema<TInput>,
+    schema: z.ZodType<TInput>,
     handler: (
         params: TInput,
         client: ReturnType<typeof createServerClient>,
@@ -123,7 +123,7 @@ export function createAuthenticatedAction<TInput, TOutput>(
 export function createAuthenticatedActionWithOptionalParams<TInput, TOutput>(
     action: PermissionAction,
     resource: PermissionResource,
-    schema: z.ZodSchema<TInput>,
+    schema: z.ZodType<TInput>,
     handler: (
         query: Record<string, string | number | string[]>,
         client: ReturnType<typeof createServerClient>,
