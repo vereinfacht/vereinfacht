@@ -3,7 +3,7 @@ import { Option } from '@/app/components/Input/SelectInput';
 import { TranslationSchemaType } from '@/types/jsonapi-models';
 import { camelCaseToSnakeCase } from '@/utils/strings';
 import { Translate } from 'next-translate';
-import { z } from 'zod';
+import { z, ZodCustomStringFormat } from 'zod';
 import { getI18nNamespace } from './localization';
 import { ResourceName } from '@/resources/resource';
 
@@ -143,12 +143,10 @@ function addChecks(inputProps: FieldProps, field: any) {
         if (field.maxLength != null) {
             inputProps.maxLength = field.maxLength;
         }
+    }
 
-        if (field.format === 'regex') {
-            console.log(field);
-
-            // inputProps.pattern = field.regex;
-        }
+    if (field instanceof ZodCustomStringFormat) {
+        inputProps.pattern = field.def.pattern?.toString();
     }
 
     if (field instanceof z.ZodNumber) {

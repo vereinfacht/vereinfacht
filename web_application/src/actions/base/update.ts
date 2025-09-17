@@ -33,14 +33,12 @@ export default async function updateFormAction<K>(
     );
 
     try {
-        console.log(body);
         await action(body as K);
 
         return {
             success: true,
         };
     } catch (error) {
-        console.error(error);
         if (error instanceof ZodError) {
             return handleZodError(error);
         }
