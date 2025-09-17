@@ -83,9 +83,11 @@ export default function CreateForm({ data, action }: Props) {
                             min={0}
                             step="0.01"
                             required
-                            defaultValue={Math.abs(
-                                Number(data?.amount ?? undefined),
-                            )}
+                            defaultValue={
+                                data
+                                    ? Math.abs(Number(data?.amount))
+                                    : undefined
+                            }
                             onChange={(e) => {
                                 const value = Math.abs(
                                     parseFloat(e.target.value),

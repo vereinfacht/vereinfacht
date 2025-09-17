@@ -84,7 +84,7 @@ export default function MultiselectInput({
                 ))}
             <Combobox
                 immediate
-                value={multiple ? selected : (selected[0] ?? undefined)}
+                value={multiple ? selected : (selected[0] ?? null)}
                 onChange={(value: Option | Option[] | null) => {
                     if (multiple) {
                         setSelected((value ?? []) as Option[]);
@@ -136,6 +136,7 @@ export default function MultiselectInput({
                             required={required}
                             className="pointer-events-none absolute opacity-0"
                             tabIndex={-1}
+                            readOnly
                         />
                     </>
                 )}
