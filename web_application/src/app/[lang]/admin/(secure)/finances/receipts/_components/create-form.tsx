@@ -45,10 +45,19 @@ export default function CreateForm({ data, action }: Props) {
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
-        action,
-        {
-            success: false,
+        async (state, formData) => {
+            const parsedAmount = parseFloat(formData.get('amount') as string);
+            formData.set(
+                'amount',
+                (receiptType === 'expense'
+                    ? -Math.abs(parsedAmount)
+                    : Math.abs(parsedAmount)
+                ).toString(),
+            );
+
+            return action(state, formData);
         },
+        { success: false },
     );
 
     return (
