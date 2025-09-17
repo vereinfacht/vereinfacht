@@ -80,6 +80,7 @@ export function DataTable<TData extends Model, TValue>({
                                     data-state={
                                         row.getIsSelected() && 'selected'
                                     }
+                                    data-cy={`${row.index}-row`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
