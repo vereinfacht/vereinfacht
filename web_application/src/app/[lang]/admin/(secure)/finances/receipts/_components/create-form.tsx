@@ -45,6 +45,7 @@ export default function CreateForm({ data, action }: Props) {
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
+        // @todo: try to optimise this after Zod upgrade
         async (state, formData) => {
             const parsedAmount = parseFloat(formData.get('amount') as string);
             formData.set(
