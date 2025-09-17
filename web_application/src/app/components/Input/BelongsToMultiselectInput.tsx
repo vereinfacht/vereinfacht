@@ -51,8 +51,9 @@ export default function BelongsToMultiselectInput({
                     },
                 );
 
-                if (!response.ok)
+                if (!response.ok) {
                     throw new Error(`API error: ${response.status}`);
+                }
 
                 const json = await response.json();
                 const newOptions: TransactionOption[] = json.data.map(

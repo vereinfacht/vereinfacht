@@ -47,8 +47,9 @@ export default function BelongsToSelectInput({
                     },
                 );
 
-                if (!response.ok)
+                if (!response.ok) {
                     throw new Error(`API error: ${response.status}`);
+                }
 
                 const json = await response.json();
                 const newOptions: Option[] = json.data.map(
