@@ -4,6 +4,7 @@ import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import ProgressBar from '@/app/components/ui/progress-bar';
 import { CircleCheck } from 'lucide-react';
+import useTranslation from 'next-translate/useTranslation';
 import { useMemo } from 'react';
 
 interface Props {
@@ -17,6 +18,7 @@ export default function ReceiptProgressBar({
     receiptType,
     totalTransactionAmount,
 }: Props) {
+    const { t } = useTranslation('receipt');
     const calculationAmount = receiptType === 'expense' ? -amount : amount;
 
     const difference = Math.abs(totalTransactionAmount - calculationAmount);
@@ -80,10 +82,12 @@ export default function ReceiptProgressBar({
                             value={difference}
                         />
                         {isOver ? (
-                            <Text className="whitespace-nowrap">zu viel</Text>
+                            <Text className="whitespace-nowrap">
+                                {t('amount.too_much')}
+                            </Text>
                         ) : (
                             <Text className="whitespace-nowrap">
-                                noch offen
+                                {t('amount.still_open')}
                             </Text>
                         )}
                     </div>

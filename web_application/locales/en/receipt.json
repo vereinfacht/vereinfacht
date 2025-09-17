@@ -17,7 +17,9 @@
         "help": "Designation for internal assignment (e.g. member number)"
     },
     "amount": {
-        "label": "Amount"
+        "label": "Amount",
+        "still_open": "Still open",
+        "too_much": "Too much"
     },
     "status": {
         "label": "Status",

@@ -17,7 +17,9 @@
         "help": "Bezeichnung für die interne Zuordnung (bspw. Mitgliedsnummer)"
     },
     "amount": {
-        "label": "Betrag"
+        "label": "Betrag",
+        "still_open": "Noch offen",
+        "too_much": "Zu viel"
     },
     "status": {
         "label": "Status",
