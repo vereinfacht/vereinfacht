@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
-import TransactionProgressBar from './transaction-progress-bar';
+import ReceiptProgressBar from './receipt-progress-bar';
 
 interface Props {
     action: (
@@ -96,7 +96,7 @@ export default function CreateForm({ data, action }: Props) {
                             }}
                         />
                     </div>
-                    <TransactionProgressBar
+                    <ReceiptProgressBar
                         amount={amount}
                         receiptType={receiptType}
                         totalTransactionAmount={totalTransactionAmount}

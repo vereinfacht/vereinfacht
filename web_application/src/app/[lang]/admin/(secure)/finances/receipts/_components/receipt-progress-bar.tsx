@@ -12,7 +12,7 @@ interface Props {
     totalTransactionAmount: number;
 }
 
-export default function TransactionProgressBar({
+export default function ReceiptProgressBar({
     amount,
     receiptType,
     totalTransactionAmount,
@@ -66,7 +66,7 @@ export default function TransactionProgressBar({
                         value={totalTransactionAmount}
                     />
                 )}
-                {totalTransactionAmount !== amount && (
+                {totalTransactionAmount !== calculationAmount && (
                     <div
                         className={`absolute bottom-0 flex -translate-y-6 items-end gap-2 text-orange-400 ${getAlignClass(progressValue)}`}
                         style={{
