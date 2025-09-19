@@ -12,6 +12,7 @@ import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
 import ReceiptProgressBar from './receipt-progress-bar';
+import { FileInput } from '@/app/components/Input/FileInput';
 
 interface Props {
     action: (
@@ -171,6 +172,15 @@ export default function CreateForm({ data, action }: Props) {
                               ]
                             : undefined
                     }
+                />
+                <FileInput
+                    id="receipt-file"
+                    label={t('receipt:receiptFile.label')}
+                    help={t('receipt:receiptFile.help')}
+                    name="receiptFile"
+                    required={true}
+                    multiple={true}
+                    accept={'.png, .jpg, .jpeg, .pdf'}
                 />
             </div>
         </ActionForm>
