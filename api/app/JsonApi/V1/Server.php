@@ -17,6 +17,7 @@ use App\JsonApi\V1\Clubs\ClubSchema;
 use App\JsonApi\V1\Roles\RoleSchema;
 use App\JsonApi\V1\Users\UserSchema;
 use Illuminate\Support\Facades\Auth;
+use App\JsonApi\V1\Media\MediaSchema;
 use Illuminate\Database\Eloquent\Model;
 use LaravelJsonApi\Core\Document\Error;
 use App\JsonApi\V1\Members\MemberSchema;
@@ -118,6 +119,7 @@ class Server extends BaseServer
             FinanceAccountSchema::class,
             FinanceContactSchema::class,
             DivisionMembershipTypeSchema::class,
+            MediaSchema::class,
         ];
     }
 

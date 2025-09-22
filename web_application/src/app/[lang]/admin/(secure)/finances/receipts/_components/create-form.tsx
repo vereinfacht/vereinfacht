@@ -12,7 +12,7 @@ import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
 import ReceiptProgressBar from './receipt-progress-bar';
-import { FileInput } from '@/app/components/Input/FileInput';
+import { MediaInput } from '@/app/components/Input/MediaInput';
 
 interface Props {
     action: (
@@ -173,7 +173,7 @@ export default function CreateForm({ data, action }: Props) {
                             : undefined
                     }
                 />
-                <FileInput
+                <MediaInput
                     id="receipt-file"
                     label={t('receipt:receiptFile.label')}
                     help={t('receipt:receiptFile.help')}

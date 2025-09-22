@@ -40,6 +40,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
+            BelongsToMany::make('media')->type('media'),
         ];
     }
 
@@ -77,6 +78,7 @@ class ReceiptSchema extends Schema
         return [
             'transactions',
             'financeContact',
+            'media',
         ];
     }
 }

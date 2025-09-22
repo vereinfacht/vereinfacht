@@ -10,7 +10,7 @@ import { Input } from '../ui/input';
 import { Progress } from '../ui/progress';
 import InputLabel from './InputLabel';
 
-interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface MediaInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
     label?: string;
     help?: string;
@@ -86,7 +86,7 @@ function UploadQueueItem({ task, onRemove }: UploadQueueItemProps) {
     );
 }
 
-export function FileInput({
+export function MediaInput({
     id,
     label,
     help,
@@ -95,9 +95,9 @@ export function FileInput({
     multiple = false,
     accept,
     onFilesChange,
-}: FileInputProps) {
+}: MediaInputProps) {
     const [uploadQueue, setUploadQueue] = useState<UploadTask[]>([]);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const mediaInputRef = useRef<HTMLInputElement | null>(null);
 
     const handleAddFiles = (newFiles: File[]) => {
         setUploadQueue((currentQueue) => {
@@ -119,12 +119,12 @@ export function FileInput({
                     ),
             );
 
-            if (fileInputRef.current) {
+            if (mediaInputRef.current) {
                 const dataTransfer = new DataTransfer();
                 uniqueQueue.forEach((task) =>
                     dataTransfer.items.add(task.rawFile),
                 );
-                fileInputRef.current.files = dataTransfer.files;
+                mediaInputRef.current.files = dataTransfer.files;
             }
 
             onFilesChange?.(uniqueQueue.map((task) => task.rawFile));
@@ -141,12 +141,12 @@ export function FileInput({
         setUploadQueue((queue) => {
             const updatedQueue = queue.filter((_, i) => i !== index);
 
-            if (fileInputRef.current) {
+            if (mediaInputRef.current) {
                 const dataTransfer = new DataTransfer();
                 updatedQueue.forEach((task) =>
                     dataTransfer.items.add(task.rawFile),
                 );
-                fileInputRef.current.files = dataTransfer.files;
+                mediaInputRef.current.files = dataTransfer.files;
             }
 
             onFilesChange?.(updatedQueue.map((task) => task.rawFile));
@@ -199,7 +199,7 @@ export function FileInput({
 
             <Input
                 className="mt-1 px-3 py-2 hover:bg-slate-50"
-                ref={fileInputRef}
+                ref={mediaInputRef}
                 id={id}
                 type="file"
                 accept={accept}

@@ -6,6 +6,7 @@ use App\Models\Club;
 use App\Models\Receipt;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
 
 class FakeReceiptSeeder extends Seeder
 {
@@ -24,6 +25,13 @@ class FakeReceiptSeeder extends Seeder
                         $receipt->finance_contact_id = $financeContacts->random()->id;
                     }
                     $receipt->save();
+
+                    $count = rand(1, 3);
+                    for ($i = 1; $i <= $count; $i++) {
+                        $receipt->addMedia(
+                            UploadedFile::fake()->image("{$receipt->reference_number}-$i.jpg", 600, 400)
+                        )->toMediaCollection('receipts');
+                    }
                 });
 
             $transactions = Transaction::where('club_id', $club->id)->get();
