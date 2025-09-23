@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Media;
 
+use App\Models\Media;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
@@ -9,7 +10,6 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaSchema extends Schema
 {
@@ -30,10 +30,12 @@ class MediaSchema extends Schema
     {
         return [
             ID::make(),
-            DateTime::make('createdAt')->sortable()->readOnly(),
-            DateTime::make('updatedAt')->sortable()->readOnly(),
-            Str::make('name')->sortable(),
-            Str::make('mime_type')->sortable(),
+            DateTime::make('createdAt')->readOnly(),
+            DateTime::make('updatedAt')->readOnly(),
+            Str::make('name'),
+            Str::make('mimeType'),
+            Str::make('size'),
+            Str::make('originalUrl')->readOnly(),
         ];
     }
 
