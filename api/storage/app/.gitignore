@@ -1,6 +1,4 @@
 *
 !public/
 !.gitignore
-!seed/
-!seed/receipt-test.pdf
-!seed/receipt-test.png
+!seed/**
