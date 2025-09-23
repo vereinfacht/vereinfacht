@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
-use Spatie\MediaLibrary\MediaCollections\File;
 
 class Media extends BaseMedia
 {
     public function getOriginalUrlAttribute(): string
     {
         return $this->getUrl();
+    }
+
+    public function getPreviewUrlAttribute(): string
+    {
+        return $this->hasGeneratedConversion('preview') ? $this->getUrl('preview') : '';
     }
 }

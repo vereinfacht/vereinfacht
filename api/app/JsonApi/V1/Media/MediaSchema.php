@@ -36,6 +36,7 @@ class MediaSchema extends Schema
             Str::make('mimeType'),
             Str::make('size'),
             Str::make('originalUrl')->readOnly(),
+            Str::make('previewUrl')->readOnly(),
         ];
     }
 

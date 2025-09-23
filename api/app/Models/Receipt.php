@@ -7,12 +7,14 @@ use App\Enums\ReceiptStatusEnum;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Traits\HasPreviewConversions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Receipt extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ReceiptFactory> */
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasPreviewConversions;
 
     protected $fillable = [
         'reference_number',
@@ -35,6 +37,11 @@ class Receipt extends Model implements HasMedia
     public function getStatusAttribute(): string
     {
         return $this->transactions()->exists() ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->registerPreviewConversion($media);
     }
 
     // Relations

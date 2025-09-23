@@ -6,7 +6,7 @@ use App\Models\Club;
 use App\Models\Receipt;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
-use Illuminate\Http\UploadedFile;
+
 
 class FakeReceiptSeeder extends Seeder
 {
