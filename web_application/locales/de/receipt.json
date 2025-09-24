@@ -29,5 +29,8 @@
             "completed": "Der Beleg ist vollständig.",
             "incompleted": "Der Beleg ist noch unvollständig: Es muss mindestens eine Transaktion zugeordnet werden."
         }
+    },
+    "media": {
+        "label": "Dateien"
     }
 }

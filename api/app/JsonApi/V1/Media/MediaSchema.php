@@ -32,7 +32,7 @@ class MediaSchema extends Schema
             ID::make(),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
-            Str::make('name'),
+            Str::make('fileName'),
             Str::make('mimeType'),
             Str::make('size'),
             Str::make('originalUrl')->readOnly(),

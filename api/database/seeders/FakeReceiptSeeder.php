@@ -23,7 +23,7 @@ class FakeReceiptSeeder extends Seeder
         Club::all()->each(function ($club) use ($seedFiles) {
             $financeContacts = $club->financeContacts;
             $receipts = Receipt::factory()
-                ->count(50)
+                ->count(20)
                 ->make(['club_id' => $club->id])
                 ->each(function ($receipt) use ($financeContacts, $seedFiles) {
                     if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {

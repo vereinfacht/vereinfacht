@@ -15,18 +15,15 @@ trait HasPreviewConversions
         // PDF conversion
         if ($media && str_contains($media->mime_type, 'pdf')) {
             $this->addMediaConversion('preview')
-                ->width(368)
-                ->height(232)
-                ->pdfPageNumber(1)
-                ->nonQueued();
+                ->width(400)
+                ->height(565)
+                ->pdfPageNumber(1);
             return;
         }
 
         // Image conversion
         $this->addMediaConversion('preview')
-            ->width(368)
-            ->height(232)
-            ->fit(Fit::Contain)
-            ->nonQueued();
+            ->width(400)
+            ->height(565);
     }
 }
