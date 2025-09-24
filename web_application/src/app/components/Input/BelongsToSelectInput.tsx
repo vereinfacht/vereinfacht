@@ -1,94 +1,61 @@
 'use client';
 
-import { Building2, CircleUserRound } from 'lucide-react';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { useCallback, useEffect, useState } from 'react';
-import MultiselectInput from '../MultiselectInput/MultiselectInput';
-import Text from '../Text/Text';
+import { NewMultiselectInput } from '../MultiselectInput/NewMultiselectInput';
 import { Option } from './SelectInput';
 
-interface Props {
-    id: string;
-    name?: string;
+export const itemsPerQuery = 6;
+
+interface Props<T> {
+    resourceName: string;
+    resourceType: string;
+    action: (searchTerm: string) => Promise<any>;
+    optionLabel: (item: T) => React.ReactNode;
     label?: string | React.ReactNode;
-    defaultValue?: Option[];
-    onChange?: (selected: Option[]) => void;
+    onChange?: () => void;
     required?: boolean;
-    resource?: string;
+    defaultValue?: Option[];
 }
 
-export default function BelongsToSelectInput({
-    id,
-    name,
+export default function BelongsToSelectInput<T>({
+    resourceName,
+    resourceType,
     label,
+    action,
+    optionLabel,
     defaultValue,
-    onChange,
     required = false,
-    resource,
-}: Props) {
+}: Props<T>) {
     const [options, setOptions] = useState<Option[]>([]);
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    // @todo: use server action or other fetch handling
     const fetchOptions = useCallback(
         async (searchTerm: string) => {
-            if (!resource) return;
-
             try {
-                const response = await fetch(
-                    `http://api.verein.localhost/api/v1/${resource}?filter[query]=${encodeURIComponent(
-                        searchTerm,
-                    )}`,
-                    {
-                        headers: {
-                            Accept: 'application/vnd.api+json',
-                            'Content-Type': 'application/vnd.api+json',
-                            Authorization: `Bearer`,
-                        },
-                    },
-                );
+                setLoading(true);
+                const response = await action(searchTerm);
 
-                if (!response.ok) {
-                    throw new Error(`API error: ${response.status}`);
-                }
+                const resources = deserialize(
+                    response as DocumentObject,
+                ) as T[];
 
-                const json = await response.json();
-                const newOptions: Option[] = json.data.map(
-                    (item: {
-                        id: string;
-                        attributes: {
-                            contactType: string;
-                            fullName: string;
-                            companyName: string;
-                        };
-                    }) => ({
-                        value: item.id,
-                        label: (
-                            <div className="flex gap-2">
-                                {item.attributes.contactType === 'person' ? (
-                                    <CircleUserRound width={16} />
-                                ) : (
-                                    <Building2 width={16} />
-                                )}
-                                {item.attributes.fullName && (
-                                    <Text className="min-w-fit font-medium">
-                                        {item.attributes.fullName}
-                                    </Text>
-                                )}
-                                <Text className="truncate">
-                                    {item.attributes.companyName}
-                                </Text>
-                            </div>
-                        ),
-                    }),
-                );
+                const newOptions: Option[] = resources.map((resource) => ({
+                    // @ts-expect-error: T has no id property
+                    value: resource.id,
+                    label: optionLabel(resource as T),
+                }));
 
-                setOptions(newOptions.slice(0, 10));
+                setOptions(newOptions);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.error('Error fetching options:', error);
                 setOptions([]);
             }
         },
-        [resource],
+        [optionLabel, action],
     );
 
     useEffect(() => {
@@ -96,22 +63,23 @@ export default function BelongsToSelectInput({
             fetchOptions(query);
         }, 400);
         return () => clearTimeout(handler);
-    }, [query, fetchOptions]);
+    }, [query]);
 
     useEffect(() => {
         fetchOptions('');
     }, [fetchOptions]);
 
     return (
-        <MultiselectInput
-            id={id}
-            name={name}
+        <NewMultiselectInput
+            id={resourceName}
+            name={'relationships[' + resourceName + '][' + resourceType + ']'}
+            loading={loading}
             label={label}
             options={options}
             defaultValue={defaultValue}
-            onChange={onChange}
             required={required}
             onQueryChange={setQuery}
+            query={query}
             multiple={false}
         />
     );

@@ -24,20 +24,26 @@ export default async function updateFormAction<K>(
         redirect('/admin/auth/login');
     }
 
+    const relationships = {};
+
     const attributes: Record<string, any> = {};
 
     for (const [key, raw] of Array.from(formData.entries())) {
-        const value = raw.toString();
+        if (key.startsWith('relationships[')) {
+            const relationship = await parseRelationship(key, raw);
 
-        const relationships = await parseRelationship(key, value);
-        if (relationships) {
-            Object.assign(body.data.relationships || {}, relationships);
+            if (!relationship) {
+                continue;
+            }
+
+            Object.assign(relationships, relationship);
         } else {
-            attributes[key] = value === '' ? undefined : value;
+            attributes[key] = raw === '' ? undefined : raw;
         }
     }
 
     body.data.attributes = attributes;
+    body.data.relationships = relationships;
 
     try {
         await action(body as K);

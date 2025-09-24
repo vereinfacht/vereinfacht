@@ -7,3 +7,9 @@
         --color-primary-500: 62 77 86;
     }
 }
+
+/* shadcn */
+.PopoverContent {
+    width: var(--radix-popover-trigger-width);
+    max-height: var(--radix-popover-content-available-height);
+}

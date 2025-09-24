@@ -2,7 +2,6 @@
 
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
-import { toKebabCase } from '@/utils/strings';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
 
@@ -21,31 +20,45 @@ export interface BaseBody {
     };
 }
 
-export async function parseRelationship(key: string, value: string) {
-    if (value.startsWith('[') && value.endsWith(']')) {
-        try {
-            const ids = JSON.parse(value) as string[];
-            const isPlural = key.endsWith('s');
+export async function parseRelationship(key: string, value: any) {
+    const resourceName = key.split('[')[1]?.split(']')[0];
+    const type = key.split('[')[2]?.split(']')[0];
+    const isMultiple = value.startsWith('[') && value.endsWith(']');
+    const values = isMultiple
+        ? value
+              .slice(1, -1)
+              .split(',')
+              .map((v: string) => v.trim())
+        : [value];
 
-            if (ids.length === 1 && !isPlural) {
-                return {
-                    [key]: {
-                        data: {
-                            id: ids[0],
-                            type: toKebabCase(key) + 's',
-                        },
-                    },
-                };
-            } else if (isPlural) {
-                return {
-                    [key]: { data: ids.map((id) => ({ id, type: key })) },
-                };
-            }
-        } catch {
-            return null;
-        }
+    if (!resourceName || !type) {
+        return null;
     }
-    return null;
+
+    const data = {};
+
+    if (isMultiple) {
+        Object.assign(data, {
+            data:
+                values.length === 0 || (values.length === 1 && values[0] === '')
+                    ? []
+                    : values.map((id: string) => ({
+                          type,
+                          id: id.toString(),
+                      })),
+        });
+    } else {
+        Object.assign(data, {
+            data:
+                values.length === 0 || values[0] === ''
+                    ? null
+                    : { type, id: values[0] },
+        });
+    }
+
+    return {
+        [resourceName]: data,
+    };
 }
 
 export default async function createFormAction<K>(
@@ -61,9 +74,9 @@ export default async function createFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    if (setClubId) {
-        const relationships = body.data.relationships || {};
+    const relationships = body.data.relationships || {};
 
+    if (setClubId) {
         relationships.club = {
             data: { type: 'clubs', id: session.club_id.toString() },
         };
@@ -74,17 +87,22 @@ export default async function createFormAction<K>(
     const attributes: Record<string, any> = {};
 
     for (const [key, raw] of Array.from(formData.entries())) {
-        const value = raw.toString();
+        if (key.startsWith('relationships[')) {
+            const relationship = await parseRelationship(key, raw);
 
-        const relationships = await parseRelationship(key, value);
-        if (relationships) {
-            Object.assign(body.data.relationships || {}, relationships);
+            if (!relationship) {
+                continue;
+            }
+
+            Object.assign(relationships, relationship);
         } else {
-            attributes[key] = value === '' ? undefined : value;
+            attributes[key] = raw === '' ? undefined : raw;
         }
     }
 
     body.data.attributes = attributes;
+    body.data.relationships = relationships;
+
     try {
         await action(body as K);
 

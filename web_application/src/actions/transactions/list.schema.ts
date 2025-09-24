@@ -19,6 +19,7 @@ export const listTransactionsSchema = z.object({
         .object({
             financeAccountId: z.string().optional(),
             status: z.array(z.enum(transactionStatusOptions)).optional(),
+            query: z.string().optional(),
         })
         .optional(),
 });
