@@ -7,6 +7,7 @@ use App\Models\Receipt;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
+
 class FakeReceiptSeeder extends Seeder
 {
     /**
@@ -14,16 +15,30 @@ class FakeReceiptSeeder extends Seeder
      */
     public function run(): void
     {
-        Club::all()->each(function ($club) {
+        $seedFiles = [
+            storage_path('app/seed/receipt-test.pdf'),
+            storage_path('app/seed/receipt-test.png'),
+        ];
+
+        Club::all()->each(function ($club) use ($seedFiles) {
             $financeContacts = $club->financeContacts;
             $receipts = Receipt::factory()
-                ->count(50)
+                ->count(20)
                 ->make(['club_id' => $club->id])
-                ->each(function ($receipt) use ($financeContacts) {
+                ->each(function ($receipt) use ($financeContacts, $seedFiles) {
                     if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
                         $receipt->finance_contact_id = $financeContacts->random()->id;
                     }
                     $receipt->save();
+
+                    $count = rand(1, 3);
+                    for ($i = 1; $i <= $count; $i++) {
+                        $filePath = $seedFiles[array_rand($seedFiles)];
+
+                        $receipt->addMedia($filePath)
+                            ->preservingOriginal()
+                            ->toMediaCollection('receipts', 'public');
+                    }
                 });
 
             $transactions = Transaction::where('club_id', $club->id)->get();
