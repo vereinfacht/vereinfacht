@@ -20,6 +20,7 @@ import {
     createLoader,
     inferParserType,
     parseAsArrayOf,
+    parseAsBoolean,
     parseAsInteger,
     parseAsString,
     parseAsStringLiteral,
@@ -91,6 +92,7 @@ export const listReceiptSearchParams = {
         .withOptions({
             shallow: false,
         }),
+    hasMedia: parseAsBoolean.withOptions({ shallow: false }),
 };
 
 export const listUserSearchParams = {
