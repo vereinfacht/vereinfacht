@@ -35,7 +35,6 @@ class ReceiptSchema extends Schema
             Str::make('receiptType'),
             DateTime::make('documentDate')->sortable(),
             Str::make('status')->readOnly(),
-            Str::make('relatedMedia')->readOnly(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),

@@ -140,7 +140,7 @@ export default function ReceiptsTable({
             },
         },
         {
-            accessorKey: 'relatedMedia',
+            accessorKey: 'media',
             header: () =>
                 extended ? (
                     <TriStateHeaderFilter
@@ -152,24 +152,23 @@ export default function ReceiptsTable({
                     t('receipt:media.label')
                 ),
             cell: ({ row }) => {
-                const relatedMediaCount =
-                    (row.getValue('relatedMedia') as string[])?.length ?? 0;
-                return relatedMediaCount > 0 ? (
+                const mediaCount =
+                    (row.getValue('media') as Array<{ url: string }>)?.length ??
+                    0;
+                return mediaCount > 0 ? (
                     <>
                         {(() => {
-                            const relatedMedia = row.getValue(
-                                'relatedMedia',
-                            ) as { url: string }[];
+                            const media = row.getValue('media') as {
+                                url: string;
+                            }[];
                             const href =
-                                relatedMediaCount === 1
-                                    ? relatedMedia[0]?.url
+                                mediaCount === 1
+                                    ? media[0]?.url
                                     : `/admin/finances/receipts/${row.original.id}`;
                             return (
                                 <a
                                     target={
-                                        relatedMediaCount > 0
-                                            ? '_blank'
-                                            : undefined
+                                        mediaCount > 0 ? '_blank' : undefined
                                     }
                                     rel="noopener noreferrer"
                                     className="relative block w-fit"
@@ -180,7 +179,7 @@ export default function ReceiptsTable({
                                         className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
                                         variant="primary"
                                     >
-                                        {relatedMediaCount}
+                                        {mediaCount}
                                     </Badge>
                                 </a>
                             );
