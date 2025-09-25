@@ -32,12 +32,16 @@ class FakeReceiptSeeder extends Seeder
                     $receipt->save();
 
                     $count = rand(1, 3);
-                    for ($i = 1; $i <= $count; $i++) {
-                        $filePath = $seedFiles[array_rand($seedFiles)];
+                    // 50% chance to have media
+                    if (rand(1, 100) <= 50) {
+                        $count = rand(1, 3);
+                        for ($i = 1; $i <= $count; $i++) {
+                            $filePath = $seedFiles[array_rand($seedFiles)];
 
-                        $receipt->addMedia($filePath)
-                            ->preservingOriginal()
-                            ->toMediaCollection('receipts', 'public');
+                            $receipt->addMedia($filePath)
+                                ->preservingOriginal()
+                                ->toMediaCollection('receipts', 'public');
+                        }
                     }
                 });
 

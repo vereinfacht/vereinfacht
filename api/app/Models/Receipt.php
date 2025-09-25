@@ -39,6 +39,17 @@ class Receipt extends Model implements HasMedia
         return $this->transactions()->exists() ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
     }
 
+    public function getRelatedMediaAttribute()
+    {
+        return $this->getMedia('receipts')->map(function ($media) {
+            return [
+                'id' => $media->id,
+                'fileName' => $media->file_name,
+                'url' => $media->getUrl(),
+            ];
+        });
+    }
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->registerPreviewConversion($media);

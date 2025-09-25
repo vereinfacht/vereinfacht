@@ -10,6 +10,7 @@ export const receiptSortingOptions = [
 
 export const receiptTypeOptions = ['income', 'expense'] as const;
 export const receiptStatusOptions = ['incompleted', 'completed'] as const;
+export const receiptHasMediaOptions = ['true', 'false'] as const;
 
 export const listReceiptsSchema = z.object({
     ...baseListSchema.shape,
@@ -18,6 +19,7 @@ export const listReceiptsSchema = z.object({
         .object({
             receiptType: z.array(z.enum(receiptTypeOptions)).optional(),
             status: z.array(z.enum(receiptStatusOptions)).optional(),
+            hasMedia: z.boolean().optional(),
         })
         .optional(),
 });

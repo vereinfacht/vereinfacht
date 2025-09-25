@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
 use App\Enums\ReceiptStatusEnum;
+use App\Enums\ReceiptHasMediaEnum;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -34,6 +35,7 @@ class ReceiptSchema extends Schema
             Str::make('receiptType'),
             DateTime::make('documentDate')->sortable(),
             Str::make('status')->readOnly(),
+            Str::make('relatedMedia')->readOnly(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
@@ -51,6 +53,15 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            StatusFilter::make(
+                'hasMedia',
+                null,
+                'media',
+                [
+                    'true' => 'has',
+                    'false' => 'doesnt_have',
+                ]
+            ),
             StatusFilter::make(
                 'status',
                 null,
