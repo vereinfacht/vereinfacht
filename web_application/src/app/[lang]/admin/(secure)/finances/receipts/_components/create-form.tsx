@@ -247,9 +247,9 @@ export default function CreateForm({ data, action }: Props) {
                 </FormField>
                 <MediaInput
                     id="receipt-file"
-                    label={t('receipt:receiptFile.label')}
-                    help={t('receipt:receiptFile.help')}
-                    name="receiptFile"
+                    label={t('receipt:media.label')}
+                    help={t('receipt:media.help')}
+                    name="media"
                     multiple={true}
                     accept={'.png, .jpg, .jpeg, .pdf'}
                 />

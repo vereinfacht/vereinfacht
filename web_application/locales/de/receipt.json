@@ -32,6 +32,7 @@
     },
     "media": {
         "label": "Dateien",
+        "help": "Unterstützt die Formate PNG, JPG und PDF.",
         "filter": {
             "label": "Dateien",
             "true": "Mit Dateien",

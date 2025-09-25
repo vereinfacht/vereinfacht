@@ -31,6 +31,12 @@
         }
     },
     "media": {
-        "label": "Files"
+        "label": "Files",
+        "help": "Supports PNG, JPG and PDF formats.",
+        "filter": {
+            "label": "Files",
+            "true": "With files",
+            "false": "Without files"
+        }
     }
 }
