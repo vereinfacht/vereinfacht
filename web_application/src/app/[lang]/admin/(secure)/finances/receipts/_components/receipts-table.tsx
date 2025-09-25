@@ -153,17 +153,18 @@ export default function ReceiptsTable({
                 ),
             cell: ({ row }) => {
                 const mediaCount =
-                    (row.getValue('media') as Array<{ url: string }>)?.length ??
-                    0;
+                    (row.getValue('media') as Array<{ originalUrl: string }>)
+                        ?.length ?? 0;
                 return mediaCount > 0 ? (
                     <>
                         {(() => {
                             const media = row.getValue('media') as {
-                                url: string;
+                                originalUrl: string;
                             }[];
+                            console.log(media);
                             const href =
                                 mediaCount === 1
-                                    ? media[0]?.url
+                                    ? media[0]?.originalUrl
                                     : `/admin/finances/receipts/${row.original.id}`;
                             return (
                                 <a
