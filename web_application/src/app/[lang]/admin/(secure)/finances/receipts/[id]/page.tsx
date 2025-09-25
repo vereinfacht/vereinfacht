@@ -19,6 +19,7 @@ export default async function ReceiptShowPage({ params }: Props) {
             include: ['transactions', 'media'],
         }),
     ]);
+
     if (!receipt) {
         notFound();
     }

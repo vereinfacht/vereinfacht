@@ -1,5 +1,6 @@
 import Text from '@/app/components/Text/Text';
 import { FileIcon, ImageIcon } from 'lucide-react';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     value?: Array<{
@@ -13,10 +14,12 @@ interface Props {
 }
 
 export default function MediaField({ value = [] }: Props) {
+    const { t } = useTranslation('general');
+
     if (!value.length) {
         return (
-            <Text className="text-sm italic text-slate-400">
-                No media available
+            <Text className="text-sm italic text-slate-500">
+                {t('no_media_attached')}
             </Text>
         );
     }
