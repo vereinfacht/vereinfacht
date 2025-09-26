@@ -25,10 +25,12 @@ export const receiptRelationshipsSchema = z.object({
     }),
     financeContact: z
         .object({
-            data: z.object({
-                id: z.string(),
-                type: z.literal('finance-contacts'),
-            }),
+            data: z
+                .object({
+                    id: z.string(),
+                    type: z.literal('finance-contacts'),
+                })
+                .nullable(),
         })
         .optional(),
     transactions: z

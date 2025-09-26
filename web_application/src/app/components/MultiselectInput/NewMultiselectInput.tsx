@@ -119,7 +119,7 @@ export function NewMultiselectInput({
                 value={
                     multiple
                         ? '[' + selected.map((s) => s.value).join(',') + ']'
-                        : selected[0]?.value
+                        : (selected[0]?.value ?? '')
                 }
             />
             {label &&
