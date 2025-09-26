@@ -4,13 +4,17 @@ namespace App\Models;
 
 use App\Casts\MoneyCast;
 use App\Enums\ReceiptStatusEnum;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Traits\HasPreviewConversions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Receipt extends Model
+class Receipt extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ReceiptFactory> */
-    use HasFactory;
+    use HasFactory, InteractsWithMedia, HasPreviewConversions;
 
     protected $fillable = [
         'reference_number',
@@ -32,9 +36,15 @@ class Receipt extends Model
 
     public function getStatusAttribute(): string
     {
-        return $this->transactions()->exists() ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
+        return floatval($this->transactions()->sum('amount')) === ($this->amount * 100) ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->registerPreviewConversion($media);
+    }
+
+    // Relations
     public function club()
     {
         return $this->belongsTo(Club::class);

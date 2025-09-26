@@ -29,5 +29,14 @@
             "completed": "The receipt is complete.",
             "incompleted": "The receipt is incomplete: At least one transaction must be assigned."
         }
+    },
+    "media": {
+        "label": "Files",
+        "help": "Supports PNG, JPG and PDF formats.",
+        "filter": {
+            "label": "Files",
+            "true": "With files",
+            "false": "Without files"
+        }
     }
 }

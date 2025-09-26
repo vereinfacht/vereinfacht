@@ -18,6 +18,7 @@ export const listFinanceContactsSchema = z.object({
     filter: z
         .object({
             contactType: z.array(z.enum(financeContactTypeOptions)).optional(),
+            query: z.string().optional(),
         })
         .optional(),
 });

@@ -19,7 +19,7 @@ class ReceiptRequest extends ResourceRequest
             'documentDate' => ['required', 'date'],
             'amount' => ['required', 'numeric', 'not_in:0'],
             'club' => ['required', JsonApiRule::toOne()],
-            'financeContact' => ['required', JsonApiRule::toOne()],
+            'financeContact' => [JsonApiRule::toOne()],
             'transactions' => [JsonApiRule::toMany()],
         ];
     }

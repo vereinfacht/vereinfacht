@@ -16,9 +16,10 @@ export default async function ReceiptShowPage({ params }: Props) {
     const receipt = await Promise.all([
         getReceipt({
             id: params.id,
-            include: ['transactions'],
+            include: ['transactions', 'media'],
         }),
     ]);
+
     if (!receipt) {
         notFound();
     }
@@ -43,6 +44,12 @@ export default async function ReceiptShowPage({ params }: Props) {
             attribute: 'amount',
             type: 'currency',
             value: receipt[0]?.amount,
+        },
+        {
+            attribute: 'media',
+            type: 'media',
+            // @ts-expect-error: media is not yet typed by the schema
+            value: receipt[0]?.media,
         },
     ];
 

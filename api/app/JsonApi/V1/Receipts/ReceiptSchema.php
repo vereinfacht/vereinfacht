@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
 use App\Enums\ReceiptStatusEnum;
+use App\Enums\ReceiptHasMediaEnum;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -40,6 +41,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
+            BelongsToMany::make('media')->type('media'),
         ];
     }
 
@@ -50,6 +52,15 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            StatusFilter::make(
+                'hasMedia',
+                null,
+                'media',
+                [
+                    'true' => 'has',
+                    'false' => 'doesnt_have',
+                ]
+            ),
             StatusFilter::make(
                 'status',
                 null,
@@ -71,12 +82,12 @@ class ReceiptSchema extends Schema
         return PagePagination::make();
     }
 
-
     public function includePaths(): array
     {
         return [
             'transactions',
             'financeContact',
+            'media',
         ];
     }
 }

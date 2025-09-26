@@ -10,6 +10,8 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
+import { Badge } from '@/app/components/ui/badge';
 import {
     Tooltip,
     TooltipContent,
@@ -29,10 +31,11 @@ import {
     CircleCheck,
     CircleDashed,
     CircleUserRound,
+    Paperclip,
 } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
-import DateField from '../../../components/Fields/Detail/DateField';
 import CreateButton from '../../../components/CreateButton';
+import DateField from '../../../components/Fields/Detail/DateField';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -133,6 +136,57 @@ export default function ReceiptsTable({
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
+                );
+            },
+        },
+        {
+            accessorKey: 'media',
+            header: () =>
+                extended ? (
+                    <TriStateHeaderFilter
+                        parser={listReceiptSearchParams.hasMedia}
+                        paramKey="hasMedia"
+                        translationKey="receipt:media.filter"
+                    />
+                ) : (
+                    t('receipt:media.label')
+                ),
+            cell: ({ row }) => {
+                const mediaCount =
+                    (row.getValue('media') as Array<{ originalUrl: string }>)
+                        ?.length ?? 0;
+                return mediaCount > 0 ? (
+                    <>
+                        {(() => {
+                            const media = row.getValue('media') as {
+                                originalUrl: string;
+                            }[];
+                            const href =
+                                mediaCount === 1
+                                    ? media[0]?.originalUrl
+                                    : `/admin/finances/receipts/${row.original.id}`;
+                            return (
+                                <a
+                                    target={
+                                        mediaCount > 0 ? '_blank' : undefined
+                                    }
+                                    rel="noopener noreferrer"
+                                    className="relative block w-fit"
+                                    href={href}
+                                >
+                                    <Paperclip className="text-blue-500" />
+                                    <Badge
+                                        className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
+                                        variant="primary"
+                                    >
+                                        {mediaCount}
+                                    </Badge>
+                                </a>
+                            );
+                        })()}
+                    </>
+                ) : (
+                    <Paperclip className="text-slate-500" />
                 );
             },
         },
