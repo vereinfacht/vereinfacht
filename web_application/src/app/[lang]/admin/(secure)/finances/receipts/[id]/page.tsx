@@ -48,6 +48,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         {
             attribute: 'media',
             type: 'media',
+            // @ts-expect-error: media is not yet typed by the schema
             value: receipt[0]?.media,
         },
     ];

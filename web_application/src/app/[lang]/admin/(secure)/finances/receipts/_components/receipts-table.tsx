@@ -161,7 +161,6 @@ export default function ReceiptsTable({
                             const media = row.getValue('media') as {
                                 originalUrl: string;
                             }[];
-                            console.log(media);
                             const href =
                                 mediaCount === 1
                                     ? media[0]?.originalUrl

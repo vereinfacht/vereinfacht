@@ -6,7 +6,6 @@ import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultisele
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
-import { FileInput } from '@/app/components/Input/FileInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
