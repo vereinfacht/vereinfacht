@@ -15,7 +15,7 @@ import {
 } from '@/types/resources';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
@@ -45,6 +45,13 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
+    const transactionTypeOptions: Option[] = [
+        { label: t('transaction:transaction_type.income'), value: 'income' },
+        { label: t('transaction:transaction_type.expense'), value: 'expense' },
+    ];
+
+    const [transactionType, setTransactionType] = useState<string>('income');
+
     const [amount, setAmount] = useState<number>(
         Math.abs(Number(data?.amount ?? null)),
     );
@@ -56,10 +63,14 @@ export default function CreateForm({ data, action }: Props) {
             amount: receipt.amount || 0,
         })) || [];
 
+    const [selectedReceipts, setSelectedReceipts] =
+        useState<any[]>(defaultReceipts);
+
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
     >([]);
 
+    // Fetch finance accounts on mount
     useEffect(() => {
         listFinanceAccounts().then(setFinanceAccounts);
     }, []);
@@ -76,6 +87,15 @@ export default function CreateForm({ data, action }: Props) {
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         // @todo: try to optimise this after Zod upgrade
         async (state, formData) => {
+            const parsedAmount = parseFloat(formData.get('amount') as string);
+            formData.set(
+                'amount',
+                (transactionType === 'expense'
+                    ? -Math.abs(parsedAmount)
+                    : Math.abs(parsedAmount)
+                ).toString(),
+            );
+
             return action(state, formData);
         },
         { success: false },
@@ -147,12 +167,27 @@ export default function CreateForm({ data, action }: Props) {
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"
-                        name="relationships[financeAccount][financeAccount]"
-                        label={t('financeAccount:title.label')}
+                        name="relationships[financeAccount][finance-accounts]"
+                        label={t('finance_account:title.one')}
                         options={financeAccountOptions}
                         defaultValue={financeAccount ?? ''}
                         handleChange={(e) =>
                             setFinanceAccount(
+                                (e.target as HTMLSelectElement).value,
+                            )
+                        }
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['transactionType']}>
+                    <SelectInput
+                        id="transasction-type"
+                        name="transactionType"
+                        label={t('transaction:transaction_type.label')}
+                        options={transactionTypeOptions}
+                        defaultValue={transactionType}
+                        handleChange={(e) =>
+                            setTransactionType(
                                 (e.target as HTMLSelectElement).value,
                             )
                         }

@@ -34,6 +34,11 @@
         }
 
     },
+    "transaction_type": {
+        "label": "Typ",
+        "income": "Einnahme",
+        "expense": "Ausgabe"
+    },
 
     "all_sources": "Alle Quellen"
 }

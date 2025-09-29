@@ -33,6 +33,11 @@
             "incompleted": "The transaction is incomplete: At least one receipt is required."
         }
     },
+    "transaction_type": {
+        "label": "Type",
+        "income": "Income",
+        "expense": "Expense"
+    },
 
     "all_sources": "All sources"
 }
