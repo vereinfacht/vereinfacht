@@ -20,6 +20,7 @@ import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
+import ReceiptProgressBar from '../../receipts/_components/receipt-progress-bar';
 
 interface Props {
     action: (
@@ -84,6 +85,10 @@ export default function CreateForm({ data, action }: Props) {
 
     const [financeAccount, setFinanceAccount] = useState<string>(
         data?.financeAccount?.id ?? '',
+    );
+    const totalReceiptAmount = selectedReceipts.reduce(
+        (sum, receipt) => sum + (receipt.amount || 0),
+        0,
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
@@ -235,6 +240,11 @@ export default function CreateForm({ data, action }: Props) {
                     />
                 </FormField>
             </div>
+            <ReceiptProgressBar
+                amount={amount}
+                receiptType={transactionType}
+                totalTransactionAmount={totalReceiptAmount}
+            />
         </ActionForm>
     );
 }
