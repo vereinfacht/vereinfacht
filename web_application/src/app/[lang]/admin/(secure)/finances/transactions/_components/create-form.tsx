@@ -118,6 +118,7 @@ export default function CreateForm({ data, action }: Props) {
                             min={3}
                             max={255}
                             required
+                            autoFocus
                             defaultValue={data?.name ?? ''}
                         />
                     </FormField>
