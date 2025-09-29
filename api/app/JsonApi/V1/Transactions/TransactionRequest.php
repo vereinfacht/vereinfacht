@@ -13,8 +13,11 @@ class TransactionRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:255'],
             'amount' => ['required', 'numeric', 'not_in:0'],
+            'valuedAt' => ['nullable', 'date'],
+            'bookedAt' => ['nullable', 'date'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeAccount' => ['required', JsonApiRule::toOne()],
         ];

@@ -15,7 +15,6 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use App\JsonApi\Filters\WithoutRelationFilter;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
@@ -42,7 +41,7 @@ class TransactionSchema extends Schema
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Str::make('status')->readOnly(),
-            HasOne::make('financeAccount'),
+            BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsToMany::make('receipts'),
             BelongsTo::make('club')->type('clubs'),
         ];
@@ -76,5 +75,13 @@ class TransactionSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'receipts',
+            'financeAccount',
+        ];
     }
 }
