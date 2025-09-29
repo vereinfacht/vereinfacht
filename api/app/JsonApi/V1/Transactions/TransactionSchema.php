@@ -35,7 +35,7 @@ class TransactionSchema extends Schema
             ID::make(),
             Str::make('name'),
             Str::make('description'),
-            Number::make('amount')->sortable(),
+            Str::make('amount')->sortable(),
             DateTime::make('valuedAt')->sortable(),
             DateTime::make('bookedAt')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
