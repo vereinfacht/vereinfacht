@@ -20,6 +20,7 @@ class TransactionRequest extends ResourceRequest
             'bookedAt' => ['nullable', 'date'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeAccount' => ['required', JsonApiRule::toOne()],
+            'receipts' => [JsonApiRule::toMany()],
         ];
     }
 }

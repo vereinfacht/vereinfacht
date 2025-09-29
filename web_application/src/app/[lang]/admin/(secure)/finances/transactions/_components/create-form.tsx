@@ -1,9 +1,10 @@
 'use client';
 
+import { listFinanceAccounts } from '@/actions/financeAccounts/list';
 import { listReceipts } from '@/actions/receipts/list';
-import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
+import { default as BelongsToMultiselectInput } from '@/app/components/Input/BelongsToMultiselectInput';
 import { itemsPerQuery } from '@/app/components/Input/BelongsToSelectInput';
-import { Option } from '@/app/components/Input/SelectInput';
+import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
@@ -14,13 +15,11 @@ import {
 } from '@/types/resources';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
-import BelongsToSelectInput from '@/app/components/Input/BelongsToMultiselectInput';
-import { listFinanceAccounts } from '@/actions/financeAccounts/list';
 
 interface Props {
     action: (
@@ -43,19 +42,6 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
     );
 }
 
-function FinanceAccountOption({ item }: { item: TFinanceAccountDeserialized }) {
-    return (
-        <div className="flex w-full justify-between">
-            <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit font-medium">{item.title}</Text>
-                <Text className="min-w-fit font-medium">
-                    {item.accountType}
-                </Text>
-            </div>
-        </div>
-    );
-}
-
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
@@ -70,10 +56,22 @@ export default function CreateForm({ data, action }: Props) {
             amount: receipt.amount || 0,
         })) || [];
 
-    const [selectedReceipts, setSelectedReceipts] =
-        useState<any[]>(defaultReceipts);
+    const [financeAccounts, setFinanceAccounts] = useState<
+        TFinanceAccountDeserialized[]
+    >([]);
 
-    console.log(selectedReceipts);
+    useEffect(() => {
+        listFinanceAccounts().then(setFinanceAccounts);
+    }, []);
+
+    const financeAccountOptions: Option[] = financeAccounts.map((account) => ({
+        label: account.title,
+        value: account.id,
+    }));
+
+    const [financeAccount, setFinanceAccount] = useState<string>(
+        data?.financeAccount?.id ?? '',
+    );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         // @todo: try to optimise this after Zod upgrade
@@ -146,32 +144,21 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </fieldset>
-                <BelongsToSelectInput<TFinanceAccountDeserialized>
-                    resourceName="financeAccount"
-                    resourceType="finance-accounts"
-                    label={t('finance_account:title.one')}
-                    action={(searchTerm) =>
-                        listFinanceAccounts({
-                            page: { size: itemsPerQuery, number: 1 },
-                            filter: { query: searchTerm },
-                        })
-                    }
-                    optionLabel={(item) => <FinanceAccountOption item={item} />}
-                    defaultValue={
-                        data?.financeAccount
-                            ? [
-                                  {
-                                      label: (
-                                          <FinanceAccountOption
-                                              item={data.financeAccount}
-                                          />
-                                      ),
-                                      value: data.financeAccount.id,
-                                  },
-                              ]
-                            : []
-                    }
-                />
+                <FormField errors={formState.errors?.['financeAccount']}>
+                    <SelectInput
+                        id="finance-account"
+                        name="relationships[financeAccount][financeAccount]"
+                        label={t('financeAccount:title.label')}
+                        options={financeAccountOptions}
+                        defaultValue={financeAccount ?? ''}
+                        handleChange={(e) =>
+                            setFinanceAccount(
+                                (e.target as HTMLSelectElement).value,
+                            )
+                        }
+                        required
+                    />
+                </FormField>
                 <FormField errors={formState.errors?.['amount']}>
                     <TextInput
                         id="amount"
