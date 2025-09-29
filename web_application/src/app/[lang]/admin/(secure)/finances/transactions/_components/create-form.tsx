@@ -50,7 +50,9 @@ export default function CreateForm({ data, action }: Props) {
         { label: t('transaction:transaction_type.expense'), value: 'expense' },
     ];
 
-    const [transactionType, setTransactionType] = useState<string>('income');
+    const [transactionType, setTransactionType] = useState<string>(
+        (data?.amount ?? 0) < 0 ? 'expense' : 'income',
+    );
 
     const [amount, setAmount] = useState<number>(
         Math.abs(Number(data?.amount ?? null)),
