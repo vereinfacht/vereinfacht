@@ -18,7 +18,21 @@ class TransactionRequest extends ResourceRequest
             'amount' => ['required', 'numeric', 'not_in:0'],
             'bookedAt' => ['nullable', 'date'],
             'club' => ['required', JsonApiRule::toOne()],
-            'financeAccount' => ['required', JsonApiRule::toOne()],
+            'financeAccount' => [
+                'required',
+                JsonApiRule::toOne(),
+                function ($attribute, $value, $fail) {
+                    $accountId = $value['id'] ?? null;
+
+                    if (
+                        !$accountId || !\App\Models\FinanceAccount::where('id', $accountId)
+                            ->where('account_type', 'cash_box')
+                            ->exists()
+                    ) {
+                        $fail('The selected finance account must be a cash box account.');
+                    }
+                },
+            ],
             'receipts' => [JsonApiRule::toMany()],
         ];
     }
