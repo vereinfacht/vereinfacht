@@ -11,7 +11,7 @@ import ReceiptsTable from './_components/receipts-table';
 
 async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
     const response = await listReceipts({
-        sort: params.sort ?? undefined,
+        sort: params.sort ?? ['-documentDate'],
         page: { size: itemsPerPage, number: params.page },
         filter: {
             receiptType: params.receiptType ? params.receiptType : undefined,
