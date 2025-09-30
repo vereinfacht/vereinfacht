@@ -3,7 +3,6 @@ import { z } from 'zod';
 export const transactionAttributesSchema = z.object({
     name: z.string().min(3).max(255).optional(),
     description: z.string().optional(),
-    valuedAt: z.string(),
     bookedAt: z.string(),
     amount: z
         .string()

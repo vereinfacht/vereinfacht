@@ -13,6 +13,8 @@ import {
     TReceiptDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
+import { formatDate } from '@/utils/dates';
+import { SupportedLocale } from '@/utils/localization';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
@@ -31,9 +33,14 @@ interface Props {
 }
 
 function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
+    const { lang } = useTranslation();
+
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
+                <Text className="min-w-fit">
+                    {formatDate(item.documentDate, lang as SupportedLocale)}
+                </Text>
                 <Text className="min-w-fit font-medium">
                     {item.referenceNumber}
                 </Text>
@@ -45,11 +52,6 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
-
-    const transactionTypeOptions: Option[] = [
-        { label: t('transaction:transaction_type.income'), value: 'income' },
-        { label: t('transaction:transaction_type.expense'), value: 'expense' },
-    ];
 
     const [transactionType, setTransactionType] = useState<string>(
         (data?.amount ?? 0) < 0 ? 'expense' : 'income',
@@ -73,9 +75,12 @@ export default function CreateForm({ data, action }: Props) {
         TFinanceAccountDeserialized[]
     >([]);
 
-    // Fetch finance accounts on mount
     useEffect(() => {
-        listFinanceAccounts().then(setFinanceAccounts);
+        listFinanceAccounts({
+            filter: {
+                accountType: 'cash_box',
+            },
+        }).then(setFinanceAccounts);
     }, []);
 
     const financeAccountOptions: Option[] = financeAccounts.map((account) => ({
@@ -116,67 +121,46 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
-                    <FormField errors={formState.errors?.['name']}>
-                        <TextInput
-                            id="name"
-                            name="name"
-                            label={t('transaction:title.label')}
-                            min={3}
-                            max={255}
-                            required
-                            autoFocus
-                            defaultValue={data?.name ?? ''}
-                        />
-                    </FormField>
-                    <FormField errors={formState.errors?.['description']}>
-                        <TextInput
-                            id="description"
-                            name="description"
-                            label={t('transaction:purpose.label')}
-                            defaultValue={data?.description ?? ''}
-                        />
-                    </FormField>
-                    <FormField errors={formState.errors?.['valuedAt']}>
-                        <TextInput
-                            id="valuedAt"
-                            name="valuedAt"
-                            label={t('transaction:valued_at.label')}
-                            defaultValue={
-                                data?.valuedAt
-                                    ? format(
-                                          new Date(data.valuedAt),
-                                          'yyyy-MM-dd',
-                                      )
-                                    : ''
-                            }
-                            type="date"
-                            required
-                        />
-                    </FormField>
-                    <FormField errors={formState.errors?.['bookedAt']}>
-                        <TextInput
-                            id="bookedAt"
-                            name="bookedAt"
-                            label={t('transaction:booked_at.label')}
-                            defaultValue={
-                                data?.bookedAt
-                                    ? format(
-                                          new Date(data.bookedAt),
-                                          'yyyy-MM-dd',
-                                      )
-                                    : ''
-                            }
-                            type="date"
-                            required
-                        />
-                    </FormField>
-                </fieldset>
+                <FormField errors={formState.errors?.['name']}>
+                    <TextInput
+                        id="name"
+                        name="name"
+                        label={t('transaction:title.label')}
+                        min={3}
+                        max={255}
+                        required
+                        autoFocus
+                        defaultValue={data?.name ?? ''}
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['description']}>
+                    <TextInput
+                        id="description"
+                        name="description"
+                        label={t('transaction:purpose.label')}
+                        defaultValue={data?.description ?? ''}
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['bookedAt']}>
+                    <TextInput
+                        id="bookedAt"
+                        name="bookedAt"
+                        label={t('transaction:booked_at.label')}
+                        defaultValue={
+                            data?.bookedAt
+                                ? format(new Date(data.bookedAt), 'yyyy-MM-dd')
+                                : ''
+                        }
+                        type="date"
+                        required
+                    />
+                </FormField>
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"
                         name="relationships[financeAccount][finance-accounts]"
                         label={t('finance_account:title.one')}
+                        help={t('transaction:amount.help')}
                         options={financeAccountOptions}
                         defaultValue={financeAccount ?? ''}
                         handleChange={(e) =>
@@ -187,64 +171,45 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['transactionType']}>
-                    <SelectInput
-                        id="transasction-type"
-                        name="transactionType"
-                        label={t('transaction:transaction_type.label')}
-                        options={transactionTypeOptions}
-                        defaultValue={transactionType}
-                        handleChange={(e) =>
-                            setTransactionType(
-                                (e.target as HTMLSelectElement).value,
-                            )
-                        }
-                        required
-                    />
-                </FormField>
-                <FormField errors={formState.errors?.['amount']}>
-                    <TextInput
-                        id="amount"
-                        name="amount"
-                        label={t('transaction:amount.label')}
-                        type="number"
-                        min={0}
-                        step="0.01"
-                        required
-                        defaultValue={
-                            data ? Math.abs(Number(data?.amount)) : undefined
-                        }
-                        onChange={(e) => {
-                            const value = Math.abs(parseFloat(e.target.value));
-                            setAmount(isNaN(value) ? 0 : value);
-                        }}
-                    />
-                </FormField>
-                <FormField errors={formState.errors?.['receipts']}>
-                    <BelongsToMultiselectInput<TReceiptDeserialized>
-                        resourceName="receipts"
-                        resourceType="receipts"
-                        pivotAttributes={['amount']}
-                        label={t('receipt:title.other')}
-                        action={(searchTerm) =>
-                            listReceipts({
-                                page: { size: itemsPerQuery, number: 1 },
-                                filter: { query: searchTerm },
-                            })
-                        }
-                        optionLabel={(item) => <ReceiptOption item={item} />}
-                        onChange={(selected: Option[]) => {
-                            setSelectedReceipts(selected || []);
-                        }}
-                        defaultValue={defaultReceipts}
-                    />
-                </FormField>
             </div>
+            <FormField errors={formState.errors?.['amount']}>
+                <TextInput
+                    id="amount"
+                    name="amount"
+                    label={t('transaction:amount.label')}
+                    help={t('transaction:amount.help')}
+                    type="number"
+                    step="0.01"
+                    required
+                    defaultValue={
+                        data ? Math.abs(Number(data?.amount)) : undefined
+                    }
+                />
+            </FormField>
             <ReceiptProgressBar
                 amount={amount}
                 receiptType={transactionType}
                 totalTransactionAmount={totalReceiptAmount}
             />
+            <FormField errors={formState.errors?.['receipts']}>
+                <BelongsToMultiselectInput<TReceiptDeserialized>
+                    resourceName="receipts"
+                    resourceType="receipts"
+                    pivotAttributes={['amount']}
+                    label={t('receipt:title.other')}
+                    action={(searchTerm) =>
+                        listReceipts({
+                            page: { size: itemsPerQuery, number: 1 },
+                            filter: { query: searchTerm },
+                        })
+                    }
+                    optionLabel={(item) => <ReceiptOption item={item} />}
+                    onChange={(selected: Option[]) => {
+                        setSelectedReceipts(selected || []);
+                    }}
+                    defaultValue={defaultReceipts}
+                />
+            </FormField>
         </ActionForm>
     );
 }

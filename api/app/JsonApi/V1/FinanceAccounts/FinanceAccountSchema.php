@@ -4,11 +4,11 @@ namespace App\JsonApi\V1\FinanceAccounts;
 
 use App\Models\FinanceAccount;
 use LaravelJsonApi\Eloquent\Schema;
-use App\JsonApi\Filters\QueryFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\SoftDeletes;
 use LaravelJsonApi\Eloquent\Fields\Number;
+use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\SoftDelete;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
@@ -58,7 +58,7 @@ class FinanceAccountSchema extends Schema
         return [
             WhereIdIn::make($this),
             WithTrashed::make('with-trashed'),
-            QueryFilter::make('query', ['title']),
+            Where::make('accountType', 'account_type'),
         ];
     }
 
