@@ -53,14 +53,6 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
-    const [transactionType, setTransactionType] = useState<string>(
-        (data?.amount ?? 0) < 0 ? 'expense' : 'income',
-    );
-
-    const [amount, setAmount] = useState<number>(
-        Math.abs(Number(data?.amount ?? null)),
-    );
-
     const defaultReceipts =
         data?.receipts?.map((receipt) => ({
             label: <ReceiptOption item={receipt} />,
@@ -70,6 +62,20 @@ export default function CreateForm({ data, action }: Props) {
 
     const [selectedReceipts, setSelectedReceipts] =
         useState<any[]>(defaultReceipts);
+
+    const [rawAmount, setRawAmount] = useState<number>(data?.amount ?? 0);
+
+    const [transactionType, setTransactionType] = useState<
+        'income' | 'expense'
+    >(
+        data
+            ? (data.amount ?? 0) > 0
+                ? 'income'
+                : 'expense'
+            : rawAmount > 0
+              ? 'income'
+              : 'expense',
+    );
 
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
@@ -99,15 +105,6 @@ export default function CreateForm({ data, action }: Props) {
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         // @todo: try to optimise this after Zod upgrade
         async (state, formData) => {
-            const parsedAmount = parseFloat(formData.get('amount') as string);
-            formData.set(
-                'amount',
-                (transactionType === 'expense'
-                    ? -Math.abs(parsedAmount)
-                    : Math.abs(parsedAmount)
-                ).toString(),
-            );
-
             return action(state, formData);
         },
         { success: false },
@@ -181,13 +178,17 @@ export default function CreateForm({ data, action }: Props) {
                     type="number"
                     step="0.01"
                     required
-                    defaultValue={
-                        data ? Math.abs(Number(data?.amount)) : undefined
-                    }
+                    defaultValue={data?.amount ?? undefined}
+                    onChange={(e) => {
+                        setRawAmount(Number(e.target.value));
+                        setTransactionType(
+                            Number(e.target.value) > 0 ? 'income' : 'expense',
+                        );
+                    }}
                 />
             </FormField>
             <ReceiptProgressBar
-                amount={amount}
+                amount={Math.abs(rawAmount)}
                 receiptType={transactionType}
                 totalTransactionAmount={totalReceiptAmount}
             />
