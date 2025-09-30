@@ -16,7 +16,8 @@
         "label": "Valued At"
     },
     "amount": {
-        "label": "Amount"
+        "label": "Amount",
+        "help": "The amount of the transaction in Euro. Negative amounts are expenses, positive amounts are income."
     },
     "iban": {
         "label": "IBAN"
@@ -33,10 +34,8 @@
             "incompleted": "The transaction is incomplete: At least one receipt is required."
         }
     },
-    "transaction_type": {
-        "label": "Type",
-        "income": "Income",
-        "expense": "Expense"
+    "finance_account": {
+        "help": "The cash register on which the transaction is posted."
     },
 
     "all_sources": "All sources"

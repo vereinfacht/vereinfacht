@@ -157,7 +157,7 @@ export default function CreateForm({ data, action }: Props) {
                         id="finance-account"
                         name="relationships[financeAccount][finance-accounts]"
                         label={t('finance_account:title.one')}
-                        help={t('transaction:amount.help')}
+                        help={t('transaction:finance_account.help')}
                         options={financeAccountOptions}
                         defaultValue={financeAccount ?? ''}
                         handleChange={(e) =>
