@@ -9,16 +9,10 @@ import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
+import MediaCell from '@/app/components/Table/MediaCell';
+import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
-import { Badge } from '@/app/components/ui/badge';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipPrimitive,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/app/components/ui/tooltip';
 import { ResourceName } from '@/resources/resource';
 import {
     TFinanceContactDeserialized,
@@ -26,14 +20,7 @@ import {
 } from '@/types/resources';
 import { listReceiptSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import {
-    Building2,
-    CircleCheck,
-    CircleDashed,
-    CircleDotDashed,
-    CircleUserRound,
-    Paperclip,
-} from 'lucide-react';
+import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
@@ -106,41 +93,13 @@ export default function ReceiptsTable({
                 ) : (
                     t('receipt:status.label')
                 ),
-            cell: ({ row }) => {
-                const status = row.getValue('status');
-                const statusDescription = t(
-                    'receipt:status.description.' + status,
-                );
-                const tooltipId = `status-tooltip-${row.id}`;
-
-                return (
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger
-                                asChild
-                                className="cursor-help"
-                                aria-describedby={tooltipId}
-                            >
-                                {status === 'incompleted' ? (
-                                    <CircleDashed className="text-slate-500" />
-                                ) : status === 'pending' ? (
-                                    <CircleDotDashed className="text-yellow-500" />
-                                ) : (
-                                    <CircleCheck className="text-green-500" />
-                                )}
-                            </TooltipTrigger>
-                            <TooltipContent role="tooltip" id={tooltipId}>
-                                {statusDescription}
-                                <TooltipPrimitive.Arrow
-                                    fill="white"
-                                    width={11}
-                                    height={5}
-                                />
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                );
-            },
+            cell: ({ row }) => (
+                <StatusCell
+                    status={row.getValue('status')}
+                    rowId={row.id}
+                    translationResource={'receipts'}
+                />
+            ),
         },
         {
             accessorKey: 'media',
@@ -154,63 +113,13 @@ export default function ReceiptsTable({
                 ) : (
                     t('receipt:media.label')
                 ),
-            cell: ({ row }) => {
-                const media = row.getValue('media') as Array<{
-                    originalUrl: string;
-                }>;
-                const mediaCount = media?.length ?? 0;
-                const statusDescription = mediaCount
-                    ? t('receipt:media.has_attachments', { count: mediaCount })
-                    : t('receipt:media.no_attachments');
-                const tooltipId = `media-tooltip-${row.id}`;
-                const href =
-                    mediaCount === 1
-                        ? media[0]?.originalUrl
-                        : `/admin/finances/receipts/${row.original.id}`;
-
-                return (
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger
-                                asChild
-                                aria-describedby={tooltipId}
-                                className="relative block w-fit"
-                            >
-                                {mediaCount > 0 ? (
-                                    <a
-                                        target={
-                                            mediaCount === 1
-                                                ? '_blank'
-                                                : undefined
-                                        }
-                                        rel="noopener noreferrer"
-                                        href={href}
-                                        className="relative block w-fit"
-                                    >
-                                        <Paperclip className="text-blue-500" />
-                                        <Badge
-                                            className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
-                                            variant="primary"
-                                        >
-                                            {mediaCount}
-                                        </Badge>
-                                    </a>
-                                ) : (
-                                    <Paperclip className="text-slate-500" />
-                                )}
-                            </TooltipTrigger>
-                            <TooltipContent role="tooltip" id={tooltipId}>
-                                {statusDescription}
-                                <TooltipPrimitive.Arrow
-                                    fill="white"
-                                    width={11}
-                                    height={5}
-                                />
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                );
-            },
+            cell: ({ row }) => (
+                <MediaCell
+                    media={row.getValue('media')}
+                    rowId={row.id}
+                    rowLink={`/admin/finances/receipts/${row.original.id}`}
+                />
+            ),
         },
         {
             accessorKey: 'amount',
