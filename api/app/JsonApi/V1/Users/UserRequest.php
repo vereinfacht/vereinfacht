@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Users;
 
+use LaravelJsonApi\Validation\Rule as JsonApiRule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 
 class UserRequest extends ResourceRequest
@@ -16,6 +17,8 @@ class UserRequest extends ResourceRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'preferredLocale' => ['required', 'string', 'max:2', 'in:en,de'],
+            'club' => ['required', JsonApiRule::toOne()],
+            'permissions' => [JsonApiRule::toMany()],
         ];
     }
 }

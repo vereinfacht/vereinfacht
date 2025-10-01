@@ -20,9 +20,11 @@ interface Props {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
+
     const [preferredLocale, setPreferredLocale] = useState<string>(
         data?.preferredLocale ?? 'de',
     );
+
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         {
@@ -39,7 +41,7 @@ export default function CreateForm({ data, action }: Props) {
         <ActionForm
             action={formAction}
             state={formState}
-            isCreate={data == null}
+            type={data ? 'update' : 'create'}
             translationKey="user"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
@@ -53,6 +55,7 @@ export default function CreateForm({ data, action }: Props) {
                         required
                         minLength={2}
                         maxLength={255}
+                        autoFocus
                     />
                 </FormField>
                 <FormField errors={formState.errors?.['email']}>
@@ -88,7 +91,7 @@ export default function CreateForm({ data, action }: Props) {
                             (e.target as HTMLSelectElement).value,
                         );
                     }}
-                    defaultValue={data?.preferredLocale}
+                    defaultValue={data?.preferredLocale ?? preferredLocale}
                     label={t('user:preferred_locale.label')}
                     options={preferredLocaleOptions}
                     required
