@@ -39,6 +39,8 @@
             "label": "Dateien",
             "true": "Mit Dateien",
             "false": "Ohne Dateien"
-        }
+        },
+        "has_attachments": "Beleg hat ({{count}}) Anhänge",
+        "no_attachments": "Beleg hat keine Anhänge"
     }
 }

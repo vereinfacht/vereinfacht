@@ -155,41 +155,60 @@ export default function ReceiptsTable({
                     t('receipt:media.label')
                 ),
             cell: ({ row }) => {
-                const mediaCount =
-                    (row.getValue('media') as Array<{ originalUrl: string }>)
-                        ?.length ?? 0;
-                return mediaCount > 0 ? (
-                    <>
-                        {(() => {
-                            const media = row.getValue('media') as {
-                                originalUrl: string;
-                            }[];
-                            const href =
-                                mediaCount === 1
-                                    ? media[0]?.originalUrl
-                                    : `/admin/finances/receipts/${row.original.id}`;
-                            return (
-                                <a
-                                    target={
-                                        mediaCount > 0 ? '_blank' : undefined
-                                    }
-                                    rel="noopener noreferrer"
-                                    className="relative block w-fit"
-                                    href={href}
-                                >
-                                    <Paperclip className="text-blue-500" />
-                                    <Badge
-                                        className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
-                                        variant="primary"
+                const media = row.getValue('media') as Array<{
+                    originalUrl: string;
+                }>;
+                const mediaCount = media?.length ?? 0;
+                const statusDescription = mediaCount
+                    ? t('receipt:media.has_attachments', { count: mediaCount })
+                    : t('receipt:media.no_attachments');
+                const tooltipId = `media-tooltip-${row.id}`;
+                const href =
+                    mediaCount === 1
+                        ? media[0]?.originalUrl
+                        : `/admin/finances/receipts/${row.original.id}`;
+
+                return (
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger
+                                asChild
+                                aria-describedby={tooltipId}
+                                className="relative block w-fit"
+                            >
+                                {mediaCount > 0 ? (
+                                    <a
+                                        target={
+                                            mediaCount === 1
+                                                ? '_blank'
+                                                : undefined
+                                        }
+                                        rel="noopener noreferrer"
+                                        href={href}
+                                        className="relative block w-fit"
                                     >
-                                        {mediaCount}
-                                    </Badge>
-                                </a>
-                            );
-                        })()}
-                    </>
-                ) : (
-                    <Paperclip className="text-slate-500" />
+                                        <Paperclip className="text-blue-500" />
+                                        <Badge
+                                            className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
+                                            variant="primary"
+                                        >
+                                            {mediaCount}
+                                        </Badge>
+                                    </a>
+                                ) : (
+                                    <Paperclip className="text-slate-500" />
+                                )}
+                            </TooltipTrigger>
+                            <TooltipContent role="tooltip" id={tooltipId}>
+                                {statusDescription}
+                                <TooltipPrimitive.Arrow
+                                    fill="white"
+                                    width={11}
+                                    height={5}
+                                />
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 );
             },
         },
