@@ -23,6 +23,8 @@ class ReceiptSchema extends Schema
      */
     public static string $model = Receipt::class;
 
+    protected $defaultSort = '-documentDate';
+
     /**
      * Get the resource fields.
      */
