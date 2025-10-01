@@ -97,7 +97,7 @@ export default function ReceiptsTable({
                 <StatusCell
                     status={row.getValue('status')}
                     rowId={row.id}
-                    translationResource={'receipts'}
+                    translationResource={'receipt'}
                 />
             ),
         },
