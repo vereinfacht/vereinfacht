@@ -21,7 +21,7 @@ import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
 import { listTransactionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import { CircleCheck, CircleDashed } from 'lucide-react';
+import { CircleCheck, CircleDashed, CircleDotDashed } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
@@ -112,7 +112,7 @@ export default function TransactionsTable({
                                 {status === 'incompleted' ? (
                                     <CircleDashed className="text-slate-500" />
                                 ) : status === 'pending' ? (
-                                    <CircleDashed className="text-yellow-500" />
+                                    <CircleDotDashed className="text-yellow-500" />
                                 ) : (
                                     <CircleCheck className="text-green-500" />
                                 )}
