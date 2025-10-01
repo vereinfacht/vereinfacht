@@ -40,7 +40,7 @@
             "true": "Mit Dateien",
             "false": "Ohne Dateien"
         },
-        "has_attachments": "Beleg hat ({{count}}) Anhänge",
-        "no_attachments": "Beleg hat keine Anhänge"
+        "has_attachments": "Beleg hat ({{count}}) Dateien",
+        "no_attachments": "Beleg hat keine Dateien"
     }
 }

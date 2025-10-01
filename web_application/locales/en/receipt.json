@@ -40,7 +40,7 @@
             "true": "With files",
             "false": "Without files"
         },
-        "has_attachments": "Receipt has ({{count}}) attachments",
-        "no_attachments": "Receipt has no attachments"
+        "has_attachments": "Receipt has ({{count}}) files",
+        "no_attachments": "Receipt has no files"
     }
 }
