@@ -7,7 +7,7 @@ interface Props {
     handleRemove: (option: Option) => void;
 }
 
-export default function SelectedOptions({ options, handleRemove }: Props) {
+export default function SelectedOptions({ options = [], handleRemove }: Props) {
     return (
         <ul className="mt-2 w-full">
             {options.map((option) => (

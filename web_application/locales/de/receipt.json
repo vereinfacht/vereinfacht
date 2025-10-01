@@ -4,7 +4,7 @@
         "other": "Belege",
         "label": "Name"
     },
-    "type": {
+    "receipt_type": {
         "label": "Typ",
         "income": "Einnahme",
         "expense": "Ausgabe"
@@ -13,10 +13,13 @@
         "label": "Belegdatum"
     },
     "reference_number": {
-        "label": "Referenznummer"
+        "label": "Referenznummer",
+        "help": "Bezeichnung für die interne Zuordnung (bspw. Mitgliedsnummer)"
     },
     "amount": {
-        "label": "Betrag"
+        "label": "Betrag",
+        "still_open": "Noch offen",
+        "too_much": "Zu viel"
     },
     "status": {
         "label": "Status",
@@ -25,6 +28,15 @@
         "description": {
             "completed": "Der Beleg ist vollständig.",
             "incompleted": "Der Beleg ist noch unvollständig: Es muss mindestens eine Transaktion zugeordnet werden."
+        }
+    },
+    "media": {
+        "label": "Dateien",
+        "help": "Unterstützt die Formate PNG, JPG und PDF.",
+        "filter": {
+            "label": "Dateien",
+            "true": "Mit Dateien",
+            "false": "Ohne Dateien"
         }
     }
 }

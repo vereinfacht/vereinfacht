@@ -4,7 +4,7 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
-import { BaseBody, handleZodError } from './create';
+import { BaseBody, handleZodError, parseRelationship } from './create';
 
 interface UpdateFormBody extends BaseBody {
     data: {
@@ -17,7 +17,6 @@ export default async function updateFormAction<K>(
     action: (payload: K) => Promise<any>,
     formData: FormData,
     body: UpdateFormBody,
-    setClubId: boolean = true,
 ): Promise<FormActionState> {
     const session = await auth();
 
@@ -25,23 +24,26 @@ export default async function updateFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    if (setClubId) {
-        const relationships = body.data.relationships || {};
+    const relationships = {};
 
-        relationships.club = {
-            data: { type: 'clubs', id: session.club_id.toString() },
-        };
+    const attributes: Record<string, any> = {};
 
-        body.data.relationships = relationships;
+    for (const [key, raw] of Array.from(formData.entries())) {
+        if (key.startsWith('relationships[')) {
+            const relationship = await parseRelationship(key, raw);
+
+            if (!relationship) {
+                continue;
+            }
+
+            Object.assign(relationships, relationship);
+        } else {
+            attributes[key] = raw === '' ? undefined : raw;
+        }
     }
 
-    body.data.attributes = Object.fromEntries(formData.entries());
-    body.data.attributes = Object.fromEntries(
-        Object.entries(body.data.attributes).map(([key, value]) => [
-            key,
-            value === '' ? undefined : value,
-        ]),
-    );
+    body.data.attributes = attributes;
+    body.data.relationships = relationships;
 
     try {
         await action(body as K);

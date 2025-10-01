@@ -11,12 +11,16 @@ import {
     receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
-import { transactionSortingOptions } from '@/actions/transactions/list.schema';
+import {
+    transactionSortingOptions,
+    transactionStatusOptions,
+} from '@/actions/transactions/list.schema';
 import { userSortingOptions } from '@/actions/users/list.schema';
 import {
     createLoader,
     inferParserType,
     parseAsArrayOf,
+    parseAsBoolean,
     parseAsInteger,
     parseAsString,
     parseAsStringLiteral,
@@ -49,6 +53,11 @@ export const listTransactionSearchParams = {
     ).withOptions({
         shallow: false,
     }),
+    status: parseAsArrayOf(parseAsStringLiteral(transactionStatusOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
     accountId: parseAsString,
 };
 
@@ -73,7 +82,7 @@ export const listReceiptSearchParams = {
     ).withOptions({
         shallow: false,
     }),
-    type: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
+    receiptType: parseAsArrayOf(parseAsStringLiteral(receiptTypeOptions))
         .withDefault([])
         .withOptions({
             shallow: false,
@@ -83,6 +92,7 @@ export const listReceiptSearchParams = {
         .withOptions({
             shallow: false,
         }),
+    hasMedia: parseAsBoolean.withOptions({ shallow: false }),
 };
 
 export const listUserSearchParams = {

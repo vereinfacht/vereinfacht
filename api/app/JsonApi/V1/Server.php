@@ -17,6 +17,7 @@ use App\JsonApi\V1\Clubs\ClubSchema;
 use App\JsonApi\V1\Roles\RoleSchema;
 use App\JsonApi\V1\Users\UserSchema;
 use Illuminate\Support\Facades\Auth;
+use App\JsonApi\V1\Media\MediaSchema;
 use Illuminate\Database\Eloquent\Model;
 use LaravelJsonApi\Core\Document\Error;
 use App\JsonApi\V1\Members\MemberSchema;
@@ -31,7 +32,6 @@ use App\JsonApi\V1\PaymentPeriods\PaymentPeriodSchema;
 use App\JsonApi\V1\FinanceAccounts\FinanceAccountSchema;
 use App\JsonApi\V1\FinanceContacts\FinanceContactSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
-use App\JsonApi\V1\FinanceAccountTypes\FinanceAccountTypeSchema;
 use App\JsonApi\V1\DivisionMembershipTypes\DivisionMembershipTypeSchema;
 
 class Server extends BaseServer
@@ -80,16 +80,16 @@ class Server extends BaseServer
             return $model->club()->associate($club->getKey());
         }
 
-        if (! $club && $user instanceof Club) {
+        if (!$club && $user instanceof Club) {
             return $model->club()->associate($user->id);
         }
 
-        if (! $club && getPermissionsTeamId()) {
+        if (!$club && getPermissionsTeamId()) {
             return $model->club()->associate(getPermissionsTeamId());
         }
 
         // currently only used for club form and should be handled in another way
-        if (! $club && $user->hasRole('super admin')) {
+        if (!$club && $user->hasRole('super admin')) {
             return $model->club()->associate($user->current_club_id);
         }
 
@@ -107,19 +107,19 @@ class Server extends BaseServer
         return [
             ClubSchema::class,
             UserSchema::class,
+            RoleSchema::class,
             MemberSchema::class,
+            ReceiptSchema::class,
             DivisionSchema::class,
             MembershipSchema::class,
+            PermissionSchema::class,
             TransactionSchema::class,
+            PaymentPeriodSchema::class,
             MembershipTypeSchema::class,
             FinanceAccountSchema::class,
             FinanceContactSchema::class,
             DivisionMembershipTypeSchema::class,
-            RoleSchema::class,
-            PermissionSchema::class,
-            PaymentPeriodSchema::class,
-            FinanceAccountTypeSchema::class,
-            ReceiptSchema::class
+            MediaSchema::class,
         ];
     }
 
@@ -132,12 +132,12 @@ class Server extends BaseServer
         Club::addGlobalScope(new ClubScope);
         User::addGlobalScope(new ClubScope);
         Member::addGlobalScope(new ClubScope);
+        Receipt::addGlobalScope(new ClubScope);
         Division::addGlobalScope(new ClubScope);
         Membership::addGlobalScope(new ClubScope);
         Transaction::addGlobalScope(new ClubScope);
         MembershipType::addGlobalScope(new ClubScope);
         FinanceAccount::addGlobalScope(new ClubScope);
         FinanceContact::addGlobalScope(new ClubScope);
-        Receipt::addGlobalScope(new ClubScope);
     }
 }

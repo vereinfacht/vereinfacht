@@ -3,6 +3,8 @@
 namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
+use App\Enums\ReceiptStatusEnum;
+use App\Enums\ReceiptHasMediaEnum;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -30,7 +32,7 @@ class ReceiptSchema extends Schema
         return [
             ID::make(),
             Str::make('referenceNumber'),
-            Str::make('type'),
+            Str::make('receiptType'),
             DateTime::make('documentDate')->sortable(),
             Str::make('status')->readOnly(),
             Str::make('amount')->sortable(),
@@ -39,6 +41,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
+            BelongsToMany::make('media')->type('media'),
         ];
     }
 
@@ -49,8 +52,25 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            WhereIn::make('type')->delimiter(','),
-            StatusFilter::make('status'),
+            StatusFilter::make(
+                'hasMedia',
+                null,
+                'media',
+                [
+                    'true' => 'has',
+                    'false' => 'doesnt_have',
+                ]
+            ),
+            StatusFilter::make(
+                'status',
+                null,
+                'transactions',
+                [
+                    ReceiptStatusEnum::COMPLETED->value => 'has',
+                    ReceiptStatusEnum::INCOMPLETED->value => 'doesnt_have',
+                ]
+            ),
+            WhereIn::make('receiptType')->delimiter(','),
         ];
     }
 
@@ -60,5 +80,14 @@ class ReceiptSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'transactions',
+            'financeContact',
+            'media',
+        ];
     }
 }

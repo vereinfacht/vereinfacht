@@ -11,6 +11,10 @@ export const getReceipt = createAuthenticatedAction(
         const response = await client.GET('/receipts/{receipt}', {
             params: {
                 path: { receipt: params.id },
+                // @ts-expect-error: prepareQuery() does not return the expected type
+                query: {
+                    include: params.include?.join(','),
+                },
             },
         });
 

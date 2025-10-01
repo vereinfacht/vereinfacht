@@ -24,6 +24,15 @@
     "bic": {
         "label": "BIC"
     },
+    "status": {
+        "label": "Status",
+        "completed": "Completed",
+        "incompleted": "Incompleted",
+        "description": {
+            "completed": "The transaction is complete.",
+            "incompleted": "The transaction is incomplete: At least one receipt is required."
+        }
+    },
 
     "all_sources": "All sources"
 }

@@ -4,7 +4,7 @@
         "other": "Receipts",
         "label": "Name"
     },
-    "type": {
+    "receipt_type": {
         "label": "Type",
         "income": "Income",
         "expense": "Expense"
@@ -13,10 +13,13 @@
         "label": "Document date"
     },
     "reference_number": {
-        "label": "Reference number"
+        "label": "Reference number",
+        "help": "Designation for internal assignment (e.g. member number)"
     },
     "amount": {
-        "label": "Amount"
+        "label": "Amount",
+        "still_open": "Still open",
+        "too_much": "Too much"
     },
     "status": {
         "label": "Status",
@@ -25,6 +28,15 @@
         "description": {
             "completed": "The receipt is complete.",
             "incompleted": "The receipt is incomplete: At least one transaction must be assigned."
+        }
+    },
+    "media": {
+        "label": "Files",
+        "help": "Supports PNG, JPG and PDF formats.",
+        "filter": {
+            "label": "Files",
+            "true": "With files",
+            "false": "Without files"
         }
     }
 }

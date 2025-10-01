@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Club;
-use App\Models\FinanceAccountType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,22 +19,33 @@ class FinanceAccountFactory extends Factory
     {
         return [
             'title' => $this->faker->randomElement([
-                'Sommerfest',
-                'Vereinskasse',
-                'Vereinsheim',
-                'Getränke',
                 'Sparbuch',
                 'Volksbank Beiträge',
                 'Postbank',
                 'Sparkasse',
             ]),
             'iban' => $this->faker->iban('DE'),
-            'bic' => $this->faker->swiftBicNumber(),
             'starts_at' => $this->faker->dateTime(),
-            'initial_balance' => $this->faker->randomFloat(2, -1000, 1000),
             'club_id' => Club::factory(),
-            'finance_account_type_id' => FinanceAccountType::factory(),
-
+            'account_type' => 'bank_account',
         ];
+    }
+
+    public function cashBox(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'title' => $this->faker->randomElement([
+                    'Sommerfest',
+                    'Vereinskasse',
+                    'Vereinsheim',
+                    'Getränke',
+                ]),
+                'starts_at' => $this->faker->dateTime(),
+                'initial_balance' => $this->faker->randomFloat(2, -1000, 1000),
+                'club_id' => Club::factory(),
+                'account_type' => 'cash_box',
+            ];
+        });
     }
 }

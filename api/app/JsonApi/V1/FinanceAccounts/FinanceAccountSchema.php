@@ -9,13 +9,18 @@ use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use LaravelJsonApi\Eloquent\Fields\SoftDelete;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Filters\WithTrashed;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
+use LaravelJsonApi\Eloquent\SoftDeletes;
 
 class FinanceAccountSchema extends Schema
 {
+    use SoftDeletes;
+
     /**
      * The model the schema corresponds to.
      */
@@ -28,9 +33,9 @@ class FinanceAccountSchema extends Schema
     {
         return [
             ID::make(),
+            Str::make('accountType'),
             Str::make('title'),
             Str::make('iban'),
-            Str::make('bic'),
             Number::make('initialBalance'),
             Number::make('currentBalance')->extractUsing(
                 static fn($model) => $model->getCurrentBalance()
@@ -38,8 +43,8 @@ class FinanceAccountSchema extends Schema
             DateTime::make('startsAt'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
+            SoftDelete::make('deletedAt'),
             BelongsTo::make('club')->type('clubs'),
-            BelongsTo::make('type')->type('finance-account-types'),
             HasMany::make('transactions')->type('transactions'),
         ];
     }
@@ -51,6 +56,7 @@ class FinanceAccountSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WithTrashed::make('with-trashed'),
         ];
     }
 

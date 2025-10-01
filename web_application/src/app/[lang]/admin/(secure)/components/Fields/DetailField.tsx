@@ -3,14 +3,15 @@ import Text from '@/app/components/Text/Text';
 import { DefaultDetailFieldDef, ResourceName } from '@/resources/resource';
 import { camelCaseToSnakeCase, singularize } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
+import BooleanField from './Detail/BooleanField';
 import ColorField from './Detail/ColorField';
 import CurrencyField from './Detail/CurrencyField';
 import DateField from './Detail/DateField';
 import DefaultField from './Detail/DefaultField';
 import ImageField from './Detail/ImageField';
 import { LinkField } from './Detail/LinkField';
+import MediaField from './Detail/MediaField';
 import TranslationField from './Detail/TranslationField';
-import BooleanField from './Detail/BooleanField';
 
 type Props<T> = DefaultDetailFieldDef<T> & {
     value: any;
@@ -64,6 +65,9 @@ export default function DetailField<T>({
             break;
         case 'boolean':
             component = <BooleanField value={displayValue} />;
+            break;
+        case 'media':
+            component = <MediaField value={displayValue} />;
             break;
 
         default:

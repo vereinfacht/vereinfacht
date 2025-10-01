@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -25,8 +24,7 @@ class FakeFinanceAccountSeeder extends Seeder
                 ->create([
                     'title' => 'Sparkasse Beiträge',
                     'club_id' => $club->id,
-                    'finance_account_type_id' => FinanceAccountType::where('title->en', 'Bank account')->first()->id,
-                    'initial_balance' => 1000,
+                    'account_type' => 'bank_account'
                 ]);
             FinanceAccount::factory()
                 ->has(
@@ -37,7 +35,8 @@ class FakeFinanceAccountSeeder extends Seeder
                 ->create([
                     'title' => 'Vereinsheim',
                     'club_id' => $club->id,
-                    'finance_account_type_id' => FinanceAccountType::where('title->en', 'Cash box')->first()->id,
+                    'account_type' => 'cash_box',
+                    'initial_balance' => 1000
                 ]);
         });
     }

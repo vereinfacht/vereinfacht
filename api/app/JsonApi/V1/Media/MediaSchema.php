@@ -1,39 +1,49 @@
 <?php
 
-namespace App\JsonApi\V1\FinanceAccountTypes;
+namespace App\JsonApi\V1\Media;
 
-use App\Models\FinanceAccountType;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\ArrayHash;
+use App\Models\Media;
+use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use LaravelJsonApi\Eloquent\Schema;
 
-class FinanceAccountTypeSchema extends Schema
+class MediaSchema extends Schema
 {
+
     /**
      * The model the schema corresponds to.
+     *
+     * @var string
      */
-    public static string $model = FinanceAccountType::class;
+    public static string $model = Media::class;
 
     /**
      * Get the resource fields.
+     *
+     * @return array
      */
     public function fields(): array
     {
         return [
             ID::make(),
-            Str::make('title'),
-            ArrayHash::make('titleTranslations', 'title')->extractUsing(
-                static fn ($model, $column) => $model->getTranslations($column)
-            ),
+            DateTime::make('createdAt')->readOnly(),
+            DateTime::make('updatedAt')->readOnly(),
+            Str::make('fileName'),
+            Str::make('mimeType'),
+            Str::make('size'),
+            Str::make('originalUrl')->readOnly(),
+            Str::make('previewUrl')->readOnly(),
         ];
     }
 
     /**
      * Get the resource filters.
+     *
+     * @return array
      */
     public function filters(): array
     {
@@ -44,6 +54,8 @@ class FinanceAccountTypeSchema extends Schema
 
     /**
      * Get the resource paginator.
+     *
+     * @return Paginator|null
      */
     public function pagination(): ?Paginator
     {

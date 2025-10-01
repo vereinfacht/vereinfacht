@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\Club;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class QueryFilterTest extends TestCase
@@ -16,10 +15,8 @@ class QueryFilterTest extends TestCase
     public function test_query_filter_searches_multiple_transaction_columns()
     {
         $club = Club::factory()->create();
-        $accountType = FinanceAccountType::factory()->create();
         $account = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $accountType->id,
+            'club_id' => $club->id
         ]);
 
         $matchingTransaction1 = Transaction::factory()->create([

@@ -3,7 +3,8 @@ import { baseListSchema } from '../base/list.schema';
 
 export const permissionSortingOptions = ['name', '-name'] as const;
 
-export const listPermissionsSchema = baseListSchema.extend({
+export const listPermissionsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(permissionSortingOptions)).optional(),
 });
 

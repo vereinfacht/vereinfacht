@@ -1,89 +1,74 @@
 'use client';
 
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { useCallback, useEffect, useState } from 'react';
-import MultiselectInput from '../MultiselectInput/MultiselectInput';
-import CurrencyText from '../Text/CurrencyText';
-import Text from '../Text/Text';
+import { NewMultiselectInput } from '../MultiselectInput/NewMultiselectInput';
 import { Option } from './SelectInput';
 
-interface Props {
-    id: string;
-    name?: string;
+export const itemsPerQuery = 6;
+
+interface Props<T> {
+    resourceName: string;
+    resourceType: string;
+    action: (searchTerm: string) => Promise<any>;
+    optionLabel: (item: T) => React.ReactNode;
     label?: string | React.ReactNode;
-    defaultValue?: Option[];
     onChange?: (selected: Option[]) => void;
     required?: boolean;
-    resource?: string;
+    defaultValue?: Option[];
+    pivotAttributes?: string[];
 }
 
-export default function BelongsToMultiselectInput({
-    id,
-    name,
+export default function BelongsToSelectInput<T>({
+    resourceName,
+    resourceType,
     label,
-    defaultValue,
+    action,
     onChange,
+    optionLabel,
+    defaultValue,
+    pivotAttributes = [],
     required = false,
-    resource,
-}: Props) {
+}: Props<T>) {
     const [options, setOptions] = useState<Option[]>([]);
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    // @todo: use server action or other fetch handling
     const fetchOptions = useCallback(
         async (searchTerm: string) => {
-            if (!resource) return;
-
             try {
-                const response = await fetch(
-                    `http://api.verein.localhost/api/v1/${resource}?filter[query]=${encodeURIComponent(
-                        searchTerm,
-                    )}&filter[withoutReceipts]=true`,
-                    {
-                        headers: {
-                            Accept: 'application/vnd.api+json',
-                            'Content-Type': 'application/vnd.api+json',
-                            Authorization: `Bearer`,
-                        },
-                    },
-                );
+                setLoading(true);
+                const response = await action(searchTerm);
 
-                if (!response.ok)
-                    throw new Error(`API error: ${response.status}`);
+                const resources = deserialize(
+                    response as DocumentObject,
+                ) as T[];
 
-                const json = await response.json();
-                const newOptions: Option[] = json.data.map(
-                    (item: {
-                        id: string;
-                        attributes: {
-                            name: string;
-                            description: string;
-                            amount: number;
-                        };
-                    }) => ({
-                        value: item.id,
-                        label: (
-                            <div className="flex justify-between">
-                                <div className="flex w-10/12 gap-2">
-                                    <Text className="min-w-fit font-medium">
-                                        {item.attributes.name}
-                                    </Text>
-                                    <Text className="truncate">
-                                        {item.attributes.description}
-                                    </Text>
-                                </div>
-                                <CurrencyText value={item.attributes.amount} />
-                            </div>
-                        ),
-                    }),
-                );
+                const newOptions: Option[] = resources.map((resource) => {
+                    const option: Option = {
+                        value: (resource as any).id,
+                        label: optionLabel(resource),
+                    };
 
-                setOptions(newOptions.slice(0, 10));
+                    if (pivotAttributes.length > 0) {
+                        pivotAttributes.forEach((attribute: string) => {
+                            // @ts-expect-error: Dynamic attribute assignment
+                            option[attribute] = resource[attribute];
+                        });
+                    }
+
+                    return option;
+                });
+
+                setOptions(newOptions);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.error('Error fetching options:', error);
                 setOptions([]);
             }
         },
-        [resource],
+        [optionLabel, action],
     );
 
     useEffect(() => {
@@ -91,22 +76,25 @@ export default function BelongsToMultiselectInput({
             fetchOptions(query);
         }, 400);
         return () => clearTimeout(handler);
-    }, [query, fetchOptions]);
+    }, [query]);
 
     useEffect(() => {
         fetchOptions('');
     }, [fetchOptions]);
 
     return (
-        <MultiselectInput
-            id={id}
-            name={name}
+        <NewMultiselectInput
+            id={resourceName}
+            name={'relationships[' + resourceName + '][' + resourceType + ']'}
+            loading={loading}
             label={label}
             options={options}
             defaultValue={defaultValue}
-            onChange={onChange}
             required={required}
             onQueryChange={setQuery}
+            query={query}
+            multiple={true}
+            onChange={onChange}
         />
     );
 }

@@ -9,7 +9,55 @@ export interface BaseBody {
     data: {
         type: string;
         attributes?: Record<string, any>;
-        relationships?: Record<string, { data: { type: string; id: string } }>;
+        relationships?: Record<
+            string,
+            {
+                data:
+                    | { type: string; id: string }
+                    | { type: string; id: string }[];
+            }
+        >;
+    };
+}
+
+export async function parseRelationship(key: string, value: any) {
+    const resourceName = key.split('[')[1]?.split(']')[0];
+    const type = key.split('[')[2]?.split(']')[0];
+    const isMultiple = value.startsWith('[') && value.endsWith(']');
+    const values = isMultiple
+        ? value
+              .slice(1, -1)
+              .split(',')
+              .map((v: string) => v.trim())
+        : [value];
+
+    if (!resourceName || !type) {
+        return null;
+    }
+
+    const data = {};
+
+    if (isMultiple) {
+        Object.assign(data, {
+            data:
+                values.length === 0 || (values.length === 1 && values[0] === '')
+                    ? []
+                    : values.map((id: string) => ({
+                          type,
+                          id: id.toString(),
+                      })),
+        });
+    } else {
+        Object.assign(data, {
+            data:
+                values.length === 0 || values[0] === ''
+                    ? null
+                    : { type, id: values[0] },
+        });
+    }
+
+    return {
+        [resourceName]: data,
     };
 }
 
@@ -26,9 +74,9 @@ export default async function createFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    if (setClubId) {
-        const relationships = body.data.relationships || {};
+    const relationships = body.data.relationships || {};
 
+    if (setClubId) {
         relationships.club = {
             data: { type: 'clubs', id: session.club_id.toString() },
         };
@@ -36,13 +84,24 @@ export default async function createFormAction<K>(
         body.data.relationships = relationships;
     }
 
-    body.data.attributes = Object.fromEntries(formData.entries());
-    body.data.attributes = Object.fromEntries(
-        Object.entries(body.data.attributes).map(([key, value]) => [
-            key,
-            value === '' ? undefined : value,
-        ]),
-    );
+    const attributes: Record<string, any> = {};
+
+    for (const [key, raw] of Array.from(formData.entries())) {
+        if (key.startsWith('relationships[')) {
+            const relationship = await parseRelationship(key, raw);
+
+            if (!relationship) {
+                continue;
+            }
+
+            Object.assign(relationships, relationship);
+        } else {
+            attributes[key] = raw === '' ? undefined : raw;
+        }
+    }
+
+    body.data.attributes = attributes;
+    body.data.relationships = relationships;
 
     try {
         await action(body as K);
@@ -64,7 +123,7 @@ export async function handleZodError(error: ZodError) {
         success: false,
         errors: error.issues.reduce(
             (acc, err) => {
-                const attribute = err.path[err.path.length - 1];
+                const attribute = err.path[err.path.length - 1] as string;
 
                 if (!acc[attribute]) {
                     acc[attribute] = [];

@@ -10,13 +10,16 @@ export const receiptSortingOptions = [
 
 export const receiptTypeOptions = ['income', 'expense'] as const;
 export const receiptStatusOptions = ['incompleted', 'completed'] as const;
+export const receiptHasMediaOptions = ['true', 'false'] as const;
 
-export const listReceiptsSchema = baseListSchema.extend({
+export const listReceiptsSchema = z.object({
+    ...baseListSchema.shape,
     sort: z.array(z.enum(receiptSortingOptions)).optional(),
     filter: z
         .object({
-            type: z.array(z.enum(receiptTypeOptions)).optional(),
+            receiptType: z.array(z.enum(receiptTypeOptions)).optional(),
             status: z.array(z.enum(receiptStatusOptions)).optional(),
+            hasMedia: z.boolean().optional(),
         })
         .optional(),
 });

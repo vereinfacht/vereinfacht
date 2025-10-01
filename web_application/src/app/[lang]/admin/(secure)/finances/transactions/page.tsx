@@ -3,7 +3,7 @@ import {
     loadListTransactionsSearchParams,
 } from '@/utils/search-params';
 import AccountsList from './_components/accounts-list';
-import TransactionsList from './_components/transactions-list';
+import TransactionsTable from './_components/transactions-table';
 import { WithSearchParams } from '@/types/params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { TTransactionDeserialized } from '@/types/resources';
@@ -14,9 +14,19 @@ async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
-        filter: params.accountId ? { financeAccountId: params.accountId } : {},
+        filter: {
+            ...(params.accountId ? { financeAccountId: params.accountId } : {}),
+            ...(params.status ? { status: params.status } : {}),
+        },
         include: ['financeAccount'],
-        fields: { 'finance-accounts': ['title', 'iban', 'bic'] },
+        fields: {
+            'finance-accounts': [
+                'title',
+                'iban',
+                'initialBalance',
+                'accountType',
+            ],
+        },
     });
 
     return response || [];
@@ -35,7 +45,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
         <div className="flex gap-6">
             <AccountsList />
 
-            <TransactionsList
+            <TransactionsTable
                 transactions={transactions}
                 totalPages={totalPages}
             />

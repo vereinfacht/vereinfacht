@@ -1,5 +1,9 @@
+'use server';
+
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { baseDeleteSchema } from '../base/delete.schema';
+import { baseDeleteSchema, DeleteParams } from '../base/delete.schema';
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import deleteFormAction from '../base/delete';
 
 export const deleteFinanceAccount = createAuthenticatedAction(
     'delete',
@@ -15,7 +19,6 @@ export const deleteFinanceAccount = createAuthenticatedAction(
             },
         );
 
-        // DELETE returns 204 No Content on success, so we handle it specially
         if (response.error) {
             handleApiResponse(response, 'Failed to delete finance account');
         }
@@ -23,3 +26,14 @@ export const deleteFinanceAccount = createAuthenticatedAction(
         return true;
     },
 );
+
+export async function deleteFinanceAccountFormAction(
+    id: string,
+    previousState: FormActionState,
+) {
+    return await deleteFormAction<DeleteParams>(
+        previousState,
+        deleteFinanceAccount,
+        { id },
+    );
+}

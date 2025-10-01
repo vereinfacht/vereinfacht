@@ -33,7 +33,7 @@ export default function UsersTable({ users }: Props) {
         },
         {
             accessorKey: 'email',
-            header: t('user:email.label'),
+            header: t('general:email'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
@@ -68,12 +68,12 @@ export default function UsersTable({ users }: Props) {
         },
         {
             accessorKey: 'createdAt',
-            header: t('user:created_at.label'),
+            header: t('general:created_at'),
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
         },
         {
             accessorKey: 'updatedAt',
-            header: t('user:updated_at.label'),
+            header: t('general:updated_at'),
             cell: ({ row }) => <DateField value={row.getValue('updatedAt')} />,
         },
     ];

@@ -4,9 +4,15 @@ import Text, { TextProps } from '../Text/Text';
 
 interface Props extends TextProps {
     value: number;
+    colorized?: boolean;
 }
 
-export default function CurrencyText({ value, className, ...props }: Props) {
+export default function CurrencyText({
+    value,
+    className,
+    colorized = true,
+    ...props
+}: Props) {
     const { getFormatted } = useCurrency();
 
     return (
@@ -16,9 +22,9 @@ export default function CurrencyText({ value, className, ...props }: Props) {
             className={[
                 className,
                 'text-right',
-                value > 0
+                value > 0 && colorized
                     ? 'text-green-500'
-                    : value < 0
+                    : value < 0 && colorized
                       ? 'text-red-400'
                       : 'text-slate-900',
             ].join(' ')}

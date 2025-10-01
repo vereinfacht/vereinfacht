@@ -7,7 +7,6 @@ use App\Models\Club;
 use App\Models\Receipt;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
-use App\Models\FinanceAccountType;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class WithoutRelationFilterTest extends TestCase
@@ -17,10 +16,8 @@ class WithoutRelationFilterTest extends TestCase
     public function test_only_transactions_without_receipts_are_returned_when_filter_applied()
     {
         $club = Club::factory()->create();
-        $accountType = FinanceAccountType::factory()->create();
         $account = FinanceAccount::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_type_id' => $accountType->id,
+            'club_id' => $club->id
         ]);
 
         $transactionWithReceipt = Transaction::factory()->create([

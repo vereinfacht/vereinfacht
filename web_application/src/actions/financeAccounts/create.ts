@@ -1,16 +1,39 @@
+'use server';
+
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { createFinanceAccountSchema } from './create.schema';
+import createFormAction from '../base/create';
+import {
+    CreateFinanceAccountParams,
+    createFinanceAccountSchema,
+} from './create.schema';
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 
 export const createFinanceAccount = createAuthenticatedAction(
     'create',
-    'finance-accounts',
+    'finance-Accounts',
     createFinanceAccountSchema,
-    async (params, client) => {
+    async (body, client) => {
         const response = await client.POST('/finance-accounts', {
-            // @ts-expect-error: fix type mismatch between schema and raw api body
-            body: params,
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
+            body,
         });
 
         return handleApiResponse(response, 'Failed to create finance account');
     },
 );
+
+export async function createFinanceAccountFormAction(
+    previousState: FormActionState,
+    formData: FormData,
+) {
+    return await createFormAction<CreateFinanceAccountParams>(
+        previousState,
+        createFinanceAccount,
+        formData,
+        {
+            data: {
+                type: 'finance-accounts',
+            },
+        },
+    );
+}

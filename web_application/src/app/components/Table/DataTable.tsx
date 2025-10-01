@@ -4,6 +4,7 @@ import {
     ColumnDef,
     flexRender,
     getCoreRowModel,
+    TableOptions,
     useReactTable,
 } from '@tanstack/react-table';
 
@@ -22,6 +23,7 @@ import TablePagination from './TablePagination';
 
 interface DataTableProps<TData, TValue> {
     data: TData[];
+    defaultColumn?: TableOptions<TData>['defaultColumn'];
     columns: ColumnDef<TData, TValue>[];
     resourceName: ResourceName;
     canView?: boolean;
@@ -31,6 +33,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData extends Model, TValue>({
     data,
+    defaultColumn,
     columns,
     resourceName,
     canView = false,
@@ -38,13 +41,14 @@ export function DataTable<TData extends Model, TValue>({
     totalPages,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
+        defaultColumn,
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
 
     return (
-        <>
+        <div className="flex flex-col gap-8">
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
@@ -76,6 +80,7 @@ export function DataTable<TData extends Model, TValue>({
                                     data-state={
                                         row.getIsSelected() && 'selected'
                                     }
+                                    data-cy={`${row.index}-row`}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
@@ -125,6 +130,6 @@ export function DataTable<TData extends Model, TValue>({
                 </Table>
             </div>
             <TablePagination totalPages={totalPages} />
-        </>
+        </div>
     );
 }

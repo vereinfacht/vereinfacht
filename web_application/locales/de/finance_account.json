@@ -1,11 +1,47 @@
 {
     "title": {
-        "one": "Konto",
-        "other": "Konten",
+        "one": "Transaktionsquelle",
+        "other": "Transaktionsquellen",
         "label": "Name"
     },
-
+    "initial_balance": {
+        "label": "Betrag zu Beginn"
+    },
+    "account_type": {
+        "cash_box": "Kasse",
+        "bank_account": "Bankkonto"
+    },
     "rename": "Umbenennen",
+    "activate": "Aktivieren",
     "deactivate": "Deaktivieren",
-    "import_transactions": "Transaktionen importieren"
+    "deactivated": "Deaktivierte Quellen",
+    "import_transactions": "Transaktionen importieren",
+    "create_modal": {
+        "title": "Neue Transaktionsquelle erstellen",
+        "choose_type": "Typ wählen",
+        "edit_type": "{{type}} einrichten"
+    },
+    "edit_modal": {
+        "description": "Passen Sie die Einstellungen der Transaktionsquelle an."
+    },
+    "activate_modal": {
+        "title": "Transaktionsquelle reaktivieren",
+        "description": "<0>Möchten Sie die Quelle <1>{{name}}</1> reaktivieren?</0>",
+        "notification": {
+            "activate": {
+                "success": "{{resource}} wurde reaktiviert",
+                "error": "{{resource}} konnte nicht reaktiviert werden"
+            }
+        }
+    },
+    "deactivate_modal": {
+        "title": "Transaktionsquelle deaktivieren",
+        "description": "<0>Wenn Sie die Quelle <1>{{name}}</1> deaktivieren, bleiben alle bestehenden Transaktions- und Belegzuordnungen bestehen. Allerdings erscheint diese Quelle nicht mehr in der Übersicht und es erfolgen für unzugeordnete Transaktionen keine Hinweise oder Erinnerungen mehr. Dieser Schritt kann rückgängig gemacht werden.</0>",
+        "notification": {
+            "deactivate": {
+                "success": "{{resource}} wurde deaktiviert",
+                "error": "{{resource}} konnte nicht deaktiviert werden"
+            }
+        }
+    }
 }

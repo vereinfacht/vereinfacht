@@ -3,8 +3,8 @@ import { z } from 'zod';
 export const baseListSchema = z.object({
     page: z
         .object({
-            size: z.number().int().positive().optional(),
-            number: z.number().int().positive().optional(),
+            size: z.int().positive().optional(),
+            number: z.int().positive().optional(),
         })
         .optional(),
     sort: z.array(z.enum(['createdAt', '-createdAt'] as const)).optional(),

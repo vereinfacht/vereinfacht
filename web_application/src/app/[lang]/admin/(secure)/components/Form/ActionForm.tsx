@@ -9,31 +9,28 @@ import SubmitButton from './SubmitButton';
 interface Props extends PropsWithChildren {
     state: FormActionState;
     action: (payload: FormData) => void;
-    isCreate: boolean;
-    redirectPath?: string;
+    type: 'create' | 'update' | 'delete';
     translationKey: string;
 }
 
 export default function ActionForm({
     state,
     action,
-    isCreate,
+    type,
     children,
-    redirectPath,
     translationKey,
 }: Props) {
     const { t } = useTranslation();
 
     return (
-        <form action={action} className="container flex flex-col gap-8">
+        <form action={action} className="container flex h-full flex-col gap-8">
             <FormStateHandler
                 state={state}
                 translationKey={translationKey}
-                redirectPath={redirectPath}
-                isCreate={isCreate}
+                type={type}
             />
             {children}
-            <div className="flex gap-4 self-end">
+            <div className="mt-auto flex gap-4 self-end">
                 <CancelButton />
                 <SubmitButton title={t('general:save')} />
             </div>

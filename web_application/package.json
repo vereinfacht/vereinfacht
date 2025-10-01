@@ -16,11 +16,15 @@
     "dependencies": {
         "@formatjs/intl-localematcher": "^0.5.4",
         "@headlessui/react": "^2.2.0",
+        "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-collapsible": "^1.1.10",
-        "@radix-ui/react-dialog": "^1.1.14",
+        "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-dropdown-menu": "^2.0.6",
+        "@radix-ui/react-popover": "^1.1.15",
+        "@radix-ui/react-progress": "^1.1.7",
         "@radix-ui/react-separator": "^1.1.7",
         "@radix-ui/react-slot": "^1.2.3",
+        "@radix-ui/react-switch": "^1.2.6",
         "@radix-ui/react-toast": "^1.2.6",
         "@radix-ui/react-tooltip": "^1.2.8",
         "@tanstack/react-table": "^8.16.0",
@@ -29,6 +33,7 @@
         "@types/react-dom": "^18.2.7",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.0",
+        "cmdk": "^1.1.1",
         "date-fns": "^3.6.0",
         "eslint": "^8.37.0",
         "eslint-config-next": "^14.2.2",
@@ -48,7 +53,7 @@
         "tailwind-merge": "^2.2.2",
         "tailwindcss-animate": "^1.0.7",
         "typescript": "^5.2.2",
-        "zod": "^3.23.8"
+        "zod": "^4.1.8"
     },
     "devDependencies": {
         "@svgr/webpack": "^8.1.0",

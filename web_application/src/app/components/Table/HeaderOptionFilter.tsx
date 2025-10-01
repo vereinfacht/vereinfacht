@@ -39,7 +39,10 @@ export function HeaderOptionFilter({
     }
 
     return (
-        <div className="flex items-center gap-x-4">
+        <div
+            className={`flex items-center gap-x-4 ${filterQueryParam?.length ? 'text-slate-800' : ''}`}
+        >
+            {' '}
             {t(`${translationKey}.label`)}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>

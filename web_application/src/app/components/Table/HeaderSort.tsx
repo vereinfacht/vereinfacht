@@ -15,7 +15,9 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
     const matchedSort = sort?.find((s) => s.includes(columnId));
 
     return (
-        <span className="flex items-center gap-x-4">
+        <span
+            className={`flex items-center gap-x-4 ${matchedSort ? 'text-slate-800' : ''}`}
+        >
             {columnTitle}
             <Button
                 variant="ghost"
