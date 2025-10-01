@@ -7,20 +7,20 @@ import IconTooltip from '../Tooltip/IconTooltip';
 export interface StatusCellProps {
     status: 'incompleted' | 'pending' | 'completed';
     rowId: string | number;
-    translationResource: string;
     className?: string;
+    translateNamespace: string;
 }
 
 export default function StatusCell({
     status,
     rowId,
     className,
-    translationResource,
+    translateNamespace,
 }: StatusCellProps) {
     const { t } = useTranslation();
     const tooltipId = `status-tooltip-${rowId}`;
     const statusDescription = t(
-        `${translationResource}:status.description.${status}`,
+        `${translateNamespace}:status.description.${status}`,
     );
 
     const icon =

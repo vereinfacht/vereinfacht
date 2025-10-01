@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react';
-import { Paperclip } from 'lucide-react';
 import { Badge } from '@/app/components/ui/badge';
+import { Paperclip } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import IconTooltip from '../Tooltip/IconTooltip';
 
 export interface MediaCellProps {
-    media: Array<{ originalUrl: string }>;
+    media: Array<{ originalUrl: string; name?: string }>;
     rowId: string | number;
     rowLink?: string;
     className?: string;
+    translateNamespace: string;
 }
 
 export default function MediaCell({
@@ -18,13 +18,26 @@ export default function MediaCell({
     rowId,
     rowLink,
     className,
+    translateNamespace,
 }: MediaCellProps) {
     const { t } = useTranslation();
     const mediaCount = media?.length ?? 0;
     const tooltipId = `media-tooltip-${rowId}`;
-    const statusDescription = mediaCount
-        ? t('receipt:media.has_attachments', { count: mediaCount })
-        : t('receipt:media.no_attachments');
+
+    let statusDescription = t(`${translateNamespace}:media.no_attachments`);
+
+    if (mediaCount === 1) {
+        const item = media[0];
+        statusDescription = item.name
+            ? item.name
+            : decodeURIComponent(
+                  item.originalUrl.split('/').pop() || 'unknown.pdf',
+              );
+    } else if (mediaCount > 1) {
+        statusDescription = t(`${translateNamespace}:media.has_attachments`, {
+            count: mediaCount,
+        });
+    }
 
     const href = mediaCount === 1 ? media[0]?.originalUrl : rowLink;
 

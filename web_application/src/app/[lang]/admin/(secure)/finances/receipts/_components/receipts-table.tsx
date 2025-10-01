@@ -97,7 +97,7 @@ export default function ReceiptsTable({
                 <StatusCell
                     status={row.getValue('status')}
                     rowId={row.id}
-                    translationResource={'receipt'}
+                    translateNamespace={'receipt'}
                 />
             ),
         },
@@ -118,6 +118,7 @@ export default function ReceiptsTable({
                     media={row.getValue('media')}
                     rowId={row.id}
                     rowLink={`/admin/finances/receipts/${row.original.id}`}
+                    translateNamespace="receipt"
                 />
             ),
         },

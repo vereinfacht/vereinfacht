@@ -91,7 +91,7 @@ export default function TransactionsTable({
                 <StatusCell
                     status={row.getValue('status')}
                     rowId={row.id}
-                    translationResource={'transaction'}
+                    translateNamespace={'transaction'}
                 />
             ),
         },
