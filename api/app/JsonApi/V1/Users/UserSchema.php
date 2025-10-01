@@ -3,16 +3,17 @@
 namespace App\JsonApi\V1\Users;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use LaravelJsonApi\Eloquent\Fields\Relations\MorphTo;
 
 class UserSchema extends Schema
 {
@@ -30,10 +31,12 @@ class UserSchema extends Schema
             ID::make(),
             Str::make('name')->sortable(),
             Str::make('email'),
+            Str::make('password')->hidden(),
             Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             HasMany::make('roles')->type('roles'),
+            MorphTo::make('club')->type('clubs'),
         ];
     }
 
