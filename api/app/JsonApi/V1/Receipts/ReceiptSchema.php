@@ -3,11 +3,11 @@
 namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
-use App\Enums\ReceiptStatusEnum;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Filters\Has;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
@@ -51,23 +51,16 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            StatusFilter::make(
-                'hasMedia',
-                null,
-                'media',
-                [
-                    'true' => 'has',
-                    'false' => 'doesnt_have',
-                ]
-            ),
+            Has::make($this, 'media'),
             StatusFilter::make(
                 'status',
-                null,
                 'transactions',
-                [
-                    ReceiptStatusEnum::COMPLETED->value => 'has',
-                    ReceiptStatusEnum::INCOMPLETED->value => 'doesnt_have',
-                ]
+                'receipt_transaction',
+                'receipt_id',
+                'transaction_id',
+                'transactions',
+                'amount',
+                'amount'
             ),
             WhereIn::make('receiptType')->delimiter(','),
         ];

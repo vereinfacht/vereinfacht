@@ -36,7 +36,20 @@ class Receipt extends Model implements HasMedia
 
     public function getStatusAttribute(): string
     {
-        return floatval($this->transactions()->sum('amount')) === ($this->amount * 100) ? ReceiptStatusEnum::COMPLETED->value : ReceiptStatusEnum::INCOMPLETED->value;
+        $transactionsCount = $this->transactions()->count();
+        $transactionsSum = (int) $this->transactions()->sum('amount');
+        $receiptAmount = is_object($this->amount) && method_exists($this->amount, 'getAmount')
+            ? (int) $this->amount->getAmount()
+            : (int) round($this->amount * 100);
+
+        if ($transactionsCount === 0) {
+            return ReceiptStatusEnum::INCOMPLETED->value;
+        }
+
+        if ($transactionsSum == $receiptAmount) {
+            return ReceiptStatusEnum::COMPLETED->value;
+        }
+        return ReceiptStatusEnum::PENDING->value;
     }
 
     public function registerMediaConversions(?Media $media = null): void

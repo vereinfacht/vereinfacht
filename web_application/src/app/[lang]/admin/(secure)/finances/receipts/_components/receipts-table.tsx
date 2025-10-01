@@ -122,6 +122,8 @@ export default function ReceiptsTable({
                             >
                                 {status === 'incompleted' ? (
                                     <CircleDashed className="text-slate-500" />
+                                ) : status === 'pending' ? (
+                                    <CircleDashed className="text-yellow-500" />
                                 ) : (
                                     <CircleCheck className="text-green-500" />
                                 )}
@@ -144,8 +146,8 @@ export default function ReceiptsTable({
             header: () =>
                 extended ? (
                     <TriStateHeaderFilter
-                        parser={listReceiptSearchParams.hasMedia}
-                        paramKey="hasMedia"
+                        parser={listReceiptSearchParams.media}
+                        paramKey="media"
                         translationKey="receipt:media.filter"
                     />
                 ) : (

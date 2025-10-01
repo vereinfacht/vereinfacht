@@ -111,6 +111,8 @@ export default function TransactionsTable({
                             >
                                 {status === 'incompleted' ? (
                                     <CircleDashed className="text-slate-500" />
+                                ) : status === 'pending' ? (
+                                    <CircleDashed className="text-yellow-500" />
                                 ) : (
                                     <CircleCheck className="text-green-500" />
                                 )}

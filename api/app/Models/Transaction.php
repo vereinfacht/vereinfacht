@@ -35,7 +35,20 @@ class Transaction extends Model
 
     public function getStatusAttribute(): string
     {
-        return $this->receipts()->exists() ? TransactionStatusEnum::COMPLETED->value : TransactionStatusEnum::INCOMPLETED->value;
+        $receiptsCount = $this->receipts()->count();
+        $receiptsSum = (int) $this->receipts()->sum('amount');
+        $transactionAmount = is_object($this->amount) && method_exists($this->amount, 'getAmount')
+            ? (int) $this->amount->getAmount()
+            : (int) round($this->amount * 100);
+
+        if ($receiptsCount === 0) {
+            return TransactionStatusEnum::INCOMPLETED->value;
+        }
+
+        if ($receiptsSum == $transactionAmount) {
+            return TransactionStatusEnum::COMPLETED->value;
+        }
+        return TransactionStatusEnum::PENDING->value;
     }
 
     /**

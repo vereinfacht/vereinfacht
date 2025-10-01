@@ -9,36 +9,57 @@ use LaravelJsonApi\Eloquent\Filters\Concerns\DeserializesValue;
 
 class StatusFilter implements Filter
 {
-    use DeserializesValue;
-    use IsSingular;
+    use DeserializesValue, IsSingular;
 
     private string $name;
-    private ?string $column = null;
-    private ?string $relationship = null;
-    private ?array $statusMap = null;
+    private string $relationship;
+    private string $pivotTable;
+    private string $foreignKey;
+    private string $relatedKey;
+    private string $relatedTable;
+    private string $relatedAmountColumn;
+    private string $mainAmountColumn;
 
-    /**
-     * Create a new filter instance.
-     */
     public static function make(
         string $name,
-        ?string $column = null,
-        ?string $relationship = null,
-        ?array $statusMap = null
+        string $relationship,
+        string $pivotTable,
+        string $foreignKey,
+        string $relatedKey,
+        string $relatedTable,
+        string $relatedAmountColumn = 'amount',
+        string $mainAmountColumn = 'amount'
     ): self {
-        return new static($name, $column, $relationship, $statusMap);
+        return new self(
+            $name,
+            $relationship,
+            $pivotTable,
+            $foreignKey,
+            $relatedKey,
+            $relatedTable,
+            $relatedAmountColumn,
+            $mainAmountColumn
+        );
     }
 
     public function __construct(
         string $name,
-        ?string $column = null,
-        ?string $relationship = null,
-        ?array $statusMap = null
+        string $relationship,
+        string $pivotTable,
+        string $foreignKey,
+        string $relatedKey,
+        string $relatedTable,
+        string $relatedAmountColumn = 'amount',
+        string $mainAmountColumn = 'amount'
     ) {
         $this->name = $name;
-        $this->column = $column;
         $this->relationship = $relationship;
-        $this->statusMap = $statusMap;
+        $this->pivotTable = $pivotTable;
+        $this->foreignKey = $foreignKey;
+        $this->relatedKey = $relatedKey;
+        $this->relatedTable = $relatedTable;
+        $this->relatedAmountColumn = $relatedAmountColumn;
+        $this->mainAmountColumn = $mainAmountColumn;
     }
 
     public function key(): string
@@ -49,23 +70,37 @@ class StatusFilter implements Filter
     public function apply($query, $value)
     {
         $statuses = $this->deserialize($value);
-        if (!is_array($statuses)) {
+
+        if (is_string($statuses) && str_contains($statuses, ',')) {
+            $statuses = explode(',', $statuses);
+        } elseif (!is_array($statuses)) {
             $statuses = [$statuses];
         }
 
-        if ($this->relationship && $this->statusMap) {
-            $query->where(function (Builder $builder) use ($statuses) {
-                foreach ($statuses as $status) {
-                    $condition = $this->statusMap[$status] ?? null;
-                    if ($condition === 'has') {
-                        $builder->orHas($this->relationship);
-                    } elseif ($condition === 'doesnt_have') {
-                        $builder->orDoesntHave($this->relationship);
-                    }
+        $query->where(function (Builder $builder) use ($statuses) {
+            $table = $builder->getModel()->getTable();
+
+            foreach ($statuses as $status) {
+                $sumQuery = "(SELECT COALESCE(SUM(t.{$this->relatedAmountColumn}),0)
+                       FROM {$this->relatedTable} t
+                       JOIN {$this->pivotTable} p ON p.{$this->relatedKey} = t.id
+                      WHERE p.{$this->foreignKey} = {$table}.id)";
+
+                if ($status === 'completed') {
+                    $builder->orWhereRaw("$sumQuery = {$table}.{$this->mainAmountColumn}");
                 }
-            });
-        } elseif ($this->column) {
-            $query->whereIn($this->column, $statuses);
-        }
+
+                if ($status === 'pending') {
+                    $builder->orWhere(function ($q) use ($sumQuery, $table) {
+                        $q->whereRaw("EXISTS (SELECT 1 FROM {$this->pivotTable} p WHERE p.{$this->foreignKey} = {$table}.id)")
+                            ->whereRaw("$sumQuery != {$table}.{$this->mainAmountColumn}");
+                    });
+                }
+
+                if ($status === 'incompleted') {
+                    $builder->orDoesntHave($this->relationship);
+                }
+            }
+        });
     }
 }
