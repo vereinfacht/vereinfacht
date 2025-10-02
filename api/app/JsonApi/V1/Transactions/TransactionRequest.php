@@ -13,7 +13,7 @@ class TransactionRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
             'amount' => ['required', 'numeric', 'not_in:0'],
             'bookedAt' => ['required', 'date'],
