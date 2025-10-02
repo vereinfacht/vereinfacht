@@ -20,6 +20,7 @@ export const listReceiptsSchema = z.object({
             receiptType: z.array(z.enum(receiptTypeOptions)).optional(),
             status: z.array(z.enum(receiptStatusOptions)).optional(),
             hasMedia: z.boolean().optional(),
+            query: z.string().optional(),
         })
         .optional(),
 });

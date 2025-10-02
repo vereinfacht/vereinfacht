@@ -4,8 +4,8 @@ namespace App\JsonApi\V1\Receipts;
 
 use App\Models\Receipt;
 use App\Enums\ReceiptStatusEnum;
-use App\Enums\ReceiptHasMediaEnum;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
@@ -16,6 +16,7 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
+
 
 class ReceiptSchema extends Schema
 {
@@ -71,6 +72,7 @@ class ReceiptSchema extends Schema
                 ]
             ),
             WhereIn::make('receiptType')->delimiter(','),
+            QueryFilter::make('query', ['reference_number', 'amount']),
         ];
     }
 

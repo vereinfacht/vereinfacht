@@ -16,7 +16,8 @@
         "label": "Valuta"
     },
     "amount": {
-        "label": "Betrag"
+        "label": "Betrag",
+        "help": "Der Betrag der Transaktion in EUR. Negative Beträge sind Ausgaben, positive Einnahmen."
     },
     "iban": {
         "label": "IBAN"
@@ -32,7 +33,9 @@
             "completed": "Die Transaktion ist vollständig.",
             "incompleted": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
-
+    },
+    "finance_account": {
+        "help": "Die Kasse, auf der die Transaktion gebucht wird."
     },
 
     "all_sources": "Alle Quellen"
