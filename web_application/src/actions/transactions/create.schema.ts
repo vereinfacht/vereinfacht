@@ -1,17 +1,19 @@
 import { z } from 'zod';
 
+export const amountSchema = z
+    .string()
+    .refine((value) => !isNaN(Number(value)), {
+        message: 'Amount must be a number',
+    })
+    .refine((value) => Number(value) !== 0, {
+        message: 'Amount must not be zero',
+    });
+
 export const transactionAttributesSchema = z.object({
     name: z.string().min(3).max(255).optional(),
     description: z.string().optional(),
     bookedAt: z.string(),
-    amount: z
-        .string()
-        .refine((value) => !isNaN(Number(value)), {
-            message: 'Amount must be a number',
-        })
-        .refine((value) => Number(value) !== 0, {
-            message: 'Amount must not be zero',
-        }),
+    amount: amountSchema,
 });
 
 export const transactionRelationshipsSchema = z.object({
