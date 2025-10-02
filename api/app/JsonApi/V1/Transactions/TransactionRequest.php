@@ -16,7 +16,7 @@ class TransactionRequest extends ResourceRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
             'amount' => ['required', 'numeric', 'not_in:0'],
-            'bookedAt' => ['nullable', 'date'],
+            'bookedAt' => ['required', 'date'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeAccount' => [
                 'required',
