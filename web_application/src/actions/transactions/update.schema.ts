@@ -3,7 +3,6 @@ import { transactionAttributesSchema } from './create.schema';
 import { idSchema } from '../base/get.schema';
 
 export const updateTransactionSchema = z.object({
-    // ...createTransactionSchema.shape,
     data: z.object({
         id: idSchema,
         type: z.literal('transactions'),
