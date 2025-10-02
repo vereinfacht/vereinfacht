@@ -1,8 +1,13 @@
 'use client';
 
+import { listRoles } from '@/actions/roles/list';
+import BelongsToSelectInput, {
+    itemsPerQuery,
+} from '@/app/components/Input/BelongsToMultiselectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
-import { TUserDeserialized } from '@/types/resources';
+import { Badge } from '@/app/components/ui/badge';
+import { TRoleDeserialized, TUserDeserialized } from '@/types/resources';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -16,6 +21,24 @@ interface Props {
         payload: FormData,
     ) => Promise<FormActionState>;
     data?: TUserDeserialized;
+}
+
+function RoleOption({ item }: { item: TRoleDeserialized }) {
+    const { t } = useTranslation();
+    return (
+        <div className="flex w-full justify-between">
+            <div className="flex w-10/12 gap-2">
+                <Badge
+                    key={item.name}
+                    variant={
+                        item.name === 'club admin' ? 'secondary' : 'default'
+                    }
+                >
+                    {t(`role:${item.name}`)}
+                </Badge>
+            </div>
+        </div>
+    );
 }
 
 export default function CreateForm({ data, action }: Props) {
@@ -83,19 +106,44 @@ export default function CreateForm({ data, action }: Props) {
                         maxLength={255}
                     />
                 </FormField>
-                <SelectInput
-                    id="preferred-locale"
-                    name="preferredLocale"
-                    handleChange={(e) => {
-                        setPreferredLocale(
-                            (e.target as HTMLSelectElement).value,
-                        );
-                    }}
-                    defaultValue={data?.preferredLocale ?? preferredLocale}
-                    label={t('user:preferred_locale.label')}
-                    options={preferredLocaleOptions}
-                    required
-                />
+                <FormField errors={formState.errors?.['preferredLocale']}>
+                    <SelectInput
+                        id="preferred-locale"
+                        name="preferredLocale"
+                        handleChange={(e) => {
+                            setPreferredLocale(
+                                (e.target as HTMLSelectElement).value,
+                            );
+                        }}
+                        defaultValue={data?.preferredLocale ?? preferredLocale}
+                        label={t('user:preferred_locale.label')}
+                        options={preferredLocaleOptions}
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['roles']}>
+                    <BelongsToSelectInput<TRoleDeserialized>
+                        resourceName="role"
+                        resourceType="roles"
+                        label={t('role:title.other')}
+                        required
+                        action={(searchTerm) =>
+                            listRoles({
+                                page: { size: itemsPerQuery, number: 1 },
+                                filter: { query: searchTerm },
+                            })
+                        }
+                        optionLabel={(item) => <RoleOption item={item} />}
+                        defaultValue={
+                            data?.roles
+                                ? data.roles.map((role) => ({
+                                      label: <RoleOption item={role} />,
+                                      value: role.id,
+                                  }))
+                                : []
+                        }
+                    />
+                </FormField>
             </div>
         </ActionForm>
     );

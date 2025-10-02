@@ -36,7 +36,7 @@ class UserSchema extends Schema
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             HasMany::make('roles')->type('roles'),
-            MorphTo::make('club')->type('clubs'),
+            HasMany::make('club')->type('clubs'),
         ];
     }
 

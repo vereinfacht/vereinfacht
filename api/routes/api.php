@@ -58,6 +58,9 @@ JsonApiRoute::server('v1')
         $server->resource('permissions', JsonApiController::class)
             ->only('index');
 
+        $server->resource('roles', JsonApiController::class)
+            ->only('index');
+
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
 
