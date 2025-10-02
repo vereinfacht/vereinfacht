@@ -25,9 +25,11 @@
         "label": "Status",
         "completed": "Completed",
         "incompleted": "Incompleted",
+        "empty": "Empty",
         "description": {
             "completed": "The receipt is complete.",
-            "incompleted": "The receipt is incomplete: At least one transaction must be assigned."
+            "incompleted": "The receipt is partially settled: There are already transactions, but the total does not yet match the receipt amount.",
+            "empty": "The receipt is incomplete: At least one transaction must be assigned."
         }
     },
     "media": {
@@ -37,6 +39,8 @@
             "label": "Files",
             "true": "With files",
             "false": "Without files"
-        }
+        },
+        "has_attachments": "Receipt has ({{count}}) files",
+        "no_attachments": "Receipt has no files"
     }
 }

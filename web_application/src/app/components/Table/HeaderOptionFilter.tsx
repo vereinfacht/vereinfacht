@@ -69,7 +69,7 @@ export function HeaderOptionFilter({
                         ) : null}
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="flex flex-col gap-y-4 p-2">
+                <DropdownMenuContent className="flex flex-col gap-y-4 p-4">
                     {options.map((option) => (
                         <DropdownMenuItem
                             key={option}

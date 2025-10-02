@@ -10,7 +10,11 @@ export const transactionSortingOptions = [
     '-amount',
 ] as const;
 
-export const transactionStatusOptions = ['incompleted', 'completed'] as const;
+export const transactionStatusOptions = [
+    'empty',
+    'incompleted',
+    'completed',
+] as const;
 
 export const listTransactionsSchema = z.object({
     ...baseListSchema.shape,

@@ -4,8 +4,9 @@ namespace App\Enums;
 
 enum ReceiptStatusEnum: string
 {
-    case INCOMPLETED = 'incompleted';
     case COMPLETED = 'completed';
+    case INCOMPLETED = 'incompleted';
+    case EMPTY = 'empty';
 
     public static function getAllValues(): array
     {
