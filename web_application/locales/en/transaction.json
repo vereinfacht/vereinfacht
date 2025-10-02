@@ -27,12 +27,12 @@
     "status": {
         "label": "Status",
         "completed": "Completed",
-        "pending": "Pending",
         "incompleted": "Incompleted",
+        "empty": "Empty",
         "description": {
             "completed": "The transaction is complete.",
-            "pending": "The transaction is partially settled: Receipts are present, but the total does not match the transaction amount.",
-            "incompleted": "The transaction is incomplete: At least one receipt is required."
+            "incompleted": "The transaction is partially settled: Receipts are present, but the total does not match the transaction amount.",
+            "empty": "The transaction is incomplete: At least one receipt is required."
         }
     },
 

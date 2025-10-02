@@ -42,13 +42,14 @@ class Transaction extends Model
             : (int) round($this->amount * 100);
 
         if ($receiptsCount === 0) {
-            return TransactionStatusEnum::INCOMPLETED->value;
+            return TransactionStatusEnum::EMPTY->value;
         }
 
         if ($receiptsSum == $transactionAmount) {
             return TransactionStatusEnum::COMPLETED->value;
         }
-        return TransactionStatusEnum::PENDING->value;
+
+        return TransactionStatusEnum::INCOMPLETED->value;
     }
 
     /**

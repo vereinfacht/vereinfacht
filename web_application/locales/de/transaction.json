@@ -27,12 +27,12 @@
     "status": {
         "label": "Status",
         "completed": "Vollständig",
-        "pending": "Ausstehend",
         "incompleted": "Unvollständig",
+        "empty": "Leer",
         "description": {
             "completed": "Die Transaktion ist vollständig.",
-            "pending": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Belege vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
-            "incompleted": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
+            "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Belege vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
+            "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
 
     },

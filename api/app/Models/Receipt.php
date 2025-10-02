@@ -43,13 +43,14 @@ class Receipt extends Model implements HasMedia
             : (int) round($this->amount * 100);
 
         if ($transactionsCount === 0) {
-            return ReceiptStatusEnum::INCOMPLETED->value;
+            return ReceiptStatusEnum::EMPTY->value;
         }
 
         if ($transactionsSum == $receiptAmount) {
             return ReceiptStatusEnum::COMPLETED->value;
         }
-        return ReceiptStatusEnum::PENDING->value;
+
+        return ReceiptStatusEnum::INCOMPLETED->value;
     }
 
     public function registerMediaConversions(?Media $media = null): void

@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum TransactionStatusEnum: string
 {
-    case INCOMPLETED = 'incompleted';
-    case PENDING = 'pending';
     case COMPLETED = 'completed';
+    case INCOMPLETED = 'incompleted';
+    case EMPTY = 'empty';
 
     public static function getAllValues(): array
     {

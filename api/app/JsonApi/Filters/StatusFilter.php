@@ -90,14 +90,14 @@ class StatusFilter implements Filter
                     $builder->orWhereRaw("$sumQuery = {$table}.{$this->mainAmountColumn}");
                 }
 
-                if ($status === 'pending') {
+                if ($status === 'incompleted') {
                     $builder->orWhere(function ($q) use ($sumQuery, $table) {
                         $q->whereRaw("EXISTS (SELECT 1 FROM {$this->pivotTable} p WHERE p.{$this->foreignKey} = {$table}.id)")
                             ->whereRaw("$sumQuery != {$table}.{$this->mainAmountColumn}");
                     });
                 }
 
-                if ($status === 'incompleted') {
+                if ($status === 'empty') {
                     $builder->orDoesntHave($this->relationship);
                 }
             }

@@ -11,8 +11,8 @@ export const transactionSortingOptions = [
 ] as const;
 
 export const transactionStatusOptions = [
+    'empty',
     'incompleted',
-    'pending',
     'completed',
 ] as const;
 

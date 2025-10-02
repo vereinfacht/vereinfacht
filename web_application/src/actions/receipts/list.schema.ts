@@ -10,8 +10,8 @@ export const receiptSortingOptions = [
 
 export const receiptTypeOptions = ['income', 'expense'] as const;
 export const receiptStatusOptions = [
+    'empty',
     'incompleted',
-    'pending',
     'completed',
 ] as const;
 export const receiptHasMediaOptions = ['true', 'false'] as const;
