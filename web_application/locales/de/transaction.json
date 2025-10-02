@@ -17,7 +17,7 @@
     },
     "amount": {
         "label": "Betrag",
-        "help": "Der Betrag der Transaktion in Euro. Negative Beträge sind Ausgaben, positive Einnahmen."
+        "help": "Der Betrag der Transaktion in EUR. Negative Beträge sind Ausgaben, positive Einnahmen."
     },
     "iban": {
         "label": "IBAN"

@@ -17,7 +17,7 @@
     },
     "amount": {
         "label": "Amount",
-        "help": "The amount of the transaction in Euro. Negative amounts are expenses, positive amounts are income."
+        "help": "The amount of the transaction in EUR. Negative amounts are expenses, positive amounts are income."
     },
     "iban": {
         "label": "IBAN"
