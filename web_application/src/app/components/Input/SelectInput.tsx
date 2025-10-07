@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ChangeEvent, HTMLProps, ReactNode, useState } from 'react';
 import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
+import HelpText from '../HelpText';
 
 export interface Option {
     label: string | React.ReactNode;
@@ -16,6 +17,7 @@ export interface Props extends HTMLProps<HTMLSelectElement> {
     name: string;
     options?: Option[];
     label?: string;
+    help?: string;
     icon?: ReactNode;
     handleChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -23,6 +25,7 @@ export interface Props extends HTMLProps<HTMLSelectElement> {
 export default function SelectInput({
     handleChange,
     label,
+    help,
     icon,
     options,
     ...props
@@ -81,6 +84,7 @@ export default function SelectInput({
                 </select>
                 <InputIcon type="select" icon={icon} />
             </div>
+            {help != null && <HelpText text={help} className="mt-0.5" />}
         </div>
     );
 }
