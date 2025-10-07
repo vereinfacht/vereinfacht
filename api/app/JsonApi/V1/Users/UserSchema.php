@@ -11,9 +11,8 @@ use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use LaravelJsonApi\Eloquent\Fields\Relations\MorphTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class UserSchema extends Schema
 {
@@ -35,8 +34,8 @@ class UserSchema extends Schema
             Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
-            HasMany::make('roles')->type('roles'),
-            HasMany::make('club')->type('clubs'),
+            BelongsToMany::make('roles')->type('roles'),
+            BelongsToMany::make('clubs')->type('clubs'),
         ];
     }
 

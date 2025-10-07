@@ -17,8 +17,8 @@ class UserRequest extends ResourceRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'preferredLocale' => ['required', 'string', 'max:2', 'in:en,de'],
-            'club' => ['required', JsonApiRule::toMany()],
-            'permissions' => [JsonApiRule::toMany()],
+            'clubs' => ['required', JsonApiRule::toMany()],
+            'roles' => ['required', JsonApiRule::toMany()],
         ];
     }
 }
