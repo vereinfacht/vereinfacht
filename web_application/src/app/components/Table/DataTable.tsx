@@ -27,7 +27,7 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     resourceName: ResourceName;
     canView?: boolean;
-    canEdit?: boolean;
+    canEdit?: boolean | ((row: TData) => boolean);
     totalPages?: number;
 }
 
@@ -93,18 +93,26 @@ export function DataTable<TData extends Model, TValue>({
                                             )}
                                         </TableCell>
                                     ))}
-                                    {canEdit || canView ? (
+                                    {(canEdit || canView) && (
                                         <TableCell
                                             key="actions"
                                             className="flex items-center justify-end gap-4"
                                         >
-                                            {canEdit && (
-                                                <TableAction
-                                                    type="edit"
-                                                    href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                    id={row.original.id}
-                                                />
-                                            )}
+                                            {typeof canEdit === 'function'
+                                                ? canEdit(row.original) && (
+                                                      <TableAction
+                                                          type="edit"
+                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                          id={row.original.id}
+                                                      />
+                                                  )
+                                                : canEdit && (
+                                                      <TableAction
+                                                          type="edit"
+                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                          id={row.original.id}
+                                                      />
+                                                  )}
                                             {canView && (
                                                 <TableAction
                                                     type="view"
@@ -113,7 +121,7 @@ export function DataTable<TData extends Model, TValue>({
                                                 />
                                             )}
                                         </TableCell>
-                                    ) : null}
+                                    )}
                                 </TableRow>
                             ))
                         ) : (

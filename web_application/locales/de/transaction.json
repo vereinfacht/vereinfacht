@@ -16,7 +16,8 @@
         "label": "Valuta"
     },
     "amount": {
-        "label": "Betrag"
+        "label": "Betrag",
+        "help": "Der Betrag der Transaktion in EUR. Negative Beträge sind Ausgaben, positive Einnahmen."
     },
     "iban": {
         "label": "IBAN"
@@ -34,7 +35,9 @@
             "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Belege vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
             "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
-
+    },
+    "finance_account": {
+        "help": "Die Kasse, auf der die Transaktion gebucht wird."
     },
 
     "all_sources": "Alle Quellen"

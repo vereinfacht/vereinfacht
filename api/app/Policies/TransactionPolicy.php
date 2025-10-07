@@ -25,6 +25,10 @@ class TransactionPolicy
      */
     public function view(User $user, Transaction $transaction): bool
     {
+        if ($transaction->financeAccount->account_type === 'bank_account') {
+            return false;
+        }
+
         if ($user instanceof Club) {
             return $user->id === $transaction->financeAccount->club_id;
         }
@@ -37,7 +41,11 @@ class TransactionPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return true;
+        }
+
+        return $user->can('create transactions');
     }
 
     /**
@@ -45,7 +53,15 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction): bool
     {
-        return false;
+        if ($transaction->financeAccount->account_type === 'bank_account') {
+            return false;
+        }
+
+        if ($user instanceof Club) {
+            return $user->id === $transaction->club_id;
+        }
+
+        return $user->can('update transactions') && $transaction->club_id === getPermissionsTeamId();
     }
 
     /**

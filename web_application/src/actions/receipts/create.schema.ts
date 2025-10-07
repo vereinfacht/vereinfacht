@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { amountSchema } from '../transactions/create.schema';
 
 export const receiptType = ['income', 'expense'] as const;
 
@@ -6,14 +7,7 @@ export const receiptAttributesSchema = z.object({
     receiptType: z.enum(receiptType),
     referenceNumber: z.string().min(2).max(255).optional(),
     documentDate: z.string(),
-    amount: z
-        .string()
-        .refine((value) => !isNaN(Number(value)), {
-            message: 'Amount must be a number',
-        })
-        .refine((value) => Number(value) !== 0, {
-            message: 'Amount must not be zero',
-        }),
+    amount: amountSchema,
 });
 
 export const receiptRelationshipsSchema = z.object({
