@@ -10,9 +10,11 @@ use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Fields\Relations\MorphTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\MorphToMany;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Filters\Has;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
@@ -21,12 +23,15 @@ use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
+
 class ReceiptSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
      */
     public static string $model = Receipt::class;
+
+    protected $defaultSort = '-documentDate';
 
     /**
      * Get the resource fields.
@@ -56,25 +61,19 @@ class ReceiptSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            StatusFilter::make(
-                'hasMedia',
-                null,
-                'media',
-                [
-                    'true' => 'has',
-                    'false' => 'doesnt_have',
-                ]
-            ),
+            Has::make($this, 'media'),
             StatusFilter::make(
                 'status',
-                null,
                 'transactions',
-                [
-                    ReceiptStatusEnum::COMPLETED->value => 'has',
-                    ReceiptStatusEnum::INCOMPLETED->value => 'doesnt_have',
-                ]
+                'receipt_transaction',
+                'receipt_id',
+                'transaction_id',
+                'transactions',
+                'amount',
+                'amount'
             ),
             WhereIn::make('receiptType')->delimiter(','),
+            QueryFilter::make('query', ['reference_number', 'amount']),
         ];
     }
 
