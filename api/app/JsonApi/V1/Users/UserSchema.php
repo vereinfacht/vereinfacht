@@ -30,7 +30,11 @@ class UserSchema extends Schema
             ID::make(),
             Str::make('name')->sortable(),
             Str::make('email'),
-            Str::make('password')->hidden(),
+            Str::make('password')->hidden()->fillUsing(
+                static function ($model, $column, $value) {
+                    $model->fill([$column => Hash::make($value)]);
+                }
+            ),
             Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
