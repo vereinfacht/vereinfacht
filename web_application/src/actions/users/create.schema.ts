@@ -16,12 +16,12 @@ export const userRelationshipsSchema = z.object({
             type: z.literal('clubs'),
         }),
     }),
-    permissions: z
+    roles: z
         .object({
             data: z.array(
                 z.object({
                     id: z.string(),
-                    type: z.literal('permissions'),
+                    type: z.literal('roles'),
                 }),
             ),
         })
