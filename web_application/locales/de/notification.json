@@ -15,5 +15,9 @@
             "success": "{{resource}} wurde erstellt",
             "error": "{{resource}} konnte nicht erstellt werden"
         }
+    },
+
+    "upload": {
+        "error": "Datei konnte nicht hochgeladen werden"
     }
 }

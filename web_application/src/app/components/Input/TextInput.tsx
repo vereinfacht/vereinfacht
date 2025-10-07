@@ -5,6 +5,7 @@ import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
 import styles from './TextInput.module.css';
 import HelpText from '../HelpText';
+import { required } from 'zod/v4/core/util.cjs';
 
 export interface TextInputProps extends HTMLProps<HTMLInputElement> {
     id: string;
@@ -46,7 +47,6 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
                     required={props.required}
                 />
             ) : null}
-
             <div className="relative mt-1 w-full">
                 <input
                     {...props}
@@ -55,6 +55,7 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
                     ref={inputRef}
                     onChange={onChange}
                     data-cy={props['data-cy'] ?? props.id}
+                    aria-required={props.required}
                 />
                 <InputIcon type={type} icon={icon} />
             </div>

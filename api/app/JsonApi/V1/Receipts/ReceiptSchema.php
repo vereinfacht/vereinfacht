@@ -2,9 +2,13 @@
 
 namespace App\JsonApi\V1\Receipts;
 
+use App\JsonApi\Fields\HasManyMedia;
 use App\Models\Receipt;
 use App\Enums\ReceiptStatusEnum;
 use App\Enums\ReceiptHasMediaEnum;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use LaravelJsonApi\Eloquent\Fields\Relations\MorphTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\MorphToMany;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -41,7 +45,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
-            BelongsToMany::make('media')->type('media'),
+            HasMany::make('media')->type('media'),
         ];
     }
 

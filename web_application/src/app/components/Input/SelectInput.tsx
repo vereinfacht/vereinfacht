@@ -61,6 +61,7 @@ export default function SelectInput({
                     defaultValue={props.defaultValue ?? ''}
                     onChange={onChange}
                     data-cy={props.id}
+                    aria-required={props.required}
                 >
                     {props.children ?? (
                         <>

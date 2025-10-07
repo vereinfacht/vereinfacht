@@ -64,6 +64,7 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
 
     const receiptTypeOptions: Option[] = [
         { label: t('receipt:receipt_type.income'), value: 'income' },
@@ -116,6 +117,7 @@ export default function CreateForm({ data, action }: Props) {
             state={formState}
             type={data ? 'update' : 'create'}
             translationKey="receipt"
+            loading={loading}
         >
             <div>
                 <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
@@ -251,6 +253,7 @@ export default function CreateForm({ data, action }: Props) {
                     name="media"
                     multiple={true}
                     accept={'.png, .jpg, .jpeg, .pdf'}
+                    setLoading={setLoading}
                 />
             </div>
         </ActionForm>
