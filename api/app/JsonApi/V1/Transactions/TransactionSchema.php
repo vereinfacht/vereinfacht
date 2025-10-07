@@ -4,7 +4,6 @@ namespace App\JsonApi\V1\Transactions;
 
 use App\Models\Transaction;
 use LaravelJsonApi\Eloquent\Schema;
-use App\Enums\TransactionStatusEnum;
 use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -58,12 +57,13 @@ class TransactionSchema extends Schema
             WithoutRelationFilter::make('withoutReceipts', 'receipts'),
             StatusFilter::make(
                 'status',
-                null,
                 'receipts',
-                [
-                    TransactionStatusEnum::COMPLETED->value => 'has',
-                    TransactionStatusEnum::INCOMPLETED->value => 'doesnt_have',
-                ]
+                'receipt_transaction',
+                'transaction_id',
+                'receipt_id',
+                'receipts',
+                'amount',
+                'amount'
             ),
         ];
     }
