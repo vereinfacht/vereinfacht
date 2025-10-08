@@ -113,11 +113,24 @@ export function MediaInput({
     }
 
     useEffect(() => {
-        setLoading(true);
+        const uploadAll = async () => {
+            if (uploadQueue.length === 0) {
+                return;
+            }
 
-        uploadQueue.forEach((task, index) => uploadFile(task, index));
+            setLoading(true);
 
-        setLoading(false);
+            for (let i = 0; i < uploadQueue.length; i++) {
+                const task = uploadQueue[i];
+                if (task.progress < 100) {
+                    await uploadFile(task, i);
+                }
+            }
+
+            setLoading(false);
+        };
+
+        uploadAll();
     }, [uploadQueue]);
 
     return (
@@ -139,6 +152,7 @@ export function MediaInput({
                 multiple={multiple}
                 name={name}
                 onChange={onFileInputChange}
+                data-cy="media-input"
             />
             {help && <HelpText text={help} className="mt-0.5" />}
             {uploadQueue.map((task, index) => (
