@@ -37,6 +37,16 @@ export const receiptRelationshipsSchema = z.object({
             ),
         })
         .optional(),
+    media: z
+        .object({
+            data: z.array(
+                z.object({
+                    id: z.string(),
+                    type: z.literal('media'),
+                }),
+            ),
+        })
+        .optional(),
 });
 
 export const createReceiptSchema = z.object({

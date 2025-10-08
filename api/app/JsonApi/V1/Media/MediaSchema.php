@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\Media;
 
 use App\Models\Media;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
@@ -37,6 +38,7 @@ class MediaSchema extends Schema
             Str::make('size'),
             Str::make('originalUrl')->readOnly(),
             Str::make('previewUrl')->readOnly(),
+            BelongsTo::make('club')->type('clubs'),
         ];
     }
 

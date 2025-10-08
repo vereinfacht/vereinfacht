@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MediaController;
 use App\Http\Controllers\Api\V1\MembershipController;
+use App\Http\Controllers\Api\V1\ReceiptController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
@@ -55,13 +57,16 @@ JsonApiRoute::server('v1')
                 $actions->post('logout');
             });
 
+        $server->resource('media', MediaController::class)
+            ->only('store', 'destroy');
+
         $server->resource('permissions', JsonApiController::class)
             ->only('index');
 
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
 
-        $server->resource('receipts', JsonApiController::class)
+        $server->resource('receipts', ReceiptController::class)
             ->only('index', 'show', 'store', 'update');
 
         $server->resource('finance-accounts', JsonApiController::class)
