@@ -11,5 +11,11 @@
             "success": "{{resource}} has been updated",
             "error": "{{resource}} could not be updated"
         }
+    },
+
+    "upload": {
+        "error": "The file {{fileName}} could not be uploaded, please try again",
+        "success": "The file {{fileName}} has been uploaded successfully",
+        "removed": "The file {{fileName}} has been removed successfully"
     }
 }

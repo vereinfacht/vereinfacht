@@ -186,7 +186,40 @@ export function MediaInput({
             intervals.push(interval);
         });
 
-        return () => intervals.forEach((interval) => clearInterval(interval));
+        const result = await response.json();
+
+        console.log({ result });
+
+        if (result.status === 201 && result.mediaId) {
+            // setMediaIds((ids) => [...ids, result.mediaId]);
+            setUploadQueue((queue) =>
+                queue.map((t, i) =>
+                    i === index
+                        ? { ...t, progress: 100, mediaId: result.mediaId }
+                        : t,
+                ),
+            );
+
+            toast({
+                variant: 'success',
+                description: t('notification:upload.success', {
+                    fileName: task.rawFile.name,
+                }),
+            });
+        } else {
+            toast({
+                variant: 'error',
+                description: t('notification:upload.error', {
+                    fileName: task.rawFile.name,
+                }),
+            });
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        uploadQueue.forEach((task, index) => uploadFile(task, index));
+        setLoading(false);
     }, [uploadQueue]);
 
     return (
@@ -215,7 +248,22 @@ export function MediaInput({
                 <UploadQueueItem
                     key={`${task.rawFile.name}-${task.rawFile.size}`}
                     task={task}
-                    onRemove={() => removeFileFromQueue(index)}
+                    onRemove={() => {
+                        setUploadQueue((queue) =>
+                            queue.filter((_, i) => i !== index),
+                        );
+                        if (task.mediaId) {
+                            setMediaIds((ids) =>
+                                ids.filter((id) => id !== task.mediaId),
+                            );
+                        }
+                        toast({
+                            variant: 'success',
+                            description: t('notification:upload.removed', {
+                                fileName: task.rawFile.name,
+                            }),
+                        });
+                    }}
                 />
             ))}
         </div>

@@ -15,5 +15,11 @@
             "success": "{{resource}} wurde erstellt",
             "error": "{{resource}} konnte nicht erstellt werden"
         }
+    },
+
+    "upload": {
+        "error": "Die Datei {{fileName}} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut",
+        "success": "Die Datei {{fileName}} wurde erfolgreich hochgeladen",
+        "removed": "Die Datei {{fileName}} wurde erfolgreich entfernt"
     }
 }
