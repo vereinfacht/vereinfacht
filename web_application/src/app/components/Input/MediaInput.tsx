@@ -87,7 +87,7 @@ export function MediaInput({
         console.log({ result });
 
         if (result.status === 201 && result.mediaId) {
-            // setMediaIds((ids) => [...ids, result.mediaId]);
+            setMediaIds((ids) => [...ids, result.mediaId]);
             setUploadQueue((queue) =>
                 queue.map((t, i) =>
                     i === index

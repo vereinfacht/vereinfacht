@@ -14,8 +14,8 @@
     },
 
     "upload": {
-        "error": "The file {{fileName}} could not be uploaded, please try again",
-        "success": "The file {{fileName}} has been uploaded successfully",
-        "removed": "The file {{fileName}} has been removed successfully"
+        "error": "{{fileName}} could not be uploaded, please try again",
+        "success": "{{fileName}} has been uploaded successfully",
+        "removed": "{{fileName}} has been removed successfully"
     }
 }
