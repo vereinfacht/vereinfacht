@@ -1,9 +1,7 @@
 'use server';
 
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { baseDeleteSchema, DeleteParams } from '../base/delete.schema';
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
-import deleteFormAction from '../base/delete';
+import { baseDeleteSchema } from '../base/delete.schema';
 
 export const deleteMedia = createAuthenticatedAction(
     'delete',
@@ -23,12 +21,3 @@ export const deleteMedia = createAuthenticatedAction(
         return true;
     },
 );
-
-export async function deleteMediaFormAction(
-    id: string,
-    previousState: FormActionState,
-) {
-    return await deleteFormAction<DeleteParams>(previousState, deleteMedia, {
-        id,
-    });
-}
