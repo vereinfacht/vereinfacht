@@ -103,6 +103,8 @@ export default async function createFormAction<K>(
     body.data.attributes = attributes;
     body.data.relationships = relationships;
 
+    console.log(body);
+
     try {
         await action(body as K);
 
@@ -110,6 +112,8 @@ export default async function createFormAction<K>(
             success: true,
         };
     } catch (error) {
+        console.log(error);
+
         if (error instanceof ZodError) {
             return handleZodError(error);
         }

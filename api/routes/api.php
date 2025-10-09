@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MediaController;
 use App\Http\Controllers\Api\V1\MembershipController;
+use App\Http\Controllers\Api\V1\ReceiptController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
+use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
@@ -17,6 +20,12 @@ use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('v1')
+    ->group(function () {
+        Route::post('media/upload', [MediaController::class, 'upload']);
+    });
 
 JsonApiRoute::server('v1')
     ->prefix('v1')
@@ -55,13 +64,16 @@ JsonApiRoute::server('v1')
                 $actions->post('logout');
             });
 
+        $server->resource('media', MediaController::class)
+            ->only('destroy');
+
         $server->resource('permissions', JsonApiController::class)
             ->only('index');
 
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
 
-        $server->resource('receipts', JsonApiController::class)
+        $server->resource('receipts', ReceiptController::class)
             ->only('index', 'show', 'store', 'update');
 
         $server->resource('finance-accounts', JsonApiController::class)

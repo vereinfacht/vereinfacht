@@ -1,16 +1,10 @@
 import Text from '@/app/components/Text/Text';
+import { TMediaDeserialized } from '@/types/resources';
 import { FileIcon, ImageIcon } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
-    value?: Array<{
-        id: string | number;
-        fileName: string;
-        mimeType: string;
-        size: number;
-        previewUrl?: string;
-        originalUrl: string;
-    }>;
+    value?: TMediaDeserialized[];
 }
 
 export default function MediaField({ value = [] }: Props) {

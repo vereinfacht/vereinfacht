@@ -28,6 +28,7 @@ export default function TextAreaInput({
                     forInput={props.id}
                     value={label}
                     required={props.required}
+                    aria-required={props.required}
                 />
             ) : null}
 

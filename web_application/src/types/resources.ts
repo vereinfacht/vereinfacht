@@ -7,9 +7,9 @@ export type TFinanceContactRaw =
     components['schemas']['resources.finance-contacts.resource.fetch'];
 export type TTransactionRaw =
     components['schemas']['resources.transactions.resource.fetch'];
-
 export type TReceiptRaw =
     components['schemas']['resources.receipts.resource.fetch'];
+
 export type TUserRaw = components['schemas']['resources.users.resource.fetch'];
 export type TRoleRaw = components['schemas']['resources.roles.resource.fetch'];
 export type TPermissionRaw =
@@ -29,6 +29,15 @@ export type TPermissionDeserialized = TPermissionRaw['attributes'] & {
     id: string;
 };
 
+export type TMediaDeserialized = {
+    id: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
+    originalUrl: string;
+    previewUrl?: string;
+};
+
 // Deserialized finance domain types
 export type TFinanceAccountDeserialized = TFinanceAccountRaw['attributes'] & {
     id: string;
@@ -44,6 +53,7 @@ export type TReceiptDeserialized = TReceiptRaw['attributes'] & {
     id: string;
     transactions?: TTransactionDeserialized[];
     financeContact?: TFinanceContactDeserialized;
+    media?: TMediaDeserialized[];
 };
 
 export type TTransactionDeserialized = TTransactionRaw['attributes'] & {

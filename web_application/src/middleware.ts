@@ -2,6 +2,7 @@ import { NextRequestWithAuth, withAuth } from 'next-auth/middleware';
 import { NextURL } from 'next/dist/server/web/next-url';
 import { handleAdminPaths } from './middlewares/auth';
 import { localizePath, pathnameHasLocale } from './middlewares/localization';
+import { NextResponse } from 'next/server';
 
 export const config = {
     matcher: [
@@ -11,6 +12,10 @@ export const config = {
 
 function middleware(request: NextRequestWithAuth) {
     const { nextUrl } = request;
+
+    if (nextUrl.pathname === '/upload') {
+        return NextResponse.next();
+    }
 
     if (pathnameHasLocale(nextUrl.pathname)) {
         return handleLocalizedPaths(request, nextUrl);
