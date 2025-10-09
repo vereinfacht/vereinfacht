@@ -87,7 +87,7 @@ export function MediaInput({
         console.log({ result });
 
         if (result.status === 201 && result.mediaId) {
-            // setMediaIds((ids) => [...ids, result.mediaId]);
+            setMediaIds((ids) => [...ids, result.mediaId]);
             setUploadQueue((queue) =>
                 queue.map((t, i) =>
                     i === index
@@ -95,20 +95,42 @@ export function MediaInput({
                         : t,
                 ),
             );
+
+            toast({
+                variant: 'success',
+                description: t('notification:upload.success', {
+                    fileName: task.rawFile.name,
+                }),
+            });
         } else {
             toast({
                 variant: 'error',
-                description: t('notification:upload.error'),
+                description: t('notification:upload.error', {
+                    fileName: task.rawFile.name,
+                }),
             });
         }
     }
 
     useEffect(() => {
-        setLoading(true);
+        const uploadAll = async () => {
+            if (uploadQueue.length === 0) {
+                return;
+            }
 
-        uploadQueue.forEach((task, index) => uploadFile(task, index));
+            setLoading(true);
 
-        setLoading(false);
+            for (let i = 0; i < uploadQueue.length; i++) {
+                const task = uploadQueue[i];
+                if (task.progress < 100) {
+                    await uploadFile(task, i);
+                }
+            }
+
+            setLoading(false);
+        };
+
+        uploadAll();
     }, [uploadQueue]);
 
     return (
@@ -130,6 +152,7 @@ export function MediaInput({
                 multiple={multiple}
                 name={name}
                 onChange={onFileInputChange}
+                data-cy="media-input"
             />
             {help && <HelpText text={help} className="mt-0.5" />}
             {uploadQueue.map((task, index) => (
@@ -145,6 +168,12 @@ export function MediaInput({
                                 ids.filter((id) => id !== task.mediaId),
                             );
                         }
+                        toast({
+                            variant: 'success',
+                            description: t('notification:upload.removed', {
+                                fileName: task.rawFile.name,
+                            }),
+                        });
                     }}
                 />
             ))}
