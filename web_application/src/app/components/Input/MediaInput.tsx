@@ -60,25 +60,16 @@ export function MediaInput({
 
     const handleAddFiles = (newFiles: File[]) => {
         setUploadQueue((currentQueue) => {
-            const tasksToAdd = newFiles.map((rawFile) => ({
-                rawFile,
-                progress: 0,
-            }));
-            const combinedQueue = multiple
+            const existingFiles = new Set(
+                currentQueue.map((f) => f.rawFile.name + f.rawFile.size),
+            );
+            const tasksToAdd = newFiles
+                .filter((f) => !existingFiles.has(f.name + f.size))
+                .map((rawFile) => ({ rawFile, progress: 0 }));
+
+            return multiple
                 ? [...currentQueue, ...tasksToAdd]
                 : tasksToAdd.slice(0, 1);
-
-            const uniqueQueue = combinedQueue.filter(
-                (task, i, array) =>
-                    i ===
-                    array.findIndex(
-                        (t) =>
-                            t.rawFile.name === task.rawFile.name &&
-                            t.rawFile.size === task.rawFile.size,
-                    ),
-            );
-
-            return uniqueQueue;
         });
     };
 
@@ -118,26 +109,29 @@ export function MediaInput({
 
             toast({
                 variant: 'success',
-                description: t('notification:upload.success', {
+                description: t('notification:media.upload.success', {
                     fileName: task.rawFile.name,
                 }),
             });
         } else {
             toast({
                 variant: 'error',
-                description: t('notification:upload.error', {
+                description: t('notification:media.upload.error', {
                     fileName: task.rawFile.name,
                 }),
             });
         }
     }
 
+    const isUploading = useRef(false);
+
     useEffect(() => {
         const uploadAll = async () => {
-            if (uploadQueue.length === 0) {
+            if (uploadQueue.length === 0 || isUploading.current) {
                 return;
             }
 
+            isUploading.current = true;
             setLoading(true);
 
             for (let i = 0; i < uploadQueue.length; i++) {
@@ -148,6 +142,7 @@ export function MediaInput({
             }
 
             setLoading(false);
+            isUploading.current = false;
         };
 
         uploadAll();
@@ -188,12 +183,6 @@ export function MediaInput({
                                 ids.filter((id) => id !== task.mediaId),
                             );
                         }
-                        toast({
-                            variant: 'success',
-                            description: t('notification:upload.removed', {
-                                fileName: task.rawFile.name,
-                            }),
-                        });
                     }}
                 />
             ))}

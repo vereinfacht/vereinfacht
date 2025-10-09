@@ -13,9 +13,14 @@
         }
     },
 
-    "upload": {
-        "error": "{{fileName}} could not be uploaded, please try again",
-        "success": "{{fileName}} has been uploaded successfully",
-        "removed": "{{fileName}} has been removed successfully"
+    "media": {
+        "upload": {
+            "error": "{{fileName}} could not be uploaded, please try again",
+            "success": "{{fileName}} has been uploaded successfully"
+        },
+        "delete": {
+            "success": "{{fileName}} has been removed successfully",
+            "error": "{{fileName}} could not be removed, please try again"
+        }
     }
 }

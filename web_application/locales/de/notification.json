@@ -17,9 +17,14 @@
         }
     },
 
-    "upload": {
-        "error": "{{fileName}} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut",
-        "success": "{{fileName}} wurde erfolgreich hochgeladen",
-        "removed": "{{fileName}} wurde erfolgreich entfernt"
+    "media": {
+        "delete": {
+            "success": "{{fileName}} wurde erfolgreich entfernt",
+            "error": "{{fileName}} konnte nicht entfernt werden, bitte versuchen Sie es erneut"
+        },
+        "upload": {
+            "success": "{{fileName}} wurde erfolgreich hochgeladen",
+            "error": "{{fileName}} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut"
+        }
     }
 }

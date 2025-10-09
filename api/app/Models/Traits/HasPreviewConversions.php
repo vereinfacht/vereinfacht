@@ -2,7 +2,6 @@
 
 namespace App\Models\Traits;
 
-use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait HasPreviewConversions

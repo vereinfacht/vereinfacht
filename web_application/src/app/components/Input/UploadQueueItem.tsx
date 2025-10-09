@@ -1,12 +1,14 @@
+import { deleteMedia } from '@/actions/media/delete';
+import { useToast } from '@/hooks/toast/use-toast';
 import {
     File as FileIcon,
     Image as ImageIcon,
     LoaderCircle,
     X,
 } from 'lucide-react';
+import useTranslation from 'next-translate/useTranslation';
 import { Progress } from '../ui/progress';
 import { UploadTask } from './MediaInput';
-import { deleteMedia } from '@/actions/media/delete';
 
 interface UploadQueueItemProps {
     task: UploadTask;
@@ -17,17 +19,34 @@ export default function UploadQueueItem({
     task,
     onRemove,
 }: UploadQueueItemProps) {
+    const { toast } = useToast();
+    const { t } = useTranslation();
+
     async function handleRemove() {
         if (!task.mediaId) {
+            onRemove();
             return;
         }
 
-        const response = await deleteMedia({ id: task.mediaId });
+        try {
+            const response = await deleteMedia({ id: task.mediaId });
 
-        if (response) {
-            onRemove();
-        } else {
-            console.error(response);
+            if (response) {
+                onRemove();
+                toast({
+                    variant: 'success',
+                    description: t('notification:media.delete.success', {
+                        fileName: task.rawFile.name,
+                    }),
+                });
+            }
+        } catch (error) {
+            toast({
+                variant: 'error',
+                description: t('notification:media.delete.error', {
+                    fileName: task.rawFile.name,
+                }),
+            });
         }
     }
 
