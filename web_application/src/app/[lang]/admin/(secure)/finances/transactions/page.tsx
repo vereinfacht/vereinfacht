@@ -1,14 +1,15 @@
+import { listTransactions } from '@/actions/transactions/list';
+import { itemsPerPage } from '@/services/api-endpoints';
+import { WithSearchParams } from '@/types/params';
+import { TTransactionDeserialized } from '@/types/resources';
 import {
     ListTransactionSearchParamsType,
     loadListTransactionsSearchParams,
 } from '@/utils/search-params';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
+import CreateButton from '../../components/CreateButton';
 import AccountsList from './_components/accounts-list';
 import TransactionsTable from './_components/transactions-table';
-import { WithSearchParams } from '@/types/params';
-import { deserialize, DocumentObject } from 'jsonapi-fractal';
-import { TTransactionDeserialized } from '@/types/resources';
-import { itemsPerPage } from '@/services/api-endpoints';
-import { listTransactions } from '@/actions/transactions/list';
 
 async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
     const response = await listTransactions({
@@ -42,13 +43,16 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
     return (
-        <div className="flex gap-6">
-            <AccountsList />
+        <>
+            <CreateButton href="/admin/finances/transactions/create" />
+            <div className="flex gap-6">
+                <AccountsList />
 
-            <TransactionsTable
-                transactions={transactions}
-                totalPages={totalPages}
-            />
-        </div>
+                <TransactionsTable
+                    transactions={transactions}
+                    totalPages={totalPages}
+                />
+            </div>
+        </>
     );
 }

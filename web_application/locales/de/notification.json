@@ -18,6 +18,8 @@
     },
 
     "upload": {
-        "error": "Datei konnte nicht hochgeladen werden"
+        "error": "{{fileName}} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut",
+        "success": "{{fileName}} wurde erfolgreich hochgeladen",
+        "removed": "{{fileName}} wurde erfolgreich entfernt"
     }
 }

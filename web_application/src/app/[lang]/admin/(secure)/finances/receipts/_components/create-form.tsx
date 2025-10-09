@@ -6,6 +6,7 @@ import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultisele
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
+import { MediaInput } from '@/app/components/Input/MediaInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
@@ -24,7 +25,6 @@ import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
 import ReceiptProgressBar from './receipt-progress-bar';
-import { MediaInput } from '@/app/components/Input/MediaInput';
 
 interface Props {
     action: (
@@ -246,16 +246,18 @@ export default function CreateForm({ data, action }: Props) {
                         }
                     />
                 </FormField>
-                <MediaInput
-                    id="receipt-file"
-                    label={t('receipt:media.label')}
-                    help={t('receipt:media.help')}
-                    name="media"
-                    media={data?.media}
-                    multiple={true}
-                    accept={'.png, .jpg, .jpeg, .pdf'}
-                    setLoading={setLoading}
-                />
+                <FormField errors={formState.errors?.['media']}>
+                    <MediaInput
+                        id="receipt-file"
+                        label={t('receipt:media.label')}
+                        help={t('receipt:media.help')}
+                        name="media"
+                        media={data?.media}
+                        multiple={true}
+                        accept={'.png, .jpg, .jpeg, .pdf'}
+                        setLoading={setLoading}
+                    />
+                </FormField>
             </div>
         </ActionForm>
     );

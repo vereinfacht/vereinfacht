@@ -4357,6 +4357,16 @@
                                 "value": "income"
                             }
                         }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

@@ -5556,6 +5556,8 @@ export interface operations {
                 "filter[status]"?: string;
                 /** @description A list of receiptTypes to filter by. */
                 "filter[receiptType]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
             };
             header?: never;
             path?: never;
