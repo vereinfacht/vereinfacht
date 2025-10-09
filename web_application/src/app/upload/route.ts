@@ -1,47 +1,8 @@
-import { createMediaSchema } from '@/actions/media/create.schema';
-import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { NextRequest, NextResponse } from 'next/server';
-import { BaseBody, parseRelationship } from '@/actions/base/create';
-import { redirect } from 'next/navigation';
+import { uploadSchema } from '@/actions/media/upload.schema';
 import { auth } from '@/utils/auth';
-import { baseDeleteSchema } from '@/actions/base/delete.schema';
-
-export const DELETE = async (req: NextRequest) => {
-    const session = await auth();
-
-    if (!session?.accessToken) {
-        redirect('/admin/auth/login');
-    }
-
-    const { id } = await req.json();
-
-    console.log({ id });
-
-    const action = createAuthenticatedAction(
-        'delete',
-        'media',
-        baseDeleteSchema,
-        async (params, client) => {
-            const response = await client.DELETE('/media/{media_id}', {
-                params: {
-                    path: { media_id: params.id },
-                },
-            });
-
-            if (response.error) {
-                handleApiResponse(response, 'Failed to delete media');
-            }
-
-            return true;
-        },
-    );
-
-    const response = await action({ id });
-
-    console.log(response);
-
-    return NextResponse.json({ status: 200 });
-};
+import { redirect } from 'next/navigation';
+import { NextRequest, NextResponse } from 'next/server';
+import { File } from 'node:buffer';
 
 export const POST = async (req: NextRequest) => {
     const session = await auth();
@@ -51,48 +12,63 @@ export const POST = async (req: NextRequest) => {
     }
 
     const formData = await req.formData();
-    const body: BaseBody = { data: { type: 'media' } };
-    const relationships = body.data.relationships || {};
+    formData.append('clubId', session.club_id.toString());
+    const result = uploadSchema.safeParse(
+        Object.fromEntries(formData.entries()),
+    );
 
-    relationships.club = {
-        data: { type: 'clubs', id: session.club_id.toString() },
-    };
-
-    body.data.relationships = relationships;
-
-    const attributes: Record<string, any> = {};
-
-    for (const [key, raw] of Array.from(formData.entries())) {
-        if (key.startsWith('relationships[')) {
-            const relationship = await parseRelationship(key, raw);
-
-            if (!relationship) {
-                continue;
-            }
-
-            Object.assign(relationships, relationship);
-        } else {
-            attributes[key] = raw === '' ? undefined : raw;
-        }
+    if (!result.success) {
+        console.log('Invalid form data', result.error);
+        return NextResponse.json({
+            status: 400,
+            message: 'Invalid form data',
+            details: result.error.issues,
+        });
     }
 
-    body.data.attributes = attributes;
-    body.data.relationships = relationships;
+    const file = formData.get('file') as File | null;
 
-    const action = createAuthenticatedAction(
-        'create',
-        'media',
-        createMediaSchema,
-        async (body, client) => {
-            const response = await client.POST('/media', {
-                body,
-            });
+    if (!file) {
+        console.log('No file found in incoming FormData');
+        return NextResponse.json({ status: 400, message: 'No file provided' });
+    }
 
-            return handleApiResponse(response, 'Failed to create media');
+    // Convert blob -> buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const blob = new Blob([arrayBuffer], { type: file.type });
+
+    const forwardData = new FormData();
+    forwardData.append('file', blob, file.name);
+    forwardData.append(
+        'collectionName',
+        formData.get('collectionName') as string,
+    );
+    forwardData.append('clubId', session.club_id.toString());
+
+    // using openapi-fetch lead to issues with parsing the multipart form data correctly
+    // so we are using fetch() directly here
+    const response = await fetch(
+        `${(process.env.API_DOMAIN || '') + (process.env.API_PATH || '')}/media/upload`,
+        {
+            method: 'POST',
+            body: forwardData,
+            headers: {
+                Authorization: `Bearer ${session.accessToken}`,
+                Accept: 'application/vnd.api+json',
+            },
         },
     );
 
-    const response = await action(body);
+    const text = await response.text();
+    const responseData = JSON.parse(text);
 
-    return NextResponse.json({ status: 201, mediaId: response.data.id });
+    if (response.status !== 201) {
+        return NextResponse.json({
+            status: response.status,
+            message: 'Failed to create media',
+            details: responseData,
+        });
+    }
+
+    return NextResponse.json({ status: 201, mediaId: responseData.data.id });
 };

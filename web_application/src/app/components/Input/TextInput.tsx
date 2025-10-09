@@ -5,7 +5,6 @@ import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
 import styles from './TextInput.module.css';
 import HelpText from '../HelpText';
-import { required } from 'zod/v4/core/util.cjs';
 
 export interface TextInputProps extends HTMLProps<HTMLInputElement> {
     id: string;

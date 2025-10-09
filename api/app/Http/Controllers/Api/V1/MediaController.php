@@ -3,20 +3,16 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Media;
+use App\Http\Requests\UploadMediaRequest;
+use App\Models\TemporaryUpload;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
-use LaravelJsonApi\Laravel\Http\Requests\ResourceQuery;
-use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
-use LaravelJsonApi\Contracts\Routing\Route;
-use LaravelJsonApi\Contracts\Store\Store as StoreContract;
-use LaravelJsonApi\Core\Responses\DataResponse;
 
 class MediaController extends Controller
 {
 
     use Actions\FetchMany;
     use Actions\FetchOne;
-    // use Actions\Store;
+    use Actions\Store;
     use Actions\Update;
     use Actions\Destroy;
     use Actions\FetchRelated;
@@ -25,67 +21,26 @@ class MediaController extends Controller
     use Actions\AttachRelationship;
     use Actions\DetachRelationship;
 
-    public function store(Route $route, StoreContract $store)
+    public function upload(UploadMediaRequest $request)
     {
-        $request = ResourceRequest::forResource(
-            $resourceType = $route->resourceType()
-        );
-
-        $query = ResourceQuery::queryOne($resourceType);
-        $response = null;
-
-        if (method_exists($this, 'saving')) {
-            $response = $this->saving(null, $request, $query);
+        if (!$request->hasFile('file')) {
+            return response()->json(['error' => 'No file attached'], 400);
         }
 
-        if (!$response && method_exists($this, 'creating')) {
-            $response = $this->creating($request, $query);
-        }
+        $temporaryOwner = new TemporaryUpload();
+        $temporaryOwner->id = 0;
+        $temporaryOwner->exists = true;
 
-        if ($response) {
-            return $response;
-        }
+        $media = $temporaryOwner
+            ->addMediaFromRequest('file')
+            ->withProperties(['club_id' => $request->input('clubId')])
+            ->toMediaCollection($request->input('collectionName'));
 
-        // Create the media resource in DB
-        $model = Media::create([
-            // 'title' => $validated['attributes']['title'] ?? null,
-            // add other fillable attributes here
-            'model_type' => 'App\Models\TemporaryUpload',
-            'model_id' => 1,
-            'collection_name' => 'temporary',
-            'name' => 'asdf',
-            'file_name' => 'fdas',
-            'disk' => 'public',
-            'size' => 78986,
-            'manipulations' => [],
-            'custom_properties' => [],
-            'generated_conversions' => '{"preview":true}',
-            'responsive_images' => [],
-            'club_id' => 1,
-        ]);
-
-        // Attach uploaded file with Spatie Media Library
-        if ($request->hasFile('file')) {
-            $model
-                ->addMediaFromRequest('file')
-                ->toMediaCollection('uploads'); // use your configured collection name
-        }
-
-        // $model = $store
-        //     ->create($resourceType)
-        //     ->withRequest($query)
-        //     ->store($request->validated());
-
-        if (method_exists($this, 'created')) {
-            $response = $this->created($model, $request, $query);
-        }
-
-        if (!$response && method_exists($this, 'saved')) {
-            $response = $this->saved($model, $request, $query);
-        }
-
-        return $response ?? DataResponse::make($model)
-            ->withQueryParameters($query)
-            ->didCreate();
+        return response()->json([
+            'data' => [
+                'type' => 'media',
+                'id' => (string) $media->id,
+            ],
+        ], 201, ['Content-Type' => 'application/vnd.api+json']);
     }
 }

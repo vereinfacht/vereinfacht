@@ -5,6 +5,7 @@ import HelpText from '../HelpText';
 import { Input } from '../ui/input';
 import InputLabel from './InputLabel';
 import UploadQueueItem from './UploadQueueItem';
+import { TMediaDeserialized } from '@/types/resources';
 
 interface MediaInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
@@ -13,12 +14,19 @@ interface MediaInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     help?: string;
     name?: string;
+    media?: TMediaDeserialized[];
     multiple?: boolean;
 }
 
 export interface UploadTask {
-    rawFile: File;
     progress: number;
+    rawFile:
+        | File
+        | {
+              name: string;
+              size: number;
+              type: string;
+          };
     mediaId?: string;
 }
 
@@ -27,13 +35,26 @@ export function MediaInput({
     label,
     help,
     name,
+    media,
     multiple = false,
     accept,
     setLoading,
 }: MediaInputProps) {
     const { toast } = useToast();
     const { t } = useTranslation();
-    const [uploadQueue, setUploadQueue] = useState<UploadTask[]>([]);
+    const [uploadQueue, setUploadQueue] = useState<UploadTask[]>(
+        media
+            ? media.map((m) => ({
+                  progress: 100,
+                  mediaId: m.id,
+                  rawFile: {
+                      name: m.fileName,
+                      size: m.size,
+                      type: m.mimeType,
+                  },
+              }))
+            : [],
+    );
     const [mediaIds, setMediaIds] = useState<string[]>([]);
     const mediaInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -70,12 +91,13 @@ export function MediaInput({
     }
 
     async function uploadFile(task: UploadTask, index: number) {
-        if (task.progress === 100) {
+        if (task.progress === 100 || task.rawFile instanceof File === false) {
             return;
         }
 
         const formData = new FormData();
         formData.append('file', task.rawFile);
+        formData.set('collectionName', 'receipts');
 
         const response = await fetch('/upload', {
             method: 'POST',
@@ -84,10 +106,8 @@ export function MediaInput({
 
         const result = await response.json();
 
-        console.log({ result });
-
         if (result.status === 201 && result.mediaId) {
-            // setMediaIds((ids) => [...ids, result.mediaId]);
+            setMediaIds((ids) => [...ids, result.mediaId]);
             setUploadQueue((queue) =>
                 queue.map((t, i) =>
                     i === index

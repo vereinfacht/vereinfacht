@@ -3,7 +3,6 @@ import { receiptAttributesSchema } from './create.schema';
 import { idSchema } from '../base/get.schema';
 
 export const updateReceiptSchema = z.object({
-    // ...createReceiptSchema.shape,
     data: z.object({
         id: idSchema,
         type: z.literal('receipts'),
@@ -29,6 +28,18 @@ export const updateReceiptSchema = z.object({
                             })
                             .nullable(),
                     ),
+                })
+                .optional(),
+            media: z
+                .object({
+                    data: z
+                        .array(
+                            z.object({
+                                id: z.string(),
+                                type: z.literal('media'),
+                            }),
+                        )
+                        .nullable(),
                 })
                 .optional(),
         }),

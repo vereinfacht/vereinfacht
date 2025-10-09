@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Traits\HandlesMediaRelationships;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
-use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
-use LaravelJsonApi\Contracts\Routing\Route;
-use LaravelJsonApi\Contracts\Store\Store as StoreContract;
+use App\Http\Controllers\Controller;
 
-class ReceiptController extends JsonApiController
+class ReceiptController extends Controller
 {
     use HandlesMediaRelationships;
 
@@ -22,18 +20,4 @@ class ReceiptController extends JsonApiController
     use Actions\UpdateRelationship;
     use Actions\AttachRelationship;
     use Actions\DetachRelationship;
-
-    // public function attachingMedias(
-    //     $post,
-    //     $request,
-    //     $query
-    // ): void {
-    //     $tags = $request->toMany();
-    //     ray($tags);
-    // }
-
-    // public function store(Route $route, StoreContract $store)
-    // {
-    //     ray("asdad");
-    // }
 }

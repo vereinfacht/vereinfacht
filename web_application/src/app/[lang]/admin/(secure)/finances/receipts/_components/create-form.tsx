@@ -251,6 +251,7 @@ export default function CreateForm({ data, action }: Props) {
                     label={t('receipt:media.label')}
                     help={t('receipt:media.help')}
                     name="media"
+                    media={data?.media}
                     multiple={true}
                     accept={'.png, .jpg, .jpeg, .pdf'}
                     setLoading={setLoading}

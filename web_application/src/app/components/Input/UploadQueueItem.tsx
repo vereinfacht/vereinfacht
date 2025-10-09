@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Progress } from '../ui/progress';
 import { UploadTask } from './MediaInput';
+import { deleteMedia } from '@/actions/media/delete';
 
 interface UploadQueueItemProps {
     task: UploadTask;
@@ -21,21 +22,12 @@ export default function UploadQueueItem({
             return;
         }
 
-        const response = await fetch('/upload', {
-            method: 'DELETE',
-            body: JSON.stringify({
-                id: task.mediaId,
-            }),
-        });
+        const response = await deleteMedia({ id: task.mediaId });
 
-        const result = await response.json();
-
-        console.log(result);
-
-        if (result.status === 200) {
+        if (response) {
             onRemove();
         } else {
-            console.error(result);
+            console.error(response);
         }
     }
 

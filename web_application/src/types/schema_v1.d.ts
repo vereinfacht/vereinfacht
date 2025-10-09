@@ -381,6 +381,40 @@ export interface paths {
         patch: operations["users.roles.update"];
         trace?: never;
     };
+    "/media/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload a new medium */
+        post: operations["media.upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/media/{medium}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Destroy one medium */
+        delete: operations["media.destroy"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/permissions": {
         parameters: {
             query?: never;
@@ -5258,6 +5292,64 @@ export interface operations {
             401: components["responses"]["401"];
             404: components["responses"]["404"];
             422: components["responses"]["422"];
+        };
+    };
+    "media.upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description The file to upload
+                     */
+                    file: string;
+                    /** @description The name of the collection to which the media belongs */
+                    collectionName: string;
+                    /** @description The ID of the club associated with the media */
+                    clubId: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "media.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                medium: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
     "permissions.index": {

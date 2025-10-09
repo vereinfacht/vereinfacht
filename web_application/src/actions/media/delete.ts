@@ -10,9 +10,9 @@ export const deleteMedia = createAuthenticatedAction(
     'media',
     baseDeleteSchema,
     async (params, client) => {
-        const response = await client.DELETE('/media/{media_id}', {
+        const response = await client.DELETE('/media/{medium}', {
             params: {
-                path: { media: params.id },
+                path: { medium: params.id },
             },
         });
 
