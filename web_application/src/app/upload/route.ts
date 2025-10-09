@@ -33,7 +33,6 @@ export const POST = async (req: NextRequest) => {
         return NextResponse.json({ status: 400, message: 'No file provided' });
     }
 
-    // Convert blob -> buffer
     const arrayBuffer = await file.arrayBuffer();
     const blob = new Blob([arrayBuffer], { type: file.type });
 
