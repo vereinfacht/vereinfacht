@@ -114,6 +114,7 @@ export function MediaInput({
                 }),
             });
         } else {
+            setUploadQueue((queue) => queue.filter((_, i) => i !== index));
             toast({
                 variant: 'error',
                 description: t('notification:media.upload.error', {
