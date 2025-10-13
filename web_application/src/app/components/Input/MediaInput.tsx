@@ -156,7 +156,7 @@ export function MediaInput({
                 type="hidden"
                 name={'relationships[media][media]'}
                 value={
-                    mediaIds.length > 0 ? '[' + mediaIds.join(',') + ']' : ''
+                    mediaIds.length > 0 ? '[' + mediaIds.join(',') + ']' : '[]'
                 }
             />
             <Input

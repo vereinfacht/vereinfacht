@@ -204,14 +204,10 @@ export default function CreateForm({ data, action }: Props) {
                         id="documentDate"
                         name="documentDate"
                         label={t('receipt:document_date.label')}
-                        defaultValue={
-                            data?.documentDate
-                                ? format(
-                                      new Date(data.documentDate),
-                                      'yyyy-MM-dd',
-                                  )
-                                : ''
-                        }
+                        defaultValue={format(
+                            new Date(data?.documentDate ?? Date.now()),
+                            'yyyy-MM-dd',
+                        )}
                         type="date"
                         required
                     />

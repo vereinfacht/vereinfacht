@@ -32,14 +32,12 @@ export const updateReceiptSchema = z.object({
                 .optional(),
             media: z
                 .object({
-                    data: z
-                        .array(
-                            z.object({
-                                id: z.string(),
-                                type: z.literal('media'),
-                            }),
-                        )
-                        .nullable(),
+                    data: z.array(
+                        z.object({
+                            id: z.string(),
+                            type: z.literal('media'),
+                        }),
+                    ),
                 })
                 .optional(),
         }),
