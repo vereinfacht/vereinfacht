@@ -10,10 +10,8 @@ class TemporaryUpload extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['token'];
-
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('temporary')->useDisk('public');
+        $this->addMediaCollection('temporary');
     }
 }
