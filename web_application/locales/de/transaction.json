@@ -39,6 +39,14 @@
     "finance_account": {
         "help": "Die Kasse, auf der die Transaktion gebucht wird."
     },
+    "import": {
+        "title": "Transaktionen importieren",
+        "description": "Importieren Sie Transaktionen von Ihrer Bank, indem Sie eine MT940-Datei hochladen."
+    },
+    "file": {
+        "label": "Importdatei",
+        "help": "Unterstützt die Formate TXT und MT940."
+    },
 
     "all_sources": "Alle Quellen"
 }

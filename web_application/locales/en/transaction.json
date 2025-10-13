@@ -39,6 +39,14 @@
     "finance_account": {
         "help": "The cash register on which the transaction is posted."
     },
+        "import": {
+        "title": "Import Transactions",
+        "description": "Import transactions from your bank by uploading an MT940 file."
+    },
+    "file": {
+        "label": "Import File",
+        "help": "Supports TXT and MT940 formats."
+    },
 
     "all_sources": "All sources"
 }
