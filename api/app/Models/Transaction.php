@@ -16,6 +16,7 @@ class Transaction extends Model
         'name',
         'description',
         'amount',
+        'currency',
         'valued_at',
         'booked_at',
         'finance_account_id',
