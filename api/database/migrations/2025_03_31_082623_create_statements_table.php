@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('statements', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->integer('amount');
+            $table->string('identifier')->nullable();
+            $table->timestamp('date')->nullable();
 
             $table->foreignId('finance_account_id')
                 ->constrained('finance_accounts')
@@ -23,12 +22,7 @@ return new class extends Migration
             $table->foreignId('club_id')
                 ->constrained('clubs')
                 ->cascadeOnDelete();
-            $table->foreignId('statement_id')
-                ->constrained('statements')
-                ->cascadeOnDelete();
 
-            $table->timestamp('valued_at')->nullable();
-            $table->timestamp('booked_at')->nullable();
             $table->timestamps();
         });
     }
@@ -38,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('statements');
     }
 };

@@ -18,8 +18,7 @@ class Transaction extends Model
         'amount',
         'valued_at',
         'booked_at',
-        'finance_account_id',
-        'club_id',
+        'statement_id',
     ];
 
     public function casts()
@@ -69,5 +68,10 @@ class Transaction extends Model
     public function receipts()
     {
         return $this->belongsToMany(Receipt::class, 'receipt_transaction');
+    }
+
+    public function statement()
+    {
+        return $this->belongsTo(Statement::class);
     }
 }

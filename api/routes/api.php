@@ -88,4 +88,10 @@ JsonApiRoute::server('v1')
                 $relations->hasOne('financeAccount', JsonApiController::class);
             })
             ->only('index', 'show', 'store', 'update');
+
+        $server->resource('statements', JsonApiController::class)
+            ->relationships(function ($relations) {
+                $relations->hasOne('financeAccount', JsonApiController::class);
+            })
+            ->only('index', 'show', 'store', 'update');
     });
