@@ -103,8 +103,6 @@ export default async function createFormAction<K>(
     body.data.attributes = attributes;
     body.data.relationships = relationships;
 
-    console.log(body);
-
     try {
         await action(body as K);
 
