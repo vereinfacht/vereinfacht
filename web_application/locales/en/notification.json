@@ -11,5 +11,16 @@
             "success": "{{resource}} has been updated",
             "error": "{{resource}} could not be updated"
         }
+    },
+
+    "media": {
+        "upload": {
+            "error": "{{fileName}} could not be uploaded, please try again",
+            "success": "{{fileName}} has been uploaded successfully"
+        },
+        "delete": {
+            "success": "{{fileName}} has been removed successfully",
+            "error": "{{fileName}} could not be removed, please try again"
+        }
     }
 }

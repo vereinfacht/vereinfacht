@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Jobs\CleanupMedia;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+Schedule::command('media-library:regenerate --only-missing --only=preview')
+    ->everyMinute();
+
+Schedule::job(new CleanupMedia())->dailyAt('03:00');
