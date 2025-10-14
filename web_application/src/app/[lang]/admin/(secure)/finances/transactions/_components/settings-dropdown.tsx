@@ -138,7 +138,7 @@ export default function SettingsDropdown({ account }: Props) {
                 ) : formType === 'activation' ? (
                     <ActivationForm account={account} setIsOpen={setIsOpen} />
                 ) : formType === 'import' ? (
-                    <ImportTransactionsForm />
+                    <ImportTransactionsForm onDone={() => setIsOpen(false)} />
                 ) : null}
             </DialogContent>
         </Dialog>

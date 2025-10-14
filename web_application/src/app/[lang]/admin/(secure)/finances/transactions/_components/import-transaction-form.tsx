@@ -4,10 +4,17 @@ import Button from '@/app/components/Button/Button';
 import { MediaInput } from '@/app/components/Input/MediaInput';
 import Text from '@/app/components/Text/Text';
 import ProgressBar from '@/app/components/ui/progress-bar';
+import { CircleCheck } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 
-export default function ImportTransactionForm() {
+interface ImportTransactionFormProps {
+    onDone?: () => void;
+}
+
+export default function ImportTransactionForm({
+    onDone,
+}: ImportTransactionFormProps) {
     const { t } = useTranslation();
 
     const [file, setFile] = useState<File | null>(null);
@@ -61,6 +68,17 @@ export default function ImportTransactionForm() {
         setExpectedCount(null);
     };
 
+    const handleDone = () => {
+        setFile(null);
+        setExpectedCount(null);
+        setImportedCount(0);
+        setProgress(0);
+        setMessage('');
+        setIsImporting(false);
+
+        if (onDone) onDone();
+    };
+
     return (
         <div className="space-y-4">
             <MediaInput
@@ -72,8 +90,8 @@ export default function ImportTransactionForm() {
                 onFilesChange={(files) => setFile(files[0] ?? null)}
             />
 
-            {expectedCount !== null && (
-                <Text>Expected transactions: {expectedCount}</Text>
+            {expectedCount !== null && !isImporting && (
+                <Text>Expected transactions in the file: {expectedCount}</Text>
             )}
 
             {isImporting && (
@@ -82,40 +100,44 @@ export default function ImportTransactionForm() {
                 </Text>
             )}
 
+            {!isImporting && progress === 100 && (
+                <Text>Import done: {importedCount}</Text>
+            )}
+
             {progress > 0 && (
-                <div className="mt-2 h-4">
+                <div className="mt-2 flex h-4 items-center gap-4">
                     <ProgressBar
                         value={progress}
                         ariaLabel={`Import progress: ${Math.round(progress)}%`}
                     />
-                    <Text className="text-sm text-gray-700">
-                        {Math.round(progress)}%
-                    </Text>
+                    {progress == 100 ? (
+                        <CircleCheck className="text-green-400" />
+                    ) : (
+                        <Text className="text-sm text-gray-700">
+                            {Math.round(progress)}%
+                        </Text>
+                    )}
                 </div>
             )}
 
-            {message && (
-                <Text
-                    aria-live="polite"
-                    className={
-                        message.includes('Successfully')
-                            ? 'text-green-600'
-                            : 'text-red-600'
-                    }
-                >
-                    {message}
-                </Text>
-            )}
+            {message && <Text>{message}</Text>}
 
             <div className="flex justify-end">
-                <Button
-                    type="button"
-                    disabled={!file || expectedCount === 0 || isImporting}
-                    onClick={handleImport}
-                    isLoading={isImporting}
-                >
-                    import
-                </Button>
+                {progress < 100 && (
+                    <Button
+                        type="button"
+                        disabled={!file || expectedCount === 0 || isImporting}
+                        onClick={handleImport}
+                        isLoading={isImporting}
+                    >
+                        import
+                    </Button>
+                )}
+                {!isImporting && progress === 100 && (
+                    <Button type="button" onClick={handleDone}>
+                        done
+                    </Button>
+                )}
             </div>
         </div>
     );
