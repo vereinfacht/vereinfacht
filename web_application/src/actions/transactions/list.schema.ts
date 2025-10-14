@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
+import { queryFilterSchema } from '../receipts/list.schema';
 
 export const transactionSortingOptions = [
     'bookedAt',
@@ -23,7 +24,7 @@ export const listTransactionsSchema = z.object({
         .object({
             financeAccountId: z.string().optional(),
             status: z.array(z.enum(transactionStatusOptions)).optional(),
-            query: z.string().optional(),
+            query: queryFilterSchema,
         })
         .optional(),
 });

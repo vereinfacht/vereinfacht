@@ -40,7 +40,7 @@ export default function UploadQueueItem({
                     }),
                 });
             }
-        } catch (error) {
+        } catch {
             toast({
                 variant: 'error',
                 description: t('notification:media.delete.error', {

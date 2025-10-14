@@ -18,7 +18,6 @@ export const POST = async (req: NextRequest) => {
     );
 
     if (!result.success) {
-        console.log('Invalid form data', result.error);
         return NextResponse.json({
             status: 400,
             message: 'Invalid form data',
@@ -29,7 +28,6 @@ export const POST = async (req: NextRequest) => {
     const file = formData.get('file') as File | null;
 
     if (!file) {
-        console.log('No file found in incoming FormData');
         return NextResponse.json({ status: 400, message: 'No file provided' });
     }
 
