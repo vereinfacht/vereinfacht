@@ -6,6 +6,7 @@ use App\Models\Statement;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
@@ -32,9 +33,12 @@ class StatementSchema extends Schema
             DateTime::make('date')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
+            Number::make('amount')->extractUsing(
+                static fn($model) => $model->getAmount()
+            )->readOnly(),
             BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsTo::make('club')->type('clubs'),
-            HasMany::make('transactions'),
+            HasMany::make('transactions')->type('transactions'),
         ];
     }
 

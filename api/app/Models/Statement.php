@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,6 +24,7 @@ class Statement extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'date' => 'datetime',
+            'amount' => MoneyCast::class,
         ];
     }
 
@@ -43,5 +45,10 @@ class Statement extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function getAmount(): float
+    {
+        return ($this->transactions()->sum('amount') / 100);
     }
 }

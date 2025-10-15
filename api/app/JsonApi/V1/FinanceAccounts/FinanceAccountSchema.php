@@ -38,9 +38,9 @@ class FinanceAccountSchema extends Schema
             Str::make('title'),
             Str::make('iban'),
             Number::make('initialBalance'),
-            // Number::make('currentBalance')->extractUsing(
-            //     static fn($model) => $model->getCurrentBalance()
-            // )->readOnly(),
+            Number::make('currentBalance')->extractUsing(
+                static fn($model) => $model->getCurrentBalance()
+            )->readOnly(),
             DateTime::make('startsAt'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),

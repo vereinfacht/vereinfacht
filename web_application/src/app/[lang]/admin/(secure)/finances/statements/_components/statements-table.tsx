@@ -1,5 +1,6 @@
 'use client';
 
+import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
@@ -59,6 +60,11 @@ export default function StatementsTable({
             cell: ({ row }) => (
                 <TextCell>{row.getValue('financeAccount_title')}</TextCell>
             ),
+        },
+        {
+            accessorKey: 'amount',
+            header: t('transaction:amount.label'),
+            cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
         {
             accessorKey: 'transactions',
