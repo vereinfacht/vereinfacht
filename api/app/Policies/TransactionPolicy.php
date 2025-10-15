@@ -25,15 +25,15 @@ class TransactionPolicy
      */
     public function view(User $user, Transaction $transaction): bool
     {
-        if ($transaction->financeAccount->account_type === 'bank_account') {
+        if ($transaction->statement->financeAccount->account_type === 'bank_account') {
             return false;
         }
 
         if ($user instanceof Club) {
-            return $user->id === $transaction->financeAccount->club_id;
+            return $user->id === $transaction->statement->financeAccount->club_id;
         }
 
-        return $user->can('view transactions') && $transaction->financeAccount->club_id === getPermissionsTeamId();
+        return $user->can('view transactions') && $transaction->statement->financeAccount->club_id === getPermissionsTeamId();
     }
 
     /**
