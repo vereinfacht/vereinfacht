@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
+use App\Models\Statement;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +18,7 @@ class FakeFinanceAccountSeeder extends Seeder
         Club::all()->each(function ($club) {
             FinanceAccount::factory()
                 ->has(
-                    Transaction::factory()->count(30)->state([
+                    Statement::factory()->count(30)->state([
                         'club_id' => $club->id,
                     ])
                 )
@@ -28,7 +29,7 @@ class FakeFinanceAccountSeeder extends Seeder
                 ]);
             FinanceAccount::factory()
                 ->has(
-                    Transaction::factory()->count(30)->state([
+                    Statement::factory()->count(30)->state([
                         'club_id' => $club->id,
                     ])
                 )

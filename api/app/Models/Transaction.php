@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
-    /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -55,16 +54,6 @@ class Transaction extends Model
      * Relationships
      * ------------------------------------------------------------------------
      */
-    public function club()
-    {
-        return $this->belongsTo(Club::class);
-    }
-
-    public function financeAccount()
-    {
-        return $this->belongsTo(FinanceAccount::class);
-    }
-
     public function receipts()
     {
         return $this->belongsToMany(Receipt::class, 'receipt_transaction');

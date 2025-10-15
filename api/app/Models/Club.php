@@ -128,6 +128,11 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         return $this->hasMany(Transaction::class);
     }
 
+    public function statements(): HasMany
+    {
+        return $this->hasMany(Statement::class);
+    }
+
     /**
      * Attributes
      * ------------------------------------------------------------------------
@@ -137,8 +142,8 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $sanitizer = new Sanitizer;
 
         return Attribute::make(
-            get: fn (?string $value) => $value ? $sanitizer->get($value) : null,
-            set: fn (?string $value) => $value ? $sanitizer->get($value) : null,
+            get: fn(?string $value) => $value ? $sanitizer->get($value) : null,
+            set: fn(?string $value) => $value ? $sanitizer->get($value) : null,
         );
     }
 
@@ -150,7 +155,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $url .= '/apply';
 
         return Attribute::make(
-            get: fn () => $url,
+            get: fn() => $url,
         );
     }
 

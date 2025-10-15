@@ -47,6 +47,7 @@ class FinanceAccountSchema extends Schema
             SoftDelete::make('deletedAt'),
             BelongsTo::make('club')->type('clubs'),
             HasMany::make('transactions')->type('transactions'),
+            HasMany::make('statements')->type('statements'),
         ];
     }
 

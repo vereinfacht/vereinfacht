@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         $valuedAt = $this->faker->dateTimeBetween('-1 year', 'now');
-        $bookedAt = $valuedAt->modify('+'.$this->faker->numberBetween(0, 2).' days');
+        $bookedAt = $valuedAt->modify('+' . $this->faker->numberBetween(0, 2) . ' days');
 
         return [
             'name' => $this->faker->name(),
@@ -27,8 +27,6 @@ class TransactionFactory extends Factory
             'amount' => $this->faker->randomFloat(2, -1000, 1000),
             'valued_at' => $valuedAt,
             'booked_at' => $bookedAt,
-            'club_id' => Club::factory(),
-            'finance_account_id' => FinanceAccount::factory(),
         ];
     }
 }

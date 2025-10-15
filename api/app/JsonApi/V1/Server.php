@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Member;
 use App\Models\Receipt;
 use App\Models\Division;
+use App\Models\Statement;
 use App\Models\Membership;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
@@ -23,6 +24,7 @@ use LaravelJsonApi\Core\Document\Error;
 use App\JsonApi\V1\Members\MemberSchema;
 use App\JsonApi\V1\Receipts\ReceiptSchema;
 use App\JsonApi\V1\Divisions\DivisionSchema;
+use App\JsonApi\V1\Statements\StatementSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\Permissions\PermissionSchema;
 use App\JsonApi\V1\Transactions\TransactionSchema;
@@ -69,6 +71,10 @@ class Server extends BaseServer
         Transaction::saving(static function (Transaction $transaction): void {
             self::handleClubAssociation($transaction);
         });
+
+        Statement::saving(static function (Statement $statement): void {
+            self::handleClubAssociation($statement);
+        });
     }
 
     protected static function handleClubAssociation(Model $model)
@@ -113,6 +119,7 @@ class Server extends BaseServer
             DivisionSchema::class,
             MembershipSchema::class,
             PermissionSchema::class,
+            StatementSchema::class,
             TransactionSchema::class,
             PaymentPeriodSchema::class,
             MembershipTypeSchema::class,
