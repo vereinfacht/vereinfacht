@@ -1,6 +1,7 @@
 import { getAny, getOne } from '@/actions/fetchAdminResources';
 import { ActionState } from '@/actions/validateForm';
 import { Query } from '@/services/api-endpoints';
+import { TMediaDeserialized } from '@/types/resources';
 import { SupportedLocale, defaultLocale } from '@/utils/localization';
 import { loadListSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
@@ -19,7 +20,8 @@ export type DetailFieldDef<T> =
     | DefaultDetailFieldDef<T>
     | BelongsToDetailFieldDef<T>
     | SimpleDetailFieldDef<T>
-    | BelongsToManyDetailFieldDef<T>;
+    | BelongsToManyDetailFieldDef<T>
+    | MediaDetailField<T>;
 
 export type DefaultDetailFieldDef<T> = {
     attribute: keyof T;
@@ -52,6 +54,12 @@ export interface BelongsToManyDetailFieldDef<T, K = any>
     extends Omit<DefaultDetailFieldDef<T>, 'value'> {
     type: 'belongsToMany';
     value: K[];
+}
+
+export interface MediaDetailField<T>
+    extends Omit<DefaultDetailFieldDef<T>, 'value'> {
+    type: 'media';
+    value: TMediaDeserialized[];
 }
 
 export class Resource<T> {

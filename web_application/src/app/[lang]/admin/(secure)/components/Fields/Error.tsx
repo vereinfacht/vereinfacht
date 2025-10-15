@@ -7,7 +7,7 @@ interface Props {
 
 export default function Error({ error }: Props) {
     return (
-        <Text preset="error" className="pl-2">
+        <Text preset="error" className="pl-2" tag="span">
             {error}
         </Text>
     );

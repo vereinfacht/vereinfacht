@@ -48,7 +48,6 @@ export default async function ReceiptShowPage({ params }: Props) {
         {
             attribute: 'media',
             type: 'media',
-            // @ts-expect-error: media is not yet typed by the schema
             value: receipt[0]?.media,
         },
     ];
@@ -57,6 +56,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         <div className="container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
+                    // @ts-expect-error: value type of media field is not compatible with detail field value type
                     <DetailField
                         key={index}
                         {...field}

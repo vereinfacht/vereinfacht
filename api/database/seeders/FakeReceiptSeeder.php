@@ -25,7 +25,7 @@ class FakeReceiptSeeder extends Seeder
             $receipts = Receipt::factory()
                 ->count(20)
                 ->make(['club_id' => $club->id])
-                ->each(function ($receipt) use ($financeContacts, $seedFiles) {
+                ->each(function ($receipt) use ($financeContacts, $seedFiles, $club) {
                     if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
                         $receipt->finance_contact_id = $financeContacts->random()->id;
                     }
@@ -39,6 +39,7 @@ class FakeReceiptSeeder extends Seeder
                             $filePath = $seedFiles[array_rand($seedFiles)];
 
                             $receipt->addMedia($filePath)
+                                ->withProperties(['club_id' => $club->id])
                                 ->preservingOriginal()
                                 ->toMediaCollection('receipts', 'public');
                         }

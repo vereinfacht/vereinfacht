@@ -10,7 +10,7 @@ export default function HelpText({ text, className }: Props) {
     return (
         <Text
             preset="body-sm"
-            className={['text-slate-600', className].join(' ')}
+            className={['text-slate-800', className].join(' ')}
         >
             {text}
         </Text>
