@@ -10,9 +10,9 @@ use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class StatementSchema extends Schema
 {
@@ -34,7 +34,7 @@ class StatementSchema extends Schema
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsTo::make('club')->type('clubs'),
-            BelongsToMany::make('transactions'),
+            HasMany::make('transactions'),
         ];
     }
 

@@ -58,10 +58,10 @@ class TransactionPolicy
         }
 
         if ($user instanceof Club) {
-            return $user->id === $transaction->club_id;
+            return $user->id === $transaction->statement->club_id;
         }
 
-        return $user->can('update transactions') && $transaction->club_id === getPermissionsTeamId();
+        return $user->can('update transactions') && $transaction->statement->club_id === getPermissionsTeamId();
     }
 
     /**

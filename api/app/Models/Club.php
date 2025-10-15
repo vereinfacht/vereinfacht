@@ -123,9 +123,16 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         return $this->hasMany(FinanceContact::class);
     }
 
-    public function transactions(): HasMany
+    public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasManyThrough(
+            Transaction::class,
+            Statement::class,
+            'club_id',
+            'statement_id',
+            'id',
+            'id'
+        );
     }
 
     public function statements(): HasMany
