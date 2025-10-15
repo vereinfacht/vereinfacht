@@ -3658,6 +3658,102 @@
                 }
             }
         },
+        "\/media\/upload": {
+            "post": {
+                "tags": [
+                    "Media"
+                ],
+                "summary": "Upload a new medium",
+                "description": "",
+                "operationId": "media.upload",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "multipart\/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                    "type": "string",
+                                    "format": "binary",
+                                    "description": "The file to upload"
+                                    },
+                                    "collectionName": {
+                                    "type": "string",
+                                    "description": "The name of the collection to which the media belongs"
+                                    },
+                                    "clubId": {
+                                    "type": "integer",
+                                    "description": "The ID of the club associated with the media"
+                                    }
+                                },
+                                "required": ["file", "collectionName", "clubId"]
+                                }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/media\/{medium}": {
+            "delete": {
+                "tags": [
+                    "Media"
+                ],
+                "summary": "Destroy one medium",
+                "description": "",
+                "operationId": "media.destroy",
+                "parameters": [
+                    {
+                        "name": "medium",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
         "\/permissions": {
             "get": {
                 "tags": [

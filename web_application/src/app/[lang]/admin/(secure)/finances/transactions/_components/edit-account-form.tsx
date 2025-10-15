@@ -86,7 +86,11 @@ export default function EditAccountForm({ account, setIsOpen }: Props) {
             </div>
 
             <div className="flex gap-4 self-end">
-                <Button preset="secondary" type="button">
+                <Button
+                    preset="secondary"
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                >
                     {capitalizeFirstLetter(t('general:cancel'))}
                 </Button>
                 <SubmitButton title={t('general:save')} />

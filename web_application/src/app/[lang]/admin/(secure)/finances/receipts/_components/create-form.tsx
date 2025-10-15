@@ -6,6 +6,7 @@ import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultisele
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
+import { MediaInput } from '@/app/components/Input/MediaInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
@@ -24,7 +25,6 @@ import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
 import ReceiptProgressBar from './receipt-progress-bar';
-import { MediaInput } from '@/app/components/Input/MediaInput';
 
 interface Props {
     action: (
@@ -64,6 +64,7 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
 
     const receiptTypeOptions: Option[] = [
         { label: t('receipt:receipt_type.income'), value: 'income' },
@@ -116,6 +117,7 @@ export default function CreateForm({ data, action }: Props) {
             state={formState}
             type={data ? 'update' : 'create'}
             translationKey="receipt"
+            loading={loading}
         >
             <div>
                 <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
@@ -202,14 +204,10 @@ export default function CreateForm({ data, action }: Props) {
                         id="documentDate"
                         name="documentDate"
                         label={t('receipt:document_date.label')}
-                        defaultValue={
-                            data?.documentDate
-                                ? format(
-                                      new Date(data.documentDate),
-                                      'yyyy-MM-dd',
-                                  )
-                                : ''
-                        }
+                        defaultValue={format(
+                            new Date(data?.documentDate ?? Date.now()),
+                            'yyyy-MM-dd',
+                        )}
                         type="date"
                         required
                     />
@@ -244,14 +242,18 @@ export default function CreateForm({ data, action }: Props) {
                         }
                     />
                 </FormField>
-                <MediaInput
-                    id="receipt-file"
-                    label={t('receipt:media.label')}
-                    help={t('receipt:media.help')}
-                    name="media"
-                    multiple={true}
-                    accept={'.png, .jpg, .jpeg, .pdf'}
-                />
+                <FormField errors={formState.errors?.['media']}>
+                    <MediaInput
+                        id="receipt-file"
+                        label={t('receipt:media.label')}
+                        help={t('receipt:media.help')}
+                        name="media"
+                        media={data?.media}
+                        multiple={true}
+                        accept={'.png, .jpg, .jpeg, .pdf'}
+                        setLoading={setLoading}
+                    />
+                </FormField>
             </div>
         </ActionForm>
     );

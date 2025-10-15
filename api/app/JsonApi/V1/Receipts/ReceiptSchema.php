@@ -13,6 +13,7 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
@@ -44,7 +45,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsToMany::make('transactions'),
-            BelongsToMany::make('media')->type('media'),
+            HasMany::make('media')->type('media'),
         ];
     }
 

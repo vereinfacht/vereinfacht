@@ -15,5 +15,16 @@
             "success": "{{resource}} wurde erstellt",
             "error": "{{resource}} konnte nicht erstellt werden"
         }
+    },
+
+    "media": {
+        "delete": {
+            "success": "{{fileName}} wurde erfolgreich entfernt",
+            "error": "{{fileName}} konnte nicht entfernt werden, bitte versuchen Sie es erneut"
+        },
+        "upload": {
+            "success": "{{fileName}} wurde erfolgreich hochgeladen",
+            "error": "{{fileName}} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut"
+        }
     }
 }

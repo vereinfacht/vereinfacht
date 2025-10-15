@@ -43,7 +43,7 @@ export default function SettingsDropdown({ account }: Props) {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
                 <DropdownMenuTrigger className="p-1">
                     <Settings className="ml-auto h-4 w-4 text-gray-400" />
                 </DropdownMenuTrigger>
