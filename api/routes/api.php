@@ -79,7 +79,7 @@ JsonApiRoute::server('v1')
         $server->resource('finance-accounts', JsonApiController::class)
             ->relationships(function ($relations) {
                 $relations->hasOne('club', JsonApiController::class);
-                $relations->hasMany('transactions', JsonApiController::class);
+                $relations->hasMany('statements', JsonApiController::class);
             })
             ->only('index', 'show', 'store', 'update');
 
@@ -89,6 +89,7 @@ JsonApiRoute::server('v1')
         $server->resource('statements', JsonApiController::class)
             ->relationships(function ($relations) {
                 $relations->hasOne('financeAccount', JsonApiController::class);
+                $relations->hasMany('transactions', JsonApiController::class);
             })
             ->only('index', 'show', 'store', 'update');
     });

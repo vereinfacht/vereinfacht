@@ -25,6 +25,7 @@ class StatementPolicy
      */
     public function view(User $user, Statement $statement): bool
     {
+        return true;
         if ($statement->financeAccount->account_type === 'bank_account') {
             return false;
         }

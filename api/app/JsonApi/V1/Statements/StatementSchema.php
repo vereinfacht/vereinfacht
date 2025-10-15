@@ -61,6 +61,7 @@ class StatementSchema extends Schema
     {
         return [
             'transactions',
+            'financeAccount',
         ];
     }
 }

@@ -11,6 +11,7 @@ import {
     receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
+import { statementSortingOptions } from '@/actions/statements/list.schema';
 import {
     transactionSortingOptions,
     transactionStatusOptions,
@@ -58,6 +59,16 @@ export const listTransactionSearchParams = {
         .withOptions({
             shallow: false,
         }),
+    accountId: parseAsString,
+};
+
+export const listStatementSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(statementSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
     accountId: parseAsString,
 };
 
@@ -112,6 +123,10 @@ export const loadListMembershipsSearchParams = createLoader(
 
 export const loadListTransactionsSearchParams = createLoader(
     listTransactionSearchParams,
+);
+
+export const loadListStatementsSearchParams = createLoader(
+    listStatementSearchParams,
 );
 
 export const loadListFinanceContactsSearchParams = createLoader(

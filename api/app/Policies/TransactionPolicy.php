@@ -53,7 +53,7 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction): bool
     {
-        if ($transaction->financeAccount->account_type === 'bank_account') {
+        if ($transaction->statement->financeAccount->account_type === 'bank_account') {
             return false;
         }
 
