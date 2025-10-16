@@ -17,15 +17,12 @@ import FormStateHandler, {
 import SubmitButton from '../../../components/Form/SubmitButton';
 import Trans from 'next-translate/Trans';
 
-interface ImportTransactionFormProps {
+interface Props {
     account: TFinanceAccountDeserialized;
     setIsOpen: (open: boolean) => void;
 }
 
-export default function ImportTransactionForm({
-    account,
-    setIsOpen,
-}: ImportTransactionFormProps) {
+export default function ImportStatementsForm({ account, setIsOpen }: Props) {
     const { t } = useTranslation();
     const router = useRouter();
     const { id } = account;

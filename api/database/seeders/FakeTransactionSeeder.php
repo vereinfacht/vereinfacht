@@ -14,7 +14,7 @@ class FakeTransactionSeeder extends Seeder
             $club->statements->each(function ($statement) {
 
                 if ($statement->financeAccount->account_type === 'bank_account') {
-                    $count = rand(1, 100) <= 40 ? rand(2, 15) : 1;
+                    $count = rand(1, 100) <= 15 ? rand(2, 15) : 1;
                 } else {
                     $count = 1;
                 }
