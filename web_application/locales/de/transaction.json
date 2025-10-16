@@ -36,6 +36,11 @@
             "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
     },
+    "type": {
+        "label": "Typ",
+        "collective": "Sammel",
+        "individual": "Einzel"
+    },
     "finance_account": {
         "help": "Die Kasse, auf der die Transaktion gebucht wird."
     },

@@ -38,6 +38,45 @@ export default function StatementsTable({
             ),
         },
         {
+            accessorKey: 'transactions',
+            header: () => (
+                <span className={accountId !== null ? 'text-slate-900' : ''}>
+                    {t('transaction:type.label')}
+                </span>
+            ),
+            cell: ({ row }) => {
+                const transactionCount =
+                    (row.getValue('transactions') as any[])?.length || 0;
+                return (
+                    <div className="relative block w-fit">
+                        {transactionCount > 1 ? (
+                            <>
+                                <Badge
+                                    variant="primary"
+                                    className="bg-sky-200 text-slate-800"
+                                >
+                                    {t('transaction:type.collective')}
+                                </Badge>
+                                <Badge
+                                    className="absolute right-[-8px] top-[-12px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
+                                    variant="primary"
+                                >
+                                    {transactionCount}
+                                </Badge>
+                            </>
+                        ) : (
+                            <Badge
+                                variant="secondary"
+                                className="bg-indigo-200 text-slate-800"
+                            >
+                                {t('transaction:type.individual')}
+                            </Badge>
+                        )}
+                    </div>
+                );
+            },
+        },
+        {
             accessorKey: 'date',
             header: ({ column }) => (
                 <HeaderSort
@@ -67,29 +106,6 @@ export default function StatementsTable({
             accessorKey: 'amount',
             header: t('transaction:amount.label'),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
-        },
-        {
-            accessorKey: 'transactions',
-            header: () => (
-                <span className={accountId !== null ? 'text-slate-900' : ''}>
-                    {t('transaction:title.other')}
-                </span>
-            ),
-            cell: ({ row }) => {
-                const transactionCount =
-                    (row.getValue('transactions') as any[])?.length || 0;
-                return (
-                    <div className="relative block w-fit">
-                        <Receipt className="text-blue-500" />
-                        <Badge
-                            className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 p-0 text-[10px] font-semibold"
-                            variant="primary"
-                        >
-                            {transactionCount}
-                        </Badge>
-                    </div>
-                );
-            },
         },
     ];
 
