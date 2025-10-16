@@ -14,6 +14,10 @@
         "create": {
             "success": "{{resource}} wurde erstellt",
             "error": "{{resource}} konnte nicht erstellt werden"
+        },
+        "action": {
+            "success": "Aktion erfolgreich",
+            "error": "Aktion fehlgeschlagen"
         }
     },
 

@@ -90,7 +90,7 @@ export function MediaInput({
         formData.append('file', task.rawFile);
         formData.set('collectionName', 'receipts');
 
-        const response = await fetch('/upload', {
+        const response = await fetch('/api/upload/media', {
             method: 'POST',
             body: formData,
         });

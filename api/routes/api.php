@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\MediaController;
 use App\Http\Controllers\Api\V1\MembershipController;
 use App\Http\Controllers\Api\V1\ReceiptController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\StatementController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
@@ -24,7 +25,8 @@ use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
 Route::middleware(['auth:sanctum'])
     ->prefix('v1')
     ->group(function () {
-        Route::post('media/upload', [MediaController::class, 'upload']);
+        Route::post('upload/media', [MediaController::class, 'upload']);
+        Route::post('import/statements', [StatementController::class, 'import']);
     });
 
 JsonApiRoute::server('v1')
