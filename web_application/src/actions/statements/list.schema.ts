@@ -11,6 +11,7 @@ export const listStatementsSchema = z.object({
     filter: z
         .object({
             financeAccountId: z.string().optional(),
+            statementType: z.enum(statementTypeOptions).optional(),
         })
         .optional(),
 });
