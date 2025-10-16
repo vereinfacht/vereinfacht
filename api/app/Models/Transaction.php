@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
-    /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -19,8 +18,7 @@ class Transaction extends Model
         'currency',
         'valued_at',
         'booked_at',
-        'finance_account_id',
-        'club_id',
+        'statement_id',
     ];
 
     public function casts()
@@ -57,18 +55,37 @@ class Transaction extends Model
      * Relationships
      * ------------------------------------------------------------------------
      */
+    public function receipts()
+    {
+        return $this->belongsToMany(Receipt::class, 'receipt_transaction');
+    }
+
+    public function statement()
+    {
+        return $this->belongsTo(Statement::class);
+    }
+
     public function club()
     {
-        return $this->belongsTo(Club::class);
+        return $this->hasOneThrough(
+            Club::class,
+            Statement::class,
+            'id',
+            'id',
+            'statement_id',
+            'club_id',
+        );
     }
 
     public function financeAccount()
     {
-        return $this->belongsTo(FinanceAccount::class);
-    }
-
-    public function receipts()
-    {
-        return $this->belongsToMany(Receipt::class, 'receipt_transaction');
+        return $this->hasOneThrough(
+            FinanceAccount::class,
+            Statement::class,
+            'id',
+            'id',
+            'statement_id',
+            'finance_account_id',
+        );
     }
 }

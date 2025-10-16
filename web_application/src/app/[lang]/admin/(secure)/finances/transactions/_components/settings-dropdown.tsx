@@ -25,6 +25,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import ActivationForm from './activation-form';
 import EditAccountForm from './edit-account-form';
+import ImportTransactionsForm from './import-transaction-form';
 
 interface Props {
     account: TFinanceAccountDeserialized;
@@ -32,7 +33,9 @@ interface Props {
 
 export default function SettingsDropdown({ account }: Props) {
     const [isOpen, setIsOpen] = useState(false);
-    const [formType, setFormType] = useState<'edit' | 'activation'>('edit');
+    const [formType, setFormType] = useState<'edit' | 'activation' | 'import'>(
+        'edit',
+    );
     const { t } = useTranslation();
     const { title } = account;
     const accountStatus =
@@ -40,14 +43,21 @@ export default function SettingsDropdown({ account }: Props) {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
                 <DropdownMenuTrigger className="p-1">
                     <Settings className="ml-auto h-4 w-4 text-gray-400" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem>
-                        {t('finance_account:import_transactions')}
-                    </DropdownMenuItem>
+                    <DialogTrigger
+                        asChild
+                        onClick={() => {
+                            setFormType('import');
+                        }}
+                    >
+                        <DropdownMenuItem>
+                            {t('finance_account:import_transactions')}
+                        </DropdownMenuItem>
+                    </DialogTrigger>
                     <DialogTrigger
                         asChild
                         onClick={() => {
@@ -85,9 +95,13 @@ export default function SettingsDropdown({ account }: Props) {
                                 ? t('resource:edit_resource', {
                                       resource: t('finance_account:title.one'),
                                   })
-                                : accountStatus === 'active'
-                                  ? t('finance_account:deactivate_modal.title')
-                                  : t('finance_account:activate_modal.title')}
+                                : formType === 'import'
+                                  ? t('finance_account:import_transactions')
+                                  : accountStatus === 'active'
+                                    ? t(
+                                          'finance_account:deactivate_modal.title',
+                                      )
+                                    : t('finance_account:activate_modal.title')}
                         </Text>
                     </DialogTitle>
                     <DialogDescription asChild className="mt-2">
@@ -95,6 +109,8 @@ export default function SettingsDropdown({ account }: Props) {
                             <Text>
                                 {t('finance_account:edit_modal.description')}
                             </Text>
+                        ) : formType === 'import' ? (
+                            <Text>{t('transaction:import.description')}</Text>
                         ) : accountStatus === 'active' ? (
                             <Trans
                                 i18nKey="finance_account:deactivate_modal.description"
@@ -102,9 +118,7 @@ export default function SettingsDropdown({ account }: Props) {
                                     <Text key="0" preset="default" />,
                                     <span key="1" className="font-semibold" />,
                                 ]}
-                                values={{
-                                    name: title,
-                                }}
+                                values={{ name: title }}
                             />
                         ) : (
                             <Trans
@@ -113,18 +127,22 @@ export default function SettingsDropdown({ account }: Props) {
                                     <Text key="0" preset="default" />,
                                     <span key="1" className="font-semibold" />,
                                 ]}
-                                values={{
-                                    name: title,
-                                }}
+                                values={{ name: title }}
                             />
                         )}
                     </DialogDescription>
                 </DialogHeader>
+
                 {formType === 'edit' ? (
                     <EditAccountForm account={account} setIsOpen={setIsOpen} />
-                ) : (
+                ) : formType === 'activation' ? (
                     <ActivationForm account={account} setIsOpen={setIsOpen} />
-                )}
+                ) : formType === 'import' ? (
+                    <ImportTransactionsForm
+                        account={account}
+                        setIsOpen={setIsOpen}
+                    />
+                ) : null}
             </DialogContent>
         </Dialog>
     );

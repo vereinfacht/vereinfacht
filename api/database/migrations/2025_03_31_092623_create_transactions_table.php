@@ -17,11 +17,8 @@ return new class extends Migration {
             $table->integer('amount');
             $table->string('currency');
 
-            $table->foreignId('finance_account_id')
-                ->constrained('finance_accounts')
-                ->cascadeOnDelete();
-            $table->foreignId('club_id')
-                ->constrained('clubs')
+            $table->foreignId('statement_id')
+                ->constrained('statements')
                 ->cascadeOnDelete();
 
             $table->timestamp('valued_at')->nullable();

@@ -4,6 +4,7 @@ namespace App\Models\Scopes;
 
 use App\Models\Club;
 use App\Models\DivisionMembershipType;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -63,6 +64,14 @@ class ClubScope implements Scope
         if ($model instanceof User) {
             $builder->whereHas('roles', function ($query) use ($clubId) {
                 $query->where('model_has_roles.club_id', $clubId);
+            });
+
+            return;
+        }
+
+        if ($model instanceof Transaction) {
+            $builder->whereHas('statement.financeAccount', function ($query) use ($clubId) {
+                $query->where('club_id', $clubId);
             });
 
             return;

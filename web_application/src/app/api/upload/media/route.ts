@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
     // using openapi-fetch lead to issues with parsing the multipart form data correctly
     // so we are using fetch() directly here
     const response = await fetch(
-        `${(process.env.API_DOMAIN || '') + (process.env.API_PATH || '')}/media/upload`,
+        `${(process.env.API_DOMAIN || '') + (process.env.API_PATH || '')}/upload/media`,
         {
             method: 'POST',
             body: forwardData,

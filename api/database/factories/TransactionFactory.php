@@ -37,8 +37,6 @@ class TransactionFactory extends Factory
             'currency' => $currency,
             'valued_at' => $valuedAt,
             'booked_at' => $bookedAt,
-            'club_id' => Club::factory(),
-            'finance_account_id' => FinanceAccount::factory(),
         ];
     }
 }

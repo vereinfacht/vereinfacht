@@ -36,8 +36,24 @@
             "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
     },
+    "type": {
+        "label": "Typ",
+        "collective": "Sammel",
+        "individual": "Einzel"
+    },
     "finance_account": {
         "help": "Die Kasse, auf der die Transaktion gebucht wird."
+    },
+    "import": {
+        "title": "Transaktionen importieren",
+        "description": "Hier können exportierte Umsätze im MT940-Format (*.mta-Datei) aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Transaktionen werden automatisch erkannt und übersprungen.",
+        "preview": {
+            "exptected_data": "<0>{{statement_count}}</0> Statements mit <1>{{transaction_count}}</1> Transaktionen werden voraussichtlich importiert."
+        }
+    },
+    "file": {
+        "label": "Datei",
+        "help": "Unterstützt das Format *.mta"
     },
 
     "all_sources": "Alle Quellen"

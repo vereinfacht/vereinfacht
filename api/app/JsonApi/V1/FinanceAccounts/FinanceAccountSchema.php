@@ -46,7 +46,7 @@ class FinanceAccountSchema extends Schema
             DateTime::make('updatedAt')->sortable()->readOnly(),
             SoftDelete::make('deletedAt'),
             BelongsTo::make('club')->type('clubs'),
-            HasMany::make('transactions')->type('transactions'),
+            HasMany::make('statements')->type('statements'),
         ];
     }
 

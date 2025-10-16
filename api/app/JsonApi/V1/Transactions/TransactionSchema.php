@@ -39,9 +39,8 @@ class TransactionSchema extends Schema
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Str::make('status')->readOnly(),
-            BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsToMany::make('receipts'),
-            BelongsTo::make('club')->type('clubs'),
+            BelongsTo::make('statement')->type('statements'),
         ];
     }
 
@@ -52,7 +51,6 @@ class TransactionSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            Where::make('financeAccountId', 'finance_account_id')->using('='),
             QueryFilter::make('query', ['name', 'description', 'amount']),
             WithoutRelationFilter::make('withoutReceipts', 'receipts'),
             StatusFilter::make(
@@ -80,7 +78,8 @@ class TransactionSchema extends Schema
     {
         return [
             'receipts',
-            'financeAccount',
+            'statement',
+            'statement.financeAccount',
         ];
     }
 }
