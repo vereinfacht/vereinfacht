@@ -11,7 +11,10 @@ import {
     receiptStatusOptions,
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
-import { statementSortingOptions } from '@/actions/statements/list.schema';
+import {
+    statementSortingOptions,
+    statementTypeOptions,
+} from '@/actions/statements/list.schema';
 import {
     transactionSortingOptions,
     transactionStatusOptions,
@@ -69,6 +72,11 @@ export const listStatementSearchParams = {
     ).withOptions({
         shallow: false,
     }),
+    statementType: parseAsArrayOf(parseAsStringLiteral(statementTypeOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
     accountId: parseAsString,
 };
 
@@ -145,6 +153,10 @@ export type ListMembershipSearchParamsType = inferParserType<
 
 export type ListTransactionSearchParamsType = inferParserType<
     typeof listTransactionSearchParams
+>;
+
+export type ListStatementSearchParamsType = inferParserType<
+    typeof listStatementSearchParams
 >;
 
 export type ListFinanceContactSearchParamsType = inferParserType<

@@ -3,7 +3,7 @@ import { itemsPerPage } from '@/services/api-endpoints';
 import { WithSearchParams } from '@/types/params';
 import { TStatementDeserialized } from '@/types/resources';
 import {
-    ListTransactionSearchParamsType,
+    ListStatementSearchParamsType,
     loadListStatementsSearchParams,
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
@@ -11,12 +11,15 @@ import CreateButton from '../../components/CreateButton';
 import AccountsList from './_components/accounts-list';
 import StatementsTable from './_components/statements-table';
 
-async function getStatementsFromApi(params: ListTransactionSearchParamsType) {
+async function getStatementsFromApi(params: ListStatementSearchParamsType) {
     const response = await listStatements({
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
         filter: {
             ...(params.accountId ? { financeAccountId: params.accountId } : {}),
+            ...(params.statementType
+                ? { statementType: params.statementType }
+                : {}),
         },
         include: ['transactions', 'financeAccount'],
         fields: {

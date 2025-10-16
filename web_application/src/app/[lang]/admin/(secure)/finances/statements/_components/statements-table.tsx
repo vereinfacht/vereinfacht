@@ -1,7 +1,9 @@
 'use client';
 
+import { statementTypeOptions } from '@/actions/statements/list.schema';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
+import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { Badge } from '@/app/components/ui/badge';
@@ -11,7 +13,6 @@ import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import { Receipt } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 
@@ -28,7 +29,7 @@ export default function StatementsTable({
     const translationHook = useTranslation();
     const lang = translationHook.lang as SupportedLocale;
     const { t } = translationHook;
-    console.log('statements', statements);
+
     const columns: ColumnDef<TStatementDeserialized>[] = [
         {
             accessorKey: 'identifier',
@@ -40,9 +41,12 @@ export default function StatementsTable({
         {
             accessorKey: 'transactions',
             header: () => (
-                <span className={accountId !== null ? 'text-slate-900' : ''}>
-                    {t('transaction:type.label')}
-                </span>
+                <HeaderOptionFilter
+                    options={statementTypeOptions ?? []}
+                    parser={listStatementSearchParams.statementType}
+                    paramKey={'statementType'}
+                    translationKey={'transaction:type'}
+                />
             ),
             cell: ({ row }) => {
                 const transactionCount =

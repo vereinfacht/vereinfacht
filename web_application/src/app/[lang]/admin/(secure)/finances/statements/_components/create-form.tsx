@@ -10,6 +10,7 @@ import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import {
     TFinanceAccountDeserialized,
+    TStatementDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
@@ -27,7 +28,7 @@ interface Props {
         state: FormActionState,
         payload: FormData,
     ) => Promise<FormActionState>;
-    data?: TTransactionDeserialized;
+    data?: TStatementDeserialized;
 }
 
 function TransactionOption({ item }: { item: TTransactionDeserialized }) {
@@ -94,7 +95,7 @@ export default function CreateForm({ data, action }: Props) {
     }));
 
     const [financeAccount, setFinanceAccount] = useState<string>(
-        data?.financeAccount?.id,
+        data?.financeAccount?.id ?? '',
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
