@@ -41,11 +41,14 @@
     },
     "import": {
         "title": "Transaktionen importieren",
-        "description": "Importieren Sie Transaktionen von Ihrer Bank, indem Sie eine MT940-Datei hochladen."
+        "description": "Hier können exportierte Umsätze im MT940-Format (*.mta-Datei) aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Transaktionen werden automatisch erkannt und übersprungen.",
+        "preview": {
+            "exptected_data": "<0>{{statement_count}}</0> Statements mit <1>{{transaction_count}}</1> Transaktionen werden voraussichtlich importiert."
+        }
     },
     "file": {
-        "label": "Importdatei",
-        "help": "Unterstützt die Formate TXT und MT940."
+        "label": "Datei",
+        "help": "Unterstützt das Format *.mta"
     },
 
     "all_sources": "Alle Quellen"

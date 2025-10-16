@@ -1,144 +1,149 @@
 'use client';
 
+import { importStatementsFormAction } from '@/actions/statements/import';
 import Button from '@/app/components/Button/Button';
-import { MediaInput } from '@/app/components/Input/MediaInput';
 import Text from '@/app/components/Text/Text';
-import ProgressBar from '@/app/components/ui/progress-bar';
-import { CircleCheck } from 'lucide-react';
+import { Input } from '@/app/components/ui/input';
+import { TFinanceAccountDeserialized } from '@/types/resources';
+import { capitalizeFirstLetter } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useFormState } from 'react-dom';
+import FormField from '../../../components/Form/FormField';
+import FormStateHandler, {
+    FormActionState,
+} from '../../../components/Form/FormStateHandler';
+import SubmitButton from '../../../components/Form/SubmitButton';
+import Trans from 'next-translate/Trans';
 
 interface ImportTransactionFormProps {
-    onDone?: () => void;
+    account: TFinanceAccountDeserialized;
+    setIsOpen: (open: boolean) => void;
 }
 
 export default function ImportTransactionForm({
-    onDone,
+    account,
+    setIsOpen,
 }: ImportTransactionFormProps) {
     const { t } = useTranslation();
+    const router = useRouter();
+    const { id } = account;
+    const extendedFormAction = importStatementsFormAction.bind(null, id);
+    const [formState, formAction] = useFormState<FormActionState, FormData>(
+        extendedFormAction,
+        {
+            success: false,
+        },
+    );
 
     const [file, setFile] = useState<File | null>(null);
-    const [expectedCount, setExpectedCount] = useState<number | null>(null);
-    const [importedCount, setImportedCount] = useState<number>(0);
-    const [progress, setProgress] = useState(0);
-    const [message, setMessage] = useState('');
-    const [isImporting, setIsImporting] = useState(false);
+    const [expectedData, setExpectedData] = useState<{
+        statement_count: number;
+        transaction_count: number;
+    }>({
+        statement_count: 0,
+        transaction_count: 0,
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const countTransactions = async (file: File) => {
+        setIsLoading(true);
         const text = await file.text();
-        return text.split(/\r?\n/).filter((line) => line.startsWith(':61:'))
-            .length;
+
+        return {
+            statement_count: text
+                .split(/\r?\n/)
+                .filter((line) => line.startsWith(':20:')).length,
+            transaction_count: text
+                .split(/\r?\n/)
+                .filter((line) => line.startsWith(':61:')).length,
+        };
     };
 
     useEffect(() => {
         if (!file) {
-            setExpectedCount(null);
-            setMessage('');
+            setExpectedData({
+                statement_count: 0,
+                transaction_count: 0,
+            });
             return;
         }
 
         countTransactions(file)
-            .then((count) => {
-                setExpectedCount(count);
-                setMessage(count > 0 ? '' : 'No transactions found in file.');
+            .then((data) => {
+                setExpectedData(data);
+                setIsLoading(false);
             })
             .catch(() => {
-                setMessage('Invalid file.');
-                setExpectedCount(null);
+                setExpectedData({
+                    statement_count: 0,
+                    transaction_count: 0,
+                });
+                setIsLoading(false);
             });
     }, [file]);
 
-    const handleImport = async () => {
-        if (!file || expectedCount === null || expectedCount === 0) return;
-
-        setIsImporting(true);
-        setImportedCount(0);
-        setProgress(0);
-        setMessage('');
-
-        for (let i = 1; i <= expectedCount; i++) {
-            await new Promise((r) => setTimeout(r, 1200));
-            setImportedCount(i);
-            setProgress((i / expectedCount) * 100);
-        }
-
-        setMessage(`Successfully imported ${expectedCount} transaction(s).`);
-        setIsImporting(false);
-        setFile(null);
-        setExpectedCount(null);
-    };
-
-    const handleDone = () => {
-        setFile(null);
-        setExpectedCount(null);
-        setImportedCount(0);
-        setProgress(0);
-        setMessage('');
-        setIsImporting(false);
-
-        if (onDone) onDone();
-    };
-
     return (
-        <div className="space-y-4">
-            <MediaInput
-                id="transaction-file"
-                label={t('transaction:file.label')}
-                help={t('transaction:file.help')}
-                accept=".txt,.mta"
-                disabled={isImporting}
-                onFilesChange={(files) => setFile(files[0] ?? null)}
+        <form action={formAction} className="container flex flex-col gap-8">
+            <FormStateHandler
+                state={formState}
+                translationKey="statements"
+                type="action"
+                onSuccess={() => {
+                    setIsOpen(false);
+                    router.refresh();
+                }}
             />
+            <FormField errors={formState.errors?.['file']}>
+                <Input
+                    className="mt-1 px-3 py-2 hover:bg-slate-50"
+                    id="file"
+                    name="file"
+                    type="file"
+                    accept=".mta"
+                    multiple={false}
+                    disabled={isLoading}
+                    onChange={(event) => {
+                        const files = event.target.files;
 
-            {expectedCount !== null && !isImporting && (
-                <Text>Expected transactions in the file: {expectedCount}</Text>
-            )}
+                        setFile(files ? files[0] : null);
+                    }}
+                    required
+                />
+            </FormField>
 
-            {isImporting && (
-                <Text>
-                    Importing transaction {importedCount} / {expectedCount}
-                </Text>
-            )}
-
-            {!isImporting && progress === 100 && (
-                <Text>Import done: {importedCount}</Text>
-            )}
-
-            {progress > 0 && (
-                <div className="mt-2 flex h-4 items-center gap-4">
-                    <ProgressBar
-                        value={progress}
-                        ariaLabel={`Import progress: ${Math.round(progress)}%`}
-                    />
-                    {progress == 100 ? (
-                        <CircleCheck className="text-green-400" />
-                    ) : (
-                        <Text className="text-sm text-gray-700">
-                            {Math.round(progress)}%
-                        </Text>
-                    )}
-                </div>
-            )}
-
-            {message && <Text>{message}</Text>}
-
-            <div className="flex justify-end">
-                {progress < 100 && (
-                    <Button
-                        type="button"
-                        disabled={!file || expectedCount === 0 || isImporting}
-                        onClick={handleImport}
-                        isLoading={isImporting}
-                    >
-                        import
-                    </Button>
+            {(expectedData.statement_count > 0 ||
+                expectedData.transaction_count > 0) &&
+                !isLoading && (
+                    <Text>
+                        <Trans
+                            i18nKey={
+                                'transaction:import.preview.exptected_data'
+                            }
+                            values={{
+                                statement_count: expectedData.statement_count,
+                                transaction_count:
+                                    expectedData.transaction_count,
+                            }}
+                            components={[
+                                <span key="0" className={'font-semibold'} />,
+                                <span key="1" className={'font-semibold'} />,
+                            ]}
+                        />
+                    </Text>
                 )}
-                {!isImporting && progress === 100 && (
-                    <Button type="button" onClick={handleDone}>
-                        done
-                    </Button>
-                )}
+
+            <div className="flex gap-4 self-end">
+                <Button
+                    preset="secondary"
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                >
+                    {capitalizeFirstLetter(t('general:cancel'))}
+                </Button>
+                <SubmitButton title={t('general:import')} />
             </div>
-        </div>
+        </form>
     );
 }

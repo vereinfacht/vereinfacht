@@ -13,7 +13,7 @@ export interface FormActionState {
 interface Props {
     state: FormActionState;
     translationKey: string;
-    type?: 'create' | 'update' | 'delete';
+    type?: 'create' | 'update' | 'delete' | 'action';
     customNotificationTranslationKey?: string;
     onSuccess?: () => void;
 }
