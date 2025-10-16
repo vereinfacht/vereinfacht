@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Club;
-use App\Models\Transaction;
+use App\Models\Statement;
 use Illuminate\Foundation\Auth\User;
 
-class TransactionPolicy
+class StatementPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -17,19 +17,24 @@ class TransactionPolicy
             return true;
         }
 
-        return $user->can('view transactions');
+        return $user->can('view statements');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Transaction $transaction): bool
+    public function view(User $user, Statement $statement): bool
     {
-        if ($user instanceof Club) {
-            return $user->id === $transaction->statement->club_id;
+        return true;
+        if ($statement->financeAccount->account_type === 'bank_account') {
+            return false;
         }
 
-        return $user->can('view transactions') && $transaction->statement->club_id === getPermissionsTeamId();
+        if ($user instanceof Club) {
+            return $user->id === $statement->financeAccount->club_id;
+        }
+
+        return $user->can('view statements') && $statement->financeAccount->club_id === getPermissionsTeamId();
     }
 
     /**
@@ -41,29 +46,29 @@ class TransactionPolicy
             return true;
         }
 
-        return $user->can('create transactions');
+        return $user->can('create statements');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Transaction $transaction): bool
+    public function update(User $user, Statement $statement): bool
     {
-        if ($transaction->statement->financeAccount->account_type === 'bank_account') {
+        if ($statement->financeAccount->account_type === 'bank_account') {
             return false;
         }
 
         if ($user instanceof Club) {
-            return $user->id === $transaction->statement->club_id;
+            return $user->id === $statement->club_id;
         }
 
-        return $user->can('update transactions') && $transaction->statement->club_id === getPermissionsTeamId();
+        return $user->can('update statements') && $statement->club_id === getPermissionsTeamId();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Transaction $transaction): bool
+    public function delete(User $user, Statement $statement): bool
     {
         return false;
     }
@@ -71,7 +76,7 @@ class TransactionPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Transaction $transaction): bool
+    public function restore(User $user, Statement $statement): bool
     {
         return false;
     }
@@ -79,7 +84,7 @@ class TransactionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Transaction $transaction): bool
+    public function forceDelete(User $user, Statement $statement): bool
     {
         return false;
     }

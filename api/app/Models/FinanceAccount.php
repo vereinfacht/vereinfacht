@@ -40,13 +40,15 @@ class FinanceAccount extends Model
         return $this->belongsTo(Club::class);
     }
 
-    public function transactions()
+    public function statements()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Statement::class);
     }
 
     public function getCurrentBalance(): float
     {
-        return ($this->transactions()->sum('amount') / 100) + $this->initial_balance;
+        $initialBalance = $this->initial_balance ?? 0;
+        $transactionsSum = $this->statements()->withSum('transactions', 'amount')->get()->sum('transactions_sum_amount');
+        return ($transactionsSum / 100) + $initialBalance;
     }
 }
