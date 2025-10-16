@@ -16,10 +16,10 @@ async function getStatementsFromApi(params: ListStatementSearchParamsType) {
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
         filter: {
+            statementType: Array.isArray(params.statementType)
+                ? params.statementType[0]
+                : (params.statementType ?? undefined),
             ...(params.accountId ? { financeAccountId: params.accountId } : {}),
-            ...(params.statementType
-                ? { statementType: params.statementType }
-                : {}),
         },
         include: ['transactions', 'financeAccount'],
         fields: {
