@@ -63,20 +63,6 @@ export default function CreateForm({ data, action }: Props) {
     const [selectedTransactions, setSelectedTransactions] =
         useState<any[]>(defaultTransactions);
 
-    const [rawAmount, setRawAmount] = useState<number>(data?.amount ?? 0);
-
-    const [transactionType, setTransactionType] = useState<
-        'income' | 'expense'
-    >(
-        data
-            ? (data.amount ?? 0) > 0
-                ? 'income'
-                : 'expense'
-            : rawAmount > 0
-              ? 'income'
-              : 'expense',
-    );
-
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
     >([]);
@@ -173,7 +159,7 @@ export default function CreateForm({ data, action }: Props) {
                     onChange={(selected: Option[]) => {
                         setSelectedTransactions(selected || []);
                     }}
-                    defaultValue={defaultTransactions}
+                    defaultValue={defaultTransactions || selectedTransactions}
                 />
             </FormField>
         </ActionForm>

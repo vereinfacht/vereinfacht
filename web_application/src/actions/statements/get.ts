@@ -1,6 +1,6 @@
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
+import { TStatementDeserialized } from '@/types/resources';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
-import { TTransactionDeserialized } from '@/types/resources';
 import { baseGetSchema } from '../base/get.schema';
 
 export const getStatement = createAuthenticatedAction(
@@ -8,10 +8,10 @@ export const getStatement = createAuthenticatedAction(
     'statements',
     baseGetSchema,
     async (params, client) => {
+        // @ts-expect-error: prepareQuery() does not return the expected type
         const response = await client.GET('/statements/{statement}', {
             params: {
                 path: { statement: params.id },
-                // @ts-expect-error: prepareQuery() does not return the expected type
                 query: {
                     include: params.include?.join(','),
                 },
