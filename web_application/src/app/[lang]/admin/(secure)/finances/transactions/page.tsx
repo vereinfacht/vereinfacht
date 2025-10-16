@@ -16,18 +16,9 @@ async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
         filter: {
-            ...(params.accountId ? { financeAccountId: params.accountId } : {}),
             ...(params.status ? { status: params.status } : {}),
         },
-        include: ['financeAccount'],
-        fields: {
-            'finance-accounts': [
-                'title',
-                'iban',
-                'initialBalance',
-                'accountType',
-            ],
-        },
+        include: ['statement.financeAccount'],
     });
 
     return response || [];

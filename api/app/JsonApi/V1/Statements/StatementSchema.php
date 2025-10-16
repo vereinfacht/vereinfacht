@@ -1,31 +1,27 @@
 <?php
 
-namespace App\JsonApi\V1\FinanceAccounts;
+namespace App\JsonApi\V1\Statements;
 
-use App\Models\FinanceAccount;
+use App\Models\Statement;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\SoftDeletes;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Filters\Where;
+use App\JsonApi\Filters\StatementTypeFilter;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
-use LaravelJsonApi\Eloquent\Fields\SoftDelete;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Filters\WithTrashed;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
-class FinanceAccountSchema extends Schema
+class StatementSchema extends Schema
 {
-    use SoftDeletes;
-
     /**
      * The model the schema corresponds to.
      */
-    public static string $model = FinanceAccount::class;
+    public static string $model = Statement::class;
 
     /**
      * Get the resource fields.
@@ -34,19 +30,16 @@ class FinanceAccountSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('accountType'),
-            Str::make('title'),
-            Str::make('iban'),
-            Number::make('initialBalance'),
-            Number::make('currentBalance')->extractUsing(
-                static fn($model) => $model->getCurrentBalance()
-            )->readOnly(),
-            DateTime::make('startsAt'),
+            Str::make('identifier'),
+            DateTime::make('date')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
-            SoftDelete::make('deletedAt'),
+            Number::make('amount')->extractUsing(
+                static fn($model) => $model->getAmount()
+            )->readOnly(),
+            BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsTo::make('club')->type('clubs'),
-            HasMany::make('statements')->type('statements'),
+            HasMany::make('transactions')->type('transactions'),
         ];
     }
 
@@ -57,8 +50,8 @@ class FinanceAccountSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            WithTrashed::make('with-trashed'),
-            Where::make('accountType', 'account_type'),
+            Where::make('financeAccountId', 'finance_account_id')->using('='),
+            StatementTypeFilter::make('statementType'),
         ];
     }
 
@@ -68,5 +61,14 @@ class FinanceAccountSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'transactions',
+            'transactions.receipts',
+            'financeAccount',
+        ];
     }
 }

@@ -46,7 +46,9 @@ class FakeReceiptSeeder extends Seeder
                     }
                 });
 
-            $transactions = Transaction::where('club_id', $club->id)->get();
+            $transactions = Transaction::whereHas('statement', function ($query) use ($club) {
+                $query->where('club_id', $club->id);
+            })->get();
             $noTransactionReceipts = $receipts->random(max(1, floor($receipts->count() * 0.3)));
             $unusedTransactions = $transactions->random(max(1, floor($transactions->count() * 0.2)));
             $usableTransactions = $transactions->diff($unusedTransactions);

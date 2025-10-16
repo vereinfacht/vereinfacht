@@ -30,7 +30,7 @@ export default async function Navigation() {
             title: t('admin:finances'),
             items: [
                 {
-                    href: '/admin/finances/transactions',
+                    href: '/admin/finances/statements',
                     title: t('transaction:title.other'),
                 },
                 {
