@@ -1,7 +1,7 @@
 'use client';
 
 import { listFinanceAccounts } from '@/actions/financeAccounts/list';
-import { listReceipts } from '@/actions/receipts/list';
+import { listTransactions } from '@/actions/transactions/list';
 import { default as BelongsToMultiselectInput } from '@/app/components/Input/BelongsToMultiselectInput';
 import { itemsPerQuery } from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
@@ -10,7 +10,6 @@ import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import {
     TFinanceAccountDeserialized,
-    TReceiptDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
@@ -22,7 +21,6 @@ import { useFormState } from 'react-dom';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
-import ReceiptProgressBar from '../../receipts/_components/receipt-progress-bar';
 
 interface Props {
     action: (
@@ -32,18 +30,16 @@ interface Props {
     data?: TTransactionDeserialized;
 }
 
-function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
+function TransactionOption({ item }: { item: TTransactionDeserialized }) {
     const { lang } = useTranslation();
 
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
                 <Text className="min-w-fit">
-                    {formatDate(item.documentDate, lang as SupportedLocale)}
+                    {formatDate(item.valuedAt, lang as SupportedLocale)}
                 </Text>
-                <Text className="min-w-fit font-medium">
-                    {item.referenceNumber}
-                </Text>
+                <Text className="min-w-fit font-medium">{item.name}</Text>
             </div>
             <CurrencyText value={Number(item.amount) || 0} />
         </div>
@@ -53,15 +49,18 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
-    const defaultReceipts =
-        data?.receipts?.map((receipt) => ({
-            label: <ReceiptOption item={receipt} />,
-            value: receipt.id,
-            amount: receipt.amount || 0,
-        })) || [];
+    const defaultTransactions = data
+        ? [
+              {
+                  label: <TransactionOption item={data} />,
+                  value: data.id,
+                  amount: data.amount || 0,
+              },
+          ]
+        : [];
 
-    const [selectedReceipts, setSelectedReceipts] =
-        useState<any[]>(defaultReceipts);
+    const [selectedTransactions, setSelectedTransactions] =
+        useState<any[]>(defaultTransactions);
 
     const [rawAmount, setRawAmount] = useState<number>(data?.amount ?? 0);
 
@@ -95,11 +94,7 @@ export default function CreateForm({ data, action }: Props) {
     }));
 
     const [financeAccount, setFinanceAccount] = useState<string>(
-        data?.financeAccount?.id ?? '',
-    );
-    const totalReceiptAmount = selectedReceipts.reduce(
-        (sum, receipt) => sum + (receipt.amount || 0),
-        0,
+        data?.financeAccount?.id,
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
@@ -122,7 +117,7 @@ export default function CreateForm({ data, action }: Props) {
                     <TextInput
                         id="name"
                         name="name"
-                        label={t('transaction:title.label')}
+                        label={t('transaction:identifier.label')}
                         min={3}
                         max={255}
                         required
@@ -130,19 +125,11 @@ export default function CreateForm({ data, action }: Props) {
                         defaultValue={data?.name ?? ''}
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['description']}>
+                <FormField errors={formState.errors?.['date']}>
                     <TextInput
-                        id="description"
-                        name="description"
-                        label={t('transaction:purpose.label')}
-                        defaultValue={data?.description ?? ''}
-                    />
-                </FormField>
-                <FormField errors={formState.errors?.['bookedAt']}>
-                    <TextInput
-                        id="bookedAt"
-                        name="bookedAt"
-                        label={t('transaction:booked_at.label')}
+                        id="date"
+                        name="date"
+                        label={t('transaction:date.label')}
                         defaultValue={
                             data?.bookedAt
                                 ? format(new Date(data.bookedAt), 'yyyy-MM-dd')
@@ -169,46 +156,23 @@ export default function CreateForm({ data, action }: Props) {
                     />
                 </FormField>
             </div>
-            <FormField errors={formState.errors?.['amount']}>
-                <TextInput
-                    id="amount"
-                    name="amount"
-                    label={t('transaction:amount.label')}
-                    help={t('transaction:amount.help')}
-                    type="number"
-                    step="0.01"
-                    required
-                    defaultValue={data?.amount ?? undefined}
-                    onChange={(e) => {
-                        setRawAmount(Number(e.target.value));
-                        setTransactionType(
-                            Number(e.target.value) > 0 ? 'income' : 'expense',
-                        );
-                    }}
-                />
-            </FormField>
-            <ReceiptProgressBar
-                amount={Math.abs(rawAmount)}
-                receiptType={transactionType}
-                totalTransactionAmount={totalReceiptAmount}
-            />
-            <FormField errors={formState.errors?.['receipts']}>
-                <BelongsToMultiselectInput<TReceiptDeserialized>
-                    resourceName="receipts"
-                    resourceType="receipts"
+            <FormField errors={formState.errors?.['transactions']}>
+                <BelongsToMultiselectInput<TTransactionDeserialized>
+                    resourceName="transactions"
+                    resourceType="transactions"
                     pivotAttributes={['amount']}
-                    label={t('receipt:title.other')}
+                    label={t('transaction:title.other')}
                     action={(searchTerm) =>
-                        listReceipts({
+                        listTransactions({
                             page: { size: itemsPerQuery, number: 1 },
                             filter: { query: searchTerm },
                         })
                     }
-                    optionLabel={(item) => <ReceiptOption item={item} />}
+                    optionLabel={(item) => <TransactionOption item={item} />}
                     onChange={(selected: Option[]) => {
-                        setSelectedReceipts(selected || []);
+                        setSelectedTransactions(selected || []);
                     }}
-                    defaultValue={defaultReceipts}
+                    defaultValue={defaultTransactions}
                 />
             </FormField>
         </ActionForm>

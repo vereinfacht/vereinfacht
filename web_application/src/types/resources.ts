@@ -61,7 +61,7 @@ export type TReceiptDeserialized = TReceiptRaw['attributes'] & {
 export type TTransactionDeserialized = TTransactionRaw['attributes'] & {
     id: string;
     receipts?: TReceiptDeserialized[];
-    financeAccount?: TFinanceAccountDeserialized;
+    statement?: TStatementDeserialized;
 };
 
 export type TStatementDeserialized = TStatementRaw['attributes'] & {

@@ -23,11 +23,13 @@ import TransactionDetailsModal from './transaction-details-modal';
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
     totalPages: number;
+    canExpand?: boolean;
 }
 
 export default function TransactionsTable({
     transactions,
     totalPages,
+    canExpand = false,
 }: TransactionsListProps) {
     const [accountId] = useQueryState('accountId');
     const translationHook = useTranslation();
@@ -35,6 +37,20 @@ export default function TransactionsTable({
     const { t } = translationHook;
 
     const columns: ColumnDef<TTransactionDeserialized>[] = [
+        {
+            id: 'expander',
+            cell: ({ row }) =>
+                canExpand && row.subRows && row.subRows.length > 0 ? (
+                    <button
+                        {...{
+                            onClick: row.getToggleExpandedHandler(),
+                            className: 'pointer px-2 py-1',
+                        }}
+                    >
+                        {row.getIsExpanded() ? '▼' : '▶'}
+                    </button>
+                ) : null,
+        },
         {
             accessorKey: 'name',
             header: t('transaction:title.label'),
@@ -96,15 +112,15 @@ export default function TransactionsTable({
             ),
         },
         {
-            accessorKey: 'financeAccount.title',
+            accessorKey: 'financeAccountTitle',
             header: () => (
                 <span className={accountId !== null ? 'text-slate-900' : ''}>
                     {t('finance_account:title.one')}
                 </span>
             ),
-            cell: ({ row }) => (
-                <TextCell>{row.getValue('financeAccount_title')}</TextCell>
-            ),
+            accessorFn: (row: TTransactionDeserialized) =>
+                row.statement?.financeAccount?.title ?? '',
+            cell: ({ getValue }) => <TextCell>{getValue<string>()}</TextCell>,
         },
         {
             accessorKey: 'amount',
@@ -154,15 +170,21 @@ export default function TransactionsTable({
         );
     }
 
+    const dataWithSubRows = transactions.map((transaction) => ({
+        ...transaction,
+        subRows: transaction.receipts ?? [],
+    }));
+
     return (
         <>
             <DataTable
-                data={transactions}
+                data={dataWithSubRows}
                 columns={columns}
                 resourceName={'finances/transactions' as ResourceName}
                 totalPages={totalPages}
                 canEdit={(transaction) =>
-                    transaction.financeAccount?.accountType === 'cash_box'
+                    transaction.statement?.financeAccount?.accountType ===
+                    'cash_box'
                 }
                 canView={false}
                 defaultColumn={{

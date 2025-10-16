@@ -4,12 +4,14 @@ import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TStatementDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
+import { Receipt } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
 
@@ -73,16 +75,21 @@ export default function StatementsTable({
                     {t('transaction:title.other')}
                 </span>
             ),
-            cell: ({ row }) => (
-                <TextCell>
-                    {(Array.isArray(row.getValue('transactions'))
-                        ? (row.getValue('transactions') as { id: string }[])
-                        : []
-                    )
-                        .map((transaction) => transaction.id)
-                        .join(', ')}
-                </TextCell>
-            ),
+            cell: ({ row }) => {
+                const transactionCount =
+                    (row.getValue('transactions') as any[])?.length || 0;
+                return (
+                    <div className="relative block w-fit">
+                        <Receipt className="text-blue-500" />
+                        <Badge
+                            className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 p-0 text-[10px] font-semibold"
+                            variant="primary"
+                        >
+                            {transactionCount}
+                        </Badge>
+                    </div>
+                );
+            },
         },
     ];
 
@@ -91,12 +98,12 @@ export default function StatementsTable({
             <DataTable
                 data={statements}
                 columns={columns}
-                resourceName={'finances/transactions' as ResourceName}
+                resourceName={'finances/statements' as ResourceName}
                 totalPages={totalPages}
                 canEdit={(statement) =>
                     statement.financeAccount?.accountType === 'cash_box'
                 }
-                canView={false}
+                canView={true}
                 defaultColumn={{
                     size: 150,
                     enableResizing: false,
