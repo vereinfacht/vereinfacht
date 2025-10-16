@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Behaviors\HasRoles;
-use App\Models\Behaviors\PrefersLocale;
-use App\Models\Scopes\ClubScope;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\ClubScope;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Behaviors\HasRoles;
+use Illuminate\Support\Collection;
+use App\Models\Behaviors\PrefersLocale;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\HasTenants;
+use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable implements FilamentUser, HasLocalePreference, HasTenants
 {
