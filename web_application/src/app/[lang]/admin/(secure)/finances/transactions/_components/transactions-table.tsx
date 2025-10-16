@@ -7,7 +7,6 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import StatusCell from '@/app/components/Table/StatusCell';
-import { TableAction } from '@/app/components/Table/TableAction';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TTransactionDeserialized } from '@/types/resources';
@@ -17,19 +16,15 @@ import { listTransactionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
-import { useState } from 'react';
-import TransactionDetailsModal from './transaction-details-modal';
 
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
     totalPages: number;
-    canExpand?: boolean;
 }
 
 export default function TransactionsTable({
     transactions,
     totalPages,
-    canExpand = false,
 }: TransactionsListProps) {
     const [accountId] = useQueryState('accountId');
     const translationHook = useTranslation();
@@ -37,20 +32,6 @@ export default function TransactionsTable({
     const { t } = translationHook;
 
     const columns: ColumnDef<TTransactionDeserialized>[] = [
-        {
-            id: 'expander',
-            cell: ({ row }) =>
-                canExpand && row.subRows && row.subRows.length > 0 ? (
-                    <button
-                        {...{
-                            onClick: row.getToggleExpandedHandler(),
-                            className: 'pointer px-2 py-1',
-                        }}
-                    >
-                        {row.getIsExpanded() ? '▼' : '▶'}
-                    </button>
-                ) : null,
-        },
         {
             accessorKey: 'name',
             header: t('transaction:title.label'),
@@ -133,30 +114,7 @@ export default function TransactionsTable({
             ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
-        {
-            id: 'actions',
-            cell: ({ row }) => (
-                <TableAction
-                    type="view"
-                    onClick={() => openTransactionDetails(row.original)}
-                />
-            ),
-        },
     ];
-
-    const [selectedTransaction, setSelectedTransaction] =
-        useState<TTransactionDeserialized | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openTransactionDetails = (transaction: TTransactionDeserialized) => {
-        setSelectedTransaction(transaction);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedTransaction(null);
-    };
 
     if (transactions.length === 0) {
         return (
@@ -170,15 +128,10 @@ export default function TransactionsTable({
         );
     }
 
-    const dataWithSubRows = transactions.map((transaction) => ({
-        ...transaction,
-        subRows: transaction.receipts ?? [],
-    }));
-
     return (
         <>
             <DataTable
-                data={dataWithSubRows}
+                data={transactions}
                 columns={columns}
                 resourceName={'finances/transactions' as ResourceName}
                 totalPages={totalPages}
@@ -186,19 +139,12 @@ export default function TransactionsTable({
                     transaction.statement?.financeAccount?.accountType ===
                     'cash_box'
                 }
-                canView={false}
+                canView={true}
                 defaultColumn={{
                     size: 150,
                     enableResizing: false,
                 }}
             />
-            {selectedTransaction && (
-                <TransactionDetailsModal
-                    transaction={selectedTransaction}
-                    isOpen={isModalOpen}
-                    onClose={closeModal}
-                />
-            )}
         </>
     );
 }

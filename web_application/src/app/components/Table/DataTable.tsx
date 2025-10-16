@@ -4,7 +4,6 @@ import {
     ColumnDef,
     flexRender,
     getCoreRowModel,
-    getExpandedRowModel,
     TableOptions,
     useReactTable,
 } from '@tanstack/react-table';
@@ -19,8 +18,6 @@ import {
 } from '@/app/components/Table/Table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
-import { Fragment } from 'react/jsx-runtime';
-import CurrencyCell from './CurrencyCell';
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
 
@@ -48,8 +45,6 @@ export function DataTable<TData extends Model, TValue>({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        getExpandedRowModel: getExpandedRowModel(),
-        getSubRows: (row) => row.subRows ?? [],
     });
 
     return (
@@ -80,114 +75,54 @@ export function DataTable<TData extends Model, TValue>({
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <Fragment key={row.id}>
-                                    <TableRow
-                                        key={row.id}
-                                        data-state={
-                                            row.getIsSelected() && 'selected'
-                                        }
-                                        data-cy={`${row.index}-row`}
-                                    >
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell
-                                                key={cell.id}
-                                                data-cy={`${cell.id}-cell`}
-                                            >
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext(),
-                                                )}
-                                            </TableCell>
-                                        ))}
-                                        {(canEdit || canView) && (
-                                            <TableCell
-                                                key="actions"
-                                                className="flex items-center justify-end gap-4"
-                                            >
-                                                {typeof canEdit === 'function'
-                                                    ? canEdit(row.original) && (
-                                                          <TableAction
-                                                              type="edit"
-                                                              href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                              id={
-                                                                  row.original
-                                                                      .id
-                                                              }
-                                                          />
-                                                      )
-                                                    : canEdit && (
-                                                          <TableAction
-                                                              type="edit"
-                                                              href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                              id={
-                                                                  row.original
-                                                                      .id
-                                                              }
-                                                          />
-                                                      )}
-                                                {canView && (
-                                                    <TableAction
-                                                        type="view"
-                                                        href={`/admin/${resourceName}/${row.original.id}`}
-                                                        id={row.original.id}
-                                                    />
-                                                )}
-                                            </TableCell>
-                                        )}
-                                    </TableRow>
-                                    {row.getIsExpanded() &&
-                                        row.original.receipts?.length > 0 && (
-                                            <TableRow>
-                                                <TableCell
-                                                    colSpan={
-                                                        row.getVisibleCells()
-                                                            .length
-                                                    }
-                                                >
-                                                    <div className="ml-4 border-l border-gray-200 pl-4">
-                                                        <DataTable
-                                                            data={
-                                                                row.original
-                                                                    .receipts
-                                                            }
-                                                            columns={[
-                                                                {
-                                                                    accessorKey:
-                                                                        'referenceNumber',
-                                                                    header: 'Reference',
-                                                                },
-                                                                {
-                                                                    accessorKey:
-                                                                        'receiptType',
-                                                                    header: 'Type',
-                                                                },
-                                                                {
-                                                                    accessorKey:
-                                                                        'documentDate',
-                                                                    header: 'Date',
-                                                                },
-                                                                {
-                                                                    accessorKey:
-                                                                        'amount',
-                                                                    header: 'Amount',
-                                                                    cell: ({
-                                                                        row,
-                                                                    }) => (
-                                                                        <CurrencyCell
-                                                                            value={row.getValue(
-                                                                                'amount',
-                                                                            )}
-                                                                        />
-                                                                    ),
-                                                                },
-                                                            ]}
-                                                            resourceName="receipts "
-                                                        />
-                                                    </div>
-                                                </TableCell>
-                                            </TableRow>
-                                        )}
-                                </Fragment>
+                                <TableRow
+                                    key={row.id}
+                                    data-state={
+                                        row.getIsSelected() && 'selected'
+                                    }
+                                    data-cy={`${row.index}-row`}
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell
+                                            key={cell.id}
+                                            data-cy={`${cell.id}-cell`}
+                                        >
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext(),
+                                            )}
+                                        </TableCell>
+                                    ))}
+                                    {(canEdit || canView) && (
+                                        <TableCell
+                                            key="actions"
+                                            className="flex items-center justify-end gap-4"
+                                        >
+                                            {typeof canEdit === 'function'
+                                                ? canEdit(row.original) && (
+                                                      <TableAction
+                                                          type="edit"
+                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                          id={row.original.id}
+                                                      />
+                                                  )
+                                                : canEdit && (
+                                                      <TableAction
+                                                          type="edit"
+                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                          id={row.original.id}
+                                                      />
+                                                  )}
+                                            {canView && (
+                                                <TableAction
+                                                    type="view"
+                                                    href={`/admin/${resourceName}/${row.original.id}`}
+                                                    id={row.original.id}
+                                                />
+                                            )}
+                                        </TableCell>
+                                    )}
+                                </TableRow>
                             ))
                         ) : (
                             <TableRow>

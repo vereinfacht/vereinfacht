@@ -46,7 +46,7 @@ export default async function StatementShowPage({ params }: Props) {
             value: statement[0]?.amount,
         },
     ];
-    console.log('statement', statement.transactions);
+
     return (
         <div className="container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
@@ -72,7 +72,6 @@ export default async function StatementShowPage({ params }: Props) {
                         totalPages={Math.ceil(
                             (statement[0]?.transactions?.length ?? 0) / 10,
                         )}
-                        canExpand={true}
                     />
                 </>
             ) : null}

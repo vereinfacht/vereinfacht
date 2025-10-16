@@ -3,31 +3,27 @@
 namespace Database\Seeders;
 
 use App\Models\Club;
-use App\Models\Receipt;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
 class FakeTransactionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     */
     public function run(): void
     {
-        Club::all()->each(function ($club) {
-            $club->statements->each(function ($statement) use ($club) {
-                $hasMultiple = rand(1, 100) <= 20;
-                $count = $hasMultiple ? rand(2, 15) : 1;
+        Club::with('statements.financeAccount')->get()->each(function ($club) {
+            $club->statements->each(function ($statement) {
+
+                if ($statement->financeAccount->account_type === 'bank_account') {
+                    $count = rand(1, 100) <= 40 ? rand(2, 15) : 1;
+                } else {
+                    $count = 1;
+                }
 
                 Transaction::factory()
                     ->count($count)
-                    ->make([
+                    ->create([
                         'statement_id' => $statement->id,
-                    ])
-                    ->each(function ($transaction) {
-                        $transaction->save();
-                    });
+                    ]);
             });
         });
     }
