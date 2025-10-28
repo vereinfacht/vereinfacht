@@ -1,6 +1,5 @@
 'use client';
 
-import CurrencyText from '@/app/components/Text/CurrencyText';
 import { Button } from '@/app/components/ui/button';
 import {
     Card,
@@ -36,7 +35,6 @@ export default function TransactionDetailsModal({
 
     if (!transaction) return null;
 
-    const amount = transaction.amount || 0;
     const purpose = transaction.description || t('default_values.purpose');
 
     return (
@@ -105,35 +103,7 @@ export default function TransactionDetailsModal({
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label className="text-muted-foreground text-sm font-medium">
-                                        {t('finance_account:title.label')}
-                                    </label>
-                                    <p className="mt-1 text-sm">
-                                        {transaction.financeAccount?.title}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label className="text-muted-foreground text-sm font-medium">
-                                        {t('transaction:amount.label')}
-                                    </label>
-                                    <div className="mt-1 flex items-center gap-2">
-                                        <CurrencyText value={amount} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label className="text-muted-foreground text-sm font-medium">
-                                        {t('transaction:iban.label')}
-                                    </label>
-                                    <p className="bg-muted text-muted-foreground mt-1 rounded font-mono text-sm">
-                                        {transaction.financeAccount?.iban}
-                                    </p>
-                                </div>
-                            </div>
+                            <p>WIP</p>
                         </CardContent>
                     </Card>
 

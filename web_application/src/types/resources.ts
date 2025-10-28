@@ -13,7 +13,6 @@ export type TReceiptRaw =
     components['schemas']['resources.receipts.resource.fetch'];
 
 export type TUserRaw = components['schemas']['resources.users.resource.fetch'];
-export type TRoleRaw = components['schemas']['resources.roles.resource.fetch'];
 export type TPermissionRaw =
     components['schemas']['resources.permissions.resource.fetch'];
 
@@ -22,8 +21,9 @@ export type TUserDeserialized = TUserRaw['attributes'] & {
     roles?: TRoleDeserialized[];
 };
 
-export type TRoleDeserialized = TRoleRaw['attributes'] & {
+export type TRoleDeserialized = {
     id: string;
+    name: string;
     permissions?: TPermissionDeserialized[];
 };
 
