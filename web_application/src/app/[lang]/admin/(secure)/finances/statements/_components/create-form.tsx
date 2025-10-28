@@ -5,7 +5,6 @@ import { listTransactions } from '@/actions/transactions/list';
 import { default as BelongsToMultiselectInput } from '@/app/components/Input/BelongsToMultiselectInput';
 import { itemsPerQuery } from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
-import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import {
@@ -15,7 +14,6 @@ import {
 } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
-import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -100,7 +98,7 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <FormField errors={formState.errors?.['name']}>
+                {/* <FormField errors={formState.errors?.['name']}>
                     <TextInput
                         id="name"
                         name="name"
@@ -111,8 +109,8 @@ export default function CreateForm({ data, action }: Props) {
                         autoFocus
                         defaultValue={data?.name ?? ''}
                     />
-                </FormField>
-                <FormField errors={formState.errors?.['date']}>
+                </FormField> */}
+                {/* <FormField errors={formState.errors?.['date']}>
                     <TextInput
                         id="date"
                         name="date"
@@ -125,7 +123,7 @@ export default function CreateForm({ data, action }: Props) {
                         type="date"
                         required
                     />
-                </FormField>
+                </FormField> */}
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"
