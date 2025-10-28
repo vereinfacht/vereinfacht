@@ -25,16 +25,15 @@ class StatementPolicy
      */
     public function view(User $user, Statement $statement): bool
     {
-        return true;
         if ($statement->financeAccount->account_type === 'bank_account') {
             return false;
         }
 
         if ($user instanceof Club) {
-            return $user->id === $statement->financeAccount->club_id;
+            return $user->id === $statement->club_id;
         }
 
-        return $user->can('view statements') && $statement->financeAccount->club_id === getPermissionsTeamId();
+        return $user->can('view statements') && $statement->club_id === getPermissionsTeamId();
     }
 
     /**
