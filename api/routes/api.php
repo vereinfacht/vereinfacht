@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\V1\MediaController;
-use App\Http\Controllers\Api\V1\MembershipController;
-use App\Http\Controllers\Api\V1\ReceiptController;
-use App\Http\Controllers\Api\V1\UserController;
-use App\Http\Controllers\StatementController;
-use App\Http\Middleware\ChangeLocaleFromHeader;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatementController;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Middleware\ChangeLocaleFromHeader;
+use App\Http\Controllers\Api\V1\MediaController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
-use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
+use App\Http\Controllers\Api\V1\ReceiptController;
 use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
+use App\Http\Controllers\Api\V1\MembershipController;
+use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,4 +97,7 @@ JsonApiRoute::server('v1')
                 $relations->hasMany('transactions', JsonApiController::class);
             })
             ->only('index', 'show', 'store', 'update');
+
+        $server->resource('tax-accounts', JsonApiController::class)
+            ->only('index');
     });

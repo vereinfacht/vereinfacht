@@ -27,6 +27,7 @@ use App\JsonApi\V1\Divisions\DivisionSchema;
 use App\JsonApi\V1\Statements\StatementSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\Permissions\PermissionSchema;
+use App\JsonApi\V1\TaxAccounts\TaxAccountSchema;
 use App\JsonApi\V1\Transactions\TransactionSchema;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
@@ -127,6 +128,7 @@ class Server extends BaseServer
             FinanceContactSchema::class,
             DivisionMembershipTypeSchema::class,
             MediaSchema::class,
+            TaxAccountSchema::class,
         ];
     }
 
