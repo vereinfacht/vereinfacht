@@ -44,6 +44,7 @@ class ReceiptSchema extends Schema
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
+            BelongsTo::make('taxAccount')->type('tax-accounts'),
             BelongsToMany::make('transactions'),
             HasMany::make('media')->type('media'),
         ];
@@ -86,6 +87,7 @@ class ReceiptSchema extends Schema
             'transactions',
             'financeContact',
             'media',
+            'taxAccount',
         ];
     }
 }

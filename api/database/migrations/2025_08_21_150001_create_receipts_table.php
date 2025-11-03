@@ -27,6 +27,11 @@ return new class extends Migration
                 ->constrained('finance_contacts')
                 ->cascadeOnDelete();
 
+            $table->foreignId('tax_account_id')
+                ->nullable()
+                ->constrained('tax_accounts')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

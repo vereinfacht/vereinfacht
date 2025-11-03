@@ -4,11 +4,11 @@ namespace App\Models;
 
 use App\Casts\MoneyCast;
 use App\Enums\ReceiptStatusEnum;
-use App\Models\Traits\HasPreviewConversions;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Traits\HasPreviewConversions;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Receipt extends Model implements HasMedia
@@ -25,6 +25,7 @@ class Receipt extends Model implements HasMedia
         'amount',
         'club_id',
         'finance_contact_id',
+        'tax_account_id',
     ];
 
     public function casts()
@@ -74,5 +75,10 @@ class Receipt extends Model implements HasMedia
     public function transactions()
     {
         return $this->belongsToMany(Transaction::class, 'receipt_transaction');
+    }
+
+    public function taxAccount()
+    {
+        return $this->belongsTo(TaxAccount::class);
     }
 }
