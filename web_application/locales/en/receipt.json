@@ -42,5 +42,9 @@
         },
         "has_attachments": "Receipt has ({{count}}) files",
         "no_attachments": "Receipt has no files"
+    },
+    "tax_account": {
+        "label": "Tax account",
+        "help": "The tax account to which this receipt is assigned."
     }
 }

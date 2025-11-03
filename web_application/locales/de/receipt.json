@@ -42,5 +42,9 @@
         },
         "has_attachments": "Beleg hat ({{count}}) Dateien",
         "no_attachments": "Beleg hat keine Dateien"
+    },
+    "tax_account": {
+        "label": "Steuerkonto",
+        "help": "Das Steuerkonto, dem dieser Beleg zugeordnet ist."
     }
 }

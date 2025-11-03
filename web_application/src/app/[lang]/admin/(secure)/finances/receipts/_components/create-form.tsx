@@ -272,7 +272,7 @@ export default function CreateForm({ data, action }: Props) {
                     <BelongsToSelectInput<TTaxAccountDeserialized>
                         resourceName="taxAccount"
                         resourceType="tax-accounts"
-                        label={t('taxAccount:title.one')}
+                        label={t('receipt:tax_account.label')}
                         action={(searchTerm) =>
                             listTaxAccounts({
                                 page: { size: itemsPerQuery, number: 1 },
