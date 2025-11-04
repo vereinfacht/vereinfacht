@@ -18,6 +18,7 @@ class FakeDatabaseSeeder extends Seeder
             FakeFinanceAccountSeeder::class,
             FakeFinanceContactSeeder::class,
             FakeTransactionSeeder::class,
+            FakeTaxAccountSeeder::class,
             FakeReceiptSeeder::class,
         ]);
     }

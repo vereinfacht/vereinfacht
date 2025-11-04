@@ -27,6 +27,7 @@ class TaxAccountSchema extends Schema
             ID::make(),
             Str::make('name'),
             Str::make('referenceNumber'),
+            Str::make('description'),
         ];
     }
 

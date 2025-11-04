@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Club;
 use App\Models\Receipt;
+use App\Models\TaxAccount;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -20,15 +21,23 @@ class FakeReceiptSeeder extends Seeder
             storage_path('app/seed/receipt-test.png'),
         ];
 
-        Club::all()->each(function ($club) use ($seedFiles) {
+        $taxAccounts = TaxAccount::all();
+
+        Club::all()->each(function ($club) use ($seedFiles, $taxAccounts) {
             $financeContacts = $club->financeContacts;
             $receipts = Receipt::factory()
                 ->count(20)
                 ->make(['club_id' => $club->id])
-                ->each(function ($receipt) use ($financeContacts, $seedFiles, $club) {
+                ->each(function ($receipt) use ($financeContacts, $seedFiles, $club, $taxAccounts) {
                     if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
                         $receipt->finance_contact_id = $financeContacts->random()->id;
                     }
+
+                    // 50% chance to have tax account
+                    if (rand(1, 100) <= 50 && $taxAccounts->count() > 0) {
+                        $receipt->tax_account_id = $taxAccounts->random()->id;
+                    }
+
                     $receipt->save();
 
                     $count = rand(1, 3);

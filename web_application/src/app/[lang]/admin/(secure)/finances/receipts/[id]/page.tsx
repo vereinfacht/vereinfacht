@@ -56,6 +56,8 @@ export default async function ReceiptShowPage({ params }: Props) {
             attribute: 'taxAccount',
             value:
                 receipt[0]?.taxAccount?.referenceNumber +
+                ' - ' +
+                receipt[0]?.taxAccount?.description +
                 ' (' +
                 receipt[0]?.taxAccount?.name +
                 ')',

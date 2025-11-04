@@ -66,10 +66,11 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
 function TaxAccountOption({ item }: { item: TTaxAccountDeserialized }) {
     return (
         <div className="flex items-center gap-2">
-            <Text className="truncate">{item.name}</Text>
             <Text className="min-w-fit font-medium">
                 {item.referenceNumber}
             </Text>
+            <Text className="truncate">{item.description}</Text>
+            <Text>({item.name})</Text>
         </div>
     );
 }
