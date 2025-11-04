@@ -34,7 +34,7 @@ class FakeReceiptSeeder extends Seeder
                     }
 
                     // 50% chance to have tax account
-                    if (rand(1, 100) <= 50 && $taxAccounts->count() > 0) {
+                    if (rand(1, 100) <= 80 && $taxAccounts->count() > 0) {
                         $receipt->tax_account_id = $taxAccounts->random()->id;
                     }
 
@@ -67,9 +67,20 @@ class FakeReceiptSeeder extends Seeder
                     return;
                 }
 
-                $receipt->transactions()->attach(
-                    $usableTransactions->random(rand(1, 3))->pluck('id')->toArray()
-                );
+                // Attach 1-3 random transactions
+                $selectedTransactions = $usableTransactions->random(rand(1, 3));
+                $receipt->transactions()->attach($selectedTransactions->pluck('id')->toArray());
+
+                // 50% chance to match transaction sum exactly
+                if (rand(1, 100) <= 50) {
+                    $receipt->amount = $selectedTransactions->sum('amount');
+                } else {
+                    $variance = rand(10, 30) / 100;
+                    $direction = rand(0, 1) ? 1 : -1;
+                    $receipt->amount = $selectedTransactions->sum('amount') * (1 + $direction * $variance);
+                }
+
+                $receipt->save();
             });
         });
     }

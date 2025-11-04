@@ -49,7 +49,7 @@ class Receipt extends Model implements HasMedia
             return ReceiptStatusEnum::EMPTY->value;
         }
 
-        if ($transactionsSum == $receiptAmount) {
+        if ($this->tax_account_id && $transactionsSum === $receiptAmount) {
             return ReceiptStatusEnum::COMPLETED->value;
         }
 
