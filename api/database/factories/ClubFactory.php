@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\SkrType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -38,7 +39,7 @@ class ClubFactory extends Factory
             'allow_voluntary_contribution' => $this->faker->boolean(),
             'has_consented_media_publication_is_required' => $this->faker->boolean(),
             'has_consented_media_publication_default_value' => $this->faker->boolean(),
-            'skr_type_id' => 1,
+            'skr_type_id' => SkrType::where('title', 'SKR 03')->first()?->id,
         ];
 
         if ($this->faker->boolean()) {
