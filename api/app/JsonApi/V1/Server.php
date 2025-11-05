@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 use LaravelJsonApi\Core\Document\Error;
 use App\JsonApi\V1\Members\MemberSchema;
 use App\JsonApi\V1\Receipts\ReceiptSchema;
+use App\JsonApi\V1\SkrTypes\SkrTypeSchema;
 use App\JsonApi\V1\Divisions\DivisionSchema;
 use App\JsonApi\V1\Statements\StatementSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
@@ -129,6 +130,7 @@ class Server extends BaseServer
             DivisionMembershipTypeSchema::class,
             MediaSchema::class,
             TaxAccountSchema::class,
+            SkrTypeSchema::class,
         ];
     }
 

@@ -3,8 +3,6 @@
 namespace App\Policies;
 
 use App\Models\Club;
-use App\Models\Receipt;
-use App\Models\TaxAccount;
 use Illuminate\Foundation\Auth\User;
 
 class TaxAccountPolicy

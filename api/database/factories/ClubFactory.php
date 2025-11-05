@@ -21,7 +21,7 @@ class ClubFactory extends Factory
 
         $attributes = [
             'title' => $this->faker->unique()->company(),
-            'extended_title' => $this->faker->company().' '.$this->faker->companySuffix(),
+            'extended_title' => $this->faker->company() . ' ' . $this->faker->companySuffix(),
             'address' => $this->faker->streetAddress(),
             'zip_code' => $this->faker->postcode(),
             'city' => $this->faker->city(),
@@ -38,6 +38,7 @@ class ClubFactory extends Factory
             'allow_voluntary_contribution' => $this->faker->boolean(),
             'has_consented_media_publication_is_required' => $this->faker->boolean(),
             'has_consented_media_publication_default_value' => $this->faker->boolean(),
+            'skr_type_id' => 1,
         ];
 
         if ($this->faker->boolean()) {

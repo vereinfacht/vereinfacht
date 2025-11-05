@@ -50,6 +50,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         'allow_voluntary_contribution',
         'has_consented_media_publication_is_required',
         'has_consented_media_publication_default_value',
+        'skr_type_id',
     ];
 
     protected function casts(): array
@@ -138,6 +139,11 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
     public function statements(): HasMany
     {
         return $this->hasMany(Statement::class);
+    }
+
+    public function skrType()
+    {
+        return $this->belongsTo(SkrType::class);
     }
 
     /**

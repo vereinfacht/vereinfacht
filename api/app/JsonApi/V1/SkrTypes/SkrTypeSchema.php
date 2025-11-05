@@ -1,23 +1,22 @@
 <?php
 
-namespace App\JsonApi\V1\TaxAccounts;
+namespace App\JsonApi\V1\SkrTypes;
 
-use App\Models\TaxAccount;
+use App\Models\SkrType;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
 
-class TaxAccountSchema extends Schema
+class SkrTypeSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
      */
-    public static string $model = TaxAccount::class;
+    public static string $model = SkrType::class;
 
     /**
      * Get the resource fields.
@@ -26,9 +25,7 @@ class TaxAccountSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('accountNumber'),
-            Str::make('description'),
-            BelongsTo::make('skrType')->type('skr-types'),
+            Str::make('title'),
         ];
     }
 
@@ -38,7 +35,7 @@ class TaxAccountSchema extends Schema
     public function filters(): array
     {
         return [
-            QueryFilter::make('query', ['account_number', 'description']),
+            QueryFilter::make('query', ['title']),
         ];
     }
 

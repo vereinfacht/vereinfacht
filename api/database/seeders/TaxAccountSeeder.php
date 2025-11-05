@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class FakeTaxAccountSeeder extends Seeder
+class TaxAccountSeeder extends Seeder
 {
     public function run(): void
     {
@@ -20,9 +20,9 @@ class FakeTaxAccountSeeder extends Seeder
 
         foreach ($accounts as $account) {
             DB::table('tax_accounts')->insert([
-                'name' => 'SKR03',
-                'reference_number' => $account['account_number'],
+                'account_number' => $account['account_number'],
                 'description' => $account['description'],
+                'skr_type_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

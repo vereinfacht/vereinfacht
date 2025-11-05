@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TaxAccount extends Model
+class SkrType extends Model
 {
-    /** @use HasFactory<\Database\Factories\TaxAccountFactory> */
+    /** @use HasFactory<\Database\Factories\SkrTypeFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'account_number',
-        'description',
-        'skr_type_id',
+        'title',
     ];
 
     public function casts()
@@ -22,10 +20,5 @@ class TaxAccount extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
-    }
-
-    public function skrType()
-    {
-        return $this->belongsTo(SkrType::class);
     }
 }

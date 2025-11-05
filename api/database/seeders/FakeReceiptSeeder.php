@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Club;
 use App\Models\Receipt;
-use App\Models\TaxAccount;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -21,43 +20,27 @@ class FakeReceiptSeeder extends Seeder
             storage_path('app/seed/receipt-test.png'),
         ];
 
-        $taxAccounts = TaxAccount::all();
-
-        Club::all()->each(function ($club) use ($seedFiles, $taxAccounts) {
-            $financeContacts = $club->financeContacts;
+        Club::all()->each(function ($club) use ($seedFiles) {
             $receipts = Receipt::factory()
                 ->count(20)
-                ->make(['club_id' => $club->id])
-                ->each(function ($receipt) use ($financeContacts, $seedFiles, $club, $taxAccounts) {
-                    if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
-                        $receipt->finance_contact_id = $financeContacts->random()->id;
+                ->create(['club_id' => $club->id]);
+
+            // Attach media
+            $receipts->each(function ($receipt) use ($seedFiles, $club) {
+                if (rand(1, 100) <= 50) {
+                    foreach (range(1, rand(1, 3)) as $i) {
+                        $filePath = $seedFiles[array_rand($seedFiles)];
+                        $receipt->addMedia($filePath)
+                            ->withProperties(['club_id' => $club->id])
+                            ->preservingOriginal()
+                            ->toMediaCollection('receipts', 'public');
                     }
+                }
+            });
 
-                    // 50% chance to have tax account
-                    if (rand(1, 100) <= 80 && $taxAccounts->count() > 0) {
-                        $receipt->tax_account_id = $taxAccounts->random()->id;
-                    }
+            // Attach transactions
+            $transactions = Transaction::whereHas('statement', fn($query) => $query->where('club_id', $club->id))->get();
 
-                    $receipt->save();
-
-                    $count = rand(1, 3);
-                    // 50% chance to have media
-                    if (rand(1, 100) <= 50) {
-                        $count = rand(1, 3);
-                        for ($i = 1; $i <= $count; $i++) {
-                            $filePath = $seedFiles[array_rand($seedFiles)];
-
-                            $receipt->addMedia($filePath)
-                                ->withProperties(['club_id' => $club->id])
-                                ->preservingOriginal()
-                                ->toMediaCollection('receipts', 'public');
-                        }
-                    }
-                });
-
-            $transactions = Transaction::whereHas('statement', function ($query) use ($club) {
-                $query->where('club_id', $club->id);
-            })->get();
             $noTransactionReceipts = $receipts->random(max(1, floor($receipts->count() * 0.3)));
             $unusedTransactions = $transactions->random(max(1, floor($transactions->count() * 0.2)));
             $usableTransactions = $transactions->diff($unusedTransactions);
@@ -67,18 +50,14 @@ class FakeReceiptSeeder extends Seeder
                     return;
                 }
 
-                // Attach 1-3 random transactions
                 $selectedTransactions = $usableTransactions->random(rand(1, 3));
                 $receipt->transactions()->attach($selectedTransactions->pluck('id')->toArray());
 
-                // 50% chance to match transaction sum exactly
-                if (rand(1, 100) <= 50) {
-                    $receipt->amount = $selectedTransactions->sum('amount');
-                } else {
-                    $variance = rand(10, 30) / 100;
-                    $direction = rand(0, 1) ? 1 : -1;
-                    $receipt->amount = $selectedTransactions->sum('amount') * (1 + $direction * $variance);
-                }
+                // Adjust amount variance
+                $sum = $selectedTransactions->sum('amount');
+                $receipt->amount = rand(1, 100) <= 50
+                    ? $sum
+                    : $sum * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
 
                 $receipt->save();
             });

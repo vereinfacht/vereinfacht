@@ -16,15 +16,13 @@ export default async function ReceiptShowPage({ params }: Props) {
     const receipt = await Promise.all([
         getReceipt({
             id: params.id,
-            include: ['transactions', 'media', 'taxAccount'],
+            include: ['transactions', 'media', 'taxAccount.skrType'],
         }),
     ]);
 
     if (!receipt) {
         notFound();
     }
-
-    console.log(receipt);
 
     const { t } = createTranslation('receipt');
 
@@ -48,19 +46,19 @@ export default async function ReceiptShowPage({ params }: Props) {
             value: receipt[0]?.amount,
         },
         {
-            attribute: 'media',
-            type: 'media',
-            value: receipt[0]?.media,
-        },
-        {
             attribute: 'taxAccount',
             value:
-                receipt[0]?.taxAccount?.referenceNumber +
+                receipt[0]?.taxAccount?.accountNumber +
                 ' - ' +
                 receipt[0]?.taxAccount?.description +
                 ' (' +
-                receipt[0]?.taxAccount?.name +
+                receipt[0]?.taxAccount?.skrType?.title +
                 ')',
+        },
+        {
+            attribute: 'media',
+            type: 'media',
+            value: receipt[0]?.media,
         },
     ];
 

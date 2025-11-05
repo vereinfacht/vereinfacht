@@ -6926,6 +6926,104 @@
                     }
                 }
             }
+        },
+        "\/tax-accounts": {
+            "get": {
+                "tags": [
+                    "Tax-accounts"
+                ],
+                "summary": "Get all tax-accounts",
+                "description": "",
+                "operationId": "tax-accounts.index",
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The page size for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number for paginated results",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index tax-accounts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.tax-accounts.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -7481,6 +7579,28 @@
                                         "readOnly": true
                                     }
                                 }
+                            },
+                            "skrType": {
+                                "title": "skrType",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
                             }
                         }
                     }
@@ -7711,6 +7831,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-accounts\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "skrType": {
+                                "title": "skrType",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -10300,6 +10442,28 @@
                                     }
                                 }
                             },
+                            "taxAccount": {
+                                "title": "taxAccount",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
                             "transactions": {
                                 "title": "transactions",
                                 "type": "object",
@@ -10601,6 +10765,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/finance-contacts\/15"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "taxAccount": {
+                                "title": "taxAccount",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
                                             }
                                         },
                                         "readOnly": true
@@ -11004,6 +11190,28 @@
                                     }
                                 }
                             },
+                            "taxAccount": {
+                                "title": "taxAccount",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
                             "transactions": {
                                 "title": "transactions",
                                 "type": "object",
@@ -11144,6 +11352,68 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/transactions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.tax-accounts.resource.fetch": {
+                "title": "Resource\/Tax-account\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "tax-accounts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "accountNumber": {
+                                "title": "accountNumber",
+                                "type": "string",
+                                "example": "0010"
+                            },
+                            "description": {
+                                "title": "description",
+                                "type": "string",
+                                "example": "Entgeltlich erworbene Konzessionen und gewerbl. Schutzrechte,"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "skrType": {
+                                "title": "skrType",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
                                             }
                                         },
                                         "readOnly": true

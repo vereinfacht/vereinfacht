@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tax_accounts', function (Blueprint $table) {
+        Schema::create('skr_types', function (Blueprint $table) {
             $table->id();
-            $table->string('account_number');
-            $table->text('description')->nullable();
+            $table->string('title');
             $table->timestamps();
-
-            $table->foreignId('skr_type_id')->constrained('skr_types')
-                ->cascadeOnDelete();
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tax_accounts');
+        Schema::dropIfExists('skr_types');
     }
 };
