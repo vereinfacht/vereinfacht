@@ -54,7 +54,7 @@ export type TFinanceContactDeserialized = TFinanceContactRaw['attributes'] & {
 
 export type TTaxAccountDeserialized = TTaxAccountRaw['attributes'] & {
     id: string;
-    skrType?: {
+    taxAccountChart?: {
         id: string;
         title: string;
     };

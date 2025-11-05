@@ -1,8 +1,8 @@
 <?php
 
-namespace App\JsonApi\V1\SkrTypes;
+namespace App\JsonApi\V1\TaxAccountCharts;
 
-use App\Models\SkrType;
+use App\Models\TaxAccountChart;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -11,12 +11,12 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 
 
-class SkrTypeSchema extends Schema
+class TaxAccountChartSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
      */
-    public static string $model = SkrType::class;
+    public static string $model = TaxAccountChart::class;
 
     /**
      * Get the resource fields.

@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('tax_accounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tax_account_chart_id')->constrained('tax_account_charts')
+                ->cascadeOnDelete();
             $table->string('account_number');
             $table->text('description')->nullable();
             $table->timestamps();
-
-            $table->foreignId('skr_type_id')->constrained('skr_types')
-                ->cascadeOnDelete();
         });
     }
 

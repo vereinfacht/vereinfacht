@@ -13,8 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('clubs', function (Blueprint $table) {
-            $table->foreignId('skr_type_id')->nullable()->after('constitution_url')
-                ->constrained('skr_types')
+            $table->foreignId('tax_account_chart_id')->nullable()->after('id')
+                ->constrained('tax_account_charts')
                 ->nullOnDelete();
         });
     }
@@ -25,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('clubs', function (Blueprint $table) {
-            $table->dropForeign(['skr_type_id']);
-            $table->dropColumn('skr_type_id');
+            $table->dropForeign(['tax_account_chart_id']);
+            $table->dropColumn('tax_account_chart_id');
         });
     }
 };

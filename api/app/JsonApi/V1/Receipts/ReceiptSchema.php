@@ -88,7 +88,7 @@ class ReceiptSchema extends Schema
             'financeContact',
             'media',
             'taxAccount',
-            'taxAccount.skrType',
+            'taxAccount.taxAccountChart',
         ];
     }
 }

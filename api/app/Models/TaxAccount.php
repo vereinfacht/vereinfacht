@@ -13,7 +13,7 @@ class TaxAccount extends Model
     protected $fillable = [
         'account_number',
         'description',
-        'skr_type_id',
+        'tax_account_chart_id',
     ];
 
     public function casts()
@@ -24,8 +24,8 @@ class TaxAccount extends Model
         ];
     }
 
-    public function skrType()
+    public function taxAccountChart()
     {
-        return $this->belongsTo(SkrType::class);
+        return $this->belongsTo(TaxAccountChart::class);
     }
 }

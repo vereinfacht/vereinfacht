@@ -7580,8 +7580,8 @@
                                     }
                                 }
                             },
-                            "skrType": {
-                                "title": "skrType",
+                            "taxAccountChart": {
+                                "title": "taxAccountChart",
                                 "type": "object",
                                 "properties": {
                                     "links": {
@@ -7837,8 +7837,8 @@
                                     }
                                 }
                             },
-                            "skrType": {
-                                "title": "skrType",
+                            "taxAccountChart": {
+                                "title": "taxAccountChart",
                                 "type": "object",
                                 "properties": {
                                     "links": {
@@ -11398,8 +11398,8 @@
                     "relationships": {
                         "type": "object",
                         "properties": {
-                            "skrType": {
-                                "title": "skrType",
+                            "taxAccountChart": {
+                                "title": "taxAccountChart",
                                 "type": "object",
                                 "properties": {
                                     "links": {

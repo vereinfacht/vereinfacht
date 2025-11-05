@@ -59,7 +59,7 @@ class ClubSchema extends Schema
             HasMany::make('membershipTypes')->type('membership-types'),
             HasMany::make('paymentPeriods')->type('payment-periods'),
             HasMany::make('financeAccounts')->type('finance-accounts'),
-            HasOne::make('skrType')->type('skr-types'),
+            HasOne::make('taxAccountChart')->type('tax-account-charts'),
         ];
     }
 
@@ -85,7 +85,7 @@ class ClubSchema extends Schema
     public function includePaths(): array
     {
         return [
-            'skrType',
+            'taxAccountChart',
         ];
     }
 }

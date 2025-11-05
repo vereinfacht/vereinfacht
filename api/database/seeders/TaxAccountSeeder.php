@@ -22,7 +22,7 @@ class TaxAccountSeeder extends Seeder
             DB::table('tax_accounts')->insert([
                 'account_number' => $account['account_number'],
                 'description' => $account['description'],
-                'skr_type_id' => 1,
+                'tax_account_chart_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

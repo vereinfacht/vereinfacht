@@ -16,7 +16,7 @@ export default async function ReceiptShowPage({ params }: Props) {
     const receipt = await Promise.all([
         getReceipt({
             id: params.id,
-            include: ['transactions', 'media', 'taxAccount.skrType'],
+            include: ['transactions', 'media', 'taxAccount.taxAccountChart'],
         }),
     ]);
 
@@ -52,7 +52,7 @@ export default async function ReceiptShowPage({ params }: Props) {
                 ' - ' +
                 receipt[0]?.taxAccount?.description +
                 ' (' +
-                receipt[0]?.taxAccount?.skrType?.title +
+                receipt[0]?.taxAccount?.taxAccountChart?.title +
                 ')',
         },
         {

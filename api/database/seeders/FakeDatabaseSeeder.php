@@ -13,7 +13,7 @@ class FakeDatabaseSeeder extends Seeder
     {
         $this->call([
             DatabaseSeeder::class,
-            SkrTypeSeeder::class,
+            TaxAccountChartSeeder::class,
             DemoClubSeeder::class,
             FakeClubsSeeder::class,
             FakeFinanceAccountSeeder::class,

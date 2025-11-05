@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SkrType extends Model
+class TaxAccountChart extends Model
 {
-    /** @use HasFactory<\Database\Factories\SkrTypeFactory> */
+    /** @use HasFactory<\Database\Factories\TaxAccountChartFactory> */
     use HasFactory;
 
     protected $fillable = [

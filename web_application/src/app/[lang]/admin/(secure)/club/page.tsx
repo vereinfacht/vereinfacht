@@ -22,7 +22,7 @@ async function getClubData(locale: string) {
     const [club] = await getOne<Club>(
         'clubs',
         session.club_id,
-        { include: ['skrType'] },
+        { include: ['taxAccountChart'] },
         locale,
     );
 
@@ -82,8 +82,8 @@ export default async function ClubPage({ params }: Props) {
             type: 'link',
         },
         {
-            attribute: 'skrType' as keyof Club,
-            value: club['skrType']?.title ?? '-',
+            attribute: 'taxAccountChart' as keyof Club,
+            value: club['taxAccountChart']?.title ?? '-',
         },
         {
             attribute: 'membershipStartCycleType',

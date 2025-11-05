@@ -1133,8 +1133,8 @@ export interface components {
                         self?: string;
                     };
                 };
-                /** skrType */
-                skrType?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
                     readonly links?: {
                         /**
                          * related
@@ -1334,8 +1334,8 @@ export interface components {
                         self?: string;
                     };
                 };
-                /** skrType */
-                skrType?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
                     readonly links?: {
                         /**
                          * related
@@ -3832,8 +3832,8 @@ export interface components {
                 description?: string;
             };
             relationships?: {
-                /** skrType */
-                skrType?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
                     readonly links?: {
                         /**
                          * related

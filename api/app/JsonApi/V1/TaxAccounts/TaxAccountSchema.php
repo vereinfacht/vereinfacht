@@ -28,7 +28,7 @@ class TaxAccountSchema extends Schema
             ID::make(),
             Str::make('accountNumber'),
             Str::make('description'),
-            BelongsTo::make('skrType')->type('skr-types'),
+            BelongsTo::make('taxAccountChart')->type('tax-account-charts'),
         ];
     }
 
