@@ -150,5 +150,6 @@ class Server extends BaseServer
         MembershipType::addGlobalScope(new ClubScope);
         FinanceAccount::addGlobalScope(new ClubScope);
         FinanceContact::addGlobalScope(new ClubScope);
+        Statement::addGlobalScope(new ClubScope);
     }
 }
