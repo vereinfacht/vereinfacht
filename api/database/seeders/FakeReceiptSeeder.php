@@ -21,34 +21,26 @@ class FakeReceiptSeeder extends Seeder
         ];
 
         Club::all()->each(function ($club) use ($seedFiles) {
-            $financeContacts = $club->financeContacts;
             $receipts = Receipt::factory()
                 ->count(20)
-                ->make(['club_id' => $club->id])
-                ->each(function ($receipt) use ($financeContacts, $seedFiles, $club) {
-                    if (rand(1, 100) <= 70 && $financeContacts->count() > 0) {
-                        $receipt->finance_contact_id = $financeContacts->random()->id;
+                ->create(['club_id' => $club->id]);
+
+            // Attach media
+            $receipts->each(function ($receipt) use ($seedFiles, $club) {
+                if (rand(1, 100) <= 50) {
+                    foreach (range(1, rand(1, 3)) as $i) {
+                        $filePath = $seedFiles[array_rand($seedFiles)];
+                        $receipt->addMedia($filePath)
+                            ->withProperties(['club_id' => $club->id])
+                            ->preservingOriginal()
+                            ->toMediaCollection('receipts', 'public');
                     }
-                    $receipt->save();
+                }
+            });
 
-                    $count = rand(1, 3);
-                    // 50% chance to have media
-                    if (rand(1, 100) <= 50) {
-                        $count = rand(1, 3);
-                        for ($i = 1; $i <= $count; $i++) {
-                            $filePath = $seedFiles[array_rand($seedFiles)];
+            // Attach transactions
+            $transactions = Transaction::whereHas('statement', fn($query) => $query->where('club_id', $club->id))->get();
 
-                            $receipt->addMedia($filePath)
-                                ->withProperties(['club_id' => $club->id])
-                                ->preservingOriginal()
-                                ->toMediaCollection('receipts', 'public');
-                        }
-                    }
-                });
-
-            $transactions = Transaction::whereHas('statement', function ($query) use ($club) {
-                $query->where('club_id', $club->id);
-            })->get();
             $noTransactionReceipts = $receipts->random(max(1, floor($receipts->count() * 0.3)));
             $unusedTransactions = $transactions->random(max(1, floor($transactions->count() * 0.2)));
             $usableTransactions = $transactions->diff($unusedTransactions);
@@ -58,9 +50,16 @@ class FakeReceiptSeeder extends Seeder
                     return;
                 }
 
-                $receipt->transactions()->attach(
-                    $usableTransactions->random(rand(1, 3))->pluck('id')->toArray()
-                );
+                $selectedTransactions = $usableTransactions->random(rand(1, 3));
+                $receipt->transactions()->attach($selectedTransactions->pluck('id')->toArray());
+
+                // Adjust amount variance
+                $sum = $selectedTransactions->sum('amount');
+                $receipt->amount = rand(1, 100) <= 50
+                    ? $sum
+                    : $sum * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
+
+                $receipt->save();
             });
         });
     }

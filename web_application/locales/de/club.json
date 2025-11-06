@@ -63,5 +63,9 @@
     "has_consented_media_publication_default_value": {
         "label": "Standardwert für Einwilligung Medienveröffentlichung"
     },
-    "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf."
+    "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf.",
+    "tax_account_chart": {
+        "label": "Steuerkontenkreis",
+        "help": "Der Steuerkontenkreis, der für diesen Verein verwendet wird."
+    }
 }

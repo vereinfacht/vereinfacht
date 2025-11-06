@@ -755,6 +755,23 @@ export interface paths {
         patch: operations["statements.transactions.update"];
         trace?: never;
     };
+    "/tax-accounts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all tax-accounts */
+        get: operations["tax-accounts.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1116,6 +1133,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** taxAccountChart */
+                taxAccountChart?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        self?: string;
+                    };
+                };
             };
         };
         /** Resource/Club/Update */
@@ -1298,6 +1330,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** taxAccountChart */
+                taxAccountChart?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
                          */
                         self?: string;
                     };
@@ -3142,6 +3189,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** taxAccount */
+                taxAccount?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        self?: string;
+                    };
+                };
                 /** transactions */
                 transactions?: {
                     readonly links?: {
@@ -3354,6 +3416,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         */
+                        self?: string;
+                    };
+                };
+                /** taxAccount */
+                taxAccount?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
                          */
                         self?: string;
                     };
@@ -3617,6 +3694,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** taxAccount */
+                taxAccount?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        self?: string;
+                    };
+                };
                 /** transactions */
                 transactions?: {
                     readonly links?: {
@@ -3712,6 +3804,45 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/transactions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Tax-account/Fetch */
+        "resources.tax-accounts.resource.fetch": {
+            /**
+             * type
+             * @default tax-accounts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * accountNumber
+                 * @example 0010
+                 */
+                accountNumber?: string;
+                /**
+                 * description
+                 * @example Entgeltlich erworbene Konzessionen und gewerbl. Schutzrechte,
+                 */
+                description?: string;
+            };
+            relationships?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/skr-types/1
                          */
                         self?: string;
                     };
@@ -7065,6 +7196,45 @@ export interface operations {
             401: components["responses"]["401"];
             404: components["responses"]["404"];
             422: components["responses"]["422"];
+        };
+    };
+    "tax-accounts.index": {
+        parameters: {
+            query?: {
+                /** @description The page size for paginated results */
+                "page[size]"?: number;
+                /** @description The page number for paginated results */
+                "page[number]"?: number;
+                sort?: ("id" | "-id")[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index tax-accounts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.tax-accounts.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
         };
     };
 }

@@ -1,0 +1,4941 @@
+{
+  "country_code": "de",
+  "name": "Germany - Kontenplan SKR03 UKV",
+  "tree": {
+    "Aktiva": {
+      "root_type": "Asset",
+      "is_group": 1,
+      "Anlageverm\u00f6gen": {
+        "is_group": 1,
+        "Immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+          "is_group": 1,
+          "Entgeltlich erworbene Konzessionen und gewerbl. Schutzrechte,": {
+            "account_number": "0010"
+          },
+          "Konzessionen": {
+            "account_number": "0015"
+          },
+          "Gewerbliche Schutzrechte": {
+            "account_number": "0020"
+          },
+          "\u00c4hnliche Rechte und Werte": {
+            "account_number": "0025"
+          },
+          "EDV-Software,": {
+            "account_number": "0027"
+          },
+          "Lizenzen an gewerblichen Schutzrechten und \u00e4hnlichen Rechten und Werten": {
+            "account_number": "0030"
+          },
+          "Gesch\u00e4fts- oder Firmenwert": {
+            "account_number": "0035"
+          },
+          "Anzahlungen auf Gesch\u00e4fts-, Firmenwert": {
+            "account_number": "0038"
+          },
+          "Anzahlungen immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "0039"
+          },
+          "Verschmelzungsmehrwert": {
+            "account_number": "0040"
+          },
+          "Selbstgeschaffene immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "0043"
+          },
+          "EDV Software": {
+            "account_number": "0044"
+          },
+          "Lizenzen und Franchisevertr\u00e4ge": {
+            "account_number": "0045"
+          },
+          "Konzessionen und gewerbliche Schutzrechte": {
+            "account_number": "0046"
+          },
+          "Rezepte, Verfahren, Prototypen": {
+            "account_number": "0047"
+          },
+          "Immaterielle Verm\u00f6gensgegenst\u00e4nde in Entwicklung": {
+            "account_number": "0048"
+          }
+        },
+        "Sachanlagen": {
+          "is_group": 1,
+          "Grundst\u00fccke, grundst\u00fccksgleiche Rechte und Bauten einschlie\u00dflich der Bauten auf fremden Grundst\u00fccken": {
+            "is_group": 1,
+            "Grundst\u00fccke,grndst.Rechte und Bauten": {
+              "account_number": "0050",
+              "account_type": "Fixed Asset"
+            },
+            "Grundst\u00fccksanteil h\u00e4usl. Arbeitszimmer": {
+              "account_number": "0059"
+            },
+            "Grundst\u00fccke, grundst\u00fccksgl. Rechte": {
+              "account_number": "0060"
+            },
+            "Unbebaute Grundst\u00fccke": {
+              "account_number": "0065"
+            },
+            "Grundst\u00fccksgleiche Rechte": {
+              "account_number": "0070"
+            },
+            "Grundst\u00fccke mit Substanzverzehr": {
+              "account_number": "0075"
+            },
+            "Bauten auf eigenen Grundst\u00fccken und grundst\u00fcckgleichen Rechten": {
+              "Bauten auf eigenen Grundst\u00fccken und grundst\u00fcckgleichen Rechten": {
+                "account_number": "0080"
+              },
+              "Grundst\u00fcckswert eigener bebauter Grundst\u00fccke": {
+                "account_number": "0085",
+                "account_type": "Fixed Asset"
+              },
+              "Gesch\u00e4ftsbauten": {
+                "is_group": 1,
+                "Gesch\u00e4ftsbauten": {
+                  "account_number": "0090"
+                },
+                "Fabrikbauten": {
+                  "account_number": "0100"
+                },
+                "Garagen": {
+                  "account_number": "0110"
+                },
+                "Au\u00dfenanlagen": {
+                  "account_number": "0111"
+                },
+                "Hof- und Wegebefestigungen": {
+                  "account_number": "0112"
+                },
+                "Einrichtung Fabrik- und Gesch\u00e4ftsbauten": {
+                  "account_number": "0113"
+                },
+                "Andere Baute": {
+                  "account_number": "0115"
+                }
+              },
+              "account_type": "Fixed Asset",
+              "Wohnbauten": {
+                "is_group": 1,
+                "Wohnbauten": {
+                  "account_number": "0140"
+                },
+                "Garagen": {
+                  "account_number": "0145"
+                },
+                "Au\u00dfenanlagen": {
+                  "account_number": "0146"
+                },
+                "Hof- und Wegebefestigungen": {
+                  "account_number": "0147"
+                },
+                "Einrichtungen f\u00fcr Wohnbauten": {
+                  "account_number": "0148"
+                },
+                "Geb\u00e4udeteil h\u00e4usliches Arbeitszimmer": {
+                  "account_number": "0149"
+                }
+              }
+            },
+            "Bauten auf fremden Grundst\u00fccken": {
+              "is_group": 1,
+              "Bauten auf fremden Grundst\u00fccken": {
+                "account_number": "0160"
+              },
+              "Gesch\u00e4ftsbauten": {
+                "is_group": 1,
+                "Gesch\u00e4ftsbauten": {
+                  "account_number": "0165"
+                },
+                "Fabrikbauten": {
+                  "account_number": "0170"
+                },
+                "Garagen": {
+                  "account_number": "0175"
+                },
+                "Au\u00dfenanlagen": {
+                  "account_number": "0176"
+                },
+                "Hof- und Wegebefestigungen": {
+                  "account_number": "0177"
+                },
+                "Einrichtung Fabrik- und Gesch\u00e4ftsbauten": {
+                  "account_number": "0178"
+                },
+                "Andere Bauten": {
+                  "account_number": "0179"
+                }
+              },
+              "Wohnbauten": {
+                "is_group": 1,
+                "Wohnbauten": {
+                  "account_number": "0190"
+                },
+                "Garagen": {
+                  "account_number": "0191"
+                },
+                "Au\u00dfenanlagen": {
+                  "account_number": "0192"
+                },
+                "Hof- und Wegebefestigungen": {
+                  "account_number": "0193"
+                },
+                "Einrichtungen f\u00fcr Wohnbauten": {
+                  "account_number": "0194"
+                }
+              }
+            }
+          },
+          "Technische Anlagen und Maschinen": {
+            "is_group": 1,
+            "Technische Anlagen und Maschinen": {
+              "account_number": "0200"
+            },
+            "Maschinen": {
+              "account_number": "0210"
+            },
+            "Maschinengebundene Werkzeuge": {
+              "account_number": "0220"
+            },
+            "Maschinelle Anlagen": {
+              "account_number": "0240"
+            },
+            "Transportanlagen und \u00c4hnliches": {
+              "account_number": "0260"
+            },
+            "Betriebsvorrichtungen": {
+              "account_number": "0280"
+            }
+          },
+          "Andere Anlagen, Betriebs- und Gesch\u00e4ftsausstattung": {
+            "is_group": 1,
+            "Andere Anlagen, Betriebs- und Gesch\u00e4ftsausstattung": {
+              "account_number": "0300"
+            },
+            "Andere Anlagen": {
+              "account_number": "0310"
+            },
+            "PKW": {
+              "account_number": "0320"
+            },
+            "LKW": {
+              "account_number": "0350"
+            },
+            "Sonstige Transportmittel": {
+              "account_number": "0380"
+            },
+            "Betriebsausstattung": {
+              "account_number": "0400"
+            },
+            "Gesch\u00e4ftsausstattung": {
+              "account_number": "0410"
+            },
+            "B\u00fcroeinrichtung": {
+              "account_number": "0420"
+            },
+            "Ladeneinrichtung": {
+              "account_number": "0430"
+            },
+            "Werkzeuge": {
+              "account_number": "0440"
+            },
+            "Einbauten": {
+              "account_number": "0450"
+            },
+            "Ger\u00fcst- und Schalungsmaterial": {
+              "account_number": "0460"
+            },
+            "Geringwertige Wirtschaftsg\u00fcter": {
+              "account_number": "0480"
+            },
+            "Geringwertige WG gr\u00f6\u00dfer 150 bis 1000 Euro (Sammelposten)": {
+              "account_number": "0485"
+            },
+            "Sonstige Betriebs-u.Gesch.ausstattung": {
+              "account_number": "0490"
+            }
+          },
+          "Geleistete Anzahlungen und Anlagen im Bau": {
+            "is_group": 1,
+            "Anzahlungen a.Grundst\u00fccke ohne Bauten": {
+              "account_number": "0079"
+            },
+            "Gesch\u00e4fts-,Fabrik-u.and. Bauten im Bau": {
+              "account_number": "0120"
+            },
+            "Anzahlg. auf Bauten eigen. Grundst\u00fccken": {
+              "account_number": "0129"
+            },
+            "Wohnbauten im Bau": {
+              "account_number": "0150"
+            },
+            "Anzahlung auf Wohnbauten auf eig. Grundst\u00fccken": {
+              "account_number": "0159"
+            },
+            "Gesch\u00e4fts-,Fabrik-u.and. Bauten im Bau auf fremd. Grundst\u00fccken": {
+              "account_number": "0180"
+            },
+            "Anzahlungen auf Bauten fremd. Grundst\u00fccken": {
+              "account_number": "0189"
+            },
+            "Wohnbauten im Bau auf fremd. Grundst\u00fccken": {
+              "account_number": "0195"
+            },
+            "Anzahlungen a. Wohnbauten auf fremd. Grundst\u00fccken": {
+              "account_number": "0199"
+            },
+            "Technische Anlagen und Maschinen im Bau": {
+              "account_number": "0290"
+            },
+            "Anzahlungen auf technische Anlagen": {
+              "account_number": "0299"
+            },
+            "Betriebs- u. Gesch.ausstattung im Bau": {
+              "account_number": "0498"
+            },
+            "Anzahlung Betriebs- u. Gesch.ausstattung": {
+              "account_number": "0499"
+            }
+          }
+        },
+        "Finanzanlagen": {
+          "is_group": 1,
+          "Anteile an verbundenen Unternehmen (Anlageverm\u00f6gen)": {
+            "is_group": 1,
+            "Anteile an verbundenen Unternehmen (Anlageverm\u00f6gen)": {
+              "account_number": "0500"
+            },
+            "Anteile an herrschender oder mehrheitlich beteiligter Gesellschaft": {
+              "account_number": "0504"
+            }
+          },
+          "Ausleihungen an verbundene Unternehmen": {
+            "is_group": 1,
+            "Ausleihungen an verbundene Unternehmen": {
+              "account_number": "0505"
+            },
+            "Ausleihungen an verbundene Unternehmen, Personengesellschaften": {
+              "account_number": "0506"
+            },
+            "Ausleihungen an verbundene Unternehmen, Kapitalgesellschaften": {
+              "account_number": "0507"
+            },
+            "Ausleihungen an verbundene Unternehmen, Einzelunternehmen": {
+              "account_number": "0508"
+            }
+          },
+          "Beteiligungen": {
+            "is_group": 1,
+            "Beteiligungen": {
+              "account_number": "0510"
+            },
+            "Typisch stille Beteiligungen": {
+              "account_number": "0513"
+            },
+            "Atypische stille Beteiligungen": {
+              "account_number": "0516"
+            },
+            "Andere Beteiligungen an Kapitalges.": {
+              "account_number": "0517"
+            },
+            "Andere Beteiligungen an Personenges.": {
+              "account_number": "0518"
+            },
+            "Beteiligung GmbH&Co. an Komplement\u00e4r GmbH": {
+              "account_number": "0519"
+            }
+          },
+          "Ausleihungen an ein Unternehmen, mit denen ein Beteiligungsverh\u00e4ltnis besteht": {
+            "is_group": 1,
+            "Ausleih. an UN mit Beteiligungsverh.": {
+              "account_number": "0520"
+            },
+            "Ausleihungen an Unternehmen, mit denen ein Beteiligungsverh\u00e4ltniss besteht, Personengesellschaften": {
+              "account_number": "0523"
+            },
+            "Ausleihungen an Unternehmen, mit denen ein Beteiligungsverh\u00e4ltniss besteht, Kapitalgesellschaften": {
+              "account_number": "0524"
+            }
+          },
+          "Wertpapiere des Anlageverm\u00f6gens": {
+            "is_group": 1,
+            "Wertpapiere des Anlageverm\u00f6gens": {
+              "account_number": "0525"
+            },
+            "Wertpapiere mit Gewinnbeteiligungsanspr\u00fcchen, die dem Teileink\u00fcnfteverfahren unterliegen": {
+              "account_number": "0530"
+            },
+            "Festverzinsliche Wertpapier": {
+              "account_number": "0535"
+            }
+          },
+          "Sonstige Ausleihungen": {
+            "is_group": 1,
+            "Sonstige Ausleihungen": {
+              "account_number": "0540"
+            },
+            "Darlehen": {
+              "account_number": "0550"
+            },
+            "Ausleihungen an Gesellschafter": {
+              "account_number": "0580"
+            },
+            "Ausleihungen an GmbH Gesellschafter": {
+              "account_number": "0582"
+            },
+            "Ausleihungen an stille Gesellschafter": {
+              "account_number": "0583"
+            },
+            "Ausleihungen an pers\u00f6nlich haftende Gesellschafter": {
+              "account_number": "0584"
+            },
+            "Ausleihungen an Kommanditisten": {
+              "account_number": "0586"
+            },
+            "Ausleihungen an nahe stehende Personen": {
+              "account_number": "0590"
+            }
+          },
+          "Genossenschaftsanteile zum langfristigen Verbleib ": {
+            "is_group": 1,
+            "Genossenschaftsanteile zum langfristigen Verbleib ": {
+              "account_number": "0570"
+            }
+          },
+          "R\u00fcckdeckungsanspr\u00fcche aus Lebensversicherungen zum langfristigen Verbleib": {
+            "is_group": 1,
+            "R\u00fcckdeckungsanspr\u00fcche aus Lebensversicherungen zum langfristigen Verbleib": {
+              "account_number": "0595"
+            }
+          }
+        }
+      },
+      "Umlaufverm\u00f6gen": {
+        "is_group": 1,
+        "Vorr\u00e4te": {
+          "is_group": 1,
+          "Roh-, Hilfs- und Betriebsstoffe ": {
+            "is_group": 1,
+            "Bestand Roh-, Hilfs- und Betriebsstoffe": {
+              "account_number": "3970"
+            },
+            "Bestand Waren": {
+              "account_number": "3980"
+            }
+          },
+          "Unfertige Erzeugnisse und Leistungen": {
+            "is_group": 1,
+            "Unfertige Erzeugnisse und Leistungen": {
+              "account_number": "7000",
+              "account_type": "Stock"
+            },
+            "Unfertige Erzeugnisse": {
+              "account_number": "7050",
+              "account_type": "Stock"
+            },
+            "Unfertige Leistungen": {
+              "account_number": "7080"
+            }
+          },
+          "Fertige Erzeugnisse und Waren": {
+            "is_group": 1,
+            "Fertige Erzeugnisse und Waren (Bestand)": {
+              "account_number": "7100",
+              "account_type": "Stock"
+            },
+            "Fertige Erzeugnisse (Bestand)": {
+              "account_number": "7110",
+              "account_type": "Stock"
+            },
+            "Waren (Bestand)": {
+              "account_number": "7140",
+              "account_type": "Stock"
+            }
+          },
+          "Geleistete  Anzahlungen": {
+            "is_group": 1,
+            "Geleistete Anzahlungen auf Vorr\u00e4te": {
+              "account_number": "1510"
+            },
+            "Geleistete Anzahlungen 7% VSt": {
+              "account_number": "1511"
+            },
+            "Geleistete Anzahlungen 19% VSt": {
+              "account_number": "1518"
+            }
+          }
+        },
+        "Forderungen und sonstige Verm\u00f6gensgegenst\u00e4nde": {
+          "is_group": 1,
+          "Forderungen aus Lieferungen und Leistungen": {
+            "is_group": 1,
+            "Forderungen aus Lieferungen und Leistungen": {
+              "account_number": "1400",
+              "account_type": "Receivable"
+            },
+            "Forderungen aus Lieferungen und Leistungen ohne Kontokorrent": {
+              "account_number": "1410",
+              "account_type": "Receivable"
+            },
+            "Forderungen aus Lieferungen und Leistungen zum allgem. UStsatz oder eines Kleinunternehmens(E\u00dcR - Einnahme \u00dcberschussrechnung)": {
+              "account_number": "1445"
+            },
+            "Forderungen aus Lieferungen und Leistungen zum erm\u00e4\u00dfigt. Steuersatz (E\u00dcR)": {
+              "account_number": "1446"
+            },
+            "Forderg. aus stfr., oder nicht steuerbaren Lieferungen und Leistungen  (E\u00dcR)": {
+              "account_number": "1447"
+            },
+            "Forderungen aus Lieferungen und Leistungen  gem\u00e4\u00df § 24 UStG (E\u00dcR)": {
+              "account_number": "1448"
+            },
+            "Gegenkto 1445-1448 Aufteilung der Forderungen nach Steuers\u00e4tzen (E\u00dcR)": {
+              "account_number": "1449"
+            },
+            "Forderungen nach § 11 EStG f\u00fcr § 4/3 ESt": {
+              "account_number": "1450"
+            },
+            "Forderungen aus Lieferungen/Leistungen ohne Kontokorrent (bis 1 Jahr)": {
+              "account_number": "1451"
+            },
+            "Forderungen aus Lieferungen/Leistungen ohne Kontokorrent (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1455"
+            },
+            "Zweifelhafte Forderungen": {
+              "account_number": "1460"
+            },
+            "Zweifelhafte Forderungen (bis 1 Jahr)": {
+              "account_number": "1461"
+            },
+            "Zweifelhafte Forderungen (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1465"
+            },
+            "Pauschalwertberichtigung auf Forderungen mit einer Restlaufzeit bis zu 1 Jahr": {
+              "account_number": "0996"
+            },
+            "Pauschalwertberichtigung auf Forderungen mit einer Restlaufzeit von mehr als 1 Jahr": {
+              "account_number": "0997"
+            },
+            "Einzelwertberichtigungen auf Forderungen mit einer Restlaufzeit bis zu 1 Jahr": {
+              "account_number": "0998"
+            },
+            "Einzelwertberichtigungen auf Forderungen mit einer Restlaufzeit von mehr als 1 Jahr": {
+              "account_number": "0999"
+            },
+            "Forderungen aus Lieferungen und Leistungen gg. Gesellschafter": {
+              "account_number": "1490"
+            },
+            "Forderungen aus Lieferungen und Leistungen gg. Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1491"
+            },
+            "Forderungen aus Lieferungen und Leistungen gg. Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1495"
+            },
+            "Gegenkonto sonst.VG bei Buchung Debitor": {
+              "account_number": "1498"
+            },
+            "Gegenkonto bei Aufteilung Debitoren": {
+              "account_number": "1499"
+            }
+          },
+          "Forderungen gegen verbundene Unternehmen": {
+            "is_group": 1,
+            "Forderungen aus L+L gg. verbundenen UN": {
+              "account_number": "1470"
+            },
+            "Forderungen aus L+L gg. verbund. UN (bis 1 Jahr)": {
+              "account_number": "1471"
+            },
+            "Forderungen aus L+L gg. verbund. UN (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1475"
+            },
+            "WB Forderungen gg. verbundene UN ((bis 1 Jahr)": {
+              "account_number": "1478"
+            },
+            "WB Forderungen gg. verbundene UN (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1479"
+            },
+            "Forderungen gegen verbund. Unternehmen": {
+              "account_number": "1594"
+            },
+            "Forderungen gg. verbundene UN(bis 1 Jahr)": {
+              "account_number": "1595"
+            },
+            "Forderungen gg. verbundene UN(gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1596"
+            }
+          },
+          "Forderungen gegen Unternehmen, mit denen ein Beteiligungsverh\u00e4ltnis besteht": {
+            "is_group": 1,
+            "Forderg. L+L gg. UN m. Beteiligungsverh\u00e4ltnis": {
+              "account_number": "1480"
+            },
+            "Forderg. L+L gg.U N m. Beteiligungsverh\u00e4ltnis(bis 1 Jahr)": {
+              "account_number": "1481"
+            },
+            "Forderg. L+L gg. UN m. Beteiligungsverh\u00e4ltnis(gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1485"
+            },
+            "Wertberichtigungen auf Forderungen gegen Unternehmen, mit denen ein Beteiligungsverh\u00e4ltnis besteht (bis 1 Jahr)": {
+              "account_number": "1488"
+            },
+            "Wertberichtigungen auf Forderungen gegen Unternehmen, mit denen ein Beteiligungsverh\u00e4ltnis besteht (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1489"
+            },
+            "Forderungen gg. UN m. Beteiligungsverh\u00e4ltnis": {
+              "account_number": "1597"
+            },
+            "Forderg. gg. UN mit Beteiligungsverh\u00e4ltnis b.1J": {
+              "account_number": "1598"
+            },
+            "Forderg. gg. UN mit Beteiligungsverh\u00e4ltnis g.1J": {
+              "account_number": "1599"
+            }
+          },
+          "sonstige Verm\u00f6gensgegenst\u00e4nde": {
+            "is_group": 1,
+            "GmbH-Anteile zum kurzfristigen Verbleib": {
+              "account_number": "1350"
+            },
+            "Genossenschaftsanteile zum kurzfristigen Verbleib": {
+              "account_number": "1352"
+            },
+            "Verm\u00f6gensgegenst\u00e4nde zur Erf\u00fcllung von mit der Altersversorgung vergleichbaren langfristigen Verpflichtungen": {
+              "account_number": "1353"
+            },
+            "Verm\u00f6gensgegenst\u00e4nde zur Saldierung mit der Altersversorgung vergleichbaren langfristigen Verpflichtungen": {
+              "account_number": "1354"
+            },
+            "Anspr\u00fcche a. R\u00fcckdeckungsversicherung": {
+              "account_number": "1355"
+            },
+            "Verm\u00f6gensgegenst\u00e4nde zur Erf\u00fcllung von Pensionsr\u00fcckstellungen und \u00e4hnlichen Verpflichtungen zum langfristigen Verbleib": {
+              "account_number": "1356"
+            },
+            "Verm\u00f6gensgegenst\u00e4nde zur Saldierung mit Pensionsr\u00fcckstell. und \u00e4hnlichen Verpflicht. zum langfrist. Verbleib": {
+              "account_number": "1357"
+            },
+            "Geldtransit": {
+              "account_number": "1360"
+            },
+            "Gewinnermittlung §4/3 EsTg ergebniswirksam": {
+              "account_number": "1370"
+            },
+            "Gewinnermittlung §4/3 EsTg nicht ergebniswirksam": {
+              "account_number": "1371"
+            },
+            "Wirtschaftsg\u00fcter Umlaufverm. § 4/3 EStG": {
+              "account_number": "1372"
+            },
+            "Forderungen gegen Kommanditisten und atypisch stille Gesellschafter": {
+              "account_number": "1373"
+            },
+            "Forderungen gegen Kommanditisten und atypisch stille Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1374"
+            },
+            "Forderungen gegen Kommanditisten und atypisch stille Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1375"
+            },
+            "Forderungen gegen typisch stille Gesellschafter": {
+              "account_number": "1376"
+            },
+            "Forderungen gegen typisch stille Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1377"
+            },
+            "Forderungen gegen typisch stille Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1378"
+            },
+            "\u00dcberleitungskonto Kostenstellen": {
+              "account_number": "1380"
+            },
+            "Forderungen gegen GmbH-Gesellschafter": {
+              "account_number": "1381"
+            },
+            "Forderungen gegen GmbH-Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1382"
+            },
+            "Forderungen gegen GmbH-Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1383"
+            },
+            "Forderungen gegen pers\u00f6nlich haftende Gesellschafter": {
+              "account_number": "1385"
+            },
+            "Forderungen gegen pers\u00f6nlich haftende Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1386"
+            },
+            "Forderungen gegen pers\u00f6nlich haftende Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1387"
+            },
+            "Anspr\u00fcche aus betrieblicher Alterversorgung und Pensionsanspr\u00fcche (Mitunternehmer)": {
+              "account_number": "1389"
+            },
+            "Verrechnung Ist-Versteuerung": {
+              "account_number": "1390"
+            },
+            "Sonstige Verm\u00f6gensgegenst\u00e4nde": {
+              "account_number": "1500"
+            },
+            "Sonstige Verm\u00f6gensgegenst\u00e4nde (bis 1 Jahr)": {
+              "account_number": "1501"
+            },
+            "Sonstige Verm\u00f6gensgegenst\u00e4nde (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1502"
+            },
+            "Forderungen gg. Gesch\u00e4ftsf.(bis 1 Jahr)": {
+              "account_number": "1503"
+            },
+            "Forderungen gg. Gesch\u00e4ftsf.(gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1504"
+            },
+            "Forderungen gg. Aufsichtsratsm. (bis 1 Jahr)": {
+              "account_number": "1505"
+            },
+            "Forderungen gg. Aufsichtsratsm. (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1506"
+            },
+            "Forderungen gg. Gesellschafter (bis 1 Jahr)": {
+              "account_number": "1507"
+            },
+            "Forderungen gg. Gesellschafter (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1508"
+            },
+            "Forderungen gegen Arbeitsgemeinschaften": {
+              "account_number": "1519"
+            },
+            "Forderungen gegen\u00fcber Krankenkassen aus Aufwendungsausgleichsgesetz": {
+              "account_number": "1520"
+            },
+            "Agenturwarenabrechnung": {
+              "account_number": "1521"
+            },
+            "Genussrechte": {
+              "account_number": "1522"
+            },
+            "Einzahlungsanspr\u00fcche zu Nebenleistungen oder Zuzahlungen": {
+              "account_number": "1524"
+            },
+            "Kautionen": {
+              "account_number": "1525"
+            },
+            "Kautionen (bis 1 Jahr": {
+              "account_number": "1526"
+            },
+            "Kautionen (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1527"
+            },
+            "Nachtr\u00e4gl. abz. VSt § 15a Abs. 2": {
+              "account_number": "1528"
+            },
+            "Zur\u00fcckzuzahlende VSt §15a Abs.2": {
+              "account_number": "1529"
+            },
+            "Forderg. gg. Personal Lohn- u. Gehalt": {
+              "account_number": "1530"
+            },
+            "Forderungen gegen Personal (bis 1 Jahr)": {
+              "account_number": "1531"
+            },
+            "Forderungen gegen Personal (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1537"
+            },
+            "K\u00f6rperschaftsteuerguthaben §37 (bis 1 Jahr)": {
+              "account_number": "1538"
+            },
+            "K\u00f6rperschaftsteuerguthaben §37 (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1539"
+            },
+            "Steuer\u00fcberzahlungen": {
+              "account_number": "1540"
+            },
+            "Steuererst.anspruch gegen ander. EG-Land": {
+              "account_number": "1542"
+            },
+            "Forderg. an FA aus abgef\u00fchrtem Bauabzug": {
+              "account_number": "1543"
+            },
+            "Forderungen gegen\u00fcber Bundesagentur f\u00fcr Arbeit": {
+              "account_number": "1544"
+            },
+            "USt-Forderungen": {
+              "account_number": "1545"
+            },
+            "USt-Forderungen Vorjahr": {
+              "account_number": "1546"
+            },
+            "Forderungen aus Verbrauchsteuern": {
+              "account_number": "1547"
+            },
+            "VSt im Folgejahr abziehbar": {
+              "account_number": "1548"
+            },
+            "K\u00f6rperschaftsteuerr\u00fcckforderung": {
+              "account_number": "1549"
+            },
+            "Darlehen": {
+              "account_number": "1550"
+            },
+            "Darlehen (bis 1 Jahr)": {
+              "account_number": "1551"
+            },
+            "Darlehen (gr\u00f6\u00dfer 1 Jahr)": {
+              "account_number": "1555"
+            },
+            "Nachtr\u00e4glich abziehbare VSt, § 15a Abs. 1 UStG, bewegliche Wirtschaftsg\u00fcter": {
+              "account_number": "1556"
+            },
+            "Zur\u00fcckzuzahlende VSt, § 15a Abs. 1 UStG, bewegliche Wirtschaftsg\u00fcte": {
+              "account_number": "1557"
+            },
+            "Nachtr\u00e4glich abziehbare VSt, § 15a Abs. 1 UStG, unbewegliche Wirtschaftsg\u00fcter": {
+              "account_number": "1558"
+            },
+            "Zur\u00fcckzuzahlende VSt, § 15a Abs. 1 UStG, unbeweglich Wirtschaftsg\u00fcter": {
+              "account_number": "1559"
+            },
+            "Aufzuteilende VSt": {
+              "account_number": "1560"
+            },
+            "Aufzuteilende VSt 7%": {
+              "account_number": "1561"
+            },
+            "Aufzuteilende VSt aus innergemeinschaftlichem Erwerb": {
+              "account_number": "1562"
+            },
+            "Aufzuteil. VSt aus innergemeinschaftlichem Erwerb 19%": {
+              "account_number": "1563"
+            },
+            "Aufzuteilende VSt 19%": {
+              "account_number": "1566"
+            },
+            "Aufzuteil. VSt §§ 13a/13b UStG": {
+              "account_number": "1567"
+            },
+            "Aufzuteil. VSt §§13a/13b USt 19%": {
+              "account_number": "1569"
+            },
+            "Abziehbare VSt": {
+              "account_number": "1570"
+            },
+            "Abziehbare VSt 7%": {
+              "account_number": "1571"
+            },
+            "Abziehbare VSt aus innergemeinschaftlichem Erwerb": {
+              "account_number": "1572"
+            },
+            "VSt aus Erwerb als letzter Abnehmer innerhalb eines Dreiecksgesch\u00e4fts": {
+              "account_number": "1573"
+            },
+            "Abziehbare VSt aus innergemeinschaftlichem Erwerb 19%": {
+              "account_number": "1574"
+            },
+            "Abziehbare VSt 19%": {
+              "account_number": "1576"
+            },
+            "Abziehbare VSt § 13b UStG 19%": {
+              "account_number": "1577"
+            },
+            "Abziehbare VSt § 13b UStG": {
+              "account_number": "1578"
+            },
+            "Gegenkonto VSt § 4/3 EStG": {
+              "account_number": "1580"
+            },
+            "Aufl\u00f6sung VSt Vorjahr § 4/3 EStG": {
+              "account_number": "1581"
+            },
+            "VSt aus Investitionen § 4/3 EStG": {
+              "account_number": "1582"
+            },
+            "Gegenkto. VSt Durchschnittss\u00e4tze": {
+              "account_number": "1583"
+            },
+            "Abziehbare VSt aus innergemeinschaftlichem Erwerb von Neufahrzeugen von Lieferanten ohne USt-Id-Nr. ": {
+              "account_number": "1584"
+            },
+            "Abziehbare VSt aus der Auslagerung von Gegenst\u00e4nden aus einem UStlager": {
+              "account_number": "1585"
+            },
+            "VSt nach allgemeinen Durchschnittss\u00e4tzen UStVA Kz. 63": {
+              "account_number": "1587"
+            },
+            "Einfuhr-USt": {
+              "account_number": "1588"
+            },
+            "Durchlaufende Posten": {
+              "account_number": "1590"
+            },
+            "Rundungsdifferenzen": {
+              "account_number": "1591",
+              "account_type": "Round Off"
+            },
+            "Fremdgeld": {
+              "account_number": "1592"
+            }
+          }
+        },
+        "Schecks, Kassenbestand, Bundesbank- und Postbankguthaben, Guthaben bei Kreditinstituten": {
+          "is_group": 1,
+          "Kasse": {
+            "account_number": "1000",
+            "account_type": "Cash"
+          },
+          "Nebenkasse 1": {
+            "account_number": "1010",
+            "account_type": "Cash"
+          },
+          "Nebenkasse 2": {
+            "account_number": "1020",
+            "account_type": "Cash"
+          },
+          "Postbank": {
+            "account_number": "1100"
+          },
+          "Postbank 1": {
+            "account_number": "1110"
+          },
+          "Postbank 2": {
+            "account_number": "1120"
+          },
+          "Postbank 3": {
+            "account_number": "1130"
+          },
+          "LZB-Guthaben": {
+            "account_number": "1190"
+          },
+          "Bundesbankguthaben": {
+            "account_number": "1195"
+          },
+          "Bank": {
+            "account_number": "1200",
+            "account_type": "Bank"
+          },
+          "Bank 1": {
+            "account_number": "1210"
+          },
+          "Bank 2": {
+            "account_number": "1220"
+          },
+          "Bank 3": {
+            "account_number": "1230"
+          },
+          "Bank 4": {
+            "account_number": "1240"
+          },
+          "Bank 5": {
+            "account_number": "1250"
+          },
+          "Paypal": {
+            "account_number": "1255"
+          },
+          "Finanzmittelanlagen im Rahmen der kurzfristigen Finanzdisposition (nicht im Finanzmittelfonds enthalten)": {
+            "account_number": "1290"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kreditinstituten (nicht im Finanzmittelfonds enthalten": {
+            "account_number": "1295"
+          },
+          "Wechsel aus Lieferung und Leistung": {
+            "account_number": "1300"
+          },
+          "Wechsel a. Lieferungen/Leistungen (bis 1 Jahr)": {
+            "account_number": "1301"
+          },
+          "Wechsel a. Lieferungen/Leistungen (gr\u00f6\u00dfer 1 Jahr)": {
+            "account_number": "1302"
+          },
+          "Wechsel aus Lieferungen und Leistungen, bundesbankf\u00e4hig": {
+            "account_number": "1305"
+          },
+          "Besitzwechsel gegen verbund. Unternehmen": {
+            "account_number": "1310"
+          },
+          "Besitzwechsel gegen verbundene UN (bis 1 Jahr)": {
+            "account_number": "1311"
+          },
+          "Besitzwechsel gegen verbundene UN (gr\u00f6\u00dfer 1 Jahr)": {
+            "account_number": "1312"
+          },
+          "Besitzwechs.gg.verb.UN, bundesbankf\u00e4hig": {
+            "account_number": "1315"
+          },
+          "Besitzwechsel gg.UN m. Beteiligungsverh.": {
+            "account_number": "1320"
+          },
+          "Besitzwechsel gg.UN m. Beteiligungsverh.(bis 1 Jahr)": {
+            "account_number": "1321"
+          },
+          "Besitzwechsel gg.UN m. Beteiligungsverh.(gr\u00f6\u00dfer 1 Jahr)": {
+            "account_number": "1322"
+          },
+          "Besitzwechsel gg.UN m. Beteiligungsverh., bundesbankf\u00e4hig": {
+            "account_number": "1325"
+          },
+          "Finanzwechsel": {
+            "account_number": "1327"
+          },
+          "Wertpapiere mit geringen Wertschwankungen": {
+            "account_number": "1329"
+          },
+          "Schecks": {
+            "account_number": "1330"
+          }
+        },
+        "Wertpapiere": {
+          "is_group": 1,
+          "Anteile an verbundenen Unternehmen (UV)": {
+            "account_number": "1340"
+          },
+          "Anteile an herrschender oder mit Mehrheit beteiligter Gesellschaft": {
+            "account_number": "1344"
+          },
+          "Sonstige Wertpapiere": {
+            "account_number": "1348"
+          },
+          "Wertpapieranlagen im Rahmen der kurzfr. Disposition": {
+            "account_number": "1349"
+          }
+        },
+        "Sonstige Verm\u00f6gensgegenst\u00e4nde": {
+          "is_group": 1,
+          "Sonstige Verrechnungskosten (Interimskonto)": {
+            "account_number": "1792"
+          },
+          "Verrechnung geleistete Anzahlungen bei Buchung \u00fcber Kreditorkonto": {
+            "account_number": "1793"
+          },
+          "USt aus Erwerb als letzter Abnehmer innerhalb eines Dreiecksgeschafts": {
+            "account_number": "1794"
+          },
+          "Verbindlichkeiten im Rahmen der sozialen Sicherheit (f\u00fcr § 4/3 EStG)": {
+            "account_number": "1795"
+          }
+        }
+      },
+      "Aktive Rechnungsabgrenzung": {
+        "is_group": 1,
+        "Aktive Rechnungsabgrenzung": {
+          "account_number": "0980"
+        },
+        "Aktive latente Steuern": {
+          "account_number": "0983"
+        },
+        "Als Aufwand ber\u00fccksichtigte Z\u00f6lle und Verbrauchsteuern auf Vorr\u00e4te": {
+          "account_number": "0984"
+        },
+        "Als Aufwand ber\u00fccksichtigte USt auf Anzahlungen": {
+          "account_number": "0985"
+        },
+        "Damnum/Disagio": {
+          "account_number": "0986"
+        },
+        "Rechnungsabgrenzungsposten (Gewinnr\u00fccklage Soll) aus erfolgsneutralen Verrechnungen": {
+          "account_number": "0987"
+        },
+        "Latente Steuern (Gewinnr\u00fccklage Soll) aus aus erfolgsneutralen Verrechnungen": {
+          "account_number": "0988"
+        },
+        "Gesamth\u00e4nderisch gebundene R\u00fccklagen (mit Aufteilung f\u00fcr Kapitalkontenentwicklung)": {
+          "account_number": "0989"
+        }
+      },
+      "sonstige Aktiva": {
+        "is_group": 1,
+        "Abgrenzung unterj\u00e4hrige pauschal gebuchte Abschreibung f\u00fcr BWA": {
+          "account_number": "0992"
+        }
+      }
+    },
+    "Passiva": {
+      "root_type": "Liability",
+      "is_group": 1,
+      "Eigenkapital": {
+        "is_group": 1,
+        "Gezeichnetes Kapital": {
+          "is_group": 1,
+          "Gezeichnetes Kapital": {
+            "account_number": "0800"
+          },
+          "Ausstehende Einlagen auf das gezeichnete Kapital": {
+            "is_group": 1,
+            "Ausstehende Einlagen auf das gezeichnete Kapital, nicht eingefordert": {
+              "account_number": "0801"
+            },
+            "Ausstehende Einlagen auf das gezeichnete Kapital, eingefordert ": {
+              "account_number": "0810"
+            },
+            "Erworbene eigene Anteile": {
+              "account_number": "0819"
+            },
+            "Eingeforderte Nachsch\u00fcsse (Gegenkonto 0845)": {
+              "account_number": "0839"
+            }
+          },
+          "Kapitalkonto": {
+            "Kapitalanteile der pers\u00f6nlich haftenden Gesellschafter": {
+              "is_group": 1,
+              "Festkapital": {
+                "account_number": "0870"
+              },
+              "Variables Kapital (EK)": {
+                "account_number": "0880"
+              }
+            },
+            "Kapitalanteile der Kommanditisten": {
+              "is_group": 1,
+              "Kommandit-Kapital (EK)": {
+                "account_number": "0900"
+              },
+              "Verlustausgleich (EK)": {
+                "account_number": "0910"
+              }
+            }
+          }
+        },
+        "Kapitalr\u00fccklagen": {
+          "is_group": 1,
+          "Kapitalr\u00fccklage": {
+            "account_number": "0840"
+          },
+          "Kapitalr\u00fccklage durch Ausgabe von Anteilen \u00fcber Nennbetrag": {
+            "account_number": "0841"
+          },
+          "Kapitalr\u00fccklage durch Ausgabe von Schuldverschreibungen f. Wandlungs- und Optionsrechte zum Erwerb von Anteilen": {
+            "account_number": "0842"
+          },
+          "Kapitalr\u00fccklage durch Zuzahlungen gegen Gew\u00e4hrung eines Vorzugs f\u00fcr Anteil": {
+            "account_number": "0843"
+          },
+          "Kapitalr\u00fccklage durch andere Zuzahlungen in das Eigenkapital": {
+            "account_number": "0844"
+          },
+          "Nachschusskapital (Gegenkonto 0839)": {
+            "account_number": "0845"
+          }
+        },
+        "Gewinnr\u00fccklagen": {
+          "is_group": 1,
+          "Gesetzliche R\u00fccklage": {
+            "is_group": 1,
+            "Gesetzliche R\u00fccklage": {
+              "account_number": "0846"
+            }
+          },
+          "R\u00fccklage f\u00fcr Anteile an einem herrschenden oder mehrheitlich beteiligten Unternehmen": {
+            "is_group": 1,
+            "R\u00fccklage f\u00fcr Anteile an einem herrschenden oder mehrheitlich beteiligten Unternehmen": {
+              "account_number": "0849"
+            }
+          },
+          "Satzungsm\u00e4\u00dfige R\u00fccklagen": {
+            "is_group": 1,
+            "Satzungsm\u00e4\u00dfige R\u00fccklagen": {
+              "account_number": "0851"
+            }
+          },
+          "Andere Gewinnr\u00fccklagen": {
+            "is_group": 1,
+            "Andere Gewinnr\u00fccklagen aus dem Erwerb eigener Anteile": {
+              "account_number": "0848"
+            },
+            "Andere Ergebnisr\u00fccklagen": {
+              "account_number": "0852"
+            },
+            "Gewinnr\u00fccklagen aus den \u00dcbergangsvorschriften BilMoG": {
+              "account_number": "0853"
+            },
+            "Gewinnr\u00fccklagen aus den \u00dcbergangsvorschriftenBilMoG (Zuschreibung Sachanlageverm\u00f6gen)": {
+              "account_number": "0854"
+            },
+            "Andere Gewinnr\u00fccklagen": {
+              "account_number": "0855"
+            },
+            "Eigenkapitalanteil von Wertaufholungen": {
+              "account_number": "0856"
+            },
+            "Gewinnr\u00fccklagen aus den \u00dcbergangsvorschriften BilMoG (Zuschreibung Finanzanlageverm\u00f6gen)": {
+              "account_number": "0857"
+            },
+            "Gewinnr\u00fccklagen aus den \u00dcbergangsvorschriften BilMoG (Aufl\u00f6sung der Sonderposten mit R\u00fccklageanteil)": {
+              "account_number": "0858"
+            },
+            "Latente Steuern (Gewinnr\u00fccklage Haben) aus erfolgsneutralen Verrechnungen": {
+              "account_number": "0859"
+            }
+          }
+        },
+        "Gewinnvortrag / Verlustvortrag": {
+          "is_group": 1,
+          "Gewinnvortrag vor Verwendung": {
+            "account_number": "0860"
+          },
+          "Gewinnvortrag vor Verwendung (mit Aufteilung f\u00fcr Kapitalkonten)": {
+            "account_number": "0865"
+          },
+          "Verlustvortrag vor Verwendung (mit Aufteilung f\u00fcr Kapitalkonten)": {
+            "account_number": "0867"
+          },
+          "Verlustvortrag vor Verwendung": {
+            "account_number": "0868"
+          },
+          "Gewinnvortrag nach Verwendung": {
+            "account_number": "2860"
+          },
+          "Verlustvortrag nach Verwendung": {
+            "account_number": "2868"
+          }
+        },
+        "Vortrag auf neue Rechnung": {
+          "is_group": 1,
+          "Vortrag auf neue Rechnung (Bilanz)": {
+            "account_number": "0869"
+          }
+        }
+      },
+      "Sonderposten mit R\u00fccklageanteil": {
+        "is_group": 1,
+        "Sonderposten mit R\u00fccklageanteil, steuerfreie R\u00fccklagen": {
+          "account_number": "0930"
+        },
+        "Sonderposten mit R\u00fccklageanteil, nach § 6b EStG": {
+          "account_number": "0931"
+        },
+        "Sonderposten mit R\u00fccklageanteil nach EStR R 6.6": {
+          "account_number": "0932"
+        },
+        "Sonderposten mit R\u00fccklageanteil nach § 52 Abs. 16 EStG": {
+          "account_number": "0939"
+        },
+        "Sonderposten mit R\u00fccklageanteil, Sonderabschreibungen)": {
+          "account_number": "0940"
+        },
+        "Sonderposten mit R\u00fccklageanteil nach § 7g Abs. 2 EStG n. F.": {
+          "account_number": "0943"
+        },
+        "Ausgleichsposten bei Entnahmen § 4g EStG": {
+          "account_number": "0945"
+        },
+        "R\u00fccklage f\u00fcr Zusch\u00fcss": {
+          "account_number": "0946"
+        },
+        "Sonderposten mit R\u00fccklageanteil § 7g Abs. 5 EStG": {
+          "account_number": "0947"
+        },
+        "Sonderposten f\u00fcr Zusch\u00fcsse und Zulagen": {
+          "account_number": "0949"
+        }
+      },
+      "R\u00fcckstellungen": {
+        "is_group": 1,
+        "Pensions-und \u00e4hnliche R\u00fcckstellungen": {
+          "is_group": 1,
+          "Pensions-und \u00e4hnliche R\u00fcckstellungen": {
+            "account_number": "0950"
+          },
+          "R\u00fcckstellungen f\u00fcr Pensionen und \u00e4hnl. Verpflicht. zur Saldierung mit Verm\u00f6gensgegenst\u00e4nden zum langfrist. Verbleib": {
+            "account_number": "0951"
+          },
+          "R\u00fcckstellungen f\u00fcr Pensionen und \u00e4hnliche Verpflichtungen gegen\u00fcber Gesellschaftern oder nahestehenden Personen": {
+            "account_number": "0952"
+          },
+          "R\u00fcckstellungen f\u00fcr Direktzusagen": {
+            "account_number": "0953"
+          },
+          "R\u00fcckstellungen f\u00fcr Zuschussverpflichtungen f\u00fcr Pensionskassen und Lebensversicherungen)": {
+            "account_number": "0954"
+          }
+        },
+        "Steuerr\u00fcckstellungen": {
+          "is_group": 1,
+          "Steuerr\u00fcckstellungen": {
+            "account_number": "0955"
+          },
+          "Gewerbesteuerr\u00fcckstellung § 4 Abs. 5b": {
+            "account_number": "0956"
+          },
+          "Steuerr\u00fcckstellung aus Steuerstundung (BStBK)": {
+            "account_number": "0962"
+          },
+          "K\u00f6rperschaftsteuerr\u00fcckstellung": {
+            "account_number": "0963"
+          },
+          "R\u00fcckstellungen f\u00fcr latente Steuern": {
+            "account_number": "0969"
+          },
+          "USt nicht f\u00e4llig": {
+            "account_number": "1760"
+          },
+          "USt nicht f\u00e4llig 7%": {
+            "account_number": "1761"
+          },
+          "USt nicht f\u00e4llig aus im Inland steuerpflichtigen EU-Lieferungen": {
+            "account_number": "1762"
+          },
+          "USt nicht f\u00e4llig aus im Inland steuerpflichtigen EU-Lieferungen 19%": {
+            "account_number": "1764"
+          },
+          "USt nicht f\u00e4llig 19%": {
+            "account_number": "1766"
+          }
+        },
+        "sonstige R\u00fcckstellungen": {
+          "is_group": 1,
+          "Urlaubsr\u00fcckstellungen": {
+            "account_number": "0961"
+          },
+          "R\u00fcckstellungen f\u00fcr mit der Altersversorgung vergleichbare langfristige Verpflichtungen zum langfristigen Verbleib": {
+            "account_number": "0964"
+          },
+          "R\u00fcckstellungen f\u00fcr Personalkosten": {
+            "account_number": "0965"
+          },
+          "R\u00fcckstellungen f\u00fcr Aufbewahrungspflicht": {
+            "account_number": "0966"
+          },
+          "R\u00fcckstellungen langfr. Verpflicht. (mit der Altersversorgung vergleichbar) zur Saldierung mit Verm\u00f6gensgegenst\u00e4nden zum Verbleib": {
+            "account_number": "0967"
+          },
+          "Sonstige R\u00fcckstellunge": {
+            "account_number": "0970"
+          },
+          "R\u00fcckstellungen f\u00fcr unterlassene Aufwendungen f\u00fcr Instandhaltung, Nachholung in den ersten drei Monaten": {
+            "account_number": "0971"
+          },
+          "R\u00fcckstellungen Abraum-/Abfallbeseit.": {
+            "account_number": "0973"
+          },
+          "R\u00fcckstellungen f. Gew\u00e4hrleistungen": {
+            "account_number": "0974"
+          },
+          "R\u00fcckstellungen f. drohende Verluste aus schwebenden Gesch\u00e4ften": {
+            "account_number": "0976"
+          },
+          "R\u00fcckstellungen f\u00fcr Abschluss u. Pr\u00fcfungskosten": {
+            "account_number": "0977"
+          },
+          "Aufwandsr\u00fcckstellungen § 249 II HGB": {
+            "account_number": "0978"
+          },
+          "R\u00fcckstellungen f\u00fcr Umweltschutz": {
+            "account_number": "0979"
+          }
+        }
+      },
+      "Verbindlichkeiten": {
+        "is_group": 1,
+        "Anleihen": {
+          "is_group": 1,
+          "Anleihen, nicht konvertibel": {
+            "account_number": "0600"
+          },
+          "Anleihen, nicht konvertibel (b. 1 Jahr)": {
+            "account_number": "0601"
+          },
+          "Anleihen, nicht konvertibel (1-5 Jahre)": {
+            "account_number": "0605"
+          },
+          "Anleihen, nicht konvertibel (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0610"
+          },
+          "Anleihen konvertibel": {
+            "account_number": "0615"
+          },
+          "Anleihen konvertibel(bis 1 Jahr)": {
+            "account_number": "0616"
+          },
+          "Anleihen konvertibel(1-5 Jahre)": {
+            "account_number": "0620"
+          },
+          "Anleihen konvertibel(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0625"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kreditinstituten": {
+            "account_number": "0630"
+          }
+        },
+        "Verbindlichkeiten gegen\u00fcber Kreditinstituten": {
+          "is_group": 1,
+          "Verbindlichkeiten gg. Kreditinstituten(bis 1 Jahr)": {
+            "account_number": "0631"
+          },
+          "Verbindlichkeiten gg. Kreditinstituten(1-5 Jahre)": {
+            "account_number": "0640"
+          },
+          "Verbindlichkeiten gg. Kreditinstituten(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0650"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kreditinstituten aus Teilzahlungsvertr\u00e4gen": {
+            "account_number": "0660"
+          },
+          "Verbindlichkeiten aus TZV gg. Kreditinstituten(bis 1 Jahr)": {
+            "account_number": "0661"
+          },
+          "Verbindlichkeiten aus TZV gg. Kreditinstituten(1-5 Jahre)": {
+            "account_number": "0670"
+          },
+          "Verbindlichkeiten aus TZV gg. Kreditinstituten(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0680"
+          },
+          "Gegenkonto 0630-0689 bei Aufteilung Kto 0690-98": {
+            "account_number": "0699"
+          }
+        },
+        "Erhaltene Anzahlungen auf Bestellungen (Verbindlichkeiten)": {
+          "is_group": 1,
+          "Erhaltene Anzahlungen auf Bestellungen (Verbindlichkeiten)": {
+            "account_number": "1710"
+          },
+          "Erhaltene, versteuerte Anzahlungen 7% USt ": {
+            "account_number": "1711"
+          },
+          "Erhaltene, versteuerte Anzahlungen 19% USt (Verbindlichkeiten)": {
+            "account_number": "1718"
+          },
+          "Erhaltene Anzahlungen (bis 1 Jahr)": {
+            "account_number": "1719"
+          },
+          "Erhaltene Anzahlungen (1-5 Jahre)": {
+            "account_number": "1720"
+          },
+          "Erhaltene Anzahlungen (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1721"
+          },
+          "Erhaltene Anzahlungen auf Bestellungen (von Vorr\u00e4ten offen abgesetzt)": {
+            "account_number": "1722"
+          },
+          "USt in Folgeperiode f\u00e4llig (§§ 13 Abs. 1 Nr. 6, 13b Abs. 2 UStG)": {
+            "account_number": "1725"
+          },
+          "USt aus im anderen EU-Land steuerpflichtigen elektronischen Dienstleistungen": {
+            "account_number": "1728"
+          },
+          "Steuerzahlungen aus im anderen EU-Land steuerpflichtigen elektronischen Dienstleistungen an kleine einzige Anlaufstellen": {
+            "account_number": "1729"
+          }
+        },
+        "Verbindlichkeiten aus Lieferungen und Leistungen": {
+          "is_group": 1,
+          "Verbindlichkeiten aus Lieferungen und Leistungen": {
+            "account_number": "1600",
+            "account_type": "Payable"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen allgem. Steuersatz": {
+            "account_number": "1605"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen erm\u00e4\u00dfigt. Steuersatz": {
+            "account_number": "1606"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen ohne VStabzug": {
+            "account_number": "1607"
+          },
+          "Gegenkto Aufteilung Verbindlichkeiten aus Lieferungen und Leistungen": {
+            "account_number": "1609"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen ohne Kontokorrent": {
+            "account_number": "1610"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen f\u00fcr Investitionen § 4/3 EStG": {
+            "account_number": "1624"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen (bis 1 Jahr)": {
+            "account_number": "1625"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen (1-5 Jahre)": {
+            "account_number": "1626"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1628"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg. Gesellschaftern": {
+            "account_number": "1650"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg. Gesellsch. (bis 1 Jahr)": {
+            "account_number": "1651"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg. Gesellsch. (1-5 Jahre)": {
+            "account_number": "1655"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg. Gesellsch. (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1658"
+          },
+          "Gegenkonto 1625-1658 bei Aufteilung Kreditoren": {
+            "account_number": "1659"
+          },
+          "Verbindlichkeiten gegen\u00fcber GmbH-Gesellschaftern": {
+            "account_number": "1665"
+          },
+          "Verbindlichkeiten gegen\u00fcber GmbH-Gesellschaftern (bis 1 Jahr)": {
+            "account_number": "1666"
+          },
+          "Verbindlichkeiten gegen\u00fcber GmbH-Gesellschaftern (1-5 Jahre)": {
+            "account_number": "1667"
+          },
+          "Verbindlichkeiten gegen\u00fcber GmbH-Gesellschaftern (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1668"
+          },
+          "Verbindlichkeiten gegen\u00fcber pers\u00f6nlich haftenden Gesellschaftern": {
+            "account_number": "1670"
+          },
+          "Verbindlichkeiten gegen\u00fcber pers\u00f6nlich haftenden Gesellschaftern (bis 1 Jahr)": {
+            "account_number": "1671"
+          },
+          "Verbindlichkeiten gegen\u00fcber pers\u00f6nlich haftenden Gesellschaftern (1-5 Jahre)": {
+            "account_number": "1672"
+          },
+          "Verbindlichkeiten gegen\u00fcber pers\u00f6nlich haftenden Gesellschaftern (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1673"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kommanditisten": {
+            "account_number": "1675"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kommanditisten (bis 1 Jahr)": {
+            "account_number": "1676"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kommanditisten (1-5 Jahre)": {
+            "account_number": "1677"
+          },
+          "Verbindlichkeiten gegen\u00fcber Kommanditisten (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1678"
+          },
+          "Verbindlichkeiten gegen\u00fcber Arbeitsgemeinschaften": {
+            "account_number": "1691"
+          },
+          "Verbindlichkeiten gegen\u00fcber stillen Gesellschaftern": {
+            "account_number": "1695"
+          },
+          "Verbindlichkeiten gegen\u00fcber stillen Gesellschaftern (bis 1 Jahr)": {
+            "account_number": "1696"
+          },
+          "Verbindlichkeiten gegen\u00fcber stillen Gesellschaftern (1-5 Jahre": {
+            "account_number": "1697"
+          },
+          "Verbindlichkeiten gegen\u00fcber stillen Gesellschaftern (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1698"
+          }
+        },
+        "Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel": {
+          "is_group": 1,
+          "Wechselverbindlichkeiten": {
+            "account_number": "1660"
+          },
+          "Wechselverbindlichkeiten (bis 1 Jahr)": {
+            "account_number": "1661"
+          },
+          "Wechselverbindlichkeiten (1-5 Jahre)": {
+            "account_number": "1662"
+          },
+          "Wechselverbindlichkeiten (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1663"
+          }
+        },
+        "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen ": {
+          "is_group": 1,
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen": {
+            "account_number": "0700"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen(bis 1 Jahr)": {
+            "account_number": "0701"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen(1-5 Jahre)": {
+            "account_number": "0705"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0710"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg. verbundenen UN": {
+            "account_number": "1630"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.verbundenen UN (bis 1 Jahr)": {
+            "account_number": "1631"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.verbundenen UN (1-5 Jahre)": {
+            "account_number": "1635"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.verbundenen UN (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1638"
+          }
+        },
+        "Verbindlichkeiten gegen\u00fcber Unternehmen, mit denen ein Beteiligungsverh\u00e4ltnis besteht": {
+          "is_group": 1,
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen mit Beteiligungsverh\u00e4ltnis": {
+            "account_number": "0715"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen mit Beteilig(bis 1 Jahr)": {
+            "account_number": "0716"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen mit Beteilig (1-5 Jahre)": {
+            "account_number": "0720"
+          },
+          "Verbindlichkeiten gegen\u00fcber verbundenen Unternehmen mit Beteilig (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0725"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.UN m.Beteiligg.verh.": {
+            "account_number": "1640"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.UN m. Bet.verh. (bis 1 Jahr)": {
+            "account_number": "1641"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.UN m. Bet.verh. (1-5 Jahre)": {
+            "account_number": "1645"
+          },
+          "Verbindlichkeiten aus Lieferungen und Leistungen gg.UN m. Bet.verh. (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1648"
+          }
+        },
+        "Sonstige Verbindlichkeiten": {
+          "is_group": 1,
+          "Verbindlichkeiten gg. Gesellschaftern": {
+            "account_number": "0730"
+          },
+          "Verbindlichkeiten gg. Gesellschaftern (bis 1 Jahr)": {
+            "account_number": "0731"
+          },
+          "Verbindlichkeiten gg. Gesellschaftern (1-5 Jahre)": {
+            "account_number": "0740"
+          },
+          "Verbindlichkeiten gg. Gesellschaftern (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0750"
+          },
+          "Verbindlichkeiten gegen\u00fcber  Gesellschaftern f\u00fcr offene Aussch\u00fcttungen": {
+            "account_number": "0755"
+          },
+          "Darlehen typ. stiller Gesellschafter": {
+            "account_number": "0760"
+          },
+          "Darlehen typ. stiller Gesellsch.(bis 1 Jahr)": {
+            "account_number": "0761"
+          },
+          "Darlehen typ. stiller Gesellsch.(1-5 Jahre": {
+            "account_number": "0764"
+          },
+          "Darlehen typ. stiller Gesellsch.(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0767"
+          },
+          "Darlehen atyp. stiller Gesellschafter": {
+            "account_number": "0770"
+          },
+          "Darlehen atyp. stiller Gesellsch.(bis 1 Jahr)": {
+            "account_number": "0771"
+          },
+          "Darlehen atyp. stiller Gesellsch.(1-5 Jahre)": {
+            "account_number": "0774"
+          },
+          "Darlehen atyp. stiller Gesellsch.(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0777"
+          },
+          "Partiarische Darlehen": {
+            "account_number": "0780"
+          },
+          "Partiarische Darlehen(bis 1 Jahr)": {
+            "account_number": "0781"
+          },
+          "Partiarische Darlehen(1-5 Jahre)": {
+            "account_number": "0784"
+          },
+          "Partiarische Darlehen(gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "0787"
+          },
+          "Gegenkonto bei Aufteilung Kto 0730-0798": {
+            "account_number": "0799"
+          },
+          "Gesellschafter-Darlehen (Vollhafter)": {
+            "account_number": "0890"
+          },
+          "Gesellschafter-Darlehen (Teilhafter)": {
+            "account_number": "0920"
+          },
+          "Verrechnungskonto erhaltene Anzahlungen bei Buchung \u00fcber Debitorenkonto": {
+            "account_number": "1593"
+          },
+          "Sonstige Verbindlichkeiten": {
+            "account_number": "1700"
+          },
+          "Sonstige Verbindlichkeiten (bis 1 J": {
+            "account_number": "1701"
+          },
+          "Sonstige Verbindlichkeiten (1-5 Jahre)": {
+            "account_number": "1702"
+          },
+          "Sonstige Verbindlichkeiten (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1703"
+          },
+          "Sonst. Verbindlichkeiten nach §11 EStG": {
+            "account_number": "1704"
+          },
+          "Darlehen": {
+            "account_number": "1705"
+          },
+          "Darlehen (bis 1 Jahr)": {
+            "account_number": "1706"
+          },
+          "Darlehen (1-5 Jahre)": {
+            "account_number": "1707"
+          },
+          "Darlehen (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1708"
+          },
+          "Gewinnverf\u00fcgung stille Gesellschaft.": {
+            "account_number": "1709"
+          },
+          "Kreditkartenabrechnung": {
+            "account_number": "1730"
+          },
+          "Agenturwarenabrechnung": {
+            "account_number": "1731"
+          },
+          "Erhaltene Kautionen": {
+            "account_number": "1732"
+          },
+          "Erhaltene Kautionen (bis 1 Jahr)": {
+            "account_number": "1733"
+          },
+          "Erhaltene Kautionen (1-5 Jahre)": {
+            "account_number": "1734"
+          },
+          "Erhaltene Kautionen (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1735"
+          },
+          "Verbindlichkeiten aus Steuern und Abgaben": {
+            "account_number": "1736"
+          },
+          "Verbindlichkeiten aus Steuern und Abgaben (bis 1 Jahr)": {
+            "account_number": "1737"
+          },
+          "Verbindlichkeiten aus Steuern und Abgaben (1-5 Jahre)": {
+            "account_number": "1738"
+          },
+          "Verbindlichkeiten aus Steuern und Abgaben (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1739"
+          },
+          "Verbindlichkeiten aus Lohn und Gehalt": {
+            "account_number": "1740"
+          },
+          "Verbindlichkeiten aus Lohn- und Kirchensteuer": {
+            "account_number": "1741"
+          },
+          "Verbindlichkeiten im Rahmen der sozialen Sicherheit": {
+            "account_number": "1742"
+          },
+          "Verbindlichk. soziale Sicherheit (bis 1 Jahr)": {
+            "account_number": "1743"
+          },
+          "Verbindlichk. soziale Sicherheit (1-5 Jahre)": {
+            "account_number": "1744"
+          },
+          "Verbindlichk. soziale Sicherheit (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1745"
+          },
+          "Verbindlichkeiten aus Einbehaltungen (KapESt und SolZ, KiSt auf KapESt) f\u00fcr offene Aussch\u00fcttungen": {
+            "account_number": "1746"
+          },
+          "Verbindlichkeiten f\u00fcr Verbrauchsteuern": {
+            "account_number": "1747"
+          },
+          "Verbindlichkeiten f\u00fcr Einbehaltungen von Arbeitnehmern": {
+            "account_number": "1748"
+          },
+          "Verbindlichkeiten an das Finanzamt aus abzuf\u00fchrendem Bauabzugsbetrag": {
+            "account_number": "1749"
+          },
+          "Verbindlichkeiten aus Verm\u00f6gensbildung": {
+            "account_number": "1750"
+          },
+          "Verbindlichk. Verm\u00f6gensbildung (bis 1 Jahr)": {
+            "account_number": "1751"
+          },
+          "Verbindlichk. Verm\u00f6gensbildung (1-5 Jahre)": {
+            "account_number": "1752"
+          },
+          "Verbindlichk. Verm\u00f6gensbildung (gr\u00f6\u00dfer 5 Jahre)": {
+            "account_number": "1753"
+          },
+          "Steuerzahlungen an andere L\u00e4nder": {
+            "account_number": "1754"
+          },
+          "Lohn- und Gehaltsverrechnungen": {
+            "account_number": "1755"
+          },
+          "Lohn/Gehaltsverrechnung §11 f. 4/3 EStG": {
+            "account_number": "1756"
+          },
+          "Sonstige Verbindlichkeiten aus genossenschaftlicher R\u00fcckverg\u00fctung": {
+            "account_number": "1758"
+          },
+          "Voraussichtliche Beitragsschuld gegen\u00fcber den Sozialversicherungstr\u00e4gern": {
+            "account_number": "1759"
+          },
+          "USt aus im anderen EU-Land steuerpflichtigen Lieferungen": {
+            "account_number": "1767",
+            "account_type": "Tax"
+          },
+          "USt aus im anderen EU-Land steuerpflichtigen sonstigen Leistungen/Werklieferungen": {
+            "account_number": "1768",
+            "account_type": "Tax"
+          },
+          "USt aus der Auslagerung von Gegenst\u00e4nden aus einem UStlager": {
+            "account_number": "1769",
+            "account_type": "Tax"
+          },
+          "USt": {
+            "account_number": "1770",
+            "account_type": "Tax"
+          },
+          "USt 7%": {
+            "account_number": "1771",
+            "account_type": "Tax"
+          },
+          "USt aus innergemeinschaftlichem Erwerb": {
+            "account_number": "1772",
+            "account_type": "Tax"
+          },
+          "USt aus innergemeinschaftlichem Erwerb 19%": {
+            "account_number": "1774",
+            "account_type": "Tax"
+          },
+          "USt 19%": {
+            "account_number": "1776",
+            "account_type": "Tax"
+          },
+          "USt aus im Inland steuerpflichtigen EU-Lieferungen": {
+            "account_number": "1777",
+            "account_type": "Tax"
+          },
+          "USt aus im Inland steuerpflichtigen EU-Lieferungen 19%": {
+            "account_number": "1778",
+            "account_type": "Tax"
+          },
+          "USt aus innergemeinschaftlichem Erwerb ohne VStabzug": {
+            "account_number": "1779"
+          },
+          "UStvorauszahlungen": {
+            "account_number": "1780",
+            "account_type": "Tax"
+          },
+          "UStvorauszahlungen 1/11": {
+            "account_number": "1781",
+            "account_type": "Tax"
+          },
+          "Nachsteuer, UStVA Kz. 65": {
+            "account_number": "1782"
+          },
+          "In Rechnung unrichtig oder unberechtigt ausgewiesene Steuerbetr\u00e4ge, UStVA Kz. 69": {
+            "account_number": "1783"
+          },
+          "USt aus innergemeinschaftlichem Erwerb von Neufahrzeugen von Lieferanten ohne USt-Identifikationsnummer": {
+            "account_number": "1784",
+            "account_type": "Tax"
+          },
+          "USt nach § 13b UStG": {
+            "account_number": "1785"
+          },
+          "USt nach § 13b UStG 19%": {
+            "account_number": "1787",
+            "account_type": "Tax"
+          },
+          "Einfuhr-USt, aufgeschoben bis...": {
+            "account_number": "1788",
+            "account_type": "Tax"
+          },
+          "USt laufendes Jahr": {
+            "account_number": "1789",
+            "account_type": "Tax"
+          },
+          "USt Vorjahr": {
+            "account_number": "1790",
+            "account_type": "Tax"
+          },
+          "USt fr\u00fchere Jahre": {
+            "account_number": "1791",
+            "account_type": "Tax"
+          }
+        }
+      },
+      "Passive Rechnungsabgrenzung": {
+        "is_group": 1,
+        "Passive Rechnungsabgrenzung": {
+          "account_number": "0990"
+        }
+      },
+      "Passive latente Steuern": {
+        "is_group": 1,
+        "Passive latente Steuern": {
+          "account_number": "0968"
+        }
+      }
+    },
+    "Ertrag": {
+      "root_type": "Income",
+      "is_group": 1,
+      "Umsatzerl\u00f6se": {
+        "is_group": 1,
+        "Grundst\u00fccksertr\u00e4ge": {
+          "account_number": "2750"
+        },
+        "Erl\u00f6se aus Vermietung und Verpachtung, UStfrei § 4 Nr. 12 UStG": {
+          "account_number": "2751"
+        },
+        "Erl\u00f6se aus Vermietung und Verpachtung 19% USt": {
+          "account_number": "2752"
+        },
+        "Ertr\u00e4ge aus Verwaltungskostenumlage": {
+          "account_number": "2764"
+        },
+        "Umsatzerl\u00f6se -0": {
+          "account_number": "8000",
+          "account_type": "Income Account"
+        },
+        "Umsatzerl\u00f6se -1": {
+          "account_number": "8001",
+          "account_type": "Income Account"
+        },
+        "Umsatzerl\u00f6se -2": {
+          "account_number": "8002",
+          "account_type": "Income Account"
+        },
+        "Steuerfreie Ums\u00e4tze §4 Nr. 8 ff UStG": {
+          "account_number": "8100"
+        },
+        "Steuerfreie Ums\u00e4tze nach § 4 Nr. 12 UStG (Vermietung und Verpachtung)": {
+          "account_number": "8105"
+        },
+        "Sonstige steuerfreie Ums\u00e4tze Inland": {
+          "account_number": "8110"
+        },
+        "Steuerfreie Ums\u00e4tze § 4 Nr. 1a UStG": {
+          "account_number": "8120"
+        },
+        "Steuerfreie innergemeinschaftliche Lieferungen § 4 Nr. 1b UStG ": {
+          "account_number": "8125"
+        },
+        "Lieferungen des ersten Abnehmers bei innergemeinschaftlichen Dreiecksgesch\u00e4ften § 25b Abs. 2 UStG": {
+          "account_number": "8130"
+        },
+        "Steuerfreie innergemeinschaftliche Lieferungen von Neufahrzeugen an Abnehmer ohne USt-Id-Nr": {
+          "account_number": "8135"
+        },
+        "Steuerfreie Ums\u00e4tze Offshore usw.": {
+          "account_number": "8140"
+        },
+        "Steuerfreie Ums\u00e4tze § 4 Nr. 2-7 UStG": {
+          "account_number": "8150"
+        },
+        "Steuerfreie Ums\u00e4tze ohne VStabzug zum Gesamtumsatz geh\u00f6rend, § 4 UStG": {
+          "account_number": "8160"
+        },
+        "Steuerfreie Ums\u00e4tze ohne VStabzug zum Gesamtumsatz geh\u00f6rend": {
+          "account_number": "8165"
+        },
+        "Erl\u00f6se, die mit den Durchschnittss\u00e4tzen des § 24 UStG versteuert werde": {
+          "account_number": "8190"
+        },
+        "Umsatzerl\u00f6se nach §§ 25 und 25a UStG 19% USt": {
+          "account_number": "8191"
+        },
+        "Umsatzerl\u00f6se nach §§ 25 und 25a UStG ohne USt": {
+          "account_number": "8193"
+        },
+        "Umsatzerl\u00f6se aus Reiseleistungen § 25 Abs. 2 UStG, steuerfrei": {
+          "account_number": "8194"
+        },
+        "Erl\u00f6se Kleinunternehmer § 19 UStG": {
+          "account_number": "8195"
+        },
+        "Erl\u00f6se Geldspielautomaten 19% USt": {
+          "account_number": "8196"
+        },
+        "Erl\u00f6se": {
+          "account_number": "8200"
+        },
+        "Erl\u00f6se 7% USt": {
+          "account_number": "8300"
+        },
+        "Erl\u00f6se aus im Inland steuerpflichtigen EU Lieferungen 7% USt.": {
+          "account_number": "8310"
+        },
+        "Erl\u00f6se aus im Inland steuerpflichtigen EU-Lieferungen 19% USt": {
+          "account_number": "8315"
+        },
+        "Erl\u00f6se aus im anderen EU-Land steuerpflichtigen Lieferungen": {
+          "account_number": "8320"
+        },
+        "Erl\u00f6se aus im anderen EU-Land steuerpflichtigen elektronischen Dienstleistungen": {
+          "account_number": "8331"
+        },
+        "Erl\u00f6se aus Lieferungen von Mobilfunkger\u00e4ten/Schaltkreisen f\u00fcr die der Leistungsempf\u00e4nger die USt nach § 13b UStG schuldet": {
+          "account_number": "8335"
+        },
+        "Erl\u00f6se aus im anderen EU-Land steuerpflichtigen sonstigen Leistungen, f\u00fcr die der Leistungsempf\u00e4nger die USt schuldet": {
+          "account_number": "8336"
+        },
+        "Erl\u00f6se aus Leistungen, f\u00fcr die der Leistungsempf\u00e4nger die USt nach § 13b UStG schuldet": {
+          "account_number": "8337"
+        },
+        "Erl\u00f6se aus im Drittland steuerbaren Leistungen, im Inland nicht steuerbare Ums\u00e4tze": {
+          "account_number": "8338"
+        },
+        "Erl\u00f6se aus im anderen EU-Land steuerbaren Leistungen, im Inland nicht steuerbare Ums\u00e4tze": {
+          "account_number": "8339"
+        },
+        "Erl\u00f6se 16% USt": {
+          "account_number": "8340"
+        },
+        "Erl\u00f6se 19% USt": {
+          "account_number": "8400"
+        },
+        "Erl\u00f6se 19% USt -1": {
+          "account_number": "8410"
+        },
+        "Nebenerl\u00f6se (Bezug und Materialaufwand)": {
+          "account_number": "8499"
+        },
+        "Andere Nebenerl\u00f6se": {
+          "account_number": "8607"
+        },
+        "Erl\u00f6sschm\u00e4lerungen": {
+          "account_number": "8700"
+        },
+        "Erl\u00f6sschm\u00e4lerungen f\u00fcr steuerfreie Ums\u00e4tze nach § 4 Nr. 8 ff. UStG)": {
+          "account_number": "8701"
+        },
+        "Erl\u00f6sschm\u00e4lerungen f\u00fcr steuerfreie Ums\u00e4tze nach § 4 Nr. 2-7 UStG)": {
+          "account_number": "8702"
+        },
+        "Erl\u00f6sschm\u00e4lerungen f\u00fcr sonstige steuerfreie Ums\u00e4tze ohne VStabzug)": {
+          "account_number": "8703"
+        },
+        "Erl\u00f6sschm\u00e4lerungen f\u00fcr sonstige steuerfreie Ums\u00e4tze mit VStabzug": {
+          "account_number": "8704"
+        },
+        "Erl\u00f6sschm\u00e4lerungen steuerfrei §4 Nr. 1": {
+          "account_number": "8705"
+        },
+        "Erl\u00f6sschm\u00e4lerungen f\u00fcr steuerfreie innergemeinschaftliche Dreiecksgesch\u00e4fte nach § 25b Abs. 2, 4 UStG": {
+          "account_number": "8706"
+        },
+        "Erl\u00f6sschm\u00e4lerungen 7% USt": {
+          "account_number": "8710"
+        },
+        "Erl\u00f6sschm\u00e4lerungen 19% USt": {
+          "account_number": "8720"
+        },
+        "Erl\u00f6sschm\u00e4lerungen aus steuerfreien innergemeinschaftlichen Lieferungen": {
+          "account_number": "8724"
+        },
+        "Erl\u00f6sschm\u00e4lerungen aus im Inland steuerpflichtigen EU-Lieferungen 7% USt": {
+          "account_number": "8725"
+        },
+        "Erl\u00f6sschm\u00e4lerungen aus im Inland steuerpflichtigen EU-Lieferungen  19% USt": {
+          "account_number": "8726"
+        },
+        "Erl\u00f6sschm\u00e4lerungen aus im anderen EU-Land steuerpflichtigen Lieferungen": {
+          "account_number": "8727"
+        },
+        "Gew\u00e4hrte Skonti": {
+          "account_number": "8730"
+        },
+        "Gew\u00e4hrte Skonti 7% US": {
+          "account_number": "8731"
+        },
+        "Gew\u00e4hrte Skonti 19% USt": {
+          "account_number": "8736"
+        },
+        "Gew\u00e4hrte Skonti aus Lieferungen von Mobilfunkger\u00e4ten und Schaltkreisen f. die der Empf\u00e4nger die USt schuldet": {
+          "account_number": "8738"
+        },
+        "Gew\u00e4hrte Skonti aus Leistungen, f\u00fcr die der Leistungsempf\u00e4nger  die USt nach § 13b UStG schuldet": {
+          "account_number": "8741"
+        },
+        "Gew\u00e4hrte Skonti aus Erl\u00f6sen aus im anderen EU Land steuerpflichtigen sonstigen Leistungen, f. die der Empf\u00e4nger die USt schuldet": {
+          "account_number": "8742"
+        },
+        "Gew\u00e4hrte Skonti aus steuerfreien innergemeinschaftlichen Lieferungen § 4 Nr. 1b UStG": {
+          "account_number": "8743"
+        },
+        "Gew\u00e4hrte Skonti aus im Inland steuerpflichtigen EU-Lieferungen": {
+          "account_number": "8745"
+        },
+        "Gew\u00e4hrte Skonti aus im Inland steuerpflichtigen EU-Lieferungen 7% USt": {
+          "account_number": "8746"
+        },
+        "Gew\u00e4hrte Skonti aus im Inland steuerpflichtigen EU-Lieferungen 19% USt": {
+          "account_number": "8748"
+        },
+        "Gew\u00e4hrte Boni 7% USt": {
+          "account_number": "8750"
+        },
+        "Gew\u00e4hrte Boni 19% USt": {
+          "account_number": "8760"
+        },
+        "Gew\u00e4hrte Boni": {
+          "account_number": "8769"
+        },
+        "Gew\u00e4hrte Rabatte": {
+          "account_number": "8770"
+        },
+        "Gew\u00e4hrte Rabatte 7% USt": {
+          "account_number": "8780"
+        },
+        "Gew\u00e4hrte Rabatte 19% USt": {
+          "account_number": "8790"
+        },
+        "Nicht steuerbare Ums\u00e4tze (Innenums\u00e4tze) ": {
+          "account_number": "8950"
+        },
+        "Umsatzsteuerverg\u00fctungen, z. B. nach § 24 UStG": {
+          "account_number": "8955"
+        },
+        "Direkt mit dem Umsatz verbundene Steuer": {
+          "account_number": "8959"
+        },
+        "Konten f\u00fcr die Verbuchung von Sonderbetriebseinnahmen": {
+          "is_group": 1,
+          "Sonderbetriebseinnahmen, T\u00e4tigkeitsverg\u00fctung": {
+            "account_number": "8500"
+          },
+          "Sonderbetriebseinnahmen, Miet-/Pachteinnahmen": {
+            "account_number": "8501"
+          },
+          "Sonderbetriebseinnahmen, Zinseinnahmen": {
+            "account_number": "8502"
+          },
+          "Sonderbetriebseinnahmen, Haftungsverg\u00fctung": {
+            "account_number": "8503"
+          },
+          "Sonderbetriebseinnahmen, Pensionszahlungen": {
+            "account_number": "8504"
+          },
+          "Sonderbetriebseinnahmen, sonstige Sonderbetriebseinnahme": {
+            "account_number": "8505"
+          },
+          "Provisionsums\u00e4tze": {
+            "account_number": "8510"
+          },
+          "Provisionsums\u00e4tze, steuerfrei §4 Nr.8ff": {
+            "account_number": "8514"
+          },
+          "Provisionsums\u00e4tze, steuerfrei § 4 Nr.5": {
+            "account_number": "8515"
+          },
+          "Provisionsums\u00e4tze 7% USt": {
+            "account_number": "8516"
+          },
+          "Provisionsums\u00e4tze 19% USt": {
+            "account_number": "8519"
+          },
+          "Erl\u00f6se Abfallverwertung": {
+            "account_number": "8520"
+          },
+          "Erl\u00f6se Leergut": {
+            "account_number": "8540"
+          },
+          "Sonstige Ertr\u00e4ge aus Provisionen, Lizenzen und Patenten": {
+            "account_number": "8570"
+          },
+          "Sonstige Ertr\u00e4ge aus Provisionen, Lizenzen und Patenten, steuerfrei § 4 Nr. 8 ff. UStG": {
+            "account_number": "8574"
+          },
+          "Sonstige Ertr\u00e4ge aus Provisionen, Lizenzen und Patenten, steuerfrei § 4 Nr. 5 UStG": {
+            "account_number": "8575"
+          },
+          "Sonstige Ertr\u00e4ge aus Provisionen, Lizenzen und Patenten, 7% USt": {
+            "account_number": "8576"
+          },
+          "Sonstige Ertr\u00e4ge aus Provisionen, Lizenzen und Patenten, 19% US": {
+            "account_number": "8579"
+          }
+        },
+        "Statistische Konten E\u00dcR": {
+          "is_group": 1,
+          "Statistisches Konto Erl\u00f6se zum allgemeinen Umsatzsteuersatz (E\u00dcR)": {
+            "account_number": "8580"
+          },
+          "Statistisches Konto Erl\u00f6se zum erm\u00e4\u00dfigten Umsatzsteuersatz (E\u00dcR)": {
+            "account_number": "8581"
+          },
+          "Statistisches Konto Erl\u00f6se steuerfrei und nicht steuerbar (E\u00dcR)": {
+            "account_number": "8582"
+          },
+          "Gegenkonto 8580-8582 bei Aufteilung der Erl\u00f6se nach Steuers\u00e4tzen (E\u00dcR": {
+            "account_number": "8589"
+          }
+        }
+      },
+
+      "Andere aktivierte Eigenleistungen": {
+        "is_group": 1,
+        "Andere aktivierte Eigenleistungen": {
+          "account_number": "8990"
+        },
+        "Aktivierte Eigenleistungen (den Herstellungskosten zurechenbare Fremdkapitalzinsen)": {
+          "account_number": "8994"
+        },
+        "Aktivierte Eigenleistungen zur Erstellung von selbst geschaffenen immateriellen Verm\u00f6gensgegenst\u00e4nde": {
+          "account_number": "8995"
+        }
+      },
+      "Zinsertr\u00e4ge": {
+        "is_group": 1,
+        "Ertr\u00e4ge aus Beteiligungen": {
+          "account_number": "2600"
+        },
+        "Ertr\u00e4ge aus Beteiligungen an Personengesellschaften (verbundene Unternehmen), § 9 GewStG": {
+          "account_number": "2603"
+        },
+        "Ertr\u00e4ge aus Beteiligungen an Personengesellschaften (verbundene Unternehmen), § 9 GewStG bzw. § 18 EStG": {
+          "account_number": "2615"
+        },
+        "Ertr\u00e4ge aus Anteilen an Kapitalgesellschaften (Beteiligung) § 3 Nr. 40 EStG/§ 8b Abs. 1 KStG9": {
+          "account_number": "2616"
+        },
+        "Gewinnanteile aus gewerblichen und selbst\u00e4ndigen Mitunternehmerschaften, § 9 GewStG bzw. § 18 EStG": {
+          "account_number": "2618"
+        },
+        "Ertr\u00e4ge aus Beteiligungen an verbundenen Unternehmen": {
+          "account_number": "2619"
+        },
+        "Ertr\u00e4ge Wertpapiere/Ausleihungen des Finanzanlageverm\u00f6gens": {
+          "account_number": "2620"
+        },
+        "Ertr\u00e4ge aus Ausleihungen des Finanzanlageverm\u00f6gens": {
+          "account_number": "2621"
+        },
+        "Ertr\u00e4ge aus Ausleihungen des inanzanlageverm\u00f6gens an verbundenen Unternehmen": {
+          "account_number": "2622"
+        },
+        "Ertr\u00e4ge aus Anteilen an Personengesellschaften(Finanzanlageverm\u00f6gen)": {
+          "account_number": "2623"
+        },
+        "Ertr\u00e4ge aus Anteilen an Kapitalgesellschaften (Finanzanlageverm\u00f6gen) § 3 Nr. 40 EStG/§ 8b Abs. 1  und 4 KStG9": {
+          "account_number": "2625"
+        },
+        "Ertr\u00e4ge aus Anteilen an Kapitalgesellschaften (verbundene Unternehmen) § 3 Nr. 40 EStG/§ 8b Abs. 1 KStG9": {
+          "account_number": "2626"
+        },
+        "Zins- und Dividendenertr\u00e4ge": {
+          "account_number": "2640"
+        },
+        "Erhaltene Ausgleichszahlungen (als au\u00dfenstehender Aktion\u00e4r)": {
+          "account_number": "2641"
+        },
+        "Ertr\u00e4ge aus Anteilen an Personengesellschaften (verbundene Unternehmen)": {
+          "account_number": "2646"
+        },
+        "Ertr\u00e4ge aus anderen Wertpapieren des Finanzanlageverm\u00f6gens an Kapitalgesellschaften (verbundene Unternehmen)": {
+          "account_number": "2647"
+        },
+        "Ertr\u00e4ge aus anderen Wertpapieren des Finanzanlageverm\u00f6gens an Personengesellschaften (verbundene Unternehmen)": {
+          "account_number": "2648"
+        },
+        "Ertr\u00e4ge aus anderen Wertpapieren und Ausleihungen des Finanzanlageverm\u00f6gens aus verbundenen Unternehme": {
+          "account_number": "2649"
+        },
+        "Sonstige Zinsen und \u00e4hnliche Ertr\u00e4ge": {
+          "is_group": 1,
+          "Sonstige Zinsen und \u00e4hnliche Ertr\u00e4ge": {
+            "account_number": "2650"
+          },
+          "Zinsertr\u00e4ge § 233a AO, § 4 Abs. 5b EStG": {
+            "account_number": "2653"
+          },
+          "Ertr\u00e4ge aus anderen Wertpapieren und Ausleihungen des UVs": {
+            "account_number": "2654"
+          },
+          "Ertr\u00e4ge aus Anteilen an Kapitalgesellschaften (UV) § 3 Nr. 40 EStG/§ 8b Abs. 1 und 4 KStG": {
+            "account_number": "2655"
+          },
+          "Ertr\u00e4ge aus Anteilen an Kapitalgesellschaften (verbundene Unternehmen) § 3 Nr. 40 EStG/§ 8b Abs. 1 KStG": {
+            "account_number": "2656"
+          },
+          "Zinsertr\u00e4ge § 233a AO": {
+            "account_number": "2657"
+          },
+          "Zinsertr\u00e4ge § 233a AO, Anlage A KSt": {
+            "account_number": "2658"
+          },
+          "Sonst. Zinsen u.\u00e4. Ertr\u00e4ge aus verbundenen Unternehmen": {
+            "account_number": "2659"
+          },
+          "Ertr\u00e4ge aus der W\u00e4hrungsumrechnung": {
+            "account_number": "2660"
+          },
+          "Ertr\u00e4ge aus der W\u00e4hrungsumrechnung (nicht § 256a HGB)": {
+            "account_number": "2661"
+          },
+          "Ertr\u00e4ge Bewertung Finanzmittelfonds": {
+            "account_number": "2666"
+          },
+          "Diskontertr\u00e4ge": {
+            "account_number": "2670"
+          },
+          "Diskontertr\u00e4ge verbundene Unternehmen": {
+            "account_number": "2679"
+          },
+          "Zins\u00e4hnliche Ertr\u00e4ge": {
+            "account_number": "2680"
+          },
+          "Steuerfreie Zinsertr\u00e4ge aus der Abzinsung von R\u00fcckstellungen": {
+            "account_number": "2682"
+          },
+          "Zinsertrag Abzinsung Verbindlichkeit": {
+            "account_number": "2683"
+          },
+          "Zinsertrag Abzinsung R\u00fcckstellungen": {
+            "account_number": "2684"
+          },
+          "Zinsertrag Abzinsung Pensionsr\u00fcckst.": {
+            "account_number": "2685"
+          },
+          "Zinsertr. Abzinsung Pensionsr\u00fcckst. Verr.§ 246/2 HGB": {
+            "account_number": "2686"
+          },
+          "Ertr. aus VermG zur Verrechnung § 246/2 HGB": {
+            "account_number": "2687"
+          },
+          "Zinsertrag aus vorzeitiger R\u00fcckzahlung des K\u00f6rperschaftsteuerErh\u00f6hungsbetrages § 38 KStG": {
+            "account_number": "2688"
+          },
+          "ZZins\u00e4hnliche Ertr\u00e4ge aus verbundenen Unternehme": {
+            "account_number": "2689"
+          }
+        }
+      },
+      "Sonstige betriebliche Ertr\u00e4ge": {
+        "is_group": 1,
+        "Abg\u00e4nge Sachanlagen Restbuchwert": {
+          "account_number": "2315"
+        },
+        "Anlagenabg\u00e4nge immaterielle Verm\u00f6gensgegenst\u00e4nde (Restbuchwert bei Buchgewinn)": {
+          "account_number": "2316"
+        },
+        "Anlagenabg\u00e4nge Finanzanlagen (Restbuchwert bei Buchgewinn)": {
+          "account_number": "2317"
+        },
+        "Anlagenabg\u00e4nge Finanzanlagen  § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG (Restbuchwert bei Buchgewinn)": {
+          "account_number": "2318"
+        },
+        "Ertr\u00e4ge durch Verschmelzung und Umwandlung": {
+          "account_number": "2504"
+        },
+        "Gewinn aus der Ver\u00e4u\u00dferung oder der Aufgabe von Gesch\u00e4ftsaktivit\u00e4ten nach Steuer": {
+          "account_number": "2508"
+        },
+        "Betriebsfremde Ertr\u00e4ge": {
+          "account_number": "2510"
+        },
+        "Periodenfremde Ertr\u00e4g": {
+          "account_number": "2520"
+        },
+        "Ao Ertrag \u00dcbergangsvorschrift BilMoG": {
+          "account_number": "2590"
+        },
+        "Ao Ertrag \u00dcbergangsvorschr. latente St": {
+          "account_number": "2594"
+        },
+        "Andere betriebs- und/oder periodenfremde (neutrale) sonstige Ertr\u00e4ge ": {
+          "account_number": "2700"
+        },
+        "Sonstige betriebliche und regelm\u00e4\u00dfige Ertr\u00e4ge (neutral)": {
+          "account_number": "2705"
+        },
+        "Sonstige Ertr\u00e4ge betriebsfremd und regelm\u00e4\u00dfig": {
+          "account_number": "2707"
+        },
+        "Sonstige Ertr\u00e4ge unregelm\u00e4\u00dfig": {
+          "account_number": "2709"
+        },
+        "Ertr\u00e4ge Zuschreibg. Sachanlageverm\u00f6gen": {
+          "account_number": "2710"
+        },
+        "Ertr\u00e4ge Zuschreibg. immat. Anlageverm\u00f6g.": {
+          "account_number": "2711"
+        },
+        "Ertr\u00e4ge Zuschreibg. Finanzanlageverm\u00f6gen": {
+          "account_number": "2712"
+        },
+        "Ertr\u00e4ge aus Zuschreibungen des Finanzanlageverm\u00f6gens § 3 Nr. 40 EStG/§ 8b Abs. 3 Satz 8 KStG": {
+          "account_number": "2713"
+        },
+        "Ertr\u00e4ge aus Zuschreibungen § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG": {
+          "account_number": "2714"
+        },
+        "Ertr\u00e4ge aus Zuschreibungen des UVs (au\u00dfer Vorr\u00e4te)": {
+          "account_number": "2715"
+        },
+        "Ertr\u00e4ge aus Zuschreibungen des UVs § 3 Nr. 40 EStG/ § 8b Abs. 3 Satz 8 KStG": {
+          "account_number": "2716"
+        },
+        "Ertr\u00e4ge aus Abgang von AV-Gegenst\u00e4nden": {
+          "account_number": "2720"
+        },
+        "Ertr\u00e4ge aus der Ver\u00e4u\u00dferung von Anteilen an Kapitalgesellschaften (Finanzanlageverm\u00f6gen)": {
+          "account_number": "2723"
+        },
+        "Ertr\u00e4ge aus dem Abgang von Gegenst\u00e4nden des UVs (au\u00dfer Vorr\u00e4te)": {
+          "account_number": "2725"
+        },
+        "Ertr\u00e4ge aus dem Abgang von Gegenst\u00e4nden des UVs (au\u00dfer Vorr\u00e4te) § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG": {
+          "account_number": "2726"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung einer steuerlichen R\u00fccklage nach § 6b Abs. 3 EStG": {
+          "account_number": "2727"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung einer steuerlichen R\u00fccklage nach § 6b Abs. 10 EStG": {
+          "account_number": "2728"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung der R\u00fccklage f\u00fcr Ersatzbeschaffung R 6.6 EStR": {
+          "account_number": "2729"
+        },
+        "Ertr\u00e4ge aus der Herabsetzung der Pauschalwertberichtigung auf Forderungen": {
+          "account_number": "2730"
+        },
+        "Ertr\u00e4ge aus der Herabsetzung der Einzelwertberichtigung auf Forderungen": {
+          "account_number": "2731"
+        },
+        "Ertr\u00e4ge aus abgeschriebenen Forderungen": {
+          "account_number": "2732"
+        },
+        "Ertr\u00e4ge Aufl\u00f6sung von R\u00fcckstellungen": {
+          "account_number": "2735"
+        },
+        "Ertr\u00e4ge aus der Herabsetzung von Verbindlichkeiten": {
+          "account_number": "2736"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung einer steuerlichen R\u00fccklage nach § 4g EStG": {
+          "account_number": "2737"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung von steuerlichen R\u00fccklagen nach § 52 Abs. 16 EStG": {
+          "account_number": "2738"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung von steuerlichen R\u00fccklagen (Ansparabschreibung nach § 7g Abs. 2 EStG)": {
+          "account_number": "2739"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung einer steuerlichen R\u00fccklage": {
+          "account_number": "2740"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung steuerrechtlicher Sonderabschreibungen": {
+          "account_number": "2741"
+        },
+        "Versicherungsentsch\u00e4digungen und Schadenersatzleistungen": {
+          "account_number": "2742"
+        },
+        "Investitionszusch\u00fcsse": {
+          "account_number": "2743"
+        },
+        "Investitionszulagen": {
+          "account_number": "2744"
+        },
+        "Steuerfreie Ertr\u00e4ge aus der Aufl\u00f6sung von steuerlichen R\u00fccklagen": {
+          "account_number": "2746"
+        },
+        "Sonstige steuerfreie Betriebseinnahmen": {
+          "account_number": "2747"
+        },
+        "Erstattungen Aufwendungsausgleichsgesetz": {
+          "account_number": "2749"
+        },
+        "Ertr\u00e4ge aus der Aktivierung unentgeltlich erworbener Verm\u00f6gensgegenst\u00e4nde": {
+          "account_number": "2760"
+        },
+        "Kostenerstattungen, R\u00fcckverg\u00fctungen und Gutschriften f\u00fcr fr\u00fchere Jahre": {
+          "account_number": "2762"
+        },
+        "Verrechnete sonstige Sachbez\u00fcge (keine Waren)": {
+          "account_number": "8590"
+        },
+        "Sachbez\u00fcge 7% USt (Waren)": {
+          "account_number": "8591"
+        },
+        "Sachbez\u00fcge 19% USt (Waren)": {
+          "account_number": "8595"
+        },
+        "Sonstige Erl\u00f6se betrieblich und regelm\u00e4\u00dfig": {
+          "account_number": "8600"
+        },
+        "Sonstige betriebliche Ertr\u00e4ge": {
+          "account_number": "8603"
+        },
+        "Erstattete VSt anderer L\u00e4nder": {
+          "account_number": "8604"
+        },
+        "Sonstige Ertr\u00e4ge betrieblich und regelm\u00e4\u00dfig": {
+          "account_number": "8605"
+        },
+        "Sonstige betriebliche Ertr\u00e4ge von verbundenen Unternehmen": {
+          "account_number": "8606"
+        },
+        "Sonstige Ertr\u00e4ge betrieblich und regelm\u00e4\u00dfig, steuerfrei § 4 Nr. 8 ff. UStG": {
+          "account_number": "8609"
+        },
+        "Verrechnete sonstige Sachbez\u00fcge": {
+          "account_number": "8610"
+        },
+        "Verrechnete sonstige Sachbez\u00fcge aus Kfz-Gestellung 19% USt": {
+          "account_number": "8611"
+        },
+        "Verrechnete sonstige Sachbez\u00fcge 19% USt": {
+          "account_number": "8613"
+        },
+        "Verrechnete sonstige Sachbez\u00fcge ohne USt": {
+          "account_number": "8614"
+        },
+        "Sonstige betriebliche Ertr\u00e4ge, steuerfrei z. B. § 4 Nr. 2-7 UStG": {
+          "account_number": "8625"
+        },
+        "Sonstige Ertr\u00e4ge betrieblich und regelm\u00e4\u00dfig 7% USt": {
+          "account_number": "8630"
+        },
+        "Sonstige Ertr\u00e4ge betrieblich und regelm\u00e4\u00dfig 19% USt": {
+          "account_number": "8640"
+        },
+        "Sonstige Ertr\u00e4ge betrieblich und regelm\u00e4\u00dfig 16 % US": {
+          "account_number": "8649"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen 19% USt (bei Buchgewinn)": {
+          "account_number": "8820"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen steuerfrei § 4 Nr. 1a UStG (bei Buchgewinn)": {
+          "account_number": "8827"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen steuerfrei § 4 Nr. 1b UStG (bei Buchgewinn)": {
+          "account_number": "8828"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen (bei Buchgewinn)": {
+          "account_number": "8829"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen immaterieller Verm\u00f6gensgegenst\u00e4nde (bei Buchgewinn)": {
+          "account_number": "8837"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Finanzanlagen (bei Buchgewinn)": {
+          "account_number": "8838"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Finanzanlagen § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG (bei Buchgewinn)": {
+          "account_number": "8839"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen von Wirtschaftsg\u00fctern des UVs 19% USt f\u00fcr § 4 Abs. 3 Satz 4 EStG": {
+          "account_number": "8850"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen von Wirtschaftsg\u00fctern des UVs, USt-frei § 4 Nr. 8 ff. UStG i. V. m. § 4 Abs. 3 Satz 4 EStG": {
+          "account_number": "8851"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen von Wirtschaftsg\u00fctern des UVs, USt-frei  § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG": {
+          "account_number": "8852"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen von Wirtschaftsg\u00fctern des UVs nach § 4 Abs. 3 Satz 4 EStG13)": {
+          "account_number": "8853"
+        },
+        "Unentgeltliche Wertabgaben": {
+          "account_number": "8900"
+        },
+        "Entnahme von Gegenst\u00e4nden ohne USt": {
+          "account_number": "8905"
+        },
+        "Verwendung von Gegenst\u00e4nden ohne USt": {
+          "account_number": "8906"
+        },
+        "Entnahme durch den Unternehmer f\u00fcr Zwecke au\u00dferhalb des Unternehmens (Waren) 19% US": {
+          "account_number": "8910"
+        },
+        "Entnahme durch den Unternehmer f\u00fcr Zwecke au\u00dferhalb des Unternehmens (Waren) 7% USt": {
+          "account_number": "8915"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens ohne USt (TelefonNutzung)": {
+          "account_number": "8918"
+        },
+        "Entnahme durch den Unternehmer f\u00fcr Zwecke au\u00dferhalb des Unternehmens (Waren) ohne USt": {
+          "account_number": "8919"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens 19% USt": {
+          "account_number": "8920"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens 19% USt (Kfz-Nutzung)": {
+          "account_number": "8921"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens 19% USt (TelefonNutzung)": {
+          "account_number": "8922"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens ohne USt (Kfz-Nutzung)": {
+          "account_number": "8924"
+        },
+        "Unentgeltliche Erbringung einer sonstigen Leistung 19% USt": {
+          "account_number": "8925"
+        },
+        "Unentgeltliche Erbringung einer sonstigen Leistung ohne USt": {
+          "account_number": "8929"
+        },
+        "Verwendung von Gegenst\u00e4nden f\u00fcr Zwecke au\u00dferhalb des Unternehmens 7% USt": {
+          "account_number": "8930"
+        },
+        "Unentgeltliche Erbringung einer sonstigen Leistung 7% US": {
+          "account_number": "8932"
+        },
+        "Unentgeltliche Zuwendung von Gegenst\u00e4nden 19% USt": {
+          "account_number": "8935"
+        },
+        "Unentgeltliche Zuwendung von Gegenst\u00e4nden ohne USt": {
+          "account_number": "8939"
+        },
+        "Unentgeltliche Zuwendung von Waren 19% USt": {
+          "account_number": "8940"
+        },
+        "Unentgeltliche Zuwendung von Waren 7% US": {
+          "account_number": "8945"
+        },
+        "Unentgeltliche Zuwendung von Waren ohne USt": {
+          "account_number": "8949"
+        }
+      },
+      "Sonstige Zinsen und \u00e4hnliche Ertr\u00e4ge": {
+        "is_group": 1,
+        "Erl\u00f6se Zinsen und Diskontspesen": {
+          "account_number": "8650"
+        },
+        "Erl.Zinsen /Diskontspesen aus verb.U": {
+          "account_number": "8660"
+        }
+      },
+      "Ertrag aus Kapitalherabsetzung": {
+        "is_group": 1,
+        "Ertr\u00e4ge aus Kapitalherabsetzung": {
+          "account_number": "2745"
+        }
+      },
+      "Einstellungen in Gewinnr\u00fccklagen": {
+        "is_group": 1,
+        "Einstellungen in Gewinnr\u00fccklagen": {
+          "is_group": 1
+        }
+      }
+    },
+    "Aufwand": {
+      "root_type": "Expense",
+      "is_group": 1,
+      "Materialaufwand": {
+        "is_group": 1,
+        "Aufwendungen f\u00fcr Roh-, Hilfs- und Betriebsstoffe und f\u00fcr bezogene Waren": {
+          "is_group": 1,
+          "Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3000"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe 7% VSt": {
+            "account_number": "3010"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe 19% VSt": {
+            "account_number": "3030"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe, innergemeinschaftlicher Erwerb 7% VSt und 7% USt": {
+            "account_number": "3060"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe, innergemeinschaftlicher Erwerb 19% VSt und 19% USt": {
+            "account_number": "3062"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe, innergemeinschaftlicher Erwerb ohne VSt und 7% USt": {
+            "account_number": "3066"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe, innergemeinschaftlicher Erwerb ohne VSt und 19% USt": {
+            "account_number": "3067"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe 5,5 % VSt": {
+            "account_number": "3070"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe 10,7% VSt": {
+            "account_number": "3071"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe aus einem USt-Lager §13a UStG 7% VSt und 7% USt": {
+            "account_number": "3075"
+          },
+          "Einkauf Roh-, Hilfs- und Betriebsstoffe aus einem USt-Lager §13a UStG 19% VSt und 19% USt": {
+            "account_number": "3076"
+          },
+          "Erwerb Roh-, Hilfs- und Betriebsstoffe als letzte Abnehmer innerhalb Dreiecksgesch\u00e4ft 19% VSt und 19% USt": {
+            "account_number": "3089"
+          },
+          "Energiestoffe (Fertigung)": {
+            "account_number": "3090"
+          },
+          "Energiestoffe (Fertigung) 7% VSt": {
+            "account_number": "3091"
+          },
+          "Energiestoffe (Fertigung) 19% VSt": {
+            "account_number": "3092"
+          },
+          "Wareneingang": {
+            "account_number": "3200"
+          },
+          "Wareneingang 7% VSt": {
+            "account_number": "3300"
+          },
+          "Wareneingang ohne VStabzug": {
+            "account_number": "3349"
+          },
+          "Wareneingang 19% VSt": {
+            "account_number": "3400"
+          },
+          "Innergemeinschaftlicher Erwerb 7% VSt und 7% USt": {
+            "account_number": "3420"
+          },
+          "Innergemeinschaftlicher Erwerb 19% VSt und 19% USt": {
+            "account_number": "3425"
+          },
+          "Innergemeinschaftlicher Erwerb ohne VSt und 7% USt": {
+            "account_number": "3430"
+          },
+          "Innergemeinschaftlicher Erwerb ohne VSt und 19% USt": {
+            "account_number": "3435"
+          },
+          "Innergemeinschaftlicher Erwerb von Neufahrzeugen von Lieferanten ohne USt-Id-Nr. 19% VSt und 19% USt": {
+            "account_number": "3440"
+          },
+          "Wareneingang 5,5% VSt": {
+            "account_number": "3505"
+          },
+          "Wareneingang 10,7% VSt": {
+            "account_number": "3540"
+          },
+          "Steuerfreier Innergemeinschaftlicher Erwerb": {
+            "account_number": "3550"
+          },
+          "Wareneingang, im Drittland steuerbar": {
+            "account_number": "3551"
+          },
+          "Erwerb 1. Abnehmer im Dreiecksgesch\u00e4ft": {
+            "account_number": "3552"
+          },
+          "Erwerb Waren als letzter Abnehmer innerhalb Dreiecksgesch\u00e4ft 19% VSt und 19% USt": {
+            "account_number": "3553"
+          },
+          "Wareneingang im anderen EG-Land steuerba": {
+            "account_number": "3558"
+          },
+          "Steuerfreie Einfuhren": {
+            "account_number": "3559"
+          },
+          "Waren aus USt-Lager 7% VSt, 7% USt": {
+            "account_number": "3560"
+          },
+          "Waren aus USt-Lager 19% VSt, 19% USt": {
+            "account_number": "3565"
+          },
+          "Nicht abziehbare VSt": {
+            "account_number": "3600"
+          },
+          "Nicht abziehbare VSt 7": {
+            "account_number": "3610"
+          },
+          "Nicht abziehbare VSt 19": {
+            "account_number": "3660"
+          },
+          "Nachl\u00e4sse": {
+            "account_number": "3700"
+          },
+          "Nachl\u00e4sse aus Einkauf Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3701"
+          },
+          "Nachl\u00e4sse 7% VSt": {
+            "account_number": "3710"
+          },
+          "Nachl\u00e4sse aus Einkauf Roh-, Hilfs- und Betriebsstoffe 7% VSt": {
+            "account_number": "3714"
+          },
+          "Nachl\u00e4sse aus Einkauf Roh-, Hilfs- und Betriebsstoffe 19% VSt": {
+            "account_number": "3715"
+          },
+          "Nachl\u00e4sse aus Einkauf Roh-, Hilfs- und Betriebsstoffe, aus innergemeinschaftlichem Erwerb 7% VSt und 7% USt": {
+            "account_number": "3717"
+          },
+          "Nachl\u00e4sse aus Einkauf Roh-, Hilfs- und Betriebsstoffe, aus innergemeinschaftlichem Erwerb 19% VSt und 19% USt": {
+            "account_number": "3718"
+          },
+          "Nachl\u00e4sse 19% VSt": {
+            "account_number": "3720"
+          },
+          "Nachl\u00e4sse aus innergemeinschaftlichem Erwerb 7% VSt/USt": {
+            "account_number": "3724"
+          },
+          "Nachl\u00e4sse aus innergemeinschaftlichem Erwerb 19% VSt/USt": {
+            "account_number": "3725"
+          },
+          "Erhaltene Skonti": {
+            "account_number": "3730"
+          },
+          "Erhaltene Skonti 7% VSt": {
+            "account_number": "3731"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3733"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe 7% VSt": {
+            "account_number": "3734"
+          },
+          "Erhaltene Skonti 19% VSt": {
+            "account_number": "3736"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe 19% VSt": {
+            "account_number": "3738"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-,Hilfs- und Betriebsstoffe aus steuerpflichtigem innergemein. Erwerb 19% VSt und 19% USt": {
+            "account_number": "3741"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe aus steuerpflichtigem innergemein. Erwerb 7% VSt und 7% USt": {
+            "account_number": "3743"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-,Hilfs- und Betriebsstoffe aus steuerpflichtigem innergemeinschaftlichem Erwerb": {
+            "account_number": "3744"
+          },
+          "Erhaltene Skonti aus steuerpflichtigem innergemeinschaftlichem Erwerb": {
+            "account_number": "3745"
+          },
+          "Erhalt. Skonti aus steuerpflichtigem innergemeinschaftlichem Erwerb 7% VSt/USt": {
+            "account_number": "3746"
+          },
+          "Erhaltene Skonti aus steuerpflichtigem innergemeinschaftlichem Erwerb 19% VSt/USt": {
+            "account_number": "3748"
+          },
+          "Erhaltene Boni 7% VSt": {
+            "account_number": "3750"
+          },
+          "Erhaltene Boni aus Einkauf Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3753"
+          },
+          "Erhaltene Boni aus Einkauf Roh-, Hilfs- und Betriebsstoffe 7% VSt": {
+            "account_number": "3754"
+          },
+          "Erhaltene Boni aus Einkauf Roh-, Hilfs- und Betriebsstoffe 19% VSt": {
+            "account_number": "3755"
+          },
+          "Erhaltene Boni 19% VSt": {
+            "account_number": "3760"
+          },
+          "Erhaltene Bon": {
+            "account_number": "3769"
+          },
+          "Erhaltene Rabatte": {
+            "account_number": "3770"
+          },
+          "Erhaltene Rabatte 7% VSt": {
+            "account_number": "3780"
+          },
+          "Erhaltene Rabatte aus Einkauf Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3783"
+          },
+          "Erhaltene Rabatte aus Einkauf Roh-, Hilfs- und Betriebsstoffe 7% VSt": {
+            "account_number": "3784"
+          },
+          "Erhaltene Rabatte aus Einkauf Roh-, Hilfs- und Betriebsstoffe 19% VSt": {
+            "account_number": "3785"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe 10,7% VSt": {
+            "account_number": "3788"
+          },
+          "Erhaltene Rabatte 19% VSt": {
+            "account_number": "3790"
+          },
+          "Erhaltene Skonti aus Erwerb Roh-, Hilfs- und Betriebsstoffe als Letzter innerhalb Dreiecksgesch\u00e4ft 19% VSt und 19% USt": {
+            "account_number": "3792"
+          },
+          "Erhaltene Skonti aus Erwerb Waren als letzter Abnehmer innerhalb Dreiecksgesch\u00e4ft 19% VSt und 19% USt": {
+            "account_number": "3793"
+          },
+          "Erhaltene Skonti 5,5% VSt": {
+            "account_number": "3794"
+          },
+          "Erhaltene Skonti 10,7% VSt": {
+            "account_number": "3796"
+          },
+          "Erhaltene Skonti aus Einkauf Roh-, Hilfs- und Betriebsstoffe 5,5% VSt": {
+            "account_number": "3798"
+          },
+          "Bezugsnebenkosten": {
+            "account_type": "Expenses Included In Valuation",
+            "account_number": "3800"
+          },
+          "Leergut": {
+            "account_number": "3830"
+          },
+          "Z\u00f6lle und Einfuhrabgaben": {
+            "account_number": "3850"
+          },
+          "Bestandsver\u00e4nderungen Waren": {
+            "account_number": "3950",
+            "account_type": "Stock Adjustment"
+          },
+          "Bestandsver\u00e4nderungen Roh-, Hilfs- und Betriebsstoffe": {
+            "account_number": "3955"
+          },
+          "Bestandsver\u00e4nderungen Roh- Hilfs- und Betriebsstoffe sowie bezogene Waren Bestand an Vorr\u00e4te": {
+            "account_number": "3960"
+          },
+          "Verrechnete Stoffkosten": {
+            "account_number": "3990"
+          },
+          "Material- und Stoffverbrauch": {
+            "account_number": "4000"
+          }
+        },
+        "Aufwendungen f\u00fcr bezogene Leistungen ": {
+          "is_group": 1,
+          "Fremdleistungen": {
+            "account_number": "3100"
+          },
+          "Fremdleistungen 19% VSt": {
+            "account_number": "3106"
+          },
+          "Fremdleistungen 7% VSt": {
+            "account_number": "3108"
+          },
+          "Fremdleistungen ohne VSt": {
+            "account_number": "3109"
+          },
+          "Ums\u00e4tze, f\u00fcr die als Leistungsempf\u00e4nger die Steuernach § 13b Abs. 2 UStG geschuldet wird": {
+            "is_group": 1,
+            "Bauleistungen eines im Inland ans\u00e4ssigen Unternehmers 7% VSt und 7% USt": {
+              "account_number": "3110"
+            },
+            "Sonstige Leistungen eines im anderen EG-Land ans\u00e4ssigen Unternehmers 7% VSt und 7% USt": {
+              "account_number": "3113"
+            },
+            "Leistungen ausl. UN 7% VSt, 7% USt": {
+              "account_number": "3115"
+            },
+            "Bauleistungen eines im Inland ans\u00e4ssigen Unternehmers 19% VSt und 19% USt": {
+              "account_number": "3120"
+            },
+            "Sonstige Leistungen eines im anderen EU-Land ans\u00e4ssigen Unternehmers 19% VSt und 19% USt": {
+              "account_number": "3123"
+            },
+            "Leistungen eines im Ausland ans\u00e4ssigen Unternehmers 19% VSt und 19% USt": {
+              "account_number": "3125"
+            },
+            "Bauleistungen eines im Inland ans\u00e4ssigen Unternehmers ohne VSt und 7% USt": {
+              "account_number": "3130"
+            },
+            "Sonstige Leistungen eines im anderen EU-Land ans\u00e4ssigen Unternehmers ohne VSt und 7% USt": {
+              "account_number": "3133"
+            },
+            "Leistungen eines im Ausland ans\u00e4ssigen Unternehmers ohne VSt und 7% USt": {
+              "account_number": "3135"
+            },
+            "Bauleistungen eines im Inland ans\u00e4ssigen Unternehmers ohne VSt und 19% USt": {
+              "account_number": "3140"
+            },
+            "Sonstige Leistungen eines im anderen EU-Land ans\u00e4ssigen Unternehmers ohne VSt und 19% USt": {
+              "account_number": "3143"
+            },
+            "Leistungen eines im Ausland ans\u00e4ssigen Unternehmers ohne VSt und 19% USt": {
+              "account_number": "3145"
+            },
+            "Erhaltene Skonti aus Leistungen §13b UStG": {
+              "account_number": "3150"
+            },
+            "Erhaltene Skonti aus Leistungen nach § 13b UStG 19% VSt und 19% USt": {
+              "account_number": "3151"
+            },
+            "Erh. Skonti Leistg. § 13b o. VSt/ m. USt": {
+              "account_number": "3153"
+            },
+            "Erh. Skonti Leistg. § 13b o. VSt/ 19% USt": {
+              "account_number": "3154"
+            },
+            "Leistungen nach § 13b UStG mit VStabzug": {
+              "account_number": "3160"
+            },
+            "Leistungen nach § 13b UStG ohne VStabzug": {
+              "account_number": "3165"
+            },
+            "Fremdleistungen (Miet- und Pachtzinsen unbewegliche Wirtschaftsg\u00fcter)": {
+              "account_number": "3175"
+            },
+            "Fremdleistungen (Entgelte f\u00fcr Rechte und Lizenzen)": {
+              "account_number": "3180"
+            },
+            "Fremdleistungen (Verg\u00fctungen f\u00fcr die \u00dcberlassung von Wirtschaftsg\u00fctern - mit Sonderbetriebseinnahme korrespondierend)": {
+              "account_number": "3185"
+            }
+          }
+        }
+      },
+      "Personalaufwendungen": {
+        "is_group": 1,
+        "L\u00f6hne und  Geh\u00e4lter ": {
+          "is_group": 1,
+          "L\u00f6hne und Geh\u00e4lter": {
+            "account_number": "4100"
+          },
+          "L\u00f6hne": {
+            "account_number": "4110"
+          },
+          "Geh\u00e4lter": {
+            "account_number": "4120"
+          },
+          "Gesch\u00e4ftsf\u00fchrergeh\u00e4lter GmbH-Gesells.": {
+            "account_number": "4124"
+          },
+          "Ehegattengehalt": {
+            "account_number": "4125"
+          },
+          "Tantiemen Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4126"
+          },
+          "Gesch\u00e4ftsf\u00fchrergeh\u00e4lter": {
+            "account_number": "4127"
+          },
+          "Verg\u00fctungen an angestellte Mitunternehmer § 15 EStG (mit Sonderbetriebseinnahme korrespondierend)": {
+            "account_number": "4128"
+          },
+          "Tantiemen Arbeitnehmer": {
+            "account_number": "4129"
+          },
+          "Freiwillige soziale Aufwendung. lohnsteuerpflichtig": {
+            "account_number": "4145"
+          },
+          "Freiwillige Zuwendungen an Minijobber": {
+            "account_number": "4146"
+          },
+          "Freiwillige Zuwendungen an Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4147"
+          },
+          "Freiwillige Zuwendungen an angestellte Mitunternehmer § 15 EStG": {
+            "account_number": "4148"
+          },
+          "Pauschale Steuer f\u00fcr Zusch\u00fcsse": {
+            "account_number": "4149"
+          },
+          "Krankengeldzusch\u00fcss": {
+            "account_number": "4150"
+          },
+          "Sachzuwendungen und Dienstleistungen an Minijobber": {
+            "account_number": "4151"
+          },
+          "Sachzuwendungen und Dienstleistg. an AN": {
+            "account_number": "4152"
+          },
+          "Sachzuwendungen und Dienstleistungen an Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4153"
+          },
+          "Sachzuwendungen und Dienstleistungen an angestellte Mitunternehmer § 15 EStG": {
+            "account_number": "4154"
+          },
+          "Zusch\u00fcsse Agenturen f\u00fcr Arbeit": {
+            "account_number": "4155"
+          },
+          "Aufwendungen aus der Ver\u00e4nderung von Urlaubsr\u00fcckstellungen": {
+            "account_number": "4156"
+          },
+          "Aufwendungen aus der Ver\u00e4nderung von Urlaubsr\u00fcckstellungen f\u00fcr Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4157"
+          },
+          "Aufwendungen aus der Ver\u00e4nderung von Urlaubsr\u00fcckstellungen f\u00fcr angestellte Mitunternehmer § 1 EStG": {
+            "account_number": "4158"
+          },
+          "Aufwendungen aus der Ver\u00e4nderung von Urlaubsr\u00fcckstellungen f\u00fcr Minijobber": {
+            "account_number": "4159"
+          },
+          "Verm\u00f6genswirksame Leistungen": {
+            "account_number": "4170"
+          },
+          "Fahrtkostenerstatt. Whg./Arbeitsst\u00e4tte": {
+            "account_number": "4175"
+          },
+          "Bedienungsgelder": {
+            "account_number": "4180"
+          },
+          "Aushilfsl\u00f6hne": {
+            "account_number": "4190"
+          },
+          "Pauschale Steuern und Abgaben f\u00fcr Sachzuwendungen und Dienstleistungen an Minijobber": {
+            "account_number": "4194"
+          },
+          "L\u00f6hne f\u00fcr Minijobs": {
+            "account_number": "4195"
+          },
+          "Pauschale Steuern und Abgaben f\u00fcr Sachzuwendungen und Dienstleistungen an Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4196"
+          },
+          "Pauschale Steuern und Abgaben f\u00fcr Sachzuwendungen und Dienstleistungen an angestellte Mitunternehmer § 15 EStG1)": {
+            "account_number": "4197"
+          },
+          "Pauschale Steuern f\u00fcr Arbeitnehmer": {
+            "account_number": "4198"
+          },
+          "Pauschale Steuer f\u00fcr Aushilfe": {
+            "account_number": "4199"
+          }
+        },
+        "Soziale Abgaben und Aufwendungen f\u00fcr Altersversorgung und f\u00fcr Unterst\u00fctzung": {
+          "is_group": 1,
+          "Freiwillige soziale Aufwendung. LSt-frei": {
+            "Gesetzliche Sozialaufwendungen": {
+              "account_number": "4130"
+            },
+            "Gesetzliche soziale Aufwendungen f\u00fcr Mitunternehmer § 15 EStG  (mit Sonderbetriebseinnahme korrespondierend)": {
+              "account_number": "4137"
+            },
+            "Beitr\u00e4ge zur Berufsgenossenschaft": {
+              "account_number": "4138"
+            },
+            "account_number": "4140"
+          },
+          "Sonstige soziale Abgaben": {
+            "account_number": "4141"
+          },
+          "Soziale Abgaben f\u00fcr Minijobber": {
+            "account_number": "4144"
+          },
+          "Versorgungskasse": {
+            "account_number": "4160"
+          },
+          "Aufwendungen f\u00fcr Altersversorgun": {
+            "account_number": "4165"
+          },
+          "Aufwendungen f\u00fcr Altersversorgung f\u00fcr Gesellschafter-Gesch\u00e4ftsf\u00fchrer": {
+            "account_number": "4166"
+          },
+          "Pauschale Steuer f\u00fcr Versicherungen": {
+            "account_number": "4167"
+          },
+          "Aufwendungen f\u00fcr Altersversorgung f\u00fcr Mitunternehmer § 15 EStG (mit Sonderbetriebseinnahme korrespondierend)": {
+            "account_number": "4168"
+          },
+          "Aufwendungen f\u00fcr Unterst\u00fctzun": {
+            "account_number": "4169"
+          }
+        }
+      },
+      "Abschreibungen": {
+        "is_group": 1,
+        "auf immaterielle Verm\u00f6gensgegenst\u00e4nde des Anlageverm\u00f6gens und Sachanlagen": {
+          "is_group": 1,
+          "Kaufleasing": {
+            "account_number": "4815"
+          },
+          "Abschreibungen auf immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "4822",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf selbst geschaffene immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "4823",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf den Gesch\u00e4fts-, oder Firmenwert": {
+            "account_number": "4824",
+            "account_type": "Depreciation"
+          },
+          "Au\u00dferplanm\u00e4\u00dfige Abschreibungen auf den Gesch\u00e4fts- oder Firmenwert": {
+            "account_number": "4825",
+            "account_type": "Depreciation"
+          },
+          "Au\u00dferplanm\u00e4\u00dfige Abschreibungen auf immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "4826",
+            "account_type": "Depreciation"
+          },
+          "Au\u00dferplanm\u00e4\u00dfige Abschreibungen auf selbst geschaffene immaterielle Verm\u00f6gensgegenst\u00e4nde": {
+            "account_number": "4827"
+          },
+          "Abschreibungen auf Sachanlagen": {
+            "account_number": "4830",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf Geb\u00e4ude": {
+            "account_number": "4831",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf Kfz": {
+            "account_number": "4832",
+            "account_type": "Depreciation"
+          },
+          "Abschreibung Arbeitszimmer": {
+            "account_number": "4833",
+            "account_type": "Depreciation"
+          },
+          "Au\u00dferplanm\u00e4\u00dfige Abschreibungen auf Sachanlagen": {
+            "account_number": "4840",
+            "account_type": "Depreciation"
+          },
+          "Absetzung f\u00fcr au\u00dfergew\u00f6hnliche technische und wirtschaftliche Abnutzung der Geb\u00e4ude": {
+            "account_number": "4841",
+            "account_type": "Depreciation"
+          },
+          "Absetzung f\u00fcr au\u00dfergew\u00f6hnliche technische und wirtschaftliche Abnutzung des Kfz": {
+            "account_number": "4842",
+            "account_type": "Depreciation"
+          },
+          "Absetzung f\u00fcr au\u00dfergew\u00f6hnliche technische und wirtschaftliche Abnutzung sonstiger Wirtschaftsg\u00fcte": {
+            "account_number": "4843",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf Sachanlagen auf Grund steuerlicher Sondervorschriften": {
+            "account_number": "4850",
+            "account_type": "Depreciation"
+          },
+          "Sonderabschreibungen nach § 7g Abs. 5 EStG (ohne Kfz)": {
+            "account_number": "4851",
+            "account_type": "Depreciation"
+          },
+          "Sonderabschreibungen nach § 7g Abs. 5 EStG (f\u00fcr Kfz)": {
+            "account_number": "4852",
+            "account_type": "Depreciation"
+          },
+          "K\u00fcrzung der Anschaffungs- oder Herstellungskosten gem\u00e4\u00df § 7g Abs. 2 EStG (ohne Kfz)": {
+            "account_number": "4853",
+            "account_type": "Depreciation"
+          },
+          "K\u00fcrzung der Anschaffungs- oder Herstellungskosten gem\u00e4\u00df § 7g Abs. 2 EStG (f\u00fcr Kfz": {
+            "account_number": "4854",
+            "account_type": "Depreciation"
+          },
+          "Sofortabschreibung GWG": {
+            "account_number": "4855",
+            "account_type": "Depreciation"
+          },
+          "Abschreibungen auf aktivierte GWG": {
+            "account_number": "4860",
+            "account_type": "Depreciation"
+          },
+          "Abschreibung Sammelposten GWG": {
+            "account_number": "4862",
+            "account_type": "Depreciation"
+          },
+          "Au\u00dferplanm\u00e4\u00dfige Abschreibungen auf aktivierte GWG": {
+            "account_number": "4865",
+            "account_type": "Depreciation"
+          }
+        },
+        "auf Verm\u00f6gensgegenst\u00e4nde des Umlaufverm\u00f6gens, un\u00fcblich": {
+          "is_group": 1,
+          "Forderungsverluste, un\u00fcblich hoch": {
+            "account_number": "2430"
+          },
+          "Forderungsverluste 7% USt (soweit un\u00fcblich hoch)": {
+            "account_number": "2431"
+          },
+          "Forderungsverluste 19% USt (soweit un\u00fcblich hoch": {
+            "account_number": "2436"
+          },
+          "Abschreibungen auf Forderungen gegen\u00fcber Kapitalgesellschaften, an denen eine Beteiligung besteht( soweit un\u00fcblich hoch)": {
+            "account_number": "2440"
+          },
+          "Abschreibungen auf Forderungen gegen\u00fcber Gesellschaftern und nahe stehenden Personen (soweit un\u00fcblich hoch)": {
+            "account_number": "2441"
+          },
+          "Abschreibungen auf sonstige Verm\u00f6gensgegenst\u00e4nde des UVs (soweit un\u00fcbliche H\u00f6he)": {
+            "account_number": "4880"
+          },
+          "Abschreibungen auf UV, steuerrechtlich bedingt (soweit un\u00fcbliche H\u00f6he)": {
+            "account_number": "4882"
+          },
+          "Abschreibungen auf Roh-, Hilfs- und Betriebsstoffe/Waren (soweit un\u00fcbliche H\u00f6he)": {
+            "account_number": "4892"
+          },
+          "Abschreibungen auf fertige und unfertige Erzeugnisse (soweit un\u00fcbliche H\u00f6he)": {
+            "account_number": "4893"
+          }
+        }
+      },
+      "Sonstige betriebliche Aufwendungen": {
+        "is_group": 1,
+        "Verluste durch Verschmelzung und Umwandlung": {
+          "account_number": "2004"
+        },
+        "Verluste durch au\u00dfergew\u00f6hnliche Schadensf\u00e4lle": {
+          "account_number": "2006"
+        },
+        "Aufwendungen f\u00fcr Restrukturierungs und Sanierungsma\u00dfnahmen": {
+          "account_number": "2007"
+        },
+        "Verluste aus der Ver\u00e4u\u00dferung oder der Aufgabe von Gesch\u00e4ftsaktivit\u00e4ten nach Steuer": {
+          "account_number": "2008"
+        },
+        "Sonstige Aufwendungen": {
+          "account_number": "2300"
+        },
+        "Sonstige Aufwendungen betriebsfremd und regelm\u00e4\u00dfig": {
+          "account_number": "2307"
+        },
+        "Sonstige nicht abziehbare Aufwendungen": {
+          "account_number": "2308"
+        },
+        "Sonstige Aufwendungen unregelm\u00e4\u00dfig": {
+          "account_number": "2309"
+        },
+        "Anlagenabg\u00e4nge Sachanlagen (Restbuchwert bei Buchverlust)": {
+          "account_number": "2310"
+        },
+        "Anlagenabg\u00e4nge immaterielle Verm\u00f6gensgegenst\u00e4nde (Restbuchwert bei Buchverlust)": {
+          "account_number": "2311"
+        },
+        "Anlagenabg\u00e4nge Finanzanlagen (Restbuchwert bei Buchverlust)": {
+          "account_number": "2312"
+        },
+        "Anlagenabg\u00e4nge Finanzanlagen  § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG (Restbuchwert bei Buchverlust)": {
+          "account_number": "2313"
+        },
+        "Verluste aus dem Abgang von Gegenst\u00e4nden des Anlageverm\u00f6gen": {
+          "account_number": "2320"
+        },
+        "Verluste aus der Ver\u00e4u\u00dferung von Anteilen an Kapitalgesellschaften (Finanzanlageverm\u00f6gen) § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG": {
+          "account_number": "2323"
+        },
+        "Verluste aus Abgang von UV": {
+          "account_number": "2325"
+        },
+        "Verluste aus dem Abgang von Gegenst\u00e4nden des UVs (au\u00dfer Vorr\u00e4te) § 3 Nr. 40 EStG/ § 8b Abs. 3 KStG": {
+          "account_number": "2326"
+        },
+        "Abgang von Wirtschaftsg\u00fctern des UVs nach § 4 Abs. 3  Satz 4 EStG": {
+          "account_number": "2327"
+        },
+        "Abgang von Wirtschaftsg\u00fctern des UVs § 3 Nr. 40 EStG/ § 8b Abs. 3 KStG nach § 4 Abs. 3 Satz 4 EStG": {
+          "account_number": "2328"
+        },
+        "Einstellungen in die steuerliche R\u00fccklage nach § 4g EStG1": {
+          "account_number": "2339"
+        },
+        "Einstellungen in die steuerliche R\u00fccklage nach § 6b Abs. 3 EStG": {
+          "account_number": "2342"
+        },
+        "Einstellungen in die steuerliche R\u00fccklage nach § 6b Abs. 10 EStG": {
+          "account_number": "2343"
+        },
+        "Einstellungen in die R\u00fccklage fur Ersatzbeschaffung nach R 6.6 EStR1": {
+          "account_number": "2344"
+        },
+        "Einstellungen in steuerliche R\u00fccklagen": {
+          "account_number": "2345"
+        },
+        "Aufwendungen aus dem Erwerb eigener Anteile": {
+          "account_number": "2347"
+        },
+        "Grundst\u00fccksaufwendungen, neutral": {
+          "account_number": "2350"
+        },
+        "Zuwendungen, Spenden steuerl. n. abziehb.": {
+          "account_number": "2380"
+        },
+        "Zuwendungen, Spenden wissensch./kult. Zweck": {
+          "account_number": "2381"
+        },
+        "Zuwendungen, Spenden mildt\u00e4tige Zwecke": {
+          "account_number": "2382"
+        },
+        "Zuwendungen, Spenden kirchl./rel./gemein.": {
+          "account_number": "2383"
+        },
+        "Zuwendungen, Spenden an politische Partei": {
+          "account_number": "2384"
+        },
+        "Nicht abziehbare H\u00e4lfte der Aufsichtsratsverg\u00fctungen": {
+          "account_number": "2385"
+        },
+        "Abziehbare Aufsichtsratsverg\u00fctung": {
+          "account_number": "2386"
+        },
+        "Zuwendungen, Spenden in das zu erhaltende Verm\u00f6gen (Verm\u00f6gensstock) einer Stiftung f. gemeinn\u00fctzige Zwecke": {
+          "account_number": "2387"
+        },
+        "Zuwendungen, Spenden in das zu erhaltende Verm\u00f6gen (Verm\u00f6gensstock) einer Stiftung f. kirchl., rel. und gemeinn. Zwecke": {
+          "account_number": "2389"
+        },
+        "Zuwendungen, Spenden an Stiftungen in das zu erhaltende Verm\u00f6gen (Verm\u00f6gensstock) f. wissens., mildt., kult. Zwecke": {
+          "account_number": "2390"
+        },
+        "Forderungsverluste (\u00fcbliche H\u00f6he)": {
+          "account_number": "2400"
+        },
+        "Forderungsverluste 7% USt (\u00fcbliche H\u00f6he)": {
+          "account_number": "2401"
+        },
+        "Forderungsverluste aus stfr. EG-Lieferungen (\u00fcbliche H\u00f6he)": {
+          "account_number": "2402"
+        },
+        "Forderungsverluste EG-Lieferungen 7% (\u00fcbliche H\u00f6he)": {
+          "account_number": "2403"
+        },
+        "Forderungsverluste 19% USt (\u00fcbliche H\u00f6he)": {
+          "account_number": "2406"
+        },
+        "Forderungsverluste EG-Lieferung 19% USt (\u00fcbliche H\u00f6he)": {
+          "account_number": "2408"
+        },
+        "Einstellungen in die Pauschalwertberichtigung auf Forderungen": {
+          "account_number": "2450"
+        },
+        "Einstellungen in die Einzelwertberichtigung auf Forderungen": {
+          "account_number": "2451"
+        },
+        "Ausgleichsabgabe i. S. d. Schwerbehindertengesetze": {
+          "account_number": "4139"
+        },
+        "Raumkosten": {
+          "account_number": "4200"
+        },
+        "Miete, unbewegliche Wirtschaftsg\u00fcter": {
+          "account_number": "4210"
+        },
+        "Aufwendungen f\u00fcr gemietete oder gepachtete unbewegliche Wirtschaftg\u00fcter die gewerbesteuerlich hinzuzurechnen sind": {
+          "account_number": "4211"
+        },
+        "Miete/Aufwendungen f\u00fcr doppelte Haushaltsf\u00fchrung": {
+          "account_number": "4212"
+        },
+        "Leasing, unbewegliche Wirtschaftsg\u00fcter": {
+          "account_number": "4215"
+        },
+        "Verg\u00fctungen an Mitunternehmer  f\u00fcr die mietweise \u00dcberlassung ihrer unbeweglichen Wirtschaftsg\u00fcter § 15 EStG": {
+          "account_number": "4219"
+        },
+        "Pacht, unbewegliche Wirtschaftsg\u00fcter": {
+          "account_number": "4220"
+        },
+        "Verg\u00fctungen an Gesellschafter f\u00fcr die miet- oder pachtweise \u00dcberlassung ihrer unbeweglichen Wirtschaftsg\u00fcter": {
+          "account_number": "4222"
+        },
+        "Miet- und Pachtnebenkosten": {
+          "account_number": "4228"
+        },
+        "Verg\u00fctungen an Mitunternehmer f\u00fcr die pachtweise \u00dcberlassung ihrer unbeweglichen Wirtschaftsg\u00fcter § 15 EStG": {
+          "account_number": "4229"
+        },
+        "Heizung": {
+          "account_number": "4230"
+        },
+        "Gas, Strom, Wasser": {
+          "account_number": "4240"
+        },
+        "Reinigung": {
+          "account_number": "4250"
+        },
+        "Instandhaltung betrieblicher R\u00e4ume": {
+          "account_number": "4260"
+        },
+        "Abgaben f\u00fcr betrieblich genutzt. Grundbesitz": {
+          "account_number": "4270"
+        },
+        "Sonstige Raumkosten": {
+          "account_number": "4280"
+        },
+        "Aufwendungen f\u00fcr ein h\u00e4usliches Arbeitszimmer (abziehbarer Anteil)": {
+          "account_number": "4288"
+        },
+        "Aufwendungen f\u00fcr ein h\u00e4usliches Arbeitszimmer (nicht abziehbarer Anteil)": {
+          "account_number": "4289"
+        },
+        "Grundst\u00fccksaufwendungen, betrieblich": {
+          "account_number": "4290"
+        },
+        "Nicht abziehbare VSt": {
+          "account_number": "4300"
+        },
+        "Nicht abziehbare VSt 7%": {
+          "account_number": "4301"
+        },
+        "Nicht abziehbare VSt 19%": {
+          "account_number": "4306"
+        },
+        "Versicherungen": {
+          "account_number": "4360"
+        },
+        "Versicherung f\u00fcr Geb\u00e4ude": {
+          "account_number": "4366"
+        },
+        "Netto-Pr\u00e4mie f\u00fcr R\u00fcckdeckung k\u00fcnftiger Versorgungsleistungen": {
+          "account_number": "4370"
+        },
+        "Beitr\u00e4ge": {
+          "account_number": "4380"
+        },
+        "Sonstige Abgaben": {
+          "account_number": "4390"
+        },
+        "Steuerlich abzugsf\u00e4hige Versp\u00e4tungszuschl\u00e4ge und Zwangsgelder": {
+          "account_number": "4396"
+        },
+        "Steuerlich nicht abzugsf\u00e4hige Versp\u00e4tungszuschl\u00e4ge und Zwangsgelder": {
+          "account_number": "4397"
+        },
+        "Fahrzeugkosten": {
+          "account_number": "4500"
+        },
+        "Kfz-Versicherungen": {
+          "account_number": "4520"
+        },
+        "Laufende Kfz-Betriebskosten": {
+          "account_number": "4530"
+        },
+        "Kfz-Reparaturen": {
+          "account_number": "4540"
+        },
+        "Garagenmieten": {
+          "account_number": "4550"
+        },
+        "Mautgeb\u00fchren": {
+          "account_number": "4560"
+        },
+        "Mietleasing Kfz": {
+          "account_number": "4570"
+        },
+        "Sonstige Kfz-Koste": {
+          "account_number": "4580"
+        },
+        "Kfz-Kosten f\u00fcr betrieblich genutzte zum Privatverm\u00f6gen geh\u00f6rende Kraftfahrzeuge": {
+          "account_number": "4590"
+        },
+        "Fremdfahrzeugkosten": {
+          "account_number": "4595"
+        },
+        "Werbekoste": {
+          "account_number": "4600"
+        },
+        "Streuartikel": {
+          "account_number": "4605"
+        },
+        "Geschenke abzugsf\u00e4hig ohne § 37b EStG": {
+          "account_number": "4630"
+        },
+        "Geschenke abzugsf\u00e4hig mit § 37b EStG ": {
+          "account_number": "4631"
+        },
+        "Pauschale Steuern f\u00fcr Geschenke und Zugaben abzugsf\u00e4hig": {
+          "account_number": "4632"
+        },
+        "Geschenke nicht abzugsf\u00e4hig ohne § 37b EStG": {
+          "account_number": "4635"
+        },
+        "Geschenke nicht abzugsf\u00e4hig mit § 37b EStG": {
+          "account_number": "4636"
+        },
+        "Pauschale Steuern f\u00fcr Geschenke und Zuwendungen nicht abzugsf\u00e4hig": {
+          "account_number": "4637"
+        },
+        "Geschenke ausschlie\u00dflich betrieblich genutzt": {
+          "account_number": "4638"
+        },
+        "Zugaben mit § 37b EStG": {
+          "account_number": "4639"
+        },
+        "Repr\u00e4sentationskosten": {
+          "account_number": "4640"
+        },
+        "Bewirtungskosten": {
+          "account_number": "4650"
+        },
+        "Sonstige eingeschr\u00e4nkt abziehbare Betriebsausgaben (abziehbarer Anteil)": {
+          "account_number": "4651"
+        },
+        "Sonstige eingeschr\u00e4nkt abziehbare Betriebsausgaben (nicht abziehbarer Anteil)": {
+          "account_number": "4652"
+        },
+        "Aufmerksamkeiten": {
+          "account_number": "4653"
+        },
+        "Nicht abzugsf\u00e4hige Bewirtungskosten": {
+          "account_number": "4654"
+        },
+        "Nicht abzugsf\u00e4hige Betriebsausgaben": {
+          "account_number": "4655"
+        },
+        "Reisekosten Arbeitnehmer": {
+          "account_number": "4660"
+        },
+        "Reisekosten Arbeitnehmer, Fahrtkosten": {
+          "account_number": "4663"
+        },
+        "Reisekosten Arbeitnehmer Verpflegungsmehraufwand": {
+          "account_number": "4664"
+        },
+        "Reisekosten Arbeitnehmer \u00dcbernachtungsaufwand": {
+          "account_number": "4666"
+        },
+        "Kilometergelderstattung Arbeitnehmer": {
+          "account_number": "4668"
+        },
+        "Reisekosten Unternehmer": {
+          "account_number": "4670"
+        },
+        "Reisekosten Unternehmer (nicht abziehbarer Anteil)": {
+          "account_number": "4672"
+        },
+        "Reisekosten Unternehmer, Fahrtkosten": {
+          "account_number": "4673"
+        },
+        "Reisekosten Unternehmer Verpflegungsmehraufwand": {
+          "account_number": "4674"
+        },
+        "Reisekosten Unternehmer \u00dcbernachtungsaufwand und Reisenebenkosten": {
+          "account_number": "4676"
+        },
+        "Fahrten zwischen Wohnung und Betriebsst\u00e4tte und Familienheimfahrten (abziehbarer Anteil)": {
+          "account_number": "4678"
+        },
+        "Fahrten zwischen Wohnung und Betriebsst\u00e4tte und Familienheimfahrten (nicht abziehbarer Anteil)": {
+          "account_number": "4679"
+        },
+        "Fahrten zwischen Wohnung und Betriebsst\u00e4tte und Familienheimfahrten (Haben)": {
+          "account_number": "4680"
+        },
+        "Verpflegungsmehraufwendungen im Rahmen der doppelten Haushaltsf\u00fchrung Unternehmer": {
+          "account_number": "4681"
+        },
+        "Kosten Warenabgabe": {
+          "account_number": "4700"
+        },
+        "Verpackungsmaterial": {
+          "account_number": "4710"
+        },
+        "Ausgangsfrachten": {
+          "account_number": "4730"
+        },
+        "Transportversicherungen": {
+          "account_number": "4750"
+        },
+        "Verkaufsprovisionen": {
+          "account_number": "4760"
+        },
+        "Fremdarbeiten (Vertrieb)": {
+          "account_number": "4780"
+        },
+        "Aufwand f\u00fcr Gew\u00e4hrleistungen": {
+          "account_number": "4790"
+        },
+        "Reparaturen und Instandhaltungen von technischen Anlagen und Maschinen": {
+          "account_number": "4800"
+        },
+        "Reparaturen und Instandhaltung von Bauten": {
+          "account_number": "4801"
+        },
+        "Reparaturen und Instandhaltungen von anderen Anlagen und Betriebs- und Gesch\u00e4ftsausstattung": {
+          "account_number": "4805"
+        },
+        "Wartungskosten f\u00fcr Hard- und Software": {
+          "account_number": "4806"
+        },
+        "Zuf\u00fchrung zu Aufwandsr\u00fcckstellungen": {
+          "account_number": "4808"
+        },
+        "Sonst. Reparaturen und Instandhaltungen": {
+          "account_number": "4809"
+        },
+        "Mietleasing bewegliche Wirtschaftsg\u00fcter": {
+          "account_number": "4810"
+        },
+        "Abschreibungen auf UV au\u00dfer Vorr\u00e4te und Wertpapiere des UVs (\u00fcbliche H\u00f6he)": {
+          "account_number": "4886"
+        },
+        "Abschreibungen auf UV au\u00dfer Vorr\u00e4te und Wertpapiere des UVs, steuerrechtlich bedingt (\u00fcbliche H\u00f6he)": {
+          "account_number": "4887"
+        },
+        "Sonstige betriebliche Aufwendungen": {
+          "account_number": "4900"
+        },
+        "Interimskonto f\u00fcr Aufwendungen in einem anderen Land bei denen eine VSt-Verg\u00fctung m\u00f6glich ist": {
+          "account_number": "4902"
+        },
+        "Sonstige Aufwendungen betrieblich und regelm\u00e4\u00dfig": {
+          "account_number": "4905"
+        },
+        "Fremdleistungen und Fremdarbeiten": {
+          "account_number": "4909"
+        },
+        "Porto": {
+          "account_number": "4910"
+        },
+        "Telefon": {
+          "account_number": "4920"
+        },
+        "Telefax und Internetkosten": {
+          "account_number": "4925"
+        },
+        "B\u00fcrobedarf": {
+          "account_number": "4930"
+        },
+        "Zeitschriften, B\u00fccher": {
+          "account_number": "4940"
+        },
+        "Fortbildungskosten": {
+          "account_number": "4945"
+        },
+        "Freiwillige Sozialleistungen": {
+          "account_number": "4946"
+        },
+        "Verg\u00fctungen an Mitunternehmer §15 EStG": {
+          "account_number": "4948"
+        },
+        "Haftungsverg\u00fctung an Mitunternehmer": {
+          "account_number": "4949"
+        },
+        "Rechts- und Beratungskosten": {
+          "account_number": "4950"
+        },
+        "Buchf\u00fchrungskosten": {
+          "account_number": "4955"
+        },
+        "Abschluss- und Pr\u00fcfungskosten": {
+          "account_number": "4957"
+        },
+        "Verg\u00fctungen an Gesellschafter f\u00fcr die miet- oder pachtweise \u00dcberlassung ihrer beweglichen Wirtschaftsg\u00fcter": {
+          "account_number": "4958"
+        },
+        "Verg\u00fctungen an Mitunternehmer f\u00fcr die miet- oder pachtweise \u00dcberlassung ihrer beweglichen Wirtschaftsg\u00fcter § 15 EStG": {
+          "account_number": "4959"
+        },
+        "Mieten f\u00fcr Einrichtungen (bewegliche Wirtschaftsg\u00fcter)": {
+          "account_number": "4960"
+        },
+        "Pacht(bewegliche Wirtschaftsg\u00fcter)": {
+          "account_number": "4961"
+        },
+        "Aufwendungen f\u00fcr gemietete oder gepachtete bewegliche Wirtschaftsg\u00fcter,die gewerbesteuerlich hinzuzurechnend sind": {
+          "account_number": "4963"
+        },
+        "Aufwendungen f\u00fcr die zeitlich befristete \u00dcberlassung von Rechten (Lizenzen, Konzessionen)": {
+          "account_number": "4964"
+        },
+        "Mietleasing bewegliche Wirtschaftsg\u00fcter f\u00fcr Betriebs- und Gesch\u00e4ftsausstattung": {
+          "account_number": "4965"
+        },
+        "Aufwand Abraum-/Abfallbeseitigung": {
+          "account_number": "4969"
+        },
+        "Nebenkosten des Geldverkehr": {
+          "account_number": "4970"
+        },
+        "Aufwendungen aus Anteilen an Kapitalgesellschaften §§ 3 Nr. 40, 3c EStG/§ 8b Abs. 1 und 4 KStG": {
+          "account_number": "4975"
+        },
+        "Ver\u00e4u\u00dferungskosten § 3 Nr. 40 EStG/§ 8b Abs. 2 KStG": {
+          "account_number": "4976"
+        },
+        "Sonstiger Betriebsbedarf": {
+          "account_number": "4980"
+        },
+        "Genossenschaftliche R\u00fcckverg\u00fctung an Mitglieder": {
+          "account_number": "4984"
+        },
+        "Werkzeuge und Kleinger\u00e4te": {
+          "account_number": "4985"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen (bei Buchverlust)": {
+          "account_number": "8800"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen 19% USt (bei Buchverlust)": {
+          "account_number": "8801"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen steuerfrei § 4 Nr. 1a UStG (bei Buchverlust)": {
+          "account_number": "8807"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Sachanlageverm\u00f6gen steuerfrei § 4 Nr. 1b UStG (bei Buchverlust)": {
+          "account_number": "8808"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen immaterieller Verm\u00f6gensgegenst\u00e4nde (bei Buchverlust)": {
+          "account_number": "8817"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Finanzanlagen (bei Buchverlust)": {
+          "account_number": "8818"
+        },
+        "Erl\u00f6se aus Verk\u00e4ufen Finanzanlagen § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG (bei Buchverlust)": {
+          "account_number": "8819"
+        },
+        "Betriebsfremde und periodenfremde Aufwendungen": {
+          "is_group": 1,
+          "Betriebsfremde Aufwendungen": {
+            "account_number": "2010"
+          },
+          "Periodenfremde Aufwendunge": {
+            "account_number": "2020"
+          }
+        },
+        "Aufwendungen aus der Anwendung von \u00dcbergangsvorschriften i. S. d. BilMoG": {
+          "is_group": 1,
+          "Aufwendungen aus der Anwendung von \u00dcbergangsvorschriften": {
+            "account_number": "2090"
+          },
+          "Aufwendungen aus der Anwendung von \u00dcbergangsvorschriften (Pensionsr\u00fcckstellungen)": {
+            "account_number": "2091"
+          },
+          "Aufwendungen aus der Anwendung von \u00dcbergangsvorschriften (Latente Steuern)": {
+            "account_number": "2094"
+          }
+        },
+        "Kalkulatorische Kosten": {
+          "is_group": 1,
+          "Kalkulatorischer Unternehmerlohn": {
+            "account_number": "4990"
+          },
+          "Kalkulatorische Miete und Pacht": {
+            "account_number": "4991"
+          },
+          "Kalkulatorische Zinsen": {
+            "account_number": "4992"
+          },
+          "Kalkulatorische Abschreibungen": {
+            "account_number": "4993"
+          },
+          "Kalkulatorische Wagnisse": {
+            "account_number": "4994"
+          },
+          "Kalkulatorischer Lohn f\u00fcr unentgeltliche Mitarbeiter": {
+            "account_number": "4995"
+          }
+        },
+        "Verrechnete kalkulatorische Kosten": {
+          "is_group": 1,
+          "Verrechneter kalkul.Unternehmerlohn": {
+            "account_number": "2890"
+          },
+          "Verrechnete kalkul. Miete und Pacht": {
+            "account_number": "2891"
+          },
+          "Verrechnete kalkulatorische Zinsen": {
+            "account_number": "2892"
+          },
+          "Verrechnete kalkul. Abschreibungen": {
+            "account_number": "2893"
+          },
+          "Verrechnete kalkulatorische Wagnisse": {
+            "account_number": "2894"
+          },
+          "Verrechneter kalkulatorischer Lohn f\u00fcr unentgeltliche Mitarbeite": {
+            "account_number": "2895"
+          }
+        },
+        "Herstellungskosten": {
+          "account_number": "4996",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Verwaltungskosten": {
+          "account_number": "4997"
+        },
+        "Vertriebskosten": {
+          "account_number": "4998"
+        },
+        "Gegenkonto 4996-4998": {
+          "account_number": "4999"
+        }
+      },
+      "Privat": {
+        "is_group": 1,
+        "Privat (Eigenkapital)Vollhafter/Einzelunternehmer": {
+          "is_group": 1,
+          "Privatentnahmen allgemein": {
+            "account_number": "1800"
+          },
+          "Privatsteuern": {
+            "account_number": "1810"
+          },
+          "Sonderausgaben beschr\u00e4nkt abzugsf\u00e4hig": {
+            "account_number": "1820"
+          },
+          "Sonderausgaben unbeschr\u00e4nkt abzugsf\u00e4hig": {
+            "account_number": "1830"
+          },
+          "Zuwendungen, Spenden": {
+            "account_number": "1840"
+          },
+          "Au\u00dfergew\u00f6hnliche Belastungen": {
+            "account_number": "1850"
+          },
+          "Grundst\u00fccksaufwand": {
+            "account_number": "1860"
+          },
+          "Grundst\u00fccksaufwand (UStschl\u00fcssel m\u00f6glich)": {
+            "account_number": "1869"
+          },
+          "Grundst\u00fccksertra": {
+            "account_number": "1870"
+          },
+          "Grundst\u00fccksertrag (UStschl\u00fcssel m\u00f6glich)": {
+            "account_number": "1879"
+          },
+          "Unentgeltliche Wertabgaben": {
+            "account_number": "1880"
+          },
+          "Privateinlagen": {
+            "account_number": "1890"
+          }
+        },
+        "Privat (Fremdkapital) Teilhafter": {
+          "is_group": 1,
+          "Privatentnahmen allgemein": {
+            "account_number": "1900"
+          },
+          "Privatsteuern": {
+            "account_number": "1910"
+          },
+          "Sonderausgaben beschr\u00e4nkt abzugsf\u00e4hig.": {
+            "account_number": "1920"
+          },
+          "Sonderausgaben unbeschr\u00e4nkt abzugsf\u00e4hig.": {
+            "account_number": "1930"
+          },
+          "Zuwendungen, Spenden": {
+            "account_number": "1940"
+          },
+          "Au\u00dfergew\u00f6hnliche Belastungen": {
+            "account_number": "1950"
+          },
+          "Grundst\u00fccksaufwand": {
+            "account_number": "1960"
+          },
+          "Grundst\u00fccksertrag": {
+            "account_number": "1970"
+          },
+          "Unentgeltliche Wertabgaben": {
+            "account_number": "1980"
+          },
+          "Privateinlagen": {
+            "account_number": "1990"
+          }
+        }
+      },
+      "Abschreibungen auf Finanzanlagen und auf Wertpapiere des Umlaufverm\u00f6gens": {
+        "is_group": 1,
+        "Abschreibungen auf Finanzanlagen (nicht dauerhaft)": {
+          "account_number": "4866"
+        },
+        "Abschreibungen auf Finanzanlagen": {
+          "account_number": "4870"
+        },
+        "Abschreibungen auf Finanzanlagen § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG (dauerhaft)": {
+          "account_number": "4871"
+        },
+        "Aufwendungen auf Grund von Verlustanteilen an gewerblichen und selbst\u00e4ndigen Mitunternehmerschaften, § 8 GewStG bzw. § 18 EStG": {
+          "account_number": "4872"
+        },
+        "Abschreibungen auf Finanzanlagen auf Grund § 6b EStG-R\u00fccklage, § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG": {
+          "account_number": "4873"
+        },
+        "Abschreibungen auf Finanzanlagen auf Grund § 6b EStG-R\u00fccklage": {
+          "account_number": "4874"
+        },
+        "Abschreibungen auf Wertpapiere des UVs": {
+          "account_number": "4875"
+        },
+        "Abschreibungen auf Wertpapiere des UVs § 3 Nr. 40 EStG/§ 8b Abs. 3 KStG": {
+          "account_number": "4876"
+        },
+        "Abschreibungen auf Finanzanlagen - verbundene Unternehmen": {
+          "account_number": "4877"
+        },
+        "Abschreibungen auf Wertpapiere des UVs - verbundene Unternehmen": {
+          "account_number": "4878"
+        }
+      },
+      "Zinsen und \u00e4hnliche Aufwendungen": {
+        "is_group": 1,
+        "Zinsen und \u00e4hnliche Aufwendungen": {
+          "account_number": "2100"
+        },
+        "Steuerlich nicht abzugsf\u00e4hige andere Nebenleistungen zu Steuern §4 Abs.5b, EStG": {
+          "account_number": "2102"
+        },
+        "Abzugsf\u00e4h. and. Nebenleist. zu Steuern": {
+          "account_number": "2103"
+        },
+        "Nicht abzugsf\u00e4h.and.Nebenleist.z.Steuern": {
+          "account_number": "2104"
+        },
+        "Zinsaufw. § 233a AO,§ 4 Abs. 5b EStG": {
+          "account_number": "2105"
+        },
+        "Abzinsung KSt-Erh\u00f6hungsbetrag § 382107": {
+          "account_number": "2106"
+        },
+        "Zinsaufw. § 233a AO betriebliche Steuern": {
+          "account_number": "2107"
+        },
+        "Zinsaufwendungen §§ 233a bis 237 AO": {
+          "account_number": "2108"
+        },
+        "Zinsaufwendungen an verbundene Unternehmen": {
+          "account_number": "2109"
+        },
+        "Zinsaufwendungen f\u00fcr kurzfristige Verbindlichkeiten": {
+          "account_number": "2110"
+        },
+        "Zinsaufwendungen §§ 234 bis 237 AO abzugsf\u00e4hig": {
+          "account_number": "2111"
+        },
+        "Nicht abzugsf\u00e4hige Schuldzinsen gem\u00e4\u00df § 4 Abs. 4a EStG  (Hinzurechnungsbetrag)": {
+          "account_number": "2113"
+        },
+        "Zinsen f\u00fcr Gesellschafterdarlehen": {
+          "account_number": "2114"
+        },
+        "Zinsen und \u00e4hnliche Aufwendungen §§ 3 Nr. 40, 3c EStG/§ 8b Abs. 1 und 4 KStG": {
+          "account_number": "2115"
+        },
+        "Zinsen und \u00e4hnliche Aufwendungen an verbundene Unternehmen §§ 3 Nr. 40, 3c EStG/§ 8b Abs. 1 KStG": {
+          "account_number": "2116"
+        },
+        "Zinsen an Gesellschafter mit einer Beteiligung von mehr als 25 % bzw. diesen nahe stehende Personen": {
+          "account_number": "2117"
+        },
+        "Zinsen auf Kontokorrentkonten": {
+          "account_number": "2118"
+        },
+        "Zinsaufwendungen f\u00fcr kurzfristige Verbindlichkeiten an verbundene Unternehmen": {
+          "account_number": "2119"
+        },
+        "Zinsaufwendungen f\u00fcr langfristige Verbindlichkeiten": {
+          "account_number": "2120"
+        },
+        "Abschreibungen auf Disagio/Damnum zur Finanzierung": {
+          "account_number": "2123"
+        },
+        "Abschreibungen auf Disagio/  Damnum zur Finanzierung des  Anlageverm\u00f6gens": {
+          "account_number": "2124"
+        },
+        "Zinsen f\u00fcr Geb\u00e4ude im Betriebsverm\u00f6gen": {
+          "account_number": "2125"
+        },
+        "Zinsen zur Finanzierung Anlageverm\u00f6gen": {
+          "account_number": "2126"
+        },
+        "Renten und dauernde Lasten": {
+          "account_number": "2127"
+        },
+        "Zinsaufwendungen f\u00fcr Kapital\u00fcberlassung durch Mitunternehmer § 15 EStG (mit Sonderbetriebseinnahme korrespondierend)": {
+          "account_number": "2128"
+        },
+        "Zinsaufwendungen f\u00fcr langfristige Verbindlichkeiten an verbundene Unternehmen": {
+          "account_number": "2129"
+        },
+        "Diskontaufwendungen": {
+          "account_number": "2130"
+        },
+        "Diskontaufwendungen an verbundene UN": {
+          "account_number": "2139"
+        },
+        "Zins\u00e4hnliche Aufwendungen": {
+          "account_number": "2140"
+        },
+        "Kreditprovisionen und Verwaltungskostenbeitr\u00e4ge": {
+          "account_number": "2141"
+        },
+        "Zinsanteil der Zuf\u00fchrungen zu Pensionsr\u00fcckstellungen": {
+          "account_number": "2142"
+        },
+        "Zinsaufwendungen aus der Abzinsung von Verbindlichkeiten": {
+          "account_number": "2143"
+        },
+        "Zinsaufwendungen aus der Abzinsung von R\u00fcckstellungen": {
+          "account_number": "2144"
+        },
+        "Zinsaufwendungen aus der Abzinsung von Pensionsr\u00fcckstellungen und \u00e4hnlichen/vergleichbaren Verpflichtungen": {
+          "account_number": "2145"
+        },
+        "Zinsaufw. Abzinsung Pensionsr\u00fcckst. Verr. § 246/2 HGB": {
+          "account_number": "2146"
+        },
+        "Aufwendungen aus Verm\u00f6gensgegenst\u00e4nden zur Verrechnung nach § 246 Abs. 2 HGB": {
+          "account_number": "2147"
+        },
+        "Steuerlich nicht abzugsf\u00e4hige Zinsaufwendungen aus der Abzinsung von R\u00fcckstellungen": {
+          "account_number": "2148"
+        },
+        "Zins\u00e4hnliche Aufwendungen an verbundene Unternehmen": {
+          "account_number": "2149"
+        },
+        "Aufwendungen aus der W\u00e4hrungsumrechnung": {
+          "account_number": "2150"
+        },
+        "Aufwendungen aus der W\u00e4hrungsumrechnung (nicht § 256a HGB)": {
+          "account_number": "2151"
+        },
+        "Aufwendg. Bewertung Finanzmittelfonds": {
+          "account_number": "2166"
+        },
+        "Nicht abziehbare VSt": {
+          "account_number": "2170"
+        },
+        "Nicht abziehbare VSt 7%": {
+          "account_number": "2171"
+        },
+        "Nicht abziehbare VSt 19%": {
+          "account_number": "2176"
+        }
+      },
+      "Steuern vom Einkommen und Ertrag ": {
+        "is_group": 1,
+        "K\u00f6rperschaftsteuer": {
+          "account_number": "2200"
+        },
+        "K\u00f6rperschaftsteuer f\u00fcr Vorjahre": {
+          "account_number": "2203"
+        },
+        "K\u00f6rperschaftsteuererstattung Vorjahre": {
+          "account_number": "2204"
+        },
+        "Solidarit\u00e4tszuschlag": {
+          "account_number": "2208"
+        },
+        "Solidarit\u00e4tszuschlag f\u00fcr Vorjahre": {
+          "account_number": "2209"
+        },
+        "Solidarit\u00e4tszuschlagerstattungen f\u00fcr Vorjahre": {
+          "account_number": "2210"
+        },
+        "Kapitalertragsteuer 25%": {
+          "account_number": "2213"
+        },
+        "Anrechenbarer Solidarit\u00e4tszuschlag auf Kapitalertragsteuer 25%": {
+          "account_number": "2216"
+        },
+        "Ausl\u00e4ndische Steuer auf im Inland steuerfreie DBA-Eink\u00fcnfte": {
+          "account_number": "2218"
+        },
+        "Anrechnung / Abzug ausl\u00e4ndische Quellensteuer": {
+          "account_number": "2219"
+        },
+        "Aufw. Zuf\u00fchrg/Aufl\u00f6sung latente Steuern": {
+          "account_number": "2250"
+        },
+        "Ertr\u00e4ge Zuf\u00fchrg/Aufl\u00f6sg latente Steuern": {
+          "account_number": "2255"
+        },
+        "Aufwendungen aus der Zuf\u00fchrung zu Steuerr\u00fcckstellungen f\u00fcr Steuerstundung (BStBK)": {
+          "account_number": "2260"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung von Steuerr\u00fcckstellungen f\u00fcr Steuerstundung (BStBK)": {
+          "account_number": "2265"
+        },
+        "Gewerbesteuernachzahlungen und Gewerbesteuererstattungen f\u00fcr Vorjahre, § 4 Abs. 5b EStG": {
+          "account_number": "2281"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung von Gewerbesteuerr\u00fcckstellungen,  § 4 Abs. 5b EStG": {
+          "account_number": "2283"
+        },
+        "Gewerbesteuer": {
+          "account_number": "4320"
+        }
+      },
+      "sonstige Steuern ": {
+        "is_group": 1,
+        "Steuernachzahlungen Vorjahre f\u00fcr sonstige Steuern": {
+          "account_number": "2285"
+        },
+        "Steuererstattungen Vorjahre f\u00fcr sonstige Steuern": {
+          "account_number": "2287"
+        },
+        "Ertr\u00e4ge aus der Aufl\u00f6sung von R\u00fcckstellungen f\u00fcr sonstige  Steuern": {
+          "account_number": "2289"
+        },
+        "Grundsteuer": {
+          "account_number": "2375"
+        },
+        "Kfz-Steuern": {
+          "account_number": "4510"
+        },
+        "Sonstige Betriebssteuern": {
+          "account_number": "4340"
+        },
+        "Verbrauchsteuer": {
+          "account_number": "4350"
+        },
+        "\u00d4kosteuer": {
+          "account_number": "4355"
+        }
+      }
+    },
+    "Vortrags-, Kapital-, Korrektur-  und statistische Konten": {
+      "root_type": "Asset",
+      "is_group": 1,
+      "Vortragskonten": {
+        "is_group": 1,
+        "Saldenvortr\u00e4ge Sachkonten": {
+          "account_number": "9000"
+        },
+        "Saldenvortr\u00e4ge Sachkonten -1": {
+          "account_number": "9001"
+        },
+        "Saldenvortr\u00e4ge Debitoren": {
+          "account_number": "9008"
+        },
+        "Saldenvortr\u00e4ge Kreditoren": {
+          "account_number": "9009"
+        },
+        "Offene Posten 2000": {
+          "account_number": "9070"
+        },
+        "Offene Posten 2001": {
+          "account_number": "9071"
+        },
+        "Offene Posten 2002": {
+          "account_number": "9072"
+        },
+        "Offene Posten 2003": {
+          "account_number": "9073"
+        },
+        "Offene Posten 2004": {
+          "account_number": "9074"
+        },
+        "Offene Posten 2005": {
+          "account_number": "9075"
+        },
+        "Offene Posten 2006": {
+          "account_number": "9076"
+        },
+        "Offene Posten 2007": {
+          "account_number": "9077"
+        },
+        "Offene Posten 2008": {
+          "account_number": "9078"
+        },
+        "Offene Posten 2009": {
+          "account_number": "9079"
+        },
+        "Offene Posten aus 2010": {
+          "account_number": "9080"
+        },
+        "Offene Posten aus 2011": {
+          "account_number": "9081"
+        },
+        "Offene Posten aus 2012": {
+          "account_number": "9082"
+        },
+        "Offene Posten aus 2013": {
+          "account_number": "9083"
+        },
+        "Offene Posten aus 2014": {
+          "account_number": "9084"
+        },
+        "Offene Posten aus 2015": {
+          "account_number": "9085"
+        },
+        "Offene Posten aus 2016": {
+          "account_number": "9086"
+        },
+        "Offene Posten aus 2017": {
+          "account_number": "9087"
+        },
+        "Offene Posten aus 2018": {
+          "account_number": "9088"
+        },
+        "Summenvortragskonto": {
+          "account_number": "9090"
+        }
+      },
+      "Statistische Konten f\u00fcr Betriebswirtschaftliche Auswertungen (BWA)": {
+        "is_group": 1,
+        "Verkaufstage": {
+          "account_number": "9101"
+        },
+        "Anzahl der Barkunden": {
+          "account_number": "9102"
+        },
+        "Besch\u00e4ftigte Personen": {
+          "account_number": "9103"
+        },
+        "Unbezahlte Personen": {
+          "account_number": "9104"
+        },
+        "Verkaufskr\u00e4fte": {
+          "account_number": "9105"
+        },
+        "Gesch\u00e4ftsraum qm": {
+          "account_number": "9106"
+        },
+        "Verkaufsraum qm": {
+          "account_number": "9107"
+        },
+        "Anzahl Rechnungen": {
+          "account_number": "9116"
+        },
+        "Anzahl Kreditkunden monatlich": {
+          "account_number": "9117"
+        },
+        "Anzahl Kreditkunden aufgelaufen": {
+          "account_number": "9118"
+        },
+        "Erweiterungsinvestitionen": {
+          "account_number": "9120"
+        },
+        "Auftragseingang im Gesch\u00e4ftsjahr": {
+          "account_number": "9135"
+        },
+        "Auftragsbestand": {
+          "account_number": "9140"
+        }
+      },
+      "Variables Kapital Teilhafter": {
+        "is_group": 1,
+        "Variables Kapital": {
+          "account_number": "9141"
+        },
+        "Variables Kapital - Anteil Teilhafter": {
+          "account_number": "9142"
+        }
+      },
+      "Kapital\u00e4nderungen durch \u00dcbertragung einer § 6b EStG R\u00fccklage": {
+        "is_group": 1,
+        "Variables Kapital Vollhafter - \u00dcbertragung einer § 6b EStG-R\u00fccklage": {
+          "account_number": "9146"
+        },
+        "Variables Kapital Teilhafter - \u00dcbertragung einer § 6b EStG-R\u00fccklagn": {
+          "account_number": "9147"
+        }
+      },
+      "Andere Kapitalkontenanpassungen: Vollhafter,": {
+        "is_group": 1,
+        "Festkapital - andere Kapitalkontenanpassungen": {
+          "account_number": "9150"
+        },
+        "Variables Kapital - andere Kapitalkontenanpassungen": {
+          "account_number": "9151"
+        },
+        "Verlust-/Vortragskonto - andere Kapitalkontenanpassungen": {
+          "account_number": "9152"
+        },
+        "Kapitalkonto III - andere Kapitalkontenanpassungen": {
+          "account_number": "9153"
+        },
+        "Ausstehende Einlagen auf das Komplement\u00e4r-Kapital, nicht eingefordert - andere Kapitalkontenanpassungen": {
+          "account_number": "9154"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen - andere Kapitalkontenanpassunge": {
+          "account_number": "9155"
+        }
+      },
+      "Andere Kapitalkontenanpassungen: Teilhafter": {
+        "is_group": 1,
+        "Kommandit-Kapital - andere Kapitalkontenanpassungen": {
+          "account_number": "9160"
+        },
+        "Variables Kapital - andere Kapitalkontenanpassungen": {
+          "account_number": "9161"
+        },
+        "Verlustausgleichskonto - andere Kapitalkontenanpassungen": {
+          "account_number": "9162"
+        },
+        "Kapitalkonto III - andere Kapitalkontenanpassungen": {
+          "account_number": "9163"
+        },
+        "Ausstehende Einlagen auf das Kommandit-Kapital, nicht eingefordert - andere Kapitalkontenanpassungen": {
+          "account_number": "9164"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen - andere Kapitalkontenanpassungen": {
+          "account_number": "9165"
+        }
+      },
+      "Umbuchungen auf andere Kapitalkonten: Vollhafter": {
+        "is_group": 1,
+        "Festkapital - Umbuchungen": {
+          "account_number": "9170"
+        },
+        "Variables Kapital - Umbuchungen": {
+          "account_number": "9171"
+        },
+        "Verlust-/Vortragskonto - Umbuchungen": {
+          "account_number": "9172"
+        },
+        "Kapitalkonto III - Umbuchungen": {
+          "account_number": "9173"
+        },
+        "Ausstehende Einlagen auf das Komplement\u00e4r-Kapital, nicht eingefordert - Umbuchungen": {
+          "account_number": "9174"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen - Umbuchungen": {
+          "account_number": "9175"
+        }
+      },
+      "Umbuchungen auf andere Kapitalkonten: Teilhafter": {
+        "is_group": 1,
+        "Kommandit-Kapital - Umbuchungen": {
+          "account_number": "9180"
+        },
+        "Variables Kapital - Umbuchungen": {
+          "account_number": "9181"
+        },
+        "Verlustausgleichskonto - Umbuchungen": {
+          "account_number": "9182"
+        },
+        "Kapitalkonto III - Umbuchungen": {
+          "account_number": "9183"
+        },
+        "Ausstehende Einlagen auf das Kommandit-Kapital, nicht eingefordert-Umbuchungen": {
+          "account_number": "9184"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen- Umbuchungen": {
+          "account_number": "9185"
+        },
+        "Verrechnungskonto f\u00fcr Umbuchungen zwischen Gesellschaften": {
+          "account_number": "9189"
+        }
+      },
+      "Gegenkonten zu statistischen Konten f\u00fcr Betriebswirtschaftliche Auswertungen": {
+        "is_group": 1,
+        "Gegenkto. zu Konten 9101-9107, 9116-9118": {
+          "account_number": "9190"
+        },
+        "Gegenkonto zu Konten 9120, 9135-9140": {
+          "account_number": "9199"
+        }
+      },
+      "Statistische Konten f\u00fcr den Kennziffernanteil der Bilanz": {
+        "is_group": 1,
+        "Besch\u00e4ftigte Personen": {
+          "account_number": "9200"
+        },
+        "Gegenkonto zu 9200": {
+          "account_number": "9209"
+        },
+        "Produktive L\u00f6hne": {
+          "account_number": "9210"
+        },
+        "Gegenkonto zu 9210": {
+          "account_number": "9219"
+        }
+      },
+      "Statistische Konten zur informativen Abgabe des gezeichneten Kapitals in anderer W\u00e4hrung": {
+        "is_group": 1,
+        "Gez. Kapital in DM (Art. 42/3/1 EGHGB)": {
+          "account_number": "9220"
+        },
+        "Gez. Kapital Euro (Art. 42/3/2 EGHGB)": {
+          "account_number": "9221"
+        },
+        "Gegenkonto zu Konten 9220-9221": {
+          "account_number": "9229"
+        }
+      },
+      "Statistische Konten f\u00fcr die Kapitalflussrechnung": {
+        "is_group": 1,
+        "Investitionsverbindlichkeiten bei den Leistungsverbindlichkeiten ": {
+          "account_number": "9240"
+        },
+        "Investitionsverbindlichkeiten aus Sachanlagek\u00e4ufen bei Leistungsverbindlichkeiten": {
+          "account_number": "9241"
+        },
+        "Investitionsverbindlichkeiten aus K\u00e4ufen von immateriellen Verm\u00f6gensgegenst\u00e4nden bei Leistungsverbindlichkeiten": {
+          "account_number": "9242"
+        },
+        "Investitionsverbindlichk. Finanzanlagen": {
+          "account_number": "9243"
+        },
+        "Gegenkonto zu Konten 9240 - 9243": {
+          "account_number": "9244"
+        },
+        "Forderungen aus Sachanlageverk\u00e4ufen bei sonstigen Verm\u00f6gensgegenst\u00e4nden": {
+          "account_number": "9245"
+        },
+        "Forderungen aus Verk\u00e4ufen immaterieller Verm\u00f6gensgegenst\u00e4nde bei sonstigen Verm\u00f6gensgegenst\u00e4nden": {
+          "account_number": "9246"
+        },
+        "Forderungen Verk\u00e4ufe von Finanzanlagen": {
+          "account_number": "9247"
+        },
+        "Gegenkonto zu Konten 9245 - 9247 KU": {
+          "account_number": "9249"
+        }
+      },
+      "Aufgliederung der R\u00fcckstellungen": {
+        "is_group": 1,
+        "Kurzfristige R\u00fcckstellungen": {
+          "account_number": "9260"
+        },
+        "Mittelfristige R\u00fcckstellungen": {
+          "account_number": "9262"
+        },
+        "Langfristige R\u00fcckstellung o.Pensionen": {
+          "account_number": "9264"
+        },
+        "Gegenkonto zu Konten 9260-9268": {
+          "account_number": "9269"
+        }
+      },
+      "Statistische Konten f\u00fcr in der Bilanzauszuweisende Haftungsverh\u00e4ltnisse": {
+        "is_group": 1,
+        "Gegenkonto zu 9271-9279  (Soll-Buchung)": {
+          "account_number": "9270"
+        },
+        "Verbindlichkeiten aus der Begebung und \u00dcbertragung von Wechseln": {
+          "account_number": "9271"
+        },
+        "Verbindlichkeiten aus der Begebung und \u00dcbertragung von Wechseln gegen\u00fcber verbundenen/ assoziierten Unternehmen": {
+          "account_number": "9272"
+        },
+        "Verbindlichkeiten aus B\u00fcrgschaften, Wechsel- und Scheckb\u00fcrgschaften": {
+          "account_number": "9273"
+        },
+        "Verbindlichkeiten aus B\u00fcrgschaften, Wechsel- und Scheckb\u00fcrgschaften gegen\u00fcber verbundenen/assoziierten Unternehmen": {
+          "account_number": "9274"
+        },
+        "Verbindlichkeiten aus Gew\u00e4hrleistungsvertr\u00e4gen": {
+          "account_number": "9275"
+        },
+        "Verbindlichkeiten aus Gew\u00e4hrleistungsvertr\u00e4gen gegen\u00fcber verbundenen/assoziierten Unternehmen": {
+          "account_number": "9276"
+        },
+        "Haftung aus der Bestellung von Sicherheiten f\u00fcr fremde Verbindlichkeiten": {
+          "account_number": "9277"
+        },
+        "Haftung aus der Bestellung von Sicherheiten f\u00fcr fremde Verbindlichkeiten gegen\u00fcber verbundenen/ assoziierten Unternehmen": {
+          "account_number": "9278"
+        },
+        "Verpflichtungen aus Treuhandverm\u00f6gen": {
+          "account_number": "9279"
+        }
+      },
+      "Statistische Konten f\u00fcr die im Anhang auszugebenden sonstigen finanziellen Verpflichtungen": {
+        "is_group": 1,
+        "Gegenkonto zu Konten 9281-9286 KU": {
+          "account_number": "9280"
+        },
+        "Verpflichtungen aus Miet- und Leasingvertr\u00e4gen": {
+          "account_number": "9281"
+        },
+        "Verpflichtungen aus Miet- und Leasingvertr\u00e4gen gegen\u00fcber verbundenen Unternehmen": {
+          "account_number": "9282"
+        },
+        "Andere Verpflichtungen gem.§285 Nr3 HGB": {
+          "account_number": "9283"
+        },
+        "Andere Verpflichtungen §285 Nr3 HGB v.U": {
+          "account_number": "9284"
+        }
+      },
+      "Unterschiedsbetrag aus der Abzinsung von Altersversorgungsverpflichtungen nach § 253 Abs. 6 HGB": {
+        "is_group": 1,
+        "Unterschiedsbetrag aus der Abzinsung von Altersversorgungsverpflichtungen nach § 253 Abs. 6 HGB (Haben)": {
+          "account_number": "9285"
+        },
+        "Gegenkonto zu 92851": {
+          "account_number": "9286"
+        }
+      },
+      "Statistische Konten f\u00fcr § 4 Abs. 3 EStG": {
+        "is_group": 1,
+        "Zinsen bei Buchungen \u00fcber Debitoren bei § 4 Abs. 3 EStG": {
+          "account_number": "9287"
+        },
+        "Mahngeb\u00fchr bei Deb. Buchung § 4/3 EStG": {
+          "account_number": "9288"
+        },
+        "Gegenkonto zu Konto 9287 und 9288": {
+          "account_number": "9289"
+        },
+        "Statistisches Konto steuerfreie Auslagen": {
+          "account_number": "9290"
+        },
+        "Gegenkonto zu 9290": {
+          "account_number": "9291"
+        },
+        "Statistisches Konto Fremdgeld": {
+          "account_number": "9292"
+        },
+        "Gegenkonto zu 9292": {
+          "account_number": "9293"
+        },
+        "Einlagen stiller Gesellschafter": {
+          "account_number": "9295"
+        },
+        "Steuerrechtlicher Ausgleichsposten": {
+          "account_number": "9297"
+        }
+      },
+      "Privat Teilhafter (Eigenkapital, f\u00fcr Verrechnung mit Kapitalkonto III - Konto 9840-9849)": {
+        "is_group": 1,
+        "Privatentnahmen allgemein": {
+          "account_number": "9400"
+        },
+        "Privatsteuern": {
+          "account_number": "9410"
+        },
+        "Sonderausgaben beschr\u00e4nkt abzugsf\u00e4hig": {
+          "account_number": "9420"
+        },
+        "Sonderausgaben unbeschr\u00e4nkt abzugsf\u00e4hig": {
+          "account_number": "9430"
+        },
+        "Zuwendungen, Spenden": {
+          "account_number": "9440"
+        },
+        "Au\u00dfergew\u00f6hnliche Belastungen": {
+          "account_number": "9450"
+        },
+        "Grundst\u00fccksaufwand": {
+          "account_number": "9460"
+        },
+        "Grundst\u00fccksertrag": {
+          "account_number": "9470"
+        },
+        "Unentgeltliche Wertabgaben": {
+          "account_number": "9480"
+        },
+        "Privateinlagen": {
+          "account_number": "9490"
+        }
+      },
+      "Statistische Konten f\u00fcr die Kapitalkontenentwicklung": {
+        "is_group": 1,
+        "Anteil f\u00fcr Konto 0900 Teilhafter": {
+          "account_number": "9500"
+        },
+        "Anteil f\u00fcr Konto 0910 Teilhafter": {
+          "account_number": "9510"
+        },
+        "Anteil f\u00fcr Konto 0920 Teilhafter": {
+          "account_number": "9520"
+        },
+        "Anteil f\u00fcr Konto 9950 Teilhafter": {
+          "account_number": "9530"
+        },
+        "Anteil f\u00fcr Konto 9930 Vollhafter": {
+          "account_number": "9540"
+        },
+        "Anteil f\u00fcr Konto 9810 Vollhafter": {
+          "account_number": "9550"
+        },
+        "Anteil f\u00fcr Konto 9820 Vollhafter": {
+          "account_number": "9560"
+        },
+        "Anteil f\u00fcr Konto 0870 Vollhafter": {
+          "account_number": "9570"
+        },
+        "Anteil f\u00fcr Konto 0880 Vollhafter": {
+          "account_number": "9580"
+        },
+        "Anteil f\u00fcr Konto 0890 Vollhafter": {
+          "account_number": "9590"
+        },
+        "Name des Gesellschaft Vollhafter": {
+          "account_number": "9600"
+        },
+        "T\u00e4tigkeitsverg\u00fctung Vollhafter": {
+          "account_number": "9610"
+        },
+        "Tantieme Vollhafter": {
+          "account_number": "9620"
+        },
+        "Darlehensverzinsung Vollhafter": {
+          "account_number": "9630"
+        },
+        "Gebrauchs\u00fcberlassung Vollhafter": {
+          "account_number": "9640"
+        },
+        "Sonstige Verg\u00fctungen Vollhafter": {
+          "account_number": "9650"
+        },
+        "Restanteil Vollhafter": {
+          "account_number": "9690"
+        },
+        "Name des Gesellschafters Teilhafter": {
+          "account_number": "9700"
+        },
+        "T\u00e4tigkeitsverg\u00fctung Teilhafter": {
+          "account_number": "9710"
+        },
+        "Tantieme Teilhafter": {
+          "account_number": "9720"
+        },
+        "Darlehensverzinsung Teilhafter": {
+          "account_number": "9730"
+        },
+        "Gebrauchs\u00fcberlassung": {
+          "account_number": "9740"
+        },
+        "Sonstige Verg\u00fctungen Teilhafter": {
+          "account_number": "9750"
+        },
+        "Anteil f\u00fcr Konto 9840 Teilhafter": {
+          "account_number": "9780"
+        },
+        "Restanteil Teilhafter": {
+          "account_number": "9790"
+        },
+        "Abstimmsummenkonto f\u00fcr den Import von Buchungss\u00e4tzen": {
+          "account_number": "9800"
+        }
+      },
+      "R\u00fccklagen, Gewinn Verlustvortrag": {
+        "is_group": 1,
+        "Gesamth\u00e4nderisch gebundene R\u00fccklagen - andere Kapitalkontenanpassungen": {
+          "account_number": "9802"
+        },
+        "Gewinnvortrag/Verlustvortrag - andere Kapitalkontenanpassungen": {
+          "account_number": "9803"
+        },
+        "Gesamth\u00e4nderisch gebundene R\u00fccklagen - Umbuchungen": {
+          "account_number": "9804"
+        },
+        "Gewinnvortrag/Verlustvortrag - Umbuchungen": {
+          "account_number": "9805"
+        }
+      },
+      "Statistische Anteile an den Posten Jahres\u00fcberschuss/-fehlbetrag bzw. Bilanzgewinn/-verlust": {
+        "is_group": 1,
+        "Zuzurechnender Anteil am Jahres\u00fcberschuss/Jahresfehlbetrag - je Gesellschafter": {
+          "account_number": "9806"
+        },
+        "Zuzurechnender Anteil am Bilanzgewinn/Bilanzverlust - je Gesellschafter": {
+          "account_number": "9807"
+        },
+        "Gegenkonto f\u00fcr zuzurechnenden Anteil am Jahres\u00fcberschuss/ Jahresfehlbetrag": {
+          "account_number": "9808"
+        },
+        "Gegenkonto f\u00fcr zuzurechnenden Anteil am Bilanzgewinn/Bilanzverlust1": {
+          "account_number": "9809"
+        }
+      },
+      "Kapital Personenhandelsgesellschaft Vollhafter": {
+        "is_group": 1,
+        "Kapitalkonto III": {
+          "account_number": "9810"
+        },
+        "Verlust-/Vortragskonto": {
+          "account_number": "9820"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen": {
+          "account_number": "9830"
+        }
+      },
+      "Kapital Personenhandelsgesellschaft Teilhafter": {
+        "is_group": 1,
+        "Kapitalkonto III": {
+          "account_number": "9840"
+        },
+        "Verrechnungskonto f\u00fcr Einzahlungsverpflichtungen": {
+          "account_number": "9850"
+        }
+      },
+      "Einzahlungsverpflichtungen im Bereich der Forderungen": {
+        "is_group": 1,
+        "Einzahlungsverpflichtungen pers\u00f6nlich haftender Gesellschafter": {
+          "account_number": "9860"
+        },
+        "Einzahlungsverpflichtungen Kommanditisten": {
+          "account_number": "9870"
+        }
+      },
+      "Ausgleichsposten f\u00fcr aktivierte eigene Anteile und Bilanzierungshilfen": {
+        "is_group": 1,
+        "Ausgleichsposten f\u00fcr aktivierte  eigene Anteile": {
+          "account_number": "9880"
+        }
+      },
+      "Nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen": {
+        "is_group": 1,
+        "Nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen pers\u00f6nlich haftender Gesellschafter": {
+          "account_number": "9883"
+        },
+        "Nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen Kommanditisten": {
+          "account_number": "9884"
+        }
+      },
+      "Verrechnungskonto f\u00fcr nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen": {
+        "is_group": 1,
+        "Verrechnungskonto f\u00fcr nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen pers\u00f6nlich haftender Gesellschafter": {
+          "account_number": "9885"
+        },
+        "Verrechnungskonto f\u00fcr nicht durch Verm\u00f6genseinlagen gedeckte Entnahmen Kommanditisten": {
+          "account_number": "9886"
+        }
+      },
+      "Steueraufwand der Gesellschafter": {
+        "is_group": 1,
+        "Steueraufwand der Gesellschafter": {
+          "account_number": "9887"
+        },
+        "Gegenkonto zu 9887": {
+          "account_number": "9889"
+        }
+      },
+      "Statistische Konten f\u00fcr Gewinnzuschlag": {
+        "is_group": 1,
+        "Gewinnzuschlag §§ 6b, 6c, 7g a.F. (H)": {
+          "account_number": "9890"
+        },
+        "Gewinnzuschlag §§ 6b, 6c, 7g a.F. (S)": {
+          "account_number": "9891"
+        }
+      },
+      "Ver\u00e4nderung der gesamth\u00e4nderisch gebundenen R\u00fccklagen (Einlagen/Entnahmen)": {
+        "is_group": 1,
+        "Ver\u00e4nderung der gesamth\u00e4nderisch gebundenen R\u00fccklagen (Einlagen/Entnahmen": {
+          "account_number": "9892"
+        }
+      },
+      "VSt-/Umsatzsteuerkonten zur Korrektur der Forderungen/Verbindlichkeiten (E\u00dcR)": {
+        "is_group": 1,
+        "Umsatzsteuer in Forderungen allg. Satz": {
+          "account_number": "9893"
+        },
+        "Umsatzsteuer in Forderungen erm\u00e4\u00df. Satz": {
+          "account_number": "9894"
+        },
+        "Gegenkonto Aufteilung Umsatzsteuer": {
+          "account_number": "9895"
+        },
+        "VSt in Verbindl. allgem. Satz": {
+          "account_number": "9896"
+        },
+        "VSt in Verbindl. erm\u00e4\u00dfig. Satz": {
+          "account_number": "9897"
+        },
+        "Gegenkonto Aufteilung VSt": {
+          "account_number": "9899"
+        }
+      },
+      "Statistische Konten zu § 4 (4a) EStG": {
+        "is_group": 1,
+        "Gegenkto. Minderung Entnahmen §4,4a EStG": {
+          "account_number": "9910"
+        },
+        "Minderung der Entnahmen § 4, 4a EStG": {
+          "account_number": "9911"
+        },
+        "Erh\u00f6hung der Entnahmen § 4, 4a EStG": {
+          "account_number": "9912"
+        },
+        "Gegenkto. Erh\u00f6hung Entnahmen §4,4a EStG": {
+          "account_number": "9913"
+        }
+      },
+      "Statistische Konten f\u00fcr den au\u00dferhalb der Bilanz zu ber\u00fccksichtigenden Investitionsabzugsbetrag nach § 7g EStG": {
+        "is_group": 1,
+        "Hinzurechnung Investitionsabzugsbetrag § 7g Abs. 2 EStG aus dem 2. vorangegangenen Wirtschaftsjahr, au\u00dferbilanziell (Haben)": {
+          "account_number": "9916"
+        },
+        "Hinzurechnung Investitionsabzugsbetrag § 7g Abs. 2 EStG aus dem 3. vorangegangenen Wirtschaftsjahr,": {
+          "account_number": "9917"
+        },
+        "R\u00fcckg\u00e4ngigmachung Investitionsabzugsbetrag § 7g Abs. 3, 4 EStG im 2. vorangegangenen Wirtschaftsjahr ": {
+          "account_number": "9918"
+        },
+        "R\u00fcckg\u00e4ngigmachung Investitionsabzugsbetrag § 7g Abs. 3, 4 EStG im 3. vorangegangenen Wirtschaftsjahr": {
+          "account_number": "9919"
+        }
+      },
+      "Ausstehende Einlagen": {
+        "is_group": 1,
+        "Ausstehende Einlagen auf das Komplement\u00e4r-Kapital, nicht eingefordert": {
+          "account_number": "9920"
+        },
+        "Ausstehende Einlagen auf das Komplement\u00e4r-Kapital, eingefordert": {
+          "account_number": "9930"
+        },
+        "Ausstehende Einlagen auf das Kommandit-Kapital, nicht eingefordert": {
+          "account_number": "9940"
+        },
+        "Ausstehende Einlagen auf das Kommandit-Kapital, eingefordert": {
+          "account_number": "9950"
+        }
+      },
+      "Konten zu Bewertungskorrekturen": {
+        "is_group": 1,
+        "Bewertungskorrektur zu Forderungen aus Lieferungen und Leistungen": {
+          "account_number": "9960"
+        },
+        "Bewertungskorrektur zu sonstigen Verbindlichkeiten": {
+          "account_number": "9961"
+        },
+        "Bewertungskorrektur zu Guthaben bei Kreditinstituten": {
+          "account_number": "9962"
+        },
+        "Bewertungskorrektur zu Verbindlichkeiten gegen\u00fcber Kreditinstituten": {
+          "account_number": "9963"
+        },
+        "Bewertungskorrektur zu Verbindlichkeiten aus Lieferungen und Leistungen": {
+          "account_number": "9964"
+        },
+        "Bewertungskorrektur zu sonstigen Verm\u00f6gensgegenst\u00e4nden": {
+          "account_number": "9965"
+        }
+      },
+      "Statistische Konten f\u00fcr den au\u00dferhalb der Bilanz zu ber\u00fccksichtigenden Investitionsabzugsbetrag nach § 7g  EStG": {
+        "is_group": 1,
+        "Investitionsabzugsbetrag § 7g Abs. 1 EStG, au\u00dferbilanziell (Soll)": {
+          "account_number": "9970"
+        },
+        "Investitionsabzugsbetrag § 7g Abs. 1 EStG, au\u00dferbilanziell (Haben)  - Gegenkonto zu 9970": {
+          "account_number": "9971"
+        },
+        "Hinzurechnung Investitionsabzugsbetrag § 7g Abs. 2 EStG aus dem vorangegangenen Wirtschaftsjahr, au\u00dferbilanziell (Haben)": {
+          "account_number": "9972"
+        },
+        "Hinzurechnung Investitionsabzugsbetrag § 7g Abs. 2 EStG aus den vorangegangenen Wirtschaftsjahren, au\u00dferbilanziell (Soll)": {
+          "account_number": "9973"
+        },
+        "R\u00fcckg\u00e4ngigmachung Investitionsabzugsbetrag § 7g Abs. 3, 4 EStG im vorangegangenen Wirtschaftsjahr": {
+          "account_number": "9974"
+        },
+        "R\u00fcckg\u00e4ngigmachung Investitionsabzugsbetrag § 7g Abs. 3, 4 EStG in den vorangegangenen Wirtschaftsjahren": {
+          "account_number": "9975"
+        }
+      },
+      "Statistische Konten f\u00fcr die Zinsschranke § 4h EStG/§ 8a KStG": {
+        "is_group": 1,
+        "Nicht abzugsf\u00e4hige Zinsaufw. § 4h, (H)": {
+          "account_number": "9976"
+        },
+        "Nicht abzugsf\u00e4hige Zinsaufw. § 4h, (S)": {
+          "account_number": "9977"
+        },
+        "Abziehb. Zinsaufw. Vorjahre § 4h, (S)": {
+          "account_number": "9978"
+        },
+        "Abziehb. Zinsaufw. Vorjahre § 4h, (H)": {
+          "account_number": "9979"
+        }
+      },
+      "Stat. Konten f. den GuV-Ausweis in Gutschrift bzw. Belastung auf Verbindl.konten bei den Zuordnungstab. f\u00fcr PersHG nach KapCoRiLiG": {
+        "is_group": 1,
+        "Belastung auf Verbindlichkeitskonten": {
+          "account_number": "9980"
+        },
+        "Verr.kto. Anteil Belastung Verb.konten": {
+          "account_number": "9981"
+        },
+        "Anteil Gutschrift auf Verbindl.konten": {
+          "account_number": "9982"
+        },
+        "Verr.kto Anteil Gutschrift Verb.konten": {
+          "account_number": "9983"
+        }
+      },
+      "Statistische Konten f\u00fcr die Gewinnkorrektur nach § 60 Abs. 2 EStDV": {
+        "is_group": 1,
+        "Gewinnkorrektur nach § 60 Abs 2 EStDV": {
+          "account_number": "9984"
+        },
+        "Gegenkonto zu 9984": {
+          "account_number": "9985"
+        }
+      },
+      "Statistische Konten f\u00fcr Korrekturbuchungen in der \u00dcberleitungsrechnung": {
+        "is_group": 1,
+        "Ergebnisverteilung auf Fremdkapital": {
+          "account_number": "9986"
+        },
+        "Bilanzberichtigung": {
+          "account_number": "9987"
+        },
+        "Gegenkonto zu 9986-99881": {
+          "account_number": "9989"
+        }
+      },
+      "Statistische Konten f. au\u00dfergew\u00f6hnliche und aperiod. Gesch\u00e4ftsvorf\u00e4lle f. Anhangsangabe nach § 285 Nr. 31 u. Nr. 32 HGB": {
+        "is_group": 1,
+        "Ertr\u00e4ge von au\u00dfergew\u00f6hnlicher Gr\u00f6\u00dfenordnung oder Bedeutung": {
+          "account_number": "9990"
+        },
+        "Ertr\u00e4ge (aperiodisch)": {
+          "account_number": "9991"
+        },
+        "Ertr\u00e4ge von au\u00dfergew\u00f6hnlicher Gr\u00f6\u00dfenordnung oder Bedeutung (aperiodisch)": {
+          "account_number": "9992"
+        },
+        "Aufwendungen von au\u00dfergew\u00f6hnlicher Gr\u00f6\u00dfenordnung oder Bedeutung": {
+          "account_number": "9993"
+        },
+        "Aufwendungen (aperiodisch)": {
+          "account_number": "9994"
+        },
+        "Aufwendungen von au\u00dfergew\u00f6hnlicher Gr\u00f6\u00dfenordnung oder Bedeutung (aperiodisch)": {
+          "account_number": "9995"
+        },
+        "Gegenkonto zu 9990-9997": {
+          "account_number": "9998"
+        }
+      }
+    }
+  }
+}
+
+
+

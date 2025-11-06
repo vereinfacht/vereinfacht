@@ -2,18 +2,19 @@
 
 namespace App\JsonApi\V1\Clubs;
 
-use App\JsonApi\V1\Fields\StrSanitized;
 use App\Models\Club;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Boolean;
-use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use App\JsonApi\V1\Fields\StrSanitized;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\Where;
+use LaravelJsonApi\Eloquent\Fields\Boolean;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use LaravelJsonApi\Eloquent\Schema;
 
 class ClubSchema extends Schema
 {
@@ -58,6 +59,7 @@ class ClubSchema extends Schema
             HasMany::make('membershipTypes')->type('membership-types'),
             HasMany::make('paymentPeriods')->type('payment-periods'),
             HasMany::make('financeAccounts')->type('finance-accounts'),
+            HasOne::make('taxAccountChart')->type('tax-account-charts'),
         ];
     }
 
@@ -78,5 +80,12 @@ class ClubSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'taxAccountChart',
+        ];
     }
 }

@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use App\Classes\Sanitizer;
-use App\Models\Behaviors\PrefersLocale;
-use Filament\Facades\Filament;
-use Filament\Models\Contracts\HasAvatar;
-use Filament\Models\Contracts\HasName;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Filament\Facades\Filament;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\HasName;
+use App\Models\Behaviors\PrefersLocale;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Club extends Authenticatable implements HasAvatar, HasLocalePreference, HasName
 {
@@ -50,6 +50,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         'allow_voluntary_contribution',
         'has_consented_media_publication_is_required',
         'has_consented_media_publication_default_value',
+        'tax_account_chart_id',
     ];
 
     protected function casts(): array
@@ -138,6 +139,11 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
     public function statements(): HasMany
     {
         return $this->hasMany(Statement::class);
+    }
+
+    public function taxAccountChart()
+    {
+        return $this->belongsTo(TaxAccountChart::class);
     }
 
     /**

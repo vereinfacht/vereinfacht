@@ -1,6 +1,7 @@
 'use client';
 
 import { listFinanceContacts } from '@/actions/financeContacts/list';
+import { listTaxAccounts } from '@/actions/taxAccounts/list';
 import { listTransactions } from '@/actions/transactions/list';
 import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
 import BelongsToSelectInput, {
@@ -14,6 +15,7 @@ import Text from '@/app/components/Text/Text';
 import {
     TFinanceContactDeserialized,
     TReceiptDeserialized,
+    TTaxAccountDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
 import { format } from 'date-fns/format';
@@ -58,6 +60,14 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
                 <Text className="min-w-fit font-medium">{item.fullName}</Text>
             )}
             <Text className="truncate">{item.companyName}</Text>
+        </div>
+    );
+}
+function TaxAccountOption({ item }: { item: TTaxAccountDeserialized }) {
+    return (
+        <div className="flex items-center gap-2">
+            <Text className="min-w-fit font-medium">{item.accountNumber}</Text>
+            <Text className="truncate">{item.description}</Text>
         </div>
     );
 }
@@ -214,6 +224,34 @@ export default function CreateForm({ data, action }: Props) {
                 </FormField>
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                <FormField errors={formState.errors?.['taxAccount']}>
+                    <BelongsToSelectInput<TTaxAccountDeserialized>
+                        resourceName="taxAccount"
+                        resourceType="tax-accounts"
+                        label={t('receipt:tax_account.label')}
+                        action={(searchTerm) =>
+                            listTaxAccounts({
+                                page: { size: itemsPerQuery, number: 1 },
+                                filter: { query: searchTerm },
+                            })
+                        }
+                        optionLabel={(item) => <TaxAccountOption item={item} />}
+                        defaultValue={
+                            data?.taxAccount
+                                ? [
+                                      {
+                                          label: (
+                                              <TaxAccountOption
+                                                  item={data.taxAccount}
+                                              />
+                                          ),
+                                          value: data.taxAccount.id,
+                                      },
+                                  ]
+                                : []
+                        }
+                    />
+                </FormField>
                 <FormField errors={formState.errors?.['financeContact']}>
                     <BelongsToSelectInput<TFinanceContactDeserialized>
                         resourceName="financeContact"
@@ -242,6 +280,8 @@ export default function CreateForm({ data, action }: Props) {
                         }
                     />
                 </FormField>
+            </div>
+            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                 <FormField errors={formState.errors?.['media']}>
                     <MediaInput
                         id="receipt-file"

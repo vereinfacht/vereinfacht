@@ -18,7 +18,7 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
             status: params.status ? params.status : undefined,
             media: params.media ?? undefined,
         },
-        include: ['financeContact', 'media'],
+        include: ['financeContact', 'media', 'taxAccount'],
     });
 
     return response || [];

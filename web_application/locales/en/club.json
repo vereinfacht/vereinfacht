@@ -75,6 +75,9 @@
     "has_consented_media_publication_default_value": {
         "label": "Default value for consent media publication"
     },
-
-    "edit_hint": "Only certain fields can be edited on you own. Please contact the support if you need to change other fields."
+    "edit_hint": "Only certain fields can be edited on you own. Please contact the support if you need to change other fields.",
+    "tax_account_chart": {
+        "label": "Tax account group",
+        "help": "The tax account group used for this club."
+    }
 }
