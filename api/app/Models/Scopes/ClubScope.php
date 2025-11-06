@@ -3,13 +3,14 @@
 namespace App\Models\Scopes;
 
 use App\Models\Club;
-use App\Models\DivisionMembershipType;
-use App\Models\Transaction;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\TaxAccount;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use App\Models\DivisionMembershipType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class ClubScope implements Scope
 {
@@ -81,6 +82,19 @@ class ClubScope implements Scope
             $builder->whereHas('division', function ($query) use ($clubId) {
                 $query->where('club_id', $clubId);
             });
+
+            return;
+        }
+
+        if ($model instanceof TaxAccount) {
+            $club = Club::find($clubId);
+
+            if (!$club || !$club->taxAccountChart) {
+                $builder->take(0);
+                return;
+            }
+
+            $builder->where('tax_account_chart_id', $club->taxAccountChart->id);
 
             return;
         }

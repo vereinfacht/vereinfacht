@@ -9,6 +9,7 @@ use App\Models\Receipt;
 use App\Models\Division;
 use App\Models\Statement;
 use App\Models\Membership;
+use App\Models\TaxAccount;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
 use App\Models\FinanceContact;
@@ -151,5 +152,6 @@ class Server extends BaseServer
         FinanceAccount::addGlobalScope(new ClubScope);
         FinanceContact::addGlobalScope(new ClubScope);
         Statement::addGlobalScope(new ClubScope);
+        TaxAccount::addGlobalScope(new ClubScope);
     }
 }
