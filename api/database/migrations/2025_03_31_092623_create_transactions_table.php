@@ -12,10 +12,13 @@ return new class extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('description')->nullable();
-            $table->integer('amount');
+            $table->smallInteger('gvc')->nullable();
+            $table->string('bank_iban')->nullable();
+            $table->string('bank_account_holder')->nullable();
             $table->string('currency');
+            $table->integer('amount');
 
             $table->foreignId('statement_id')
                 ->constrained('statements')

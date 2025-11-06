@@ -38,7 +38,8 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit font-medium">{item.name}</Text>
+                <Text className="min-w-fit font-medium">{item.title}</Text>
+                <Text className="truncate">({item.bankAccountHolder})</Text>
                 <Text className="truncate">{item.description}</Text>
             </div>
             <CurrencyText value={item.amount ?? 0} />

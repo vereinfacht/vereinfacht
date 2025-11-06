@@ -7,6 +7,7 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
 import ReceiptsTable from '../../receipts/_components/receipts-table';
+import BelongsToField from '../../../components/Fields/Detail/BelongsToField';
 
 interface Props {
     params: ShowPageParams;
@@ -16,7 +17,7 @@ export default async function TransactionShowPage({ params }: Props) {
     const transaction = await Promise.all([
         getTransaction({
             id: params.id,
-            include: ['statement.financeAccount', 'receipts'],
+            include: ['statement', 'statement.financeAccount', 'receipts'],
         }),
     ]);
 
@@ -28,17 +29,32 @@ export default async function TransactionShowPage({ params }: Props) {
 
     const fields = [
         {
+            attribute: 'title',
+            value: transaction[0]?.name,
+        },
+        {
             attribute: 'financeAccount',
             label: t('finance_account:title.one'),
             value: transaction[0]?.statement?.financeAccount?.title,
         },
         {
-            attribute: 'title',
-            value: transaction[0]?.name,
+            attribute: 'description',
+            value: transaction[0]?.description,
         },
         {
-            attribute: 'purpose',
-            value: transaction[0]?.description,
+            attribute: 'bankIban',
+            value: transaction[0]?.bankIban,
+            label: t('membership:bank_iban.label'),
+        },
+        {
+            attribute: 'bankAccountHolder',
+            value: transaction[0]?.bankAccountHolder,
+            label: t('membership:bank_account_holder.label'),
+        },
+        {
+            attribute: 'amount',
+            type: 'currency',
+            value: transaction[0]?.amount,
         },
         {
             attribute: 'valuedAt',
@@ -51,28 +67,52 @@ export default async function TransactionShowPage({ params }: Props) {
             value: transaction[0]?.bookedAt,
         },
         {
-            attribute: 'amount',
-            type: 'currency',
-            value: transaction[0]?.amount,
+            attribute: 'statement',
+            type: 'belongsTo',
+            fields: [
+                {
+                    label: 'statement:date.label',
+                    attribute: 'date',
+                    type: 'date',
+                },
+            ],
         },
     ];
 
     return (
         <div className="container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
-                {fields.map((field, index) => (
-                    <DetailField
-                        key={index}
-                        {...field}
-                        resourceName={'transactions' as ResourceName}
-                        value={field.value}
-                    />
-                ))}
+                {fields.map((field, index) => {
+                    if ('type' in field && field.type === 'belongsTo') {
+                        return (
+                            // @ts-expect-error: reusing this component for now without fixing types for non-resource-class objects
+                            <BelongsToField
+                                key={index}
+                                viewRoute={'/finances/statements'}
+                                {...field}
+                                type="belongsTo"
+                                value={{
+                                    id: transaction[0]?.statement?.id,
+                                    date: transaction[0]?.statement?.date,
+                                }}
+                            />
+                        );
+                    }
+
+                    return (
+                        <DetailField
+                            key={index}
+                            {...field}
+                            resourceName={'transactions' as ResourceName}
+                            value={field.value}
+                        />
+                    );
+                })}
             </ul>
             {transaction[0]?.receipts ? (
                 <>
                     <Text preset="headline" tag="h2" className="mt-6">
-                        {t('receipts:title.other')}
+                        {t('receipt:title.other')}
                     </Text>
                     <ReceiptsTable
                         receipts={

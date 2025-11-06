@@ -5,8 +5,7 @@
         "label": "Name",
         "no_receipts": "Transaktionen ohne Belege"
     },
-
-    "purpose": {
+    "description": {
         "label": "Zweck"
     },
     "booked_at": {
@@ -17,7 +16,7 @@
     },
     "amount": {
         "label": "Betrag",
-        "help": "Der Betrag der Transaktion in EUR. Negative Beträge sind Ausgaben, positive Einnahmen."
+        "help": "Der Betrag der Transaktion in EUR."
     },
     "iban": {
         "label": "IBAN"
@@ -35,26 +34,5 @@
             "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Belege vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
             "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
         }
-    },
-    "type": {
-        "label": "Typ",
-        "collective": "Sammel",
-        "individual": "Einzel"
-    },
-    "finance_account": {
-        "help": "Die Kasse, auf der die Transaktion gebucht wird."
-    },
-    "import": {
-        "title": "Transaktionen importieren",
-        "description": "Hier können exportierte Umsätze im MT940-Format (*.mta-Datei) aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Transaktionen werden automatisch erkannt und übersprungen.",
-        "preview": {
-            "exptected_data": "<0>{{statement_count}}</0> Statements mit <1>{{transaction_count}}</1> Transaktionen werden voraussichtlich importiert."
-        }
-    },
-    "file": {
-        "label": "Datei",
-        "help": "Unterstützt das Format *.mta"
-    },
-
-    "all_sources": "Alle Quellen"
+    }
 }

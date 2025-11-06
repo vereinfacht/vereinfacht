@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Club;
-use App\Models\FinanceAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,10 +29,13 @@ class TransactionFactory extends Factory
         }
 
         return [
-            'name' => $this->faker->name(),
+            'title' => $this->faker->sentence(),
             'description' => $this->faker->text(50),
-            'amount' => $this->faker->randomFloat(2, -1000, 1000) * $currencies[$currency],
+            'gvc' => 105,
+            'bank_iban' => $this->faker->iban(),
+            'bank_account_holder' => $this->faker->name(),
             'currency' => $currency,
+            'amount' => $this->faker->randomFloat(2, -1000, 1000) * $currencies[$currency],
             'valued_at' => $valuedAt,
             'booked_at' => $bookedAt,
         ];

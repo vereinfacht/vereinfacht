@@ -12,13 +12,16 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
-        'amount',
+        'gvc',
+        'bank_iban',
+        'bank_account_holder',
+        'statement_id',
         'currency',
+        'amount',
         'valued_at',
         'booked_at',
-        'statement_id',
     ];
 
     public function casts()
@@ -30,25 +33,6 @@ class Transaction extends Model
             'updated_at' => 'datetime',
             'amount' => MoneyCast::class,
         ];
-    }
-
-    public function getStatusAttribute(): string
-    {
-        $receiptsCount = $this->receipts()->count();
-        $receiptsSum = (int) $this->receipts()->sum('amount');
-        $transactionAmount = is_object($this->amount) && method_exists($this->amount, 'getAmount')
-            ? (int) $this->amount->getAmount()
-            : (int) round($this->amount * 100);
-
-        if ($receiptsCount === 0) {
-            return TransactionStatusEnum::EMPTY->value;
-        }
-
-        if ($receiptsSum == $transactionAmount) {
-            return TransactionStatusEnum::COMPLETED->value;
-        }
-
-        return TransactionStatusEnum::INCOMPLETED->value;
     }
 
     /**
@@ -87,5 +71,28 @@ class Transaction extends Model
             'statement_id',
             'finance_account_id',
         );
+    }
+
+    public function scopeUnassigned($query)
+    {
+        return $query->whereDoesntHave('receipts');
+    }
+
+    public function getStatusAttribute(): string
+    {
+        if ($this->receipts()->count() === 0) {
+            return TransactionStatusEnum::EMPTY->value;
+        }
+
+        $receiptsSum = (int) $this->receipts()->sum('amount');
+        $transactionAmount = is_object($this->amount) && method_exists($this->amount, 'getAmount')
+            ? (int) $this->amount->getAmount()
+            : (int) round($this->amount * 100);
+
+        if ($receiptsSum == $transactionAmount) {
+            return TransactionStatusEnum::COMPLETED->value;
+        }
+
+        return TransactionStatusEnum::INCOMPLETED->value;
     }
 }

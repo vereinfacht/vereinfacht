@@ -1,7 +1,7 @@
 {
     "title": {
-        "one": "Transaction source",
-        "other": "Transaction sources",
+        "one": "Statement source",
+        "other": "Statement sources",
         "label": "Name"
     },
 
@@ -16,17 +16,17 @@
     "activate": "Activate",
     "deactivate": "Deactivate",
     "deactivated": "Deactivated sources",
-    "import_transactions": "Import transactions",
+    "import_transactions": "Import statements",
     "create_modal": {
-        "title": "Create new transaction source",
+        "title": "Create new statement source",
         "choose_type": "Choose type",
         "edit_type": "Set up {{type}}"
     },
     "edit_modal": {
-        "description": "Adjust the settings of the transaction source."
+        "description": "Adjust the settings of the statement source."
     },
     "activate_modal": {
-        "title": "Activate transaction source",
+        "title": "Activate statement source",
         "description": "<0>Do you want to activate the source <1>{{name}}</1>?</0>",
         "notification": {
             "activate": {
@@ -36,8 +36,8 @@
         }
     },
     "deactivate_modal": {
-        "title": "Deactivate transaction source",
-        "description": "<0>When you deactivate the source <1>{{name}}</1>, all existing transaction and receipt assignments will remain. However, this source will no longer appear in the overview, and no notifications or reminders will be made for unassigned transactions. This step can be undone.</0>",
+        "title": "Deactivate statement source",
+        "description": "<0>When you deactivate the source <1>{{name}}</1>, all existing statement and receipt assignments will remain. However, this source will no longer appear in the overview, and no notifications or reminders will be made for unassigned statements. This step can be undone.</0>",
         "notification": {
             "deactivate": {
                 "success": "{{resource}} has been deactivated",

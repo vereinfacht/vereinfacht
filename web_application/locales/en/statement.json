@@ -1,0 +1,32 @@
+{
+    "title": {
+        "one": "Statement",
+        "other": "Statements",
+        "label": "Name"
+    },
+    "amount": {
+        "label": "Amount",
+        "help": "The total amount of the statement in EUR."
+    },
+    "date": {
+        "label": "Date"
+    },
+    "type": {
+        "label": "Type",
+        "collective": "Collective",
+        "individual": "Individual"
+    },
+    "import": {
+        "title": "Import Statements",
+        "description": "Here you can import exported statements in MT940 format (*.mta file) from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
+        "notification": {
+            "success": "{{total_statements_created}} statements were imported. {{total_statements_skipped}} statements were skipped (duplicate or erroneous).",
+            "error": "Errors occurred while importing statements: {{errors}}"
+        }
+    },
+    "file": {
+        "label": "File",
+        "help": "Supports the format *.mta"
+    },
+    "all_sources": "All Sources"
+}

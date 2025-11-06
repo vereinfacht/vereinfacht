@@ -52,14 +52,18 @@ export async function importStatementsFormAction(
             },
         );
 
+        const responseData = await response.json();
+
         if (response.status !== 201) {
             return {
                 success: false,
+                errors: responseData.errors,
             };
         }
 
         return {
             success: true,
+            ...responseData,
         };
     } catch (error) {
         if (error instanceof ZodError) {

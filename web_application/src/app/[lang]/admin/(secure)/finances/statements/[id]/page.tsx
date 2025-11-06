@@ -28,17 +28,18 @@ export default async function StatementShowPage({ params }: Props) {
 
     const fields = [
         {
-            attribute: 'financeAccount',
-            value: statement[0]?.financeAccount?.title,
-        },
-        {
-            attribute: 'identifier',
-            value: statement[0]?.identifier,
+            attribute: 'title',
+            value: statement[0]?.title,
         },
         {
             attribute: 'date',
             type: 'date',
             value: statement[0]?.date,
+        },
+        {
+            attribute: 'financeAccount',
+            value: statement[0]?.financeAccount?.title,
+            label: t('finance_account:title.one'),
         },
         {
             attribute: 'amount',
