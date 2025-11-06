@@ -69,7 +69,7 @@ class ReceiptSchema extends Schema
                 'amount'
             ),
             WhereIn::make('receiptType')->delimiter(','),
-            QueryFilter::make('query', ['reference_number', 'amount']),
+            QueryFilter::make('query', ['reference_number', 'amount'], ['amount']),
         ];
     }
 

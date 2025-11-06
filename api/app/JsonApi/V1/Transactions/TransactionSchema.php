@@ -51,7 +51,7 @@ class TransactionSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            QueryFilter::make('query', ['name', 'description', 'amount']),
+            QueryFilter::make('query', ['name', 'description', 'amount'], ['amount']),
             WithoutRelationFilter::make('withoutReceipts', 'receipts'),
             StatusFilter::make(
                 'status',
