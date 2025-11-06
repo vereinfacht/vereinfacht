@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('clubs', function (Blueprint $table) {
-            $table->foreignId('tax_account_chart_id')->nullable()->after('id')
+            $table->foreignId('tax_account_chart_id')->nullable()->after('has_consented_media_publication_default_value')
                 ->constrained('tax_account_charts')
                 ->nullOnDelete();
         });
