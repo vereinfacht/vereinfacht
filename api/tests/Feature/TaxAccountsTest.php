@@ -13,9 +13,9 @@ class TaxAccountsTest extends TestCase
     {
         $taxAccountChart = TaxAccountChart::factory()->create();
         $otherTaxAccountChart = TaxAccountChart::factory()->create();
-        $club = Club::factory()->create(
-            ['tax_account_chart_id' => $taxAccountChart->getKey()]
-        );
+        $club = Club::factory()->create([
+            'tax_account_chart_id' => $taxAccountChart->getKey(),
+        ]);
 
         $taxAccounts = TaxAccount::factory(3)->create([
             'tax_account_chart_id' => $taxAccountChart->getKey(),
