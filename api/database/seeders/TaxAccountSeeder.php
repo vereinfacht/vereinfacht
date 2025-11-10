@@ -23,6 +23,7 @@ class TaxAccountSeeder extends Seeder
                 'account_number' => $account['account_number'],
                 'description' => $account['description'],
                 'tax_account_chart_id' => 1,
+                'club_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

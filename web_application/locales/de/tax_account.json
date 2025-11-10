@@ -1,0 +1,13 @@
+{
+    "title": {
+        "one": "Steuerkonto",
+        "other": "Steuerkonten",
+        "label": "Name"
+    },
+    "account_number": {
+        "label": "Referenznummer"
+    },
+    "description": {
+        "label": "Beschreibung"
+    }
+}

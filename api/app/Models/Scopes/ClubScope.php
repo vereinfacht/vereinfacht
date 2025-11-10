@@ -89,12 +89,27 @@ class ClubScope implements Scope
         if ($model instanceof TaxAccount) {
             $club = Club::find($clubId);
 
-            if (!$club || !$club->taxAccountChart) {
+            if (!$club) {
                 $builder->take(0);
                 return;
             }
 
-            $builder->where('tax_account_chart_id', $club->taxAccountChart->id);
+            $builder->where(function ($query) use ($club, $clubId) {
+                $query->whereNull('club_id');
+
+                $query->orWhere(function ($subQuery) use ($club, $clubId) {
+                    $subQuery->where('club_id', $clubId);
+
+                    if ($club->taxAccountChart) {
+                        $subQuery->where(function ($chartQuery) use ($club) {
+                            $chartQuery->where('tax_account_chart_id', $club->taxAccountChart->id)
+                                ->orWhereNull('tax_account_chart_id');
+                        });
+                    } else {
+                        $subQuery->whereNull('tax_account_chart_id');
+                    }
+                });
+            });
 
             return;
         }
