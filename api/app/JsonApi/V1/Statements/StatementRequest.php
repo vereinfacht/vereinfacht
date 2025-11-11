@@ -12,6 +12,26 @@ class StatementRequest extends ResourceRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'identifier' => ['string', 'max:255'],
+            'date' => ['date'],
+            'club' => ['required', JsonApiRule::toOne()],
+            'financeAccount' => [
+                'required',
+                JsonApiRule::toOne(),
+                function ($attribute, $value, $fail) {
+                    $accountId = $value['id'] ?? null;
+
+                    if (
+                        !$accountId || !\App\Models\FinanceAccount::where('id', $accountId)
+                            ->where('account_type', 'cash_box')
+                            ->exists()
+                    ) {
+                        $fail('The selected finance account must be a cash box account.');
+                    }
+                },
+            ],
+            'transactions' => [JsonApiRule::toMany()],
+        ];
     }
 }

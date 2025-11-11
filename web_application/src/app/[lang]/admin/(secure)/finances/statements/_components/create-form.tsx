@@ -1,19 +1,23 @@
 'use client';
 
 import { listFinanceAccounts } from '@/actions/financeAccounts/list';
+import { listFinanceContacts } from '@/actions/financeContacts/list';
 import { listTransactions } from '@/actions/transactions/list';
-import { default as BelongsToMultiselectInput } from '@/app/components/Input/BelongsToMultiselectInput';
-import { itemsPerQuery } from '@/app/components/Input/BelongsToSelectInput';
+import BelongsToSelectInput, {
+    itemsPerQuery,
+} from '@/app/components/Input/BelongsToMultiselectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
+import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import {
     TFinanceAccountDeserialized,
+    TFinanceContactDeserialized,
     TStatementDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
-import { formatDate } from '@/utils/dates';
-import { SupportedLocale } from '@/utils/localization';
+import { format } from 'date-fns/format';
+import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -30,36 +34,35 @@ interface Props {
 }
 
 function TransactionOption({ item }: { item: TTransactionDeserialized }) {
-    const { lang } = useTranslation();
-
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit">
-                    {formatDate(item.valuedAt, lang as SupportedLocale)}
-                </Text>
                 <Text className="min-w-fit font-medium">{item.name}</Text>
+                <Text className="truncate">{item.description}</Text>
             </div>
-            <CurrencyText value={Number(item.amount) || 0} />
+            <CurrencyText value={item.amount ?? 0} />
+        </div>
+    );
+}
+
+function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
+    return (
+        <div className="flex items-center gap-2">
+            {item.contactType === 'person' ? (
+                <CircleUserRound width={16} />
+            ) : (
+                <Building2 width={16} />
+            )}
+            {item.fullName && (
+                <Text className="min-w-fit font-medium">{item.fullName}</Text>
+            )}
+            <Text className="truncate">{item.companyName}</Text>
         </div>
     );
 }
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
-
-    const defaultTransactions = data
-        ? [
-              {
-                  label: <TransactionOption item={data} />,
-                  value: data.id,
-                  amount: data.amount || 0,
-              },
-          ]
-        : [];
-
-    const [selectedTransactions, setSelectedTransactions] =
-        useState<any[]>(defaultTransactions);
 
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
@@ -98,32 +101,6 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                {/* <FormField errors={formState.errors?.['name']}>
-                    <TextInput
-                        id="name"
-                        name="name"
-                        label={t('transaction:identifier.label')}
-                        min={3}
-                        max={255}
-                        required
-                        autoFocus
-                        defaultValue={data?.name ?? ''}
-                    />
-                </FormField> */}
-                {/* <FormField errors={formState.errors?.['date']}>
-                    <TextInput
-                        id="date"
-                        name="date"
-                        label={t('transaction:date.label')}
-                        defaultValue={
-                            data?.bookedAt
-                                ? format(new Date(data.bookedAt), 'yyyy-MM-dd')
-                                : ''
-                        }
-                        type="date"
-                        required
-                    />
-                </FormField> */}
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"
@@ -140,26 +117,63 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
+                <FormField errors={formState.errors?.['identifier']}>
+                    <TextInput
+                        id="identifier"
+                        name="identifier"
+                        label={t('transaction:identifier.label')}
+                        min={3}
+                        max={255}
+                        required
+                        autoFocus
+                        defaultValue={data?.identifier ?? ''}
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['date']}>
+                    <TextInput
+                        id="date"
+                        name="date"
+                        label={t('transaction:date.label')}
+                        defaultValue={
+                            data?.date
+                                ? format(new Date(data.date), 'yyyy-MM-dd')
+                                : ''
+                        }
+                        type="date"
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['transactions']}>
+                    <BelongsToSelectInput<TStatementDeserialized>
+                        resourceName="transactions"
+                        resourceType="transactions"
+                        label={t('transaction:title.one')}
+                        action={(searchTerm) =>
+                            listTransactions({
+                                page: { size: itemsPerQuery, number: 1 },
+                                filter: { query: searchTerm },
+                            })
+                        }
+                        optionLabel={(item) => (
+                            <TransactionOption item={item} />
+                        )}
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['financeContact']}>
+                    <BelongsToSelectInput<TFinanceContactDeserialized>
+                        resourceName="financeContact"
+                        resourceType="finance-contacts"
+                        label={t('contact:title.one')}
+                        action={(searchTerm) =>
+                            listFinanceContacts({
+                                page: { size: itemsPerQuery, number: 1 },
+                                filter: { query: searchTerm },
+                            })
+                        }
+                        optionLabel={(item) => <ContactOption item={item} />}
+                    />
+                </FormField>
             </div>
-            <FormField errors={formState.errors?.['transactions']}>
-                <BelongsToMultiselectInput<TTransactionDeserialized>
-                    resourceName="transactions"
-                    resourceType="transactions"
-                    pivotAttributes={['amount']}
-                    label={t('transaction:title.other')}
-                    action={(searchTerm) =>
-                        listTransactions({
-                            page: { size: itemsPerQuery, number: 1 },
-                            filter: { query: searchTerm },
-                        })
-                    }
-                    optionLabel={(item) => <TransactionOption item={item} />}
-                    onChange={(selected: Option[]) => {
-                        setSelectedTransactions(selected || []);
-                    }}
-                    defaultValue={defaultTransactions || selectedTransactions}
-                />
-            </FormField>
         </ActionForm>
     );
 }
