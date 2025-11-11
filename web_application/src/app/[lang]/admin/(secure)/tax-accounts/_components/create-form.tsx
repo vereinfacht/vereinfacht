@@ -3,7 +3,6 @@
 import TextInput from '@/app/components/Input/TextInput';
 import { TTaxAccountDeserialized } from '@/types/resources';
 import useTranslation from 'next-translate/useTranslation';
-import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import ActionForm from '../../components/Form/ActionForm';
 import FormField from '../../components/Form/FormField';
@@ -19,7 +18,6 @@ interface Props {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
-    const [loading, setLoading] = useState(false);
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         async (state, formData) => {
@@ -34,7 +32,6 @@ export default function CreateForm({ data, action }: Props) {
             state={formState}
             type={data ? 'update' : 'create'}
             translationKey="tax_account"
-            loading={loading}
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                 <FormField errors={formState.errors?.['accountNumber']}>

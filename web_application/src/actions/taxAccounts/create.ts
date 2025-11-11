@@ -13,8 +13,8 @@ export const createTaxAccount = createAuthenticatedAction(
     'tax-accounts',
     createTaxAccountSchema,
     async (body, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.POST('/tax-accounts', {
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 
