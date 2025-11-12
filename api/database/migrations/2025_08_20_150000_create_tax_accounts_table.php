@@ -18,13 +18,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('account_number');
-            $table->text('description')->nullable();
-
             $table->foreignId('club_id')
                 ->nullable()
                 ->constrained('clubs')
                 ->cascadeOnDelete();
+
+            $table->string('account_number');
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

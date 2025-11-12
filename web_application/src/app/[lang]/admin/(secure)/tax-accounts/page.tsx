@@ -1,4 +1,5 @@
 import { listTaxAccounts } from '@/actions/taxAccounts/list';
+import MessageBox from '@/app/components/MessageBox';
 import { itemsPerPage } from '@/services/api-endpoints';
 import { WithSearchParams } from '@/types/params';
 import { TTaxAccountDeserialized } from '@/types/resources';
@@ -7,6 +8,7 @@ import {
     loadListTaxAccountsSearchParams,
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
+import createTranslation from 'next-translate/createTranslation';
 import TaxAccountsTable from './_components/tax-accounts-table';
 
 async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
@@ -22,6 +24,7 @@ async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
 }
 
 export default async function Page({ searchParams }: WithSearchParams) {
+    const { t } = createTranslation('tax_account');
     const params = await loadListTaxAccountsSearchParams(searchParams);
     const response = await getTaxAccountsFromApi(params);
     const taxAccounts = deserialize(
@@ -31,6 +34,16 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
     return (
-        <TaxAccountsTable taxAccounts={taxAccounts} totalPages={totalPages} />
+        <>
+            <MessageBox
+                className="mb-10 mb-4"
+                preset="hint"
+                message={t('custom_hint')}
+            />
+            <TaxAccountsTable
+                taxAccounts={taxAccounts}
+                totalPages={totalPages}
+            />
+        </>
     );
 }

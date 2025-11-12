@@ -5,9 +5,10 @@
         "label": "Name"
     },
     "account_number": {
-        "label": "Referenznummer"
+        "label": "Kontonummer"
     },
     "description": {
         "label": "Beschreibung"
-    }
+    },
+    "custom_hint": "Hier können Sie nur individuelle Steuerkonten verwalten. Vordefinierte Konten aus dem Kontenplan können nicht angesehen, bearbeitet oder gelöscht werden."
 }
