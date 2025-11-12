@@ -135,7 +135,7 @@ export default function CreateForm({ data, action }: Props) {
                     <TextInput
                         id="description"
                         name="description"
-                        label={t('transaction:purpose.label')}
+                        label={t('transaction:description.label')}
                         defaultValue={data?.description ?? ''}
                     />
                 </FormField>
