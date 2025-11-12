@@ -8,16 +8,14 @@ export const updateStatementSchema = z.object({
         type: z.literal('statements'),
         attributes: statementAttributesSchema,
         relationships: z.object({
-            financeContact: z
-                .object({
-                    data: z
-                        .object({
-                            id: z.string(),
-                            type: z.literal('finance-contacts'),
-                        })
-                        .nullable(),
-                })
-                .optional(),
+            financeAccount: z.object({
+                data: z
+                    .object({
+                        id: z.string(),
+                        type: z.literal('finance-accounts'),
+                    })
+                    .nullable(),
+            }),
             transactions: z
                 .object({
                     data: z.array(

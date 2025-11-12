@@ -143,7 +143,7 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['transactions']}>
+                {/* <FormField errors={formState.errors?.['transactions']}>
                     <BelongsToSelectInput<TStatementDeserialized>
                         resourceName="transactions"
                         resourceType="transactions"
@@ -158,21 +158,7 @@ export default function CreateForm({ data, action }: Props) {
                             <TransactionOption item={item} />
                         )}
                     />
-                </FormField>
-                <FormField errors={formState.errors?.['financeContact']}>
-                    <BelongsToSelectInput<TFinanceContactDeserialized>
-                        resourceName="financeContact"
-                        resourceType="finance-contacts"
-                        label={t('contact:title.one')}
-                        action={(searchTerm) =>
-                            listFinanceContacts({
-                                page: { size: itemsPerQuery, number: 1 },
-                                filter: { query: searchTerm },
-                            })
-                        }
-                        optionLabel={(item) => <ContactOption item={item} />}
-                    />
-                </FormField>
+                </FormField> */}
             </div>
         </ActionForm>
     );
