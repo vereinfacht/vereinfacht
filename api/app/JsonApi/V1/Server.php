@@ -9,6 +9,7 @@ use App\Models\Receipt;
 use App\Models\Division;
 use App\Models\Statement;
 use App\Models\Membership;
+use App\Models\TaxAccount;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
 use App\Models\FinanceContact;
@@ -27,6 +28,7 @@ use App\JsonApi\V1\Divisions\DivisionSchema;
 use App\JsonApi\V1\Statements\StatementSchema;
 use App\JsonApi\V1\Memberships\MembershipSchema;
 use App\JsonApi\V1\Permissions\PermissionSchema;
+use App\JsonApi\V1\TaxAccounts\TaxAccountSchema;
 use App\JsonApi\V1\Transactions\TransactionSchema;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
@@ -34,6 +36,7 @@ use App\JsonApi\V1\PaymentPeriods\PaymentPeriodSchema;
 use App\JsonApi\V1\FinanceAccounts\FinanceAccountSchema;
 use App\JsonApi\V1\FinanceContacts\FinanceContactSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
+use App\JsonApi\V1\TaxAccountCharts\TaxAccountChartSchema;
 use App\JsonApi\V1\DivisionMembershipTypes\DivisionMembershipTypeSchema;
 
 class Server extends BaseServer
@@ -127,6 +130,8 @@ class Server extends BaseServer
             FinanceContactSchema::class,
             DivisionMembershipTypeSchema::class,
             MediaSchema::class,
+            TaxAccountSchema::class,
+            TaxAccountChartSchema::class,
         ];
     }
 
@@ -146,5 +151,7 @@ class Server extends BaseServer
         MembershipType::addGlobalScope(new ClubScope);
         FinanceAccount::addGlobalScope(new ClubScope);
         FinanceContact::addGlobalScope(new ClubScope);
+        Statement::addGlobalScope(new ClubScope);
+        TaxAccount::addGlobalScope(new ClubScope);
     }
 }

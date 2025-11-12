@@ -84,12 +84,12 @@ class FinanceAccountPolicy
         return false;
     }
 
-    public function viewTransactions(User $user, FinanceAccount $financeAccount): bool
+    public function viewStatements(User $user, FinanceAccount $financeAccount): bool
     {
         if ($user instanceof Club) {
             return $user->id === $financeAccount->club_id;
         }
 
-        return $user->can('view transactions') && $financeAccount->club_id === getPermissionsTeamId();
+        return $user->can('view statements') && $financeAccount->club_id === getPermissionsTeamId();
     }
 }

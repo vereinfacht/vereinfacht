@@ -95,7 +95,8 @@ export default function CreateForm({ data, action }: Props) {
     }));
 
     const [financeAccount, setFinanceAccount] = useState<string>(
-        data?.financeAccount?.id ?? '',
+        // data?.financeAccount?.id ?? '',
+        '',
     );
     const totalReceiptAmount = selectedReceipts.reduce(
         (sum, receipt) => sum + (receipt.amount || 0),

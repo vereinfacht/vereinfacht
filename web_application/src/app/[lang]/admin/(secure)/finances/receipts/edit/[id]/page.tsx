@@ -12,7 +12,7 @@ export default async function Page({ params }: Props) {
     const { id } = params;
     const receipt = await getReceipt({
         id,
-        include: ['transactions', 'financeContact', 'media'],
+        include: ['transactions', 'financeContact', 'media', 'taxAccount'],
     });
     const extendedAction = updateReceiptFormAction.bind(null, id);
 

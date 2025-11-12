@@ -5,6 +5,7 @@ namespace Tests\Feature\JsonApi\Filters;
 use Tests\TestCase;
 use App\Models\Club;
 use App\Models\Receipt;
+use App\Models\Statement;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -21,8 +22,10 @@ class WithoutRelationFilterTest extends TestCase
         ]);
 
         $transactionWithReceipt = Transaction::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_id' => $account->id,
+            'statement_id' => Statement::factory()->create([
+                'club_id' => $club->id,
+                'finance_account_id' => $account->id,
+            ])->id,
         ]);
 
         $receipt = Receipt::factory()->create([
@@ -32,8 +35,10 @@ class WithoutRelationFilterTest extends TestCase
         $transactionWithReceipt->receipts()->attach($receipt->id);
 
         $transactionWithoutReceipt = Transaction::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_id' => $account->id,
+            'statement_id' => Statement::factory()->create([
+                'club_id' => $club->id,
+                'finance_account_id' => $account->id,
+            ])->id,
         ]);
 
         $response = $this->actingAs($club)

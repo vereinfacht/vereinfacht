@@ -40,6 +40,16 @@ export const updateReceiptSchema = z.object({
                     ),
                 })
                 .optional(),
+            taxAccount: z
+                .object({
+                    data: z
+                        .object({
+                            id: z.string(),
+                            type: z.literal('tax-accounts'),
+                        })
+                        .nullable(),
+                })
+                .optional(),
         }),
     }),
 });

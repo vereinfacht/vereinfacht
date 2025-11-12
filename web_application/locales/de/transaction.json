@@ -3,7 +3,7 @@
         "one": "Transaktion",
         "other": "Transaktionen",
         "label": "Name",
-        "no_receipts": "Transaktionen ohne Belege"
+        "no_receipts": "Transaktionen ohne Buchung"
     },
     "description": {
         "label": "Zweck"
@@ -31,8 +31,8 @@
         "empty": "Leer",
         "description": {
             "completed": "Die Transaktion ist vollständig.",
-            "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Belege vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
-            "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens ein Beleg zugeordnet werden."
+            "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Buchungen vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
+            "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens eine Buchung zugeordnet werden."
         }
     }
 }

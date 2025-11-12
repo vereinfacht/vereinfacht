@@ -1,7 +1,7 @@
 {
     "title": {
-        "one": "Beleg",
-        "other": "Belege",
+        "one": "Buchung",
+        "other": "Buchungen",
         "label": "Name"
     },
     "receipt_type": {
@@ -10,7 +10,7 @@
         "expense": "Ausgabe"
     },
     "document_date": {
-        "label": "Belegdatum"
+        "label": "Buchungsdatum"
     },
     "reference_number": {
         "label": "Referenznummer",
@@ -27,9 +27,9 @@
         "incompleted": "Unvollständig",
         "empty": "Leer",
         "description": {
-            "completed": "Der Beleg ist vollständig.",
-            "incompleted": "Der Beleg ist teilweise ausgeglichen: Es sind bereits Transaktionen vorhanden, jedoch stimmt die Summe noch nicht mit dem Belegbetrag überein.",
-            "empty": "Der Beleg ist noch unvollständig: Es muss mindestens eine Transaktion zugeordnet werden."
+            "completed": "Die Buchung ist vollständig.",
+            "incompleted": "Die Buchung ist unvollständig: Es fehlen Zuordnungen.",
+            "empty": "Es gibt keine Zuordnungen für diese Buchung."
         }
     },
     "media": {
@@ -40,7 +40,11 @@
             "true": "Mit Dateien",
             "false": "Ohne Dateien"
         },
-        "has_attachments": "Beleg hat ({{count}}) Dateien",
-        "no_attachments": "Beleg hat keine Dateien"
+        "has_attachments": "Buchung hat ({{count}}) Dateien",
+        "no_attachments": "Buchung hat keine Dateien"
+    },
+    "tax_account": {
+        "label": "Steuerkonto",
+        "help": "Das Steuerkonto, dem dieser Buchung zugeordnet ist."
     }
 }
