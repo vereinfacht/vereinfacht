@@ -66,14 +66,7 @@ class Transaction extends Model
 
     public function club()
     {
-        return $this->hasOneThrough(
-            Club::class,
-            Statement::class,
-            'id',
-            'id',
-            'statement_id',
-            'club_id',
-        );
+        return $this->statement->club();
     }
 
     public function financeAccount()

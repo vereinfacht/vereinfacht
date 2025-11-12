@@ -1,7 +1,6 @@
 'use client';
 
 import { listFinanceAccounts } from '@/actions/financeAccounts/list';
-import { listFinanceContacts } from '@/actions/financeContacts/list';
 import { listTransactions } from '@/actions/transactions/list';
 import BelongsToSelectInput, {
     itemsPerQuery,
@@ -12,12 +11,10 @@ import CurrencyText from '@/app/components/Text/CurrencyText';
 import Text from '@/app/components/Text/Text';
 import {
     TFinanceAccountDeserialized,
-    TFinanceContactDeserialized,
     TStatementDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
 import { format } from 'date-fns/format';
-import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -41,22 +38,6 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
                 <Text className="truncate">{item.description}</Text>
             </div>
             <CurrencyText value={item.amount ?? 0} />
-        </div>
-    );
-}
-
-function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
-    return (
-        <div className="flex items-center gap-2">
-            {item.contactType === 'person' ? (
-                <CircleUserRound width={16} />
-            ) : (
-                <Building2 width={16} />
-            )}
-            {item.fullName && (
-                <Text className="min-w-fit font-medium">{item.fullName}</Text>
-            )}
-            <Text className="truncate">{item.companyName}</Text>
         </div>
     );
 }
@@ -143,8 +124,8 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
-                {/* <FormField errors={formState.errors?.['transactions']}>
-                    <BelongsToSelectInput<TStatementDeserialized>
+                <FormField errors={formState.errors?.['transactions']}>
+                    <BelongsToSelectInput<TTransactionDeserialized>
                         resourceName="transactions"
                         resourceType="transactions"
                         label={t('transaction:title.one')}
@@ -157,8 +138,22 @@ export default function CreateForm({ data, action }: Props) {
                         optionLabel={(item) => (
                             <TransactionOption item={item} />
                         )}
+                        defaultValue={
+                            data?.transactions
+                                ? [
+                                      {
+                                          label: (
+                                              <TransactionOption
+                                                  item={data.transactions[0]}
+                                              />
+                                          ),
+                                          value: data.transactions[0].id,
+                                      },
+                                  ]
+                                : []
+                        }
                     />
-                </FormField> */}
+                </FormField>
             </div>
         </ActionForm>
     );
