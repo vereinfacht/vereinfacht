@@ -17,6 +17,7 @@ import { ResourceName } from '@/resources/resource';
 import {
     TFinanceContactDeserialized,
     TReceiptDeserialized,
+    TTransactionDeserialized,
 } from '@/types/resources';
 import { listReceiptSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
@@ -24,6 +25,7 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
+import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -167,7 +169,29 @@ export default function ReceiptsTable({
             },
         };
 
-        columns.splice(columns.length - 2, 0, financeContactColumn);
+        const transactionsColumn: ColumnDef<TTransactionDeserialized> = {
+            accessorKey: 'transactions',
+            header: t('transaction:title.one'),
+            cell: (cell) => {
+                const transactions =
+                    cell.getValue() as TTransactionDeserialized[];
+
+                return (
+                    <BelongsToManyCell
+                        items={transactions}
+                        basePath="/admin/finances/transactions"
+                        displayProperty="name"
+                    />
+                );
+            },
+        };
+
+        columns.splice(
+            columns.length - 2,
+            0,
+            financeContactColumn,
+            transactionsColumn,
+        );
     }
 
     return (
