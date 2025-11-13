@@ -25,7 +25,6 @@ class TaxAccountPolicy
      */
     public function view(User $user, TaxAccount $taxAccount): bool
     {
-        return true;
         if ($user instanceof Club) {
             return $user->id === $taxAccount->club_id;
         }

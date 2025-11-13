@@ -95,20 +95,17 @@ class ClubScope implements Scope
             }
 
             $builder->where(function ($query) use ($club, $clubId) {
-                $query->whereNull('club_id');
+                $query->whereNull('club_id')
+                    ->orWhere(function ($subQuery) use ($club, $clubId) {
+                        $subQuery->where('club_id', $clubId)
+                            ->where(function ($chartQuery) use ($club) {
+                                $chartQuery->whereNull('tax_account_chart_id');
 
-                $query->orWhere(function ($subQuery) use ($club, $clubId) {
-                    $subQuery->where('club_id', $clubId);
-
-                    if ($club->taxAccountChart) {
-                        $subQuery->where(function ($chartQuery) use ($club) {
-                            $chartQuery->where('tax_account_chart_id', $club->taxAccountChart->id)
-                                ->orWhereNull('tax_account_chart_id');
-                        });
-                    } else {
-                        $subQuery->whereNull('tax_account_chart_id');
-                    }
-                });
+                                if ($club->taxAccountChart) {
+                                    $chartQuery->orWhere('tax_account_chart_id', $club->taxAccountChart->id);
+                                }
+                            });
+                    });
             });
 
             return;

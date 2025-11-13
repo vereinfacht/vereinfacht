@@ -40,6 +40,7 @@ export default function CreateForm({ data, action }: Props) {
                         name="accountNumber"
                         label={t('tax_account:account_number.label')}
                         defaultValue={data?.accountNumber ?? ''}
+                        required
                     />
                 </FormField>
                 <FormField errors={formState.errors?.['description']}>
@@ -48,6 +49,7 @@ export default function CreateForm({ data, action }: Props) {
                         name="description"
                         label={t('tax_account:description.label')}
                         defaultValue={data?.description ?? ''}
+                        required
                     />
                 </FormField>
             </div>

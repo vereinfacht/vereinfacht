@@ -13,7 +13,7 @@ class TaxAccountRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'accountNumber' => ['string', 'max:255'],
+            'accountNumber' => ['required', 'string', 'max:255', 'unique:tax_accounts,account_number'],
             'description' => ['string', 'max:1000'],
             'club' => ['required', JsonApiRule::toOne()],
         ];
