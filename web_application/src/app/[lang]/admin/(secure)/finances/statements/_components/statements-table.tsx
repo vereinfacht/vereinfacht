@@ -5,6 +5,7 @@ import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
+import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
@@ -32,11 +33,9 @@ export default function StatementsTable({
 
     const columns: ColumnDef<TStatementDeserialized>[] = [
         {
-            accessorKey: 'identifier',
-            header: t('transaction:identifier.label'),
-            cell: ({ row }) => (
-                <TextCell>{row.getValue('identifier')}</TextCell>
-            ),
+            accessorKey: 'title',
+            header: t('statement:title.label'),
+            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
         },
         {
             accessorKey: 'transactions',
@@ -45,7 +44,7 @@ export default function StatementsTable({
                     options={statementTypeOptions ?? []}
                     parser={listStatementSearchParams.statementType}
                     paramKey={'statementType'}
-                    translationKey={'transaction:type'}
+                    translationKey={'statement:type'}
                 />
             ),
             cell: ({ row }) => {
@@ -57,9 +56,9 @@ export default function StatementsTable({
                             <>
                                 <Badge
                                     variant="primary"
-                                    className="bg-sky-200 text-slate-800"
+                                    className="bg-sky-200 text-slate-800 hover:bg-sky-200"
                                 >
-                                    {t('transaction:type.collective')}
+                                    {t('statement:type.collective')}
                                 </Badge>
                                 <Badge
                                     className="absolute right-[-8px] top-[-12px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
@@ -71,9 +70,9 @@ export default function StatementsTable({
                         ) : (
                             <Badge
                                 variant="secondary"
-                                className="bg-indigo-200 text-slate-800"
+                                className="bg-indigo-200 text-slate-800 hover:bg-indigo-200"
                             >
-                                {t('transaction:type.individual')}
+                                {t('statement:type.individual')}
                             </Badge>
                         )}
                     </div>
@@ -86,13 +85,24 @@ export default function StatementsTable({
                 <HeaderSort
                     parser={listStatementSearchParams.sort}
                     columnId={column.id}
-                    columnTitle={t('transaction:date.label')}
+                    columnTitle={t('statement:date.label')}
                 />
             ),
             cell: ({ row }) => (
                 <TextCell>
                     {formatDate(row.getValue('date'), lang, 'dd.MM.yyyy')}
                 </TextCell>
+            ),
+        },
+        {
+            accessorKey: 'status',
+            header: t('transaction:status.label'),
+            cell: ({ row }) => (
+                <StatusCell
+                    status={row.getValue('status')}
+                    rowId={row.id}
+                    translateNamespace={'transaction'}
+                />
             ),
         },
         {
@@ -108,7 +118,7 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'amount',
-            header: t('transaction:amount.label'),
+            header: t('statement:amount.label'),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
     ];

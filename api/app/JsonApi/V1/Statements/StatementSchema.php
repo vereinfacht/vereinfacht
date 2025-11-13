@@ -31,7 +31,9 @@ class StatementSchema extends Schema
         return [
             ID::make(),
             Str::make('identifier'),
+            Str::make('title'),
             DateTime::make('date')->sortable(),
+            Str::make('status'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Number::make('amount')->extractUsing(
