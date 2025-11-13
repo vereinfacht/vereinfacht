@@ -13,8 +13,10 @@ class StatementRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'identifier' => ['string', 'max:255'],
-            'date' => ['date'],
+            'date' => ['required', 'date'],
+            'transactionAmount' => ['required', 'numeric', 'not_in:0'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:1000'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeAccount' => [
                 'required',
@@ -31,7 +33,6 @@ class StatementRequest extends ResourceRequest
                     }
                 },
             ],
-            'transactions' => [JsonApiRule::toMany()],
         ];
     }
 }

@@ -9,25 +9,11 @@ export const updateStatementSchema = z.object({
         attributes: statementAttributesSchema,
         relationships: z.object({
             financeAccount: z.object({
-                data: z
-                    .object({
-                        id: z.string(),
-                        type: z.literal('finance-accounts'),
-                    })
-                    .nullable(),
+                data: z.object({
+                    id: z.string(),
+                    type: z.literal('finance-accounts'),
+                }),
             }),
-            transactions: z
-                .object({
-                    data: z.array(
-                        z
-                            .object({
-                                id: z.string(),
-                                type: z.literal('transactions'),
-                            })
-                            .nullable(),
-                    ),
-                })
-                .optional(),
         }),
     }),
 });

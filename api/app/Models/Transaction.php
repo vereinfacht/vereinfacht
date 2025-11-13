@@ -12,9 +12,10 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'amount',
+        'currency',
         'valued_at',
         'booked_at',
         'statement_id',
