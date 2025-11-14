@@ -21,6 +21,7 @@ class Transaction extends Model
         'receipt_id',
         'currency',
         'amount',
+        'currency',
         'valued_at',
         'booked_at',
     ];

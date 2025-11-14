@@ -1,8 +1,11 @@
 import { z } from 'zod';
+import { amountSchema } from '../transactions/create.schema';
 
 export const statementAttributesSchema = z.object({
-    identifier: z.string().min(3).max(255).optional(),
     date: z.string(),
+    transactionAmount: amountSchema,
+    title: z.string().min(1).max(255),
+    description: z.string().max(1000),
 });
 
 export const statementRelationshipsSchema = z.object({
@@ -18,16 +21,6 @@ export const statementRelationshipsSchema = z.object({
             type: z.literal('finance-accounts'),
         }),
     }),
-    transactions: z
-        .object({
-            data: z.array(
-                z.object({
-                    id: z.string(),
-                    type: z.literal('transactions'),
-                }),
-            ),
-        })
-        .optional(),
 });
 
 export const createStatementSchema = z.object({

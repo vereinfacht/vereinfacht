@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\ReceiptController;
 use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
 use App\Http\Controllers\Api\V1\MembershipController;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
+use App\Http\Controllers\Api\V1\StatementController as V1StatementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +92,7 @@ JsonApiRoute::server('v1')
             })
             ->only('index', 'show', 'store', 'update');
 
-        $server->resource('statements', JsonApiController::class)
+        $server->resource('statements', V1StatementController::class)
             ->relationships(function ($relations) {
                 $relations->hasOne('financeAccount', JsonApiController::class);
                 $relations->hasMany('transactions', JsonApiController::class);
