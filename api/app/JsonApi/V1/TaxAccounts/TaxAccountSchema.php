@@ -7,10 +7,11 @@ use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Filters\Has;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-
 
 class TaxAccountSchema extends Schema
 {
@@ -26,9 +27,10 @@ class TaxAccountSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('accountNumber'),
-            Str::make('description'),
+            Str::make('accountNumber')->sortable(),
+            Str::make('description')->sortable(),
             BelongsTo::make('taxAccountChart')->type('tax-account-charts'),
+            BelongsTo::make('club')->type('clubs'),
         ];
     }
 
@@ -38,7 +40,9 @@ class TaxAccountSchema extends Schema
     public function filters(): array
     {
         return [
+            WhereIdIn::make($this),
             QueryFilter::make('query', ['account_number', 'description']),
+            Has::make($this, 'taxAccountChart'),
         ];
     }
 

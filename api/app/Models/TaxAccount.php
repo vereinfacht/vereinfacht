@@ -14,6 +14,7 @@ class TaxAccount extends Model
         'account_number',
         'description',
         'tax_account_chart_id',
+        'club_id',
     ];
 
     public function casts()
@@ -27,5 +28,10 @@ class TaxAccount extends Model
     public function taxAccountChart()
     {
         return $this->belongsTo(TaxAccountChart::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

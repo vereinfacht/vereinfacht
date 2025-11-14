@@ -75,6 +75,10 @@ export default async function Navigation() {
                     title: t('membership_type:title.other'),
                 },
                 {
+                    href: '/admin/tax-accounts',
+                    title: t('tax_account:title.other'),
+                },
+                {
                     href: '/admin/users',
                     title: t('user:title.other'),
                 },
