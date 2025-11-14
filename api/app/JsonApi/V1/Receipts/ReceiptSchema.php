@@ -16,7 +16,6 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 
 class ReceiptSchema extends Schema
@@ -45,7 +44,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsTo::make('taxAccount')->type('tax-accounts'),
-            BelongsToMany::make('transactions'),
+            HasMany::make('transactions')->type('transactions'),
             HasMany::make('media')->type('media'),
         ];
     }

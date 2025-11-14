@@ -1,13 +1,10 @@
 import { getTransaction } from '@/actions/transactions/get';
-import Text from '@/app/components/Text/Text';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
-import { TReceiptDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
-import DetailField from '../../../components/Fields/DetailField';
-import ReceiptsTable from '../../receipts/_components/receipts-table';
 import BelongsToField from '../../../components/Fields/Detail/BelongsToField';
+import DetailField from '../../../components/Fields/DetailField';
 
 interface Props {
     params: ShowPageParams;
@@ -17,7 +14,7 @@ export default async function TransactionShowPage({ params }: Props) {
     const transaction = await Promise.all([
         getTransaction({
             id: params.id,
-            include: ['statement', 'statement.financeAccount', 'receipts'],
+            include: ['statement', 'statement.financeAccount', 'receipt'],
         }),
     ]);
 
@@ -77,13 +74,28 @@ export default async function TransactionShowPage({ params }: Props) {
                 },
             ],
         },
+        {
+            attribute: 'receipt',
+            type: 'belongsTo',
+            fields: [
+                {
+                    label: 'receipt:reference_number.label',
+                    attribute: 'referenceNumber',
+                    type: 'string',
+                },
+            ],
+        },
     ];
 
     return (
         <div className="container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {
-                    if ('type' in field && field.type === 'belongsTo') {
+                    if (
+                        'type' in field &&
+                        field.type === 'belongsTo' &&
+                        field.attribute === 'statement'
+                    ) {
                         return (
                             // @ts-expect-error: reusing this component for now without fixing types for non-resource-class objects
                             <BelongsToField
@@ -99,6 +111,28 @@ export default async function TransactionShowPage({ params }: Props) {
                         );
                     }
 
+                    if (
+                        'type' in field &&
+                        field.type === 'belongsTo' &&
+                        field.attribute === 'receipt'
+                    ) {
+                        return (
+                            // @ts-expect-error: reusing this component for now without fixing types for non-resource-class objects
+                            <BelongsToField
+                                key={index}
+                                viewRoute={'/finances/receipts'}
+                                {...field}
+                                type="belongsTo"
+                                value={{
+                                    id: transaction[0]?.receipt?.id,
+                                    referenceNumber:
+                                        transaction[0]?.receipt
+                                            ?.referenceNumber,
+                                }}
+                            />
+                        );
+                    }
+
                     return (
                         <DetailField
                             key={index}
@@ -109,21 +143,6 @@ export default async function TransactionShowPage({ params }: Props) {
                     );
                 })}
             </ul>
-            {transaction[0]?.receipts ? (
-                <>
-                    <Text preset="headline" tag="h2" className="mt-6">
-                        {t('receipt:title.other')}
-                    </Text>
-                    <ReceiptsTable
-                        receipts={
-                            transaction[0]?.receipts as TReceiptDeserialized[]
-                        }
-                        totalPages={Math.ceil(
-                            (transaction[0]?.receipts?.length ?? 0) / 10,
-                        )}
-                    />
-                </>
-            ) : null}
         </div>
     );
 }

@@ -18,6 +18,7 @@ class Transaction extends Model
         'bank_iban',
         'bank_account_holder',
         'statement_id',
+        'receipt_id',
         'currency',
         'amount',
         'valued_at',
@@ -39,9 +40,9 @@ class Transaction extends Model
      * Relationships
      * ------------------------------------------------------------------------
      */
-    public function receipts()
+    public function receipt()
     {
-        return $this->belongsToMany(Receipt::class, 'receipt_transaction');
+        return $this->belongsTo(Receipt::class);
     }
 
     public function statement()
@@ -51,14 +52,7 @@ class Transaction extends Model
 
     public function club()
     {
-        return $this->hasOneThrough(
-            Club::class,
-            Statement::class,
-            'id',
-            'id',
-            'statement_id',
-            'club_id',
-        );
+        return $this->statement->club();
     }
 
     public function financeAccount()
@@ -75,24 +69,11 @@ class Transaction extends Model
 
     public function scopeUnassigned($query)
     {
-        return $query->whereDoesntHave('receipts');
+        return $query->whereNull('receipt_id');
     }
 
     public function getStatusAttribute(): string
     {
-        if ($this->receipts()->count() === 0) {
-            return TransactionStatusEnum::EMPTY->value;
-        }
-
-        $receiptsSum = (int) $this->receipts()->sum('amount');
-        $transactionAmount = is_object($this->amount) && method_exists($this->amount, 'getAmount')
-            ? (int) $this->amount->getAmount()
-            : (int) round($this->amount * 100);
-
-        if ($receiptsSum == $transactionAmount) {
-            return TransactionStatusEnum::COMPLETED->value;
-        }
-
-        return TransactionStatusEnum::INCOMPLETED->value;
+        return $this->receipt_id ? TransactionStatusEnum::COMPLETED->value : TransactionStatusEnum::EMPTY->value;
     }
 }

@@ -186,7 +186,10 @@ export default function CreateForm({ data, action }: Props) {
                             action={(searchTerm) =>
                                 listTransactions({
                                     page: { size: itemsPerQuery, number: 1 },
-                                    filter: { query: searchTerm },
+                                    filter: {
+                                        query: searchTerm,
+                                        receipt: false,
+                                    },
                                 })
                             }
                             optionLabel={(item) => (

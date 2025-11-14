@@ -33,7 +33,7 @@ class TransactionRequest extends ResourceRequest
                     }
                 },
             ],
-            'receipts' => [JsonApiRule::toMany()],
+            'receipt' => [JsonApiRule::toOne()],
         ];
     }
 }
