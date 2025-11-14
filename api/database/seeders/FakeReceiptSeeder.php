@@ -50,16 +50,21 @@ class FakeReceiptSeeder extends Seeder
                     return;
                 }
 
-                $selectedTransactions = $usableTransactions->random(rand(1, 3));
-                $receipt->transactions()->attach($selectedTransactions->pluck('id')->toArray());
+                $selectedTransaction = $usableTransactions->random(1)->first();
+                if ($selectedTransaction) {
+                    $selectedTransaction->receipt_id = $receipt->id;
+                    $selectedTransaction->save();
 
-                // Adjust amount variance
-                $sum = $selectedTransactions->sum('amount');
-                $receipt->amount = rand(1, 100) <= 50
-                    ? $sum
-                    : $sum * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
+                    $usableTransactions = $usableTransactions->reject(function ($transaction) use ($selectedTransaction) {
+                        return $transaction->id === $selectedTransaction->id;
+                    });
 
-                $receipt->save();
+                    $receipt->amount = rand(1, 100) <= 50
+                        ? $selectedTransaction->amount
+                        : $selectedTransaction->amount * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
+
+                    $receipt->save();
+                }
             });
         });
     }

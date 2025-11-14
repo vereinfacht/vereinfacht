@@ -1,30 +1,29 @@
 'use client';
 
-import { updateFinanceAccountFormAction } from '@/actions/financeAccounts/update';
+import { importStatementsFormAction } from '@/actions/statements/import';
 import Button from '@/app/components/Button/Button';
+import { Input } from '@/app/components/ui/input';
 import { TFinanceAccountDeserialized } from '@/types/resources';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { isPast } from 'date-fns';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/navigation';
 import { useFormState } from 'react-dom';
+import FormField from '../../../components/Form/FormField';
 import FormStateHandler, {
     FormActionState,
 } from '../../../components/Form/FormStateHandler';
 import SubmitButton from '../../../components/Form/SubmitButton';
-import { useRouter } from 'next/navigation';
 
 interface Props {
     account: TFinanceAccountDeserialized;
     setIsOpen: (open: boolean) => void;
 }
 
-export default function ActivationForm({ account, setIsOpen }: Props) {
+export default function ImportStatementsForm({ account, setIsOpen }: Props) {
     const { t } = useTranslation();
-    const { id } = account;
     const router = useRouter();
-    const accountStatus =
-        account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
-    const extendedFormAction = updateFinanceAccountFormAction.bind(null, id);
+    const { id } = account;
+    const extendedFormAction = importStatementsFormAction.bind(null, id);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         extendedFormAction,
         {
@@ -36,24 +35,25 @@ export default function ActivationForm({ account, setIsOpen }: Props) {
         <form action={formAction} className="container flex flex-col gap-8">
             <FormStateHandler
                 state={formState}
-                translationKey="finance_account"
-                customNotificationTranslationKey={
-                    accountStatus === 'active'
-                        ? 'finance_account:deactivate_modal.notification.deactivate'
-                        : 'finance_account:activate_modal.notification.activate'
-                }
+                customNotificationTranslationKey="statement:import.notification"
+                type="action"
                 onSuccess={() => {
                     setIsOpen(false);
                     router.refresh();
                 }}
             />
-            <input
-                type="hidden"
-                name="deletedAt"
-                value={
-                    accountStatus === 'active' ? new Date().toISOString() : ''
-                }
-            />
+            <FormField errors={formState.errors?.['file']}>
+                <Input
+                    className="mt-1 px-3 py-2 hover:bg-slate-50"
+                    id="file"
+                    name="file"
+                    type="file"
+                    accept=".mta"
+                    multiple={false}
+                    required
+                />
+            </FormField>
+
             <div className="flex gap-4 self-end">
                 <Button
                     preset="secondary"
@@ -62,14 +62,7 @@ export default function ActivationForm({ account, setIsOpen }: Props) {
                 >
                     {capitalizeFirstLetter(t('general:cancel'))}
                 </Button>
-                {accountStatus === 'active' ? (
-                    <SubmitButton
-                        preset="destructive"
-                        title={t('finance_account:deactivate')}
-                    />
-                ) : (
-                    <SubmitButton title={t('finance_account:activate')} />
-                )}
+                <SubmitButton title={t('general:import')} />
             </div>
         </form>
     );

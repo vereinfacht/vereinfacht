@@ -20,7 +20,7 @@ class QueryFilterCurrencyTest extends TestCase
         $account = FinanceAccount::factory()->create(['club_id' => $club->id]);
 
         $transaction = Transaction::factory()->create([
-            'name' => 'Test Transaction',
+            'title' => 'Test Transaction',
             'amount' => 1234,
             'statement_id' => Statement::factory()->create([
                 'club_id' => $club->id,
@@ -78,12 +78,12 @@ class QueryFilterCurrencyTest extends TestCase
 
     public function test_query_filter_works_with_mixed_columns()
     {
-        $filter = new \App\JsonApi\Filters\QueryFilter('query', ['name', 'amount'], ['amount']);
+        $filter = new \App\JsonApi\Filters\QueryFilter('query', ['title', 'amount'], ['amount']);
         $club = Club::factory()->create();
         $account = FinanceAccount::factory()->create(['club_id' => $club->id]);
 
         $transaction = Transaction::factory()->create([
-            'name' => 'Special Transaction',
+            'title' => 'Special Transaction',
             'amount' => 5000,
             'statement_id' => Statement::factory()->create([
                 'club_id' => $club->id,
@@ -92,7 +92,7 @@ class QueryFilterCurrencyTest extends TestCase
         ]);
 
         $otherTransaction = Transaction::factory()->create([
-            'name' => 'Regular Transaction',
+            'title' => 'Regular Transaction',
             'amount' => 1234,
             'statement_id' => Statement::factory()->create([
                 'club_id' => $club->id,

@@ -15,7 +15,6 @@ import { SupportedLocale } from '@/utils/localization';
 import { listTransactionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import { useQueryState } from 'nuqs';
 
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
@@ -26,23 +25,27 @@ export default function TransactionsTable({
     transactions,
     totalPages,
 }: TransactionsListProps) {
-    const [accountId] = useQueryState('accountId');
     const translationHook = useTranslation();
     const lang = translationHook.lang as SupportedLocale;
     const { t } = translationHook;
 
     const columns: ColumnDef<TTransactionDeserialized>[] = [
         {
-            accessorKey: 'name',
+            accessorKey: 'title',
             header: t('transaction:title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
+            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
         },
         {
             accessorKey: 'description',
-            header: t('transaction:purpose.label'),
+            header: t('transaction:description.label'),
             cell: ({ row }) => (
                 <TextCell truncate>{row.getValue('description')}</TextCell>
             ),
+        },
+        {
+            accessorKey: 'bankIban',
+            header: t('transaction:iban.label'),
+            cell: ({ row }) => <TextCell>{row.getValue('bankIban')}</TextCell>,
         },
         {
             accessorKey: 'valuedAt',
@@ -91,17 +94,6 @@ export default function TransactionsTable({
                     translateNamespace={'transaction'}
                 />
             ),
-        },
-        {
-            accessorKey: 'financeAccountTitle',
-            header: () => (
-                <span className={accountId !== null ? 'text-slate-900' : ''}>
-                    {t('finance_account:title.one')}
-                </span>
-            ),
-            accessorFn: (row: TTransactionDeserialized) =>
-                row.statement?.financeAccount?.title ?? '',
-            cell: ({ getValue }) => <TextCell>{getValue<string>()}</TextCell>,
         },
         {
             accessorKey: 'amount',

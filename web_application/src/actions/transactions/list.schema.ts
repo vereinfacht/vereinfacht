@@ -25,6 +25,7 @@ export const listTransactionsSchema = z.object({
             financeAccountId: z.string().optional(),
             status: z.array(z.enum(transactionStatusOptions)).optional(),
             query: queryFilterSchema,
+            receipt: z.boolean().optional(),
         })
         .optional(),
 });

@@ -74,7 +74,7 @@ class Receipt extends Model implements HasMedia
 
     public function transactions()
     {
-        return $this->belongsToMany(Transaction::class, 'receipt_transaction');
+        return $this->hasMany(Transaction::class);
     }
 
     public function taxAccount()

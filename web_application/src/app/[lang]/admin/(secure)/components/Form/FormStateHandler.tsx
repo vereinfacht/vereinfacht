@@ -12,7 +12,7 @@ export interface FormActionState {
 
 interface Props {
     state: FormActionState;
-    translationKey: string;
+    translationKey?: string;
     type?: 'create' | 'update' | 'delete' | 'action';
     customNotificationTranslationKey?: string;
     onSuccess?: () => void;
@@ -28,6 +28,9 @@ export default function FormStateHandler({
     const { toast } = useToast();
     const { t } = useTranslation();
     const router = useRouter();
+    const translationParams = {
+        resource: t(`${translationKey}:title.one`),
+    };
 
     useEffect(() => {
         if (state.success) {
@@ -38,9 +41,7 @@ export default function FormStateHandler({
                         customNotificationTranslationKey ??
                         `notification:resource.${type}`
                     }.success`,
-                    {
-                        resource: t(`${translationKey}:title.one`),
-                    },
+                    translationKey ? translationParams : { ...state },
                 ),
             });
             if (onSuccess) {
@@ -59,9 +60,7 @@ export default function FormStateHandler({
                         customNotificationTranslationKey ??
                         `notification:resource.${type}`
                     }.error`,
-                    {
-                        resource: t(`${translationKey}:title.one`),
-                    },
+                    translationKey ? translationParams : { ...state },
                 ),
             });
         }
