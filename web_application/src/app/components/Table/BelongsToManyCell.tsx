@@ -13,6 +13,7 @@ export interface BelongsToManyItem {
 export interface BelongsToManyCellProps {
     items?: BelongsToManyItem[];
     basePath: string;
+    parentPath: string;
     displayProperty: string;
     truncate?: boolean;
     className?: string;
@@ -21,6 +22,7 @@ export interface BelongsToManyCellProps {
 export default function BelongsToManyCell({
     items = [],
     basePath,
+    parentPath,
     displayProperty,
     truncate = false,
     className = '',
@@ -44,7 +46,7 @@ export default function BelongsToManyCell({
         );
     }
 
-    if (items.length <= 2) {
+    if (items.length <= 1) {
         return (
             <div
                 className={[
@@ -80,14 +82,12 @@ export default function BelongsToManyCell({
             ].join(' ')}
         >
             <Link
-                href={`${basePath}/${firstItem.id}`}
+                href={`${parentPath}`}
                 className="whitespace-nowrap text-base font-medium text-blue-500 hover:underline"
             >
-                {firstItem[displayProperty]},
+                {firstItem[displayProperty]},{' '}
+                {t('plus_n_more', { count: remainingCount })}
             </Link>
-            <Text preset="default" className="whitespace-nowrap text-gray-500">
-                {t('plusNMore', { count: remainingCount })}
-            </Text>
         </div>
     );
 }

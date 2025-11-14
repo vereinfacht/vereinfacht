@@ -15,7 +15,7 @@
     "privacy": "Datenschutz",
     "search": "Suchen",
     "selected_count": "{{count}} ausgewählt",
-    "plusNMore": "+{{count}} mehr",
+    "plus_n_more": "+{{count}} mehr",
     "select": "Wählen",
     "no_media_attached": "Keine Medien angehängt.",
 

@@ -180,6 +180,7 @@ export default function ReceiptsTable({
                     <BelongsToManyCell
                         items={transactions}
                         basePath="/admin/finances/transactions"
+                        parentPath={`/admin/finances/receipts/${cell.row.original.id}`}
                         displayProperty="name"
                     />
                 );
@@ -189,8 +190,8 @@ export default function ReceiptsTable({
         columns.splice(
             columns.length - 2,
             0,
-            financeContactColumn,
             transactionsColumn,
+            financeContactColumn,
         );
     }
 
