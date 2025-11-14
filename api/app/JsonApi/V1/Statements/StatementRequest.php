@@ -15,8 +15,8 @@ class StatementRequest extends ResourceRequest
         return [
             'date' => ['required', 'date'],
             'transactionAmount' => ['required', 'numeric', 'not_in:0'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:1000'],
+            'title' => ['required', 'string', 'min:2', 'max:255'],
+            'description' => ['required', 'string', 'min:2', 'max:1000'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeAccount' => [
                 'required',
