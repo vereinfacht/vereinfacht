@@ -16,7 +16,7 @@ export default async function StatementShowPage({ params }: Props) {
     const statement = await Promise.all([
         getStatement({
             id: params.id,
-            include: ['transactions.receipts', 'financeAccount'],
+            include: ['transactions', 'financeAccount'],
         }),
     ]);
 
