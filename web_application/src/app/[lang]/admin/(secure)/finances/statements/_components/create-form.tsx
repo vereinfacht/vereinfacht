@@ -68,7 +68,6 @@ export default function CreateForm({ data, action }: Props) {
                         id="finance-account"
                         name="relationships[financeAccount][finance-accounts]"
                         label={t('finance_account:title.one')}
-                        help={t('transaction:finance_account.help')}
                         options={financeAccountOptions}
                         defaultValue={financeAccount ?? ''}
                         handleChange={(e) =>
@@ -112,7 +111,7 @@ export default function CreateForm({ data, action }: Props) {
                     <TextInput
                         id="date"
                         name="date"
-                        label={t('transaction:date.label')}
+                        label={t('statement:date.label')}
                         defaultValue={
                             data?.date
                                 ? format(new Date(data.date), 'yyyy-MM-dd')

@@ -58,6 +58,12 @@ class Statement extends Model
     {
         $firstTransaction = $this->transactions()->first();
 
+        if (!$firstTransaction) {
+            return Attribute::make(
+                get: fn() => 'Statement #' . $this->identifier,
+            );
+        }
+
         return Attribute::make(
             get: fn() => $firstTransaction?->bank_account_holder ?? $firstTransaction->title,
         );

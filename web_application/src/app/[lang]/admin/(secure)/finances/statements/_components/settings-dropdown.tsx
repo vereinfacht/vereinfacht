@@ -110,7 +110,7 @@ export default function SettingsDropdown({ account }: Props) {
                                 {t('finance_account:edit_modal.description')}
                             </Text>
                         ) : formType === 'import' ? (
-                            <Text>{t('transaction:import.description')}</Text>
+                            <Text>{t('statement:import.description')}</Text>
                         ) : accountStatus === 'active' ? (
                             <Trans
                                 i18nKey="finance_account:deactivate_modal.description"

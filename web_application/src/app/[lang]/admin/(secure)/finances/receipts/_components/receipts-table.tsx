@@ -190,6 +190,7 @@ export default function ReceiptsTable({
         columns.splice(
             columns.length - 2,
             0,
+            // @ts-expect-error: Type issue with extended columns
             transactionsColumn,
             financeContactColumn,
         );
