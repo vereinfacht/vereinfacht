@@ -25,10 +25,6 @@ class StatementPolicy
      */
     public function view(User $user, Statement $statement): bool
     {
-        if ($statement->financeAccount->account_type === 'bank_account') {
-            return false;
-        }
-
         if ($user instanceof Club) {
             return $user->id === $statement->club_id;
         }
