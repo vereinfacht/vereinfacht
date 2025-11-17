@@ -38,7 +38,7 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
                 <Text className="min-w-fit">
                     {formatDate(item.valuedAt, lang as SupportedLocale)}
                 </Text>
-                <Text className="min-w-fit font-medium">{item.name}</Text>
+                <Text className="min-w-fit font-medium">{item.title}</Text>
             </div>
             <CurrencyText value={Number(item.amount) || 0} />
         </div>
@@ -51,7 +51,16 @@ export default function CreateForm({ data, action }: Props) {
     const defaultTransactions = data
         ? [
               {
-                  label: <TransactionOption item={data} />,
+                  label: (
+                      <TransactionOption
+                          item={
+                              {
+                                  ...data,
+                                  amount: String(data.amount || 0),
+                              } as TTransactionDeserialized
+                          }
+                      />
+                  ),
                   value: data.id,
                   amount: data.amount || 0,
               },
@@ -98,32 +107,6 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                {/* <FormField errors={formState.errors?.['name']}>
-                    <TextInput
-                        id="name"
-                        name="name"
-                        label={t('transaction:identifier.label')}
-                        min={3}
-                        max={255}
-                        required
-                        autoFocus
-                        defaultValue={data?.name ?? ''}
-                    />
-                </FormField> */}
-                {/* <FormField errors={formState.errors?.['date']}>
-                    <TextInput
-                        id="date"
-                        name="date"
-                        label={t('transaction:date.label')}
-                        defaultValue={
-                            data?.bookedAt
-                                ? format(new Date(data.bookedAt), 'yyyy-MM-dd')
-                                : ''
-                        }
-                        type="date"
-                        required
-                    />
-                </FormField> */}
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"

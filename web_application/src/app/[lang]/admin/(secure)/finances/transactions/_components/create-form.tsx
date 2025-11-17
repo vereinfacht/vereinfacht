@@ -53,23 +53,32 @@ function ReceiptOption({ item }: { item: TReceiptDeserialized }) {
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
-    const defaultReceipts =
-        data?.receipts?.map((receipt) => ({
-            label: <ReceiptOption item={receipt} />,
-            value: receipt.id,
-            amount: receipt.amount || 0,
-        })) || [];
+    const defaultReceipts = data?.receipt
+        ? [
+              {
+                  label: (
+                      <ReceiptOption
+                          item={data.receipt as TReceiptDeserialized}
+                      />
+                  ),
+                  value: data.receipt.id,
+                  amount: data.receipt.amount || 0,
+              },
+          ]
+        : [];
 
     const [selectedReceipts, setSelectedReceipts] =
         useState<any[]>(defaultReceipts);
 
-    const [rawAmount, setRawAmount] = useState<number>(data?.amount ?? 0);
+    const [rawAmount, setRawAmount] = useState<number>(
+        Number(data?.amount ?? 0),
+    );
 
     const [transactionType, setTransactionType] = useState<
         'income' | 'expense'
     >(
         data
-            ? (data.amount ?? 0) > 0
+            ? Number(data.amount ?? 0) > 0
                 ? 'income'
                 : 'expense'
             : rawAmount > 0
@@ -119,16 +128,16 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                <FormField errors={formState.errors?.['name']}>
+                <FormField errors={formState.errors?.['title']}>
                     <TextInput
-                        id="name"
-                        name="name"
+                        id="title"
+                        name="title"
                         label={t('transaction:title.label')}
                         min={3}
                         max={255}
                         required
                         autoFocus
-                        defaultValue={data?.name ?? ''}
+                        defaultValue={data?.title ?? ''}
                     />
                 </FormField>
                 <FormField errors={formState.errors?.['description']}>

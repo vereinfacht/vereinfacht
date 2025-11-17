@@ -27,7 +27,7 @@ export default async function TransactionShowPage({ params }: Props) {
     const fields = [
         {
             attribute: 'title',
-            value: transaction[0]?.name,
+            value: transaction[0]?.title,
         },
         {
             attribute: 'financeAccount',

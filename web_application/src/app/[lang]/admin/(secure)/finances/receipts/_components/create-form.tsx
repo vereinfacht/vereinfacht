@@ -44,7 +44,7 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
                 <Text className="truncate">({item.bankAccountHolder})</Text>
                 <Text className="truncate">{item.description}</Text>
             </div>
-            <CurrencyText value={item.amount ?? 0} />
+            <CurrencyText value={Number(item.amount)} />
         </div>
     );
 }

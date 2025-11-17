@@ -10997,24 +10997,34 @@
                             "identifier": {
                                 "title": "identifier",
                                 "type": "string",
-                                "example": "d2956879-c5f4-3d73-9e2c-329f4dbaf6f6"
+                                "example": "13ee6a69-72ce-3ddc-9468-34b423c5febb"
+                            },
+                            "title": {
+                                "title": "title",
+                                "type": "string",
+                                "example": "Bridie Gorczany"
                             },
                             "date": {
                                 "title": "date",
                                 "type": "string",
-                                "example": "2025-01-31T16:16:40.000000Z"
+                                "example": "2025-04-28T12:18:02.000000Z"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "example": "empty"
                             },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
+                                "example": "2025-11-17T08:43:53.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
+                                "example": "2025-11-17T08:43:53.000000Z"
                             },
                             "amount": {
                                 "title": "amount",
@@ -11485,48 +11495,68 @@
                     "attributes": {
                         "type": "object",
                         "properties": {
-                            "name": {
-                                "title": "name",
+                            "title": {
+                                "title": "title",
                                 "type": "string",
-                                "example": "Prof. Charlie Glover MD"
+                                "example": "Dolor porro quia odio quisquam architecto doloribus."
                             },
                             "description": {
                                 "title": "description",
                                 "type": "string",
-                                "example": "Quaerat sed corporis tempora esse."
+                                "example": "Qui cumque deserunt eos quibusdam asperiores."
+                            },
+                            "gvc": {
+                                "title": "gvc",
+                                "type": "number",
+                                "example": 105
+                            },
+                            "bankIban": {
+                                "title": "bankIban",
+                                "type": "string",
+                                "example": "LI028970401C20E0IWO1G"
+                            },
+                            "bankAccountHolder": {
+                                "title": "bankAccountHolder",
+                                "type": "string",
+                                "example": "Bridie Gorczany"
+                            },
+                            "currency": {
+                                "title": "currency",
+                                "type": "string",
+                                "example": "DKK"
                             },
                             "amount": {
                                 "title": "amount",
-                                "type": "number",
-                                "example": 3072.23
+                                "type": "string",
+                                "example": 5382.4
                             },
                             "valuedAt": {
                                 "title": "valuedAt",
                                 "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
+                                "example": "2025-03-10T05:05:48.000000Z"
                             },
                             "bookedAt": {
                                 "title": "bookedAt",
                                 "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
+                                "example": "2025-03-10T05:05:48.000000Z"
                             },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
+                                "example": "2025-11-17T08:43:54.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
+                                "example": "2025-11-17T08:43:54.000000Z"
                             },
                             "status": {
                                 "title": "status",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "incompleted"
+                                "example": "empty"
                             }
                         }
                     },
