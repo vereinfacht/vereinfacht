@@ -1,0 +1,13 @@
+{
+    "title": {
+        "one": "Tax account",
+        "other": "Tax accounts",
+        "label": "Name"
+    },
+    "account_number": {
+        "label": "Account number"
+    },
+    "description": {
+        "label": "Description"
+    }
+}

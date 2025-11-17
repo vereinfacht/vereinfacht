@@ -765,11 +765,31 @@ export interface paths {
         /** Get all tax-accounts */
         get: operations["tax-accounts.index"];
         put?: never;
-        post?: never;
+        /** Store one tax-account */
+        post: operations["tax-accounts.store"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/tax-accounts/{tax_account}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show one tax-account */
+        get: operations["tax-accounts.show"];
+        put?: never;
+        post?: never;
+        /** Destroy one tax-account */
+        delete: operations["tax-accounts.destroy"];
+        options?: never;
+        head?: never;
+        /** Update one tax-account */
+        patch: operations["tax-accounts.update"];
         trace?: never;
     };
 }
@@ -3311,6 +3331,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** taxAccount */
+                taxAccount?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         */
+                        self?: string;
+                    };
+                };
                 /** transactions */
                 transactions?: {
                     readonly links?: {
@@ -3843,6 +3878,127 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Tax-account/Store */
+        "resources.tax-accounts.resource.store": {
+            /**
+             * type
+             * @default tax-accounts
+             */
+            type: string;
+            attributes: {
+                /**
+                 * accountNumber
+                 * @example 0010
+                 */
+                accountNumber?: string;
+                /**
+                 * description
+                 * @example Entgeltlich erworbene Konzessionen und gewerbl. Schutzrechte,
+                 */
+                description?: string;
+            };
+            relationships?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Tax-account/Update */
+        "resources.tax-accounts.resource.update": {
+            /**
+             * type
+             * @default tax-accounts
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * accountNumber
+                 * @example 0010
+                 */
+                accountNumber?: string;
+                /**
+                 * description
+                 * @example Entgeltlich erworbene Konzessionen und gewerbl. Schutzrechte,
+                 */
+                description?: string;
+            };
+            relationships?: {
+                /** taxAccountChart */
+                taxAccountChart?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
                          */
                         self?: string;
                     };
@@ -7205,9 +7361,13 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id")[];
+                sort?: ("id" | "-id" | "accountNumber" | "-accountNumber" | "description" | "-description")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
                 /** @description Filters the records */
                 "filter[query]"?: string;
+                /** @description Only includes records that have taxAccountChart. */
+                "filter[taxAccountChart]"?: boolean;
             };
             header?: never;
             path?: never;
@@ -7235,6 +7395,141 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "tax-accounts.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.tax-accounts.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store tax-accounts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.tax-accounts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "tax-accounts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tax_account: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show tax-accounts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.tax-accounts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "tax-accounts.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tax_account: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "tax-accounts.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tax_account: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.tax-accounts.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update tax-accounts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.tax-accounts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
 }

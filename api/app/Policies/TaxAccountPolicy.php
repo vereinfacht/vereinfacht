@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Club;
+use App\Models\TaxAccount;
 use Illuminate\Foundation\Auth\User;
 
 class TaxAccountPolicy
@@ -22,33 +23,49 @@ class TaxAccountPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(): bool
+    public function view(User $user, TaxAccount $taxAccount): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $taxAccount->club_id;
+        }
+
+        return $user->can('view taxAccounts') && $taxAccount->club_id === getPermissionsTeamId();
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(): bool
+    public function create(User $user): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return true;
+        }
+
+        return $user->can('create taxAccounts');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(): bool
+    public function update(User $user, TaxAccount $taxAccount): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $taxAccount->club_id;
+        }
+
+        return $user->can('update taxAccounts') && $taxAccount->club_id === getPermissionsTeamId();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(): bool
+    public function delete(User $user, TaxAccount $taxAccount): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $taxAccount->club_id;
+        }
+
+        return $user->can('delete taxAccounts') && $taxAccount->club_id === getPermissionsTeamId();
     }
 
     /**
