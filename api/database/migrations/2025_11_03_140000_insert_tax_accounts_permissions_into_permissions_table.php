@@ -6,6 +6,9 @@ return new class extends Migration
 {
     protected $permissionNames = [
         'view taxAccounts',
+        'create taxAccounts',
+        'update taxAccounts',
+        'delete taxAccounts',
     ];
 
     public function up(): void

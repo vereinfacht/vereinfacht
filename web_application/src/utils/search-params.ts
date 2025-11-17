@@ -15,6 +15,7 @@ import {
     statementSortingOptions,
     statementTypeOptions,
 } from '@/actions/statements/list.schema';
+import { taxAccountSortingOptions } from '@/actions/taxAccounts/list.schema';
 import {
     transactionSortingOptions,
     transactionStatusOptions,
@@ -120,6 +121,15 @@ export const listUserSearchParams = {
     }),
 };
 
+export const listTaxAccountSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(taxAccountSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -144,6 +154,10 @@ export const loadListReceiptsSearchParams = createLoader(
     listReceiptSearchParams,
 );
 
+export const loadListTaxAccountsSearchParams = createLoader(
+    listTaxAccountSearchParams,
+);
+
 export const loadListUsersSearchParams = createLoader(listUserSearchParams);
 
 export type ListMembershipSearchParamsType = inferParserType<
@@ -164,6 +178,10 @@ export type ListFinanceContactSearchParamsType = inferParserType<
 
 export type ListUserSearchParamsType = inferParserType<
     typeof listUserSearchParams
+>;
+
+export type ListTaxAccountSearchParamsType = inferParserType<
+    typeof listTaxAccountSearchParams
 >;
 
 export type ListReceiptSearchParamsType = inferParserType<

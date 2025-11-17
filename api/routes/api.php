@@ -100,5 +100,5 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'store', 'update');
 
         $server->resource('tax-accounts', JsonApiController::class)
-            ->only('index');
+            ->only('index', 'show', 'store', 'update', 'destroy');
     });

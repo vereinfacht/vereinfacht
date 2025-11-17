@@ -30,6 +30,7 @@
             "transaction",
             "receipt",
             "user",
+            "tax_account",
             "role",
             "permission"
         ],
