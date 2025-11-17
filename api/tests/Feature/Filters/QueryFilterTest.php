@@ -25,7 +25,7 @@ class QueryFilterTest extends TestCase
                 'club_id' => $club->id,
                 'finance_account_id' => $account->id,
             ])->id,
-            'name' => 'Membership Fee',
+            'title' => 'Membership Fee',
             'description' => 'Annual club membership',
             'amount' => 100,
         ]);
@@ -35,7 +35,7 @@ class QueryFilterTest extends TestCase
                 'club_id' => $club->id,
                 'finance_account_id' => $account->id,
             ])->id,
-            'name' => 'Other',
+            'title' => 'Other',
             'description' => 'Special membership discount',
             'amount' => 50,
         ]);
@@ -45,7 +45,7 @@ class QueryFilterTest extends TestCase
                 'club_id' => $club->id,
                 'finance_account_id' => $account->id,
             ])->id,
-            'name' => 'Refund',
+            'title' => 'Refund',
             'description' => 'Bank refund',
             'amount' => 200,
         ]);

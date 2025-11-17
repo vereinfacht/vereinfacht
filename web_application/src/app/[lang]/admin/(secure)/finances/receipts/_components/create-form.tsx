@@ -40,10 +40,11 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit font-medium">{item.name}</Text>
+                <Text className="min-w-fit font-medium">{item.title}</Text>
+                <Text className="truncate">({item.bankAccountHolder})</Text>
                 <Text className="truncate">{item.description}</Text>
             </div>
-            <CurrencyText value={item.amount ?? 0} />
+            <CurrencyText value={Number(item.amount)} />
         </div>
     );
 }
@@ -63,6 +64,7 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
         </div>
     );
 }
+
 function TaxAccountOption({ item }: { item: TTaxAccountDeserialized }) {
     return (
         <div className="flex items-center gap-2">
@@ -185,7 +187,10 @@ export default function CreateForm({ data, action }: Props) {
                             action={(searchTerm) =>
                                 listTransactions({
                                     page: { size: itemsPerQuery, number: 1 },
-                                    filter: { query: searchTerm },
+                                    filter: {
+                                        query: searchTerm,
+                                        receipt: false,
+                                    },
                                 })
                             }
                             optionLabel={(item) => (

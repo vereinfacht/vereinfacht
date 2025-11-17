@@ -3592,22 +3592,32 @@ export interface components {
             attributes: {
                 /**
                  * identifier
-                 * @example d2956879-c5f4-3d73-9e2c-329f4dbaf6f6
+                 * @example 13ee6a69-72ce-3ddc-9468-34b423c5febb
                  */
                 identifier?: string;
                 /**
+                 * title
+                 * @example Bridie Gorczany
+                 */
+                readonly title?: string;
+                /**
                  * date
-                 * @example 2025-01-31T16:16:40.000000Z
+                 * @example 2025-04-28T12:18:02.000000Z
                  */
                 date?: string;
                 /**
+                 * status
+                 * @example empty
+                 */
+                status?: string;
+                /**
                  * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2025-11-17T08:43:53.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2025-11-17T08:43:53.000000Z
                  */
                 readonly updatedAt?: string;
                 /**
@@ -3615,6 +3625,10 @@ export interface components {
                  * @example 0
                  */
                 readonly amount?: number;
+                /** description */
+                readonly description?: string;
+                /** transactionAmount */
+                readonly transactionAmount?: number;
             };
             relationships?: {
                 /** financeAccount */
@@ -4042,43 +4056,63 @@ export interface components {
             id: string;
             attributes: {
                 /**
-                 * name
-                 * @example Prof. Charlie Glover MD
+                 * title
+                 * @example Dolor porro quia odio quisquam architecto doloribus.
                  */
-                name?: string;
+                title?: string;
                 /**
                  * description
-                 * @example Quaerat sed corporis tempora esse.
+                 * @example Qui cumque deserunt eos quibusdam asperiores.
                  */
                 description?: string;
                 /**
-                 * amount
-                 * @example 3072.23
+                 * gvc
+                 * @example 105
                  */
-                amount?: number;
+                gvc?: number;
+                /**
+                 * bankIban
+                 * @example LI028970401C20E0IWO1G
+                 */
+                bankIban?: string;
+                /**
+                 * bankAccountHolder
+                 * @example Bridie Gorczany
+                 */
+                bankAccountHolder?: string;
+                /**
+                 * currency
+                 * @example DKK
+                 */
+                currency?: string;
+                /**
+                 * amount
+                 * @example 5382.4
+                 */
+                amount?: string;
                 /**
                  * valuedAt
-                 * @example 2024-12-03T05:29:42.000000Z
+                 * @example 2025-03-10T05:05:48.000000Z
                  */
                 valuedAt?: string;
                 /**
                  * bookedAt
-                 * @example 2024-12-03T05:29:42.000000Z
+                 * @example 2025-03-10T05:05:48.000000Z
                  */
                 bookedAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2025-11-17T08:43:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2025-11-17T08:43:54.000000Z
                  */
                 readonly updatedAt?: string;
                 /**
                  * status
-                 * @example incompleted
+                 * @example empty
                  */
                 readonly status?: string;
             };

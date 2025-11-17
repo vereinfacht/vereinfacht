@@ -1,19 +1,13 @@
 'use client';
 
 import { listFinanceAccounts } from '@/actions/financeAccounts/list';
-import { listTransactions } from '@/actions/transactions/list';
-import { default as BelongsToMultiselectInput } from '@/app/components/Input/BelongsToMultiselectInput';
-import { itemsPerQuery } from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
-import CurrencyText from '@/app/components/Text/CurrencyText';
-import Text from '@/app/components/Text/Text';
+import TextInput from '@/app/components/Input/TextInput';
 import {
     TFinanceAccountDeserialized,
     TStatementDeserialized,
-    TTransactionDeserialized,
 } from '@/types/resources';
-import { formatDate } from '@/utils/dates';
-import { SupportedLocale } from '@/utils/localization';
+import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
@@ -29,37 +23,8 @@ interface Props {
     data?: TStatementDeserialized;
 }
 
-function TransactionOption({ item }: { item: TTransactionDeserialized }) {
-    const { lang } = useTranslation();
-
-    return (
-        <div className="flex w-full justify-between">
-            <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit">
-                    {formatDate(item.valuedAt, lang as SupportedLocale)}
-                </Text>
-                <Text className="min-w-fit font-medium">{item.name}</Text>
-            </div>
-            <CurrencyText value={Number(item.amount) || 0} />
-        </div>
-    );
-}
-
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
-
-    const defaultTransactions = data
-        ? [
-              {
-                  label: <TransactionOption item={data} />,
-                  value: data.id,
-                  amount: data.amount || 0,
-              },
-          ]
-        : [];
-
-    const [selectedTransactions, setSelectedTransactions] =
-        useState<any[]>(defaultTransactions);
 
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
@@ -98,38 +63,11 @@ export default function CreateForm({ data, action }: Props) {
             translationKey="transaction"
         >
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                {/* <FormField errors={formState.errors?.['name']}>
-                    <TextInput
-                        id="name"
-                        name="name"
-                        label={t('transaction:identifier.label')}
-                        min={3}
-                        max={255}
-                        required
-                        autoFocus
-                        defaultValue={data?.name ?? ''}
-                    />
-                </FormField> */}
-                {/* <FormField errors={formState.errors?.['date']}>
-                    <TextInput
-                        id="date"
-                        name="date"
-                        label={t('transaction:date.label')}
-                        defaultValue={
-                            data?.bookedAt
-                                ? format(new Date(data.bookedAt), 'yyyy-MM-dd')
-                                : ''
-                        }
-                        type="date"
-                        required
-                    />
-                </FormField> */}
                 <FormField errors={formState.errors?.['financeAccount']}>
                     <SelectInput
                         id="finance-account"
                         name="relationships[financeAccount][finance-accounts]"
                         label={t('finance_account:title.one')}
-                        help={t('transaction:finance_account.help')}
                         options={financeAccountOptions}
                         defaultValue={financeAccount ?? ''}
                         handleChange={(e) =>
@@ -140,26 +78,50 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
+                <FormField errors={formState.errors?.['transactionAmount']}>
+                    <TextInput
+                        id="transaction-amount"
+                        name="transactionAmount"
+                        label={t('transaction:amount.label')}
+                        help={t('transaction:amount.help')}
+                        defaultValue={data?.transactionAmount ?? ''}
+                        type="number"
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['title']}>
+                    <TextInput
+                        id="title"
+                        name="title"
+                        label={t('transaction:title.label')}
+                        defaultValue={data?.title ?? ''}
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['description']}>
+                    <TextInput
+                        id="description"
+                        name="description"
+                        label={t('transaction:description.label')}
+                        defaultValue={data?.description ?? ''}
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['date']}>
+                    <TextInput
+                        id="date"
+                        name="date"
+                        label={t('statement:date.label')}
+                        defaultValue={
+                            data?.date
+                                ? format(new Date(data.date), 'yyyy-MM-dd')
+                                : ''
+                        }
+                        type="date"
+                        required
+                    />
+                </FormField>
             </div>
-            <FormField errors={formState.errors?.['transactions']}>
-                <BelongsToMultiselectInput<TTransactionDeserialized>
-                    resourceName="transactions"
-                    resourceType="transactions"
-                    pivotAttributes={['amount']}
-                    label={t('transaction:title.other')}
-                    action={(searchTerm) =>
-                        listTransactions({
-                            page: { size: itemsPerQuery, number: 1 },
-                            filter: { query: searchTerm },
-                        })
-                    }
-                    optionLabel={(item) => <TransactionOption item={item} />}
-                    onChange={(selected: Option[]) => {
-                        setSelectedTransactions(selected || []);
-                    }}
-                    defaultValue={defaultTransactions || selectedTransactions}
-                />
-            </FormField>
         </ActionForm>
     );
 }

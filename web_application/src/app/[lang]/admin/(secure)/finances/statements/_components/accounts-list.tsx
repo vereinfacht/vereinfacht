@@ -36,7 +36,7 @@ export default async function AccountsList() {
         <div className="flex flex-col items-center gap-4">
             <ul className="flex flex-col space-y-3 md:w-96">
                 <AccountCard
-                    title={t('transaction:all_sources')}
+                    title={t('statement:all_sources')}
                     balance={totalAmount}
                 />
                 {activatedAccounts?.map((account) => {

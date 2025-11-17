@@ -63,7 +63,6 @@ export const listTransactionSearchParams = {
         .withOptions({
             shallow: false,
         }),
-    accountId: parseAsString,
 };
 
 export const listStatementSearchParams = {

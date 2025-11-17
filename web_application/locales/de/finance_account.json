@@ -1,7 +1,7 @@
 {
     "title": {
-        "one": "Transaktionsquelle",
-        "other": "Transaktionsquellen",
+        "one": "Umsatzquelle",
+        "other": "Umsatzquellen",
         "label": "Name"
     },
     "initial_balance": {
@@ -17,15 +17,15 @@
     "deactivated": "Deaktivierte Quellen",
     "import_transactions": "Transaktionen importieren",
     "create_modal": {
-        "title": "Neue Transaktionsquelle erstellen",
+        "title": "Neue Umsatzquelle erstellen",
         "choose_type": "Typ wählen",
         "edit_type": "{{type}} einrichten"
     },
     "edit_modal": {
-        "description": "Passen Sie die Einstellungen der Transaktionsquelle an."
+        "description": "Passen Sie die Einstellungen der Umsatzquelle an."
     },
     "activate_modal": {
-        "title": "Transaktionsquelle reaktivieren",
+        "title": "Umsatzquelle reaktivieren",
         "description": "<0>Möchten Sie die Quelle <1>{{name}}</1> reaktivieren?</0>",
         "notification": {
             "activate": {
@@ -35,8 +35,8 @@
         }
     },
     "deactivate_modal": {
-        "title": "Transaktionsquelle deaktivieren",
-        "description": "<0>Wenn Sie die Quelle <1>{{name}}</1> deaktivieren, bleiben alle bestehenden Transaktions- und Buchungszuordnungen bestehen. Allerdings erscheint diese Quelle nicht mehr in der Übersicht und es erfolgen für unzugeordnete Transaktionen keine Hinweise oder Erinnerungen mehr. Dieser Schritt kann rückgängig gemacht werden.</0>",
+        "title": "Umsatzquelle deaktivieren",
+        "description": "<0>Wenn Sie die Quelle <1>{{name}}</1> deaktivieren, bleiben alle bestehenden Transaktions- und Belegzuordnungen bestehen. Allerdings erscheint diese Quelle nicht mehr in der Übersicht und es erfolgen für unzugeordnete Transaktionen keine Hinweise oder Erinnerungen mehr. Dieser Schritt kann rückgängig gemacht werden.</0>",
         "notification": {
             "deactivate": {
                 "success": "{{resource}} wurde deaktiviert",

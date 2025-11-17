@@ -31,7 +31,9 @@ class StatementSchema extends Schema
         return [
             ID::make(),
             Str::make('identifier'),
+            Str::make('title'),
             DateTime::make('date')->sortable(),
+            Str::make('status'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Number::make('amount')->extractUsing(
@@ -40,6 +42,16 @@ class StatementSchema extends Schema
             BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsTo::make('club')->type('clubs'),
             HasMany::make('transactions')->type('transactions'),
+
+            Str::make('title')->extractUsing(
+                static fn($model) => $model->transactions()->first()?->title
+            )->readOnly(),
+            Str::make('description')->extractUsing(
+                static fn($model) => $model->transactions()->first()?->description
+            )->readOnly(),
+            Number::make('transactionAmount')->extractUsing(
+                static fn($model) => $model->transactions()->first()?->amount
+            )->readOnly(),
         ];
     }
 

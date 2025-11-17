@@ -7,6 +7,7 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
 import TransactionsTable from '../../transactions/_components/transactions-table';
+import EditButton from '../../../components/EditButton';
 
 interface Props {
     params: ShowPageParams;
@@ -64,6 +65,7 @@ export default async function ReceiptShowPage({ params }: Props) {
 
     return (
         <div className="container flex flex-col gap-6">
+            <EditButton href={`/admin/finances/receipts/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
                     // @ts-expect-error: value type of media field is not compatible with detail field value type

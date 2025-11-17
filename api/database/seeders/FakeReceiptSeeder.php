@@ -25,18 +25,19 @@ class FakeReceiptSeeder extends Seeder
                 ->count(20)
                 ->create(['club_id' => $club->id]);
 
+            // @todo: fix seeding in remote environments
             // Attach media
-            $receipts->each(function ($receipt) use ($seedFiles, $club) {
-                if (rand(1, 100) <= 50) {
-                    foreach (range(1, rand(1, 3)) as $i) {
-                        $filePath = $seedFiles[array_rand($seedFiles)];
-                        $receipt->addMedia($filePath)
-                            ->withProperties(['club_id' => $club->id])
-                            ->preservingOriginal()
-                            ->toMediaCollection('receipts', 'public');
-                    }
-                }
-            });
+            // $receipts->each(function ($receipt) use ($seedFiles, $club) {
+            //     if (rand(1, 100) <= 50) {
+            //         foreach (range(1, rand(1, 3)) as $i) {
+            //             $filePath = $seedFiles[array_rand($seedFiles)];
+            //             $receipt->addMedia($filePath)
+            //                 ->withProperties(['club_id' => $club->id])
+            //                 ->preservingOriginal()
+            //                 ->toMediaCollection('receipts', 'public');
+            //         }
+            //     }
+            // });
 
             // Attach transactions
             $transactions = Transaction::whereHas('statement', fn($query) => $query->where('club_id', $club->id))->get();
@@ -50,16 +51,21 @@ class FakeReceiptSeeder extends Seeder
                     return;
                 }
 
-                $selectedTransactions = $usableTransactions->random(rand(1, 3));
-                $receipt->transactions()->attach($selectedTransactions->pluck('id')->toArray());
+                $selectedTransaction = $usableTransactions->random(1)->first();
+                if ($selectedTransaction) {
+                    $selectedTransaction->receipt_id = $receipt->id;
+                    $selectedTransaction->save();
 
-                // Adjust amount variance
-                $sum = $selectedTransactions->sum('amount');
-                $receipt->amount = rand(1, 100) <= 50
-                    ? $sum
-                    : $sum * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
+                    $usableTransactions = $usableTransactions->reject(function ($transaction) use ($selectedTransaction) {
+                        return $transaction->id === $selectedTransaction->id;
+                    });
 
-                $receipt->save();
+                    $receipt->amount = rand(1, 100) <= 50
+                        ? $selectedTransaction->amount
+                        : $selectedTransaction->amount * (1 + (rand(10, 30) / 100) * (rand(0, 1) ? 1 : -1));
+
+                    $receipt->save();
+                }
             });
         });
     }

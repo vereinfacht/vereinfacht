@@ -31,28 +31,12 @@ export default async function Navigation() {
             items: [
                 {
                     href: '/admin/finances/statements',
-                    title: t('transaction:title.other'),
+                    title: t('statement:title.other'),
                 },
                 {
                     href: '/admin/finances/receipts',
                     title: t('receipt:title.other'),
                 },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('receipt:title.other'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:invoices'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:donations'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:evaluations'),
-                // },
                 {
                     href: '/admin/finances/contacts',
                     title: t('admin:contacts'),
