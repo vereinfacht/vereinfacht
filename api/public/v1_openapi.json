@@ -11002,6 +11002,7 @@
                             "title": {
                                 "title": "title",
                                 "type": "string",
+                                "readOnly": true,
                                 "example": "Bridie Gorczany"
                             },
                             "date": {
@@ -11031,6 +11032,16 @@
                                 "type": "number",
                                 "readOnly": true,
                                 "example": 0
+                            },
+                            "description": {
+                                "title": "description",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "transactionAmount": {
+                                "title": "transactionAmount",
+                                "type": "number",
+                                "readOnly": true
                             }
                         }
                     },

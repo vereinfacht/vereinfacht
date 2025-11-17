@@ -3564,7 +3564,7 @@ export interface components {
                  * title
                  * @example Bridie Gorczany
                  */
-                title?: string;
+                readonly title?: string;
                 /**
                  * date
                  * @example 2025-04-28T12:18:02.000000Z
@@ -3590,6 +3590,10 @@ export interface components {
                  * @example 0
                  */
                 readonly amount?: number;
+                /** description */
+                readonly description?: string;
+                /** transactionAmount */
+                readonly transactionAmount?: number;
             };
             relationships?: {
                 /** financeAccount */

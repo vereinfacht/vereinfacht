@@ -3,7 +3,10 @@
 import { listFinanceAccounts } from '@/actions/financeAccounts/list';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
-import { TFinanceAccountDeserialized } from '@/types/resources';
+import {
+    TFinanceAccountDeserialized,
+    TStatementDeserialized,
+} from '@/types/resources';
 import { format } from 'date-fns/format';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
@@ -17,57 +20,12 @@ interface Props {
         state: FormActionState,
         payload: FormData,
     ) => Promise<FormActionState>;
-<<<<<<< HEAD
     data?: TStatementDeserialized;
-}
-
-function TransactionOption({ item }: { item: TTransactionDeserialized }) {
-    const { lang } = useTranslation();
-
-    return (
-        <div className="flex w-full justify-between">
-            <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit">
-                    {formatDate(item.valuedAt, lang as SupportedLocale)}
-                </Text>
-                <Text className="min-w-fit font-medium">{item.title}</Text>
-            </div>
-            <CurrencyText value={Number(item.amount) || 0} />
-        </div>
-    );
-=======
-    data?: any;
->>>>>>> 4699aa94f096cfeb0990671912ba3f0d6a7f8481
 }
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
 
-<<<<<<< HEAD
-    const defaultTransactions = data
-        ? [
-              {
-                  label: (
-                      <TransactionOption
-                          item={
-                              {
-                                  ...data,
-                                  amount: String(data.amount || 0),
-                              } as TTransactionDeserialized
-                          }
-                      />
-                  ),
-                  value: data.id,
-                  amount: data.amount || 0,
-              },
-          ]
-        : [];
-
-    const [selectedTransactions, setSelectedTransactions] =
-        useState<any[]>(defaultTransactions);
-
-=======
->>>>>>> 4699aa94f096cfeb0990671912ba3f0d6a7f8481
     const [financeAccounts, setFinanceAccounts] = useState<
         TFinanceAccountDeserialized[]
     >([]);
