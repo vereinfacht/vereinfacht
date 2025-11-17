@@ -784,7 +784,8 @@ export interface paths {
         get: operations["tax-accounts.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one tax-account */
+        delete: operations["tax-accounts.destroy"];
         options?: never;
         head?: never;
         /** Update one tax-account */
@@ -7462,6 +7463,29 @@ export interface operations {
                         data: components["schemas"]["resources.tax-accounts.resource.fetch"];
                     };
                 };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "tax-accounts.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tax_account: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];

@@ -7297,6 +7297,50 @@
                         "$ref": "#\/components\/responses\/404"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Tax-accounts"
+                ],
+                "summary": "Destroy one tax-account",
+                "description": "",
+                "operationId": "tax-accounts.destroy",
+                "parameters": [
+                    {
+                        "name": "tax_account",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         }
     },

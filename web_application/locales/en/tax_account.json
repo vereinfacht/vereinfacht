@@ -1,11 +1,11 @@
 {
     "title": {
-        "one": "Tax Account",
-        "other": "Tax Accounts",
+        "one": "Tax account",
+        "other": "Tax accounts",
         "label": "Name"
     },
     "account_number": {
-        "label": "Reference Number"
+        "label": "Account number"
     },
     "description": {
         "label": "Description"
