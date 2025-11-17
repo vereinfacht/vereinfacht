@@ -2,7 +2,6 @@
 
 namespace App\Actions\Statement;
 
-use DateTime;
 use Jejik\MT940\Reader;
 use App\Models\Statement;
 use App\Models\Transaction;
@@ -10,6 +9,7 @@ use Illuminate\Support\Arr;
 use App\Models\FinanceAccount;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
+use App\Classes\StatementIdentifierGenerator;
 
 class FileImport
 {
@@ -50,13 +50,7 @@ class FileImport
         return $this->actionStats;
     }
 
-    protected function generateIdentifier(DateTime $date, float $amount, string $dataString): string
-    {
-        // @todo: use generator for manually created statements too
-        $rawIdentifier = $date->format('Y-m-d') . '-' . $amount . '-' . $dataString;
 
-        return hash('md5', $rawIdentifier);
-    }
 
     protected function createStatementWithTransactions(StatementInterface $parsedStatement): void
     {
@@ -75,7 +69,7 @@ class FileImport
                 continue;
             }
 
-            $statementIdentifier = $this->generateIdentifier(
+            $statementIdentifier = StatementIdentifierGenerator::generate(
                 $sharedStatementData['date'],
                 $transaction->getAmount(),
                 $transaction->getDescription()
