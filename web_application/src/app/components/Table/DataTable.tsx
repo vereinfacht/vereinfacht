@@ -1,13 +1,6 @@
 'use client';
 
-import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    TableOptions,
-    useReactTable,
-} from '@tanstack/react-table';
-
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import {
     Table,
     TableBody,
@@ -18,6 +11,13 @@ import {
 } from '@/app/components/Table/Table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
+import {
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    TableOptions,
+    useReactTable,
+} from '@tanstack/react-table';
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
 
@@ -28,11 +28,7 @@ interface DataTableProps<TData, TValue> {
     resourceName: ResourceName;
     canView?: boolean;
     canEdit?: boolean | ((row: TData) => boolean);
-    deleteAction?: (
-        formData: FormData,
-    ) => Promise<
-        import('@/app/[lang]/admin/(secure)/components/Form/FormStateHandler').FormActionState
-    >;
+    deleteAction?: (formData: FormData) => Promise<FormActionState>;
     totalPages?: number;
 }
 

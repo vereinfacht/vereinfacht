@@ -1,5 +1,6 @@
 'use client';
 
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import DeleteForm from './DeleteForm';
@@ -12,11 +13,7 @@ interface Props {
     type?: 'view' | 'edit' | 'delete';
     id?: string | number;
     itemName?: string;
-    deleteAction?: (
-        formData: FormData,
-    ) => Promise<
-        import('@/app/[lang]/admin/(secure)/components/Form/FormStateHandler').FormActionState
-    >;
+    deleteAction?: (formData: FormData) => Promise<FormActionState>;
     resourceName?: string;
 }
 
