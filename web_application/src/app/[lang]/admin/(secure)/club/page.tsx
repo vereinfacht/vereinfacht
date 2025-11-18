@@ -88,7 +88,7 @@ export default async function ClubPage({ params }: Props) {
         {
             attribute: 'taxAccountChartSource',
             type: 'link',
-            value: 'https://github.com/spritelite/SKR03',
+            value: 'https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174',
         },
         {
             attribute: 'membershipStartCycleType',

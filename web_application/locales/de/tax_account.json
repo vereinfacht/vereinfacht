@@ -10,5 +10,5 @@
     "description": {
         "label": "Beschreibung"
     },
-    "custom_hint": "Hier können Sie nur individuelle Steuerkonten verwalten. Vordefinierte Konten aus dem Kontenplan können nicht angesehen, bearbeitet oder gelöscht werden."
+    "custom_hint": "Hier können Sie nur individuelle Steuerkonten verwalten. Vordefinierte Konten aus dem Kontenplan können nicht angesehen, bearbeitet oder gelöscht werden. Quelle des Steuerkontenkreises: <a href=\"https://github.com/spritelite/SKR03\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-500 underline hover:text-blue-700\">SKR03 von spritelite</a> mit Ziel, den zugrundeliegenden <a href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-500 underline hover:text-blue-700\">Standardkontenrahmen 03</a> abzubilden."
 }
