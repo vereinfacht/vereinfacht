@@ -90,7 +90,7 @@ JsonApiRoute::server('v1')
             ->relationships(function ($relations) {
                 $relations->hasOne('statement', JsonApiController::class);
             })
-            ->only('index', 'show', 'store', 'update');
+            ->only('index', 'show');
 
         $server->resource('statements', V1StatementController::class)
             ->relationships(function ($relations) {
