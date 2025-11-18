@@ -8,6 +8,13 @@
     "back": "back",
     "create": "create",
     "import": "import",
+    "delete": "delete",
+
+    "delete_confirmation": {
+        "title": "Confirm Deletion",
+        "description": "Are you sure you want to delete this item? This action cannot be undone.",
+        "description_with_name": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
+    },
 
     "imprint": "Imprint",
     "made_with": "Digital product by",
