@@ -8,6 +8,12 @@
     "back": "zurück",
     "create": "erstellen",
     "import": "importieren",
+    "delete": "löschen",
+
+    "delete_confirmation": {
+        "title": "Löschung bestätigen",
+        "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
 
     "imprint": "Impressum",
     "made_with": "Digitales Produkt von",

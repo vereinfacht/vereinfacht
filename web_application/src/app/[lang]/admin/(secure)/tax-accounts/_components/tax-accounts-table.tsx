@@ -1,13 +1,14 @@
 'use client';
 
 import { DataTable } from '@/app/components/Table/DataTable';
+import HeaderSort from '@/app/components/Table/HeaderSort';
 import { ResourceName } from '@/resources/resource';
 import { TTaxAccountDeserialized } from '@/types/resources';
+import { createDeleteFormAction } from '@/utils/deleteActions';
+import { listTaxAccountSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
-import HeaderSort from '@/app/components/Table/HeaderSort';
-import { listTaxAccountSearchParams } from '@/utils/search-params';
 
 interface Props {
     taxAccounts: TTaxAccountDeserialized[];
@@ -16,6 +17,8 @@ interface Props {
 
 export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
     const { t } = useTranslation();
+    const deleteAction = createDeleteFormAction('tax-accounts');
+
     const columns: ColumnDef<TTaxAccountDeserialized>[] = [
         {
             header: ({ column }) => (
@@ -49,6 +52,7 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}
+                deleteAction={deleteAction}
             />
         </>
     );
