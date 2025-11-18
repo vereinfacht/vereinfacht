@@ -11,7 +11,7 @@
     "delete": "delete",
 
     "delete_confirmation": {
-        "title": "Confirm Deletion",
+        "title": "Confirm deletion",
         "description": "Are you sure you want to delete this item? This action cannot be undone."
     },
 
