@@ -81,7 +81,6 @@
         "help": "The tax account group used for this club."
     },
     "tax_account_chart_source": {
-        "label": "Source of the tax account group",
-        "help": "The source of the tax account group."
+        "label": "Source of the tax account group"
     }
 }
