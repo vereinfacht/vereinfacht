@@ -1,10 +1,7 @@
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
-
-// Import specific delete actions
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 
-// Define the mapping of resource names to their delete actions
 const deleteActionMap: Record<
     string,
     (id: string, formData: FormData) => Promise<FormActionState>
@@ -20,9 +17,6 @@ const deleteActionMap: Record<
     // etc.
 };
 
-/**
- * Creates a delete form action for a given resource
- */
 export function createDeleteFormAction(resourceName: string) {
     const deleteHandler = deleteActionMap[resourceName];
 
