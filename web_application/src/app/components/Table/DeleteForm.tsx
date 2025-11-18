@@ -68,14 +68,7 @@ export default function DeleteForm({
                     </DialogTitle>
                     <DialogDescription asChild>
                         <Text>
-                            {itemName
-                                ? t(
-                                      'general:delete_confirmation.description_with_name',
-                                      {
-                                          name: itemName,
-                                      },
-                                  )
-                                : t('general:delete_confirmation.description')}
+                            {t('general:delete_confirmation.description')}
                         </Text>
                     </DialogDescription>
                 </DialogHeader>

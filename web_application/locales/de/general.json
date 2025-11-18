@@ -12,8 +12,7 @@
 
     "delete_confirmation": {
         "title": "Löschung bestätigen",
-        "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
-        "description_with_name": "Sind Sie sicher, dass Sie \"{{name}}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+        "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
     },
 
     "imprint": "Impressum",
