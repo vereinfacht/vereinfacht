@@ -67,5 +67,9 @@
     "tax_account_chart": {
         "label": "Steuerkontenkreis",
         "help": "Der Steuerkontenkreis, der für diesen Verein verwendet wird."
+    },
+    "tax_account_chart_source": {
+        "label": "Quelle des Steuerkontenkreises",
+        "help": "Die Quelle des Steuerkontenkreises."
     }
 }

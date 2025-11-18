@@ -82,8 +82,13 @@ export default async function ClubPage({ params }: Props) {
             type: 'link',
         },
         {
-            attribute: 'taxAccountChart' as keyof Club,
+            attribute: 'taxAccountChart',
             value: club['taxAccountChart']?.title ?? '-',
+        },
+        {
+            attribute: 'taxAccountChartSource',
+            type: 'link',
+            value: 'https://github.com/spritelite/SKR03',
         },
         {
             attribute: 'membershipStartCycleType',
