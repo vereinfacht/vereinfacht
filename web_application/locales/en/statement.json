@@ -21,12 +21,12 @@
         "description": "Here you can import exported statements in MT940 format (*.mta file) from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
         "notification": {
             "success": "{{total_statements_created}} statements were imported. {{total_statements_skipped}} statements were skipped (duplicate or erroneous).",
-            "error": "Errors occurred while importing statements: {{errors}}"
+            "error": "{{errors}}"
         }
     },
     "file": {
         "label": "File",
-        "help": "Supports the format *.mta"
+        "help": "Supports MT940 formats: *.mta, *.sta, *.mt940"
     },
     "all_sources": "All Sources"
 }

@@ -48,7 +48,7 @@ export default function ImportStatementsForm({ account, setIsOpen }: Props) {
                     id="file"
                     name="file"
                     type="file"
-                    accept=".mta"
+                    accept=".mta, .sta"
                     multiple={false}
                     required
                 />

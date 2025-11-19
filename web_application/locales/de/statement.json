@@ -26,7 +26,7 @@
     },
     "file": {
         "label": "Datei",
-        "help": "Unterstützt das Format *.mta"
+        "help": "Unterstützt das Format *.mta *.sta"
     },
     "all_sources": "Alle Quellen"
 }
