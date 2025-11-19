@@ -13,9 +13,9 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 
 class ReceiptSchema extends Schema
@@ -43,8 +43,9 @@ class ReceiptSchema extends Schema
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
             BelongsTo::make('financeContact')->type('finance-contacts'),
-            BelongsToMany::make('transactions'),
-            BelongsToMany::make('media')->type('media'),
+            BelongsTo::make('taxAccount')->type('tax-accounts'),
+            HasMany::make('transactions')->type('transactions'),
+            HasMany::make('media')->type('media'),
         ];
     }
 
@@ -67,7 +68,7 @@ class ReceiptSchema extends Schema
                 'amount'
             ),
             WhereIn::make('receiptType')->delimiter(','),
-            QueryFilter::make('query', ['reference_number', 'amount']),
+            QueryFilter::make('query', ['reference_number', 'amount'], ['amount']),
         ];
     }
 
@@ -85,6 +86,8 @@ class ReceiptSchema extends Schema
             'transactions',
             'financeContact',
             'media',
+            'taxAccount',
+            'taxAccount.taxAccountChart',
         ];
     }
 }

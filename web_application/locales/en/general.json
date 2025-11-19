@@ -7,13 +7,21 @@
     "view": "view",
     "back": "back",
     "create": "create",
+    "import": "import",
+    "delete": "delete",
+
+    "delete_confirmation": {
+        "title": "Confirm deletion",
+        "description": "Are you sure you want to delete this item? This action cannot be undone."
+    },
 
     "imprint": "Imprint",
     "made_with": "Digital product by",
     "nothing_found": "Nothing found",
     "privacy": "Privacy policy",
-    "search": "Suchen",
-    "selected_count": "{{count}} ausgewählt",
+    "search": "Search",
+    "selected_count": "{{count}} selected",
+    "plus_n_more": "+{{count}} more",
     "select": "Select",
     "no_media_attached": "No media attached.",
 

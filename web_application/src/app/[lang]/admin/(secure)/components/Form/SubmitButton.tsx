@@ -8,15 +8,21 @@ import { useFormStatus } from 'react-dom';
 interface Props {
     title: string;
     preset?: ButtonPresets;
+    loading?: boolean;
 }
 
-export default function SubmitButton({ title, preset = 'primary' }: Props) {
+export default function SubmitButton({
+    title,
+    preset = 'primary',
+    loading,
+}: Props) {
     const { pending } = useFormStatus();
+    const isLoading = pending || loading;
 
     return (
         <Button
             type="submit"
-            isLoading={pending}
+            isLoading={isLoading}
             data-cy="submit-button"
             preset={preset}
         >

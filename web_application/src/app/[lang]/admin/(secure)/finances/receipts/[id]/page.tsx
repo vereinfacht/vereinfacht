@@ -7,6 +7,7 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import DetailField from '../../../components/Fields/DetailField';
 import TransactionsTable from '../../transactions/_components/transactions-table';
+import EditButton from '../../../components/EditButton';
 
 interface Props {
     params: ShowPageParams;
@@ -16,7 +17,7 @@ export default async function ReceiptShowPage({ params }: Props) {
     const receipt = await Promise.all([
         getReceipt({
             id: params.id,
-            include: ['transactions', 'media'],
+            include: ['transactions', 'media', 'taxAccount.taxAccountChart'],
         }),
     ]);
 
@@ -46,17 +47,28 @@ export default async function ReceiptShowPage({ params }: Props) {
             value: receipt[0]?.amount,
         },
         {
+            attribute: 'taxAccount',
+            value:
+                receipt[0]?.taxAccount?.accountNumber +
+                ' - ' +
+                receipt[0]?.taxAccount?.description +
+                ' (' +
+                receipt[0]?.taxAccount?.taxAccountChart?.title +
+                ')',
+        },
+        {
             attribute: 'media',
             type: 'media',
-            // @ts-expect-error: media is not yet typed by the schema
             value: receipt[0]?.media,
         },
     ];
 
     return (
         <div className="container flex flex-col gap-6">
+            <EditButton href={`/admin/finances/receipts/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
+                    // @ts-expect-error: value type of media field is not compatible with detail field value type
                     <DetailField
                         key={index}
                         {...field}

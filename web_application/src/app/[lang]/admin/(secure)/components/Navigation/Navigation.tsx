@@ -30,29 +30,13 @@ export default async function Navigation() {
             title: t('admin:finances'),
             items: [
                 {
-                    href: '/admin/finances/transactions',
-                    title: t('transaction:title.other'),
+                    href: '/admin/finances/statements',
+                    title: t('statement:title.other'),
                 },
                 {
                     href: '/admin/finances/receipts',
                     title: t('receipt:title.other'),
                 },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('receipt:title.other'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:invoices'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:donations'),
-                // },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('admin:evaluations'),
-                // },
                 {
                     href: '/admin/finances/contacts',
                     title: t('admin:contacts'),
@@ -73,6 +57,10 @@ export default async function Navigation() {
                 {
                     href: '/admin/membershipTypes',
                     title: t('membership_type:title.other'),
+                },
+                {
+                    href: '/admin/tax-accounts',
+                    title: t('tax_account:title.other'),
                 },
                 {
                     href: '/admin/users',

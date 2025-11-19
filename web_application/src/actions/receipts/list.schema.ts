@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
 
+export const queryFilterSchema = z.string().optional();
+
 export const receiptSortingOptions = [
     'documentDate',
     '-documentDate',
@@ -24,6 +26,7 @@ export const listReceiptsSchema = z.object({
             receiptType: z.array(z.enum(receiptTypeOptions)).optional(),
             status: z.array(z.enum(receiptStatusOptions)).optional(),
             media: z.boolean().optional(),
+            query: queryFilterSchema,
         })
         .optional(),
 });

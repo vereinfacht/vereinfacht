@@ -6,30 +6,30 @@ import DetailField from '../DetailField';
 import { findResource } from '@/resources';
 import { TableAction } from '@/app/components/Table/TableAction';
 
-type Props<T> = BelongsToDetailFieldDef<T>;
+interface Props<T> extends BelongsToDetailFieldDef<T> {
+    viewRoute?: string;
+}
 
 export default function BelongsToField<T>({
     attribute,
     label,
     value,
     fields,
+    viewRoute = '',
 }: Props<T>) {
     const { t, lang } = useTranslation();
     const resourceClass = findResource(attribute.toString() + 's', lang);
     const translationNamespace = camelCaseToSnakeCase(
         singularize(attribute.toString()),
     );
+    const canView = viewRoute.length > 0 || resourceClass?.canView;
+    const href = `/admin/${viewRoute.length > 0 ? viewRoute : resourceClass?.name}/${value.id}`;
 
     return (
         <li className="mt-4">
             <Text className="mb-2 flex gap-2 font-light text-slate-600 md:hyphens-auto">
                 {t(label ?? `${translationNamespace}:title`, { count: 1 })}
-                {resourceClass?.canView && (
-                    <TableAction
-                        type="view"
-                        href={`/admin/${resourceClass.name}/${value.id}`}
-                    />
-                )}
+                {canView && <TableAction type="view" href={href} />}
             </Text>
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {

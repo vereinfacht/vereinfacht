@@ -7,6 +7,13 @@
     "view": "ansehen",
     "back": "zurück",
     "create": "erstellen",
+    "import": "importieren",
+    "delete": "löschen",
+
+    "delete_confirmation": {
+        "title": "Löschung bestätigen",
+        "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
 
     "imprint": "Impressum",
     "made_with": "Digitales Produkt von",
@@ -14,6 +21,7 @@
     "privacy": "Datenschutz",
     "search": "Suchen",
     "selected_count": "{{count}} ausgewählt",
+    "plus_n_more": "+{{count}} mehr",
     "select": "Wählen",
     "no_media_attached": "Keine Medien angehängt.",
 

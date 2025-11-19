@@ -8,7 +8,6 @@ import {
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import CreateButton from '../../components/CreateButton';
-import AccountsList from './_components/accounts-list';
 import TransactionsTable from './_components/transactions-table';
 
 async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
@@ -16,18 +15,9 @@ async function getTransactionsFromApi(params: ListTransactionSearchParamsType) {
         sort: params.sort ?? undefined,
         page: { size: itemsPerPage, number: params.page },
         filter: {
-            ...(params.accountId ? { financeAccountId: params.accountId } : {}),
             ...(params.status ? { status: params.status } : {}),
         },
-        include: ['financeAccount'],
-        fields: {
-            'finance-accounts': [
-                'title',
-                'iban',
-                'initialBalance',
-                'accountType',
-            ],
-        },
+        include: ['statement.financeAccount'],
     });
 
     return response || [];
@@ -46,8 +36,6 @@ export default async function Page({ searchParams }: WithSearchParams) {
         <>
             <CreateButton href="/admin/finances/transactions/create" />
             <div className="flex gap-6">
-                <AccountsList />
-
                 <TransactionsTable
                     transactions={transactions}
                     totalPages={totalPages}

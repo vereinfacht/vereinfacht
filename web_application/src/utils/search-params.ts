@@ -12,6 +12,11 @@ import {
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
 import {
+    statementSortingOptions,
+    statementTypeOptions,
+} from '@/actions/statements/list.schema';
+import { taxAccountSortingOptions } from '@/actions/taxAccounts/list.schema';
+import {
     transactionSortingOptions,
     transactionStatusOptions,
 } from '@/actions/transactions/list.schema';
@@ -54,6 +59,20 @@ export const listTransactionSearchParams = {
         shallow: false,
     }),
     status: parseAsArrayOf(parseAsStringLiteral(transactionStatusOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
+};
+
+export const listStatementSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(statementSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+    statementType: parseAsArrayOf(parseAsStringLiteral(statementTypeOptions))
         .withDefault([])
         .withOptions({
             shallow: false,
@@ -102,6 +121,15 @@ export const listUserSearchParams = {
     }),
 };
 
+export const listTaxAccountSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(taxAccountSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -114,12 +142,20 @@ export const loadListTransactionsSearchParams = createLoader(
     listTransactionSearchParams,
 );
 
+export const loadListStatementsSearchParams = createLoader(
+    listStatementSearchParams,
+);
+
 export const loadListFinanceContactsSearchParams = createLoader(
     listFinanceContactSearchParams,
 );
 
 export const loadListReceiptsSearchParams = createLoader(
     listReceiptSearchParams,
+);
+
+export const loadListTaxAccountsSearchParams = createLoader(
+    listTaxAccountSearchParams,
 );
 
 export const loadListUsersSearchParams = createLoader(listUserSearchParams);
@@ -132,12 +168,20 @@ export type ListTransactionSearchParamsType = inferParserType<
     typeof listTransactionSearchParams
 >;
 
+export type ListStatementSearchParamsType = inferParserType<
+    typeof listStatementSearchParams
+>;
+
 export type ListFinanceContactSearchParamsType = inferParserType<
     typeof listFinanceContactSearchParams
 >;
 
 export type ListUserSearchParamsType = inferParserType<
     typeof listUserSearchParams
+>;
+
+export type ListTaxAccountSearchParamsType = inferParserType<
+    typeof listTaxAccountSearchParams
 >;
 
 export type ListReceiptSearchParamsType = inferParserType<

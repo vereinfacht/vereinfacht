@@ -3,10 +3,10 @@ import { DetailFieldDef } from '@/resources/resource';
 import { Club } from '@/types/models';
 import { LocalizedPageParams } from '@/types/params';
 import { auth } from '@/utils/auth';
+import createTranslation from 'next-translate/createTranslation';
 import { redirect } from 'next/navigation';
 import EditButton from '../components/EditButton';
 import DetailField from '../components/Fields/DetailField';
-import createTranslation from 'next-translate/createTranslation';
 
 interface Props {
     params: LocalizedPageParams;
@@ -19,7 +19,12 @@ async function getClubData(locale: string) {
         return redirect('/login');
     }
 
-    const [club] = await getOne<Club>('clubs', session.club_id, {}, locale);
+    const [club] = await getOne<Club>(
+        'clubs',
+        session.club_id,
+        { include: ['taxAccountChart'] },
+        locale,
+    );
 
     return club;
 }
@@ -75,6 +80,10 @@ export default async function ClubPage({ params }: Props) {
         {
             attribute: 'constitutionUrl',
             type: 'link',
+        },
+        {
+            attribute: 'taxAccountChart' as keyof Club,
+            value: club['taxAccountChart']?.title ?? '-',
         },
         {
             attribute: 'membershipStartCycleType',

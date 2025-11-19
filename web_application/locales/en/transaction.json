@@ -5,8 +5,7 @@
         "label": "Name",
         "no_receipts": "Transactions without receipts"
     },
-
-    "purpose": {
+    "description": {
         "label": "Purpose"
     },
     "booked_at": {
@@ -17,7 +16,7 @@
     },
     "amount": {
         "label": "Amount",
-        "help": "The amount of the transaction in EUR. Negative amounts are expenses, positive amounts are income."
+        "help": "The amount of the transaction in EUR."
     },
     "iban": {
         "label": "IBAN"
@@ -35,10 +34,5 @@
             "incompleted": "The transaction is partially settled: Receipts are present, but the total does not match the transaction amount.",
             "empty": "The transaction is incomplete: At least one receipt is required."
         }
-    },
-    "finance_account": {
-        "help": "The cash register on which the transaction is posted."
-    },
-
-    "all_sources": "All sources"
+    }
 }
