@@ -34,15 +34,14 @@ class FileImport
         $reader = new Reader();
 
         $parsers = $reader->getDefaultParsers() + [
-            'Hamburger Sparkasse AG' => HaspaParser::class,
-            'Volksbank Schleswig-Holstein Nord eG' => VRBankParser::class,
+            'Volksbank' => VRBankParser::class,
         ];
 
         $reader->addParsers($parsers);
 
         try {
             $statements = $reader->getStatements(
-                file_get_contents($this->file->getRealPath())
+                trim(file_get_contents($this->file->getRealPath()))
             );
         } catch (\Throwable $th) {
             throw new \Exception('Failed to parse the statement file: ' . $th->getMessage());

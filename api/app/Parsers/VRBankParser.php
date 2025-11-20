@@ -13,8 +13,6 @@ class VRBankParser extends GermanBank
 
     public function getAllowedBLZ(): array
     {
-        return [
-            '21690020',
-        ];
+        return [];
     }
 }
