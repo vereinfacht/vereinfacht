@@ -6,6 +6,7 @@ use Jejik\MT940\Reader;
 use App\Models\Statement;
 use App\Models\Transaction;
 use Illuminate\Support\Arr;
+use App\Parsers\VRBankParser;
 use App\Models\FinanceAccount;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
@@ -30,6 +31,12 @@ class FileImport
     {
         $this->financeAccount = $financeAccount;
         $reader = new Reader();
+
+        $parsers = $reader->getDefaultParsers() + [
+            'Volksbank Schleswig-Holstein Nord eG' => VRBankParser::class,
+        ];
+
+        $reader->addParsers($parsers);
 
         try {
             $statements = $reader->getStatements(
@@ -91,7 +98,7 @@ class FileImport
     protected function createTransaction(Statement $statement, TransactionInterface $transaction, string $currency): void
     {
         $transaction = Transaction::create([
-            'title' => $transaction->getTxText(),
+            'title' => $transaction->getTxText() ?? '-',
             'description' => $transaction->getSvwz(),
             'gvc' => (int) $transaction->getGVC(),
             'bank_iban' => $transaction->getIBAN(),
