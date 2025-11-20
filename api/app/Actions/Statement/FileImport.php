@@ -11,7 +11,6 @@ use App\Models\FinanceAccount;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
 use App\Classes\StatementIdentifierGenerator;
-use App\Parsers\HaspaParser;
 
 class FileImport
 {
