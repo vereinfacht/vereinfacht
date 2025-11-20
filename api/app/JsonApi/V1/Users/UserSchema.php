@@ -11,6 +11,7 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class UserSchema extends Schema
@@ -39,6 +40,7 @@ class UserSchema extends Schema
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsToMany::make('roles')->type('roles'),
             BelongsToMany::make('clubs')->type('clubs'),
+            BelongsTo::make('club')->type('clubs'),
         ];
     }
 

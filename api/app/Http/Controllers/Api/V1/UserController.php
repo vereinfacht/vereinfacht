@@ -35,10 +35,10 @@ class UserController extends Controller
         try {
             $data = $request->validated();
 
-            $clubIds = collect($data['clubs'] ?? [])->pluck('id');
+            $clubId = $data['club']['id'] ?? null;
             $roleIds = collect($data['roles'] ?? [])->pluck('id');
 
-            $user = User::create($data);
+            $user = User::create(collect($data)->except(['club', 'roles'])->toArray());
 
             if ($roleIds->isEmpty()) {
                 $roleNames = collect(['club admin']);
@@ -46,7 +46,7 @@ class UserController extends Controller
                 $roleNames = \Spatie\Permission\Models\Role::whereIn('id', $roleIds)->pluck('name');
             }
 
-            foreach ($clubIds as $clubId) {
+            if ($clubId) {
                 setPermissionsTeamId($clubId);
 
                 foreach ($roleNames as $roleName) {
