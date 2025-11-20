@@ -16,10 +16,26 @@ export const importStatementsSchema = z.object({
                     path: ['file'],
                 });
             }
-            if (!['application/octet-stream'].includes(file.type)) {
+
+            const allowedTypes = [
+                'application/octet-stream',
+                'application/x-sta',
+                'application/x-mta',
+                'text/plain',
+                'application/mt940',
+            ];
+
+            const fileName = file.name.toLowerCase();
+            const hasValidExtension =
+                fileName.endsWith('.sta') ||
+                fileName.endsWith('.mta') ||
+                fileName.endsWith('.mt940') ||
+                fileName.endsWith('.txt');
+
+            if (!allowedTypes.includes(file.type) && !hasValidExtension) {
                 ctx.addIssue({
                     code: 'custom',
-                    message: 'File type not supported',
+                    message: 'File type not supported.',
                     path: ['file'],
                 });
             }
