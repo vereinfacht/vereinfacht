@@ -43,7 +43,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
                 className="mb-10 mb-4"
                 preset="hint"
                 message={t('custom_hint', {
-                    link: `<a href="/${lang}/admin/club" class="underline">`,
+                    link: `<a href="/${lang}/admin/club#13" class="underline">`,
                 })}
                 allowHtml={true}
             />

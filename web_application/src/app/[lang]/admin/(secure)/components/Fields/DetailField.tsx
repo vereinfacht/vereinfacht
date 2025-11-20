@@ -17,6 +17,7 @@ import TranslationField from './Detail/TranslationField';
 type Props<T> = DefaultDetailFieldDef<T> & {
     value: any;
     resourceName: ResourceName;
+    id?: number;
 };
 
 export default function DetailField<T>({
@@ -25,6 +26,7 @@ export default function DetailField<T>({
     label,
     help,
     value,
+    id = undefined,
     formatValue,
     ...props
 }: Props<T>) {
@@ -88,6 +90,7 @@ export default function DetailField<T>({
                 backgroundOrigin: 'border-box',
                 backgroundClip: 'padding-box, border-box',
             }}
+            {...(id !== undefined ? { id: `${id}` } : {})}
         >
             <div className="flex-shrink pt-[0.125rem] md:w-64">
                 <Text preset="label" className="md:hyphens-auto">
