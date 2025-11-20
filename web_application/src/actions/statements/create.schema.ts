@@ -1,5 +1,13 @@
 import { z } from 'zod';
-import { amountSchema } from '../transactions/create.schema';
+
+export const amountSchema = z
+    .string()
+    .refine((value) => !isNaN(Number(value)), {
+        message: 'Amount must be a number',
+    })
+    .refine((value) => Number(value) !== 0, {
+        message: 'Amount must not be zero',
+    });
 
 export const statementAttributesSchema = z.object({
     date: z.string(),
