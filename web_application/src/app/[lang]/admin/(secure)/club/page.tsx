@@ -3,10 +3,10 @@ import { DetailFieldDef } from '@/resources/resource';
 import { Club } from '@/types/models';
 import { LocalizedPageParams } from '@/types/params';
 import { auth } from '@/utils/auth';
+import createTranslation from 'next-translate/createTranslation';
 import { redirect } from 'next/navigation';
 import EditButton from '../components/EditButton';
 import DetailField from '../components/Fields/DetailField';
-import createTranslation from 'next-translate/createTranslation';
 
 interface Props {
     params: LocalizedPageParams;
@@ -19,7 +19,12 @@ async function getClubData(locale: string) {
         return redirect('/login');
     }
 
-    const [club] = await getOne<Club>('clubs', session.club_id, {}, locale);
+    const [club] = await getOne<Club>(
+        'clubs',
+        session.club_id,
+        { include: ['taxAccountChart'] },
+        locale,
+    );
 
     return club;
 }
@@ -77,6 +82,15 @@ export default async function ClubPage({ params }: Props) {
             type: 'link',
         },
         {
+            attribute: 'taxAccountChart',
+            value: club['taxAccountChart']?.title ?? '-',
+        },
+        {
+            attribute: 'taxAccountChartSource',
+            type: 'html',
+            formatValue: () => t('club:tax_account_chart_source.content'),
+        },
+        {
             attribute: 'membershipStartCycleType',
             formatValue: (value) =>
                 t(`club:membership_start_cycle_type.${value}`),
@@ -104,6 +118,7 @@ export default async function ClubPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName="clubs"
+                        id={index}
                         value={field.value ?? club[field.attribute]}
                     />
                 ))}

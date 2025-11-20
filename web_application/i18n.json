@@ -26,9 +26,11 @@
             "payment_period",
             "finance",
             "finance_account",
+            "statement",
             "transaction",
             "receipt",
             "user",
+            "tax_account",
             "role",
             "permission"
         ],

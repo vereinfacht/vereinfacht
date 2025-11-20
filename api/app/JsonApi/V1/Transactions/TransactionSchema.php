@@ -8,14 +8,13 @@ use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Filters\Where;
+use LaravelJsonApi\Eloquent\Filters\Has;
+use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
-use App\JsonApi\Filters\WithoutRelationFilter;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class TransactionSchema extends Schema
 {
@@ -31,17 +30,20 @@ class TransactionSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
+            Str::make('title'),
             Str::make('description'),
+            Number::make('gvc')->sortable(),
+            Str::make('bankIban'),
+            Str::make('bankAccountHolder'),
+            Str::make('currency'),
             Str::make('amount')->sortable(),
             DateTime::make('valuedAt')->sortable(),
             DateTime::make('bookedAt')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Str::make('status')->readOnly(),
-            BelongsTo::make('financeAccount')->type('finance-accounts'),
-            BelongsToMany::make('receipts'),
-            BelongsTo::make('club')->type('clubs'),
+            BelongsTo::make('receipt')->type('receipts'),
+            BelongsTo::make('statement')->type('statements'),
         ];
     }
 
@@ -52,9 +54,7 @@ class TransactionSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            Where::make('financeAccountId', 'finance_account_id')->using('='),
-            QueryFilter::make('query', ['name', 'description', 'amount']),
-            WithoutRelationFilter::make('withoutReceipts', 'receipts'),
+            QueryFilter::make('query', ['title', 'description', 'amount', 'bank_account_holder']),
             StatusFilter::make(
                 'status',
                 'receipts',
@@ -65,6 +65,7 @@ class TransactionSchema extends Schema
                 'amount',
                 'amount'
             ),
+            Has::make($this, 'receipt'),
         ];
     }
 
@@ -79,8 +80,9 @@ class TransactionSchema extends Schema
     public function includePaths(): array
     {
         return [
-            'receipts',
-            'financeAccount',
+            'receipt',
+            'statement',
+            'statement.financeAccount',
         ];
     }
 }

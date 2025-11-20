@@ -1,0 +1,14 @@
+{
+    "title": {
+        "one": "Tax account",
+        "other": "Tax accounts",
+        "label": "Name"
+    },
+    "account_number": {
+        "label": "Account number"
+    },
+    "description": {
+        "label": "Description"
+    },
+    "custom_hint": "Here you can only manage custom tax accounts. Predefined accounts from the chart of accounts cannot be viewed, edited, or deleted. {{link}} Here you can find the sources for the predefined tax accounts."
+}

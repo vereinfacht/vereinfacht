@@ -1,0 +1,29 @@
+{
+    "title": {
+        "one": "Umsatz",
+        "other": "Umsätze",
+        "label": "Name"
+    },
+    "amount": {
+        "label": "Betrag",
+        "help": "Der gesamte Betrag des Umsatzes in EUR."
+    },
+    "date": {
+        "label": "Datum"
+    },
+    "type": {
+        "label": "Typ",
+        "collective": "Sammel",
+        "individual": "Einzel"
+    },
+    "import": {
+        "title": "Umsätze importieren",
+        "description": "Hier können exportierte Umsätze im MT940-Format aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Umsätzen bzw. Transaktionen werden automatisch erkannt und übersprungen.",
+        "notification": {
+            "success": "{{total_statements_created}} Umsätze wurden importiert. {{total_statements_skipped}} Umsätze wurden übersprungen (doppelte oder fehlerhaft).",
+            "error": "Beim Import der Umsätze gab es Fehler: {{errors}}"
+        },
+        "help": "Unterstützt das Format *.mta, *.sta, *.txt und *.mt940"
+    },
+    "all_sources": "Alle Quellen"
+}

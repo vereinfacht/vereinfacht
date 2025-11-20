@@ -1,11 +1,13 @@
 'use client';
 
 import { listFinanceContacts } from '@/actions/financeContacts/list';
+import { listTaxAccounts } from '@/actions/taxAccounts/list';
 import { listTransactions } from '@/actions/transactions/list';
 import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
+import { MediaInput } from '@/app/components/Input/MediaInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
@@ -13,6 +15,7 @@ import Text from '@/app/components/Text/Text';
 import {
     TFinanceContactDeserialized,
     TReceiptDeserialized,
+    TTaxAccountDeserialized,
     TTransactionDeserialized,
 } from '@/types/resources';
 import { format } from 'date-fns/format';
@@ -24,7 +27,6 @@ import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
 import { FormActionState } from '../../../components/Form/FormStateHandler';
 import ReceiptProgressBar from './receipt-progress-bar';
-import { MediaInput } from '@/app/components/Input/MediaInput';
 
 interface Props {
     action: (
@@ -38,10 +40,11 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
-                <Text className="min-w-fit font-medium">{item.name}</Text>
+                <Text className="min-w-fit font-medium">{item.title}</Text>
+                <Text className="truncate">({item.bankAccountHolder})</Text>
                 <Text className="truncate">{item.description}</Text>
             </div>
-            <CurrencyText value={item.amount ?? 0} />
+            <CurrencyText value={Number(item.amount)} />
         </div>
     );
 }
@@ -62,8 +65,18 @@ function ContactOption({ item }: { item: TFinanceContactDeserialized }) {
     );
 }
 
+function TaxAccountOption({ item }: { item: TTaxAccountDeserialized }) {
+    return (
+        <div className="flex items-center gap-2">
+            <Text className="min-w-fit font-medium">{item.accountNumber}</Text>
+            <Text className="truncate">{item.description}</Text>
+        </div>
+    );
+}
+
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
 
     const receiptTypeOptions: Option[] = [
         { label: t('receipt:receipt_type.income'), value: 'income' },
@@ -116,6 +129,7 @@ export default function CreateForm({ data, action }: Props) {
             state={formState}
             type={data ? 'update' : 'create'}
             translationKey="receipt"
+            loading={loading}
         >
             <div>
                 <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
@@ -173,7 +187,10 @@ export default function CreateForm({ data, action }: Props) {
                             action={(searchTerm) =>
                                 listTransactions({
                                     page: { size: itemsPerQuery, number: 1 },
-                                    filter: { query: searchTerm },
+                                    filter: {
+                                        query: searchTerm,
+                                        receipt: false,
+                                    },
                                 })
                             }
                             optionLabel={(item) => (
@@ -202,20 +219,44 @@ export default function CreateForm({ data, action }: Props) {
                         id="documentDate"
                         name="documentDate"
                         label={t('receipt:document_date.label')}
-                        defaultValue={
-                            data?.documentDate
-                                ? format(
-                                      new Date(data.documentDate),
-                                      'yyyy-MM-dd',
-                                  )
-                                : ''
-                        }
+                        defaultValue={format(
+                            new Date(data?.documentDate ?? Date.now()),
+                            'yyyy-MM-dd',
+                        )}
                         type="date"
                         required
                     />
                 </FormField>
             </div>
             <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                <FormField errors={formState.errors?.['taxAccount']}>
+                    <BelongsToSelectInput<TTaxAccountDeserialized>
+                        resourceName="taxAccount"
+                        resourceType="tax-accounts"
+                        label={t('receipt:tax_account.label')}
+                        action={(searchTerm) =>
+                            listTaxAccounts({
+                                page: { size: itemsPerQuery, number: 1 },
+                                filter: { query: searchTerm },
+                            })
+                        }
+                        optionLabel={(item) => <TaxAccountOption item={item} />}
+                        defaultValue={
+                            data?.taxAccount
+                                ? [
+                                      {
+                                          label: (
+                                              <TaxAccountOption
+                                                  item={data.taxAccount}
+                                              />
+                                          ),
+                                          value: data.taxAccount.id,
+                                      },
+                                  ]
+                                : []
+                        }
+                    />
+                </FormField>
                 <FormField errors={formState.errors?.['financeContact']}>
                     <BelongsToSelectInput<TFinanceContactDeserialized>
                         resourceName="financeContact"
@@ -244,14 +285,20 @@ export default function CreateForm({ data, action }: Props) {
                         }
                     />
                 </FormField>
-                <MediaInput
-                    id="receipt-file"
-                    label={t('receipt:media.label')}
-                    help={t('receipt:media.help')}
-                    name="media"
-                    multiple={true}
-                    accept={'.png, .jpg, .jpeg, .pdf'}
-                />
+            </div>
+            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                <FormField errors={formState.errors?.['media']}>
+                    <MediaInput
+                        id="receipt-file"
+                        label={t('receipt:media.label')}
+                        help={t('receipt:media.help')}
+                        name="media"
+                        media={data?.media}
+                        multiple={true}
+                        accept={'.png, .jpg, .jpeg, .pdf'}
+                        setLoading={setLoading}
+                    />
+                </FormField>
             </div>
         </ActionForm>
     );

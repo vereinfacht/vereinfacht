@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TaxAccountChart;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class ClubFactory extends Factory
 
         $attributes = [
             'title' => $this->faker->unique()->company(),
-            'extended_title' => $this->faker->company().' '.$this->faker->companySuffix(),
+            'extended_title' => $this->faker->company() . ' ' . $this->faker->companySuffix(),
             'address' => $this->faker->streetAddress(),
             'zip_code' => $this->faker->postcode(),
             'city' => $this->faker->city(),
@@ -38,6 +39,7 @@ class ClubFactory extends Factory
             'allow_voluntary_contribution' => $this->faker->boolean(),
             'has_consented_media_publication_is_required' => $this->faker->boolean(),
             'has_consented_media_publication_default_value' => $this->faker->boolean(),
+            'tax_account_chart_id' => TaxAccountChart::where('title', 'SKR 03')->first()?->id,
         ];
 
         if ($this->faker->boolean()) {

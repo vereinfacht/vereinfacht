@@ -63,5 +63,13 @@
     "has_consented_media_publication_default_value": {
         "label": "Standardwert für Einwilligung Medienveröffentlichung"
     },
-    "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf."
+    "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf.",
+    "tax_account_chart": {
+        "label": "Steuerkontenkreis",
+        "help": "Der Steuerkontenkreis, der für diesen Verein verwendet wird."
+    },
+    "tax_account_chart_source": {
+        "label": "Quelle des Steuerkontenkreises",
+        "content": "SKR03 von spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> mit Ziel, den zugrundeliegenden Standardkontenrahmen 03 abzubilden <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>."
+    }
 }

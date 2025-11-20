@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
+import { queryFilterSchema } from '../receipts/list.schema';
 
 export const financeContactSortingOptions = [
     'fullName',
@@ -18,7 +19,7 @@ export const listFinanceContactsSchema = z.object({
     filter: z
         .object({
             contactType: z.array(z.enum(financeContactTypeOptions)).optional(),
-            query: z.string().optional(),
+            query: queryFilterSchema,
         })
         .optional(),
 });

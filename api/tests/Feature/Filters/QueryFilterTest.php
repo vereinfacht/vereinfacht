@@ -4,6 +4,7 @@ namespace Tests\Feature\JsonApi\Filters;
 
 use Tests\TestCase;
 use App\Models\Club;
+use App\Models\Statement;
 use App\Models\Transaction;
 use App\Models\FinanceAccount;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -20,25 +21,31 @@ class QueryFilterTest extends TestCase
         ]);
 
         $matchingTransaction1 = Transaction::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_id' => $account->id,
-            'name' => 'Membership Fee',
+            'statement_id' => Statement::factory()->create([
+                'club_id' => $club->id,
+                'finance_account_id' => $account->id,
+            ])->id,
+            'title' => 'Membership Fee',
             'description' => 'Annual club membership',
             'amount' => 100,
         ]);
 
         $matchingTransaction2 = Transaction::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_id' => $account->id,
-            'name' => 'Other',
+            'statement_id' => Statement::factory()->create([
+                'club_id' => $club->id,
+                'finance_account_id' => $account->id,
+            ])->id,
+            'title' => 'Other',
             'description' => 'Special membership discount',
             'amount' => 50,
         ]);
 
         $nonMatchingTransaction = Transaction::factory()->create([
-            'club_id' => $club->id,
-            'finance_account_id' => $account->id,
-            'name' => 'Refund',
+            'statement_id' => Statement::factory()->create([
+                'club_id' => $club->id,
+                'finance_account_id' => $account->id,
+            ])->id,
+            'title' => 'Refund',
             'description' => 'Bank refund',
             'amount' => 200,
         ]);

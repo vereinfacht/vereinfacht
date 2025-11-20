@@ -3,12 +3,14 @@
 namespace App\Models\Scopes;
 
 use App\Models\Club;
-use App\Models\DivisionMembershipType;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\TaxAccount;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use App\Models\DivisionMembershipType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class ClubScope implements Scope
 {
@@ -68,9 +70,42 @@ class ClubScope implements Scope
             return;
         }
 
+        if ($model instanceof Transaction) {
+            $builder->whereHas('statement.financeAccount', function ($query) use ($clubId) {
+                $query->where('club_id', $clubId);
+            });
+
+            return;
+        }
+
         if ($model instanceof DivisionMembershipType) {
             $builder->whereHas('division', function ($query) use ($clubId) {
                 $query->where('club_id', $clubId);
+            });
+
+            return;
+        }
+
+        if ($model instanceof TaxAccount) {
+            $club = Club::find($clubId);
+
+            if (!$club) {
+                $builder->take(0);
+                return;
+            }
+
+            $builder->where(function ($query) use ($club, $clubId) {
+                $query->whereNull('club_id')
+                    ->orWhere(function ($subQuery) use ($club, $clubId) {
+                        $subQuery->where('club_id', $clubId)
+                            ->where(function ($chartQuery) use ($club) {
+                                $chartQuery->whereNull('tax_account_chart_id');
+
+                                if ($club->taxAccountChart) {
+                                    $chartQuery->orWhere('tax_account_chart_id', $club->taxAccountChart->id);
+                                }
+                            });
+                    });
             });
 
             return;

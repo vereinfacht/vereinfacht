@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use App\Classes\Sanitizer;
-use App\Models\Behaviors\PrefersLocale;
-use Filament\Facades\Filament;
-use Filament\Models\Contracts\HasAvatar;
-use Filament\Models\Contracts\HasName;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Filament\Facades\Filament;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\HasName;
+use App\Models\Behaviors\PrefersLocale;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Club extends Authenticatable implements HasAvatar, HasLocalePreference, HasName
 {
@@ -50,6 +50,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         'allow_voluntary_contribution',
         'has_consented_media_publication_is_required',
         'has_consented_media_publication_default_value',
+        'tax_account_chart_id',
     ];
 
     protected function casts(): array
@@ -123,9 +124,26 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         return $this->hasMany(FinanceContact::class);
     }
 
-    public function transactions(): HasMany
+    public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasManyThrough(
+            Transaction::class,
+            Statement::class,
+            'club_id',
+            'statement_id',
+            'id',
+            'id'
+        );
+    }
+
+    public function statements(): HasMany
+    {
+        return $this->hasMany(Statement::class);
+    }
+
+    public function taxAccountChart()
+    {
+        return $this->belongsTo(TaxAccountChart::class);
     }
 
     /**
@@ -137,8 +155,8 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $sanitizer = new Sanitizer;
 
         return Attribute::make(
-            get: fn (?string $value) => $value ? $sanitizer->get($value) : null,
-            set: fn (?string $value) => $value ? $sanitizer->get($value) : null,
+            get: fn(?string $value) => $value ? $sanitizer->get($value) : null,
+            set: fn(?string $value) => $value ? $sanitizer->get($value) : null,
         );
     }
 
@@ -150,7 +168,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
         $url .= '/apply';
 
         return Attribute::make(
-            get: fn () => $url,
+            get: fn() => $url,
         );
     }
 

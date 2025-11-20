@@ -7,7 +7,6 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import StatusCell from '@/app/components/Table/StatusCell';
-import { TableAction } from '@/app/components/Table/TableAction';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TTransactionDeserialized } from '@/types/resources';
@@ -16,9 +15,6 @@ import { SupportedLocale } from '@/utils/localization';
 import { listTransactionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import { useQueryState } from 'nuqs';
-import { useState } from 'react';
-import TransactionDetailsModal from './transaction-details-modal';
 
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
@@ -29,23 +25,27 @@ export default function TransactionsTable({
     transactions,
     totalPages,
 }: TransactionsListProps) {
-    const [accountId] = useQueryState('accountId');
     const translationHook = useTranslation();
     const lang = translationHook.lang as SupportedLocale;
     const { t } = translationHook;
 
     const columns: ColumnDef<TTransactionDeserialized>[] = [
         {
-            accessorKey: 'name',
+            accessorKey: 'title',
             header: t('transaction:title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
+            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
         },
         {
             accessorKey: 'description',
-            header: t('transaction:purpose.label'),
+            header: t('transaction:description.label'),
             cell: ({ row }) => (
                 <TextCell truncate>{row.getValue('description')}</TextCell>
             ),
+        },
+        {
+            accessorKey: 'bankIban',
+            header: t('transaction:iban.label'),
+            cell: ({ row }) => <TextCell>{row.getValue('bankIban')}</TextCell>,
         },
         {
             accessorKey: 'valuedAt',
@@ -96,17 +96,6 @@ export default function TransactionsTable({
             ),
         },
         {
-            accessorKey: 'financeAccount.title',
-            header: () => (
-                <span className={accountId !== null ? 'text-slate-900' : ''}>
-                    {t('finance_account:title.one')}
-                </span>
-            ),
-            cell: ({ row }) => (
-                <TextCell>{row.getValue('financeAccount_title')}</TextCell>
-            ),
-        },
-        {
             accessorKey: 'amount',
             header: ({ column }) => (
                 <HeaderSort
@@ -117,30 +106,7 @@ export default function TransactionsTable({
             ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
-        {
-            id: 'actions',
-            cell: ({ row }) => (
-                <TableAction
-                    type="view"
-                    onClick={() => openTransactionDetails(row.original)}
-                />
-            ),
-        },
     ];
-
-    const [selectedTransaction, setSelectedTransaction] =
-        useState<TTransactionDeserialized | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openTransactionDetails = (transaction: TTransactionDeserialized) => {
-        setSelectedTransaction(transaction);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedTransaction(null);
-    };
 
     if (transactions.length === 0) {
         return (
@@ -162,21 +128,15 @@ export default function TransactionsTable({
                 resourceName={'finances/transactions' as ResourceName}
                 totalPages={totalPages}
                 canEdit={(transaction) =>
-                    transaction.financeAccount?.accountType === 'cash_box'
+                    transaction.statement?.financeAccount?.accountType ===
+                    'cash_box'
                 }
-                canView={false}
+                canView={true}
                 defaultColumn={{
                     size: 150,
                     enableResizing: false,
                 }}
             />
-            {selectedTransaction && (
-                <TransactionDetailsModal
-                    transaction={selectedTransaction}
-                    isOpen={isModalOpen}
-                    onClose={closeModal}
-                />
-            )}
         </>
     );
 }

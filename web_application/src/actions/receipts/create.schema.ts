@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { amountSchema } from '../transactions/create.schema';
+import { amountSchema } from '../statements/create.schema';
 
 export const receiptType = ['income', 'expense'] as const;
 
@@ -35,6 +35,28 @@ export const receiptRelationshipsSchema = z.object({
                     type: z.literal('transactions'),
                 }),
             ),
+        })
+        .optional(),
+    media: z
+        .object({
+            data: z
+                .array(
+                    z.object({
+                        id: z.string(),
+                        type: z.literal('media'),
+                    }),
+                )
+                .nullable(),
+        })
+        .optional(),
+    taxAccount: z
+        .object({
+            data: z
+                .object({
+                    id: z.string(),
+                    type: z.literal('tax-accounts'),
+                })
+                .nullable(),
         })
         .optional(),
 });

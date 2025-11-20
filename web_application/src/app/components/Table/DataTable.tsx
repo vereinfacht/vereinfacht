@@ -1,13 +1,6 @@
 'use client';
 
-import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    TableOptions,
-    useReactTable,
-} from '@tanstack/react-table';
-
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import {
     Table,
     TableBody,
@@ -18,6 +11,13 @@ import {
 } from '@/app/components/Table/Table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
+import {
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    TableOptions,
+    useReactTable,
+} from '@tanstack/react-table';
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
 
@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
     resourceName: ResourceName;
     canView?: boolean;
     canEdit?: boolean | ((row: TData) => boolean);
+    deleteAction?: (formData: FormData) => Promise<FormActionState>;
     totalPages?: number;
 }
 
@@ -38,6 +39,7 @@ export function DataTable<TData extends Model, TValue>({
     resourceName,
     canView = false,
     canEdit = false,
+    deleteAction,
     totalPages,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
@@ -93,7 +95,7 @@ export function DataTable<TData extends Model, TValue>({
                                             )}
                                         </TableCell>
                                     ))}
-                                    {(canEdit || canView) && (
+                                    {(canEdit || canView || deleteAction) && (
                                         <TableCell
                                             key="actions"
                                             className="flex items-center justify-end gap-4"
@@ -118,6 +120,14 @@ export function DataTable<TData extends Model, TValue>({
                                                     type="view"
                                                     href={`/admin/${resourceName}/${row.original.id}`}
                                                     id={row.original.id}
+                                                />
+                                            )}
+                                            {deleteAction && (
+                                                <TableAction
+                                                    type="delete"
+                                                    deleteAction={deleteAction}
+                                                    id={row.original.id}
+                                                    resourceName={resourceName}
                                                 />
                                             )}
                                         </TableCell>
