@@ -11,6 +11,7 @@ use App\Models\FinanceAccount;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
 use App\Classes\StatementIdentifierGenerator;
+use App\Parsers\HaspaParser;
 
 class FileImport
 {
@@ -33,6 +34,7 @@ class FileImport
         $reader = new Reader();
 
         $parsers = $reader->getDefaultParsers() + [
+            'Hamburger Sparkasse AG' => HaspaParser::class,
             'Volksbank Schleswig-Holstein Nord eG' => VRBankParser::class,
         ];
 
