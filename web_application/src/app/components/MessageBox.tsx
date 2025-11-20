@@ -5,6 +5,7 @@ export interface MessageBoxProps {
     message: string;
     preset?: keyof typeof presets;
     className?: string;
+    allowHtml?: boolean;
 }
 
 const presets = {
@@ -17,6 +18,7 @@ export default function MessageBox({
     message,
     className,
     preset = 'default',
+    allowHtml = false,
 }: MessageBoxProps) {
     const presetClassNames = presets[preset];
 
@@ -29,7 +31,17 @@ export default function MessageBox({
             ].join(' ')}
             data-cy={`message-box-` + preset}
         >
-            <Text>{message}</Text>
+            {allowHtml ? (
+                <Text>
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: message,
+                        }}
+                    />
+                </Text>
+            ) : (
+                <Text>{message}</Text>
+            )}
         </div>
     );
 }

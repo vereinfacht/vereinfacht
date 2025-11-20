@@ -42,6 +42,11 @@ export type TMediaDeserialized = {
     previewUrl?: string;
 };
 
+export type TTaxAccountChartDeserialized = {
+    id: string;
+    title: string;
+};
+
 export type TFinanceAccountDeserialized = TFinanceAccountRaw['attributes'] & {
     id: string;
     transactions?: TTransactionDeserialized[];
@@ -54,10 +59,7 @@ export type TFinanceContactDeserialized = TFinanceContactRaw['attributes'] & {
 
 export type TTaxAccountDeserialized = TTaxAccountRaw['attributes'] & {
     id: string;
-    taxAccountChart?: {
-        id: string;
-        title: string;
-    };
+    taxAccountChart?: TTaxAccountChartDeserialized;
 };
 
 export type TReceiptDeserialized = TReceiptRaw['attributes'] & {

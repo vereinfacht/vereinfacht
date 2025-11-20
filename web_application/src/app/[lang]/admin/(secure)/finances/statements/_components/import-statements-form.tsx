@@ -2,6 +2,7 @@
 
 import { importStatementsFormAction } from '@/actions/statements/import';
 import Button from '@/app/components/Button/Button';
+import HelpText from '@/app/components/HelpText';
 import { Input } from '@/app/components/ui/input';
 import { TFinanceAccountDeserialized } from '@/types/resources';
 import { capitalizeFirstLetter } from '@/utils/strings';
@@ -48,10 +49,11 @@ export default function ImportStatementsForm({ account, setIsOpen }: Props) {
                     id="file"
                     name="file"
                     type="file"
-                    accept=".mta"
+                    accept=".mta, .sta, .txt, .mt940"
                     multiple={false}
                     required
                 />
+                <HelpText text={t('statement:import.help')} className="mt-1" />
             </FormField>
 
             <div className="flex gap-4 self-end">
