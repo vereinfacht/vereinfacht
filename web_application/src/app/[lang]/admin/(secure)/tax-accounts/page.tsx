@@ -3,12 +3,14 @@ import MessageBox from '@/app/components/MessageBox';
 import { itemsPerPage } from '@/services/api-endpoints';
 import { WithSearchParams } from '@/types/params';
 import { TTaxAccountDeserialized } from '@/types/resources';
+import { SupportedLocale } from '@/utils/localization';
 import {
     ListTaxAccountSearchParamsType,
     loadListTaxAccountsSearchParams,
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import createTranslation from 'next-translate/createTranslation';
+import useTranslation from 'next-translate/useTranslation';
 import TaxAccountsTable from './_components/tax-accounts-table';
 
 async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
@@ -24,6 +26,8 @@ async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
 }
 
 export default async function Page({ searchParams }: WithSearchParams) {
+    const translationHook = useTranslation();
+    const lang = translationHook.lang as SupportedLocale;
     const { t } = createTranslation('tax_account');
     const params = await loadListTaxAccountsSearchParams(searchParams);
     const response = await getTaxAccountsFromApi(params);
@@ -38,7 +42,9 @@ export default async function Page({ searchParams }: WithSearchParams) {
             <MessageBox
                 className="mb-10 mb-4"
                 preset="hint"
-                message={t('custom_hint')}
+                message={t('custom_hint', {
+                    link: `<a href="/${lang}/admin/club" class="underline">`,
+                })}
                 allowHtml={true}
             />
             <TaxAccountsTable

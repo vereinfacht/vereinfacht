@@ -8,6 +8,7 @@ import ColorField from './Detail/ColorField';
 import CurrencyField from './Detail/CurrencyField';
 import DateField from './Detail/DateField';
 import DefaultField from './Detail/DefaultField';
+import HtmlField from './Detail/HtmlField';
 import ImageField from './Detail/ImageField';
 import { LinkField } from './Detail/LinkField';
 import MediaField from './Detail/MediaField';
@@ -68,6 +69,9 @@ export default function DetailField<T>({
             break;
         case 'media':
             component = <MediaField value={displayValue} />;
+            break;
+        case 'html':
+            component = <HtmlField value={displayValue} />;
             break;
 
         default:

@@ -69,6 +69,7 @@
         "help": "Der Steuerkontenkreis, der für diesen Verein verwendet wird."
     },
     "tax_account_chart_source": {
-        "label": "Quelle des Steuerkontenkreises"
+        "label": "Quelle des Steuerkontenkreises",
+        "content": "SKR03 von spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> mit Ziel, den zugrundeliegenden Standardkontenrahmen 03 abzubilden <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>."
     }
 }

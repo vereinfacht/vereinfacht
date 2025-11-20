@@ -81,6 +81,7 @@
         "help": "The tax account group used for this club."
     },
     "tax_account_chart_source": {
-        "label": "Source of the tax account group"
+        "label": "Source of the tax account groups",
+        "content": "SKR03 by spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> with the goal of mapping the underlying Standard Chart of Accounts 03 <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>."
     }
 }

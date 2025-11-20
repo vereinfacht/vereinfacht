@@ -10,5 +10,5 @@
     "description": {
         "label": "Description"
     },
-    "custom_hint": "Here you can only manage custom tax accounts. Predefined accounts from the chart of accounts cannot be viewed, edited, or deleted. Source of the tax account chart: <a href=\"https://github.com/spritelite/SKR03\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-500 underline hover:text-blue-700\">SKR03 by spritelite</a> with the goal of mapping the underlying <a href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-500 underline hover:text-blue-700\">Standard Chart of Accounts 03</a>."
+    "custom_hint": "Here you can only manage custom tax accounts. Predefined accounts from the chart of accounts cannot be viewed, edited, or deleted. {{link}} Here you can find the sources for the predefined tax accounts."
 }

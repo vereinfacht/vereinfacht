@@ -87,8 +87,8 @@ export default async function ClubPage({ params }: Props) {
         },
         {
             attribute: 'taxAccountChartSource',
-            type: 'link',
-            value: 'https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174',
+            type: 'html',
+            formatValue: () => t('club:tax_account_chart_source.content'),
         },
         {
             attribute: 'membershipStartCycleType',
