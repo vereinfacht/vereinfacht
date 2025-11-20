@@ -18,6 +18,10 @@
         "action": {
             "success": "Aktion erfolgreich",
             "error": "Aktion fehlgeschlagen"
+        },
+        "delete": {
+            "success": "{{resource}} wurde gelöscht",
+            "error": "{{resource}} konnte nicht gelöscht werden"
         }
     },
 
