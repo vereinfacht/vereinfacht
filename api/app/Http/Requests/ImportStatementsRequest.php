@@ -30,7 +30,7 @@ class ImportStatementsRequest extends FormRequest
     {
         return [
             'financeAccountId' => ['required', 'string', 'exists:finance_accounts,id'],
-            'file' => ['required', 'file'],
+            'file' => ['required', 'file', 'mimes:txt,sta,mta,mt940'],
         ];
     }
 }
