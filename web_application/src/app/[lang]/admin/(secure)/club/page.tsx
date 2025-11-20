@@ -82,8 +82,13 @@ export default async function ClubPage({ params }: Props) {
             type: 'link',
         },
         {
-            attribute: 'taxAccountChart' as keyof Club,
+            attribute: 'taxAccountChart',
             value: club['taxAccountChart']?.title ?? '-',
+        },
+        {
+            attribute: 'taxAccountChartSource',
+            type: 'html',
+            formatValue: () => t('club:tax_account_chart_source.content'),
         },
         {
             attribute: 'membershipStartCycleType',
@@ -113,6 +118,7 @@ export default async function ClubPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName="clubs"
+                        id={index}
                         value={field.value ?? club[field.attribute]}
                     />
                 ))}

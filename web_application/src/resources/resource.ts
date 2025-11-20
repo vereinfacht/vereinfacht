@@ -40,7 +40,8 @@ export interface SimpleDetailFieldDef<T> extends DefaultDetailFieldDef<T> {
         | 'translation'
         | 'currency'
         | 'boolean'
-        | 'media';
+        | 'media'
+        | 'html';
 }
 
 export interface BelongsToDetailFieldDef<T, K = any>

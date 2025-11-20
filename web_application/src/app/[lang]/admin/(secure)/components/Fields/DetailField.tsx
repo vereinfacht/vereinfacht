@@ -8,6 +8,7 @@ import ColorField from './Detail/ColorField';
 import CurrencyField from './Detail/CurrencyField';
 import DateField from './Detail/DateField';
 import DefaultField from './Detail/DefaultField';
+import HtmlField from './Detail/HtmlField';
 import ImageField from './Detail/ImageField';
 import { LinkField } from './Detail/LinkField';
 import MediaField from './Detail/MediaField';
@@ -16,6 +17,7 @@ import TranslationField from './Detail/TranslationField';
 type Props<T> = DefaultDetailFieldDef<T> & {
     value: any;
     resourceName: ResourceName;
+    id?: number;
 };
 
 export default function DetailField<T>({
@@ -24,6 +26,7 @@ export default function DetailField<T>({
     label,
     help,
     value,
+    id = undefined,
     formatValue,
     ...props
 }: Props<T>) {
@@ -69,6 +72,9 @@ export default function DetailField<T>({
         case 'media':
             component = <MediaField value={displayValue} />;
             break;
+        case 'html':
+            component = <HtmlField value={displayValue} />;
+            break;
 
         default:
             component = <DefaultField value={displayValue} />;
@@ -84,6 +90,7 @@ export default function DetailField<T>({
                 backgroundOrigin: 'border-box',
                 backgroundClip: 'padding-box, border-box',
             }}
+            {...(id !== undefined ? { id: `${id}` } : {})}
         >
             <div className="flex-shrink pt-[0.125rem] md:w-64">
                 <Text preset="label" className="md:hyphens-auto">

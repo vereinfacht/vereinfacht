@@ -1,4 +1,5 @@
 import { TranslatableAttribute } from './jsonapi-models';
+import { TTaxAccountDeserialized } from './resources';
 
 export interface Model {
     id?: string;
@@ -96,6 +97,8 @@ export interface Club extends Model {
     membershipStartCycleType: MembershipStartCycleType;
     hasConsentedMediaPublicationIsRequired: boolean;
     hasConsentedMediaPublicationDefaultValue: boolean;
+    taxAccountChart?: TTaxAccountDeserialized;
+    taxAccountChartSource: string;
     divisions: Division[] | [];
     membershipTypes: MembershipType[] | [];
     paymentPeriods?: PaymentPeriod[] | [];
