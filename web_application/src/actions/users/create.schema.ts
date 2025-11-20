@@ -10,11 +10,13 @@ export const userAttributesSchema = z.object({
 });
 
 export const userRelationshipsSchema = z.object({
-    club: z.object({
-        data: z.object({
-            id: z.string(),
-            type: z.literal('clubs'),
-        }),
+    clubs: z.object({
+        data: z.array(
+            z.object({
+                id: z.string(),
+                type: z.literal('clubs'),
+            }),
+        ),
     }),
     roles: z
         .object({

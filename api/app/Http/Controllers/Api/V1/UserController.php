@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Club;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Responses\DataResponse;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
+use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
+use LaravelJsonApi\Laravel\Http\Requests\ResourceQuery;
 
 class UserController extends Controller
 {
@@ -22,9 +25,47 @@ class UserController extends Controller
     use Actions\FetchOne;
     use Actions\FetchRelated;
     use Actions\FetchRelationship;
-    use Actions\Store;
     use Actions\Update;
+    use Actions\Store;
     use Actions\UpdateRelationship;
+
+
+    protected function creating(ResourceRequest $request): DataResponse
+    {
+        try {
+            $data = $request->validated();
+
+            $clubIds = collect($data['clubs'] ?? [])->pluck('id');
+            $roleIds = collect($data['roles'] ?? [])->pluck('id');
+
+            $user = User::create($data);
+
+            if ($roleIds->isEmpty()) {
+                $roleNames = collect(['club admin']);
+            } else {
+                $roleNames = \Spatie\Permission\Models\Role::whereIn('id', $roleIds)->pluck('name');
+            }
+
+            foreach ($clubIds as $clubId) {
+                setPermissionsTeamId($clubId);
+
+                foreach ($roleNames as $roleName) {
+                    $user->assignRole($roleName);
+                }
+            }
+
+            setPermissionsTeamId(null);
+
+            $user->load(['clubs', 'roles']);
+
+            return DataResponse::make($user);
+        } catch (\Throwable $th) {
+            throw new JsonApiException(Error::fromArray([
+                'status' => 422,
+                'detail' => "User could not be created: {$th->getMessage()}",
+            ]));
+        }
+    }
 
     public function login(Request $request): DataResponse
     {
@@ -54,15 +95,6 @@ class UserController extends Controller
                 'status' => 422,
                 'detail' => "User could not be logged out: {$th->getMessage()}}",
             ]));
-        }
-    }
-
-    protected function creating($request, $model): void
-    {
-        $password = $request->input('data.attributes.password');
-
-        if ($password) {
-            $model->password = Hash::make($password);
         }
     }
 }

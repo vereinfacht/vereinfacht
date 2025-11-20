@@ -123,7 +123,7 @@ export default function CreateForm({ data, action }: Props) {
                 </FormField>
                 <FormField errors={formState.errors?.['roles']}>
                     <BelongsToSelectInput<TRoleDeserialized>
-                        resourceName="role"
+                        resourceName="roles"
                         resourceType="roles"
                         label={t('role:title.other')}
                         required
