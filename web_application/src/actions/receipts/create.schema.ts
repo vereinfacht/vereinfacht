@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { amountSchema } from '../transactions/create.schema';
+import { amountSchema } from '../statements/create.schema';
 
 export const receiptType = ['income', 'expense'] as const;
 
