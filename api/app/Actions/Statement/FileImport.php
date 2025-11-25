@@ -5,23 +5,22 @@ namespace App\Actions\Statement;
 use Jejik\MT940\Reader;
 use App\Models\Statement;
 use App\Models\Transaction;
-use Illuminate\Support\Arr;
 use App\Parsers\VRBankParser;
 use App\Models\FinanceAccount;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
 use App\Classes\StatementIdentifierGenerator;
 
 class FileImport
 {
-    protected $file;
-    protected $actionStats;
-    protected $financeAccount;
+    private object $stats;
+    private FinanceAccount $financeAccount;
 
-    public function __construct($file)
+    public function __construct(private readonly UploadedFile $file)
     {
-        $this->file = $file;
-        $this->actionStats = [
+        $this->stats = (object) [
             'total_statements_created' => 0,
             'total_statements_skipped' => 0,
         ];
@@ -30,103 +29,106 @@ class FileImport
     public function execute(FinanceAccount $financeAccount): array
     {
         $this->financeAccount = $financeAccount;
-        $reader = new Reader();
 
-        $parsers = $reader->getDefaultParsers() + [
-            'Volksbank' => VRBankParser::class,
-        ];
-
-        $reader->addParsers($parsers);
-
-        try {
-            $statements = $reader->getStatements(
-                trim(file_get_contents($this->file->getRealPath()))
-            );
-        } catch (\Throwable $th) {
-            throw new \Exception('Failed to parse the statement file: ' . $th->getMessage());
-        }
+        $statements = $this->parseFile();
 
         foreach ($statements as $parsedStatement) {
-            try {
-                $this->createStatementWithTransactions($parsedStatement);
-            } catch (\Throwable $th) {
-                throw new \Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
-            }
+            $this->importParsedStatement($parsedStatement);
         }
 
-        return $this->actionStats;
+        return (array) $this->stats;
     }
 
-
-
-    protected function createStatementWithTransactions(StatementInterface $parsedStatement): void
+    protected function parseFile(): array
     {
-        $sharedStatementData = [
-            'date' => $parsedStatement->getClosingBalance()->getDate() ?? now(),
-            'finance_account_id' => $this->financeAccount->id,
-            'club_id' => $this->financeAccount->club_id,
-        ];
-        // @todo: convert non-EUR currencies to EUR and save converted amount, original amount and the applied exchange rate
-        $currency = Arr::get($parsedStatement->getClosingBalance(), 'currency', 'EUR');
+        $reader = new Reader();
+        $reader->addParsers(
+            $reader->getDefaultParsers() + [
+                'Volksbank' => VRBankParser::class,
+            ]
+        );
 
-        foreach ($parsedStatement->getTransactions() as $transaction) {
-            if ($this->isCollectiveTransfer($transaction)) {
-                // handling collective transfer transactions is not yet supported
-                $this->actionStats['total_statements_skipped']++;
-                continue;
+        try {
+            $content = file_get_contents($this->file->getRealPath());
+
+            return $reader->getStatements(trim($content));
+        } catch (\Throwable $e) {
+            throw new \RuntimeException(
+                "Failed to parse MT940 file '{$this->file->getClientOriginalName()}': {$e->getMessage()}",
+                previous: $e
+            );
+        }
+    }
+
+    protected function importParsedStatement(StatementInterface $parsedStatement): void
+    {
+        DB::transaction(function () use ($parsedStatement) {
+
+            $closingBalance = $parsedStatement->getClosingBalance();
+            $statementDate = $closingBalance?->getDate() ?? now();
+            $currency = $closingBalance?->getCurrency() ?? 'EUR';
+
+            $transactions = $parsedStatement->getTransactions();
+
+            if (empty($transactions)) {
+                return;
             }
 
-            $statementIdentifier = StatementIdentifierGenerator::generate(
-                $sharedStatementData['date'],
-                $transaction->getAmount(),
-                $transaction->getDescription()
+            $firstTransaction = $transactions[0];
+            $identifier = StatementIdentifierGenerator::generate(
+                $statementDate,
+                $firstTransaction->getAmount(),
+                $firstTransaction->getDescription()
             );
 
-            $statement = Statement::firstOrCreate([
-                'identifier' => $statementIdentifier
-            ], $sharedStatementData);
+            $statement = Statement::firstOrCreate(
+                ['identifier' => $identifier],
+                [
+                    'date' => $statementDate,
+                    'finance_account_id' => $this->financeAccount->id,
+                    'club_id' => $this->financeAccount->club_id,
+                ]
+            );
 
-            if ($statement->wasRecentlyCreated === false) {
-                $this->actionStats['total_statements_skipped']++;
-                continue;
+            if (!$statement->wasRecentlyCreated) {
+                $this->stats->total_statements_skipped++;
+                return;
             }
 
-            $this->createTransaction($statement, $transaction, $currency);
-        }
+            foreach ($transactions as $parsedTransaction) {
+                $this->createTransaction($statement, $parsedTransaction, $currency);
+            }
+
+            $this->stats->total_statements_created++;
+        });
     }
 
-    protected function createTransaction(Statement $statement, TransactionInterface $transaction, string $currency): void
+    protected function createTransaction(Statement $statement, TransactionInterface $parsedTransaction, string $currency): void
     {
-        $transaction = Transaction::create([
-            'title' => $transaction->getTxText() ?? '-',
-            'description' => $transaction->getSvwz(),
-            'gvc' => (int) $transaction->getGVC(),
-            'bank_iban' => $transaction->getIBAN(),
-            'bank_account_holder' => $transaction->getAccountHolder(),
+        Transaction::create([
+            'title' => $this->toUtf8($parsedTransaction->getTxText() ?: '-'),
+            'description' => $this->toUtf8($parsedTransaction->getSvwz()),
+            'gvc' => (int) $parsedTransaction->getGVC(),
+            'bank_iban' => $this->toUtf8($parsedTransaction->getIBAN()),
+            'bank_account_holder' => $this->toUtf8($parsedTransaction->getAccountHolder()),
             'statement_id' => $statement->id,
             'currency' => $currency,
-            'amount' => $transaction->getAmount(),
-            'valued_at' => $transaction->getValueDate(),
-            'booked_at' => $transaction->getBookDate(),
+            'amount' => $parsedTransaction->getAmount(),
+            'valued_at' => $parsedTransaction->getValueDate(),
+            'booked_at' => $parsedTransaction->getBookDate(),
         ]);
-
-        $this->actionStats['total_statements_created']++;
     }
 
-    protected function isCollectiveTransfer(TransactionInterface $transaction): bool
+    protected function toUtf8(?string $value): ?string
     {
-        return Arr::exists(
-            [
-                "188",
-                "189",
-                "191",
-                "192",
-                "194",
-                "195",
-                "196",
-                "197"
-            ],
-            $transaction->getGVC() ?? ''
-        );
+        if ($value === null) {
+            return null;
+        }
+
+        if (mb_check_encoding($value, 'UTF-8')) {
+            return $value;
+        }
+
+        return mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1, Windows-1252');
     }
 }

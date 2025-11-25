@@ -15,4 +15,26 @@ class VRBankParser extends GermanBank
     {
         return [];
     }
+
+    protected function txText(array $lines): ?string
+    {
+        $txTextLine = $lines[1] ?? null;
+
+        if ($txTextLine === null) {
+            return null;
+        }
+
+        $cleanLine = $this->removeNewLinesFromLine($txTextLine);
+
+        if (preg_match('/\d{3}\?00([^?$]+)/', $cleanLine, $matches)) {
+            return trim($matches[1]);
+        }
+
+        return parent::txText($lines);
+    }
+
+    private function removeNewLinesFromLine(string $stringLine): string
+    {
+        return str_replace(["\n", "\r", "\r\n"], '', $stringLine);
+    }
 }
