@@ -10,7 +10,7 @@ interface Props {
 
 export default async function Page({ params }: Props) {
     const { id } = params;
-    const user = await getUser({ id });
+    const user = await getUser({ id, include: ['roles'] });
     const extendedAction = updateUserFormAction.bind(null, id);
 
     if (!user) {

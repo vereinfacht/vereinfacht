@@ -100,7 +100,7 @@ export default function CreateForm({ data, action }: Props) {
                         name="password"
                         label={t('general:password')}
                         type="password"
-                        autoComplete="new-password"
+                        autoComplete={data ? '' : 'new-password'}
                         required
                         minLength={2}
                         maxLength={255}

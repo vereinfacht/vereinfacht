@@ -34,7 +34,7 @@ export async function updateUserFormAction(
         {
             data: {
                 id,
-                type: 'finance-contacts',
+                type: 'users',
             },
         },
     );

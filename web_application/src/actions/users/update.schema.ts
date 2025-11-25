@@ -1,25 +1,21 @@
 import { z } from 'zod';
-import { createUserSchema, userAttributesSchema } from './create.schema';
 import { idSchema } from '../base/get.schema';
+import { userAttributesSchema } from './create.schema';
 
-export const updateUserSchema = createUserSchema.extend({
-    data: createUserSchema.shape.data.extend({
+export const updateUserSchema = z.object({
+    data: z.object({
         id: idSchema,
         type: z.literal('users'),
         attributes: userAttributesSchema,
         relationships: z.object({
-            permissions: z
-                .object({
-                    data: z.array(
-                        z
-                            .object({
-                                id: z.string(),
-                                type: z.literal('permissions'),
-                            })
-                            .nullable(),
-                    ),
-                })
-                .optional(),
+            roles: z.object({
+                data: z.array(
+                    z.object({
+                        id: z.string(),
+                        type: z.literal('roles'),
+                    }),
+                ),
+            }),
         }),
     }),
 });
