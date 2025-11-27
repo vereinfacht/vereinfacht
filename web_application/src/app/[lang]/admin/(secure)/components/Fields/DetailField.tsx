@@ -17,7 +17,7 @@ import TranslationField from './Detail/TranslationField';
 type Props<T> = DefaultDetailFieldDef<T> & {
     value: any;
     resourceName: ResourceName;
-    id?: number;
+    id?: string;
 };
 
 export default function DetailField<T>({

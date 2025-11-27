@@ -6,10 +6,10 @@ const deleteActionMap: Record<
     string,
     (id: string, formData: FormData) => Promise<FormActionState>
 > = {
-    'finance-accounts': async (id: string, formData: FormData) => {
+    'finance-accounts': async (id: string) => {
         return await deleteFinanceAccountFormAction(id, { success: false });
     },
-    'tax-accounts': async (id: string, formData: FormData) => {
+    'tax-accounts': async (id: string) => {
         return await deleteTaxAccountFormAction(id, { success: false });
     },
     // Add more delete actions here as they're created

@@ -18,6 +18,7 @@ class Statement extends Model
         'club_id',
         'identifier',
         'date',
+        'statement_type',
     ];
 
     public function casts()

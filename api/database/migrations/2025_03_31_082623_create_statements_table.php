@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('statements', function (Blueprint $table) {
             $table->id();
             $table->string('identifier')->nullable();
+            $table->string('statement_type');
             $table->timestamp('date')->nullable();
 
             $table->foreignId('finance_account_id')

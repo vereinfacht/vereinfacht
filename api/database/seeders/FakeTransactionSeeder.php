@@ -12,9 +12,15 @@ class FakeTransactionSeeder extends Seeder
     {
         Club::with('statements.financeAccount')->get()->each(function ($club) {
             $club->statements->each(function ($statement) {
+                $statementType = 'individual';
 
                 if ($statement->financeAccount->account_type === 'bank_account') {
-                    $count = rand(1, 100) <= 15 ? rand(2, 15) : 1;
+                    if (rand(0, 100) > 75) {
+                        $count = rand(0, 1) ? 1 : rand(2, 35);
+                        $statementType = 'collective';
+                    } else {
+                        $count = 1;
+                    }
                 } else {
                     $count = 1;
                 }
@@ -24,6 +30,14 @@ class FakeTransactionSeeder extends Seeder
                     ->create([
                         'statement_id' => $statement->id,
                     ]);
+
+                $statement->statement_type = $statementType;
+                $statement->identifier = \App\Classes\StatementIdentifierGenerator::generate(
+                    $statement->date,
+                    $statement->transactions()->sum('amount'),
+                    $statement->identifier
+                );
+                $statement->save();
             });
         });
     }

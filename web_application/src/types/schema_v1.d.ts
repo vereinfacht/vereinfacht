@@ -3611,6 +3611,11 @@ export interface components {
                  */
                 status?: string;
                 /**
+                 * statementType
+                 * @example collective
+                 */
+                readonly statementType?: string;
+                /**
                  * createdAt
                  * @example 2025-11-17T08:43:53.000000Z
                  */
@@ -6941,7 +6946,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "date" | "-date" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "date" | "-date" | "statementType" | "-statementType" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
