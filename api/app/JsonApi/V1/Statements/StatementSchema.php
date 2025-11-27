@@ -34,6 +34,7 @@ class StatementSchema extends Schema
             Str::make('title'),
             DateTime::make('date')->sortable(),
             Str::make('status'),
+            Str::make('statementType')->sortable()->readOnly(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             Number::make('amount')->extractUsing(

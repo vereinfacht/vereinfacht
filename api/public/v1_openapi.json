@@ -5929,6 +5929,8 @@
                                     "-id",
                                     "date",
                                     "-date",
+                                    "statementType",
+                                    "-statementType",
                                     "createdAt",
                                     "-createdAt",
                                     "updatedAt",
@@ -11354,6 +11356,12 @@
                                 "title": "status",
                                 "type": "string",
                                 "example": "empty"
+                            },
+                            "statementType": {
+                                "title": "statementType",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "collective"
                             },
                             "createdAt": {
                                 "title": "createdAt",

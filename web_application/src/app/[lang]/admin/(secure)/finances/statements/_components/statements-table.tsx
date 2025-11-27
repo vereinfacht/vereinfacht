@@ -52,7 +52,7 @@ export default function StatementsTable({
                     (row.getValue('transactions') as any[])?.length || 0;
                 return (
                     <div className="relative block w-fit">
-                        {transactionCount > 1 ? (
+                        {row.original.statementType === 'collective' ? (
                             <>
                                 <Badge
                                     variant="primary"

@@ -24,14 +24,12 @@ import { useFormState } from 'react-dom';
 interface Props {
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     id?: string | number;
-    itemName?: string;
     translationKey?: string;
 }
 
 export default function DeleteForm({
     deleteAction,
     id,
-    itemName,
     translationKey = 'resource',
 }: Props) {
     const { t } = useTranslation();

@@ -69,10 +69,12 @@ class FileImport
         // @todo: convert non-EUR currencies to EUR and save converted amount, original amount and the applied exchange rate
         $currency = Arr::get($parsedStatement->getClosingBalance(), 'currency', 'EUR');
 
+        $collectiveTransfers = [];
+
         foreach ($parsedStatement->getTransactions() as $transaction) {
-            if ($this->isCollectiveTransfer($transaction)) {
-                // handling collective transfer transactions is not yet supported
-                $this->actionStats['total_statements_skipped']++;
+            if ($transaction->getGVC() === '191') {
+                $collectiveTransferId = $transaction->getKref();
+                $collectiveTransfers[$collectiveTransferId][] = $transaction;
                 continue;
             }
 
@@ -83,8 +85,11 @@ class FileImport
             );
 
             $statement = Statement::firstOrCreate([
-                'identifier' => $statementIdentifier
+                'identifier' => $statementIdentifier,
+                'statement_type' => $this->isUnsupportedCollectiveTransfer($transaction) ? 'collective' : 'individual',
             ], $sharedStatementData);
+
+            $this->actionStats['total_statements_created']++;
 
             if ($statement->wasRecentlyCreated === false) {
                 $this->actionStats['total_statements_skipped']++;
@@ -93,13 +98,37 @@ class FileImport
 
             $this->createTransaction($statement, $transaction, $currency);
         }
+
+        foreach ($collectiveTransfers as $key => $transactions) {
+            $statementIdentifier = StatementIdentifierGenerator::generate(
+                $sharedStatementData['date'],
+                array_sum(array_map(fn($transaction) => $transaction->getAmount(), $transactions)),
+                $key
+            );
+
+            $statement = Statement::firstOrCreate([
+                'identifier' => $statementIdentifier,
+                'statement_type' => 'collective',
+            ], $sharedStatementData);
+
+            $this->actionStats['total_statements_created']++;
+
+            if ($statement->wasRecentlyCreated === false) {
+                $this->actionStats['total_statements_skipped']++;
+                continue;
+            }
+
+            foreach ($transactions as $transaction) {
+                $this->createTransaction($statement, $transaction, $currency);
+            }
+        }
     }
 
     protected function createTransaction(Statement $statement, TransactionInterface $transaction, string $currency): void
     {
         $transaction = Transaction::create([
             'title' => $this->toUtf8($transaction->getTxText()) ?? '',
-            'description' => $this->toUtf8($transaction->getSvwz()),
+            'description' => $this->toUtf8($transaction->getSvwz() ?? $this->toUtf8($transaction->getDescription())),
             'gvc' => (int) $transaction->getGVC(),
             'bank_iban' => $this->toUtf8($transaction->getIBAN()),
             'bank_account_holder' => $this->toUtf8($transaction->getAccountHolder()),
@@ -109,25 +138,21 @@ class FileImport
             'valued_at' => $transaction->getValueDate(),
             'booked_at' => $transaction->getBookDate(),
         ]);
-
-        $this->actionStats['total_statements_created']++;
     }
 
-    protected function isCollectiveTransfer(TransactionInterface $transaction): bool
+    protected function isUnsupportedCollectiveTransfer(TransactionInterface $transaction): bool
     {
-        return Arr::exists(
-            [
-                "188",
-                "189",
-                "191",
-                "192",
-                "194",
-                "195",
-                "196",
-                "197"
-            ],
-            $transaction->getGVC() ?? ''
-        );
+        $collectiveTransferGVCs = [
+            "188",
+            "189",
+            "192",
+            "194",
+            "195",
+            "196",
+            "197"
+        ];
+
+        return in_array($transaction->getGVC() ?? '', $collectiveTransferGVCs, true);
     }
 
     protected function toUtf8(?string $value): ?string
