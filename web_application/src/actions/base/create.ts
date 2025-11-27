@@ -110,6 +110,7 @@ export default async function createFormAction<K>(
             success: true,
         };
     } catch (error) {
+        console.error('Form Action Error:', error);
         if (error instanceof ZodError) {
             return handleZodError(error);
         }

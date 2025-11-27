@@ -4,15 +4,15 @@ namespace App\JsonApi\V1\Users;
 
 use App\Models\User;
 use LaravelJsonApi\Eloquent\Schema;
+use Illuminate\Support\Facades\Hash;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class UserSchema extends Schema
 {
@@ -30,10 +30,17 @@ class UserSchema extends Schema
             ID::make(),
             Str::make('name')->sortable(),
             Str::make('email'),
+            Str::make('password')->hidden()->fillUsing(
+                static function ($model, $column, $value) {
+                    $model->fill([$column => Hash::make($value)]);
+                }
+            ),
             Str::make('preferredLocale')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
-            HasMany::make('roles')->type('roles'),
+            BelongsToMany::make('roles')->type('roles'),
+            BelongsToMany::make('clubs')->type('clubs'),
+            BelongsTo::make('club')->type('clubs'),
         ];
     }
 
@@ -53,13 +60,6 @@ class UserSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
-    }
-
-    public function indexQuery(?Request $request, Builder $query): Builder
-    {
-        return $query->whereDoesntHave('roles', function (Builder $query) {
-            $query->where('name', 'super admin');
-        });
     }
 
     public function includePaths(): array
