@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
 use App\Http\Controllers\Api\V1\MediaController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
-use App\Http\Controllers\Api\V1\ReceiptController;
 use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
 use App\Http\Controllers\Api\V1\MembershipController;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
@@ -76,7 +75,7 @@ JsonApiRoute::server('v1')
         $server->resource('finance-contacts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
 
-        $server->resource('receipts', ReceiptController::class)
+        $server->resource('receipts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
 
         $server->resource('finance-accounts', JsonApiController::class)
