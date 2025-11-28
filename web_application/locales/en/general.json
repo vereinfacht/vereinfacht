@@ -9,6 +9,7 @@
     "create": "create",
     "import": "import",
     "delete": "delete",
+    "apply": "apply",
 
     "delete_confirmation": {
         "title": "Confirm deletion",

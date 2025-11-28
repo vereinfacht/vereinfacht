@@ -3,12 +3,7 @@ import { baseListSchema } from '../base/list.schema';
 
 export const queryFilterSchema = z.string().optional();
 
-export const receiptSortingOptions = [
-    'documentDate',
-    '-documentDate',
-    'amount',
-    '-amount',
-] as const;
+export const receiptSortingOptions = ['amount', '-amount'] as const;
 
 export const receiptTypeOptions = ['income', 'expense'] as const;
 export const receiptStatusOptions = [
@@ -27,6 +22,7 @@ export const listReceiptsSchema = z.object({
             status: z.array(z.enum(receiptStatusOptions)).optional(),
             media: z.boolean().optional(),
             query: queryFilterSchema,
+            documentDate: z.string().optional(),
         })
         .optional(),
 });

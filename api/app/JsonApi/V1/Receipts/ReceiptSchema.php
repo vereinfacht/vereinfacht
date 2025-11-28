@@ -8,6 +8,7 @@ use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use App\JsonApi\Filters\DateRangeFilter;
 use LaravelJsonApi\Eloquent\Filters\Has;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
@@ -69,6 +70,7 @@ class ReceiptSchema extends Schema
             ),
             WhereIn::make('receiptType')->delimiter(','),
             QueryFilter::make('query', ['reference_number', 'amount'], ['amount']),
+            DateRangeFilter::make('documentDate', 'document_date'),
         ];
     }
 
