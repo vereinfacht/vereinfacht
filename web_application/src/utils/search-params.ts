@@ -112,8 +112,8 @@ export const listReceiptSearchParams = {
             shallow: false,
         }),
     media: parseAsBoolean.withOptions({ shallow: false }),
-    'filter[documentDate][from]': parseAsString.withOptions({ shallow: false }),
-    'filter[documentDate][to]': parseAsString.withOptions({ shallow: false }),
+    documentDateFrom: parseAsString.withOptions({ shallow: false }),
+    documentDateTo: parseAsString.withOptions({ shallow: false }),
 };
 
 export const listUserSearchParams = {

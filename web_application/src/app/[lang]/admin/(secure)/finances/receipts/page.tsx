@@ -10,8 +10,8 @@ import { listReceipts } from '@/actions/receipts/list';
 import ReceiptsTable from './_components/receipts-table';
 
 async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
-    const fromDate = params['filter[documentDate][from]'];
-    const toDate = params['filter[documentDate][to]'];
+    const fromDate = params.documentDateFrom;
+    const toDate = params.documentDateTo;
 
     const documentDateFilter: Record<string, string> = {};
     fromDate ? (documentDateFilter.from = fromDate) : undefined;

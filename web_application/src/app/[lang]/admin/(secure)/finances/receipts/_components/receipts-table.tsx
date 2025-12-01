@@ -73,17 +73,13 @@ export default function ReceiptsTable({
                 extended ? (
                     <HeaderDatePicker
                         fromDateParser={
-                            listReceiptSearchParams[
-                                'filter[documentDate][from]'
-                            ]
+                            listReceiptSearchParams.documentDateFrom
                         }
-                        toDateParser={
-                            listReceiptSearchParams['filter[documentDate][to]']
-                        }
+                        toDateParser={listReceiptSearchParams.documentDateTo}
                         translationKey={'receipt:document_date'}
                         parameterKeys={{
-                            from: 'filter[documentDate][from]',
-                            to: 'filter[documentDate][to]',
+                            from: 'documentDateFrom',
+                            to: 'documentDateTo',
                         }}
                     />
                 ) : (
