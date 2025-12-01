@@ -81,6 +81,10 @@ export default function ReceiptsTable({
                             listReceiptSearchParams['filter[documentDate][to]']
                         }
                         translationKey={'receipt:document_date'}
+                        parameterKeys={{
+                            from: 'filter[documentDate][from]',
+                            to: 'filter[documentDate][to]',
+                        }}
                     />
                 ) : (
                     t('receipt:document_date.label')

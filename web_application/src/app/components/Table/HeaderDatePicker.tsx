@@ -22,23 +22,28 @@ interface Props {
     fromDateParser: ParserBuilder<string>;
     toDateParser: ParserBuilder<string>;
     translationKey: string;
+    parameterKeys: {
+        from: string;
+        to: string;
+    };
 }
 
 export function HeaderDatePicker({
     fromDateParser,
     toDateParser,
     translationKey,
+    parameterKeys,
 }: Props) {
     const { t } = useTranslation();
     const { lang } = useTranslation();
     const locale = lang === 'de' ? de : enUS;
 
     const [fromDate, setFromDate] = useQueryState(
-        'filter[documentDate][from]',
+        parameterKeys.from,
         fromDateParser,
     );
     const [toDate, setToDate] = useQueryState(
-        'filter[documentDate][to]',
+        parameterKeys.to,
         toDateParser,
     );
     const [isOpen, setIsOpen] = useState(false);
