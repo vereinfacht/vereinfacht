@@ -10,17 +10,12 @@ import { listReceipts } from '@/actions/receipts/list';
 import ReceiptsTable from './_components/receipts-table';
 
 async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
-    let documentDateFilter: string | undefined = undefined;
     const fromDate = params['filter[documentDate][from]'];
     const toDate = params['filter[documentDate][to]'];
 
-    if (fromDate || toDate) {
-        const dateRange = {
-            ...(fromDate && { from: fromDate }),
-            ...(toDate && { to: toDate }),
-        };
-        documentDateFilter = JSON.stringify(dateRange);
-    }
+    const documentDateFilter: Record<string, string> = {};
+    fromDate ? (documentDateFilter.from = fromDate) : undefined;
+    toDate ? (documentDateFilter.to = toDate) : undefined;
 
     const response = await listReceipts({
         sort: params.sort ?? undefined,
@@ -29,7 +24,9 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
             receiptType: params.receiptType ? params.receiptType : undefined,
             status: params.status ? params.status : undefined,
             media: params.media ?? undefined,
-            documentDate: documentDateFilter,
+            ...(Object.keys(documentDateFilter).length > 0 && {
+                documentDate: documentDateFilter,
+            }),
         },
         include: ['financeContact', 'media', 'taxAccount', 'transactions'],
     });

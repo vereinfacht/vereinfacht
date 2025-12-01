@@ -63,21 +63,22 @@ export function HeaderDatePicker({
         if (selectedRange?.from) {
             setFromDate(format(selectedRange.from, 'yyyy-MM-dd'));
         } else {
-            setFromDate('');
+            setFromDate(null);
         }
 
         if (selectedRange?.to) {
             setToDate(format(selectedRange.to, 'yyyy-MM-dd'));
         } else {
-            setToDate('');
+            setToDate(null);
         }
+
         setIsOpen(false);
     };
 
     const handleClear = () => {
         setSelectedRange(undefined);
-        setFromDate('');
-        setToDate('');
+        setFromDate(null);
+        setToDate(null);
         setIsOpen(false);
     };
 
@@ -128,6 +129,13 @@ export function HeaderDatePicker({
                                 className="flex justify-center"
                                 showOutsideDays={false}
                                 locale={locale}
+                                defaultMonth={
+                                    selectedRange?.from ||
+                                    (fromDate
+                                        ? parseISO(fromDate)
+                                        : undefined) ||
+                                    new Date()
+                                }
                             />
                         </div>
 
