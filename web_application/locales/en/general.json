@@ -8,6 +8,7 @@
     "back": "back",
     "create": "create",
     "import": "import",
+    "export": "export",
     "delete": "delete",
 
     "delete_confirmation": {
