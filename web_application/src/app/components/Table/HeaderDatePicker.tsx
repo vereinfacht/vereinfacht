@@ -42,10 +42,7 @@ export function HeaderDatePicker({
         parameterKeys.from,
         fromDateParser,
     );
-    const [toDate, setToDate] = useQueryState(
-        parameterKeys.to,
-        toDateParser,
-    );
+    const [toDate, setToDate] = useQueryState(parameterKeys.to, toDateParser);
     const [isOpen, setIsOpen] = useState(false);
 
     const [selectedRange, setSelectedRange] = useState<
