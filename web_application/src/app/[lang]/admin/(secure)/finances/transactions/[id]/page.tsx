@@ -83,6 +83,16 @@ export default async function TransactionShowPage({ params }: Props) {
                     attribute: 'referenceNumber',
                     type: 'string',
                 },
+                {
+                    label: 'receipt:booking_date.label',
+                    attribute: 'bookingDate',
+                    type: 'date',
+                },
+                {
+                    label: 'receipt:amount.label',
+                    attribute: 'amount',
+                    type: 'currency',
+                },
             ],
         },
     ];
@@ -106,6 +116,9 @@ export default async function TransactionShowPage({ params }: Props) {
                                 value={{
                                     id: transaction[0]?.statement?.id,
                                     date: transaction[0]?.statement?.date,
+                                    statementType:
+                                        transaction[0]?.statement
+                                            ?.statementType,
                                 }}
                             />
                         );
@@ -128,6 +141,9 @@ export default async function TransactionShowPage({ params }: Props) {
                                     referenceNumber:
                                         transaction[0]?.receipt
                                             ?.referenceNumber,
+                                    bookingDate:
+                                        transaction[0]?.receipt?.bookingDate,
+                                    amount: transaction[0]?.receipt?.amount,
                                 }}
                             />
                         );

@@ -186,7 +186,7 @@ export default function ReceiptsTable({
                         items={transactions}
                         basePath="/admin/finances/transactions"
                         parentPath={`/admin/finances/receipts/${cell.row.original.id}`}
-                        displayProperty="name"
+                        displayProperty="title"
                     />
                 );
             },
