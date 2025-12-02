@@ -8,8 +8,8 @@ use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Filters\Where;
-use App\JsonApi\Filters\StatementTypeFilter;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
@@ -64,7 +64,7 @@ class StatementSchema extends Schema
         return [
             WhereIdIn::make($this),
             Where::make('financeAccountId', 'finance_account_id')->using('='),
-            StatementTypeFilter::make('statementType'),
+            WhereIn::make('statementType')->delimiter(','),
         ];
     }
 
