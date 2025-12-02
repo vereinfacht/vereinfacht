@@ -109,7 +109,9 @@ export function HeaderDatePicker({
                         className="relative h-8 w-8 p-0 hover:bg-gray-100"
                         size="sm"
                     >
-                        <CalendarDays className="h-4 w-4 text-gray-600" />
+                        <CalendarDays
+                            className={`h-4 w-4 text-slate-500 ${hasActiveFilter ? 'text-slate-900' : ''}`}
+                        />
                         {hasActiveFilter && (
                             <Badge
                                 className="absolute right-0 top-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
