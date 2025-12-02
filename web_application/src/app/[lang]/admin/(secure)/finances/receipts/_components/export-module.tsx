@@ -12,7 +12,7 @@ import {
 } from '@/app/components/ui/dialog';
 import { TReceiptDeserialized } from '@/types/resources';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { Download, FileSpreadsheet } from 'lucide-react';
+import { Download, ExternalLink, FileSpreadsheet } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
@@ -100,6 +100,13 @@ export default function ExportModule({ receipts }: Props) {
         console.log('Download receipt media files');
     };
 
+    const handleEvaluationDownload = (
+        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    ) => {
+        e.preventDefault();
+        console.log('Download receipt evaluation');
+    };
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -123,6 +130,21 @@ export default function ExportModule({ receipts }: Props) {
                                     count: receipts.length,
                                 })}
                             </Text>
+                            <div>
+                                <Text className="inline">
+                                    {t(
+                                        'receipt:export_modal.evaluation_description',
+                                    )}
+                                </Text>
+                                <a
+                                    className="ml-2 inline-block"
+                                    type="link"
+                                    onClick={handleEvaluationDownload}
+                                    href="#"
+                                >
+                                    <ExternalLink className="h-6 w-6 text-blue-500 hover:scale-110" />
+                                </a>
+                            </div>
                             <div className="flex items-center rounded-md bg-slate-100 p-6">
                                 {t('receipt:export_modal.media', {
                                     count: mediaCount,
