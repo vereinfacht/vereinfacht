@@ -60,9 +60,9 @@ class ReceiptSchema extends Schema
             StatusFilter::make(
                 'status',
                 'transactions',
-                'receipt_transaction',
+                'transactions',
                 'receipt_id',
-                'transaction_id',
+                'id',
                 'transactions',
                 'amount',
                 'amount'
