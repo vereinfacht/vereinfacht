@@ -38,7 +38,7 @@ class ExportFinancialStatementRequest extends FormRequest
                     $query->where('club_id', getPermissionsTeamId());
                 }),
             ],
-            'include_media' => ['sometimes', 'boolean'],
+            'includeMedia' => ['sometimes', 'boolean'],
         ];
     }
 }

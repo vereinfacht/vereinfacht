@@ -19,9 +19,9 @@ class FinancialStatementController extends Controller
         try {
             $export = new ExportCsv();
 
-            $statementFilePath = $export->execute($financialStatement, $request->input('include_media'));
+            $statementFilePath = $export->execute($financialStatement);
 
-            if (!$request->input('include_media')) {
+            if (!$request->input('includeMedia')) {
                 return response()->download($statementFilePath)->deleteFileAfterSend(true);
             }
 
