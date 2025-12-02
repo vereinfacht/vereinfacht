@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FinancialStatementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatementController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum'])
     ->group(function () {
         Route::post('upload/media', [MediaController::class, 'upload']);
         Route::post('import/statements', [StatementController::class, 'import']);
+        Route::post('export/financial-statement', [FinancialStatementController::class, 'export']);
     });
 
 JsonApiRoute::server('v1')

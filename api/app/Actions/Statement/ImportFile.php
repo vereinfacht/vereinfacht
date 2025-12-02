@@ -12,7 +12,7 @@ use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
 use App\Classes\StatementIdentifierGenerator;
 
-class FileImport
+class ImportFile
 {
     protected $file;
     protected $actionStats;
