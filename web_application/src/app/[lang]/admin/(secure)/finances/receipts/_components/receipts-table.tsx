@@ -68,25 +68,23 @@ export default function ReceiptsTable({
             ),
         },
         {
-            accessorKey: 'documentDate',
+            accessorKey: 'bookingDate',
             header: ({ column }) =>
                 extended ? (
                     <HeaderDatePicker
-                        fromDateParser={
-                            listReceiptSearchParams.documentDateFrom
-                        }
-                        toDateParser={listReceiptSearchParams.documentDateTo}
-                        translationKey={'receipt:document_date'}
+                        fromDateParser={listReceiptSearchParams.bookingDateFrom}
+                        toDateParser={listReceiptSearchParams.bookingDateTo}
+                        translationKey={'receipt:booking_date'}
                         parameterKeys={{
-                            from: 'documentDateFrom',
-                            to: 'documentDateTo',
+                            from: 'bookingDateFrom',
+                            to: 'bookingDateTo',
                         }}
                     />
                 ) : (
-                    t('receipt:document_date.label')
+                    t('receipt:booking_date.label')
                 ),
             cell: ({ row }) => (
-                <DateField value={row.getValue('documentDate')} />
+                <DateField value={row.getValue('bookingDate')} />
             ),
         },
         {

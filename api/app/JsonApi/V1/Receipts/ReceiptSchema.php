@@ -26,7 +26,7 @@ class ReceiptSchema extends Schema
      */
     public static string $model = Receipt::class;
 
-    protected $defaultSort = '-documentDate';
+    protected $defaultSort = '-bookingDate';
 
     /**
      * Get the resource fields.
@@ -37,7 +37,7 @@ class ReceiptSchema extends Schema
             ID::make(),
             Str::make('referenceNumber'),
             Str::make('receiptType'),
-            DateTime::make('documentDate')->sortable(),
+            DateTime::make('bookingDate')->sortable(),
             Str::make('status')->readOnly(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
@@ -70,7 +70,7 @@ class ReceiptSchema extends Schema
             ),
             WhereIn::make('receiptType')->delimiter(','),
             QueryFilter::make('query', ['reference_number', 'amount'], ['amount']),
-            DateRangeFilter::make('documentDate', 'document_date'),
+            DateRangeFilter::make('bookingDate', 'booking_date'),
         ];
     }
 

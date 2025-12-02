@@ -22,7 +22,7 @@ export const listReceiptsSchema = z.object({
             status: z.array(z.enum(receiptStatusOptions)).optional(),
             media: z.boolean().optional(),
             query: queryFilterSchema,
-            documentDate: z
+            bookingDate: z
                 .object({
                     from: z.string().optional(),
                     to: z.string().optional(),

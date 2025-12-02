@@ -9,8 +9,8 @@
         "income": "Income",
         "expense": "Expense"
     },
-    "document_date": {
-        "label": "Document date"
+    "booking_date": {
+        "label": "Booking date"
     },
     "reference_number": {
         "label": "Reference number",

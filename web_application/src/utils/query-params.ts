@@ -22,7 +22,7 @@ export function prepareQuery(params: any) {
             if (Array.isArray(value)) {
                 queryParams[`filter[${key}]`] = value;
             } else if (typeof value === 'object' && value !== null) {
-                // Handle nested objects like documentDate: { from: 'date', to: 'date' }
+                // Handle nested objects like bookingDate: { from: 'date', to: 'date' }
                 Object.entries(value).forEach(([subKey, subValue]) => {
                     if (subValue !== undefined && subValue !== null) {
                         queryParams[`filter[${key}][${subKey}]`] =
