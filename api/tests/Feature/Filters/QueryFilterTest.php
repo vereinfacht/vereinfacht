@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\JsonApi\Filters;
+namespace Tests\Feature\Filters;
 
 use Tests\TestCase;
 use App\Models\Club;

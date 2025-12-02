@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Statement\FileImport;
+use App\Actions\Statement\ImportFile;
 use App\Http\Requests\ImportStatementsRequest;
 use App\Models\FinanceAccount;
 
@@ -23,7 +23,7 @@ class StatementController extends Controller
         }
 
         try {
-            $action = (new FileImport($file))->execute($financeAccount);
+            $action = (new ImportFile($file))->execute($financeAccount);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th->getMessage(),

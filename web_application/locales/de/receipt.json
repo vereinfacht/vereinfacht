@@ -46,5 +46,12 @@
     "tax_account": {
         "label": "Steuerkonto",
         "help": "Das Steuerkonto, dem dieser Buchung zugeordnet ist."
+    },
+    "export_modal": {
+        "title": "Buchungen exportieren",
+        "description": "{{count}} Buchung(en) als CSV-Datei exportieren (Excel kompatibel).",
+        "format_label": "Exportformat",
+        "media": "Die Buchungen haben {{count}} verlinkte Datei(en), hier könnte sie als zip-Datei heruntergeladen werden",
+        "evaluation_description": "Eine zusammengefasste Auswertung könnte hier heruntergeladen werden."
     }
 }
