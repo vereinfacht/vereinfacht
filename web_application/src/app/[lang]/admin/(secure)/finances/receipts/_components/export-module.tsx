@@ -28,8 +28,6 @@ export default function ExportModule({ receipts }: Props) {
         return count + (receipt.media ? receipt.media.length : 0);
     }, 0);
 
-    console.log('Total media files for export:', mediaCount);
-
     const handleExport = async () => {
         setIsExporting(true);
 

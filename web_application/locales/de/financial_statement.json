@@ -1,0 +1,10 @@
+{
+    "export": "Auswertung exportieren",
+    "export_form": {
+        "title": "Auswertung exportieren",
+        "description": "Exportiere eine Auswertung für die ausgewählten Buchungen.",
+        "include_media_title": "Anhänge einbeziehen",
+        "include_media_help": "Wenn diese Option ausgewählt ist, werden alle verknüpften Dateien der Buchungen in einem ZIP-Archiv zusammen mit der Auswertung heruntergeladen.",
+        "evaluation_description": "Eine zusammengefasste Auswertung könnte hier heruntergeladen werden."
+    }
+}

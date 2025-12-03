@@ -26,7 +26,7 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
-import ExportModule from './export-module';
+import FinancialStatementExportModule from './financial-statement-export-module';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -204,7 +204,9 @@ export default function ReceiptsTable({
             {extended && (
                 <div className="flex justify-between">
                     <CreateButton href="/admin/finances/receipts/create" />
-                    <ExportModule receipts={allReceipts || receipts} />
+                    <FinancialStatementExportModule
+                        receipts={allReceipts || receipts}
+                    />
                 </div>
             )}
             <DataTable
