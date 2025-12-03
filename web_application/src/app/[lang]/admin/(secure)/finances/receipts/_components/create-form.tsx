@@ -214,13 +214,13 @@ export default function CreateForm({ data, action }: Props) {
                         defaultValue={data?.referenceNumber ?? ''}
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['documentDate']}>
+                <FormField errors={formState.errors?.['bookingDate']}>
                     <TextInput
-                        id="documentDate"
-                        name="documentDate"
-                        label={t('receipt:document_date.label')}
+                        id="bookingDate"
+                        name="bookingDate"
+                        label={t('receipt:booking_date.label')}
                         defaultValue={format(
-                            new Date(data?.documentDate ?? Date.now()),
+                            new Date(data?.bookingDate ?? Date.now()),
                             'yyyy-MM-dd',
                         )}
                         type="date"

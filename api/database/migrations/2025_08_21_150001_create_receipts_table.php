@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('reference_number')->nullable();
             $table->string('receipt_type');
-            $table->timestamp('document_date');
+            $table->timestamp('booking_date');
             $table->integer('amount');
 
             $table->foreignId('club_id')
