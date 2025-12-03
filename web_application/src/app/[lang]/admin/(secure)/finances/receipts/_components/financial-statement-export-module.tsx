@@ -81,7 +81,7 @@ export default function FinancialStatementExportModule({ receipts }: Props) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="mb-6 w-fit" type="button">
+                <Button className="w-fit" type="button">
                     <Download className="mr-2 h-4 w-4" />
                     {t('financial_statement:export')}
                 </Button>
