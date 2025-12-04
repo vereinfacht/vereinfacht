@@ -1,18 +1,14 @@
 'use client';
 
-import { transactionStatusOptions } from '@/actions/transactions/list.schema';
 import Empty from '@/app/components/Empty';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
-import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
-import HeaderSort from '@/app/components/Table/HeaderSort';
 import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { SupportedLocale } from '@/utils/localization';
-import { listTransactionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -49,13 +45,7 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'valuedAt',
-            header: ({ column }) => (
-                <HeaderSort
-                    parser={listTransactionSearchParams.sort}
-                    columnId={column.id}
-                    columnTitle={t('transaction:valued_at.label')}
-                />
-            ),
+            header: t('transaction:valued_at.label'),
             cell: ({ row }) => (
                 <TextCell>
                     {formatDate(row.getValue('valuedAt'), lang, 'dd.MM.yyyy')}
@@ -64,13 +54,7 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'bookedAt',
-            header: ({ column }) => (
-                <HeaderSort
-                    parser={listTransactionSearchParams.sort}
-                    columnId={column.id}
-                    columnTitle={t('transaction:booked_at.label')}
-                />
-            ),
+            header: t('transaction:booked_at.label'),
             cell: ({ row }) => (
                 <TextCell>
                     {formatDate(row.getValue('bookedAt'), lang, 'dd.MM.yyyy')}
@@ -79,14 +63,7 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'status',
-            header: ({ column }) => (
-                <HeaderOptionFilter
-                    options={transactionStatusOptions ?? []}
-                    parser={listTransactionSearchParams.status}
-                    paramKey={column.id}
-                    translationKey={'transaction:status'}
-                />
-            ),
+            header: t('transaction:status.label'),
             cell: ({ row }) => (
                 <StatusCell
                     status={row.getValue('status')}
@@ -97,13 +74,7 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'amount',
-            header: ({ column }) => (
-                <HeaderSort
-                    parser={listTransactionSearchParams.sort}
-                    columnId={column.id}
-                    columnTitle={t('transaction:amount.label')}
-                />
-            ),
+            header: t('transaction:amount.label'),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
     ];
@@ -121,22 +92,20 @@ export default function TransactionsTable({
     }
 
     return (
-        <>
-            <DataTable
-                data={transactions}
-                columns={columns}
-                resourceName={'finances/transactions' as ResourceName}
-                totalPages={totalPages}
-                canEdit={(transaction) =>
-                    transaction.statement?.financeAccount?.accountType ===
-                    'cash_box'
-                }
-                canView={true}
-                defaultColumn={{
-                    size: 150,
-                    enableResizing: false,
-                }}
-            />
-        </>
+        <DataTable
+            data={transactions}
+            columns={columns}
+            resourceName={'finances/transactions' as ResourceName}
+            totalPages={totalPages}
+            canEdit={(transaction) =>
+                transaction.statement?.financeAccount?.accountType ===
+                'cash_box'
+            }
+            canView={true}
+            defaultColumn={{
+                size: 150,
+                enableResizing: false,
+            }}
+        />
     );
 }

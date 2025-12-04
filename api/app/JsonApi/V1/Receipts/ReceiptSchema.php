@@ -8,6 +8,7 @@ use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Filters\StatusFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use App\JsonApi\Filters\DateRangeFilter;
 use LaravelJsonApi\Eloquent\Filters\Has;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIn;
@@ -25,7 +26,7 @@ class ReceiptSchema extends Schema
      */
     public static string $model = Receipt::class;
 
-    protected $defaultSort = '-documentDate';
+    protected $defaultSort = '-bookingDate';
 
     /**
      * Get the resource fields.
@@ -36,7 +37,7 @@ class ReceiptSchema extends Schema
             ID::make(),
             Str::make('referenceNumber'),
             Str::make('receiptType'),
-            DateTime::make('documentDate')->sortable(),
+            DateTime::make('bookingDate')->sortable(),
             Str::make('status')->readOnly(),
             Str::make('amount')->sortable(),
             DateTime::make('createdAt')->readOnly(),
@@ -60,15 +61,16 @@ class ReceiptSchema extends Schema
             StatusFilter::make(
                 'status',
                 'transactions',
-                'receipt_transaction',
+                'transactions',
                 'receipt_id',
-                'transaction_id',
+                'id',
                 'transactions',
                 'amount',
                 'amount'
             ),
             WhereIn::make('receiptType')->delimiter(','),
             QueryFilter::make('query', ['reference_number', 'amount'], ['amount']),
+            DateRangeFilter::make('bookingDate', 'booking_date'),
         ];
     }
 

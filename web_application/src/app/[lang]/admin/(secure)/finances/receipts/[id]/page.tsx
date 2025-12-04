@@ -37,9 +37,9 @@ export default async function ReceiptShowPage({ params }: Props) {
             value: receipt[0]?.referenceNumber,
         },
         {
-            attribute: 'documentDate',
+            attribute: 'bookingDate',
             type: 'date',
-            value: receipt[0]?.documentDate,
+            value: receipt[0]?.bookingDate,
         },
         {
             attribute: 'amount',

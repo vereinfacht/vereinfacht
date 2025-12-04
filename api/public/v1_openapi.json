@@ -3854,8 +3854,8 @@
                                 "enum": [
                                     "id",
                                     "-id",
-                                    "documentDate",
-                                    "-documentDate",
+                                    "bookingDate",
+                                    "-bookingDate",
                                     "amount",
                                     "-amount"
                                 ],
@@ -5929,6 +5929,8 @@
                                     "-id",
                                     "date",
                                     "-date",
+                                    "statementType",
+                                    "-statementType",
                                     "createdAt",
                                     "-createdAt",
                                     "updatedAt",
@@ -10683,8 +10685,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },
@@ -10856,8 +10858,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },
@@ -11034,8 +11036,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },
@@ -11354,6 +11356,12 @@
                                 "title": "status",
                                 "type": "string",
                                 "example": "empty"
+                            },
+                            "statementType": {
+                                "title": "statementType",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "collective"
                             },
                             "createdAt": {
                                 "title": "createdAt",

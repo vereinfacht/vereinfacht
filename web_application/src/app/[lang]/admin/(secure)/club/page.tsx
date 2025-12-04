@@ -118,7 +118,7 @@ export default async function ClubPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName="clubs"
-                        id={index}
+                        id={field.attribute}
                         value={field.value ?? club[field.attribute]}
                     />
                 ))}
