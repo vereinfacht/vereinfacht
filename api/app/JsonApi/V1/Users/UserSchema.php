@@ -3,10 +3,12 @@
 namespace App\JsonApi\V1\Users;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use LaravelJsonApi\Eloquent\Schema;
 use Illuminate\Support\Facades\Hash;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
@@ -68,5 +70,12 @@ class UserSchema extends Schema
             'roles',
             'roles.permissions',
         ];
+    }
+
+    public function indexQuery(?Request $request, Builder $query): Builder
+    {
+        return $query->whereDoesntHave('roles', function (Builder $query) {
+            $query->where('name', 'super admin');
+        });
     }
 }
