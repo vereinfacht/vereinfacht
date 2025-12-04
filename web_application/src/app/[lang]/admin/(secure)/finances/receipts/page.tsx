@@ -14,8 +14,12 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
     const toDate = params.bookingDateTo;
 
     const bookingDateFilter: Record<string, string> = {};
-    fromDate ? (bookingDateFilter.from = fromDate) : undefined;
-    toDate ? (bookingDateFilter.to = toDate) : undefined;
+    if (fromDate) {
+        bookingDateFilter.from = fromDate;
+    }
+    if (toDate) {
+        bookingDateFilter.to = toDate;
+    }
 
     const response = await listReceipts({
         sort: params.sort ?? undefined,

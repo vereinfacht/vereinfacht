@@ -13,7 +13,7 @@ const deleteActionMap: Record<
     'tax-accounts': async (id: string) => {
         return await deleteTaxAccountFormAction(id, { success: false });
     },
-    users: async (id: string, formData: FormData) => {
+    users: async (id: string) => {
         return await deleteUserFormAction(id, { success: false });
     },
 };

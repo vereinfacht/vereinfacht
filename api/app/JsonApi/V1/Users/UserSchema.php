@@ -64,18 +64,18 @@ class UserSchema extends Schema
         return PagePagination::make();
     }
 
+    public function indexQuery(?Request $request, Builder $query): Builder
+    {
+        return $query->whereDoesntHave('roles', function (Builder $query) {
+            $query->where('name', 'super admin');
+        });
+    }
+
     public function includePaths(): array
     {
         return [
             'roles',
             'roles.permissions',
         ];
-    }
-
-    public function indexQuery(?Request $request, Builder $query): Builder
-    {
-        return $query->whereDoesntHave('roles', function (Builder $query) {
-            $query->where('name', 'super admin');
-        });
     }
 }
