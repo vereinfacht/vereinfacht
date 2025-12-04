@@ -61,7 +61,11 @@ class UserPolicy
      */
     public function delete(User $user, UserModel $model): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $model->clubs->contains('id', $user->id);
+        }
+
+        return $user->can('delete users') && $user->clubs->pluck('id')->intersect($model->clubs->pluck('id'))->isNotEmpty();
     }
 
     /**

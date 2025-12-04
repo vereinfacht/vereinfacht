@@ -6,5 +6,8 @@
     },
     "preferred_locale": {
         "label": "Bevorzugte Sprache"
+    },
+    "password": {
+        "edit_placeholder": "Leer lassen, um das aktuelle Passwort zu behalten"
     }
 }

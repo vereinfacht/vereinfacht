@@ -100,10 +100,14 @@ export default function CreateForm({ data, action }: Props) {
                         name="password"
                         label={t('general:password')}
                         type="password"
-                        autoComplete={data ? '' : 'new-password'}
-                        required
-                        minLength={2}
+                        required={!data}
+                        minLength={data ? 0 : 8}
                         maxLength={255}
+                        placeholder={
+                            data
+                                ? t('user:password.edit_placeholder')
+                                : undefined
+                        }
                     />
                 </FormField>
                 <FormField errors={formState.errors?.['preferredLocale']}>

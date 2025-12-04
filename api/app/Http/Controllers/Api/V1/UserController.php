@@ -28,7 +28,6 @@ class UserController extends Controller
     use Actions\Update;
     use Actions\UpdateRelationship;
 
-
     protected function creating(ResourceRequest $request): DataResponse
     {
         try {
