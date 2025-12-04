@@ -16,7 +16,7 @@ export const deleteUser = createAuthenticatedAction(
                 path: { user: params.id },
             },
         });
-        console.log('Delete user response:', response);
+
         if (response.error) {
             handleApiResponse(response, 'Failed to delete user');
         }
