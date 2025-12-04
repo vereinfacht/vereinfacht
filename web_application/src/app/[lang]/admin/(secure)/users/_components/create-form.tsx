@@ -74,7 +74,6 @@ export default function CreateForm({ data, action }: Props) {
                         name="name"
                         defaultValue={data?.name ?? ''}
                         label={t('user:title.label')}
-                        autoComplete="name"
                         required
                         minLength={2}
                         maxLength={255}
@@ -88,7 +87,6 @@ export default function CreateForm({ data, action }: Props) {
                         type="email"
                         defaultValue={data?.email ?? ''}
                         label={t('contact:email.label')}
-                        autoComplete="email"
                         required
                         minLength={2}
                         maxLength={255}
