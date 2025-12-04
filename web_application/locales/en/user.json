@@ -6,5 +6,8 @@
     },
     "preferred_locale": {
         "label": "Preferred language"
+    },
+    "password": {
+        "help": "Leave empty to keep current password"
     }
 }

@@ -27,6 +27,12 @@
                 "one": "Eigener Verein",
                 "other": "Eigene Vereine"
             }
+        },
+        "media": {
+            "title": {
+                "one": "Medium",
+                "other": "Medien"
+            }
         }
     }
 }

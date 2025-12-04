@@ -32,28 +32,27 @@ export default async function UserShowPage({ params }: Props) {
     const permissions = deserialize(
         permissionResponse as DocumentObject,
     ) as TPermissionDeserialized[];
-
-    const { t } = createTranslation('user');
+    const { t } = createTranslation();
     const fields = [
         {
-            label: t('title.label'),
+            label: t('user:title.label'),
             attribute: 'name',
         },
         {
-            label: t('email.label'),
+            label: t('general:email'),
             attribute: 'email',
         },
         {
-            label: t('preferred_locale.label'),
+            label: t('user:preferred_locale.label'),
             attribute: 'preferredLocale',
         },
         {
-            label: t('created_at.label'),
+            label: t('general:created_at'),
             attribute: 'createdAt',
             type: 'date',
         },
         {
-            label: t('updated_at.label'),
+            label: t('general:updated_at'),
             attribute: 'updatedAt',
             type: 'date',
         },

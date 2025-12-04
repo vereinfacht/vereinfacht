@@ -1,6 +1,7 @@
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
+import { deleteUserFormAction } from '@/actions/users/delete';
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 
 const deleteActionMap: Record<
     string,
@@ -12,9 +13,9 @@ const deleteActionMap: Record<
     'tax-accounts': async (id: string) => {
         return await deleteTaxAccountFormAction(id, { success: false });
     },
-    // Add more delete actions here as they're created
-    // 'transactions': deleteTransactionFormAction,
-    // etc.
+    users: async (id: string) => {
+        return await deleteUserFormAction(id, { success: false });
+    },
 };
 
 export function createDeleteFormAction(resourceName: string) {

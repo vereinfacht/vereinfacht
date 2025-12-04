@@ -6,11 +6,12 @@ import TextCell from '@/app/components/Table/TextCell';
 import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TUserDeserialized } from '@/types/resources';
+import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import DateField from '../../components/Fields/Detail/DateField';
 import CreateButton from '../../components/CreateButton';
+import DateField from '../../components/Fields/Detail/DateField';
 
 interface Props {
     users: TUserDeserialized[];
@@ -18,6 +19,7 @@ interface Props {
 
 export default function UsersTable({ users }: Props) {
     const { t } = useTranslation();
+    const deleteAction = createDeleteFormAction('users');
 
     const columns: ColumnDef<TUserDeserialized>[] = [
         {
@@ -87,6 +89,7 @@ export default function UsersTable({ users }: Props) {
                 resourceName={'users' as ResourceName}
                 canView={true}
                 canEdit={true}
+                deleteAction={deleteAction}
             />
         </>
     );

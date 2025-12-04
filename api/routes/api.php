@@ -60,7 +60,7 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'update');
 
         $server->resource('users', UserController::class)
-            ->only('index', 'show', 'login', 'logout')
+            ->only('index', 'show', 'login', 'logout', 'store', 'update', 'destroy')
             ->actions(function (ActionRegistrar $actions) {
                 $actions->post('login');
                 $actions->post('logout');
@@ -70,6 +70,9 @@ JsonApiRoute::server('v1')
             ->only('destroy');
 
         $server->resource('permissions', JsonApiController::class)
+            ->only('index');
+
+        $server->resource('roles', JsonApiController::class)
             ->only('index');
 
         $server->resource('finance-contacts', JsonApiController::class)
