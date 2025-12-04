@@ -32,7 +32,6 @@ export default async function UserShowPage({ params }: Props) {
     const permissions = deserialize(
         permissionResponse as DocumentObject,
     ) as TPermissionDeserialized[];
-
     const { t } = createTranslation();
     const fields = [
         {
@@ -40,7 +39,7 @@ export default async function UserShowPage({ params }: Props) {
             attribute: 'name',
         },
         {
-            label: t('user:email.label'),
+            label: t('general:email'),
             attribute: 'email',
         },
         {

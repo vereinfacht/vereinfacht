@@ -8,11 +8,11 @@ use App\Actions\User\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Responses\DataResponse;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
-use LaravelJsonApi\Laravel\Http\Requests\ResourceQuery;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 
 class UserController extends Controller
@@ -32,29 +32,13 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
+            $repository = app(UserRepository::class);
 
-            $clubId = $data['club']['id'];
-            $roleIds = collect($data['roles'] ?? [])->pluck('id');
-
-            $user = User::create(collect($data)->except(['club', 'roles'])->toArray());
-
-            if ($roleIds->isEmpty()) {
-                $roleNames = collect(['club admin']);
-            } else {
-                $roleNames = \Spatie\Permission\Models\Role::whereIn('id', $roleIds)->pluck('name');
-            }
-
-            if ($clubId) {
-                setPermissionsTeamId($clubId);
-
-                foreach ($roleNames as $roleName) {
-                    $user->assignRole($roleName);
-                }
-            }
-
-            setPermissionsTeamId(null);
-
-            $user->load(['clubs', 'roles']);
+            $user = $repository->createWithRoles(
+                $data,
+                $data['club']['id'],
+                collect($data['roles'] ?? [])->pluck('id')->toArray()
+            );
 
             return DataResponse::make($user);
         } catch (\Throwable $th) {
@@ -66,32 +50,21 @@ class UserController extends Controller
     }
 
 
-    protected function updating(User $user, ResourceRequest $request, ResourceQuery $query)
+    protected function updating(User $user, ResourceRequest $request): DataResponse
     {
         try {
             $data = $request->validated();
+            $repository = app(UserRepository::class);
+
             $clubId = $user->clubs()->exists() ? $user->clubs()->first()->id : null;
-            $roleIds = collect($data['roles'] ?? [])->pluck('id');
+            $updatedUser = $repository->updateWithRoles(
+                $user,
+                $data,
+                $clubId,
+                collect($data['roles'] ?? [])->pluck('id')->toArray()
+            );
 
-            $user->update(collect($data)->except(['club', 'roles'])->toArray());
-
-            if ($roleIds->isEmpty()) {
-                $roleNames = collect(['club admin']);
-            } else {
-                $roleNames = \Spatie\Permission\Models\Role::whereIn('id', $roleIds)->pluck('name');
-            }
-
-            if ($clubId) {
-                setPermissionsTeamId($clubId);
-
-                $user->syncRoles($roleNames);
-            }
-
-            setPermissionsTeamId(null);
-
-            $user->load(['clubs', 'roles']);
-
-            return DataResponse::make($user);
+            return DataResponse::make($updatedUser);
         } catch (\Throwable $th) {
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
