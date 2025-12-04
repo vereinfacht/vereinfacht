@@ -11,6 +11,7 @@ export const listRoles = createAuthenticatedActionWithOptionalParams(
     'roles',
     listRolesSchema,
     async (query, client) => {
+        // @ts-expect-error: api specs need to be generated
         const response = await client.GET('/roles', {
             params: {
                 query,

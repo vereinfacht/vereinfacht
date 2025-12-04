@@ -69,7 +69,7 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'bookingDate',
-            header: ({ column }) =>
+            header: () =>
                 extended ? (
                     <HeaderDatePicker
                         fromDateParser={listReceiptSearchParams.bookingDateFrom}
