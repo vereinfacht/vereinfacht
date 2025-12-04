@@ -6,7 +6,7 @@ export const receiptType = ['income', 'expense'] as const;
 export const receiptAttributesSchema = z.object({
     receiptType: z.enum(receiptType),
     referenceNumber: z.string().min(2).max(255).optional(),
-    documentDate: z.string(),
+    bookingDate: z.string(),
     amount: amountSchema,
 });
 

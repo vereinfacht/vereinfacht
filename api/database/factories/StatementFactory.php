@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Classes\StatementIdentifierGenerator;
 use App\Models\Club;
 use App\Models\FinanceAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,10 +20,16 @@ class StatementFactory extends Factory
     public function definition(): array
     {
         $date = $this->faker->dateTimeBetween('-1 year', 'now');
+        $statementTypes = ['collective', 'individual'];
 
         return [
-            'identifier' => $this->faker->uuid(),
+            'identifier' => StatementIdentifierGenerator::generate(
+                $date,
+                $this->faker->randomFloat(2, -10000, 10000),
+                $this->faker->uuid()
+            ),
             'date' => $date,
+            'statement_type' => $this->faker->randomElement($statementTypes),
             'club_id' => Club::factory(),
             'finance_account_id' => FinanceAccount::factory(),
         ];

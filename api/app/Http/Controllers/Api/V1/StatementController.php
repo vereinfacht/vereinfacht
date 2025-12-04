@@ -37,6 +37,7 @@ class StatementController extends Controller
                 'date' => $request->data['attributes']['date'],
                 'club_id' => $request->data['relationships']['club']['data']['id'],
                 'finance_account_id' => $request->data['relationships']['financeAccount']['data']['id'],
+                'statement_type' => 'individual',
                 'identifier' => $statementIdentifier,
             ]);
 
@@ -68,6 +69,7 @@ class StatementController extends Controller
             $statement->update([
                 'date' => $request->data['attributes']['date'],
                 'finance_account_id' => $request->data['relationships']['financeAccount']['data']['id'],
+                'statement_type' => 'individual',
                 'identifier' => $statementIdentifier,
             ]);
 

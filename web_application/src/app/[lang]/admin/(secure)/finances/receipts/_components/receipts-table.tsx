@@ -5,8 +5,10 @@ import {
     receiptTypeOptions,
 } from '@/actions/receipts/list.schema';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
+import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import MediaCell from '@/app/components/Table/MediaCell';
@@ -25,7 +27,6 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
-import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -67,19 +68,23 @@ export default function ReceiptsTable({
             ),
         },
         {
-            accessorKey: 'documentDate',
+            accessorKey: 'bookingDate',
             header: ({ column }) =>
                 extended ? (
-                    <HeaderSort
-                        parser={listReceiptSearchParams.sort}
-                        columnId={column.id}
-                        columnTitle={t('receipt:document_date.label')}
+                    <HeaderDatePicker
+                        fromDateParser={listReceiptSearchParams.bookingDateFrom}
+                        toDateParser={listReceiptSearchParams.bookingDateTo}
+                        translationKey={'receipt:booking_date'}
+                        parameterKeys={{
+                            from: 'bookingDateFrom',
+                            to: 'bookingDateTo',
+                        }}
                     />
                 ) : (
-                    t('receipt:document_date.label')
+                    t('receipt:booking_date.label')
                 ),
             cell: ({ row }) => (
-                <DateField value={row.getValue('documentDate')} />
+                <DateField value={row.getValue('bookingDate')} />
             ),
         },
         {
@@ -181,7 +186,7 @@ export default function ReceiptsTable({
                         items={transactions}
                         basePath="/admin/finances/transactions"
                         parentPath={`/admin/finances/receipts/${cell.row.original.id}`}
-                        displayProperty="name"
+                        displayProperty="title"
                     />
                 );
             },
@@ -190,8 +195,7 @@ export default function ReceiptsTable({
         columns.splice(
             columns.length - 2,
             0,
-            // @ts-expect-error: Type issue with extended columns
-            transactionsColumn,
+            transactionsColumn as ColumnDef<TReceiptDeserialized>,
             financeContactColumn,
         );
     }

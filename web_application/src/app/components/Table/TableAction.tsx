@@ -12,7 +12,6 @@ interface Props {
     onClick?: () => void;
     type?: 'view' | 'edit' | 'delete';
     id?: string | number;
-    itemName?: string;
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     resourceName?: string;
 }
@@ -22,7 +21,6 @@ export function TableAction({
     onClick,
     href,
     id,
-    itemName,
     deleteAction,
     resourceName,
 }: Props) {
@@ -37,7 +35,6 @@ export function TableAction({
             <DeleteForm
                 deleteAction={deleteAction}
                 id={id}
-                itemName={itemName}
                 translationKey={resourceName}
             />
         );
