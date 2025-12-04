@@ -101,11 +101,7 @@ export default function CreateForm({ data, action }: Props) {
                         required={!data}
                         minLength={data ? 0 : 8}
                         maxLength={255}
-                        placeholder={
-                            data
-                                ? t('user:password.edit_placeholder')
-                                : undefined
-                        }
+                        placeholder={data ? t('user:password.help') : undefined}
                     />
                 </FormField>
                 <FormField errors={formState.errors?.['preferredLocale']}>

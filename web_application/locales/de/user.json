@@ -8,6 +8,6 @@
         "label": "Bevorzugte Sprache"
     },
     "password": {
-        "edit_placeholder": "Leer lassen, um das aktuelle Passwort zu behalten"
+        "help": "Leer lassen, um das aktuelle Passwort zu behalten"
     }
 }
