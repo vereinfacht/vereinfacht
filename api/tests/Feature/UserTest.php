@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\Club;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -47,6 +47,152 @@ class UserTest extends TestCase
                         'id' => $otherUser->getKey(),
                     ],
                 ],
+            ]);
+    }
+
+    public function test_admin_can_create_new_user_with_roles(): void
+    {
+        $club = Club::factory()->create();
+        setPermissionsTeamId($club);
+
+        $user = User::factory()->create();
+        $user->assignRole('club admin');
+
+        $requestData = [
+            'data' => [
+                'type' => 'users',
+                'attributes' => [
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com',
+                    'password' => 'securePassword123',
+                    'preferredLocale' => 'de'
+                ],
+                'relationships' => [
+                    'club' => [
+                        'data' => [
+                            'type' => 'clubs',
+                            'id' => (string) $club->getKey()
+                        ]
+                    ],
+                    'roles' => [
+                        'data' => [
+                            [
+                                'type' => 'roles',
+                                'id' => '3'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('users')
+            ->withData($requestData['data'])
+            ->post('/api/v1/users');
+
+        $response
+            ->assertCreated()
+            ->assertJson([
+                'data' => [
+                    'type' => 'users',
+                    'attributes' => [
+                        'name' => 'John Doe',
+                        'email' => 'john.doe@example.com',
+                        'preferredLocale' => 'de'
+                    ]
+                ]
+            ]);
+    }
+
+    public function test_admin_can_update_user_with_roles(): void
+    {
+        $club = Club::factory()->create();
+        setPermissionsTeamId($club);
+
+        $user = User::factory()->create();
+        $user->assignRole('club admin');
+
+        $requestData = [
+            'data' => [
+                'type' => 'users',
+                'attributes' => [
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com',
+                    'password' => 'securePassword123',
+                    'preferredLocale' => 'de'
+                ],
+                'relationships' => [
+                    'club' => [
+                        'data' => [
+                            'type' => 'clubs',
+                            'id' => (string) $club->getKey()
+                        ]
+                    ],
+                    'roles' => [
+                        'data' => [
+                            [
+                                'type' => 'roles',
+                                'id' => '3'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('users')
+            ->withData($requestData['data'])
+            ->post('/api/v1/users');
+
+
+        $userId = $response->json('data.id');
+
+        $updateRequestData = [
+            'data' => [
+                'type' => 'users',
+                'id' => $userId,
+                'attributes' => [
+                    'name' => 'Jahne Doe',
+                    'email' => 'john.doe@example.com',
+                    'preferredLocale' => 'en'
+                ],
+                'relationships' => [
+                    'roles' => [
+                        'data' => [
+                            [
+                                'type' => 'roles',
+                                'id' => '2'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $updateResponse = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('users')
+            ->withData($updateRequestData['data'])
+            ->patch("/api/v1/users/{$userId}");
+
+        $updateResponse
+            ->assertOk()
+            ->assertJson([
+                'data' => [
+                    'type' => 'users',
+                    'id' => $userId,
+                    'attributes' => [
+                        'name' => 'Jahne Doe',
+                        'preferredLocale' => 'en'
+                    ]
+                ]
             ]);
     }
 }
