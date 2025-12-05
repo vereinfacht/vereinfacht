@@ -11,6 +11,50 @@ class UserTest extends TestCase
 {
     use DatabaseTransactions;
 
+    private function setupClubAndAdmin(): array
+    {
+        $club = Club::factory()->create();
+        setPermissionsTeamId($club);
+
+        $user = User::factory()->create();
+        $user->assignRole('club admin');
+
+        return [$club, $user];
+    }
+
+    private function createUserRequestData(Club $club, array $overrides = []): array
+    {
+        $defaultData = [
+            'data' => [
+                'type' => 'users',
+                'attributes' => [
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com',
+                    'password' => 'securePassword123',
+                    'preferredLocale' => 'de'
+                ],
+                'relationships' => [
+                    'club' => [
+                        'data' => [
+                            'type' => 'clubs',
+                            'id' => (string) $club->getKey()
+                        ]
+                    ],
+                    'roles' => [
+                        'data' => [
+                            [
+                                'type' => 'roles',
+                                'id' => '3'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        return array_merge_recursive($defaultData, $overrides);
+    }
+
     public function test_club_can_only_get_own_users(): void
     {
         $otherClub = Club::factory()->create();
@@ -52,39 +96,8 @@ class UserTest extends TestCase
 
     public function test_admin_can_create_new_user_with_roles(): void
     {
-        $club = Club::factory()->create();
-        setPermissionsTeamId($club);
-
-        $user = User::factory()->create();
-        $user->assignRole('club admin');
-
-        $requestData = [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'name' => 'John Doe',
-                    'email' => 'john.doe@example.com',
-                    'password' => 'securePassword123',
-                    'preferredLocale' => 'de'
-                ],
-                'relationships' => [
-                    'club' => [
-                        'data' => [
-                            'type' => 'clubs',
-                            'id' => (string) $club->getKey()
-                        ]
-                    ],
-                    'roles' => [
-                        'data' => [
-                            [
-                                'type' => 'roles',
-                                'id' => '3'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ];
+        [$club, $user] = $this->setupClubAndAdmin();
+        $requestData = $this->createUserRequestData($club);
 
         $response = $this
             ->actingAs($user)
@@ -105,43 +118,38 @@ class UserTest extends TestCase
                     ]
                 ]
             ]);
-    }
 
-    public function test_admin_can_update_user_with_roles(): void
-    {
-        $club = Club::factory()->create();
-        setPermissionsTeamId($club);
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('users')
+            ->includePaths('roles')
+            ->get('/api/v1/users/' . $response->json('data.id'));
 
-        $user = User::factory()->create();
-        $user->assignRole('club admin');
-
-        $requestData = [
-            'data' => [
-                'type' => 'users',
-                'attributes' => [
-                    'name' => 'John Doe',
-                    'email' => 'john.doe@example.com',
-                    'password' => 'securePassword123',
-                    'preferredLocale' => 'de'
-                ],
-                'relationships' => [
-                    'club' => [
-                        'data' => [
-                            'type' => 'clubs',
-                            'id' => (string) $club->getKey()
-                        ]
-                    ],
-                    'roles' => [
-                        'data' => [
-                            [
-                                'type' => 'roles',
-                                'id' => '3'
+        $response
+            ->assertOk()
+            ->assertJson([
+                'data' => [
+                    'type' => 'users',
+                    'id' => $response->json('data.id'),
+                    'relationships' => [
+                        'roles' => [
+                            'data' => [
+                                [
+                                    'type' => 'roles',
+                                    'id' => '3'
+                                ]
                             ]
                         ]
                     ]
                 ]
-            ]
-        ];
+            ]);
+    }
+
+    public function test_admin_can_update_user_with_roles(): void
+    {
+        [$club, $user] = $this->setupClubAndAdmin();
+        $requestData = $this->createUserRequestData($club);
 
         $response = $this
             ->actingAs($user)
@@ -191,6 +199,31 @@ class UserTest extends TestCase
                     'attributes' => [
                         'name' => 'Jahne Doe',
                         'preferredLocale' => 'en'
+                    ]
+                ]
+            ]);
+
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('users')
+            ->includePaths('roles')
+            ->get("/api/v1/users/{$userId}");
+        $response
+            ->assertOk()
+            ->assertJson([
+                'data' => [
+                    'type' => 'users',
+                    'id' => $userId,
+                    'relationships' => [
+                        'roles' => [
+                            'data' => [
+                                [
+                                    'type' => 'roles',
+                                    'id' => '2'
+                                ]
+                            ]
+                        ]
                     ]
                 ]
             ]);
