@@ -23,14 +23,18 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
                 variant="ghost"
                 data-cy={`sort-${columnId}`}
                 onClick={() =>
-                    setSort((prev) => {
-                        const newSorting = `-${columnId}`;
+                    setSort((previous) => {
+                        const currentSort = previous?.[0];
 
-                        if (prev === null) {
-                            return [newSorting];
+                        if (!currentSort) {
+                            return [`-${columnId}`];
                         }
 
-                        return [prev[0] !== newSorting ? newSorting : columnId];
+                        if (currentSort === `-${columnId}`) {
+                            return [columnId];
+                        }
+
+                        return null;
                     })
                 }
             >
