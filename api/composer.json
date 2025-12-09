@@ -6,10 +6,10 @@
         "fakerphp/faker": "^1.23",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-translatable-plugin": "^3.2",
-        "freshbitsweb/laravel-log-enhancer": "^1.7",
+        "freshbitsweb/laravel-log-enhancer": "^2.0",
         "jejik/mt940": "^0.6.3",
         "laravel-json-api/laravel": "^5.0",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "simshaun/recurr": "^5.0",
@@ -76,6 +76,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false
         }
     },
     "minimum-stability": "stable",
