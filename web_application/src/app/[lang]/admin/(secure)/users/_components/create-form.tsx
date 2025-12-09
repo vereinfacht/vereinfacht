@@ -74,6 +74,7 @@ export default function CreateForm({ data, action }: Props) {
                         name="name"
                         defaultValue={data?.name ?? ''}
                         label={t('user:title.label')}
+                        data-cy="user-name-input"
                         required
                         minLength={2}
                         maxLength={255}
@@ -87,6 +88,7 @@ export default function CreateForm({ data, action }: Props) {
                         type="email"
                         defaultValue={data?.email ?? ''}
                         label={t('contact:email.label')}
+                        data-cy="user-email-input"
                         required
                         minLength={2}
                         maxLength={255}
@@ -97,6 +99,7 @@ export default function CreateForm({ data, action }: Props) {
                         id="password"
                         name="password"
                         label={t('general:password')}
+                        data-cy="user-password-input"
                         type="password"
                         required={!data}
                         minLength={data ? 0 : 8}
