@@ -20,7 +20,7 @@ interface Props {
     resourceName: string;
 }
 
-export default function ExportModule({ resources, resourceName }: Props) {
+export default function TableExportModal({ resources, resourceName }: Props) {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [isExporting, setIsExporting] = useState(false);

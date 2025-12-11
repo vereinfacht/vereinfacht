@@ -53,7 +53,6 @@ export default function FormStateHandler({
         }
 
         if (state.errors != null) {
-            console.log('Form errors:', state.errors);
             toast({
                 variant: 'error',
                 description: t(
