@@ -40,6 +40,7 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
 
 export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListReceiptsSearchParams(searchParams);
+
     const response = await getReceiptsFromApi(params);
     const receipts = deserialize(
         response as DocumentObject,
@@ -50,6 +51,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
     return (
         <ReceiptsTable
             receipts={receipts}
+            allIds={meta.page?.allIds}
             totalPages={totalPages}
             extended={true}
         />

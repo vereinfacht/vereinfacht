@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Receipts;
 
+use App\JsonApi\V1\PagePagination;
 use App\Models\Receipt;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
@@ -15,7 +16,6 @@ use LaravelJsonApi\Eloquent\Filters\WhereIn;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
 

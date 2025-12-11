@@ -8,7 +8,8 @@
         "label": "Kontonummer"
     },
     "description": {
-        "label": "Beschreibung"
+        "label": "Beschreibung",
+        "help": "Beschreibung des Steuerkontos"
     },
     "custom_hint": "Hier können Sie nur individuelle Steuerkonten verwalten. Vordefinierte Konten aus dem Kontenplan können nicht angesehen, bearbeitet oder gelöscht werden. {{link}} Hier finden Sie die Quellen für die vordefinierte Steuerkonten."
 }

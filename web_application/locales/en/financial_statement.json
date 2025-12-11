@@ -1,0 +1,10 @@
+{
+    "export": "Export evaluation",
+    "export_form": {
+        "title": "Export evaluation",
+        "description": "Export an evaluation for all {{count}} filtered entries.",
+        "include_media_title": "Include attachments",
+        "include_media_help": "Including all linked receipt files of the entries",
+        "evaluation_description": "A summarized evaluation can be downloaded here."
+    }
+}

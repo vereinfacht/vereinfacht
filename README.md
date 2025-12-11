@@ -124,6 +124,8 @@ cp .env.local.example .env.local
 
 Paste the API token mentioned in the previous setup steps into the .env.local.
 
+Generate a NextAuth secret (follow these steps: https://next-auth.js.org/configuration/options#secret).
+
 Start the dev server while within the tooling container and inside `/web_application/`:
 
 ```sh

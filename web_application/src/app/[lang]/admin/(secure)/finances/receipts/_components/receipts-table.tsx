@@ -6,6 +6,7 @@ import {
 } from '@/actions/receipts/list.schema';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
+import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
@@ -27,15 +28,18 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
+import FinancialStatementExportModal from './financial-statement-export-modal';
 
 interface Props {
     receipts: TReceiptDeserialized[];
+    allIds?: string[];
     totalPages: number;
     extended?: boolean;
 }
 
 export default function ReceiptsTable({
     receipts,
+    allIds,
     totalPages,
     extended = false,
 }: Props) {
@@ -203,7 +207,10 @@ export default function ReceiptsTable({
     return (
         <>
             {extended && (
-                <CreateButton href="/admin/finances/receipts/create" />
+                <div className="flex justify-between">
+                    <CreateButton href="/admin/finances/receipts/create" />
+                    <FinancialStatementExportModal receiptIds={allIds} />
+                </div>
             )}
             <DataTable
                 data={receipts}

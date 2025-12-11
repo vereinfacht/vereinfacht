@@ -11,7 +11,7 @@ use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
 class DivisionSchema extends Schema
@@ -30,7 +30,7 @@ class DivisionSchema extends Schema
             ID::make(),
             Str::make('title')->readOnly(),
             ArrayHash::make('titleTranslations', 'title')->extractUsing(
-                static fn ($model, $column) => $model->getTranslations($column)
+                static fn($model, $column) => $model->getTranslations($column)
             ),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),

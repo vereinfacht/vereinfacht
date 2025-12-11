@@ -11,7 +11,7 @@ use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
 class MemberSchema extends Schema
@@ -47,10 +47,10 @@ class MemberSchema extends Schema
                     ]);
                 }
             )->serializeUsing(
-                static function ($value) {
-                    return $value?->isPast();
-                }
-            ),
+                    static function ($value) {
+                        return $value?->isPast();
+                    }
+                ),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsTo::make('club')->type('clubs'),

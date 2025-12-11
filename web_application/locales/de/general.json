@@ -8,8 +8,16 @@
     "back": "zurück",
     "create": "erstellen",
     "import": "importieren",
+    "export": "exportieren",
     "delete": "löschen",
     "apply": "Anwenden",
+
+    "table": {
+        "export": {
+            "title": "Tabelle exportieren",
+            "description": "Tabelle mit ({{count}}) Einträgen als CSV-Datei exportieren."
+        }
+    },
 
     "delete_confirmation": {
         "title": "Löschung bestätigen",
