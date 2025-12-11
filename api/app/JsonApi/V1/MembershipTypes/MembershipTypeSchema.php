@@ -12,7 +12,7 @@ use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
 class MembershipTypeSchema extends Schema
@@ -35,11 +35,11 @@ class MembershipTypeSchema extends Schema
             ID::make(),
             Str::make('title'),
             ArrayHash::make('titleTranslations', 'title')->extractUsing(
-                static fn ($model, $column) => $model->getTranslations($column)
+                static fn($model, $column) => $model->getTranslations($column)
             ),
             StrSanitized::make('description'),
             ArrayHash::make('descriptionTranslations', 'description')->extractUsing(
-                static fn ($model, $column) => $model->getTranslations($column)
+                static fn($model, $column) => $model->getTranslations($column)
             ),
             Number::make('admissionFee'),
             Number::make('monthlyFee'),

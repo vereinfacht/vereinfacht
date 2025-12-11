@@ -24,20 +24,6 @@ async function getReceiptsFromApi(params: ListReceiptSearchParamsType) {
     return response || [];
 }
 
-async function getAllReceiptsForExport(params: ListReceiptSearchParamsType) {
-    const response = await listReceipts({
-        sort: params.sort ?? undefined,
-        filter: {
-            receiptType: params.receiptType ? params.receiptType : undefined,
-            status: params.status ? params.status : undefined,
-            media: params.media ?? undefined,
-        },
-        include: ['financeContact', 'media', 'taxAccount', 'transactions'],
-    });
-
-    return response || [];
-}
-
 export default async function Page({ searchParams }: WithSearchParams) {
     const params = await loadListReceiptsSearchParams(searchParams);
 
@@ -48,15 +34,10 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
-    const allReceiptsResponse = await getAllReceiptsForExport(params);
-    const allReceipts = deserialize(
-        allReceiptsResponse as DocumentObject,
-    ) as TReceiptDeserialized[];
-
     return (
         <ReceiptsTable
             receipts={receipts}
-            allReceipts={allReceipts}
+            allIds={meta.page?.allIds}
             totalPages={totalPages}
             extended={true}
         />
