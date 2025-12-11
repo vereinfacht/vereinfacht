@@ -6,7 +6,7 @@ use Genkgo\Camt\Config;
 use App\Models\Statement;
 use Genkgo\Camt\DTO\Entry;
 use App\Models\Transaction;
-use Genkgo\Camt\Reader as CamtReader;
+use Genkgo\Camt\Reader as CAMTReader;
 use App\Classes\StatementIdentifierGenerator;
 
 class CAMTParser extends BaseStatementParser
@@ -20,7 +20,7 @@ class CAMTParser extends BaseStatementParser
     public function parse(string $filePath): array
     {
         try {
-            $reader = new CamtReader(Config::getDefault());
+            $reader = new CAMTReader(Config::getDefault());
             $message = $reader->readFile($filePath);
             $reports = $message->getRecords();
 
