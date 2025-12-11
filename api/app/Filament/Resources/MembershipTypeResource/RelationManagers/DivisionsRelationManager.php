@@ -65,7 +65,9 @@ class DivisionsRelationManager extends RelationManager
             ])
             ->headerActions([
                 AttachAction::make()
-                    ->form(fn (AttachAction $action): array => [
+                    ->recordTitle(fn(Model $record): string => "{$record->title}")
+                    ->preloadRecordSelect()
+                    ->form(fn(AttachAction $action): array => [
                         $action->getRecordSelect(),
                         Forms\Components\TextInput::make('monthly_fee')
                             ->label(__('division.monthly_fee'))
@@ -76,7 +78,7 @@ class DivisionsRelationManager extends RelationManager
                     ]),
             ])
             ->actions([
-                EditAction::make()->form(fn (EditAction $action): array => [
+                EditAction::make()->form(fn(EditAction $action): array => [
                     Forms\Components\TextInput::make('monthly_fee')
                         ->label(__('division.monthly_fee'))
                         ->numeric()

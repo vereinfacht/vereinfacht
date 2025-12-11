@@ -8,9 +8,16 @@
     "back": "back",
     "create": "create",
     "import": "import",
+    "export": "export",
     "delete": "delete",
     "apply": "apply",
 
+    "table": {
+        "export": {
+            "title": "Export table",
+            "description": "Export table with ({{count}}) entries as a CSV file."
+        }
+    },
     "delete_confirmation": {
         "title": "Confirm deletion",
         "description": "Are you sure you want to delete this item? This action cannot be undone."

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Statement\FileImport;
+use App\Actions\Statement\ImportFile;
 use App\Http\Requests\ImportStatementsRequest;
 use App\Models\FinanceAccount;
 
@@ -10,7 +10,8 @@ class StatementController extends Controller
 {
     public function __construct(
         private FileImport $fileImport
-    ) {}
+    ) {
+    }
 
     public function import(ImportStatementsRequest $request)
     {

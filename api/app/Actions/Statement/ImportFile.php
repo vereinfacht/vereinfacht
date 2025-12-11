@@ -5,7 +5,7 @@ namespace App\Actions\Statement;
 use App\Models\FinanceAccount;
 use App\Services\Statement\StatementParserResolver;
 
-class FileImport
+class ImportFile
 {
     public function __construct(
         private StatementParserResolver $parserResolver

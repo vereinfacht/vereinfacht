@@ -1,0 +1,10 @@
+{
+    "export": "Auswertung exportieren",
+    "export_form": {
+        "title": "Auswertung exportieren",
+        "description": "Exportiere eine Auswertung für alle {{count}} gefilterten Buchungen.",
+        "include_media_title": "Anhänge einbeziehen",
+        "include_media_help": "Inklusive aller verknüpften Belegdateien der Buchungen",
+        "evaluation_description": "Eine zusammengefasste Auswertung kann hier heruntergeladen werden."
+    }
+}

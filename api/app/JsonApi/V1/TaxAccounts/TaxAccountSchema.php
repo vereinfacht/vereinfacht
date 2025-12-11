@@ -10,7 +10,7 @@ use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\Has;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
 class TaxAccountSchema extends Schema

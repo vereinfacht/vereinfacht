@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Statement;
+use App\Models\Receipt;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ImportStatementsRequest extends FormRequest
+class ExportFinancialStatementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +19,7 @@ class ImportStatementsRequest extends FormRequest
             return false;
         }
 
-        return $this->user()?->can('create', Statement::class);
+        return $this->user()?->can('viewAny', Receipt::class);
     }
 
     /**
@@ -29,8 +30,15 @@ class ImportStatementsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'financeAccountId' => ['required', 'string', 'exists:finance_accounts,id'],
-            'file' => ['required', 'file', 'mimes:txt,sta,mta,mt940,xml'],
+            'receipts' => [
+                'required',
+                'min:1',
+                'array',
+                Rule::exists('receipts', 'id')->where(function ($query) {
+                    $query->where('club_id', getPermissionsTeamId());
+                }),
+            ],
+            'includeMedia' => ['sometimes', 'boolean'],
         ];
     }
 }
