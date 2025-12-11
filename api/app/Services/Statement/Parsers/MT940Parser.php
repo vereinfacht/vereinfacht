@@ -16,23 +16,19 @@ class MT940Parser extends BaseStatementParser
 
     public function canParse(string $content): bool
     {
-        return !str_starts_with(trim($content), '<?xml')
-            && !str_contains($content, '<Document')
-            && (str_contains($content, ':20:') || str_contains($content, ':25:'));
+        return str_contains($content, ':20:') || str_contains($content, ':25:');
     }
 
     public function parse(string $filePath): array
     {
-        $content = trim(file_get_contents($filePath));
-        $reader = new Reader();
-
-        $parsers = $reader->getDefaultParsers() + [
-            'Volksbank' => VRBankParser::class,
-        ];
-
-        $reader->addParsers($parsers);
-
         try {
+            $content = trim(file_get_contents($filePath));
+            $reader = new Reader();
+            $parsers = $reader->getDefaultParsers() + [
+                'Volksbank' => VRBankParser::class,
+            ];
+            $reader->addParsers($parsers);
+
             $statements = $reader->getStatements($content);
         } catch (\Throwable $th) {
             throw new \Exception('Failed to parse the MT940 statement file: ' . $th->getMessage());

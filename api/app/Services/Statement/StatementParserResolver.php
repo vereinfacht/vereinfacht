@@ -34,16 +34,4 @@ class StatementParserResolver
 
         throw new \InvalidArgumentException('No suitable parser found for the uploaded file format.');
     }
-
-    public function getSupportedFormats(): array
-    {
-        $formats = [];
-
-        foreach ($this->parserClasses as $parserClass) {
-            $parser = $this->container->make($parserClass, ['financeAccount' => new \App\Models\FinanceAccount()]);
-            $formats = array_merge($formats, $parser->supports());
-        }
-
-        return array_unique($formats);
-    }
 }

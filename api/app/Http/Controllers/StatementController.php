@@ -9,18 +9,12 @@ use App\Models\FinanceAccount;
 class StatementController extends Controller
 {
     public function __construct(
-        private FileImport $fileImport
+        private ImportFile $fileImport
     ) {
     }
 
     public function import(ImportStatementsRequest $request)
     {
-        $file = $request->file('file');
-
-        if (!$file) {
-            return response()->json(['error' => 'No file attached'], 400);
-        }
-
         $financeAccount = FinanceAccount::find($request->input('financeAccountId'));
 
         if (!$financeAccount) {
@@ -28,7 +22,7 @@ class StatementController extends Controller
         }
 
         try {
-            $action = $this->fileImport->execute($file, $financeAccount);
+            $action = $this->fileImport->execute($request->file('file'), $financeAccount);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th->getMessage(),

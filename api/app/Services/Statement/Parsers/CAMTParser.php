@@ -6,7 +6,7 @@ use Genkgo\Camt\Config;
 use App\Models\Statement;
 use Genkgo\Camt\DTO\Entry;
 use App\Models\Transaction;
-use Genkgo\Camt\Reader as CAMTReader;
+use Genkgo\Camt\Reader;
 use App\Classes\StatementIdentifierGenerator;
 
 class CAMTParser extends BaseStatementParser
@@ -20,17 +20,21 @@ class CAMTParser extends BaseStatementParser
     public function parse(string $filePath): array
     {
         try {
-            $reader = new CAMTReader(Config::getDefault());
+            $reader = new Reader(Config::getDefault());
             $message = $reader->readFile($filePath);
-            $reports = $message->getRecords();
-
-            foreach ($reports as $report) {
-                foreach ($report->getEntries() as $entry) {
-                    $this->createStatementWithTransactions($entry);
-                }
-            }
+            $statements = $message->getRecords();
         } catch (\Throwable $th) {
             throw new \Exception('Failed to parse the XML statement file: ' . $th->getMessage());
+        }
+
+        foreach ($statements as $statement) {
+            foreach ($statement->getEntries() as $entry) {
+                try {
+                    $this->createStatementWithTransactions($entry);
+                } catch (\Throwable $th) {
+                    throw new \Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
+                }
+            }
         }
 
         return $this->getStats();

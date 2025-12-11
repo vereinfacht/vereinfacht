@@ -18,12 +18,12 @@
     },
     "import": {
         "title": "Import Statements",
-        "description": "Here you can import exported statements in MT940 format (*.mta file) from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
+        "description": "Here you can import exported statements in the MT940 AND CAMT052 format from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
         "notification": {
             "success": "{{total_statements_created}} statements were imported. {{total_statements_skipped}} statements were skipped (duplicate or erroneous).",
             "error": "{{errors}}"
         },
-        "help": "Supports the formats *.mta, *.sta, *.txt, and *.mt940, as well as *.xml for CAMT files."
+        "help": "Supports the formats MT940 and CAMT 052 (and possibly other CAMT formats) with files ending in *.mta, *.sta, *.txt, *.mt940, and *.xml."
     },
     "all_sources": "All Sources"
 }

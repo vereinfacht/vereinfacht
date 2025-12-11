@@ -6,7 +6,6 @@ import {
 } from '@/actions/receipts/list.schema';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
-import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
