@@ -7,6 +7,7 @@
         "filament/filament": "^3.2",
         "filament/spatie-laravel-translatable-plugin": "^3.2",
         "freshbitsweb/laravel-log-enhancer": "^1.7",
+        "genkgo/camt": "^2.10",
         "jejik/mt940": "^0.6.3",
         "laravel-json-api/laravel": "^5.0",
         "laravel/framework": "^11.0",

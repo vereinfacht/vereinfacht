@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Parsers;
+namespace App\Services\Statement\Parsers\Extensions;
 
 use Jejik\MT940\Parser\GermanBank;
 

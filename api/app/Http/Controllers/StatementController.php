@@ -8,6 +8,10 @@ use App\Models\FinanceAccount;
 
 class StatementController extends Controller
 {
+    public function __construct(
+        private FileImport $fileImport
+    ) {}
+
     public function import(ImportStatementsRequest $request)
     {
         $file = $request->file('file');
@@ -23,7 +27,7 @@ class StatementController extends Controller
         }
 
         try {
-            $action = (new FileImport($file))->execute($financeAccount);
+            $action = $this->fileImport->execute($file, $financeAccount);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th->getMessage(),

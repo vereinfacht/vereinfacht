@@ -156,7 +156,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -197,7 +196,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HealthCheckServiceProvider::class,
-
+        App\Providers\StatementParserServiceProvider::class,
     ],
 
     /*
