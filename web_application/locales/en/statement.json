@@ -23,7 +23,7 @@
             "success": "{{total_statements_created}} statements were imported. {{total_statements_skipped}} statements were skipped (duplicate or erroneous).",
             "error": "{{errors}}"
         },
-        "help": "Supports MT940 formats: *.mta, *.sta, and *.mt940"
+        "help": "Supports the formats *.mta, *.sta, *.txt, and *.mt940, as well as *.xml for CAMT files."
     },
     "all_sources": "All Sources"
 }
