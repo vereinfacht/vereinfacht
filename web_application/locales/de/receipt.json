@@ -9,7 +9,7 @@
         "income": "Einnahme",
         "expense": "Ausgabe"
     },
-    "document_date": {
+    "booking_date": {
         "label": "Buchungsdatum"
     },
     "reference_number": {

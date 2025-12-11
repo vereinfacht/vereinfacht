@@ -21,7 +21,7 @@ class Receipt extends Model implements HasMedia
     protected $fillable = [
         'reference_number',
         'receipt_type',
-        'document_date',
+        'booking_date',
         'amount',
         'club_id',
         'finance_contact_id',

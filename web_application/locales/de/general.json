@@ -10,6 +10,7 @@
     "import": "importieren",
     "export": "exportieren",
     "delete": "löschen",
+    "apply": "Anwenden",
 
     "table": {
         "export": {

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use LaravelJsonApi\Core\Document\Error;
-use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Responses\DataResponse;
+use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
+use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 
 class UserController extends Controller
 {
@@ -24,6 +27,51 @@ class UserController extends Controller
     use Actions\Store;
     use Actions\Update;
     use Actions\UpdateRelationship;
+
+    protected function creating(ResourceRequest $request): DataResponse
+    {
+        try {
+            $data = $request->validated();
+            $repository = app(UserRepository::class);
+
+            $user = $repository->createWithRoles(
+                $data,
+                $data['club']['id'],
+                collect($data['roles'] ?? [])->pluck('id')->toArray()
+            );
+
+            return DataResponse::make($user);
+        } catch (\Throwable $th) {
+            throw new JsonApiException(Error::fromArray([
+                'status' => 422,
+                'detail' => "User could not be created: {$th->getMessage()}",
+            ]));
+        }
+    }
+
+
+    protected function updating(User $user, ResourceRequest $request): DataResponse
+    {
+        try {
+            $data = $request->validated();
+            $repository = app(UserRepository::class);
+
+            $clubId = $user->clubs()->exists() ? $user->clubs()->first()->id : null;
+            $updatedUser = $repository->updateWithRoles(
+                $user,
+                $data,
+                $clubId,
+                collect($data['roles'] ?? [])->pluck('id')->toArray()
+            );
+
+            return DataResponse::make($updatedUser);
+        } catch (\Throwable $th) {
+            throw new JsonApiException(Error::fromArray([
+                'status' => 422,
+                'detail' => "User could not be updated: {$th->getMessage()}",
+            ]));
+        }
+    }
 
     public function login(Request $request): DataResponse
     {

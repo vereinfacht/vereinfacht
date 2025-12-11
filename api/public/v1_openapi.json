@@ -3854,8 +3854,8 @@
                                 "enum": [
                                     "id",
                                     "-id",
-                                    "documentDate",
-                                    "-documentDate",
+                                    "bookingDate",
+                                    "-bookingDate",
                                     "amount",
                                     "-amount"
                                 ],
@@ -10685,8 +10685,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },
@@ -10858,8 +10858,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },
@@ -11036,8 +11036,8 @@
                                 "type": "string",
                                 "example": "income"
                             },
-                            "documentDate": {
-                                "title": "documentDate",
+                            "bookingDate": {
+                                "title": "bookingDate",
                                 "type": "string",
                                 "example": "2025-10-15 15:32:12"
                             },

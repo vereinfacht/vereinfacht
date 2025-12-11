@@ -3153,10 +3153,10 @@ export interface components {
                  */
                 receiptType?: string;
                 /**
-                 * documentDate
+                 * bookingDate
                  * @example 2025-10-15 15:32:12
                  */
-                documentDate?: string;
+                bookingDate?: string;
                 /**
                  * status
                  * @example incompleted
@@ -3275,10 +3275,10 @@ export interface components {
                  */
                 receiptType?: string;
                 /**
-                 * documentDate
+                 * bookingDate
                  * @example 2025-10-15 15:32:12
                  */
-                documentDate?: string;
+                bookingDate?: string;
                 /**
                  * status
                  * @example incompleted
@@ -3399,10 +3399,10 @@ export interface components {
                  */
                 receiptType?: string;
                 /**
-                 * documentDate
+                 * bookingDate
                  * @example 2025-10-15 15:32:12
                  */
-                documentDate?: string;
+                bookingDate?: string;
                 /**
                  * status
                  * @example incompleted
@@ -6050,7 +6050,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "documentDate" | "-documentDate" | "amount" | "-amount")[];
+                sort?: ("id" | "-id" | "bookingDate" | "-bookingDate" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */

@@ -112,6 +112,8 @@ export const listReceiptSearchParams = {
             shallow: false,
         }),
     media: parseAsBoolean.withOptions({ shallow: false }),
+    bookingDateFrom: parseAsString.withOptions({ shallow: false }),
+    bookingDateTo: parseAsString.withOptions({ shallow: false }),
 };
 
 export const listUserSearchParams = {

@@ -2,15 +2,16 @@
 
 namespace App\JsonApi\V1\Roles;
 
-use LaravelJsonApi\Eloquent\Schema;
-use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use App\JsonApi\V1\PagePagination;
 use Spatie\Permission\Models\Role;
+use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
+use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use App\JsonApi\V1\PagePagination;
 
 class RoleSchema extends Schema
 {
@@ -40,6 +41,7 @@ class RoleSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            QueryFilter::make('query', ['name']),
         ];
     }
 

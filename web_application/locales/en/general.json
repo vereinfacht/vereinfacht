@@ -10,6 +10,7 @@
     "import": "import",
     "export": "export",
     "delete": "delete",
+    "apply": "apply",
 
     "table": {
         "export": {
