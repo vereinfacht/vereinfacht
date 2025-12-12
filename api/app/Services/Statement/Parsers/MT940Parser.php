@@ -45,11 +45,6 @@ class MT940Parser extends BaseStatementParser
         return $this->getStats();
     }
 
-    public function supports(): array
-    {
-        return ['MT940', 'STA'];
-    }
-
     protected function createStatementWithTransactions(StatementInterface $parsedStatement): void
     {
         $sharedStatementData = [

@@ -18,7 +18,7 @@
     },
     "import": {
         "title": "Import Statements",
-        "description": "Here you can import exported statements in the MT940 AND CAMT052 format from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
+        "description": "Here you can import exported statements in the MT940 and CAMT052 format from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
         "notification": {
             "success": "{{total_statements_created}} statements were imported. {{total_statements_skipped}} statements were skipped (duplicate or erroneous).",
             "error": "{{errors}}"

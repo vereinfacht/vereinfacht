@@ -40,11 +40,6 @@ class CAMTParser extends BaseStatementParser
         return $this->getStats();
     }
 
-    public function supports(): array
-    {
-        return ['CAMT.053', 'XML'];
-    }
-
     private function createStatementWithTransactions(Entry $entry): void
     {
         $date = $entry->getBookingDate() ?? $entry->getValueDate() ?? now();
