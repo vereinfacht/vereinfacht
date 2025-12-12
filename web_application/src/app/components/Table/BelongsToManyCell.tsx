@@ -33,13 +33,7 @@ export default function BelongsToManyCell({
         return (
             <Text
                 preset="default"
-                className={[
-                    'text-gray-500',
-                    truncate
-                        ? 'w-40 overflow-hidden text-ellipsis whitespace-nowrap'
-                        : '',
-                    className,
-                ].join(' ')}
+                className={['text-gray-500', className].join(' ')}
             >
                 -
             </Text>
@@ -48,18 +42,17 @@ export default function BelongsToManyCell({
 
     if (items.length <= 1) {
         return (
-            <div
-                className={[
-                    'flex flex-wrap gap-1',
-                    truncate ? 'w-40 overflow-hidden' : '',
-                    className,
-                ].join(' ')}
-            >
+            <div className={['flex flex-wrap gap-1', className].join(' ')}>
                 {items.map((item, index) => (
                     <React.Fragment key={item.id}>
                         <Link
                             href={`${basePath}/${item.id}`}
-                            className="whitespace-nowrap text-base font-medium text-blue-500 hover:underline"
+                            className={[
+                                'whitespace-nowrap text-base font-medium text-blue-500 hover:underline',
+                                truncate
+                                    ? 'w-40 overflow-hidden text-ellipsis'
+                                    : '',
+                            ].join(' ')}
                         >
                             {item[displayProperty]}
                             {index < items.length - 1 && ','}
@@ -75,15 +68,16 @@ export default function BelongsToManyCell({
 
     return (
         <div
-            className={[
-                'flex items-center gap-1',
-                truncate ? 'w-40 overflow-hidden' : '',
-                className,
-            ].join(' ')}
+            className={['flex flex-wrap items-center gap-1', className].join(
+                ' ',
+            )}
         >
             <Link
                 href={`${parentPath}`}
-                className="whitespace-nowrap text-base font-medium text-blue-500 hover:underline"
+                className={[
+                    'whitespace-nowrap text-base font-medium text-blue-500 hover:underline',
+                    truncate ? 'w-40 overflow-hidden text-ellipsis' : '',
+                ].join(' ')}
             >
                 {firstItem[displayProperty]},{' '}
                 {t('plus_n_more', { count: remainingCount })}

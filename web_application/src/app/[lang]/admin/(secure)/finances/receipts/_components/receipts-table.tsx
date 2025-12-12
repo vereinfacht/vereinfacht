@@ -186,6 +186,7 @@ export default function ReceiptsTable({
 
                 return (
                     <BelongsToManyCell
+                        truncate
                         items={transactions}
                         basePath="/admin/finances/transactions"
                         parentPath={`/admin/finances/receipts/${cell.row.original.id}`}

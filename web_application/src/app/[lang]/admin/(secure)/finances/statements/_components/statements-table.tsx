@@ -35,7 +35,9 @@ export default function StatementsTable({
         {
             accessorKey: 'title',
             header: t('statement:title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
+            cell: ({ row }) => (
+                <TextCell truncate>{row.getValue('title')}</TextCell>
+            ),
         },
         {
             accessorKey: 'transactions',
