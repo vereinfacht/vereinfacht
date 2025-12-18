@@ -1,7 +1,6 @@
 'use client';
 
 import Button from '@/app/components/Button/Button';
-import Checkbox from '@/app/components/Input/Checkbox';
 import Text from '@/app/components/Text/Text';
 import {
     Dialog,
@@ -11,12 +10,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/app/components/ui/dialog';
+import { useToast } from '@/hooks/toast/use-toast';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { Download } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import SubmitButton from '../../../components/Form/SubmitButton';
-import { useToast } from '@/hooks/toast/use-toast';
 
 interface Props {
     receiptIds?: string[];
@@ -25,7 +24,6 @@ interface Props {
 export default function FinancialStatementExportModal({ receiptIds }: Props) {
     const { t } = useTranslation();
     const { toast } = useToast();
-    const [includeMedia, setIncludeMedia] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -36,10 +34,6 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
         receiptIds?.forEach((id) => {
             formData.append('receipts[]', id);
         });
-
-        if (includeMedia) {
-            formData.append('includeMedia', 'on');
-        }
 
         const response = await fetch('/api/export/financial-statement', {
             method: 'POST',
@@ -104,17 +98,6 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
                     className="container flex flex-col gap-8"
                     onSubmit={handleSubmit}
                 >
-                    <Checkbox
-                        name="includeMedia"
-                        id="includeMedia"
-                        label={t(
-                            'financial_statement:export_form.include_media_help',
-                        )}
-                        defaultValue={includeMedia}
-                        handleChange={(event) =>
-                            setIncludeMedia(event.target.checked)
-                        }
-                    />
                     <div className="flex gap-4 self-end">
                         <Button
                             preset="secondary"

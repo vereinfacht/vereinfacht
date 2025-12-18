@@ -18,7 +18,6 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
-
 class ReceiptSchema extends Schema
 {
     /**

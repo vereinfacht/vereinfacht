@@ -48,16 +48,18 @@ export default function SettingsDropdown({ account }: Props) {
                     <Settings className="ml-auto h-4 w-4 text-gray-400" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DialogTrigger
-                        asChild
-                        onClick={() => {
-                            setFormType('import');
-                        }}
-                    >
-                        <DropdownMenuItem>
-                            {t('finance_account:import_transactions')}
-                        </DropdownMenuItem>
-                    </DialogTrigger>
+                    {account.accountType === 'bank_account' && (
+                        <DialogTrigger
+                            asChild
+                            onClick={() => {
+                                setFormType('import');
+                            }}
+                        >
+                            <DropdownMenuItem>
+                                {t('finance_account:import_transactions')}
+                            </DropdownMenuItem>
+                        </DialogTrigger>
+                    )}
                     <DialogTrigger
                         asChild
                         onClick={() => {

@@ -22,6 +22,7 @@ class ReceiptRequest extends ResourceRequest
             'financeContact' => [JsonApiRule::toOne()],
             'taxAccount' => [JsonApiRule::toOne()],
             'transactions' => [JsonApiRule::toMany()],
+            'media' => [JsonApiRule::toMany()],
         ];
     }
 }

@@ -23,7 +23,7 @@ use App\Http\Controllers\Api\V1\StatementController as V1StatementController;
 |
 */
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth:sanctum', ChangeLocaleFromHeader::class])
     ->prefix('v1')
     ->group(function () {
         Route::post('upload/media', [MediaController::class, 'upload']);

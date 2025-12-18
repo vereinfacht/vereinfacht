@@ -189,7 +189,6 @@ export default function CreateForm({ data, action }: Props) {
                                     page: { size: itemsPerQuery, number: 1 },
                                     filter: {
                                         query: searchTerm,
-                                        receipt: false,
                                     },
                                 })
                             }

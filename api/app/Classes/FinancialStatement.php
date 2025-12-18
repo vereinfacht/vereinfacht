@@ -49,8 +49,9 @@ class FinancialStatement
         return collect([
             'tax_account_id' => $receipt->tax_account_id,
             'account_number' => $receipt->taxAccount->account_number,
+            'type' => $receipt->receipt_type,
             'description' => $receipt->taxAccount->description,
-            'amount' => $receipt->amount,
+            'amount' => abs($receipt->amount ?? 0),
         ]);
     }
 
@@ -62,6 +63,7 @@ class FinancialStatement
                 return [
                     'tax_account_id' => $items->first()['tax_account_id'],
                     'account_number' => $accountNumber,
+                    'type' => $items->first()['type'],
                     'description' => $items->first()['description'],
                     'amount' => $items->sum('amount'),
                 ];

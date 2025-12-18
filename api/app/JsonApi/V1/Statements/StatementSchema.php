@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Statements;
 
+use App\JsonApi\Sorting\TransactionAmountSort;
 use App\Models\Statement;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -23,6 +24,8 @@ class StatementSchema extends Schema
      */
     public static string $model = Statement::class;
 
+    protected $defaultSort = '-date';
+
     /**
      * Get the resource fields.
      */
@@ -43,7 +46,6 @@ class StatementSchema extends Schema
             BelongsTo::make('financeAccount')->type('finance-accounts'),
             BelongsTo::make('club')->type('clubs'),
             HasMany::make('transactions')->type('transactions'),
-
             Str::make('title')->extractUsing(
                 static fn($model) => $model->transactions()->first()?->title
             )->readOnly(),
@@ -53,6 +55,13 @@ class StatementSchema extends Schema
             Number::make('transactionAmount')->extractUsing(
                 static fn($model) => $model->transactions()->first()?->amount
             )->readOnly(),
+        ];
+    }
+
+    public function sortables(): iterable
+    {
+        return [
+            TransactionAmountSort::make('amount'),
         ];
     }
 

@@ -21,6 +21,7 @@ class FinancialStatementController extends Controller
 
             $statementFilePath = $export->execute($financialStatement);
 
+            // this is currently not implemented in the frontend
             if (!$request->input('includeMedia')) {
                 return response()->download($statementFilePath)->deleteFileAfterSend(true);
             }

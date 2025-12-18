@@ -1,7 +1,12 @@
 import { z } from 'zod';
 import { baseListSchema } from '../base/list.schema';
 
-export const statementSortingOptions = ['date', '-date'] as const;
+export const statementSortingOptions = [
+    'date',
+    '-date',
+    'amount',
+    '-amount',
+] as const;
 
 export const statementTypeOptions = ['collective', 'individual'] as const;
 
