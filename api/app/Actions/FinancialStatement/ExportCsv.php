@@ -8,6 +8,8 @@ class ExportCsv
 {
     public function execute(FinancialStatement $financialStatement): string
     {
+        app()->setLocale('de'); // @todo: use current user's local
+
         return $this->asIncomeExpensesCalculation($financialStatement);
     }
 
