@@ -30,8 +30,8 @@
         "incompleted": "Unvollständig",
         "empty": "Leer",
         "description": {
-            "completed": "Die Transaktion ist vollständig.",
-            "incompleted": "Die Transaktion ist teilweise ausgeglichen: Es sind bereits Buchungen vorhanden, jedoch stimmt die Summe noch nicht mit dem Transaktionsbetrag überein.",
+            "completed": "Die Transaktion wurde mindestens einer Buchung zugeordnet.",
+            "incompleted": "Nicht alle Transaktionen wurden einer Buchung zugeordnet.",
             "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens eine Buchung zugeordnet werden."
         }
     }

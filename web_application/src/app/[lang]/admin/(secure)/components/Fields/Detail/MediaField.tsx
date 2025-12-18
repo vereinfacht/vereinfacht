@@ -35,7 +35,7 @@ export default function MediaField({ value = [] }: Props) {
                     >
                         <picture className="relative block aspect-[0.707] overflow-hidden rounded-t-md bg-slate-100">
                             <img
-                                src={media.previewUrl}
+                                src={media.previewConversionUrl}
                                 alt={`Preview of ${media.fileName}`}
                                 className="absolute inset-0 h-full w-full object-contain"
                             />

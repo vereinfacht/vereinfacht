@@ -4,7 +4,7 @@ namespace App\JsonApi\Sorting;
 
 use LaravelJsonApi\Eloquent\Contracts\SortField;
 
-class FullNameSort implements SortField
+class TransactionAmountSort implements SortField
 {
     private string $name;
 
@@ -25,8 +25,10 @@ class FullNameSort implements SortField
 
     public function sort($query, string $direction = 'asc')
     {
-        $query->orderByRaw("CONCAT_WS(' ', first_name, last_name) $direction");
+        $query->withSum('transactions', 'amount')
+            ->orderBy('transactions_sum_amount', $direction);
 
         return $query;
     }
+
 }

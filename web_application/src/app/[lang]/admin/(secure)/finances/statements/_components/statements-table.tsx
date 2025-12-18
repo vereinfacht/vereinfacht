@@ -120,7 +120,13 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'amount',
-            header: t('statement:amount.label'),
+            header: ({ column }) => (
+                <HeaderSort
+                    parser={listStatementSearchParams.sort}
+                    columnId={column.id}
+                    columnTitle={t('statement:amount.label')}
+                />
+            ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
     ];

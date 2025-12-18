@@ -27,8 +27,6 @@ export const POST = async (req: NextRequest) => {
         });
     }
 
-    formData.set('includeMedia', result.data.includeMedia ? '1' : '0');
-
     // using openapi-fetch lead to issues with parsing the multipart form data correctly
     // so we are using fetch() directly here
     const response = await fetch(
