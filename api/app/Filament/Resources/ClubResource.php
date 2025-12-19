@@ -6,6 +6,7 @@ use App\Filament\Resources\ClubResource\Pages;
 use App\Filament\Resources\ClubResource\RelationManagers\DivisionsRelationManager;
 use App\Filament\Resources\ClubResource\RelationManagers\MembershipTypesRelationManager;
 use App\Models\Club;
+use App\Models\TaxAccountChart;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
@@ -51,7 +52,7 @@ class ClubResource extends Resource
                 TextInput::make('title')
                     ->label(__('club.title'))
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
                     ->required()
                     ->rules(['min:2', 'max:255']),
                 TextInput::make('extended_title')
@@ -73,7 +74,7 @@ class ClubResource extends Resource
                     ->columnSpanFull(),
                 Select::make('paymentPeriods')
                     ->label(trans_choice('payment-period.label', 2))
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => $record->title)
+                    ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->title)
                     ->multiple()
                     ->preload()
                     ->relationship(titleAttribute: 'rrule'),
@@ -155,6 +156,12 @@ class ClubResource extends Resource
                 ->label(__('club.has_consented_media_publication_is_required')),
             Toggle::make('has_consented_media_publication_default_value')
                 ->label(__('club.has_consented_media_publication_default_value')),
+            Select::make('tax_account_chart_id')
+                ->label(trans_choice('tax-account-chart.label', 1))
+                ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->title)
+                ->preload()
+                ->required()
+                ->relationship('taxAccountChart', 'title'),
         ];
     }
 
@@ -191,7 +198,7 @@ class ClubResource extends Resource
     {
         return [
             MembershipTypesRelationManager::class,
-            DivisionsRelationManager::class,
+            DivisionsRelationManager::class
         ];
     }
 
