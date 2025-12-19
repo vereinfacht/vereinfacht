@@ -30,6 +30,10 @@ class SendApplicationNotifications implements ShouldQueue
     {
         $membership = $event->membership;
 
+        if (blank($membership) || $membership->club->title === "TSV Muster") {
+            return;
+        }
+
         Notification::send(
             $this->getMemberNotifiables($membership),
             new ApplicationReceived($membership)
