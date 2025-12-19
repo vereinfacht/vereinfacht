@@ -56,11 +56,11 @@ export default async function ReceiptShowPage({ params }: Props) {
                 receipt[0]?.taxAccount?.taxAccountChart?.title +
                 ')',
         },
-        {
-            attribute: 'media',
-            type: 'media',
-            value: receipt[0]?.media,
-        },
+        // {
+        //     attribute: 'media',
+        //     type: 'media',
+        //     value: receipt[0]?.media,
+        // },
     ];
 
     return (
@@ -68,7 +68,6 @@ export default async function ReceiptShowPage({ params }: Props) {
             <EditButton href={`/admin/finances/receipts/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
-                    // @ts-expect-error: value type of media field is not compatible with detail field value type
                     <DetailField
                         key={index}
                         {...field}
