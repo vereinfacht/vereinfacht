@@ -65,9 +65,11 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
     protected static function booted(): void
     {
         static::creating(function (Club $club) {
-            if (! $club->slug) {
+            if (!$club->slug) {
                 $club->slug = Str::slug($club->title);
             }
+            // currently setting tax_account_chart_id to the first TaxAccountChart
+            $club->tax_account_chart_id = TaxAccountChart::first()?->id ?? null;
         });
 
         self::created(function ($model) {
