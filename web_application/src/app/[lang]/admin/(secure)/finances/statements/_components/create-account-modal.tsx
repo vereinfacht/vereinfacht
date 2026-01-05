@@ -151,6 +151,7 @@ export default function CreateAccountModal() {
                             <Button
                                 onClick={() => setType(null)}
                                 preset="secondary"
+                                type="button"
                             >
                                 {capitalizeFirstLetter(t('general:back'))}
                             </Button>
