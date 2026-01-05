@@ -28,6 +28,8 @@
     "nothing_found": "Nothing found",
     "privacy": "Privacy policy",
     "search": "Search",
+    "search_add": "Search and add",
+    "search_select": "Search and select",
     "selected_count": "{{count}} selected",
     "plus_n_more": "+{{count}} more",
     "select": "Select",

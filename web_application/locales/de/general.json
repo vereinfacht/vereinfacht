@@ -29,6 +29,8 @@
     "nothing_found": "Keine Treffer",
     "privacy": "Datenschutz",
     "search": "Suchen",
+    "search_add": "Suchen und hinzufügen",
+    "search_select": "Suchen und auswählen",
     "selected_count": "{{count}} ausgewählt",
     "plus_n_more": "+{{count}} mehr",
     "select": "Wählen",
