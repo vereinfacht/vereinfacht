@@ -34,7 +34,10 @@ export const financeAccountAttributesSchema = z
             });
         }
 
-        if (data.accountType === 'cash_box' && !data.initialBalance) {
+        if (
+            data.accountType === 'cash_box' &&
+            (data.initialBalance === undefined || data.initialBalance === null)
+        ) {
             ctx.addIssue({
                 code: 'custom',
                 message: 'Initial balance is required when type is cash_box',
