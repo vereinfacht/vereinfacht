@@ -23,6 +23,8 @@ export const importStatementsSchema = z.object({
                 'application/x-mta',
                 'text/plain',
                 'application/mt940',
+                'application/xml',
+                'text/xml',
             ];
 
             const fileName = file.name.toLowerCase();
@@ -30,6 +32,7 @@ export const importStatementsSchema = z.object({
                 fileName.endsWith('.sta') ||
                 fileName.endsWith('.mta') ||
                 fileName.endsWith('.mt940') ||
+                fileName.endsWith('.xml') ||
                 fileName.endsWith('.txt');
 
             if (!allowedTypes.includes(file.type) && !hasValidExtension) {

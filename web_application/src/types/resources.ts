@@ -38,8 +38,6 @@ export type TMediaDeserialized = {
     fileName: string;
     mimeType: string;
     size: number;
-    originalUrl: string;
-    previewUrl?: string;
 };
 
 export type TTaxAccountChartDeserialized = {

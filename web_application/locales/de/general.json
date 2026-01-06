@@ -8,8 +8,16 @@
     "back": "zurück",
     "create": "erstellen",
     "import": "importieren",
+    "export": "exportieren",
     "delete": "löschen",
     "apply": "Anwenden",
+
+    "table": {
+        "export": {
+            "title": "Tabelle exportieren",
+            "description": "Tabelle mit ({{count}}) Einträgen als CSV-Datei exportieren."
+        }
+    },
 
     "delete_confirmation": {
         "title": "Löschung bestätigen",
@@ -21,6 +29,8 @@
     "nothing_found": "Keine Treffer",
     "privacy": "Datenschutz",
     "search": "Suchen",
+    "search_add": "Suchen und hinzufügen",
+    "search_select": "Suchen und auswählen",
     "selected_count": "{{count}} ausgewählt",
     "plus_n_more": "+{{count}} mehr",
     "select": "Wählen",

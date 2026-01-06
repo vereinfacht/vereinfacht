@@ -35,7 +35,9 @@ export default function StatementsTable({
         {
             accessorKey: 'title',
             header: t('statement:title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
+            cell: ({ row }) => (
+                <TextCell truncate>{row.getValue('title')}</TextCell>
+            ),
         },
         {
             accessorKey: 'transactions',
@@ -118,7 +120,13 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'amount',
-            header: t('statement:amount.label'),
+            header: ({ column }) => (
+                <HeaderSort
+                    parser={listStatementSearchParams.sort}
+                    columnId={column.id}
+                    columnTitle={t('statement:amount.label')}
+                />
+            ),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },
     ];

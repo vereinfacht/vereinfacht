@@ -15,7 +15,8 @@ class ChangeLocaleFromHeader
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasHeader('Accept-Language') &&
+        if (
+            $request->hasHeader('Accept-Language') &&
             in_array($request->header('Accept-Language'), config('app.supported_locales'))
         ) {
             app()->setLocale($request->header('Accept-Language'));

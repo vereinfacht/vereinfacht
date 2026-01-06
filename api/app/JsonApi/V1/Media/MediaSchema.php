@@ -10,7 +10,7 @@ use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use App\JsonApi\V1\PagePagination;
 
 class MediaSchema extends Schema
 {
@@ -37,8 +37,6 @@ class MediaSchema extends Schema
             Str::make('fileName'),
             Str::make('mimeType'),
             Str::make('size'),
-            Str::make('originalUrl')->readOnly(),
-            Str::make('previewUrl')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
         ];
     }

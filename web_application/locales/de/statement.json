@@ -18,12 +18,12 @@
     },
     "import": {
         "title": "Umsätze importieren",
-        "description": "Hier können exportierte Umsätze im MT940-Format aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Umsätzen bzw. Transaktionen werden automatisch erkannt und übersprungen.",
+        "description": "Hier können exportierte Umsätze im MT940- und CAMT052-Format aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Umsätzen bzw. Transaktionen werden automatisch erkannt und übersprungen.",
         "notification": {
             "success": "{{total_statements_created}} Umsätze wurden importiert. {{total_statements_skipped}} Umsätze wurden übersprungen (doppelte oder fehlerhaft).",
             "error": "Beim Import der Umsätze gab es Fehler: {{errors}}"
         },
-        "help": "Unterstützt das Format *.mta, *.sta, *.txt und *.mt940"
+        "help": "Unterstützt die Formate MT940 und CAMT052 (und ggf. andere CAMT-Formate) mit Dateien der Endungen *.mta, *.sta, *.txt und *.mt940 bzw. *.xml."
     },
     "all_sources": "Alle Quellen"
 }

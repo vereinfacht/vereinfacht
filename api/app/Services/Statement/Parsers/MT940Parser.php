@@ -1,49 +1,37 @@
 <?php
 
-namespace App\Actions\Statement;
+namespace App\Services\Statement\Parsers;
 
 use Jejik\MT940\Reader;
 use App\Models\Statement;
 use App\Models\Transaction;
 use Illuminate\Support\Arr;
-use App\Parsers\VRBankParser;
-use App\Models\FinanceAccount;
 use Jejik\MT940\StatementInterface;
 use Jejik\MT940\TransactionInterface;
 use App\Classes\StatementIdentifierGenerator;
+use App\Services\Statement\Parsers\Extensions\VRBankParser;
 
-class FileImport
+class MT940Parser extends BaseStatementParser
 {
-    protected $file;
-    protected $actionStats;
-    protected $financeAccount;
 
-    public function __construct($file)
+    public function canParse(string $content): bool
     {
-        $this->file = $file;
-        $this->actionStats = [
-            'total_statements_created' => 0,
-            'total_statements_skipped' => 0,
-        ];
+        return str_contains($content, ':20:') || str_contains($content, ':25:');
     }
 
-    public function execute(FinanceAccount $financeAccount): array
+    public function parse(string $filePath): array
     {
-        $this->financeAccount = $financeAccount;
-        $reader = new Reader();
-
-        $parsers = $reader->getDefaultParsers() + [
-            'Volksbank' => VRBankParser::class,
-        ];
-
-        $reader->addParsers($parsers);
-
         try {
-            $statements = $reader->getStatements(
-                trim(file_get_contents($this->file->getRealPath()))
-            );
+            $content = trim(file_get_contents($filePath));
+            $reader = new Reader();
+            $parsers = $reader->getDefaultParsers() + [
+                'Volksbank' => VRBankParser::class,
+            ];
+            $reader->addParsers($parsers);
+
+            $statements = $reader->getStatements($content);
         } catch (\Throwable $th) {
-            throw new \Exception('Failed to parse the statement file: ' . $th->getMessage());
+            throw new \Exception('Failed to parse the MT940 statement file: ' . $th->getMessage());
         }
 
         foreach ($statements as $parsedStatement) {
@@ -54,15 +42,13 @@ class FileImport
             }
         }
 
-        return $this->actionStats;
+        return $this->getStats();
     }
-
-
 
     protected function createStatementWithTransactions(StatementInterface $parsedStatement): void
     {
         $sharedStatementData = [
-            'date' => $parsedStatement->getClosingBalance()->getDate() ?? now(),
+            'date' => $parsedStatement->getClosingBalance()->getDate(),
             'finance_account_id' => $this->financeAccount->id,
             'club_id' => $this->financeAccount->club_id,
         ];
@@ -89,12 +75,12 @@ class FileImport
                 'statement_type' => $this->isUnsupportedCollectiveTransfer($transaction) ? 'collective' : 'individual',
             ], $sharedStatementData);
 
-            $this->actionStats['total_statements_created']++;
-
             if ($statement->wasRecentlyCreated === false) {
-                $this->actionStats['total_statements_skipped']++;
+                $this->incrementSkipped();
                 continue;
             }
+
+            $this->incrementCreated();
 
             $this->createTransaction($statement, $transaction, $currency);
         }
@@ -111,12 +97,12 @@ class FileImport
                 'statement_type' => 'collective',
             ], $sharedStatementData);
 
-            $this->actionStats['total_statements_created']++;
-
             if ($statement->wasRecentlyCreated === false) {
-                $this->actionStats['total_statements_skipped']++;
+                $this->incrementSkipped();
                 continue;
             }
+
+            $this->incrementCreated();
 
             foreach ($transactions as $transaction) {
                 $this->createTransaction($statement, $transaction, $currency);
@@ -126,7 +112,7 @@ class FileImport
 
     protected function createTransaction(Statement $statement, TransactionInterface $transaction, string $currency): void
     {
-        $transaction = Transaction::create([
+        Transaction::create([
             'title' => $this->toUtf8($transaction->getTxText()) ?? '',
             'description' => $this->toUtf8($transaction->getSvwz() ?? $this->toUtf8($transaction->getDescription())),
             'gvc' => (int) $transaction->getGVC(),

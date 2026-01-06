@@ -108,6 +108,7 @@ export function HeaderDatePicker({
                         variant="ghost"
                         className="relative h-8 w-8 p-0 hover:bg-gray-100"
                         size="sm"
+                        data-cy="date-range-trigger"
                     >
                         <CalendarDays
                             className={`h-4 w-4 text-slate-500 ${hasActiveFilter ? 'text-slate-900' : ''}`}
@@ -116,13 +117,19 @@ export function HeaderDatePicker({
                             <Badge
                                 className="absolute right-0 top-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
                                 variant="primary"
+                                data-cy="date-range-active-badge"
                             />
                         )}
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="flex flex-col gap-y-4 p-4">
+                <DropdownMenuContent
+                    className="flex flex-col gap-y-4 p-4"
+                    data-cy="date-range-dropdown"
+                >
                     <div className="space-y-4">
-                        <Text>{getCurrentSelectionText()}</Text>
+                        <Text data-cy="date-range-selection-text">
+                            {getCurrentSelectionText()}
+                        </Text>
 
                         <div className="rounded-lg border p-4">
                             <DayPicker
@@ -140,6 +147,7 @@ export function HeaderDatePicker({
                                         : undefined) ||
                                     new Date()
                                 }
+                                data-cy="date-range-calendar"
                             />
                         </div>
 
@@ -150,10 +158,15 @@ export function HeaderDatePicker({
                                 disabled={
                                     !selectedRange?.from && !selectedRange?.to
                                 }
+                                data-cy="date-range-apply-button"
                             >
                                 {t('general:apply')}
                             </Button>
-                            <Button onClick={handleClear} variant="outline">
+                            <Button
+                                onClick={handleClear}
+                                variant="outline"
+                                data-cy="date-range-clear-button"
+                            >
                                 <RotateCcw />
                             </Button>
                         </div>

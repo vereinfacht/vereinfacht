@@ -11,10 +11,10 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
-import MediaCell from '@/app/components/Table/MediaCell';
+// import MediaCell from '@/app/components/Table/MediaCell';
 import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
-import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
+// import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
 import { ResourceName } from '@/resources/resource';
 import {
     TFinanceContactDeserialized,
@@ -27,15 +27,18 @@ import { Building2, CircleUserRound } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
+import FinancialStatementExportModal from './financial-statement-export-modal';
 
 interface Props {
     receipts: TReceiptDeserialized[];
+    allIds?: string[];
     totalPages: number;
     extended?: boolean;
 }
 
 export default function ReceiptsTable({
     receipts,
+    allIds,
     totalPages,
     extended = false,
 }: Props) {
@@ -108,27 +111,27 @@ export default function ReceiptsTable({
                 />
             ),
         },
-        {
-            accessorKey: 'media',
-            header: () =>
-                extended ? (
-                    <TriStateHeaderFilter
-                        parser={listReceiptSearchParams.media}
-                        paramKey="media"
-                        translationKey="receipt:media.filter"
-                    />
-                ) : (
-                    t('receipt:media.label')
-                ),
-            cell: ({ row }) => (
-                <MediaCell
-                    media={row.getValue('media')}
-                    rowId={row.id}
-                    rowLink={`/admin/finances/receipts/${row.original.id}`}
-                    translateNamespace="receipt"
-                />
-            ),
-        },
+        // {
+        //     accessorKey: 'media',
+        //     header: () =>
+        //         extended ? (
+        //             <TriStateHeaderFilter
+        //                 parser={listReceiptSearchParams.media}
+        //                 paramKey="media"
+        //                 translationKey="receipt:media.filter"
+        //             />
+        //         ) : (
+        //             t('receipt:media.label')
+        //         ),
+        //     cell: ({ row }) => (
+        //         <MediaCell
+        //             media={row.getValue('media')}
+        //             rowId={row.id}
+        //             rowLink={`/admin/finances/receipts/${row.original.id}`}
+        //             translateNamespace="receipt"
+        //         />
+        //     ),
+        // },
         {
             accessorKey: 'amount',
             header: ({ column }) =>
@@ -183,6 +186,7 @@ export default function ReceiptsTable({
 
                 return (
                     <BelongsToManyCell
+                        truncate
                         items={transactions}
                         basePath="/admin/finances/transactions"
                         parentPath={`/admin/finances/receipts/${cell.row.original.id}`}
@@ -203,7 +207,10 @@ export default function ReceiptsTable({
     return (
         <>
             {extended && (
-                <CreateButton href="/admin/finances/receipts/create" />
+                <div className="flex justify-between">
+                    <CreateButton href="/admin/finances/receipts/create" />
+                    <FinancialStatementExportModal receiptIds={allIds} />
+                </div>
             )}
             <DataTable
                 data={receipts}

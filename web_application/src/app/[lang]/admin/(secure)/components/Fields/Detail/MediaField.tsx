@@ -35,7 +35,7 @@ export default function MediaField({ value = [] }: Props) {
                     >
                         <picture className="relative block aspect-[0.707] overflow-hidden rounded-t-md bg-slate-100">
                             <img
-                                src={media.previewUrl}
+                                src={''}
                                 alt={`Preview of ${media.fileName}`}
                                 className="absolute inset-0 h-full w-full object-contain"
                             />
@@ -50,7 +50,7 @@ export default function MediaField({ value = [] }: Props) {
                         </figcaption>
 
                         <a
-                            href={media.originalUrl}
+                            href={''}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="absolute inset-0 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

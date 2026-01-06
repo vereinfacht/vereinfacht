@@ -50,7 +50,7 @@ export function DataTable<TData extends Model, TValue>({
     });
 
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 overflow-auto">
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
