@@ -2,22 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Actions\User\WelcomeClubAdmin;
-use App\Filament\Resources\RolesRelationManagerResource\RelationManagers\RolesRelationManager;
-use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Notifications\Notification;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\Select;
+use App\Actions\User\WelcomeClubAdmin;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\RolesRelationManagerResource\RelationManagers\RolesRelationManager;
 
 class UserResource extends Resource
 {
@@ -59,9 +59,9 @@ class UserResource extends Resource
                 TextInput::make('password')
                     ->password()
                     ->revealable()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create'),
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                    ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context): bool => $context === 'create'),
                 DateTimePicker::make('updated_at')
                     ->label(__('validation.attributes.updated_at'))
                     ->disabled(),
@@ -92,23 +92,34 @@ class UserResource extends Resource
                 BulkAction::make('email_welcome_club_admin')
                     ->label(__('user.actions.email_welcome_club_admin.name'))
                     ->action(
-                        fn (Collection $records) => $records->each(
-                            function ($record) {
+                        function (Collection $records) {
+                            $successCount = 0;
+                            $errors = [];
+
+                            foreach ($records as $record) {
                                 try {
                                     (new WelcomeClubAdmin)->execute($record);
-
-                                    Notification::make()
-                                        ->title('Success')
-                                        ->success()
-                                        ->send();
+                                    $successCount++;
                                 } catch (\Throwable $th) {
-                                    Notification::make()
-                                        ->title($th->getMessage())
-                                        ->danger()
-                                        ->send();
+                                    $errors[] = $th->getMessage();
                                 }
                             }
-                        )
+
+                            if ($successCount > 0) {
+                                Notification::make()
+                                    ->title("Success: {$successCount} email(s) sent")
+                                    ->success()
+                                    ->send();
+                            }
+
+                            if (!empty($errors)) {
+                                Notification::make()
+                                    ->title('Some errors occurred:')
+                                    ->body(implode(', ', $errors))
+                                    ->danger()
+                                    ->send();
+                            }
+                        }
                     ),
             ]);
     }
