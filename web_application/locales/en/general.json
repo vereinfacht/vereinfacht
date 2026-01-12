@@ -15,7 +15,7 @@
     "table": {
         "export": {
             "title": "Export table",
-            "description": "Export table with ({{count}}) entries as a CSV file."
+            "description": "Table with {{count}} filtered entries as a CSV file."
         }
     },
     "delete_confirmation": {

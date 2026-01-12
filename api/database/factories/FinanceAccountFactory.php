@@ -41,6 +41,7 @@ class FinanceAccountFactory extends Factory
                     'Vereinsheim',
                     'Getränke',
                 ]),
+                'iban' => null,
                 'starts_at' => $this->faker->dateTime(),
                 'initial_balance' => $this->faker->randomFloat(2, -1000, 1000),
                 'club_id' => Club::factory(),

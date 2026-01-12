@@ -8,6 +8,7 @@ import {
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import CreateButton from '../../components/CreateButton';
+import TableExportModal from '../../components/TableExportModal';
 import AccountsList from './_components/accounts-list';
 import StatementsTable from './_components/statements-table';
 
@@ -46,7 +47,13 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
-            <CreateButton href="/admin/finances/statements/create" />
+            <div className="flex items-center justify-between">
+                <CreateButton href="/admin/finances/statements/create" />
+                <TableExportModal
+                    ids={meta.page?.allIds}
+                    resourceName="statements"
+                />
+            </div>
             <div className="flex gap-6">
                 <AccountsList />
 

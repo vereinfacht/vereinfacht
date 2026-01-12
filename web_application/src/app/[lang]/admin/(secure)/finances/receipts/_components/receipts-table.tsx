@@ -28,6 +28,7 @@ import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../../components/CreateButton';
 import DateField from '../../../components/Fields/Detail/DateField';
 import FinancialStatementExportModal from './financial-statement-export-modal';
+import TableExportModal from '../../../components/TableExportModal';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -204,12 +205,20 @@ export default function ReceiptsTable({
         );
     }
 
+    console.log({ allIds });
+
     return (
         <>
             {extended && (
                 <div className="flex justify-between">
                     <CreateButton href="/admin/finances/receipts/create" />
-                    <FinancialStatementExportModal receiptIds={allIds} />
+                    <div className="flex gap-2">
+                        <FinancialStatementExportModal receiptIds={allIds} />
+                        <TableExportModal
+                            ids={allIds ?? []}
+                            resourceName="receipts"
+                        />
+                    </div>
                 </div>
             )}
             <DataTable

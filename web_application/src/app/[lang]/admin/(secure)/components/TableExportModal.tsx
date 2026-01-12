@@ -10,83 +10,65 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/app/components/ui/dialog';
+import { useToast } from '@/hooks/toast/use-toast';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { Table } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+import SubmitButton from './Form/SubmitButton';
 
 interface Props {
-    resources: any[];
+    ids: string[];
     resourceName: string;
 }
 
-export default function TableExportModal({ resources, resourceName }: Props) {
+export default function TableExportModal({ ids, resourceName }: Props) {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
-    const [isExporting, setIsExporting] = useState(false);
+    const { toast } = useToast();
 
-    const handleExport = async () => {
-        setIsExporting(true);
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
 
-        try {
-            await exportToCSV();
-        } catch (error) {
-            console.error('Export failed:', error);
-        } finally {
-            setIsExporting(false);
-            setIsOpen(false);
-        }
-    };
+        const formData = new FormData();
 
-    const exportToCSV = async () => {
-        const headers = [
-            t('receipt:receipt_type.label'),
-            t('receipt:reference_number.label'),
-            t('receipt:document_date.label'),
-            t('receipt:status.label'),
-            t('receipt:amount.label'),
-            t('tax_account:title.other'),
-            t('tax_account:description.help'),
-        ];
-
-        const csvData = resources.map((resource) => [
-            resource.receiptType || '',
-            resource.referenceNumber || '',
-            resource.documentDate || '',
-            resource.status || '',
-            resource.amount || 0,
-            resource.taxAccount?.accountNumber || '',
-            resource.taxAccount?.description || '',
-        ]);
-
-        const csvContent = [
-            headers.join(','),
-            ...csvData.map((row) =>
-                row
-                    .map((cell) =>
-                        typeof cell === 'string' && cell.includes(',')
-                            ? `"${cell}"`
-                            : cell,
-                    )
-                    .join(','),
-            ),
-        ].join('\n');
-
-        const blob = new Blob([csvContent], {
-            type: 'text/csv;charset=utf-8;',
+        ids?.forEach((id) => {
+            formData.append('ids[]', id);
         });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute(
-            'download',
-            `receipts_export_${new Date().toISOString().split('T')[0]}.csv`,
-        );
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
+
+        formData.append('resourceName', resourceName);
+
+        const response = await fetch('/api/export/table', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            toast({
+                variant: 'error',
+                description: t('notification:resource.action.error'),
+            });
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+
+        a.href = url;
+        const contentDisposition = response.headers.get('content-disposition');
+        const fileName =
+            contentDisposition?.split('filename=')[1]?.replace(/"/g, '') ||
+            `${resourceName}_export.csv`;
+        a.download = fileName;
+
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        setIsOpen(false);
+    }
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -94,44 +76,40 @@ export default function TableExportModal({ resources, resourceName }: Props) {
                 <Button className="mb-6 w-fit" type="button">
                     <Table className="mr-2 h-4 w-4" />
                     {t('general:table.export.title')}
-                    {resources.length > 0 ? ` (${resources.length})` : ''}
+                    {ids && ids.length > 0 ? ` (${ids.length})` : ''}
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle asChild>
                         <Text preset="headline">
-                            {t(`${resourceName}:title.other`)}{' '}
-                            {t('general:export')}
+                            {t('general:table.export.title')}
                         </Text>
                     </DialogTitle>
                     <DialogDescription asChild>
                         <Text>
                             {t('general:table.export.description', {
-                                count: resources.length,
+                                count: ids?.length,
                             })}
                         </Text>
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="ml-auto flex pt-4">
-                    <Button
-                        preset="secondary"
-                        type="button"
-                        onClick={() => setIsOpen(false)}
-                        disabled={isExporting}
-                    >
-                        {capitalizeFirstLetter(String(t('general:cancel')))}
-                    </Button>
-                    <Button
-                        type="button"
-                        onClick={handleExport}
-                        isLoading={isExporting}
-                        disabled={resources.length === 0}
-                    >
-                        {capitalizeFirstLetter(t('general:export'))}
-                    </Button>
-                </div>
+                <form
+                    className="container flex flex-col gap-8"
+                    onSubmit={handleSubmit}
+                >
+                    <div className="flex gap-4 self-end">
+                        <Button
+                            preset="secondary"
+                            type="button"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {capitalizeFirstLetter(String(t('general:cancel')))}
+                        </Button>
+                        <SubmitButton title={t('general:export')} />
+                    </div>
+                </form>
             </DialogContent>
         </Dialog>
     );
