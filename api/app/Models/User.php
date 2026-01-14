@@ -73,8 +73,11 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
 
     public function isSuperAdmin(): bool
     {
-        // Requires the super admin user to be given this role to every club.
-        return $this->hasRole('super admin');
+        if (getPermissionsTeamId()) {
+            return $this->hasRole('super admin');
+        }
+
+        return $this->hasRoleInAnyTeam('super admin');
     }
 
     public function getTenants(Panel $panel): Collection

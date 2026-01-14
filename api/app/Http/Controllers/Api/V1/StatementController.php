@@ -9,19 +9,26 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Classes\StatementIdentifierGenerator;
 use LaravelJsonApi\Core\Responses\DataResponse;
-use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\Destroy;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchOne;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchMany;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelated;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\AttachRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\DetachRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\UpdateRelationship;
 
 class StatementController extends Controller
 {
-    use Actions\FetchMany;
-    use Actions\FetchOne;
-    use Actions\Destroy;
-    use Actions\FetchRelated;
-    use Actions\FetchRelationship;
-    use Actions\UpdateRelationship;
-    use Actions\AttachRelationship;
-    use Actions\DetachRelationship;
+    use FetchMany;
+    use FetchOne;
+    use Destroy;
+    use FetchRelated;
+    use FetchRelationship;
+    use UpdateRelationship;
+    use AttachRelationship;
+    use DetachRelationship;
 
     public function store(ResourceRequest $request): DataResponse
     {

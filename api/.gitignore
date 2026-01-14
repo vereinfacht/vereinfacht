@@ -20,5 +20,6 @@ yarn-error.log
 .DS_Store
 public/js
 public/css
+public/fonts
 /storage/media-library/**
 ray.php

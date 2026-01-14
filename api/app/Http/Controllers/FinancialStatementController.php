@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\FinancialStatement\ExportCsv;
-use App\Classes\FinancialStatement;
-use App\Http\Requests\ExportFinancialStatementRequest;
-use App\Models\Receipt;
+use Throwable;
 use ZipArchive;
+use App\Models\Receipt;
+use App\Classes\FinancialStatement;
+use App\Actions\FinancialStatement\ExportCsv;
+use App\Http\Requests\ExportFinancialStatementRequest;
 
 class FinancialStatementController extends Controller
 {
@@ -29,7 +30,7 @@ class FinancialStatementController extends Controller
             $zipPath = $this->getZipPath($receipts, $export->getFileName(), $statementFilePath);
 
             return response()->download($zipPath)->deleteFileAfterSend(false);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return response()->json([
                 'errors' => $th->getMessage(),
             ], 500, ['Content-Type' => 'application/vnd.api+json']);

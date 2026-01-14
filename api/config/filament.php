@@ -1,5 +1,7 @@
 <?php
 
+use Filament\Support\Commands\FileGenerators\FileGenerationFlag;
+
 return [
 
     /*
@@ -86,4 +88,13 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+    'file_generation' => [
+        'flags' => [
+            FileGenerationFlag::EMBEDDED_PANEL_RESOURCE_SCHEMAS, // Define new forms and infolists inside the resource class instead of a separate schema class.
+            FileGenerationFlag::EMBEDDED_PANEL_RESOURCE_TABLES, // Define new tables inside the resource class instead of a separate table class.
+            FileGenerationFlag::PANEL_CLUSTER_CLASSES_OUTSIDE_DIRECTORIES, // Create new cluster classes outside of their directories. Not required if you run `php artisan filament:upgrade-directory-structure-to-v4`.
+            FileGenerationFlag::PANEL_RESOURCE_CLASSES_OUTSIDE_DIRECTORIES, // Create new resource classes outside of their directories. Not required if you run `php artisan filament:upgrade-directory-structure-to-v4`.
+            FileGenerationFlag::PARTIAL_IMPORTS, // Partially import components such as form fields and table columns instead of importing each component explicitly.
+        ],
+    ],
 ];

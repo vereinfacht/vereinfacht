@@ -2,9 +2,9 @@
 
 namespace App\Models\Behaviors;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\PermissionRegistrar;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Traits\HasRoles as PackageHasRoles;
 
 trait HasRoles
@@ -55,5 +55,25 @@ trait HasRoles
 
         return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
             ->where(fn($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
+    }
+
+    /**
+     * Check if user has a role across any team/club
+     */
+    public function hasRoleInAnyTeam(string $roleName): bool
+    {
+        $roleModel = config('permission.models.role');
+        $roleInstance = app($roleModel);
+        $rolesTable = $roleInstance->getTable();
+        $pivotTable = config('permission.table_names.model_has_roles');
+        $modelMorphKey = config('permission.column_names.model_morph_key');
+        $roleIdColumn = app(PermissionRegistrar::class)->pivotRole;
+
+        return DB::table($pivotTable)
+            ->join($rolesTable, $rolesTable . '.id', '=', $pivotTable . '.' . $roleIdColumn)
+            ->where($pivotTable . '.' . $modelMorphKey, $this->getKey())
+            ->where($pivotTable . '.model_type', $this->getMorphClass())
+            ->where($rolesTable . '.name', $roleName)
+            ->exists();
     }
 }
