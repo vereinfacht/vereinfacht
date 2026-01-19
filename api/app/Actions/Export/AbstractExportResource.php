@@ -2,11 +2,10 @@
 
 namespace App\Actions\Export;
 
-use App\Contracts\ExportableResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class AbstractExportResource implements ExportableResource
+abstract class AbstractExportResource
 {
     public function execute(Collection $resources, string $resourceName, array $options = []): string
     {

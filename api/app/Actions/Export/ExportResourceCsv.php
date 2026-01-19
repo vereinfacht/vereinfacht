@@ -2,11 +2,10 @@
 
 namespace App\Actions\Export;
 
-use App\Contracts\ExportableResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class ExportResourceCsv implements ExportableResource
+class ExportResourceCsv
 {
     public function execute(Collection $resources, string $resourceName, array $columns = []): string
     {
