@@ -73,8 +73,8 @@ export default function Desktop({ children, color }: Props) {
                         className={[
                             'pointer-events-none absolute z-10 h-full w-[32px] from-white/0 to-white/60',
                             index === 1
-                                ? 'right-0 bg-gradient-to-r'
-                                : 'left-0 bg-gradient-to-l',
+                                ? 'right-0 bg-linear-to-r'
+                                : 'left-0 bg-linear-to-l',
                         ].join(' ')}
                     />
                 ))}

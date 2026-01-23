@@ -15,7 +15,7 @@ export default function StatusDot({
     return (
         <div
             className={[
-                'h-2 w-2 flex-shrink-0 flex-grow-0 justify-center rounded-full text-[100%]',
+                'h-2 w-2 shrink-0 grow-0 justify-center rounded-full',
                 className,
                 classNameOverrides,
             ].join(' ')}

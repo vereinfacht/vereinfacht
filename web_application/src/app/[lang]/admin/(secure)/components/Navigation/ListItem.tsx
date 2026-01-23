@@ -27,7 +27,7 @@ export default function ListItem({ title, href }: NavigationListItemProps) {
             />
             <Text
                 className={[
-                    'text-[100%] font-semibold leading-[1em] text-slate-700',
+                    'leading-[1em] font-semibold text-slate-700',
                     isActive && 'text-slate-900',
                 ].join(' ')}
             >

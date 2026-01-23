@@ -27,7 +27,7 @@ function CostItem({
                 price={value}
                 withPrefix={highlight ? false : withPrefix}
                 className={[
-                    '!text-sm',
+                    'text-sm!',
                     highlight ? 'font-normal text-slate-900' : '',
                 ].join(' ')}
             />

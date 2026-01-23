@@ -14,12 +14,12 @@ function CardItem({ children, checked, hasLine }: Props) {
                 {checked !== undefined ? (
                     <BooleanIcon checked={checked} />
                 ) : (
-                    <div className="mt-[0.55em] h-[0.375rem] w-[0.375rem] rounded-full bg-slate-500"></div>
+                    <div className="mt-[0.55em] h-1.5 w-1.5 rounded-full bg-slate-500"></div>
                 )}
                 {hasLine && (
                     <div
                         className={[
-                            'line absolute top-2 -z-10 w-[0.125rem] rounded-xl bg-slate-300',
+                            'line absolute top-2 -z-10 w-0.5 rounded-xl bg-slate-300',
                             styles.line,
                         ].join(' ')}
                     ></div>

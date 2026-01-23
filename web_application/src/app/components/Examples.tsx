@@ -59,7 +59,7 @@ export default function Examples() {
                                 forInput="multiselect"
                                 className="flex items-end"
                             >
-                                <IconPerson className="mb-[-0.125rem] mr-1 scale-75 fill-current" />
+                                <IconPerson className="-mb-0.5 mr-1 scale-75 fill-current" />
                                 MultiselectInput
                             </InputLabel>
                         }
@@ -85,7 +85,7 @@ export default function Examples() {
                                 forInput="multiselect"
                                 className="flex items-end"
                             >
-                                <IconPerson className="mb-[-0.125rem] mr-1 scale-75 fill-current" />
+                                <IconPerson className="-mb-0.5 mr-1 scale-75 fill-current" />
                                 MultiselectInput
                             </InputLabel>
                         }
