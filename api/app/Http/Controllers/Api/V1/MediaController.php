@@ -27,13 +27,23 @@ class MediaController extends Controller
             return response()->json(['error' => 'No file attached'], 400);
         }
 
+        $requestedClubId = $request->input('clubId');
+        $userClubId = getPermissionsTeamId();
+
+        if ($requestedClubId != $userClubId) {
+            return response()->json([
+                'error' => 'Unauthorized',
+                'message' => 'You can only upload media for your own club.'
+            ], 403);
+        }
+
         $temporaryOwner = new TemporaryUpload();
         $temporaryOwner->id = 0;
         $temporaryOwner->exists = true;
 
         $media = $temporaryOwner
             ->addMediaFromRequest('file')
-            ->withProperties(['club_id' => $request->input('clubId')])
+            ->withProperties(['club_id' => $requestedClubId])
             ->toMediaCollection($request->input('collectionName'));
 
         return response()->json([

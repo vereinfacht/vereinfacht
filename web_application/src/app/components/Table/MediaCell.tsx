@@ -31,7 +31,7 @@ export default function MediaCell({
         statusDescription = item.name
             ? item.name
             : decodeURIComponent(
-                  item.originalUrl.split('/').pop() || 'unknown.pdf',
+                  item.originalUrl?.split('/').pop() || 'unknown.pdf',
               );
     } else if (mediaCount > 1) {
         statusDescription = t(`${translateNamespace}:media.has_attachments`, {
