@@ -320,7 +320,8 @@ export interface paths {
         /** Get all users */
         get: operations["users.index"];
         put?: never;
-        post?: never;
+        /** Store one user */
+        post: operations["users.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -338,27 +339,12 @@ export interface paths {
         get: operations["users.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one user */
+        delete: operations["users.destroy"];
         options?: never;
         head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/media/upload": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Upload a new medium */
-        post: operations["media.upload"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
+        /** Update one user */
+        patch: operations["users.update"];
         trace?: never;
     };
     "/media/{medium}": {
@@ -387,6 +373,23 @@ export interface paths {
         };
         /** Get all permissions */
         get: operations["permissions.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all roles */
+        get: operations["roles.index"];
         put?: never;
         post?: never;
         delete?: never;
@@ -586,8 +589,7 @@ export interface paths {
         /** Get all transactions */
         get: operations["transactions.index"];
         put?: never;
-        /** Store one transaction */
-        post: operations["transactions.store"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -608,8 +610,7 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        /** Update one transaction */
-        patch: operations["transactions.update"];
+        patch?: never;
         trace?: never;
     };
     "/transactions/{transaction}/statement": {
@@ -679,8 +680,7 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        /** Update one statement */
-        patch: operations["statements.update"];
+        patch?: never;
         trace?: never;
     };
     "/statements/{statement}/finance-account": {
@@ -994,7 +994,10 @@ export interface components {
                  * @example Turn- und Sportverein Muster e. V.
                  */
                 extendedTitle?: string;
-                /** applyTitle */
+                /**
+                 * applyTitle
+                 * @example <p></p>
+                 */
                 applyTitle?: string;
                 /**
                  * applyUrl
@@ -1028,7 +1031,7 @@ export interface components {
                 preferredLocale?: string;
                 /**
                  * email
-                 * @example larkin.quentin@example.com
+                 * @example oschamberger@example.com
                  */
                 email?: string;
                 /**
@@ -1048,17 +1051,17 @@ export interface components {
                 logoUrl?: string;
                 /**
                  * privacyStatementUrl
-                 * @example http://herman.com/quas-aperiam-eligendi-consectetur-fuga-incidunt-voluptatem.html
+                 * @example https://ondricka.com/ut-sint-amet-eveniet-consequatur-sequi-veritatis-dolor.html
                  */
                 privacyStatementUrl?: string;
                 /**
                  * contributionStatementUrl
-                 * @example http://lind.com/occaecati-dolore-sint-vero-occaecati-excepturi
+                 * @example http://swaniawski.net/
                  */
                 contributionStatementUrl?: string;
                 /**
                  * constitutionUrl
-                 * @example http://friesen.org/exercitationem-unde-facere-sint-cupiditate-consectetur-tempora
+                 * @example http://mcclure.com/deleniti-ratione-voluptate-dolores-et-sint-non.html
                  */
                 constitutionUrl?: string;
                 /**
@@ -1083,12 +1086,12 @@ export interface components {
                 hasConsentedMediaPublicationDefaultValue?: boolean;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-13T10:21:10.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -1158,12 +1161,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         self?: string;
                     };
@@ -1195,7 +1198,10 @@ export interface components {
                  * @example Turn- und Sportverein Muster e. V.
                  */
                 extendedTitle?: string;
-                /** applyTitle */
+                /**
+                 * applyTitle
+                 * @example <p></p>
+                 */
                 applyTitle?: string;
                 /**
                  * applyUrl
@@ -1229,7 +1235,7 @@ export interface components {
                 preferredLocale?: string;
                 /**
                  * email
-                 * @example larkin.quentin@example.com
+                 * @example oschamberger@example.com
                  */
                 email?: string;
                 /**
@@ -1249,17 +1255,17 @@ export interface components {
                 logoUrl?: string;
                 /**
                  * privacyStatementUrl
-                 * @example http://herman.com/quas-aperiam-eligendi-consectetur-fuga-incidunt-voluptatem.html
+                 * @example https://ondricka.com/ut-sint-amet-eveniet-consequatur-sequi-veritatis-dolor.html
                  */
                 privacyStatementUrl?: string;
                 /**
                  * contributionStatementUrl
-                 * @example http://lind.com/occaecati-dolore-sint-vero-occaecati-excepturi
+                 * @example http://swaniawski.net/
                  */
                 contributionStatementUrl?: string;
                 /**
                  * constitutionUrl
-                 * @example http://friesen.org/exercitationem-unde-facere-sint-cupiditate-consectetur-tempora
+                 * @example http://mcclure.com/deleniti-ratione-voluptate-dolores-et-sint-non.html
                  */
                 constitutionUrl?: string;
                 /**
@@ -1284,12 +1290,12 @@ export interface components {
                 hasConsentedMediaPublicationDefaultValue?: boolean;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-13T10:21:10.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -1359,12 +1365,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         self?: string;
                     };
@@ -1393,12 +1399,12 @@ export interface components {
                 titleTranslations?: Record<string, never>;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-13T10:22:00.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -1472,12 +1478,12 @@ export interface components {
                 titleTranslations?: Record<string, never>;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-13T10:22:00.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -1564,7 +1570,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         }[];
@@ -1577,7 +1583,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         }[];
@@ -1590,7 +1596,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         };
@@ -1603,7 +1609,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         }[];
@@ -1629,7 +1635,7 @@ export interface components {
                 title?: string;
                 /**
                  * iban
-                 * @example DE06851627558042158236
+                 * @example DE37246589751456357728
                  */
                 iban?: string;
                 /**
@@ -1644,17 +1650,17 @@ export interface components {
                 readonly currentBalance?: number;
                 /**
                  * startsAt
-                 * @example 1997-04-24T21:53:33.000000Z
+                 * @example 2007-11-08T07:19:26.000000Z
                  */
                 startsAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly updatedAt?: string;
                 /** deletedAt */
@@ -1713,7 +1719,7 @@ export interface components {
                 title?: string;
                 /**
                  * iban
-                 * @example DE06851627558042158236
+                 * @example DE37246589751456357728
                  */
                 iban?: string;
                 /**
@@ -1728,17 +1734,17 @@ export interface components {
                 readonly currentBalance?: number;
                 /**
                  * startsAt
-                 * @example 1997-04-24T21:53:33.000000Z
+                 * @example 2007-11-08T07:19:26.000000Z
                  */
                 startsAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly updatedAt?: string;
                 /** deletedAt */
@@ -1799,7 +1805,7 @@ export interface components {
                 title?: string;
                 /**
                  * iban
-                 * @example DE06851627558042158236
+                 * @example DE37246589751456357728
                  */
                 iban?: string;
                 /**
@@ -1814,17 +1820,17 @@ export interface components {
                 readonly currentBalance?: number;
                 /**
                  * startsAt
-                 * @example 1997-04-24T21:53:33.000000Z
+                 * @example 2007-11-08T07:19:26.000000Z
                  */
                 startsAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly updatedAt?: string;
                 /** deletedAt */
@@ -1875,54 +1881,54 @@ export interface components {
             attributes: {
                 /**
                  * lastName
-                 * @example Quigley
+                 * @example Mohr
                  */
                 lastName?: string;
                 /**
                  * firstName
-                 * @example Gladys
+                 * @example Jesus
                  */
                 firstName?: string;
                 /**
                  * fullName
-                 * @example Gladys Quigley
+                 * @example Jesus Mohr
                  */
                 fullName?: string;
                 /** companyName */
                 companyName?: string;
                 /**
                  * gender
-                 * @example other
+                 * @example female
                  */
                 gender?: string;
                 /**
                  * address
-                 * @example 796 Stiedemann Camp Suite 581
+                 * @example 93240 Goodwin Shoals
                  */
                 address?: string;
                 /**
                  * zipCode
-                 * @example 59445
+                 * @example 73252-4185
                  */
                 zipCode?: string;
                 /**
                  * city
-                 * @example South Eudoramouth
+                 * @example Schuppeshire
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Malawi
+                 * @example Ireland
                  */
                 country?: string;
                 /**
                  * phoneNumber
-                 * @example +14639610452
+                 * @example +14454094455
                  */
                 phoneNumber?: string;
                 /**
                  * email
-                 * @example lavern.littel@example.net
+                 * @example arjun65@example.com
                  */
                 email?: string;
                 /**
@@ -1932,12 +1938,12 @@ export interface components {
                 contactType?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -1984,54 +1990,54 @@ export interface components {
             attributes: {
                 /**
                  * lastName
-                 * @example Quigley
+                 * @example Mohr
                  */
                 lastName?: string;
                 /**
                  * firstName
-                 * @example Gladys
+                 * @example Jesus
                  */
                 firstName?: string;
                 /**
                  * fullName
-                 * @example Gladys Quigley
+                 * @example Jesus Mohr
                  */
                 fullName?: string;
                 /** companyName */
                 companyName?: string;
                 /**
                  * gender
-                 * @example other
+                 * @example female
                  */
                 gender?: string;
                 /**
                  * address
-                 * @example 796 Stiedemann Camp Suite 581
+                 * @example 93240 Goodwin Shoals
                  */
                 address?: string;
                 /**
                  * zipCode
-                 * @example 59445
+                 * @example 73252-4185
                  */
                 zipCode?: string;
                 /**
                  * city
-                 * @example South Eudoramouth
+                 * @example Schuppeshire
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Malawi
+                 * @example Ireland
                  */
                 country?: string;
                 /**
                  * phoneNumber
-                 * @example +14639610452
+                 * @example +14454094455
                  */
                 phoneNumber?: string;
                 /**
                  * email
-                 * @example lavern.littel@example.net
+                 * @example arjun65@example.com
                  */
                 email?: string;
                 /**
@@ -2041,12 +2047,12 @@ export interface components {
                 contactType?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2095,54 +2101,54 @@ export interface components {
             attributes: {
                 /**
                  * lastName
-                 * @example Quigley
+                 * @example Mohr
                  */
                 lastName?: string;
                 /**
                  * firstName
-                 * @example Gladys
+                 * @example Jesus
                  */
                 firstName?: string;
                 /**
                  * fullName
-                 * @example Gladys Quigley
+                 * @example Jesus Mohr
                  */
                 fullName?: string;
                 /** companyName */
                 companyName?: string;
                 /**
                  * gender
-                 * @example other
+                 * @example female
                  */
                 gender?: string;
                 /**
                  * address
-                 * @example 796 Stiedemann Camp Suite 581
+                 * @example 93240 Goodwin Shoals
                  */
                 address?: string;
                 /**
                  * zipCode
-                 * @example 59445
+                 * @example 73252-4185
                  */
                 zipCode?: string;
                 /**
                  * city
-                 * @example South Eudoramouth
+                 * @example Schuppeshire
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Malawi
+                 * @example Ireland
                  */
                 country?: string;
                 /**
                  * phoneNumber
-                 * @example +14639610452
+                 * @example +14454094455
                  */
                 phoneNumber?: string;
                 /**
                  * email
-                 * @example lavern.littel@example.net
+                 * @example arjun65@example.com
                  */
                 email?: string;
                 /**
@@ -2152,12 +2158,12 @@ export interface components {
                 contactType?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
+                 * @example 2026-01-12T12:31:57.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2258,12 +2264,12 @@ export interface components {
             attributes: {
                 /**
                  * firstName
-                 * @example Juwan
+                 * @example Geovanny
                  */
                 firstName?: string;
                 /**
                  * lastName
-                 * @example Hudson
+                 * @example Hodkiewicz
                  */
                 lastName?: string;
                 /**
@@ -2273,22 +2279,22 @@ export interface components {
                 gender?: string;
                 /**
                  * address
-                 * @example 3225 Durgan Rue Suite 172
+                 * @example 27314 Lucas Turnpike
                  */
                 address?: string;
                 /**
                  * zipCode
-                 * @example 59280
+                 * @example 57239-8421
                  */
                 zipCode?: string;
                 /**
                  * city
-                 * @example Turcotteshire
+                 * @example Port Coltonchester
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Macedonia
+                 * @example Burundi
                  */
                 country?: string;
                 /**
@@ -2298,31 +2304,34 @@ export interface components {
                 preferredLocale?: string;
                 /**
                  * birthday
-                 * @example 1998-11-10T00:00:00.000000Z
+                 * @example 2008-09-11T00:00:00.000000Z
                  */
                 birthday?: string;
                 /**
                  * phoneNumber
-                 * @example +18567647870
+                 * @example +18173327637
                  */
                 phoneNumber?: string;
                 /**
                  * email
-                 * @example pansy.farrell@example.net
+                 * @example jwunsch@example.com
                  */
                 email?: string;
                 /** membershipTypeId */
                 readonly membershipTypeId?: string;
-                /** hasConsentedMediaPublication */
+                /**
+                 * hasConsentedMediaPublication
+                 * @example 2026-01-10T12:31:54.000000Z
+                 */
                 hasConsentedMediaPublication?: boolean;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2384,12 +2393,12 @@ export interface components {
             attributes: {
                 /**
                  * firstName
-                 * @example Juwan
+                 * @example Geovanny
                  */
                 firstName?: string;
                 /**
                  * lastName
-                 * @example Hudson
+                 * @example Hodkiewicz
                  */
                 lastName?: string;
                 /**
@@ -2399,22 +2408,22 @@ export interface components {
                 gender?: string;
                 /**
                  * address
-                 * @example 3225 Durgan Rue Suite 172
+                 * @example 27314 Lucas Turnpike
                  */
                 address?: string;
                 /**
                  * zipCode
-                 * @example 59280
+                 * @example 57239-8421
                  */
                 zipCode?: string;
                 /**
                  * city
-                 * @example Turcotteshire
+                 * @example Port Coltonchester
                  */
                 city?: string;
                 /**
                  * country
-                 * @example Macedonia
+                 * @example Burundi
                  */
                 country?: string;
                 /**
@@ -2424,31 +2433,34 @@ export interface components {
                 preferredLocale?: string;
                 /**
                  * birthday
-                 * @example 1998-11-10T00:00:00.000000Z
+                 * @example 2008-09-11T00:00:00.000000Z
                  */
                 birthday?: string;
                 /**
                  * phoneNumber
-                 * @example +18567647870
+                 * @example +18173327637
                  */
                 phoneNumber?: string;
                 /**
                  * email
-                 * @example pansy.farrell@example.net
+                 * @example jwunsch@example.com
                  */
                 email?: string;
                 /** membershipTypeId */
                 readonly membershipTypeId?: string;
-                /** hasConsentedMediaPublication */
+                /**
+                 * hasConsentedMediaPublication
+                 * @example 2026-01-10T12:31:54.000000Z
+                 */
                 hasConsentedMediaPublication?: boolean;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2562,12 +2574,12 @@ export interface components {
                 sortOrder?: number;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2666,12 +2678,12 @@ export interface components {
                 sortOrder?: number;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:54.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2715,23 +2727,20 @@ export interface components {
              * @default memberships
              */
             type: string;
-            /** @example 21 */
+            /** @example 62 */
             id: string;
             attributes: {
                 /**
                  * bankIban
-                 * @example DK2632742463527880
+                 * @example DE123123123123123123
                  */
                 bankIban?: string;
                 /**
                  * bankAccountHolder
-                 * @example Laurine Will
+                 * @example Miss Christina Dare
                  */
                 bankAccountHolder?: string;
-                /**
-                 * notes
-                 * @example Qui voluptatem suscipit pariatur repellendus quaerat. Officiis porro est ea a enim optio. Quia assumenda quia et soluta itaque. Ad quaerat molestias voluptatem atque. Consectetur itaque corporis est temporibus beatae fugiat laboriosam. Dolorem tenetur sequi sint aliquam. Qui at ut vitae facilis eum et facilis. Qui nihil earum laboriosam amet voluptatibus. Dicta itaque maiores eaque qui sit. Aut nisi eum eos quo et ut. Optio aperiam dolorum nemo deserunt quos sit aspernatur. Qui temporibus omnis necessitatibus voluptatibus. Nostrum officiis sunt et omnis ut repellat temporibus. Quia sed quas voluptates. Explicabo eum voluptas ut nemo aut dolorem voluptatum. Doloremque quo ad tempora cum autem autem. Odio voluptatum quis sapiente nobis ducimus eveniet. Voluptatibus temporibus illum est quas aperiam. Perferendis saepe consequatur voluptates suscipit non. Rerum aliquid earum distinctio autem alias. Eius blanditiis expedita facere. Est perferendis velit voluptatem molestiae dicta rerum natus aut. Occaecati iure cupiditate nostrum excepturi. Aperiam quia et sed animi quis. Neque voluptatem dolorem numquam minima reprehenderit. Magnam eum aut ut cupiditate quibusdam nemo omnis pariatur. Qui illo et aperiam cum omnis unde. Dolorem fugit aperiam sunt aut. Voluptate vel perspiciatis recusandae ut numquam rerum.
-                 */
+                /** notes */
                 notes?: string;
                 /**
                  * status
@@ -2747,19 +2756,19 @@ export interface components {
                 voluntaryContribution?: number;
                 /**
                  * startedAt
-                 * @example 1970-05-01T17:54:47.000000Z
+                 * @example 2026-01-14T00:00:00.000000Z
                  */
                 startedAt?: string;
                 /** endedAt */
                 endedAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2769,12 +2778,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         self?: string;
                     };
@@ -2784,12 +2793,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         self?: string;
                     };
@@ -2799,12 +2808,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         self?: string;
                     };
@@ -2814,12 +2823,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         self?: string;
                     };
@@ -2829,12 +2838,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         self?: string;
                     };
@@ -2851,18 +2860,15 @@ export interface components {
             attributes: {
                 /**
                  * bankIban
-                 * @example DK2632742463527880
+                 * @example DE123123123123123123
                  */
                 bankIban?: string;
                 /**
                  * bankAccountHolder
-                 * @example Laurine Will
+                 * @example Miss Christina Dare
                  */
                 bankAccountHolder?: string;
-                /**
-                 * notes
-                 * @example Qui voluptatem suscipit pariatur repellendus quaerat. Officiis porro est ea a enim optio. Quia assumenda quia et soluta itaque. Ad quaerat molestias voluptatem atque. Consectetur itaque corporis est temporibus beatae fugiat laboriosam. Dolorem tenetur sequi sint aliquam. Qui at ut vitae facilis eum et facilis. Qui nihil earum laboriosam amet voluptatibus. Dicta itaque maiores eaque qui sit. Aut nisi eum eos quo et ut. Optio aperiam dolorum nemo deserunt quos sit aspernatur. Qui temporibus omnis necessitatibus voluptatibus. Nostrum officiis sunt et omnis ut repellat temporibus. Quia sed quas voluptates. Explicabo eum voluptas ut nemo aut dolorem voluptatum. Doloremque quo ad tempora cum autem autem. Odio voluptatum quis sapiente nobis ducimus eveniet. Voluptatibus temporibus illum est quas aperiam. Perferendis saepe consequatur voluptates suscipit non. Rerum aliquid earum distinctio autem alias. Eius blanditiis expedita facere. Est perferendis velit voluptatem molestiae dicta rerum natus aut. Occaecati iure cupiditate nostrum excepturi. Aperiam quia et sed animi quis. Neque voluptatem dolorem numquam minima reprehenderit. Magnam eum aut ut cupiditate quibusdam nemo omnis pariatur. Qui illo et aperiam cum omnis unde. Dolorem fugit aperiam sunt aut. Voluptate vel perspiciatis recusandae ut numquam rerum.
-                 */
+                /** notes */
                 notes?: string;
                 /**
                  * status
@@ -2878,19 +2884,19 @@ export interface components {
                 voluntaryContribution?: number;
                 /**
                  * startedAt
-                 * @example 1970-05-01T17:54:47.000000Z
+                 * @example 2026-01-14T00:00:00.000000Z
                  */
                 startedAt?: string;
                 /** endedAt */
                 endedAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -2900,12 +2906,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         self?: string;
                     };
@@ -2915,12 +2921,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         self?: string;
                     };
@@ -2930,12 +2936,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         self?: string;
                     };
@@ -2945,12 +2951,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         self?: string;
                     };
@@ -2960,12 +2966,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         self?: string;
                     };
@@ -2979,23 +2985,20 @@ export interface components {
              * @default memberships
              */
             type: string;
-            /** @example 21 */
+            /** @example 62 */
             id: string;
             attributes: {
                 /**
                  * bankIban
-                 * @example DK2632742463527880
+                 * @example DE123123123123123123
                  */
                 bankIban?: string;
                 /**
                  * bankAccountHolder
-                 * @example Laurine Will
+                 * @example Miss Christina Dare
                  */
                 bankAccountHolder?: string;
-                /**
-                 * notes
-                 * @example Qui voluptatem suscipit pariatur repellendus quaerat. Officiis porro est ea a enim optio. Quia assumenda quia et soluta itaque. Ad quaerat molestias voluptatem atque. Consectetur itaque corporis est temporibus beatae fugiat laboriosam. Dolorem tenetur sequi sint aliquam. Qui at ut vitae facilis eum et facilis. Qui nihil earum laboriosam amet voluptatibus. Dicta itaque maiores eaque qui sit. Aut nisi eum eos quo et ut. Optio aperiam dolorum nemo deserunt quos sit aspernatur. Qui temporibus omnis necessitatibus voluptatibus. Nostrum officiis sunt et omnis ut repellat temporibus. Quia sed quas voluptates. Explicabo eum voluptas ut nemo aut dolorem voluptatum. Doloremque quo ad tempora cum autem autem. Odio voluptatum quis sapiente nobis ducimus eveniet. Voluptatibus temporibus illum est quas aperiam. Perferendis saepe consequatur voluptates suscipit non. Rerum aliquid earum distinctio autem alias. Eius blanditiis expedita facere. Est perferendis velit voluptatem molestiae dicta rerum natus aut. Occaecati iure cupiditate nostrum excepturi. Aperiam quia et sed animi quis. Neque voluptatem dolorem numquam minima reprehenderit. Magnam eum aut ut cupiditate quibusdam nemo omnis pariatur. Qui illo et aperiam cum omnis unde. Dolorem fugit aperiam sunt aut. Voluptate vel perspiciatis recusandae ut numquam rerum.
-                 */
+                /** notes */
                 notes?: string;
                 /**
                  * status
@@ -3011,19 +3014,19 @@ export interface components {
                 voluntaryContribution?: number;
                 /**
                  * startedAt
-                 * @example 1970-05-01T17:54:47.000000Z
+                 * @example 2026-01-14T00:00:00.000000Z
                  */
                 startedAt?: string;
                 /** endedAt */
                 endedAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:32.000000Z
+                 * @example 2026-01-14T10:05:55.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3033,12 +3036,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/21
+                         * @example http://api.verein.localhost/api/v1/clubs/62
                          */
                         self?: string;
                     };
@@ -3048,12 +3051,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/membership-types/21
+                         * @example http://api.verein.localhost/api/v1/membership-types/62
                          */
                         self?: string;
                     };
@@ -3063,12 +3066,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/owners/21
+                         * @example http://api.verein.localhost/api/v1/owners/62
                          */
                         self?: string;
                     };
@@ -3078,12 +3081,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/payment-periods/21
+                         * @example http://api.verein.localhost/api/v1/payment-periods/62
                          */
                         self?: string;
                     };
@@ -3093,12 +3096,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/members/21
+                         * @example http://api.verein.localhost/api/v1/members/62
                          */
                         self?: string;
                     };
@@ -3122,12 +3125,12 @@ export interface components {
                 name?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:27.000000Z
+                 * @example 2026-01-12T12:31:52.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:27.000000Z
+                 * @example 2026-01-12T12:31:52.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3139,12 +3142,12 @@ export interface components {
              * @default receipts
              */
             type: string;
-            /** @example 15 */
+            /** @example 46 */
             id: string;
             attributes: {
                 /**
                  * referenceNumber
-                 * @example REF-04152
+                 * @example REF-08015
                  */
                 referenceNumber?: string;
                 /**
@@ -3154,7 +3157,7 @@ export interface components {
                 receiptType?: string;
                 /**
                  * bookingDate
-                 * @example 2025-10-15 15:32:12
+                 * @example 2026-01-11 22:24:51
                  */
                 bookingDate?: string;
                 /**
@@ -3164,17 +3167,17 @@ export interface components {
                 readonly status?: string;
                 /**
                  * amount
-                 * @example 117.5
+                 * @example 518.69
                  */
-                amount?: number;
+                amount?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3184,12 +3187,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         self?: string;
                     };
@@ -3199,12 +3202,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         self?: string;
                     };
@@ -3214,12 +3217,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         self?: string;
                     };
@@ -3229,12 +3232,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         self?: string;
                     };
@@ -3244,12 +3247,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
                          */
                         self?: string;
                     };
@@ -3266,7 +3269,7 @@ export interface components {
             attributes: {
                 /**
                  * referenceNumber
-                 * @example REF-04152
+                 * @example REF-08015
                  */
                 referenceNumber?: string;
                 /**
@@ -3276,7 +3279,7 @@ export interface components {
                 receiptType?: string;
                 /**
                  * bookingDate
-                 * @example 2025-10-15 15:32:12
+                 * @example 2026-01-11 22:24:51
                  */
                 bookingDate?: string;
                 /**
@@ -3286,17 +3289,17 @@ export interface components {
                 readonly status?: string;
                 /**
                  * amount
-                 * @example 117.5
+                 * @example 518.69
                  */
-                amount?: number;
+                amount?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3306,12 +3309,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         self?: string;
                     };
@@ -3321,12 +3324,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         self?: string;
                     };
@@ -3336,12 +3339,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         self?: string;
                     };
@@ -3351,12 +3354,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         self?: string;
                     };
@@ -3366,12 +3369,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
                          */
                         self?: string;
                     };
@@ -3385,12 +3388,12 @@ export interface components {
              * @default receipts
              */
             type: string;
-            /** @example 15 */
+            /** @example 46 */
             id: string;
             attributes: {
                 /**
                  * referenceNumber
-                 * @example REF-04152
+                 * @example REF-08015
                  */
                 referenceNumber?: string;
                 /**
@@ -3400,7 +3403,7 @@ export interface components {
                 receiptType?: string;
                 /**
                  * bookingDate
-                 * @example 2025-10-15 15:32:12
+                 * @example 2026-01-11 22:24:51
                  */
                 bookingDate?: string;
                 /**
@@ -3410,17 +3413,17 @@ export interface components {
                 readonly status?: string;
                 /**
                  * amount
-                 * @example 117.5
+                 * @example 518.69
                  */
-                amount?: number;
+                amount?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:38.000000Z
+                 * @example 2026-01-12T12:31:58.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -3430,12 +3433,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/15
+                         * @example http://api.verein.localhost/api/v1/clubs/46
                          */
                         self?: string;
                     };
@@ -3445,12 +3448,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/finance-contacts/15
+                         * @example http://api.verein.localhost/api/v1/finance-contacts/46
                          */
                         self?: string;
                     };
@@ -3460,12 +3463,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/tax-accounts/46
                          */
                         self?: string;
                     };
@@ -3475,12 +3478,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/transactions/15
+                         * @example http://api.verein.localhost/api/v1/transactions/46
                          */
                         self?: string;
                     };
@@ -3490,12 +3493,56 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/media/15
+                         * @example http://api.verein.localhost/api/v1/media/46
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Role/Fetch */
+        "resources.roles.resource.fetch": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example super admin
+                 */
+                name?: string;
+                /**
+                 * createdAt
+                 * @example 2026-01-12T12:31:52.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-01-12T12:31:52.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** permissions */
+                permissions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/permissions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/permissions/1
                          */
                         self?: string;
                     };
@@ -3587,22 +3634,22 @@ export interface components {
              * @default statements
              */
             type: string;
-            /** @example 1 */
+            /** @example 385 */
             id: string;
             attributes: {
                 /**
                  * identifier
-                 * @example 13ee6a69-72ce-3ddc-9468-34b423c5febb
+                 * @example 53b3f084de66ce6b475449e89f8d6fff
                  */
                 identifier?: string;
                 /**
                  * title
-                 * @example Bridie Gorczany
+                 * @example 123
                  */
                 readonly title?: string;
                 /**
                  * date
-                 * @example 2025-04-28T12:18:02.000000Z
+                 * @example 2026-01-17T00:00:00.000000Z
                  */
                 date?: string;
                 /**
@@ -3612,17 +3659,17 @@ export interface components {
                 status?: string;
                 /**
                  * statementType
-                 * @example collective
+                 * @example individual
                  */
                 readonly statementType?: string;
                 /**
                  * createdAt
-                 * @example 2025-11-17T08:43:53.000000Z
+                 * @example 2026-01-23T11:47:17.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-11-17T08:43:53.000000Z
+                 * @example 2026-01-23T11:47:17.000000Z
                  */
                 readonly updatedAt?: string;
                 /**
@@ -3641,12 +3688,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         * @example http://api.verein.localhost/api/v1/finance-accounts/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         * @example http://api.verein.localhost/api/v1/finance-accounts/385
                          */
                         self?: string;
                     };
@@ -3656,12 +3703,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         * @example http://api.verein.localhost/api/v1/clubs/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         * @example http://api.verein.localhost/api/v1/clubs/385
                          */
                         self?: string;
                     };
@@ -3671,12 +3718,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         * @example http://api.verein.localhost/api/v1/transactions/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         * @example http://api.verein.localhost/api/v1/transactions/385
                          */
                         self?: string;
                     };
@@ -3693,22 +3740,37 @@ export interface components {
             attributes: {
                 /**
                  * identifier
-                 * @example d2956879-c5f4-3d73-9e2c-329f4dbaf6f6
+                 * @example 53b3f084de66ce6b475449e89f8d6fff
                  */
                 identifier?: string;
                 /**
+                 * title
+                 * @example 123
+                 */
+                readonly title?: string;
+                /**
                  * date
-                 * @example 2025-01-31T16:16:40.000000Z
+                 * @example 2026-01-17T00:00:00.000000Z
                  */
                 date?: string;
                 /**
+                 * status
+                 * @example empty
+                 */
+                status?: string;
+                /**
+                 * statementType
+                 * @example individual
+                 */
+                readonly statementType?: string;
+                /**
                  * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-23T11:47:17.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * @example 2026-01-23T11:47:17.000000Z
                  */
                 readonly updatedAt?: string;
                 /**
@@ -3716,6 +3778,10 @@ export interface components {
                  * @example 0
                  */
                 readonly amount?: number;
+                /** description */
+                readonly description?: string;
+                /** transactionAmount */
+                readonly transactionAmount?: number;
             };
             relationships?: {
                 /** financeAccount */
@@ -3723,12 +3789,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         * @example http://api.verein.localhost/api/v1/finance-accounts/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
+                         * @example http://api.verein.localhost/api/v1/finance-accounts/385
                          */
                         self?: string;
                     };
@@ -3738,27 +3804,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         * @example http://api.verein.localhost/api/v1/clubs/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/clubs/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** taxAccount */
-                taxAccount?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
+                         * @example http://api.verein.localhost/api/v1/clubs/385
                          */
                         self?: string;
                     };
@@ -3768,96 +3819,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         * @example http://api.verein.localhost/api/v1/transactions/385
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/transactions/1
-                         */
-                        self?: string;
-                    };
-                };
-            };
-        };
-        /** Resource/Statement/Update */
-        "resources.statements.resource.update": {
-            /**
-             * type
-             * @default statements
-             */
-            type: string;
-            /** @example 1 */
-            id: string;
-            attributes: {
-                /**
-                 * identifier
-                 * @example d2956879-c5f4-3d73-9e2c-329f4dbaf6f6
-                 */
-                identifier?: string;
-                /**
-                 * date
-                 * @example 2025-01-31T16:16:40.000000Z
-                 */
-                date?: string;
-                /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
-                 */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * amount
-                 * @example 0
-                 */
-                readonly amount?: number;
-            };
-            relationships?: {
-                /** financeAccount */
-                financeAccount?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/finance-accounts/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** club */
-                club?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/clubs/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/clubs/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** transactions */
-                transactions?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/transactions/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/transactions/1
+                         * @example http://api.verein.localhost/api/v1/transactions/385
                          */
                         self?: string;
                     };
@@ -3891,12 +3858,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         self?: string;
                     };
@@ -4033,7 +4000,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         };
@@ -4046,7 +4013,7 @@ export interface components {
             type: string;
             /**
              * id
-             * @example 1
+             * @example 385
              */
             id: string;
         };
@@ -4062,12 +4029,12 @@ export interface components {
             attributes: {
                 /**
                  * title
-                 * @example Dolor porro quia odio quisquam architecto doloribus.
+                 * @example Eum excepturi tempore dolorem qui consequatur dignissimos odio.
                  */
                 title?: string;
                 /**
                  * description
-                 * @example Qui cumque deserunt eos quibusdam asperiores.
+                 * @example Quis qui distinctio itaque aut deleniti veniam.
                  */
                 description?: string;
                 /**
@@ -4077,42 +4044,42 @@ export interface components {
                 gvc?: number;
                 /**
                  * bankIban
-                 * @example LI028970401C20E0IWO1G
+                 * @example VG28BADO9293769674415385
                  */
                 bankIban?: string;
                 /**
                  * bankAccountHolder
-                 * @example Bridie Gorczany
+                 * @example Axel Nader
                  */
                 bankAccountHolder?: string;
                 /**
                  * currency
-                 * @example DKK
+                 * @example EUR
                  */
                 currency?: string;
                 /**
                  * amount
-                 * @example 5382.4
+                 * @example -32.7
                  */
                 amount?: string;
                 /**
                  * valuedAt
-                 * @example 2025-03-10T05:05:48.000000Z
+                 * @example 2025-06-01T10:42:17.000000Z
                  */
                 valuedAt?: string;
                 /**
                  * bookedAt
-                 * @example 2025-03-10T05:05:48.000000Z
+                 * @example 2025-06-01T10:42:17.000000Z
                  */
                 bookedAt?: string;
                 /**
                  * createdAt
-                 * @example 2025-11-17T08:43:54.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-11-17T08:43:54.000000Z
+                 * @example 2026-01-12T12:31:56.000000Z
                  */
                 readonly updatedAt?: string;
                 /**
@@ -4122,174 +4089,8 @@ export interface components {
                 readonly status?: string;
             };
             relationships?: {
-                /** receipts */
-                receipts?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** statement */
-                statement?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        self?: string;
-                    };
-                };
-            };
-        };
-        /** Resource/Transaction/Store */
-        "resources.transactions.resource.store": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            attributes: {
-                /**
-                 * name
-                 * @example Prof. Charlie Glover MD
-                 */
-                name?: string;
-                /**
-                 * description
-                 * @example Quaerat sed corporis tempora esse.
-                 */
-                description?: string;
-                /**
-                 * amount
-                 * @example 3072.23
-                 */
-                amount?: number;
-                /**
-                 * valuedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                valuedAt?: string;
-                /**
-                 * bookedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                bookedAt?: string;
-                /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * status
-                 * @example incompleted
-                 */
-                readonly status?: string;
-            };
-            relationships?: {
-                /** receipts */
-                receipts?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** statement */
-                statement?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        self?: string;
-                    };
-                };
-            };
-        };
-        /** Resource/Transaction/Update */
-        "resources.transactions.resource.update": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /** @example 1 */
-            id: string;
-            attributes: {
-                /**
-                 * name
-                 * @example Prof. Charlie Glover MD
-                 */
-                name?: string;
-                /**
-                 * description
-                 * @example Quaerat sed corporis tempora esse.
-                 */
-                description?: string;
-                /**
-                 * amount
-                 * @example 3072.23
-                 */
-                amount?: number;
-                /**
-                 * valuedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                valuedAt?: string;
-                /**
-                 * bookedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                bookedAt?: string;
-                /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * status
-                 * @example incompleted
-                 */
-                readonly status?: string;
-            };
-            relationships?: {
-                /** receipts */
-                receipts?: {
+                /** receipt */
+                receipt?: {
                     readonly links?: {
                         /**
                          * related
@@ -4332,7 +4133,7 @@ export interface components {
             attributes: {
                 /**
                  * name
-                 * @example Prof. Vernice Jones III
+                 * @example Easter McDermot
                  */
                 name?: string;
                 /**
@@ -4341,18 +4142,23 @@ export interface components {
                  */
                 email?: string;
                 /**
+                 * password
+                 * @example $2y$10$JB7FZK45mhUnorCQhEWVs.eQHpO9tHSb/1rs8hLGZJ8isLxRxxhHy
+                 */
+                password?: string;
+                /**
                  * preferredLocale
-                 * @example de
+                 * @example en
                  */
                 preferredLocale?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-12T12:31:53.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-01-13T10:21:39.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4368,6 +4174,212 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/User/Store */
+        "resources.users.resource.store": {
+            /**
+             * type
+             * @default users
+             */
+            type: string;
+            attributes: {
+                /**
+                 * name
+                 * @example Easter McDermot
+                 */
+                name?: string;
+                /**
+                 * email
+                 * @example hello@vereinfacht.digital
+                 */
+                email?: string;
+                /**
+                 * password
+                 * @example $2y$10$JB7FZK45mhUnorCQhEWVs.eQHpO9tHSb/1rs8hLGZJ8isLxRxxhHy
+                 */
+                password?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * createdAt
+                 * @example 2026-01-12T12:31:53.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-01-13T10:21:39.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** roles */
+                roles?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/User/Update */
+        "resources.users.resource.update": {
+            /**
+             * type
+             * @default users
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example Easter McDermot
+                 */
+                name?: string;
+                /**
+                 * email
+                 * @example hello@vereinfacht.digital
+                 */
+                email?: string;
+                /**
+                 * password
+                 * @example $2y$10$JB7FZK45mhUnorCQhEWVs.eQHpO9tHSb/1rs8hLGZJ8isLxRxxhHy
+                 */
+                password?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * createdAt
+                 * @example 2026-01-12T12:31:53.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-01-13T10:21:39.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** roles */
+                roles?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
                          */
                         self?: string;
                     };
@@ -4435,13 +4447,11 @@ export interface operations {
     "memberships.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "startedAt" | "-startedAt" | "endedAt" | "-endedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description A list of statuss to filter by. */
+                "filter[status]"?: string[];
             };
             header?: never;
             path?: never;
@@ -4586,10 +4596,6 @@ export interface operations {
     "membership-types.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "sortOrder" | "-sortOrder" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
@@ -4927,10 +4933,6 @@ export interface operations {
     "divisions.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
@@ -5040,10 +5042,6 @@ export interface operations {
     "clubs.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
@@ -5725,10 +5723,6 @@ export interface operations {
     "users.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "name" | "-name" | "preferredLocale" | "-preferredLocale" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
@@ -5759,6 +5753,44 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "users.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
     "users.show": {
@@ -5795,35 +5827,63 @@ export interface operations {
             404: components["responses"]["404"];
         };
     };
-    "media.upload": {
+    "users.destroy": {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                user: string;
+            };
             cookie?: never;
         };
-        requestBody?: {
-            content: {
-                "multipart/form-data": {
-                    /**
-                     * Format: binary
-                     * @description The file to upload
-                     */
-                    file: string;
-                    /** @description The name of the collection to which the media belongs */
-                    collectionName: string;
-                    /** @description The ID of the club associated with the media */
-                    clubId: number;
-                };
-            };
-        };
+        requestBody?: never;
         responses: {
-            /** @description Created */
-            201: {
+            /** @description No Content */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"];
+                    };
+                };
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
@@ -5856,10 +5916,6 @@ export interface operations {
     "permissions.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "name" | "-name" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
@@ -5892,16 +5948,53 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "roles.index": {
+        parameters: {
+            query?: {
+                sort?: ("id" | "-id" | "name" | "-name" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index roles */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.roles.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+        };
+    };
     "finance-contacts.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "companyName" | "-companyName" | "city" | "-city" | "fullName" | "-fullName" | "fullName" | "-fullName")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description A list of contactTypes to filter by. */
+                "filter[contactType]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
             };
             header?: never;
             path?: never;
@@ -6046,19 +6139,19 @@ export interface operations {
     "receipts.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "bookingDate" | "-bookingDate" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Only includes records that have media. */
+                "filter[media]"?: boolean;
                 /** @description Filters the records */
                 "filter[status]"?: string;
                 /** @description A list of receiptTypes to filter by. */
                 "filter[receiptType]"?: string[];
                 /** @description Filters the records */
                 "filter[query]"?: string;
+                /** @description Filters the records */
+                "filter[bookingDate]"?: string;
             };
             header?: never;
             path?: never;
@@ -6203,13 +6296,13 @@ export interface operations {
     "finance-accounts.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Include trashed records */
+                "filter[with-trashed]"?: boolean;
+                /** @description Filters the records */
+                "filter[accountType]"?: string;
             };
             header?: never;
             path?: never;
@@ -6676,19 +6769,15 @@ export interface operations {
     "transactions.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
-                sort?: ("id" | "-id" | "amount" | "-amount" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "gvc" | "-gvc" | "amount" | "-amount" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
                 "filter[query]"?: string;
                 /** @description Filters the records */
-                "filter[withoutReceipts]"?: string;
-                /** @description Filters the records */
                 "filter[status]"?: string;
+                /** @description Only includes records that have receipt. */
+                "filter[receipt]"?: boolean;
             };
             header?: never;
             path?: never;
@@ -6718,44 +6807,6 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
-    "transactions.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.resource.store"];
-                };
-            };
-        };
-        responses: {
-            /** @description Store transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
     "transactions.show": {
         parameters: {
             query?: never;
@@ -6768,46 +6819,6 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "transactions.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.resource.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update transactions */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -6942,17 +6953,13 @@ export interface operations {
     "statements.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
-                sort?: ("id" | "-id" | "date" | "-date" | "statementType" | "-statementType" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "date" | "-date" | "statementType" | "-statementType" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt" | "amount" | "-amount" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
                 "filter[financeAccountId]"?: string;
-                /** @description Filters the records */
-                "filter[statementType]"?: string;
+                /** @description A list of statementTypes to filter by. */
+                "filter[statementType]"?: string[];
             };
             header?: never;
             path?: never;
@@ -7032,46 +7039,6 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show statements */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.statements.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "statements.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                statement: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.statements.resource.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update statements */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -7396,10 +7363,6 @@ export interface operations {
     "tax-accounts.index": {
         parameters: {
             query?: {
-                /** @description The page size for paginated results */
-                "page[size]"?: number;
-                /** @description The page number for paginated results */
-                "page[number]"?: number;
                 sort?: ("id" | "-id" | "accountNumber" | "-accountNumber" | "description" | "-description")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];

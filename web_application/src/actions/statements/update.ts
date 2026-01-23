@@ -10,11 +10,11 @@ export const updateStatement = createAuthenticatedAction(
     'statements',
     updateStatementSchema,
     async (body, client) => {
+        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.PATCH('/statements/{statement}', {
             params: {
                 path: { statement: body.data.id },
             },
-            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 

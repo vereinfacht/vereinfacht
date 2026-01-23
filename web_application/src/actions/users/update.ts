@@ -10,11 +10,11 @@ export const updateUser = createAuthenticatedAction(
     'users',
     updateUserSchema,
     async (body, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.PATCH('/users/{user}', {
             params: {
                 path: { user: body.data.id },
             },
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 

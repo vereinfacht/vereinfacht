@@ -10,8 +10,8 @@ export const createUser = createAuthenticatedAction(
     'users',
     createUserSchema,
     async (body, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.POST('/users', {
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 
