@@ -5,6 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    --color-primary-500: #0059ff;
+
     --color-blue-500: #0059ff;
     --color-blue-300: #00aeff;
 
@@ -24,6 +26,7 @@
     --font-weight-semibold: 599;
 
     --font-size-headline: 1.375rem;
+    --text-headline: var(--font-size-headline);
 
     --shadow-card: 0px 22px 36px rgba(5, 14, 19, 0.1);
     --shadow-card-hover: 0px 10px 24px rgba(5, 14, 19, 0.13);
