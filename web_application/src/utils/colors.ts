@@ -13,16 +13,12 @@ export function hexToRgb(hex: string): ColorObject | null {
         : null;
 }
 
-export function convertRgbToCssString(rgbObject: ColorObject | null): string {
-    if (!rgbObject) {
-        throw new Error('ColorObject null');
-    }
-
-    return `${rgbObject.r} ${rgbObject.g} ${rgbObject.b}`;
-}
-
 export function hexToCssString(hex: string): string {
-    return convertRgbToCssString(hexToRgb(hex));
+    const rgb = hexToRgb(hex);
+    if (!rgb) {
+        throw new Error('Invalid hex color');
+    }
+    return `rgb(${rgb.r} ${rgb.g} ${rgb.b})`;
 }
 
 export function contrastRatio(hexColor1: string, hexColor2?: string): number {
