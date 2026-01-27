@@ -8,7 +8,7 @@ use App\Http\Requests\ExportTableRequest;
 use App\Actions\Export\ExportReceiptResource;
 use App\Actions\Export\ExportStatementResource;
 
-class TableExportController extends Controller
+class ExportTableController extends Controller
 {
     public function export(ExportTableRequest $request)
     {

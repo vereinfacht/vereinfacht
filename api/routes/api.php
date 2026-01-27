@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatementController;
 use App\Http\Controllers\Api\V1\UserController;
-use App\Http\Controllers\TableExportController;
+use App\Http\Controllers\ExportTableController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
 use App\Http\Controllers\Api\V1\MediaController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum', ChangeLocaleFromHeader::class])
         Route::post('upload/media', [MediaController::class, 'upload']);
         Route::post('import/statements', [StatementController::class, 'import']);
         Route::post('export/financial-statement', [FinancialStatementController::class, 'export']);
-        Route::post('export/table', [TableExportController::class, 'export']);
+        Route::post('export/table', [ExportTableController::class, 'export']);
     });
 
 JsonApiRoute::server('v1')
