@@ -89,7 +89,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRoleInAnyTeam('super admin');
+        return $this->isSuperAdmin();
     }
 
     public function getDefaultClub(): ?Club

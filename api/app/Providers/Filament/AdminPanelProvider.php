@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->authGuard('web')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->tenant(Club::class)
             ->login()

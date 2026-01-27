@@ -13,67 +13,59 @@ trait HasRoles
 
     public function roles(): BelongsToMany
     {
+        $permissionRegistrar = app(PermissionRegistrar::class);
+
         $relation = $this->morphToMany(
             config('permission.models.role'),
             'model',
             config('permission.table_names.model_has_roles'),
             config('permission.column_names.model_morph_key'),
-            app(PermissionRegistrar::class)->pivotRole
-            // CUSTOM: adding pivot column club_id to roles relation
-        )->withPivot(app(PermissionRegistrar::class)->teamsKey);
-        // ENDCUSTOM
+            $permissionRegistrar->pivotRole
+        )->withPivot($permissionRegistrar->teamsKey);
 
-        if (!app(PermissionRegistrar::class)->teams) {
+        // If Spatie teams/multi-tenancy is disabled → return default relation
+        if (! $permissionRegistrar->teams) {
             return $relation;
         }
 
-        // CUSTOM: return all roles without restricting by team when user is super admin
-        $user = request()->user();
+        $user = $this;
 
-        if ($user) {
-            $roleModel = config('permission.models.role');
-            $roleInstance = app($roleModel);
-            $rolesTable = $roleInstance->getTable();
-            $pivotTable = config('permission.table_names.model_has_roles');
-            $modelMorphKey = config('permission.column_names.model_morph_key');
-            $roleIdColumn = app(PermissionRegistrar::class)->pivotRole;
-
-            $hasSuperAdmin = DB::table($pivotTable)
-                ->join($rolesTable, $rolesTable . '.id', '=', $pivotTable . '.' . $roleIdColumn)
-                ->where($pivotTable . '.' . $modelMorphKey, $user->getKey())
-                ->where($pivotTable . '.model_type', $user->getMorphClass())
-                ->where($rolesTable . '.name', 'super admin')
-                ->exists();
-
-            if ($hasSuperAdmin) {
-                return $relation;
-            }
-        }
-        // ENDCUSTOM
-
-        $teamField = config('permission.table_names.roles') . '.' . app(PermissionRegistrar::class)->teamsKey;
-
-        return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
-            ->where(fn($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
-    }
-
-    /**
-     * Check if user has a role across any team/club
-     */
-    public function hasRoleInAnyTeam(string $roleName): bool
-    {
-        $roleModel = config('permission.models.role');
-        $roleInstance = app($roleModel);
-        $rolesTable = $roleInstance->getTable();
-        $pivotTable = config('permission.table_names.model_has_roles');
+        // Check if user has 'super admin' role globally
+        $roleModel     = config('permission.models.role');
+        $roleInstance  = app($roleModel);
+        $rolesTable    = $roleInstance->getTable();
+        $pivotTable    = config('permission.table_names.model_has_roles');
         $modelMorphKey = config('permission.column_names.model_morph_key');
-        $roleIdColumn = app(PermissionRegistrar::class)->pivotRole;
+        $roleIdColumn  = $permissionRegistrar->pivotRole;
 
-        return DB::table($pivotTable)
+        $hasSuperAdmin = DB::table($pivotTable)
             ->join($rolesTable, $rolesTable . '.id', '=', $pivotTable . '.' . $roleIdColumn)
-            ->where($pivotTable . '.' . $modelMorphKey, $this->getKey())
-            ->where($pivotTable . '.model_type', $this->getMorphClass())
-            ->where($rolesTable . '.name', $roleName)
+            ->where($pivotTable . '.' . $modelMorphKey, $user->getKey())
+            ->where($pivotTable . '.model_type', $user->getMorphClass())
+            ->where($rolesTable . '.name', 'super admin')
             ->exists();
+
+        // If super admin, bypass tenant filtering
+        if ($hasSuperAdmin) {
+            return $relation;
+        }
+
+        $teamKey = $permissionRegistrar->teamsKey;
+        $teamId  = getPermissionsTeamId();
+
+        if (empty($teamId)) {
+            return $relation;
+        }
+
+        // Apply normal tenant filtering for multi-tenant users
+        $teamField = config('permission.table_names.roles') . '.' . $teamKey;
+
+        return $relation
+            ->wherePivot($teamKey, $teamId)
+            ->where(
+                fn($query) =>
+                $query->whereNull($teamField)
+                    ->orWhere($teamField, $teamId)
+            );
     }
 }
