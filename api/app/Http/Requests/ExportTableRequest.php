@@ -9,49 +9,24 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ExportTableRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    private const RESOURCES = [
+        'receipts' => Receipt::class,
+        'statements' => Statement::class,
+    ];
+
     public function authorize(): bool
     {
-        $resourceName = strtolower($this->input('resourceName'));
+        $model = self::RESOURCES[$this->input('resourceName')] ?? null;
 
-        return match ($resourceName) {
-            'receipts' => $this->user()?->can('viewAny', Receipt::class) ?? false,
-            'statements' => $this->user()?->can('viewAny', Statement::class) ?? false,
-            default => false,
-        };
+        return $model && $this->user()->can('viewAny', $model);
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        $resourceName = strtolower($this->input('resourceName'));
-        $clubId = getPermissionsTeamId();
-
-        if ($resourceName === 'receipts') {
-            return [
-                'resourceName' => ['required', 'string', Rule::in(['receipts', 'statements'])],
-                'ids' => ['required', 'array', 'min:1'],
-                'ids.*' => [Rule::exists('receipts', 'id')->where('club_id', $clubId)],
-            ];
-        }
-
-        if ($resourceName === 'statements') {
-            return [
-                'resourceName' => ['required', 'string', Rule::in(['receipts', 'statements'])],
-                'ids' => ['required', 'array', 'min:1'],
-                'ids.*' => [Rule::exists('statements', 'id')->where('club_id', $clubId)],
-            ];
-        }
-
         return [
-            'resourceName' => ['required', 'string', Rule::in(['receipts', 'statements'])],
+            'resourceName' => ['required', Rule::in(array_keys(self::RESOURCES))],
             'ids' => ['required', 'array', 'min:1'],
+            'ids.*' => ['integer', Rule::exists($this->input('resourceName'), 'id')->where('club_id', getPermissionsTeamId())],
         ];
     }
 }
