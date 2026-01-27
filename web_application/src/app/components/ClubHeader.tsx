@@ -15,8 +15,7 @@ export default function ClubHeader({ club, showCard = true }: ClubHeaderProps) {
         <header
             className={[
                 'mb-2 overflow-hidden pt-4 md:pt-6',
-                showCard &&
-                    'bg-gradient-to-b from-white via-white to-slate-400',
+                showCard && 'bg-linear-to-b from-white via-white to-slate-400',
             ].join(' ')}
         >
             <div className="mb-4 flex max-w-4xl flex-col gap-4 px-6 md:mx-auto md:mb-6 md:flex-row md:items-center md:gap-6">
@@ -33,7 +32,7 @@ export default function ClubHeader({ club, showCard = true }: ClubHeaderProps) {
                 <div className="flex-1">
                     <Text
                         tag="h1"
-                        className="text-md font-semibold leading-tight md:text-[1.375rem]"
+                        className="text-md md:text-headline leading-tight font-semibold"
                     >
                         {club.title}
                     </Text>

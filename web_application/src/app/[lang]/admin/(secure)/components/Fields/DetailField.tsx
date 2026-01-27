@@ -92,7 +92,7 @@ export default function DetailField<T>({
             }}
             {...(id !== undefined ? { id: `${id}` } : {})}
         >
-            <div className="flex-shrink pt-[0.125rem] md:w-64">
+            <div className="shrink pt-0.5 md:w-64">
                 <Text preset="label" className="md:hyphens-auto">
                     {t(
                         label ??

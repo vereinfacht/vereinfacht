@@ -52,7 +52,7 @@ export default function Mobile({ children }: { children: ReactNode }) {
                 // @ts-expect-error: className and class-name won't work when
                 // using the swiper as a web component and class give
                 // the typical react className ts error
-                class="max-w-[22rem]"
+                class="max-w-88"
                 wrapperClass={styles['swiper-wrapper']}
             >
                 {children}
