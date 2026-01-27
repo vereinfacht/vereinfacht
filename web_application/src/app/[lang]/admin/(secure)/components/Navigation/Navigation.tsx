@@ -75,7 +75,7 @@ export default async function Navigation() {
     ];
 
     return (
-        <div className="flex items-center justify-between bg-gradient-to-b from-white via-white to-slate-400 md:block md:flex-shrink-0 md:bg-gradient-to-r">
+        <div className="flex items-center justify-between bg-linear-to-b from-white via-white to-slate-400 md:block md:shrink-0 md:bg-linear-to-r">
             <div className="flex items-center">
                 <Link href="/admin/dashboard">
                     <picture className="mt-[0.1em] flex h-20 items-center px-6">

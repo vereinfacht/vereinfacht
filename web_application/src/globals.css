@@ -1,10 +1,102 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-primary-500: #0059ff;
+
+    --color-blue-500: #0059ff;
+    --color-blue-300: #00aeff;
+
+    --color-green-500: #00d13b;
+
+    --color-slate-300: #f7f9fa;
+    --color-slate-400: #ebf1f4;
+    --color-slate-500: #b5c2c9;
+    --color-slate-600: #8c9da6;
+    --color-slate-700: #5b656a;
+    --color-slate-900: #050e13;
+
+    --color-red-500: #ce1924;
+
+    --font-sans: var(--font-kantumruy), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --font-weight-semibold: 599;
+
+    --font-size-headline: 1.375rem;
+    --text-headline: var(--font-size-headline);
+
+    --shadow-card: 0px 22px 36px rgba(5, 14, 19, 0.1);
+    --shadow-card-hover: 0px 10px 24px rgba(5, 14, 19, 0.13);
+    --shadow-success: 0px 4px 4px rgba(0, 209, 59, 0.3);
+    --shadow-card-sm: 0px 22px 36px rgba(5, 14, 19, 0.04);
+    --shadow-button: 0px 4px 0px #b5c2c9, 0px 8px 8px rgba(5, 14, 19, 0.1);
+    --shadow-step: 0px 2px 0px #b5c2c9, 0px 8px 8px rgba(62, 77, 86, 0.12);
+    --shadow-input: inset 0px 2px 0px #ebf1f4;
+    --shadow-negative: 0px -10px 40px rgba(5, 14, 19, 0.3);
+    --shadow-negative-sm: 0px -10px 40px rgba(0, 82, 127, 0.05);
+    --shadow-inset-sm: 0px -10px 10px inset rgba(0, 82, 127, 0.03);
+
+    --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
+
+    --animate-move-up: move-up 0.3s cubic-bezier(0.39, 1.42, 0.43, 1);
+    --animate-fade-in: fade-in 0.3s ease-in-out;
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+
+    @keyframes move-up {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes accordion-down {
+        from {
+            height: 0;
+        }
+        to {
+            height: var(--radix-accordion-content-height);
+        }
+    }
+    @keyframes accordion-up {
+        from {
+            height: var(--radix-accordion-content-height);
+        }
+        to {
+            height: 0;
+        }
+    }
+}
+
+/*
+    The default border color has changed to `currentcolor` in Tailwind CSS v4,
+    so we've added these compatibility styles to make sure everything still
+    looks the same as it did with Tailwind CSS v3.
+
+    If we ever want to remove these styles, we need to add an explicit border
+    color utility to any element that depends on these defaults.
+*/
 @layer base {
-    :root {
-        --color-primary-500: 62 77 86;
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
     }
 }
 

@@ -13,7 +13,7 @@ export default function ColorField({ value }: Props) {
 
     return (
         <div className="mb-2 flex items-center gap-4">
-            <div className="h-8 w-8 rounded-full bg-primary-500"></div>
+            <div className="bg-primary-500 h-8 w-8 rounded-full"></div>
             <Text>{value}</Text>
         </div>
     );
