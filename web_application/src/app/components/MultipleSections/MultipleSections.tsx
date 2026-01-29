@@ -37,8 +37,8 @@ export default function MultipleSections({
                 ))}
             </ul>
             {hasMiddleSection ? (
-                <div className="relative z-10 overflow-hidden rounded-t-3xl bg-primary-500">
-                    <div className="px-6 pb-10 pt-4">
+                <div className="bg-primary-500 relative z-10 overflow-hidden rounded-t-3xl">
+                    <div className="px-6 pt-4 pb-10">
                         <Button
                             icon={<IconPlus />}
                             className="mx-auto"
@@ -47,10 +47,10 @@ export default function MultipleSections({
                             {capitalizeFirstLetter(addText ?? t('general:add'))}
                         </Button>
                     </div>
-                    <div className="h-6 w-full rounded-t-3xl bg-white shadow-negative"></div>
+                    <div className="shadow-negative h-6 w-full rounded-t-3xl bg-white"></div>
                 </div>
             ) : (
-                <div className="relative z-10 rounded-t-3xl bg-primary-500">
+                <div className="bg-primary-500 relative z-10 rounded-t-3xl">
                     <div className="h-6 w-full rounded-t-3xl bg-white"></div>
                 </div>
             )}

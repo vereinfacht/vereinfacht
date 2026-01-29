@@ -31,7 +31,7 @@ export default function MediaField({ value = [] }: Props) {
                 return (
                     <figure
                         key={media.id}
-                        className="relative w-48 rounded-md border border-slate-200 shadow-sm transition hover:shadow-md"
+                        className="relative w-48 rounded-md border border-slate-200 shadow-xs transition hover:shadow-md"
                     >
                         <picture className="relative block aspect-[0.707] overflow-hidden rounded-t-md bg-slate-100">
                             <img
@@ -53,7 +53,7 @@ export default function MediaField({ value = [] }: Props) {
                             href={`/api/media/${media.id}/download`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="absolute inset-0 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="absolute inset-0 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500"
                             aria-label={`Open ${media.fileName}`}
                         />
                     </figure>

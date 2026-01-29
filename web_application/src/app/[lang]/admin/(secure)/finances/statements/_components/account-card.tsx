@@ -37,11 +37,11 @@ export default function AccountCard({ balance, account, title }: Props) {
             className={[
                 'group flex h-auto w-full flex-col border-2 border-transparent',
                 isSelected
-                    ? 'is-selected !border-blue-500 transition-none'
+                    ? 'is-selected border-blue-500! transition-none'
                     : '',
                 type === 'deactivated' && 'shadow-none',
                 type === 'deactivated' && !isSelected
-                    ? '!border-slate-200'
+                    ? 'border-slate-200!'
                     : '',
             ].join(' ')}
         >
