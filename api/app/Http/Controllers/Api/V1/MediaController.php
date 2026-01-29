@@ -55,13 +55,20 @@ class MediaController extends Controller
         ], 201, ['Content-Type' => 'application/vnd.api+json']);
     }
 
+
     public function download(Media $media)
     {
+        $user = auth()->user();
+        abort_unless($user->can('view', $media->model), 403);
+
         return response()->file($media->getPath());
     }
 
     public function preview(Media $media)
     {
+        $user = auth()->user();
+        abort_unless($user->can('view', $media->model), 403);
+
         return response()->file($media->getPath('preview'));
     }
 }
