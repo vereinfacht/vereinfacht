@@ -8,7 +8,7 @@ class Media extends BaseMedia
 {
     public function getOriginalUrlAttribute(): string
     {
-        return $this->getUrl();
+        return route('media.download', ['media' => $this->id]);
     }
 
     public function getPreviewConversionUrlAttribute(): string

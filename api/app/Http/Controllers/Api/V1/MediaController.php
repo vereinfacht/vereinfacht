@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Media;
+use App\Models\TemporaryUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadMediaRequest;
-use App\Models\TemporaryUpload;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
 class MediaController extends Controller
@@ -53,4 +54,11 @@ class MediaController extends Controller
             ],
         ], 201, ['Content-Type' => 'application/vnd.api+json']);
     }
+
+    public function download(Media $media)
+    {
+        return response()->file($media->getPath());
+    }
+
+    public function preview(Media $media) {}
 }

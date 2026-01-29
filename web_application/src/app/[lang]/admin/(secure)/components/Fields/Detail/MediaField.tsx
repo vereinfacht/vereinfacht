@@ -50,7 +50,7 @@ export default function MediaField({ value = [] }: Props) {
                         </figcaption>
 
                         <a
-                            href={media.originalUrl}
+                            href={`/api/media/${media.id}/download`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="absolute inset-0 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
