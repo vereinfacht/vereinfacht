@@ -60,5 +60,8 @@ class MediaController extends Controller
         return response()->file($media->getPath());
     }
 
-    public function preview(Media $media) {}
+    public function preview(Media $media)
+    {
+        return response()->file($media->getPath('preview'));
+    }
 }

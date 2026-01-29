@@ -13,6 +13,6 @@ class Media extends BaseMedia
 
     public function getPreviewConversionUrlAttribute(): string
     {
-        return $this->hasGeneratedConversion('preview') ? $this->getUrl('preview') : '';
+        return route('media.preview', ['media' => $this->id]);
     }
 }
