@@ -200,21 +200,21 @@ export default function SummaryForm({ club }: SummaryFormProps) {
                                     constitutionLink: (
                                         <a
                                             href={club.constitutionUrl}
-                                            className="underline hover:text-primary-500"
+                                            className="hover:text-primary-500 underline"
                                             target="_blank"
                                         />
                                     ),
                                     contributionLink: (
                                         <a
                                             href={club.contributionStatementUrl}
-                                            className="underline hover:text-primary-500"
+                                            className="hover:text-primary-500 underline"
                                             target="_blank"
                                         />
                                     ),
                                     privacyLink: (
                                         <a
                                             href={club.privacyStatementUrl}
-                                            className="underline hover:text-primary-500"
+                                            className="hover:text-primary-500 underline"
                                             target="_blank"
                                         />
                                     ),
@@ -236,7 +236,7 @@ export default function SummaryForm({ club }: SummaryFormProps) {
                                         <Link
                                             href="https://vereinfacht.digital/datenschutz"
                                             target="_blank"
-                                            className="underline hover:text-primary-500"
+                                            className="hover:text-primary-500 underline"
                                         />
                                     ),
                                 }}

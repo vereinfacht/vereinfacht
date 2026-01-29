@@ -53,7 +53,7 @@ export default function UploadQueueItem({
     return (
         <div className="mt-3 w-full">
             <div
-                className={`relative flex w-full items-center justify-between rounded-md border bg-white px-3 py-2 shadow-sm ${
+                className={`relative flex w-full items-center justify-between rounded-md border bg-white px-3 py-2 shadow-xs ${
                     task.progress > 0 && task.progress < 100
                         ? 'animate-pulse'
                         : ''
