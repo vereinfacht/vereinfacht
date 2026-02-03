@@ -22,7 +22,7 @@ export default async function SecureLayout({ children }: PropsWithChildren) {
             }}
             className={[
                 'flex min-h-screen w-full flex-col bg-slate-400 md:flex-row',
-                shouldUseDarkMode(clubPrimaryColor) ? 'dark' : '',
+                shouldUseDarkMode(clubPrimaryColor) ? 'dark-primary' : '',
             ].join(' ')}
         >
             <Navigation />

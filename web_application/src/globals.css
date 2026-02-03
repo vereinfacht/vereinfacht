@@ -3,6 +3,7 @@
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant dark-primary (&:is(.dark-primary *));
 
 @theme {
     --color-primary-500: #0059ff;

@@ -127,9 +127,9 @@ export default function Examples() {
                             );
 
                             if (darkMode) {
-                                rootElement?.classList.add('dark');
+                                rootElement?.classList.add('dark-primary');
                             } else {
-                                rootElement?.classList.remove('dark');
+                                rootElement?.classList.remove('dark-primary');
                             }
                         }
                     }}
