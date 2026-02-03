@@ -21,16 +21,17 @@ trait HasRoles
             config('permission.table_names.model_has_roles'),
             config('permission.column_names.model_morph_key'),
             $permissionRegistrar->pivotRole
+            // CUSTOM: adding pivot column club_id to roles relation
         )->withPivot($permissionRegistrar->teamsKey);
+        // ENDCUSTOM
 
-        // If Spatie teams/multi-tenancy is disabled → return default relation
         if (! $permissionRegistrar->teams) {
             return $relation;
         }
 
+        // CUSTOM: return all roles without restricting by team when user is super admin
         $user = $this;
 
-        // Check if user has 'super admin' role globally
         $roleModel     = config('permission.models.role');
         $roleInstance  = app($roleModel);
         $rolesTable    = $roleInstance->getTable();
@@ -45,19 +46,20 @@ trait HasRoles
             ->where($rolesTable . '.name', 'super admin')
             ->exists();
 
-        // If super admin, bypass tenant filtering
         if ($hasSuperAdmin) {
             return $relation;
         }
+        // ENDCUSTOM
 
         $teamKey = $permissionRegistrar->teamsKey;
         $teamId  = getPermissionsTeamId();
 
+        // CUSTOM: modify to include roles without team assigned
         if (empty($teamId)) {
             return $relation;
         }
+        // ENDCUSTOM
 
-        // Apply normal tenant filtering for multi-tenant users
         $teamField = config('permission.table_names.roles') . '.' . $teamKey;
 
         return $relation
