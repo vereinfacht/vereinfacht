@@ -21,41 +21,20 @@ export function hexToCssString(hex: string): string {
     return `rgb(${rgb.r} ${rgb.g} ${rgb.b})`;
 }
 
-function sRgbComponentToLinear(component: number): number {
-    const normalized = component / 255;
-    return normalized <= 0.03928
-        ? normalized / 12.92
-        : Math.pow((normalized + 0.055) / 1.055, 2.4);
-}
+export function contrastRatio(hexColor1: string, hexColor2?: string): number {
+    const brightness1 = getBrightnessFromHex(hexColor1);
+    let brightness2 = 255;
 
-function getRelativeLuminanceFromHex(hexColor: string): number {
-    const rgb = hexToRgb(hexColor);
-    if (!rgb) {
-        return 1;
+    if (hexColor2) {
+        brightness2 = getBrightnessFromHex(hexColor2);
     }
-    const linearR = sRgbComponentToLinear(rgb.r);
-    const linearG = sRgbComponentToLinear(rgb.g);
-    const linearB = sRgbComponentToLinear(rgb.b);
 
-    return 0.2126 * linearR + 0.7152 * linearG + 0.0722 * linearB;
-}
-
-export function contrastRatio(
-    hexColorA: string,
-    hexColorB: string = '#ffffff',
-): number {
-    const luminanceA = getRelativeLuminanceFromHex(hexColorA);
-    const luminanceB = getRelativeLuminanceFromHex(hexColorB);
-
-    const lighterLuminance = Math.max(luminanceA, luminanceB);
-    const darkerLuminance = Math.min(luminanceA, luminanceB);
-
-    return (lighterLuminance + 0.05) / (darkerLuminance + 0.05);
+    return Math.abs(brightness2 / brightness1);
 }
 
 export function shouldUseDarkMode(primaryColor: string): boolean {
-    const ratioWithWhite = contrastRatio(primaryColor, '#ffffff');
-    return ratioWithWhite < 4.5;
+    const targetContrastRatio = 2.5;
+    return contrastRatio(primaryColor) > targetContrastRatio;
 }
 
 export function getBrightnessFromHex(hex: string): number {
