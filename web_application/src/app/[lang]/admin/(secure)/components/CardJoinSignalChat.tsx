@@ -19,7 +19,7 @@ export default function CardJoinSignalChat({ url }: Props) {
                 target="_blank"
                 className="relative z-0 flex h-full flex-col items-start justify-between bg-blue-500 p-4 text-white"
             >
-                <SignalLogo className="absolute -right-[6rem] -top-[7rem] z-[-1] h-80 w-80" />
+                <SignalLogo className="absolute -right-24 -top-28 z-[-1] h-80 w-80" />
                 <Logo className="mb-1 h-5 fill-current" />
                 <div>
                     <Text preset="headline" className="text-xl" tag="h3">

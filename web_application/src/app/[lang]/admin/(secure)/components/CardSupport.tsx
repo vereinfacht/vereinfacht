@@ -18,12 +18,14 @@ export default function CardSupport({ url, icon, title, text }: Props) {
         <Card>
             <a href={url} target="_blank" className="flex h-full flex-col p-4">
                 <div className="relative w-full">
-                    <Logo className="absolute left-0 top-0 mb-1 h-5 fill-current" />
+                    <Logo className="absolute top-0 left-0 mb-1 h-5 fill-current" />
                 </div>
                 <div className="flex flex-1 flex-col items-center justify-center">
                     {icon}
                     <Text tag="h3">{t(title)}:</Text>
-                    <Text preset="headline">{t(text)}</Text>
+                    <Text preset="headline" className="text-headline">
+                        {t(text)}
+                    </Text>
                 </div>
             </a>
         </Card>

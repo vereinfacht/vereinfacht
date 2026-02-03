@@ -35,10 +35,10 @@ export default function MembershipSwiper({ club }: MembershipSwiperProps) {
             // using the swiper as a web component and class give
             // the typical react className ts error
             class={[
-                '!h-auto rounded-3xl bg-white shadow-card',
+                'h-auto! rounded-3xl bg-white shadow-card',
                 isSmallScreen
                     ? styles['swiper-slide']
-                    : '!w-80 overflow-hidden shadow-card-sm',
+                    : 'w-80! overflow-hidden shadow-card-sm',
             ].join(' ')}
         >
             <MembershipCard
