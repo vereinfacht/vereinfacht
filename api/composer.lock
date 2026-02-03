@@ -224,16 +224,16 @@
         },
         {
             "name": "brick/math",
-            "version": "0.14.1",
+            "version": "0.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "f05858549e5f9d7bb45875a75583240a38a281d0"
+                "reference": "6af96b11de3f7d99730c118c200418c48274edb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/f05858549e5f9d7bb45875a75583240a38a281d0",
-                "reference": "f05858549e5f9d7bb45875a75583240a38a281d0",
+                "url": "https://api.github.com/repos/brick/math/zipball/6af96b11de3f7d99730c118c200418c48274edb4",
+                "reference": "6af96b11de3f7d99730c118c200418c48274edb4",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.14.1"
+                "source": "https://github.com/brick/math/tree/0.14.3"
             },
             "funding": [
                 {
@@ -280,7 +280,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-24T14:40:29+00:00"
+            "time": "2026-02-01T15:18:05+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -4592,16 +4592,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.11.0",
+            "version": "3.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "bdb375400dcd162624531666db4799b36b64e4a1"
+                "reference": "f438fcc98f92babee98381d399c65336f3a3827f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/bdb375400dcd162624531666db4799b36b64e4a1",
-                "reference": "bdb375400dcd162624531666db4799b36b64e4a1",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/f438fcc98f92babee98381d399c65336f3a3827f",
+                "reference": "f438fcc98f92babee98381d399c65336f3a3827f",
                 "shasum": ""
             },
             "require": {
@@ -4625,7 +4625,7 @@
                 "phpstan/extension-installer": "^1.4.3",
                 "phpstan/phpstan": "^2.1.22",
                 "phpunit/phpunit": "^10.5.53",
-                "squizlabs/php_codesniffer": "^3.13.4"
+                "squizlabs/php_codesniffer": "^3.13.4 || ^4.0.0"
             },
             "bin": [
                 "bin/carbon"
@@ -4668,14 +4668,14 @@
                 }
             ],
             "description": "An API extension for DateTime that supports 281 different languages.",
-            "homepage": "https://carbon.nesbot.com",
+            "homepage": "https://carbonphp.github.io/carbon/",
             "keywords": [
                 "date",
                 "datetime",
                 "time"
             ],
             "support": {
-                "docs": "https://carbon.nesbot.com/docs",
+                "docs": "https://carbonphp.github.io/carbon/guide/getting-started/introduction.html",
                 "issues": "https://github.com/CarbonPHP/carbon/issues",
                 "source": "https://github.com/CarbonPHP/carbon"
             },
@@ -4693,7 +4693,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-02T21:04:28+00:00"
+            "time": "2026-01-29T09:26:29+00:00"
         },
         {
             "name": "nette/schema",
@@ -5625,16 +5625,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.18",
+            "version": "v0.12.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "ddff0ac01beddc251786fe70367cd8bbdb258196"
+                "reference": "a4f766e5c5b6773d8399711019bb7d90875a50ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/ddff0ac01beddc251786fe70367cd8bbdb258196",
-                "reference": "ddff0ac01beddc251786fe70367cd8bbdb258196",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/a4f766e5c5b6773d8399711019bb7d90875a50ee",
+                "reference": "a4f766e5c5b6773d8399711019bb7d90875a50ee",
                 "shasum": ""
             },
             "require": {
@@ -5698,9 +5698,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.18"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.19"
             },
-            "time": "2025-12-17T14:35:46+00:00"
+            "time": "2026-01-30T17:33:13+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -6500,16 +6500,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.34.10",
+            "version": "1.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "db30de065dd4d41132b9262f2685ffd28f9af8b2"
+                "reference": "40c1b0688a8fa4a4fde13f883982e6b3a9d00a8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/db30de065dd4d41132b9262f2685ffd28f9af8b2",
-                "reference": "db30de065dd4d41132b9262f2685ffd28f9af8b2",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/40c1b0688a8fa4a4fde13f883982e6b3a9d00a8c",
+                "reference": "40c1b0688a8fa4a4fde13f883982e6b3a9d00a8c",
                 "shasum": ""
             },
             "require": {
@@ -6581,7 +6581,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.34.10"
+                "source": "https://github.com/spatie/laravel-health/tree/1.35.0"
             },
             "funding": [
                 {
@@ -6589,7 +6589,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-22T10:06:29+00:00"
+            "time": "2026-02-01T08:13:12+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
@@ -15244,23 +15244,24 @@
         },
         {
             "name": "spatie/macroable",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/macroable.git",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072"
+                "reference": "2967f69810ba4df158391665c0850010b9d1507c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/macroable/zipball/ec2c320f932e730607aff8052c44183cf3ecb072",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072",
+                "url": "https://api.github.com/repos/spatie/macroable/zipball/2967f69810ba4df158391665c0850010b9d1507c",
+                "reference": "2967f69810ba4df158391665c0850010b9d1507c",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0"
+                "php": "^8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.3"
+                "pestphp/pest": "^4",
+                "phpunit/phpunit": "^12"
             },
             "type": "library",
             "autoload": {
@@ -15288,9 +15289,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/macroable/issues",
-                "source": "https://github.com/spatie/macroable/tree/2.0.0"
+                "source": "https://github.com/spatie/macroable/tree/2.1.0"
             },
-            "time": "2021-03-26T22:39:02+00:00"
+            "time": "2026-01-30T17:13:34+00:00"
         },
         {
             "name": "spatie/ray",
