@@ -15,12 +15,12 @@ export default function MembershipCardHeader({
     const pattern = usePattern(index);
 
     return (
-        <div className="relative h-56 w-full pb-12 text-white dark:text-slate-900">
+        <div className="dark-primary:text-slate-900 relative h-56 w-full pb-12 text-white">
             <div className="flex min-h-40 flex-col items-end justify-between gap-5 px-8 pt-8">
                 <PricePerMonth price={monthlyFee} />
                 <Text
                     preset="display"
-                    className="line-clamp-2 self-start drop-shadow-display dark:drop-shadow-none"
+                    className="drop-shadow-display dark-primary:drop-shadow-none line-clamp-2 self-start"
                 >
                     {title}
                 </Text>
