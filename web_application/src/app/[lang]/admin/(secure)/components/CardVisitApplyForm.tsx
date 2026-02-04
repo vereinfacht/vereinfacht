@@ -25,7 +25,7 @@ export default function CardVisitApplyForm({ url }: Props) {
                 <Text
                     preset="headline"
                     tag="h3"
-                    className="text-headline relative text-center text-white dark:text-slate-900"
+                    className="text-headline dark-primary:text-slate-900 relative text-center text-white"
                 >
                     {t('visit_apply_form')}
                 </Text>

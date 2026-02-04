@@ -33,7 +33,7 @@ export function contrastRatio(hexColor1: string, hexColor2?: string): number {
 }
 
 export function shouldUseDarkMode(primaryColor: string): boolean {
-    const targetContrastRatio = 2.5;
+    const targetContrastRatio = 4.9;
     return contrastRatio(primaryColor) > targetContrastRatio;
 }
 

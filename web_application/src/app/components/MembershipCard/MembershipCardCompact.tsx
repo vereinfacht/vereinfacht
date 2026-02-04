@@ -3,11 +3,10 @@ import { MembershipType } from '@/types/models';
 import Text from '../Text/Text';
 import PricePerMonth from './PricePerMonth';
 
-interface Props
-    extends Pick<
-        MembershipType,
-        'monthlyFee' | 'title' | 'minimumNumberOfMonths'
-    > {
+interface Props extends Pick<
+    MembershipType,
+    'monthlyFee' | 'title' | 'minimumNumberOfMonths'
+> {
     index: number;
 }
 
@@ -21,12 +20,12 @@ export default function MembershipCardCompact({
 
     return (
         <div
-            className={`relative w-full overflow-hidden rounded-3xl pt-[63%] text-white dark:text-slate-900`}
+            className={`dark-primary:text-slate-900 relative w-full overflow-hidden rounded-3xl pt-[63%] text-white`}
         >
             <div className="absolute inset-0 flex flex-col justify-between gap-4 px-6 py-4">
                 <Text
                     preset="display"
-                    className="max-w-[80%] self-start drop-shadow-display dark:drop-shadow-none"
+                    className="drop-shadow-display dark-primary:drop-shadow-none max-w-[80%] self-start"
                 >
                     {title}
                 </Text>
@@ -36,7 +35,7 @@ export default function MembershipCardCompact({
                         duration={minimumNumberOfMonths}
                     />
                 </div>
-                <div className="absolute inset-0 -z-10 origin-center -rotate-6 scale-125 overflow-hidden">
+                <div className="absolute inset-0 -z-10 origin-center scale-125 -rotate-6 overflow-hidden">
                     {pattern}
                 </div>
             </div>
