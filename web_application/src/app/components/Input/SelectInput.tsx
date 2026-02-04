@@ -33,7 +33,7 @@ export default function SelectInput({
     const { t } = useTranslation('general');
     const [value, setValue] = useState(props.defaultValue ?? '');
     const classes = [
-        'appearance-none pr-10 mt-1 bg-slate-300 w-full p-3 rounded-md shadow-input outline-none focus:ring focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
+        'appearance-none pr-10 mt-1 bg-slate-300 w-full p-3 rounded-md shadow-input outline-hidden focus:ring-3 focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
         props.className ? props.className : null,
         props.disabled ? 'bg-slate-400' : null,
         value === '' && 'text-slate-600',

@@ -55,7 +55,7 @@ export default async function ClubLayout({ children, params }: Props) {
             style={{ '--color-primary-500': hexToCssString(clubPrimaryColor) }}
             className={[
                 'flex min-h-screen flex-col',
-                shouldUseDarkMode(clubPrimaryColor) ? 'dark' : '',
+                shouldUseDarkMode(clubPrimaryColor) ? 'dark-primary' : '',
             ].join(' ')}
         >
             {children}

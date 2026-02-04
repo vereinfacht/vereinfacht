@@ -19,13 +19,13 @@ export default function CardVisitApplyForm({ url }: Props) {
                 target="_blank"
                 className="relative flex h-full items-center justify-center p-4"
             >
-                <div className="absolute inset-0 origin-center -rotate-6 scale-150 overflow-hidden">
+                <div className="absolute inset-0 origin-center scale-150 -rotate-6 overflow-hidden">
                     {pattern}
                 </div>
                 <Text
                     preset="headline"
                     tag="h3"
-                    className="relative text-center text-white dark:text-slate-900"
+                    className="text-headline dark-primary:text-slate-900 relative text-center text-white"
                 >
                     {t('visit_apply_form')}
                 </Text>

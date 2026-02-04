@@ -27,7 +27,7 @@ export default function CardVisitClubWebsite({ url, logoUrl }: Props) {
                         className="mb-2"
                     />
                 </picture>
-                <Text preset="headline" tag="h3">
+                <Text preset="headline" tag="h3" className="text-headline">
                     {t('visit_club_website')}
                 </Text>
             </a>

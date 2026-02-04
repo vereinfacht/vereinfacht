@@ -59,7 +59,7 @@ export default function Examples() {
                                 forInput="multiselect"
                                 className="flex items-end"
                             >
-                                <IconPerson className="mb-[-0.125rem] mr-1 scale-75 fill-current" />
+                                <IconPerson className="mr-1 -mb-0.5 scale-75 fill-current" />
                                 MultiselectInput
                             </InputLabel>
                         }
@@ -85,7 +85,7 @@ export default function Examples() {
                                 forInput="multiselect"
                                 className="flex items-end"
                             >
-                                <IconPerson className="mb-[-0.125rem] mr-1 scale-75 fill-current" />
+                                <IconPerson className="mr-1 -mb-0.5 scale-75 fill-current" />
                                 MultiselectInput
                             </InputLabel>
                         }
@@ -127,9 +127,9 @@ export default function Examples() {
                             );
 
                             if (darkMode) {
-                                rootElement?.classList.add('dark');
+                                rootElement?.classList.add('dark-primary');
                             } else {
-                                rootElement?.classList.remove('dark');
+                                rootElement?.classList.remove('dark-primary');
                             }
                         }
                     }}

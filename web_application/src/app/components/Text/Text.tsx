@@ -17,7 +17,7 @@ export const presets = {
     label: 'text-sm font-medium',
     display: 'text-3xl font-semibold',
     'display-light': 'text-5xl font-light',
-    headline: 'text-[1.375rem] font-semibold',
+    headline: 'font-semibold',
     error: 'text-red-500 text-sm',
     currency: 'text-base tabular-nums font-semibold',
 };

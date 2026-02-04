@@ -21,14 +21,17 @@ export default function FormIntro({
             <div className="flex justify-between">
                 <div className="flex items-center gap-3">
                     {icon}
-                    <Text preset="headline" className="leading-tight">
+                    <Text
+                        preset="headline"
+                        className="text-headline leading-tight"
+                    >
                         {headline}
                     </Text>
                 </div>
                 {rightComponent}
             </div>
             {Boolean(text) && (
-                <Text preset="body-sm" className="mb-6 mt-2">
+                <Text preset="body-sm" className="mt-2 mb-6">
                     {text}
                 </Text>
             )}

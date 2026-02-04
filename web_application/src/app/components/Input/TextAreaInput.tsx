@@ -15,7 +15,7 @@ export default function TextAreaInput({
     ...props
 }: TextAreaInputProps) {
     const classes = [
-        'appearance-none bg-slate-300 w-full min-h-12 p-3 rounded-md shadow-input outline-none focus:ring focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
+        'appearance-none bg-slate-300 w-full min-h-12 p-3 rounded-md shadow-input outline-hidden focus:ring-3 focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
         props.className ? props.className : null,
         props.disabled ? 'bg-slate-400' : null,
     ];

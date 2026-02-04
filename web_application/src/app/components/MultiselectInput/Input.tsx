@@ -22,7 +22,7 @@ export default function Input({
     return (
         <div className="relative w-full cursor-default rounded-md bg-slate-300 text-left shadow-input placeholder:text-slate-600 focus-within:ring-2 focus-within:ring-slate-600">
             <ComboboxInput
-                className="w-full border-none bg-transparent p-3 pr-10 outline-none"
+                className="w-full border-none bg-transparent p-3 pr-10 outline-hidden"
                 displayValue={(option: Option) =>
                     typeof option?.label === 'string' ? option.label : ''
                 }

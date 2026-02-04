@@ -128,7 +128,7 @@ function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
             </details>
             <button
                 className={[
-                    'absolute bottom-0 flex w-full items-center justify-center gap-2 bg-gradient-to-b from-white/40 via-white/60 to-white px-8 py-[0.32rem] text-center text-slate-600 backdrop-blur-[0.2rem]',
+                    'absolute bottom-0 flex w-full items-center justify-center gap-2 bg-linear-to-b from-white/40 via-white/60 to-white px-8 py-[0.32rem] text-center text-slate-600 backdrop-blur-[0.2rem]',
                     showDivisions
                         ? 'rounded-b-2xl shadow-inset-sm'
                         : 'rounded-t-2xl shadow-negative-sm',

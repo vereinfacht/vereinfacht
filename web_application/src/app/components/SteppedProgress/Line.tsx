@@ -26,7 +26,7 @@ export default function Line({ currentCompleted, nextCompleted }: Props) {
 
     return (
         <div
-            className={`h-[2px] flex-1 bg-gradient-to-r ${gradientClasses}`}
+            className={`h-[2px] flex-1 bg-linear-to-r ${gradientClasses}`}
         ></div>
     );
 }

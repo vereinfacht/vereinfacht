@@ -157,7 +157,7 @@ export default function AttachDivisionsForm({
                                     forInput="multiselect"
                                     className="flex items-end"
                                 >
-                                    <IconPerson className="mb-[-0.125rem] mr-1 scale-75 fill-current" />
+                                    <IconPerson className="-mb-0.5 mr-1 scale-75 fill-current" />
                                     {application.members[index].firstName}{' '}
                                     {application.members[index].lastName}
                                 </InputLabel>
