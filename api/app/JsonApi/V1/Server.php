@@ -78,6 +78,40 @@ class Server extends BaseServer
         Statement::saving(static function (Statement $statement): void {
             self::handleClubAssociation($statement);
         });
+
+        Receipt::saved(static function (Receipt $receipt): void {
+            self::handleMediaAttachment($receipt);
+        });
+    }
+
+    protected static function handleMediaAttachment(Receipt $receipt): void
+    {
+        $request = request();
+
+        if (!$request->isJson() || !$request->has('data.relationships.media.data')) {
+            return;
+        }
+
+        $mediaData = $request->input('data.relationships.media.data', []);
+
+        if (empty($mediaData)) {
+            return;
+        }
+
+        $mediaIds = collect($mediaData)
+            ->pluck('id')
+            ->filter()
+            ->unique()
+            ->values();
+
+        foreach ($mediaIds as $id) {
+            $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($id);
+            if ($media && (!$media->model_type || $media->model_type === 'App\\Models\\TemporaryUpload')) {
+                $media->model_type = get_class($receipt);
+                $media->model_id = $receipt->id;
+                $media->save();
+            }
+        }
     }
 
     protected static function handleClubAssociation(Model $model)

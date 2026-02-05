@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Media;
+use App\Models\TemporaryUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadMediaRequest;
-use App\Models\TemporaryUpload;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
 class MediaController extends Controller
@@ -27,13 +28,23 @@ class MediaController extends Controller
             return response()->json(['error' => 'No file attached'], 400);
         }
 
+        $requestedClubId = $request->input('clubId');
+        $userClubId = getPermissionsTeamId();
+
+        if ($requestedClubId != $userClubId) {
+            return response()->json([
+                'error' => 'Unauthorized',
+                'message' => 'You can only upload media for your own club.'
+            ], 403);
+        }
+
         $temporaryOwner = new TemporaryUpload();
         $temporaryOwner->id = 0;
         $temporaryOwner->exists = true;
 
         $media = $temporaryOwner
             ->addMediaFromRequest('file')
-            ->withProperties(['club_id' => $request->input('clubId')])
+            ->withProperties(['club_id' => $requestedClubId])
             ->toMediaCollection($request->input('collectionName'));
 
         return response()->json([
@@ -42,5 +53,22 @@ class MediaController extends Controller
                 'id' => (string) $media->id,
             ],
         ], 201, ['Content-Type' => 'application/vnd.api+json']);
+    }
+
+
+    public function download(Media $media)
+    {
+        $user = auth()->user();
+        abort_unless($user->can('view', $media->model), 403);
+
+        return response()->file($media->getPath());
+    }
+
+    public function preview(Media $media)
+    {
+        $user = auth()->user();
+        abort_unless($user->can('view', $media->model), 403);
+
+        return response()->file($media->getPath('preview'));
     }
 }
