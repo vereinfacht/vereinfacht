@@ -2,8 +2,25 @@
 
 namespace App\Actions\Export;
 
+use App\Models\Receipt;
+use Illuminate\Database\Eloquent\Builder;
+
 class ExportReceiptResource extends ExportResourceCsv
 {
+    public function getQuery(array $ids, int $clubId): Builder
+    {
+        $query = Receipt::whereIn('id', $ids)
+            ->where('club_id', $clubId)
+            ->with(['financeContact', 'taxAccount']);
+
+        if (!empty($ids)) {
+            $idsString = implode(',', array_map('intval', $ids));
+            $query->orderByRaw("FIELD(id, $idsString)");
+        }
+
+        return $query;
+    }
+
     protected function getColumns(): array
     {
         return [

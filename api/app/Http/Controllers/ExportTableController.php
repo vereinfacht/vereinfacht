@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Receipt;
-use App\Models\Statement;
 use App\Http\Requests\ExportTableRequest;
 use App\Actions\Export\ExportReceiptResource;
 use App\Actions\Export\ExportStatementResource;
@@ -17,27 +15,13 @@ class ExportTableController extends Controller
             $ids = $request->input('ids');
             $clubId = getPermissionsTeamId();
 
-            [$query, $exporter] = match ($resourceName) {
-                'receipts' => [
-                    Receipt::whereIn('id', $ids)
-                        ->where('club_id', $clubId)
-                        ->with(['financeContact', 'taxAccount']),
-                    new ExportReceiptResource()
-                ],
-                'statements' => [
-                    Statement::whereIn('id', $ids)
-                        ->where('club_id', $clubId)
-                        ->with(['financeAccount', 'transactions', 'club']),
-                    new ExportStatementResource()
-                ],
+            $exporter = match ($resourceName) {
+                'receipts' => new ExportReceiptResource(),
+                'statements' => new ExportStatementResource(),
                 default => throw new \Exception("Unsupported resource type: {$resourceName}")
             };
 
-            if (!empty($ids)) {
-                $idsString = implode(',', array_map('intval', $ids));
-                $query->orderByRaw("FIELD(id, $idsString)");
-            }
-
+            $query = $exporter->getQuery($ids, $clubId);
             $resources = $query->get();
 
             if ($resources->isEmpty()) {

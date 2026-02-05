@@ -2,8 +2,25 @@
 
 namespace App\Actions\Export;
 
+use App\Models\Statement;
+use Illuminate\Database\Eloquent\Builder;
+
 class ExportStatementResource extends ExportResourceCsv
 {
+    public function getQuery(array $ids, int $clubId): Builder
+    {
+        $query = Statement::whereIn('id', $ids)
+            ->where('club_id', $clubId)
+            ->with(['financeAccount', 'transactions', 'club']);
+
+        if (!empty($ids)) {
+            $idsString = implode(',', array_map('intval', $ids));
+            $query->orderByRaw("FIELD(id, $idsString)");
+        }
+
+        return $query;
+    }
+
     protected function getColumns(): array
     {
         return [
