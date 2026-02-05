@@ -2,7 +2,7 @@
 
 namespace App\Actions\Export;
 
-class ExportStatementResource extends AbstractExportResource
+class ExportStatementResource extends ExportResourceCsv
 {
     protected function getColumns(): array
     {

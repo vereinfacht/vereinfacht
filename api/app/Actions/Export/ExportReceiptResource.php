@@ -2,9 +2,7 @@
 
 namespace App\Actions\Export;
 
-use App\Casts\MoneyCast;
-
-class ExportReceiptResource extends AbstractExportResource
+class ExportReceiptResource extends ExportResourceCsv
 {
     protected function getColumns(): array
     {
