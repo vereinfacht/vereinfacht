@@ -45,7 +45,7 @@ class ReceiptSchema extends Schema
             BelongsTo::make('financeContact')->type('finance-contacts'),
             BelongsTo::make('taxAccount')->type('tax-accounts'),
             HasMany::make('transactions')->type('transactions'),
-            HasMany::make('media')->type('media'),
+            HasMany::make('media')->type('media')->readOnly(),
         ];
     }
 

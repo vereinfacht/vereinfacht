@@ -1,12 +1,13 @@
 'use client';
 
 import { Badge } from '@/app/components/ui/badge';
+import { TMediaDeserialized } from '@/types/resources';
 import { Paperclip } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import IconTooltip from '../Tooltip/IconTooltip';
 
 export interface MediaCellProps {
-    media: Array<{ originalUrl: string; name?: string }>;
+    media: TMediaDeserialized[];
     rowId: string | number;
     rowLink?: string;
     className?: string;
@@ -25,13 +26,12 @@ export default function MediaCell({
     const tooltipId = `media-tooltip-${rowId}`;
 
     let statusDescription = t(`${translateNamespace}:media.no_attachments`);
-
     if (mediaCount === 1) {
         const item = media[0];
-        statusDescription = item.name
-            ? item.name
+        statusDescription = item.fileName
+            ? item.fileName
             : decodeURIComponent(
-                  item.originalUrl.split('/').pop() || 'unknown.pdf',
+                  item.originalUrl?.split('/').pop() || 'unknown.pdf',
               );
     } else if (mediaCount > 1) {
         statusDescription = t(`${translateNamespace}:media.has_attachments`, {
@@ -39,7 +39,8 @@ export default function MediaCell({
         });
     }
 
-    const href = mediaCount === 1 ? media[0]?.originalUrl : rowLink;
+    const href =
+        mediaCount === 1 ? `/api/media/${media[0]?.id}/download` : rowLink;
 
     const icon =
         mediaCount > 0 ? (
@@ -51,7 +52,7 @@ export default function MediaCell({
             >
                 <Paperclip className="text-blue-500" />
                 <Badge
-                    className="absolute right-[-10px] top-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
+                    className="absolute top-[-10px] right-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
                     variant="primary"
                 >
                     {mediaCount}
