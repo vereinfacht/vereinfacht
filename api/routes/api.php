@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\FinancialStatementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatementController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\ExportTableController;
 use App\Http\Middleware\ChangeLocaleFromHeader;
 use App\Http\Controllers\Api\V1\MediaController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Routing\ActionRegistrar;
 use App\Http\Controllers\Api\V1\MembershipController;
+use App\Http\Controllers\FinancialStatementController;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use App\Http\Controllers\Api\V1\StatementController as V1StatementController;
 
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', ChangeLocaleFromHeader::class])
         Route::get('media/{media}/preview', [MediaController::class, 'preview'])->name('media.preview');
         Route::post('import/statements', [StatementController::class, 'import']);
         Route::post('export/financial-statement', [FinancialStatementController::class, 'export']);
+        Route::post('export/table', [ExportTableController::class, 'export']);
     });
 
 JsonApiRoute::server('v1')

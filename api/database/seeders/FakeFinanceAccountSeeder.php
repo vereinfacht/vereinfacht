@@ -19,10 +19,10 @@ class FakeFinanceAccountSeeder extends Seeder
                 ]);
 
             FinanceAccount::factory()
+                ->cashBox()
                 ->create([
                     'title' => 'Vereinsheim',
                     'club_id' => $club->id,
-                    'account_type' => 'cash_box',
                     'initial_balance' => 1000
                 ]);
         });

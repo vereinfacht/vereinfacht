@@ -15,7 +15,7 @@
     "table": {
         "export": {
             "title": "Tabelle exportieren",
-            "description": "Tabelle mit ({{count}}) Einträgen als CSV-Datei exportieren."
+            "description": "Tabelle mit {{count}} gefilterten Einträgen als CSV-Datei exportieren."
         }
     },
 
