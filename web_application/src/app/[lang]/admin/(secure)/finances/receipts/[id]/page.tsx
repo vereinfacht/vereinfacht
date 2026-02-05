@@ -49,18 +49,20 @@ export default async function ReceiptShowPage({ params }: Props) {
         {
             attribute: 'taxAccount',
             value:
-                receipt[0]?.taxAccount?.accountNumber +
-                ' - ' +
-                receipt[0]?.taxAccount?.description +
-                ' (' +
-                receipt[0]?.taxAccount?.taxAccountChart?.title +
-                ')',
+                receipt[0]?.taxAccount == null
+                    ? '-'
+                    : receipt[0].taxAccount.accountNumber +
+                      ' - ' +
+                      receipt[0].taxAccount.description +
+                      ' (' +
+                      receipt[0].taxAccount.taxAccountChart?.title +
+                      ')',
         },
-        // {
-        //     attribute: 'media',
-        //     type: 'media',
-        //     value: receipt[0]?.media,
-        // },
+        {
+            attribute: 'media',
+            type: 'media',
+            value: receipt[0]?.media,
+        },
     ];
 
     return (
@@ -72,7 +74,7 @@ export default async function ReceiptShowPage({ params }: Props) {
                         key={index}
                         {...field}
                         resourceName={'receipts' as ResourceName}
-                        value={field.value}
+                        value={field.value as any}
                     />
                 ))}
             </ul>

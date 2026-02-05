@@ -2,6 +2,8 @@
 
 namespace App\Services\Statement\Parsers;
 
+use Exception;
+use Throwable;
 use Jejik\MT940\Reader;
 use App\Models\Statement;
 use App\Models\Transaction;
@@ -30,15 +32,15 @@ class MT940Parser extends BaseStatementParser
             $reader->addParsers($parsers);
 
             $statements = $reader->getStatements($content);
-        } catch (\Throwable $th) {
-            throw new \Exception('Failed to parse the MT940 statement file: ' . $th->getMessage());
+        } catch (Throwable $th) {
+            throw new Exception('Failed to parse the MT940 statement file: ' . $th->getMessage());
         }
 
         foreach ($statements as $parsedStatement) {
             try {
                 $this->createStatementWithTransactions($parsedStatement);
-            } catch (\Throwable $th) {
-                throw new \Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
+            } catch (Throwable $th) {
+                throw new Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
             }
         }
 

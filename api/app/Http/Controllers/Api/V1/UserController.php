@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use Throwable;
 use App\Models\User;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
@@ -12,21 +13,30 @@ use App\Repositories\UserRepository;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Responses\DataResponse;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
-use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\Store;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\Update;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\Destroy;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchOne;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchMany;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelated;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\AttachRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\DetachRelationship;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\UpdateRelationship;
 
 class UserController extends Controller
 {
-    use Actions\AttachRelationship;
-    use Actions\Destroy;
-    use Actions\DetachRelationship;
-    use Actions\FetchMany;
-    use Actions\FetchOne;
-    use Actions\FetchRelated;
-    use Actions\FetchRelationship;
-    use Actions\Store;
-    use Actions\Update;
-    use Actions\UpdateRelationship;
+    use AttachRelationship;
+    use Destroy;
+    use DetachRelationship;
+    use FetchMany;
+    use FetchOne;
+    use FetchRelated;
+    use FetchRelationship;
+    use Store;
+    use Update;
+    use UpdateRelationship;
 
     protected function creating(ResourceRequest $request): DataResponse
     {
@@ -41,7 +51,7 @@ class UserController extends Controller
             );
 
             return DataResponse::make($user);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
                 'detail' => "User could not be created: {$th->getMessage()}",
@@ -65,7 +75,7 @@ class UserController extends Controller
             );
 
             return DataResponse::make($updatedUser);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
                 'detail' => "User could not be updated: {$th->getMessage()}",
@@ -82,7 +92,7 @@ class UserController extends Controller
                 'club_id' => $loginResult->clubId,
                 'token' => $loginResult->token,
             ]);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
                 'detail' => "User could not be logged in: {$th->getMessage()}",
@@ -96,7 +106,7 @@ class UserController extends Controller
             (new Logout)->execute($request);
 
             return response()->json(['success' => 'success'], 200);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw new JsonApiException(Error::fromArray([
                 'status' => 422,
                 'detail' => "User could not be logged out: {$th->getMessage()}}",

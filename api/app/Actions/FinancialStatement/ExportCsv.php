@@ -2,6 +2,7 @@
 
 namespace App\Actions\FinancialStatement;
 
+use Exception;
 use App\Classes\FinancialStatement;
 
 class ExportCsv
@@ -34,7 +35,7 @@ class ExportCsv
         $clubId = getPermissionsTeamId();
 
         if (!$clubId) {
-            throw new \Exception('Unable to determine club context for financial statement export.');
+            throw new Exception('Unable to determine club context for financial statement export.');
         }
 
         return $clubId . '-einnahmen-ausgaben-rechnung-' . date('Y-m-d');

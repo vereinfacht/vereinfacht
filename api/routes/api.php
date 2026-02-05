@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum', ChangeLocaleFromHeader::class])
     ->prefix('v1')
     ->group(function () {
         Route::post('upload/media', [MediaController::class, 'upload']);
+        Route::get('media/{media}/download', [MediaController::class, 'download'])->name('media.download');
+        Route::get('media/{media}/preview', [MediaController::class, 'preview'])->name('media.preview');
         Route::post('import/statements', [StatementController::class, 'import']);
         Route::post('export/financial-statement', [FinancialStatementController::class, 'export']);
         Route::post('export/table', [ExportTableController::class, 'export']);

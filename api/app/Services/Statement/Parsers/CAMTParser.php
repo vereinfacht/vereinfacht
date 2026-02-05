@@ -2,11 +2,16 @@
 
 namespace App\Services\Statement\Parsers;
 
+use DateTime;
+use Exception;
+use Throwable;
+use DateTimeImmutable;
 use Genkgo\Camt\Config;
+use Genkgo\Camt\Reader;
 use App\Models\Statement;
 use Genkgo\Camt\DTO\Entry;
 use App\Models\Transaction;
-use Genkgo\Camt\Reader;
+use Genkgo\Camt\DTO\IbanAccount;
 use App\Classes\StatementIdentifierGenerator;
 
 class CAMTParser extends BaseStatementParser
@@ -23,16 +28,16 @@ class CAMTParser extends BaseStatementParser
             $reader = new Reader(Config::getDefault());
             $message = $reader->readFile($filePath);
             $statements = $message->getRecords();
-        } catch (\Throwable $th) {
-            throw new \Exception('Failed to parse the XML statement file: ' . $th->getMessage());
+        } catch (Throwable $th) {
+            throw new Exception('Failed to parse the XML statement file: ' . $th->getMessage());
         }
 
         foreach ($statements as $statement) {
             foreach ($statement->getEntries() as $entry) {
                 try {
                     $this->createStatementWithTransactions($entry);
-                } catch (\Throwable $th) {
-                    throw new \Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
+                } catch (Throwable $th) {
+                    throw new Exception('Failed to create statement – possibly invalid data format:' . $th->getMessage());
                 }
             }
         }
@@ -44,8 +49,8 @@ class CAMTParser extends BaseStatementParser
     {
         $date = $entry->getBookingDate() ?? $entry->getValueDate() ?? now();
 
-        if ($date instanceof \DateTimeImmutable) {
-            $date = \DateTime::createFromImmutable($date);
+        if ($date instanceof DateTimeImmutable) {
+            $date = DateTime::createFromImmutable($date);
         }
 
         $sharedStatementData = [
@@ -178,7 +183,7 @@ class CAMTParser extends BaseStatementParser
         }
 
         $account = $relatedParty->getAccount();
-        if ($account instanceof \Genkgo\Camt\DTO\IbanAccount) {
+        if ($account instanceof IbanAccount) {
             return (string) $account->getIban();
         }
 

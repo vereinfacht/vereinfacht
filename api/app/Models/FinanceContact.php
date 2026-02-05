@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\FinanceAccountFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FinanceContact extends Model
 {
-    /** @use HasFactory<\Database\Factories\FinanceAccountFactory> */
+    /** @use HasFactory<FinanceAccountFactory> */
     use HasFactory;
 
     protected $fillable = [

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\TaxAccountChartFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TaxAccountChart extends Model
 {
-    /** @use HasFactory<\Database\Factories\TaxAccountChartFactory> */
+    /** @use HasFactory<TaxAccountChartFactory> */
     use HasFactory;
 
     protected $fillable = [

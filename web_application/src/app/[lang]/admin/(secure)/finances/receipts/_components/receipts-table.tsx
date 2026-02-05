@@ -11,10 +11,10 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
-// import MediaCell from '@/app/components/Table/MediaCell';
+import MediaCell from '@/app/components/Table/MediaCell';
 import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
-// import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
+import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
 import { ResourceName } from '@/resources/resource';
 import {
     TFinanceContactDeserialized,
@@ -112,27 +112,27 @@ export default function ReceiptsTable({
                 />
             ),
         },
-        // {
-        //     accessorKey: 'media',
-        //     header: () =>
-        //         extended ? (
-        //             <TriStateHeaderFilter
-        //                 parser={listReceiptSearchParams.media}
-        //                 paramKey="media"
-        //                 translationKey="receipt:media.filter"
-        //             />
-        //         ) : (
-        //             t('receipt:media.label')
-        //         ),
-        //     cell: ({ row }) => (
-        //         <MediaCell
-        //             media={row.getValue('media')}
-        //             rowId={row.id}
-        //             rowLink={`/admin/finances/receipts/${row.original.id}`}
-        //             translateNamespace="receipt"
-        //         />
-        //     ),
-        // },
+        {
+            accessorKey: 'media',
+            header: () =>
+                extended ? (
+                    <TriStateHeaderFilter
+                        parser={listReceiptSearchParams.media}
+                        paramKey="media"
+                        translationKey="receipt:media.filter"
+                    />
+                ) : (
+                    t('receipt:media.label')
+                ),
+            cell: ({ row }) => (
+                <MediaCell
+                    media={row.getValue('media')}
+                    rowId={row.id}
+                    rowLink={`/admin/finances/receipts/${row.original.id}`}
+                    translateNamespace="receipt"
+                />
+            ),
+        },
         {
             accessorKey: 'amount',
             header: ({ column }) =>

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\JsonApi\V1;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\Pagination\Paginator;
-use InvalidArgumentException;
-use LaravelJsonApi\Contracts\Pagination\Page as PageContract;
-use LaravelJsonApi\Core\Document\Link;
-// CUSTOM: add IDs of all filtered results to pagination meta
-use LaravelJsonApi\Core\Pagination\AbstractPage;
-// END CUSTOM
 use Traversable;
-use function collect;
 use function count;
+use function collect;
 use function is_null;
+use InvalidArgumentException;
+// CUSTOM: add IDs of all filtered results to pagination meta
+use LaravelJsonApi\Core\Document\Link;
+// END CUSTOM
+use Illuminate\Contracts\Pagination\Paginator;
+use LaravelJsonApi\Core\Pagination\AbstractPage;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use LaravelJsonApi\Contracts\Pagination\Page as PageContract;
 
 class Page extends AbstractPage
 {
@@ -151,7 +151,7 @@ class Page extends AbstractPage
     public function withPageParam(string $key): self
     {
         if (empty($key)) {
-            throw new \InvalidArgumentException('Page parameter cannot be an empty string.');
+            throw new InvalidArgumentException('Page parameter cannot be an empty string.');
         }
 
         $this->pageParam = $key;
@@ -168,7 +168,7 @@ class Page extends AbstractPage
     public function withPerPageParam(string $key): self
     {
         if (empty($key)) {
-            throw new \InvalidArgumentException('Per-page parameter cannot be an empty string.');
+            throw new InvalidArgumentException('Per-page parameter cannot be an empty string.');
         }
 
         $this->perPageParam = $key;
@@ -229,5 +229,4 @@ class Page extends AbstractPage
     {
         return $this->paginator instanceof LengthAwarePaginator;
     }
-
 }

@@ -36,6 +36,8 @@ class MediaSchema extends Schema
             Str::make('collectionName'),
             Str::make('fileName'),
             Str::make('mimeType'),
+            Str::make('originalUrl')->readOnly(),
+            Str::make('previewConversionUrl')->readOnly(),
             Str::make('size'),
             BelongsTo::make('club')->type('clubs'),
         ];

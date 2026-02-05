@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use App\Models\Division;
 use App\Models\Membership;
+use Illuminate\Http\Request;
 use App\Models\MembershipType;
-use Closure;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApplyTenantScopes
@@ -16,20 +16,20 @@ class ApplyTenantScopes
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request):Response $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         MembershipType::addGlobalScope(
-            fn (Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
+            fn(Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
         );
 
         Membership::addGlobalScope(
-            fn (Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
+            fn(Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
         );
 
         Division::addGlobalScope(
-            fn (Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
+            fn(Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
         );
 
         return $next($request);

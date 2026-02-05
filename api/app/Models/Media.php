@@ -8,11 +8,11 @@ class Media extends BaseMedia
 {
     public function getOriginalUrlAttribute(): string
     {
-        return $this->getUrl();
+        return route('media.download', ['media' => $this->id]);
     }
 
     public function getPreviewConversionUrlAttribute(): string
     {
-        return $this->hasGeneratedConversion('preview') ? $this->getUrl('preview') : '';
+        return route('media.preview', ['media' => $this->id]);
     }
 }

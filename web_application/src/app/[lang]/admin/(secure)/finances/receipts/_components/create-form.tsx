@@ -7,7 +7,7 @@ import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultisele
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
-// import { MediaInput } from '@/app/components/Input/MediaInput';
+import { MediaInput } from '@/app/components/Input/MediaInput';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import CurrencyText from '@/app/components/Text/CurrencyText';
@@ -40,11 +40,11 @@ function TransactionOption({ item }: { item: TTransactionDeserialized }) {
     return (
         <div className="flex w-full justify-between">
             <div className="flex w-10/12 gap-2">
-            <Text className="min-w-fit font-medium">{item.title}</Text>
-            {item.bankAccountHolder && (
-                <Text className="truncate">({item.bankAccountHolder})</Text>
-            )}
-            <Text className="truncate">{item.description}</Text>
+                <Text className="min-w-fit font-medium">{item.title}</Text>
+                {item.bankAccountHolder && (
+                    <Text className="truncate">({item.bankAccountHolder})</Text>
+                )}
+                <Text className="truncate">{item.description}</Text>
             </div>
             <CurrencyText value={Number(item.amount)} />
         </div>
@@ -78,7 +78,7 @@ function TaxAccountOption({ item }: { item: TTaxAccountDeserialized }) {
 
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
-    // const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const receiptTypeOptions: Option[] = [
         { label: t('receipt:receipt_type.income'), value: 'income' },
@@ -131,7 +131,7 @@ export default function CreateForm({ data, action }: Props) {
             state={formState}
             type={data ? 'update' : 'create'}
             translationKey="receipt"
-            // loading={loading}
+            loading={loading}
         >
             <div>
                 <fieldset className="relative row-span-4 flex flex-col gap-4 rounded-lg border border-slate-200 p-4">
@@ -287,7 +287,7 @@ export default function CreateForm({ data, action }: Props) {
                     />
                 </FormField>
             </div>
-            {/* <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                 <FormField errors={formState.errors?.['media']}>
                     <MediaInput
                         id="receipt-file"
@@ -300,7 +300,7 @@ export default function CreateForm({ data, action }: Props) {
                         setLoading={setLoading}
                     />
                 </FormField>
-            </div> */}
+            </div>
         </ActionForm>
     );
 }
