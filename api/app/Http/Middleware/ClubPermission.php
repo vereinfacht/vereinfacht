@@ -2,14 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use App\Models\Club;
 use App\Models\User;
-use Illuminate\Contracts\Auth\authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\authenticatable;
 
 class ClubPermission
 {
-    public function handle($request, \Closure $next)
+    public function handle($request, Closure $next)
     {
         $authenticable = Auth::guard('sanctum')->user();
 

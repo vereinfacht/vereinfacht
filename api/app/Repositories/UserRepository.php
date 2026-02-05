@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserRepository
 {
@@ -55,7 +56,7 @@ class UserRepository
         if (empty($roleIds)) {
             $roleNames = collect(['club admin']);
         } else {
-            $roleNames = \Spatie\Permission\Models\Role::whereIn('id', $roleIds)->pluck('name');
+            $roleNames = Role::whereIn('id', $roleIds)->pluck('name');
         }
 
         setPermissionsTeamId($clubId);

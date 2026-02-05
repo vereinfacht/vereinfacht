@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Casts\MoneyCast;
 use App\Enums\TransactionStatusEnum;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\StatementFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Statement extends Model
 {
-    /** @use HasFactory<\Database\Factories\StatementFactory> */
+    /** @use HasFactory<StatementFactory> */
     use HasFactory;
 
     protected $fillable = [

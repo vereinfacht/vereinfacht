@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Casts\MoneyCast;
 use App\Enums\ReceiptStatusEnum;
 use Spatie\MediaLibrary\HasMedia;
+use Database\Factories\ReceiptFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Traits\HasPreviewConversions;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Receipt extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\ReceiptFactory> */
+    /** @use HasFactory<ReceiptFactory> */
     use HasFactory;
     use InteractsWithMedia;
     use HasPreviewConversions;

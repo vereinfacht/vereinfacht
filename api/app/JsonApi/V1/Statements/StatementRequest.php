@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Statements;
 
+use App\Models\FinanceAccount;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 
@@ -25,7 +26,7 @@ class StatementRequest extends ResourceRequest
                     $accountId = $value['id'] ?? null;
 
                     if (
-                        !$accountId || !\App\Models\FinanceAccount::where('id', $accountId)
+                        !$accountId || !FinanceAccount::where('id', $accountId)
                             ->where('account_type', 'cash_box')
                             ->exists()
                     ) {

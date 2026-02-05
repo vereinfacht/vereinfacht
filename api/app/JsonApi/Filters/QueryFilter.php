@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\Filters;
 
+use Illuminate\Database\Eloquent\Builder;
 use LaravelJsonApi\Eloquent\Contracts\Filter;
 use LaravelJsonApi\Eloquent\Filters\Concerns\IsSingular;
 use LaravelJsonApi\Eloquent\Filters\Concerns\DeserializesValue;
@@ -66,9 +67,9 @@ class QueryFilter implements Filter
     /**
      * Apply the filter to the query.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param mixed $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function apply($query, $value)
     {

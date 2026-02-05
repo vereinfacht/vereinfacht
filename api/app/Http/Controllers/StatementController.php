@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
+use App\Models\FinanceAccount;
 use App\Actions\Statement\ImportFile;
 use App\Http\Requests\ImportStatementsRequest;
-use App\Models\FinanceAccount;
 
 class StatementController extends Controller
 {
     public function __construct(
         private ImportFile $fileImport
-    ) {
-    }
+    ) {}
 
     public function import(ImportStatementsRequest $request)
     {
@@ -23,7 +23,7 @@ class StatementController extends Controller
 
         try {
             $action = $this->fileImport->execute($request->file('file'), $financeAccount);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return response()->json([
                 'errors' => $th->getMessage(),
             ], 500, ['Content-Type' => 'application/vnd.api+json']);

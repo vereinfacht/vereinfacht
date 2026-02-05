@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Casts\MoneyCast;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\FinanceAccountFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FinanceAccount extends Model
 {
-    /** @use HasFactory<\Database\Factories\FinanceAccountFactory> */
+    /** @use HasFactory<FinanceAccountFactory> */
     use HasFactory;
     use SoftDeletes;
 

@@ -2,8 +2,11 @@
 
 namespace App\Services\Statement;
 
+use InvalidArgumentException;
 use App\Models\FinanceAccount;
 use Illuminate\Contracts\Container\Container;
+use App\Services\Statement\Parsers\CAMTParser;
+use App\Services\Statement\Parsers\MT940Parser;
 use App\Services\Statement\Parsers\Contracts\StatementParserInterface;
 
 class StatementParserResolver
@@ -16,8 +19,8 @@ class StatementParserResolver
         array $parserClasses = []
     ) {
         $this->parserClasses = $parserClasses ?: [
-            \App\Services\Statement\Parsers\CAMTParser::class,
-            \App\Services\Statement\Parsers\MT940Parser::class,
+            CAMTParser::class,
+            MT940Parser::class,
         ];
     }
 
@@ -32,6 +35,6 @@ class StatementParserResolver
             }
         }
 
-        throw new \InvalidArgumentException('No suitable parser found for the uploaded file format.');
+        throw new InvalidArgumentException('No suitable parser found for the uploaded file format.');
     }
 }
