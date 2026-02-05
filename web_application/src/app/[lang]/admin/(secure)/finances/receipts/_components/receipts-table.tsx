@@ -205,8 +205,6 @@ export default function ReceiptsTable({
         );
     }
 
-    console.log({ allIds });
-
     return (
         <>
             {extended && (
