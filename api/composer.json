@@ -4,11 +4,11 @@
     "require": {
         "php": "^8.3",
         "fakerphp/faker": "^1.23",
-        "filament/filament": "^4.0",
+        "filament/filament": "^5.0",
         "freshbitsweb/laravel-log-enhancer": "^2.0",
         "genkgo/camt": "^2.10",
         "jejik/mt940": "^0.6.3",
-        "lara-zeus/spatie-translatable": "^1.0",
+        "lara-zeus/spatie-translatable": "^2.0",
         "laravel-json-api/laravel": "^5.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
