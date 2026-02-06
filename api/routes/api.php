@@ -55,7 +55,7 @@ JsonApiRoute::server('v1')
             ->only('store');
 
         $server->resource('divisions', JsonApiController::class)
-            ->only('index', 'show', 'update');
+            ->only('index', 'show',  'store', 'update');
 
         $server->resource('clubs', JsonApiController::class)
             ->relationships(function ($relations) {

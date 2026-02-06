@@ -16,6 +16,10 @@ export type TPermissionRaw =
     components['schemas']['resources.permissions.resource.fetch'];
 export type TTaxAccountRaw =
     components['schemas']['resources.tax-accounts.resource.fetch'];
+export type TDivisionRaw =
+    components['schemas']['resources.divisions.resource.fetch'];
+export type TMembershipTypeRaw =
+    components['schemas']['resources.membership-types.resource.fetch'];
 
 // Deserialized domain types
 export type TUserDeserialized = TUserRaw['attributes'] & {
@@ -80,4 +84,14 @@ export type TStatementDeserialized = TStatementRaw['attributes'] & {
     id: string;
     transactions?: TTransactionDeserialized[];
     financeAccount?: TFinanceAccountDeserialized;
+};
+
+export type TDivisionDeserialized = TDivisionRaw['attributes'] & {
+    id: string;
+    membershipTypes?: TMembershipTypeDeserialized[];
+};
+
+export type TMembershipTypeDeserialized = TMembershipTypeRaw['attributes'] & {
+    id: string;
+    division?: TDivisionDeserialized[];
 };

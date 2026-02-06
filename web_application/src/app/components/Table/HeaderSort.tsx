@@ -20,6 +20,7 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
         >
             {columnTitle}
             <Button
+                className="cursor-pointer"
                 variant="ghost"
                 data-cy={`sort-${columnId}`}
                 onClick={() =>

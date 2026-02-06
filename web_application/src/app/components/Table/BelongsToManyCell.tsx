@@ -48,7 +48,7 @@ export default function BelongsToManyCell({
                         <Link
                             href={`${basePath}/${item.id}`}
                             className={[
-                                'whitespace-nowrap text-base font-medium text-blue-500 hover:underline',
+                                'text-base font-medium whitespace-nowrap text-blue-500 hover:underline',
                                 truncate
                                     ? 'w-40 overflow-hidden text-ellipsis'
                                     : '',
@@ -74,10 +74,7 @@ export default function BelongsToManyCell({
         >
             <Link
                 href={`${parentPath}`}
-                className={[
-                    'whitespace-nowrap text-base font-medium text-blue-500 hover:underline',
-                    truncate ? 'w-40 overflow-hidden text-ellipsis' : '',
-                ].join(' ')}
+                className="text-base font-medium whitespace-nowrap text-blue-500 hover:underline"
             >
                 {firstItem[displayProperty]},{' '}
                 {t('plus_n_more', { count: remainingCount })}

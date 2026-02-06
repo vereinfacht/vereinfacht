@@ -37,7 +37,11 @@ class DivisionPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return true;
+        }
+
+        return $user->can('create divisions');
     }
 
     /**
