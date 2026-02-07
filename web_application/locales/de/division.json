@@ -3,5 +3,7 @@
         "one": "Sparte",
         "other": "Sparten",
         "label": "Name"
-    }
+    },
+    "create": "Sparte erstellen",
+    "edit": "Sparte bearbeiten"
 }

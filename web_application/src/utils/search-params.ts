@@ -1,3 +1,4 @@
+import { divisionSortingOptions } from '@/actions/divisions/list.schema';
 import {
     financeContactSortingOptions,
     financeContactTypeOptions,
@@ -132,6 +133,15 @@ export const listTaxAccountSearchParams = {
     }),
 };
 
+export const listDivisionSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(divisionSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -162,6 +172,10 @@ export const loadListTaxAccountsSearchParams = createLoader(
 
 export const loadListUsersSearchParams = createLoader(listUserSearchParams);
 
+export const loadListDivisionsSearchParams = createLoader(
+    listDivisionSearchParams,
+);
+
 export type ListMembershipSearchParamsType = inferParserType<
     typeof listMembershipSearchParams
 >;
@@ -188,4 +202,8 @@ export type ListTaxAccountSearchParamsType = inferParserType<
 
 export type ListReceiptSearchParamsType = inferParserType<
     typeof listReceiptSearchParams
+>;
+
+export type ListDivisionSearchParamsType = inferParserType<
+    typeof listDivisionSearchParams
 >;

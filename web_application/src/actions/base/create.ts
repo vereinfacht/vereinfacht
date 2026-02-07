@@ -2,6 +2,7 @@
 
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
+import { supportedLocales } from '@/utils/localization';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
 
@@ -18,6 +19,13 @@ export interface BaseBody {
             }
         >;
     };
+}
+
+function getTranslationFieldData(data: FormDataEntryValue[]) {
+    return supportedLocales.reduce(
+        (object, key, index) => ({ ...object, [key]: data[index] || '' }),
+        {},
+    );
 }
 
 export async function parseRelationship(key: string, value: any) {
@@ -86,17 +94,37 @@ export default async function createFormAction<K>(
 
     const attributes: Record<string, any> = {};
 
-    for (const [key, raw] of Array.from(formData.entries())) {
+    // Collect all unique keys first
+    const processedKeys = new Set<string>();
+
+    for (const [key] of Array.from(formData.entries())) {
+        if (processedKeys.has(key)) {
+            continue;
+        }
+
+        processedKeys.add(key);
+
         if (key.startsWith('relationships[')) {
-            const relationship = await parseRelationship(key, raw);
+            const allValues = formData.getAll(key);
+            for (const raw of allValues) {
+                const relationship = await parseRelationship(key, raw);
 
-            if (!relationship) {
-                continue;
+                if (!relationship) {
+                    continue;
+                }
+
+                Object.assign(relationships, relationship);
             }
-
-            Object.assign(relationships, relationship);
         } else {
-            attributes[key] = raw === '' ? undefined : raw;
+            const allValues = formData.getAll(key);
+
+            // If there are multiple values with the same key, treat as translation field
+            if (allValues.length > 1) {
+                attributes[key] = getTranslationFieldData(allValues);
+            } else if (allValues.length === 1) {
+                attributes[key] =
+                    allValues[0] === '' ? undefined : allValues[0];
+            }
         }
     }
 

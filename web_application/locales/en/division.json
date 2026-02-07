@@ -3,5 +3,7 @@
         "one": "Division",
         "other": "Divisions",
         "label": "Name"
-    }
+    },
+    "create": "Create division",
+    "edit": "Edit division"
 }
