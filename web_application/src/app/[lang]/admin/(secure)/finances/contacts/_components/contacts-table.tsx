@@ -1,7 +1,6 @@
 'use client';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
-import CreateButton from '@/app/[lang]/admin/(secure)/components/CreateButton';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
