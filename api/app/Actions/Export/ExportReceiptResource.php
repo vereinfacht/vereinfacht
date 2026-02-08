@@ -39,7 +39,6 @@ class ExportReceiptResource extends ExportResourceCsv
             'booking_date' => [
                 'header' => 'Booking Date',
                 'attribute' => 'booking_date',
-                'format' => 'Y-m-d H:i:s',
             ],
             'amount' => [
                 'header' => 'Amount',
