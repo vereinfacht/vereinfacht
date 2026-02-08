@@ -84,16 +84,13 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
     ];
 
     return (
-        <>
-            <CreateButton href={`/admin/finances/contacts/create/`} />
-            <DataTable
-                data={contacts}
-                columns={columns}
-                resourceName={'finances/contacts' as ResourceName}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-            />
-        </>
+        <DataTable
+            data={contacts}
+            columns={columns}
+            resourceName={'finances/contacts' as ResourceName}
+            totalPages={totalPages}
+            canEdit={true}
+            canView={true}
+        />
     );
 }
