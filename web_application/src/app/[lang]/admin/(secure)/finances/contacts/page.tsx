@@ -8,6 +8,8 @@ import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { itemsPerPage } from '@/services/api-endpoints';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import { listFinanceContacts } from '@/actions/financeContacts/list';
+import TableExportModal from '../../components/TableExportModal';
+import CreateButton from '../../components/CreateButton';
 
 async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
     const response = await listFinanceContacts({
@@ -30,5 +32,16 @@ export default async function Page({ searchParams }: WithSearchParams) {
     const meta = (response as any).meta;
     const totalPages = (meta?.page?.lastPage as number) ?? 1;
 
-    return <ContactsTable contacts={contacts} totalPages={totalPages} />;
+    return (
+        <div>
+            <div className="flex justify-between">
+                <CreateButton href={`/admin/finances/contacts/create/`} />
+                <TableExportModal
+                    ids={meta.page?.allIds}
+                    resourceName="finance_contacts"
+                />
+            </div>
+            <ContactsTable contacts={contacts} totalPages={totalPages} />
+        </div>
+    );
 }

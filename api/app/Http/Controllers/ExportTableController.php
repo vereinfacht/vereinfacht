@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Export\ExportFinanceContactResource;
 use App\Http\Requests\ExportTableRequest;
 use App\Actions\Export\ExportReceiptResource;
 use App\Actions\Export\ExportStatementResource;
@@ -18,6 +19,7 @@ class ExportTableController extends Controller
             $exporter = match ($resourceName) {
                 'receipts' => new ExportReceiptResource(),
                 'statements' => new ExportStatementResource(),
+                'finance_contacts' => new ExportFinanceContactResource(),
                 default => throw new \Exception("Unsupported resource type: {$resourceName}")
             };
 
