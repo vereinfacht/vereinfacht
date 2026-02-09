@@ -32,6 +32,7 @@ class Receipt extends Model implements HasMedia
     public function casts()
     {
         return [
+            'booking_date' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'amount' => MoneyCast::class,
@@ -47,7 +48,7 @@ class Receipt extends Model implements HasMedia
             : (int) round($this->amount * 100);
 
         if ($transactionsCount === 0) {
-            return ReceiptStatusEnum::EMPTY->value;
+            return ReceiptStatusEnum::EMPTY ->value;
         }
 
         if ($this->tax_account_id && $transactionsSum === $receiptAmount) {

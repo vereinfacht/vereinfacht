@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExportResourceCsv
 {
-    public function execute(Collection $resources, string $resourceName, array $columns = []): string
+    public function execute(Collection $resources, string $resourceName): string
     {
         if ($resources->isEmpty()) {
             throw new \Exception('No resources found for export.');
@@ -16,10 +16,10 @@ class ExportResourceCsv
         // @todo: use current user's locale
         app()->setLocale('de');
 
-        return $this->generateCsv($resources, $resourceName, $columns);
+        return $this->generateCsv($resources, $resourceName);
     }
 
-    protected function generateCsv(Collection $resources, string $resourceName, array $columns): string
+    protected function generateCsv(Collection $resources, string $resourceName): string
     {
         $tempDir = storage_path('app/tmp');
 
@@ -30,7 +30,7 @@ class ExportResourceCsv
         $csvFileName = $this->getFileName($resourceName) . '.csv';
         $csvFile = fopen($tempDir . '/' . $csvFileName, 'w');
 
-        $this->writeCsvData($csvFile, $resources, $columns);
+        $this->writeCsvData($csvFile, $resources);
 
         fclose($csvFile);
 
@@ -48,13 +48,11 @@ class ExportResourceCsv
         return $clubId . '-' . $resourceName . '-export-' . date('Y-m-d-H-i-s');
     }
 
-    protected function writeCsvData($csvFile, Collection $resources, array $columns): void
+    protected function writeCsvData($csvFile, Collection $resources): void
     {
-        $firstResource = $resources->first();
+        $columnsToExport = $this->getColumns();
 
-        $columnsToExport = $this->getColumnsToExport($firstResource, $columns);
-
-        $headers = $this->getHeaders($columnsToExport);
+        $headers = array_map(fn($column) => $column['header'], $columnsToExport);
         fputcsv($csvFile, $headers);
 
         foreach ($resources as $resource) {
@@ -66,62 +64,31 @@ class ExportResourceCsv
         }
     }
 
-    protected function getColumnsToExport(Model $resource, array $columns): array
+    protected function getColumns(): array
     {
-        if (!empty($columns)) {
-            return $columns;
-        }
-
-        $fillable = $resource->getFillable();
-
-        if (empty($fillable)) {
-            return array_keys($resource->getAttributes());
-        }
-
-        return $fillable;
+        return [];
     }
 
-    protected function getHeaders(array $columns): array
+    protected function getColumnValue(Model $resource, array $column): string
     {
-        return array_map(function ($column) {
-            $translationKey = $this->getTranslationKey($column);
-            $translated = __($translationKey);
+        if (in_array('callback', array_keys($column))) {
+            $callback = $column['callback'];
 
-            if ($translated === $translationKey) {
-                return ucwords(str_replace(['_', '-'], ' ', $column));
+            if (is_callable($callback)) {
+                return (string) $callback($resource);
             }
 
-            return $translated;
-        }, $columns);
-    }
-
-    protected function getTranslationKey(string $column): string
-    {
-        $patterns = [
-            'fields.' . $column,
-            'attributes.' . $column,
-            $column
-        ];
-
-        foreach ($patterns as $pattern) {
-            if (__($pattern) !== $pattern) {
-                return $pattern;
-            }
+            return '';
         }
 
-        return $column;
-    }
-
-    protected function getColumnValue(Model $resource, string $column): string
-    {
-        $value = $resource->getAttribute($column);
+        $value = $resource->getAttribute($column['attribute']);
 
         if ($value === null) {
             return '';
         }
 
         if ($value instanceof \Carbon\Carbon || $value instanceof \DateTime) {
-            return $value->format('Y-m-d');
+            return $value->toISOString();
         }
 
         return (string) $value;

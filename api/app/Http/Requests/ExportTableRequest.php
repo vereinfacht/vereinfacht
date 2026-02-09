@@ -12,6 +12,7 @@ class ExportTableRequest extends FormRequest
     private const RESOURCES = [
         'receipts' => Receipt::class,
         'statements' => Statement::class,
+        'finance_contacts' => FinanceContact::class,
     ];
 
     public function authorize(): bool
