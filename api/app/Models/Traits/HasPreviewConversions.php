@@ -12,12 +12,14 @@ trait HasPreviewConversions
             $this->addMediaConversion('preview')
                 ->width(400)
                 ->height(565)
-                ->pdfPageNumber(1);
+                ->pdfPageNumber(1)
+                ->nonqueued();
             return;
         }
 
         $this->addMediaConversion('preview')
             ->width(400)
-            ->height(565);
+            ->height(565)
+            ->nonqueued();
     }
 }
