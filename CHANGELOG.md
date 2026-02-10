@@ -1,9 +1,9 @@
 # vereinfacht Changelog
+
 ## [0.1.0] - 2026-02-10
 
 ### 🚀 Features
 
-- Make open source 🚀
 - Basic account management, refs #1
 - Introduce sorting and filtering to contact table, refs #3 (#4)
 - Implement user management features (#11)

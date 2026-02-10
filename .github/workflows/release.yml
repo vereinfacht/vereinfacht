@@ -21,7 +21,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: --verbose --bump
+          args: --verbose --bump --prepend CHANGELOG.md --latest
         env:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
