@@ -1,0 +1,51 @@
+name: Release on GitHub
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog and determine version
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: --verbose --bump
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Update publiccode software version
+        run: |
+          VERSION="${{ steps.git-cliff.outputs.version }}"
+          sed -i "s/softwareVersion: .*/softwareVersion: \"$VERSION\"/" publiccode.yml
+
+      - name: Commit changelog and create tag
+        run: |
+          VERSION="${{ steps.git-cliff.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md publiccode.yml
+          git commit -m "chore(release): prepare release for $VERSION"
+          git tag -a "$VERSION" -m "Release version $VERSION"
+          git push origin HEAD
+          git push origin tag "$VERSION"
+
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.git-cliff.outputs.version }}"
+          gh release create "$VERSION" \
+            --title "Release $VERSION" \
+            --notes "$(awk '/## \[/{flag=1;next}/## \[/{flag=0}flag' CHANGELOG.md)"
