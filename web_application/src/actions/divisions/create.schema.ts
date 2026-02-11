@@ -4,19 +4,10 @@ import { SupportedLocale, supportedLocales } from '@/utils/localization';
 const divisionTranslationSchema = z.object(
     supportedLocales.reduce(
         (acc, locale) => {
-            acc[locale] = z.optional(
-                z
-                    .string()
-                    .min(2, 'Minimum 2 characters required')
-                    .max(255)
-                    .or(z.literal('')),
-            );
+            acc[locale] = z.string().min(2).max(255);
             return acc;
         },
-        {} as Record<
-            SupportedLocale,
-            z.ZodOptional<z.ZodUnion<[z.ZodString, z.ZodLiteral<''>]>>
-        >,
+        {} as Record<SupportedLocale, z.ZodString>,
     ),
 );
 

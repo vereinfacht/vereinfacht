@@ -2,10 +2,10 @@
 
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
-import { supportedLocales } from '@/utils/localization';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
-import { BaseBody, handleZodError, parseRelationship } from './create';
+import { BaseBody, handleZodError } from './create';
+import { parseFormData } from './formDataParser';
 
 interface UpdateFormBody extends BaseBody {
     data: {
@@ -13,17 +13,10 @@ interface UpdateFormBody extends BaseBody {
     } & BaseBody['data'];
 }
 
-function getTranslationFieldData(data: FormDataEntryValue[]) {
-    return supportedLocales.reduce(
-        (object, key, index) => ({ ...object, [key]: data[index] || '' }),
-        {},
-    );
-}
-
 export default async function updateFormAction<K>(
     _previousState: FormActionState,
     action: (payload: K) => Promise<any>,
-    formData: FormData,
+    form: FormData,
     body: UpdateFormBody,
 ): Promise<FormActionState> {
     const session = await auth();
@@ -32,41 +25,7 @@ export default async function updateFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    const relationships = {};
-
-    const attributes: Record<string, any> = {};
-
-    const processedKeys = new Set<string>();
-
-    for (const [key] of Array.from(formData.entries())) {
-        if (processedKeys.has(key)) {
-            continue;
-        }
-
-        processedKeys.add(key);
-
-        if (key.startsWith('relationships[')) {
-            const allValues = formData.getAll(key);
-            for (const raw of allValues) {
-                const relationship = await parseRelationship(key, raw);
-
-                if (!relationship) {
-                    continue;
-                }
-
-                Object.assign(relationships, relationship);
-            }
-        } else {
-            const allValues = formData.getAll(key);
-
-            if (allValues.length > 1) {
-                attributes[key] = getTranslationFieldData(allValues);
-            } else if (allValues.length === 1) {
-                attributes[key] =
-                    allValues[0] === '' ? undefined : allValues[0];
-            }
-        }
-    }
+    const { attributes, relationships } = await parseFormData(form);
 
     body.data.attributes = attributes;
     body.data.relationships = relationships;

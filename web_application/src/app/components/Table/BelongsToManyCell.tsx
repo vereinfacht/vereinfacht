@@ -27,7 +27,18 @@ export default function BelongsToManyCell({
     truncate = false,
     className = '',
 }: BelongsToManyCellProps) {
-    const { t } = useTranslation('general');
+    const { t, lang } = useTranslation('general');
+
+    const getDisplayValue = (item: BelongsToManyItem) => {
+        const translationsKey = `${displayProperty}Translations`;
+        if (
+            item[translationsKey] &&
+            typeof item[translationsKey] === 'object'
+        ) {
+            return item[translationsKey][lang] || item[displayProperty];
+        }
+        return item[displayProperty];
+    };
 
     if (items.length === 0) {
         return (
@@ -54,7 +65,7 @@ export default function BelongsToManyCell({
                                     : '',
                             ].join(' ')}
                         >
-                            {item[displayProperty]}
+                            {getDisplayValue(item)}
                             {index < items.length - 1 && ','}
                         </Link>
                     </React.Fragment>
@@ -76,7 +87,7 @@ export default function BelongsToManyCell({
                 href={`${parentPath}`}
                 className="text-base font-medium whitespace-nowrap text-blue-500 hover:underline"
             >
-                {firstItem[displayProperty]},{' '}
+                {getDisplayValue(firstItem)},{' '}
                 {t('plus_n_more', { count: remainingCount })}
             </Link>
         </div>

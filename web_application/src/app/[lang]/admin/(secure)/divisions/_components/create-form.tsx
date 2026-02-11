@@ -24,8 +24,8 @@ interface Props {
 }
 
 export default function CreateForm({ data, action }: Props) {
-    const { t } = useTranslation();
-    console.log('CreateForm data:', data);
+    const { t, lang } = useTranslation();
+
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         { success: false },
@@ -40,7 +40,9 @@ export default function CreateForm({ data, action }: Props) {
 
     const defaultMembershipTypes =
         data?.membershipTypes?.map((membershipType) => ({
-            label: membershipType.title,
+            label:
+                membershipType.titleTranslations?.[lang] ||
+                membershipType.title,
             value: membershipType.id,
         })) || [];
 
@@ -77,7 +79,9 @@ export default function CreateForm({ data, action }: Props) {
                                 filter: { query: searchTerm },
                             })
                         }
-                        optionLabel={(item) => item.title}
+                        optionLabel={(item) =>
+                            item.titleTranslations?.[lang] || item.title
+                        }
                         defaultValue={defaultMembershipTypes}
                     />
                 </FormField>

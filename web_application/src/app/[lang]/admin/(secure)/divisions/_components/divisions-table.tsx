@@ -24,7 +24,7 @@ export default function DivisionsTable({
     totalPages,
     extended = false,
 }: Props) {
-    const { t } = useTranslation();
+    const { t, lang } = useTranslation();
     const columns: ColumnDef<TDivisionDeserialized>[] = [
         {
             accessorKey: 'title',
@@ -38,7 +38,12 @@ export default function DivisionsTable({
                 ) : (
                     t('division:title.label', { count: 1 })
                 ),
-            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
+            cell: ({ row }) => {
+                const title =
+                    row.original.titleTranslations?.[lang] ||
+                    row.getValue('title');
+                return <TextCell>{title}</TextCell>;
+            },
         },
         {
             accessorKey: 'membershipTypes',

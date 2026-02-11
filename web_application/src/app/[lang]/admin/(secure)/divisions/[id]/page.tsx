@@ -1,5 +1,4 @@
 import { getDivision } from '@/actions/divisions/get';
-import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
@@ -36,10 +35,11 @@ export default async function DivisionShowPage({ params }: Props) {
             <EditButton href={`/admin/divisions/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
+                    // @ts-expect-error: value type as element mismatch
                     <DetailField
                         key={index}
                         {...field}
-                        resourceName={'divisions' as ResourceName}
+                        resourceName={'divisions'}
                         value={field.value}
                     />
                 ))}
