@@ -25,16 +25,17 @@ The Laravel API backend (`/api/`) and the Next.js web frontend (`/web_applicatio
 
 ### Core technologies
 
--   Docker
--   Laravel (API backend)
--   JSON:API & Open API spec
--   MariaDB
--   Filament (admin panel)
--   Next.js
--   Zod (schema validation)
--   Tailwind CSS
--   shadcn/ui component library
--   Cypress (End-to-End testing)
+- Docker
+- Laravel (API backend)
+- JSON:API & Open API spec
+- MariaDB
+- Filament (admin panel)
+- Next.js
+- OpenAPI TypeScript
+- Zod (schema validation)
+- Tailwind CSS
+- shadcn/ui component library
+- Cypress (End-to-End testing)
 
 ## Installation
 
@@ -77,11 +78,11 @@ Copy the generated token and supply it to the `/web_application/.env.local` file
 
 #### Swagger API docs
 
-The Swagger API docs are available at the API URL with the path prefix `/docs`. For local development this is [http://api.verein.localhost/docs](http://api.verein.localhost/docs). A publicly available Swagger UI version will be available in the future.
+The Swagger API docs are available at the API URL via the path `/docs`. For local development this is [http://api.verein.localhost/docs](http://api.verein.localhost/docs). A publicly available Swagger UI version will be available in the future.
 
 The local API docs automatically use the API definition file stored in [`/api/public`](api/public/v1_openapi.json).
 
-A new version of this file may be greated with `php artisan jsonapi:openapi:generate v1` (requires the `FakeDatabaseSeeder` to be ran).
+A new version of this file may be created with `php artisan jsonapi:openapi:generate v1` (requires the `FakeDatabaseSeeder` to be ran).
 
 > [!NOTE]
 > This process is **not** automated, because the generator package being used does not support all the specs / features the API needs.

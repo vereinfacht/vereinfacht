@@ -3,7 +3,7 @@
 # More info at https://github.com/italia/publiccode.yml
 
 publiccodeYmlVersion: "0.2"
-softwareVersion: "dev"
+softwareVersion: "0.1.0"
 name: vereinfacht
 url: "https://github.com/vereinfacht/vereinfacht"
 landingURL: "https://vereinfacht.digital/"
