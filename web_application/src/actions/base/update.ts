@@ -37,7 +37,6 @@ export default async function updateFormAction<K>(
             success: true,
         };
     } catch (error) {
-        console.error('Error in form action:', error);
         if (error instanceof ZodError) {
             return handleZodError(error);
         }

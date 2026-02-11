@@ -71,8 +71,6 @@ export async function handleZodError(error: ZodError) {
         success: false,
         errors: error.issues.reduce(
             (acc, err) => {
-                // For nested paths like ['data', 'attributes', 'titleTranslations', 'de'],
-                // we want 'titleTranslations' not 'de'
                 const path = err.path;
                 const attributeIndex = path.indexOf('attributes');
                 const attribute =
