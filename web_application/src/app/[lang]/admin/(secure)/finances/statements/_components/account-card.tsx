@@ -9,6 +9,7 @@ import { TFinanceAccountDeserialized } from '@/types/resources';
 import { isPast } from 'date-fns';
 import useTranslation from 'next-translate/useTranslation';
 import { useQueryState } from 'nuqs';
+import { paginationSearchParamParser } from '@/utils/search-params';
 import SettingsDropdown from './settings-dropdown';
 import IconCheck from '/public/svg/check.svg';
 
@@ -23,12 +24,13 @@ export default function AccountCard({ balance, account, title }: Props) {
     const [accountId, setAccountId] = useQueryState('accountId', {
         shallow: false,
     });
+    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
     const cardId = account ? account.id : null;
     const type =
         account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
     const isSelected = cardId === accountId;
     const readableIban = account?.iban
-        ? account.iban.replace(/(.{4})/g, '$1 ').trim() // adds a space every 4 characters
+        ? account.iban.replace(/(.{4})/g, '$1 ').trim()
         : undefined;
 
     return (
@@ -45,7 +47,7 @@ export default function AccountCard({ balance, account, title }: Props) {
                     : '',
             ].join(' ')}
         >
-            <CardHeader className="p-4 pb-1 pt-3">
+            <CardHeader className="p-4 pt-3 pb-1">
                 <div className="flex w-full flex-1 items-center justify-between space-x-2">
                     <Text
                         tag="h3"
@@ -56,11 +58,14 @@ export default function AccountCard({ balance, account, title }: Props) {
                         {title}
                     </Text>
                     <button
-                        onClick={() => setAccountId(cardId)}
+                        onClick={() => {
+                            setAccountId(cardId);
+                            setPage(null);
+                        }}
                         className="p-1"
                         data-cy={`select-account-${cardId ? cardId : 'all'}`}
                     >
-                        <div className="flex size-5 items-center justify-center rounded-full bg-white ring-2 ring-slate-200 transition-all hover:bg-blue-200 hover:ring-blue-500 group-[.is-selected]:border-transparent group-[.is-selected]:ring-2 group-[.is-selected]:ring-blue-500">
+                        <div className="flex size-5 items-center justify-center rounded-full bg-white ring-2 ring-slate-200 transition-all group-[.is-selected]:border-transparent group-[.is-selected]:ring-2 group-[.is-selected]:ring-blue-500 hover:bg-blue-200 hover:ring-blue-500">
                             {isSelected && (
                                 <IconCheck className="w-3 stroke-blue-500 stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                             )}
@@ -70,7 +75,7 @@ export default function AccountCard({ balance, account, title }: Props) {
             </CardHeader>
             {readableIban !== undefined &&
                 account?.accountType === 'bank_account' && (
-                    <CardContent className="flex w-full items-end justify-between space-x-2 p-4 pb-3 pt-1">
+                    <CardContent className="flex w-full items-end justify-between space-x-2 p-4 pt-1 pb-3">
                         <Text
                             preset="body-sm"
                             className="whitespace-nowrap text-slate-600"
