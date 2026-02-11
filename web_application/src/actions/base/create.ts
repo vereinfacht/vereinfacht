@@ -4,7 +4,7 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
-import { parseFormData } from './formDataParser';
+import { parseFormData } from './parser/formDataParser';
 
 export interface BaseBody {
     data: {
@@ -24,7 +24,7 @@ export interface BaseBody {
 export default async function createFormAction<K>(
     _previousState: FormActionState,
     action: (payload: K) => Promise<any>,
-    form: FormData,
+    formData: FormData,
     body: BaseBody,
     setClubId: boolean = true,
 ): Promise<FormActionState> {
@@ -35,7 +35,7 @@ export default async function createFormAction<K>(
     }
 
     const { attributes, relationships: parsedRelationships } =
-        await parseFormData(form);
+        await parseFormData(formData);
 
     const relationships = {
         ...(body.data.relationships || {}),

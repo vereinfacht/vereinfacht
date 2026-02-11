@@ -5,7 +5,7 @@ import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
 import { BaseBody, handleZodError } from './create';
-import { parseFormData } from './formDataParser';
+import { parseFormData } from './parser/formDataParser';
 
 interface UpdateFormBody extends BaseBody {
     data: {
@@ -16,7 +16,7 @@ interface UpdateFormBody extends BaseBody {
 export default async function updateFormAction<K>(
     _previousState: FormActionState,
     action: (payload: K) => Promise<any>,
-    form: FormData,
+    formData: FormData,
     body: UpdateFormBody,
 ): Promise<FormActionState> {
     const session = await auth();
@@ -25,7 +25,7 @@ export default async function updateFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    const { attributes, relationships } = await parseFormData(form);
+    const { attributes, relationships } = await parseFormData(formData);
 
     body.data.attributes = attributes;
     body.data.relationships = relationships;
