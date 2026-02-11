@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import DetailField from '../../components/Fields/DetailField';
 import Text from '@/app/components/Text/Text';
+import ResourceTable from '@/app/components/Table/ResourceTable';
 import createTranslation from 'next-translate/createTranslation';
 
 interface Props {
@@ -49,6 +50,10 @@ export default async function DivisionShowPage({ params }: Props) {
                     <Text preset="headline" tag="h2" className="mt-6">
                         {t('membership_type:title.other')}
                     </Text>
+                    <ResourceTable
+                        resources={division[0].membershipTypes as any[]}
+                        resourceName="membershipTypes"
+                    />
                 </>
             ) : null}
         </div>
