@@ -11,11 +11,10 @@ import { z } from 'zod';
 
 export type ResourceName =
     | 'memberships'
+    | 'divisions'
     | 'divisionMembershipTypes'
     | 'clubs'
-    | 'membershipTypes'
-    | 'divisions'
-    | 'users';
+    | 'membershipTypes';
 
 export type DetailFieldDef<T> =
     | DefaultDetailFieldDef<T>
@@ -45,27 +44,21 @@ export interface SimpleDetailFieldDef<T> extends DefaultDetailFieldDef<T> {
         | 'html';
 }
 
-export interface BelongsToDetailFieldDef<T, K = any> extends Omit<
-    DefaultDetailFieldDef<T>,
-    'value'
-> {
+export interface BelongsToDetailFieldDef<T, K = any>
+    extends Omit<DefaultDetailFieldDef<T>, 'value'> {
     type: 'belongsTo';
     fields: DetailFieldDef<K>[];
     value: K;
 }
 
-export interface BelongsToManyDetailFieldDef<T, K = any> extends Omit<
-    DefaultDetailFieldDef<T>,
-    'value'
-> {
+export interface BelongsToManyDetailFieldDef<T, K = any>
+    extends Omit<DefaultDetailFieldDef<T>, 'value'> {
     type: 'belongsToMany';
     value: K[];
 }
 
-export interface MediaDetailField<T> extends Omit<
-    DefaultDetailFieldDef<T>,
-    'value'
-> {
+export interface MediaDetailField<T>
+    extends Omit<DefaultDetailFieldDef<T>, 'value'> {
     type: 'media';
     value: TMediaDeserialized[];
 }

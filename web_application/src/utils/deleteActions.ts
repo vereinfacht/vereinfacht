@@ -3,7 +3,6 @@ import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
-import { ResourceName } from '@/resources/resource';
 
 const deleteActionMap: Record<
     string,
@@ -23,7 +22,7 @@ const deleteActionMap: Record<
     },
 };
 
-export function createDeleteFormAction(resourceName: ResourceName) {
+export function createDeleteFormAction(resourceName: string) {
     const deleteHandler = deleteActionMap[resourceName];
 
     if (!deleteHandler) {

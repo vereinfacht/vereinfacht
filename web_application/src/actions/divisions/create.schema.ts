@@ -22,16 +22,6 @@ export const divisionRelationshipsSchema = z.object({
             type: z.literal('clubs'),
         }),
     }),
-    membershipTypes: z
-        .object({
-            data: z.array(
-                z.object({
-                    id: z.string(),
-                    type: z.literal('membership-types'),
-                }),
-            ),
-        })
-        .optional(),
 });
 
 export const createDivisionSchema = z.object({
