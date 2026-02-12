@@ -8,10 +8,11 @@ import Checkbox from '@/app/components/Input/Checkbox';
 import { Button } from '@/app/components/ui/button';
 import { ListFilter } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
-import { ParserBuilder, useQueryState } from 'nuqs';
+import { SingleParserBuilder, useQueryState } from 'nuqs';
+import { paginationSearchParamParser } from '@/utils/search-params';
 import { Badge } from '../ui/badge';
 interface Props {
-    parser: ParserBuilder<any[]>;
+    parser: SingleParserBuilder<any[]>;
     paramKey: string;
     options: readonly string[];
     translationKey: string;
@@ -28,6 +29,7 @@ export function HeaderOptionFilter({
         paramKey,
         parser,
     );
+    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
 
     function handleToggleOption(selectedOption: string, checked: boolean) {
         const currentOptions = filterQueryParam ?? [];
@@ -36,6 +38,7 @@ export function HeaderOptionFilter({
             : currentOptions.filter((option) => option !== selectedOption);
 
         setFilterQueryParam(updated);
+        setPage(null);
     }
 
     return (
@@ -61,7 +64,7 @@ export function HeaderOptionFilter({
                         />
                         {filterQueryParam?.length ? (
                             <Badge
-                                className="absolute right-0 top-0 flex h-5 w-5 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
+                                className="absolute top-0 right-0 flex h-5 w-5 flex-col items-center justify-center rounded-full px-1 text-[10px] text-white tabular-nums"
                                 variant="primary"
                             >
                                 {filterQueryParam.length}
