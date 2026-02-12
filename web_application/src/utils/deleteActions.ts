@@ -1,7 +1,9 @@
+import { deleteDivisionFormAction } from '@/actions/divisions/delete';
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { ResourceName } from '@/resources/resource';
 
 const deleteActionMap: Record<
     string,
@@ -16,9 +18,12 @@ const deleteActionMap: Record<
     users: async (id: string) => {
         return await deleteUserFormAction(id, { success: false });
     },
+    divisions: async (id: string) => {
+        return await deleteDivisionFormAction(id, { success: false });
+    },
 };
 
-export function createDeleteFormAction(resourceName: string) {
+export function createDeleteFormAction(resourceName: ResourceName) {
     const deleteHandler = deleteActionMap[resourceName];
 
     if (!deleteHandler) {

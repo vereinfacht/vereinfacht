@@ -12,6 +12,7 @@ import { listDivisionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
+import { createDeleteFormAction } from '@/utils/deleteActions';
 
 interface Props {
     divisions: TDivisionDeserialized[];
@@ -25,6 +26,8 @@ export default function DivisionsTable({
     extended = false,
 }: Props) {
     const { t, lang } = useTranslation();
+    const deleteAction = createDeleteFormAction('divisions');
+
     const columns: ColumnDef<TDivisionDeserialized>[] = [
         {
             accessorKey: 'title',
@@ -75,6 +78,7 @@ export default function DivisionsTable({
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}
+                deleteAction={deleteAction}
             />
         </>
     );

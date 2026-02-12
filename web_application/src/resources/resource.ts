@@ -11,10 +11,11 @@ import { z } from 'zod';
 
 export type ResourceName =
     | 'memberships'
-    | 'divisions'
     | 'divisionMembershipTypes'
     | 'clubs'
-    | 'membershipTypes';
+    | 'membershipTypes'
+    | 'divisions'
+    | 'users';
 
 export type DetailFieldDef<T> =
     | DefaultDetailFieldDef<T>

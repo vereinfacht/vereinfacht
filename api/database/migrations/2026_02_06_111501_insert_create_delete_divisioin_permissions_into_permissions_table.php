@@ -6,6 +6,7 @@ return new class extends Migration
 {
     protected $permissionNames = [
         'create divisions',
+        'delete divisions',
     ];
 
     public function up(): void

@@ -61,7 +61,11 @@ class DivisionPolicy
      */
     public function delete(User $user, Division $division): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $division->club_id;
+        }
+
+        return $user->can('delete divisions') && $division->club_id === getPermissionsTeamId();
     }
 
     /**
