@@ -2,19 +2,18 @@
 
 namespace App\JsonApi\V1\MembershipTypes;
 
+use App\JsonApi\V1\Fields\StrSanitized;
 use App\Models\MembershipType;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\ArrayHash;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Number;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
+use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
-use App\JsonApi\Filters\QueryFilter;
-use LaravelJsonApi\Eloquent\Fields\ID;
-use App\JsonApi\V1\Fields\StrSanitized;
-use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Fields\Number;
-use LaravelJsonApi\Eloquent\Fields\DateTime;
-use LaravelJsonApi\Eloquent\Fields\ArrayHash;
-use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class MembershipTypeSchema extends Schema
 {
@@ -63,7 +62,6 @@ class MembershipTypeSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            QueryFilter::make('query', ['title']),
         ];
     }
 
