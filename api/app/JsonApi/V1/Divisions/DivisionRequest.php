@@ -16,7 +16,6 @@ class DivisionRequest extends ResourceRequest
             'titleTranslations' => ['required', 'array'],
             'titleTranslations.*' => ['required', 'string', 'min:2', 'max:255'],
             'club' => ['nullable', JsonApiRule::toOne()],
-            'membershipTypes' => ['nullable', JsonApiRule::toMany()],
         ];
     }
 }
