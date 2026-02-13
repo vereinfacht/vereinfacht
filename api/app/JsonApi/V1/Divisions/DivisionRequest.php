@@ -14,14 +14,13 @@ class DivisionRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'titleTranslations.de' => ['nullable', 'string', 'min:2'],
-            'titleTranslations.en' => ['nullable', 'string', 'min:2'],
+            ...TranslationTitleRule::getLocaleRules(),
             'titleTranslations' => [
                 'required',
                 'array',
                 new TranslationTitleRule(),
             ],
-            'club' => ['nullable', JsonApiRule::toOne()],
+            'club' => ['required', JsonApiRule::toOne()],
         ];
     }
 }
