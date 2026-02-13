@@ -142,6 +142,7 @@ return [
     'uppercase' => ':Attribute muss in Großbuchstaben sein.',
     'url' => ':Attribute muss eine URL sein.',
     'uuid' => ':Attribute muss ein UUID sein.',
+    'translation_title_required' => 'Mindestens eine Sprache muss ausgefüllt sein.',
     'attributes' => [
         'address' => 'Adresse',
         'affiliate_url' => 'Affiliate-URL',

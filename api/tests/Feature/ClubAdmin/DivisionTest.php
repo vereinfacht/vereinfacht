@@ -28,7 +28,7 @@ class DivisionTest extends TestCase
             'id' => (string) $division->getKey(),
             'attributes' => [
                 'titleTranslations' => [
-                    'xx' => 'New Danish title',
+                    'de' => 'New German title',
                 ],
             ],
         ];
@@ -70,7 +70,7 @@ class DivisionTest extends TestCase
             'id' => (string) $division->getKey(),
             'attributes' => [
                 'titleTranslations' => [
-                    'xx' => 'New Danish title',
+                    'de' => 'New German title',
                 ],
             ],
         ];

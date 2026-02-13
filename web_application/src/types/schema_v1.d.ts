@@ -139,7 +139,8 @@ export interface paths {
         /** Get all divisions */
         get: operations["divisions.index"];
         put?: never;
-        post?: never;
+        /** Store one division */
+        post: operations["divisions.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1399,6 +1400,83 @@ export interface components {
                 /**
                  * updatedAt
                  * @example 2025-10-16T13:11:31.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** members */
+                members?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/members/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/members/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** membershipTypes */
+                membershipTypes?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Division/Store */
+        "resources.divisions.resource.store": {
+            /**
+             * type
+             * @default divisions
+             */
+            type: string;
+            attributes: {
+                /**
+                 * title
+                 * @example Fo
+                 */
+                readonly title?: string;
+                /**
+                 * titleTranslations
+                 * @example Fo
+                 */
+                titleTranslations?: Record<string, never>;
+                /**
+                 * createdAt
+                 * @example 2026-01-12T12:31:54.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-02-06T07:46:02.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4934,6 +5012,8 @@ export interface operations {
                 sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
             };
             header?: never;
             path?: never;
@@ -4961,6 +5041,44 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "divisions.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.divisions.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store divisions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.divisions.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
     "divisions.show": {

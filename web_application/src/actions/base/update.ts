@@ -4,7 +4,8 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';
-import { BaseBody, handleZodError, parseRelationship } from './create';
+import { BaseBody, handleZodError } from './create';
+import { parseFormData } from './parser/formDataParser';
 
 interface UpdateFormBody extends BaseBody {
     data: {
@@ -24,23 +25,7 @@ export default async function updateFormAction<K>(
         redirect('/admin/auth/login');
     }
 
-    const relationships = {};
-
-    const attributes: Record<string, any> = {};
-
-    for (const [key, raw] of Array.from(formData.entries())) {
-        if (key.startsWith('relationships[')) {
-            const relationship = await parseRelationship(key, raw);
-
-            if (!relationship) {
-                continue;
-            }
-
-            Object.assign(relationships, relationship);
-        } else {
-            attributes[key] = raw === '' ? undefined : raw;
-        }
-    }
+    const { attributes, relationships } = await parseFormData(formData);
 
     body.data.attributes = attributes;
     body.data.relationships = relationships;

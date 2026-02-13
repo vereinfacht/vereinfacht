@@ -3,16 +3,17 @@
 namespace App\JsonApi\V1\Divisions;
 
 use App\Models\Division;
-use LaravelJsonApi\Eloquent\Contracts\Paginator;
-use LaravelJsonApi\Eloquent\Fields\ArrayHash;
-use LaravelJsonApi\Eloquent\Fields\DateTime;
-use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
-use LaravelJsonApi\Eloquent\Fields\Str;
-use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
+use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\DateTime;
+use LaravelJsonApi\Eloquent\Fields\ArrayHash;
+use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
+use LaravelJsonApi\Eloquent\Contracts\Paginator;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
 
 class DivisionSchema extends Schema
 {
@@ -28,7 +29,7 @@ class DivisionSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('title')->readOnly(),
+            Str::make('title')->sortable()->readOnly(),
             ArrayHash::make('titleTranslations', 'title')->extractUsing(
                 static fn($model, $column) => $model->getTranslations($column)
             ),
@@ -47,6 +48,7 @@ class DivisionSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            QueryFilter::make('query', ['title']),
         ];
     }
 
@@ -56,5 +58,12 @@ class DivisionSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'membershipTypes',
+        ];
     }
 }

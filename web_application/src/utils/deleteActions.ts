@@ -1,3 +1,4 @@
+import { deleteDivisionFormAction } from '@/actions/divisions/delete';
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
@@ -15,6 +16,9 @@ const deleteActionMap: Record<
     },
     users: async (id: string) => {
         return await deleteUserFormAction(id, { success: false });
+    },
+    divisions: async (id: string) => {
+        return await deleteDivisionFormAction(id, { success: false });
     },
 };
 
