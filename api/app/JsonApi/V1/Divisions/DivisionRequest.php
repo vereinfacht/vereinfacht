@@ -13,8 +13,20 @@ class DivisionRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'titleTranslations' => ['required', 'array'],
-            'titleTranslations.*' => ['required', 'string', 'min:2', 'max:255'],
+            'titleTranslations.de' => ['nullable', 'string', 'min:2'],
+            'titleTranslations.en' => ['nullable', 'string', 'min:2'],
+            'titleTranslations' => [
+                'required',
+                'array',
+                function ($attribute, $value, $fail) {
+                    if (
+                        empty($value['de']) &&
+                        empty($value['en'])
+                    ) {
+                        $fail('Mindestens eine Sprache muss ausgefüllt sein.');
+                    }
+                },
+            ],
             'club' => ['nullable', JsonApiRule::toOne()],
         ];
     }

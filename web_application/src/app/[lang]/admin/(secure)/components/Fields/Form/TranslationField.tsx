@@ -41,8 +41,8 @@ export default function TranslationField({
                         defaultValue?.find((item) => item.locale === locale)
                             ?.value
                     }
-                    required={required}
-                    min={required ? 2 : undefined}
+                    // @TODO: Implement the required logic
+                    required={false}
                     label={`${locale}`}
                 />
             ))}

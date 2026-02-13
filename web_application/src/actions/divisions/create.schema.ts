@@ -1,15 +1,26 @@
 import { z } from 'zod';
 import { SupportedLocale, supportedLocales } from '@/utils/localization';
 
-const divisionTranslationSchema = z.object(
-    supportedLocales.reduce(
-        (acc, locale) => {
-            acc[locale] = z.string().min(2).max(255);
-            return acc;
+const divisionTranslationSchema = z
+    .object(
+        supportedLocales.reduce(
+            (acc, locale) => {
+                acc[locale] = z.string().min(2).optional().or(z.literal(''));
+                return acc;
+            },
+            {} as Record<SupportedLocale, z.ZodTypeAny>,
+        ),
+    )
+    .refine(
+        (data) => {
+            return Object.values(data).some(
+                (value) => typeof value === 'string' && value.length >= 2,
+            );
         },
-        {} as Record<SupportedLocale, z.ZodString>,
-    ),
-);
+        {
+            message: 'Mindestens eine Sprache muss ausgefüllt sein.',
+        },
+    );
 
 export const divisionAttributesSchema = z.object({
     titleTranslations: divisionTranslationSchema,
