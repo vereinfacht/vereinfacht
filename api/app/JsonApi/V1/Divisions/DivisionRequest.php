@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Divisions;
 
+use App\Rules\TranslationTitleRule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
@@ -18,14 +19,7 @@ class DivisionRequest extends ResourceRequest
             'titleTranslations' => [
                 'required',
                 'array',
-                function ($attribute, $value, $fail) {
-                    if (
-                        empty($value['de']) &&
-                        empty($value['en'])
-                    ) {
-                        $fail('Mindestens eine Sprache muss ausgefüllt sein.');
-                    }
-                },
+                new TranslationTitleRule(),
             ],
             'club' => ['nullable', JsonApiRule::toOne()],
         ];
