@@ -11,6 +11,7 @@ import * as RadixSwitch from '@radix-ui/react-switch';
 import { ListFilter, RotateCcw } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { ParserBuilder, useQueryState } from 'nuqs';
+import { paginationSearchParamParser } from '@/utils/search-params';
 import Text from '../Text/Text';
 
 interface Props {
@@ -26,6 +27,7 @@ export function TriStateHeaderFilter({
 }: Props) {
     const { t } = useTranslation();
     const [filterValue, setFilterValue] = useQueryState(paramKey, parser);
+    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
 
     const hasActiveFilter = filterValue !== null;
 
@@ -58,9 +60,10 @@ export function TriStateHeaderFilter({
                             <Text>{t(`${translationKey}.false`)}</Text>
                             <RadixSwitch.Root
                                 checked={filterValue === true}
-                                onCheckedChange={(checked) =>
-                                    setFilterValue(checked)
-                                }
+                                onCheckedChange={(checked) => {
+                                    setFilterValue(checked);
+                                    setPage(null);
+                                }}
                                 className="relative h-6 w-11 cursor-pointer rounded-full bg-gray-300 transition-colors data-[state=checked]:bg-blue-600"
                             >
                                 <RadixSwitch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform data-[state=checked]:translate-x-5" />
@@ -74,6 +77,7 @@ export function TriStateHeaderFilter({
                             e.preventDefault();
                             if (hasActiveFilter) {
                                 setFilterValue(null);
+                                setPage(null);
                             }
                         }}
                         className={`flex cursor-pointer items-center justify-center ${
