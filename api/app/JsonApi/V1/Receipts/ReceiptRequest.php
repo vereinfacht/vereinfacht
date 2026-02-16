@@ -17,7 +17,7 @@ class ReceiptRequest extends ResourceRequest
             'referenceNumber' => ['nullable', 'string', 'max:255'],
             'receiptType' => ['required', Rule::in(['expense', 'income'])],
             'bookingDate' => ['required', 'date'],
-            'amount' => ['required', 'numeric', 'not_in:0'],
+            'amount' => ['required', 'numeric', 'gt:0'],
             'club' => ['required', JsonApiRule::toOne()],
             'financeContact' => [JsonApiRule::toOne()],
             'taxAccount' => [JsonApiRule::toOne()],
