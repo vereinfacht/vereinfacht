@@ -36,24 +36,4 @@ class ReceiptFactory extends Factory
                 : null,
         ];
     }
-
-    public function income(): static
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'receipt_type' => 'income',
-                'amount' => $this->faker->randomFloat(2, 10, 999),
-            ];
-        });
-    }
-
-    public function expense(): static
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'receipt_type' => 'expense',
-                'amount' => -$this->faker->randomFloat(2, 10, 999),
-            ];
-        });
-    }
 }

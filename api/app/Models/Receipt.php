@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Casts\MoneyCast;
 use App\Enums\ReceiptStatusEnum;
 use Spatie\MediaLibrary\HasMedia;
-use Database\Factories\ReceiptFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Traits\HasPreviewConversions;
@@ -48,7 +47,7 @@ class Receipt extends Model implements HasMedia
             : (int) round($this->amount * 100);
 
         if ($transactionsCount === 0) {
-            return ReceiptStatusEnum::EMPTY ->value;
+            return ReceiptStatusEnum::EMPTY->value;
         }
 
         if ($this->tax_account_id && $transactionsSum === $receiptAmount) {

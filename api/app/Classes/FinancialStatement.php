@@ -50,7 +50,7 @@ class FinancialStatement
             'account_number' => $receipt->taxAccount->account_number,
             'type' => $receipt->receipt_type,
             'description' => $receipt->taxAccount->description,
-            'amount' => abs($receipt->amount ?? 0),
+            'amount' => $receipt->amount ?? 0,
         ]);
     }
 
