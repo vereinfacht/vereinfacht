@@ -124,6 +124,7 @@ Go into the tooling container:
 docker compose exec tooling bash
 cd web_application
 cp .env.local.example .env.local
+npm ci
 ```
 
 Paste the API token mentioned in the previous API setup steps into the .env.local.
