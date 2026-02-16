@@ -38,7 +38,7 @@ class TranslationTitleRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!is_array($value)) {
-            $fail(__('validation.translation_title_required'));
+            $fail(__('validation.custom.title_translation.required'));
             return;
         }
 
@@ -48,6 +48,6 @@ class TranslationTitleRule implements ValidationRule
             }
         }
 
-        $fail(__('validation.translation_title_required'));
+        $fail(__('validation.custom.title_translation.required'));
     }
 }

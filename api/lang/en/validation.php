@@ -142,7 +142,6 @@ return [
     'uppercase' => 'The :attribute field must be uppercase.',
     'url' => 'The :attribute field must be a valid URL.',
     'uuid' => 'The :attribute field must be a valid UUID.',
-    'translation_title_required' => 'At least one language must be filled in.',
     'attributes' => [
         'address' => 'address',
         'affiliate_url' => 'affiliate URL',
@@ -264,5 +263,10 @@ return [
         'username' => 'username',
         'value' => 'value',
         'year' => 'year',
+    ],
+    'custom' => [
+        'title_translation' => [
+            'required' => 'At least one language must be filled in.',
+        ],
     ],
 ];
