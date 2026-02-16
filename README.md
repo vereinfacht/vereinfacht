@@ -64,6 +64,7 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh --seeder=FakeDatabaseSeeder
 php artisan filament:assets
+php artisan filament:assets
 npm ci
 npm run build
 ```
