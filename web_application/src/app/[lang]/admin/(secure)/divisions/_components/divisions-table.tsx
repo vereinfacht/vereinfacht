@@ -13,15 +13,18 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import { createDeleteFormAction } from '@/utils/deleteActions';
+import TableExportModal from '../../components/TableExportModal';
 
 interface Props {
     divisions: TDivisionDeserialized[];
+    allIds?: string[];
     totalPages: number;
     extended?: boolean;
 }
 
 export default function DivisionsTable({
     divisions,
+    allIds,
     totalPages,
     extended = false,
 }: Props) {
@@ -70,7 +73,15 @@ export default function DivisionsTable({
 
     return (
         <>
-            {extended && <CreateButton href="/admin/divisions/create" />}
+            {extended && (
+                <div className="flex justify-between">
+                    <CreateButton href="/admin/divisions/create" />
+                    <TableExportModal
+                        ids={allIds ?? []}
+                        resourceName="divisions"
+                    />
+                </div>
+            )}
             <DataTable
                 data={divisions}
                 columns={columns}

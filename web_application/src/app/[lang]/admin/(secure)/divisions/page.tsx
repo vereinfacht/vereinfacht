@@ -31,6 +31,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
     return (
         <DivisionsTable
             divisions={divisions}
+            allIds={meta.page?.allIds}
             totalPages={totalPages}
             extended={true}
         />
