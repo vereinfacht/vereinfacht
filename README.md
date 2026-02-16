@@ -39,10 +39,16 @@ The Laravel API backend (`/api/`) and the Next.js web frontend (`/web_applicatio
 
 ## Installation
 
-> [!WARNING]
-> Instructions as well as files required to setup your own vereinfacht instances are still being developed.
-
 ## Development
+
+### Development domains
+
+| service                                | url                   |
+| -------------------------------------- | --------------------- |
+| web_application (tooling: npm run dev) | http://localhost:3000 |
+| web_application (docker build)         | http://localhost:3003 |
+| api                                    | http://localhost:3001 |
+| swagger docs                           | http://localhost:3002 |
 
 ### API
 
@@ -50,18 +56,17 @@ The backend is a Laravel application using the [JSON:API](https://jsonapi.org/) 
 
 #### Setup
 
-> [!NOTE]
-> The following steps require a `docker-compose.yml` as well as other files which are not yet included in this repository. However, they will be added shorly.
-
 Go into the tooling container:
 
 ```sh
-docker exec -it verein_tooling bash
+docker compose exec tooling bash
 cd api
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh --seeder=FakeDatabaseSeeder
+php artisan filament:assets
+npm run build
 ```
 
 Aftwards create a token for the default super admin user:
@@ -78,7 +83,8 @@ Copy the generated token and supply it to the `/web_application/.env.local` file
 
 #### Swagger API docs
 
-The Swagger API docs are available at the API URL via the path `/docs`. For local development this is [http://api.verein.localhost/docs](http://api.verein.localhost/docs). A publicly available Swagger UI version will be available in the future.
+The Swagger API docs are available at the API URL via the path `/docs`. For local development this is [http://localhost:3002](http://localhost:3002).
+Production API docs are available at [https://api.vereinfacht.digital/docs](https://api.vereinfacht.digital/docs).
 
 The local API docs automatically use the API definition file stored in [`/api/public`](api/public/v1_openapi.json).
 
@@ -106,26 +112,18 @@ The newly generated file can be found in `/api/storage/public`. For the time bei
 
 #### Setup
 
-To run web_application in development mode, expose the ports 3000 of your tooling container in your `/docker-compose.override.yml`:
-
-```yaml
-services:
-    tooling:
-        ports:
-            - 3000:3000
-```
-
 Go into the tooling container:
 
 ```sh
-docker exec -it verein_tooling bash
+docker compose exec tooling bash
 cd web_application
 cp .env.local.example .env.local
 ```
 
 Paste the API token mentioned in the previous setup steps into the .env.local.
 
-Generate a NextAuth secret (follow these steps: https://next-auth.js.org/configuration/options#secret).
+> [!WARNING]
+> When running on production you should generate a new NextAuth secret (follow these steps: https://next-auth.js.org/configuration/options#secret).
 
 Start the dev server while within the tooling container and inside `/web_application/`:
 
@@ -140,7 +138,7 @@ npm run dev
 Running the backend PHPUnit tests:
 
 ```sh
-docker exec -it verein_tooling bash
+docker compose exec tooling bash
 cd api
 php artisan test
 ```

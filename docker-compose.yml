@@ -19,12 +19,13 @@ services:
     networks:
       - stack
     restart: always
+    ports:
+      - 3306:3306
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=true
-      - MYSQL_DATABASE=verein
-      - MYSQL_USER=verein
-      - MYSQL_PASSWORD=verein
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=verein
+      - MARIADB_USER=verein
+      - MARIADB_PASSWORD=verein
 
   api:
     build:
@@ -42,6 +43,8 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./api:/var/www/html
+    ports:
+      - 3001:80
     restart: always
 
   api-docs:
@@ -51,8 +54,10 @@ services:
     networks:
       - stack
     environment:
-      - SWAGGER_JSON_URL=http://api/v1_openapi.json
-      - BASE_URL=/docs
+      - SWAGGER_JSON_URL=http://localhost:3001/v1_openapi.json
+      - BASE_URL=/
+    ports:
+      - 3002:8080
     restart: always
 
   web_application:
@@ -67,6 +72,8 @@ services:
       - database
     networks:
       - stack
+    ports:
+      - 3003:3000
     restart: always
 
   tooling:
@@ -82,4 +89,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
+    ports:
+      - 3000:3000
     restart: always
