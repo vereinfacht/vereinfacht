@@ -32,15 +32,29 @@ class FakeReceiptSeeder extends Seeder
     protected function withoutTransactions(int $club_id, int $count): void
     {
         Receipt::factory()
-            ->count($count)
+            ->income()
+            ->count(ceil($count / 2))
+            ->create(['club_id' => $club_id, 'booking_date' => now()->subDays(rand(1, 30))]);
+
+        Receipt::factory()
+            ->expense()
+            ->count(floor($count / 2))
             ->create(['club_id' => $club_id, 'booking_date' => now()->subDays(rand(1, 30))]);
     }
 
     protected function withExactTransaction(int $club_id, int $count): void
     {
-        $receipts = Receipt::factory()
-            ->count($count)
+        $incomeReceipts = Receipt::factory()
+            ->income()
+            ->count(ceil($count / 2))
             ->create(['club_id' => $club_id]);
+
+        $expenseReceipts = Receipt::factory()
+            ->expense()
+            ->count(floor($count / 2))
+            ->create(['club_id' => $club_id]);
+
+        $receipts = $incomeReceipts->merge($expenseReceipts);
 
         $receipts->each(function ($receipt) use ($club_id) {
             $statement = Statement::factory()
@@ -63,9 +77,17 @@ class FakeReceiptSeeder extends Seeder
 
     protected function withSomeTransactions(int $club_id, int $count): void
     {
-        $receipts = Receipt::factory()
-            ->count($count)
+        $incomeReceipts = Receipt::factory()
+            ->income()
+            ->count(ceil($count / 2))
             ->create(['club_id' => $club_id]);
+
+        $expenseReceipts = Receipt::factory()
+            ->expense()
+            ->count(floor($count / 2))
+            ->create(['club_id' => $club_id]);
+
+        $receipts = $incomeReceipts->merge($expenseReceipts);
 
         $receipts->each(function ($receipt) use ($club_id) {
             $statement = Statement::factory()

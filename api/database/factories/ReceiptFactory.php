@@ -27,7 +27,7 @@ class ReceiptFactory extends Factory
             'reference_number' => $this->faker->unique()->numerify('REF-#####'),
             'receipt_type' => $receiptType,
             'booking_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $receiptType === 'expense' ? -$amount : $amount,
+            'amount' => $amount,
             'finance_contact_id' => $this->faker->boolean(70)
                 ? FinanceContact::inRandomOrder()->first()?->id
                 : null,
@@ -35,5 +35,25 @@ class ReceiptFactory extends Factory
                 ? TaxAccount::inRandomOrder()->first()?->id
                 : null,
         ];
+    }
+
+    public function income(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'receipt_type' => 'income',
+                'amount' => $this->faker->randomFloat(2, 10, 999),
+            ];
+        });
+    }
+
+    public function expense(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'receipt_type' => 'expense',
+                'amount' => -$this->faker->randomFloat(2, 10, 999),
+            ];
+        });
     }
 }
