@@ -37,8 +37,6 @@ The Laravel API backend (`/api/`) and the Next.js web frontend (`/web_applicatio
 - shadcn/ui component library
 - Cypress (End-to-End testing)
 
-## Installation
-
 ## Development
 
 ### Development domains
@@ -66,6 +64,7 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh --seeder=FakeDatabaseSeeder
 php artisan filament:assets
+npm ci
 npm run build
 ```
 
@@ -80,6 +79,13 @@ php artisan tinker
 ```
 
 Copy the generated token and supply it to the `/web_application/.env.local` file (see [web frontend](#web-frontend) setup below) as well as the `/e2e/cypress.config.ts`. If for any reason this token should change, remember to change it in those places as well.
+
+You may now visit the login for the admin panel at [http://localhost:3001](http://localhost:3001) and use the seeded credentials for the super admin user:
+
+```
+Email: hello@vereinfacht.digital
+Password: password
+```
 
 #### Swagger API docs
 
@@ -120,7 +126,7 @@ cd web_application
 cp .env.local.example .env.local
 ```
 
-Paste the API token mentioned in the previous setup steps into the .env.local.
+Paste the API token mentioned in the previous API setup steps into the .env.local.
 
 > [!WARNING]
 > When running on production you should generate a new NextAuth secret (follow these steps: https://next-auth.js.org/configuration/options#secret).
@@ -129,6 +135,13 @@ Start the dev server while within the tooling container and inside `/web_applica
 
 ```sh
 npm run dev
+```
+
+You may now visit the login for the club management at [http://localhost:3000](http://localhost:3000) and use the seeded credentials for the test user. For example:
+
+```
+Email: club-admin-1@example.org
+Password: password
 ```
 
 ### Testing
