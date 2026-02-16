@@ -1,6 +1,5 @@
 import Empty from '@/app/components/Empty';
-import Text from '@/app/components/Text/Text';
-import useCurrency from '@/hooks/useCurrency';
+import CurrencyText from '@/app/components/Text/CurrencyText';
 import React from 'react';
 
 interface Props {
@@ -8,15 +7,9 @@ interface Props {
 }
 
 export default function CurrencyField({ value }: Props) {
-    const { getFormatted } = useCurrency();
-
     if (value == null || typeof value === 'string') {
         return <Empty text={'–'} />;
     }
 
-    return (
-        <Text className="hyphens-auto whitespace-break-spaces">
-            {getFormatted(value)}
-        </Text>
-    );
+    return <CurrencyText value={value} />;
 }

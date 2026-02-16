@@ -145,6 +145,7 @@ export default function CreateForm({ data, action }: Props) {
                                 id="amount"
                                 name="amount"
                                 label={t('receipt:amount.label')}
+                                help={t('receipt:amount.help')}
                                 type="number"
                                 min={0}
                                 step="0.01"

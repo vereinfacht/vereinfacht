@@ -145,7 +145,13 @@ export default function ReceiptsTable({
                 ) : (
                     t('receipt:amount.label')
                 ),
-            cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
+            cell: ({ row }) => {
+                const amount = row.getValue('amount') as number;
+                const receiptType = row.getValue('receiptType') as string;
+                const signedAmount =
+                    receiptType === 'expense' ? -amount : amount;
+                return <CurrencyCell value={signedAmount} />;
+            },
         },
     ];
 
