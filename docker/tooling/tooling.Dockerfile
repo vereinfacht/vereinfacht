@@ -9,8 +9,8 @@ ARG USER_ID
 ARG GROUP_ID
 
 # Define environment variables
-ENV USER_NAME=vvuser
-ENV GROUP_NAME=vvuser
+ENV USER_NAME=verein
+ENV GROUP_NAME=verein
 ENV USER_ID=$USER_ID
 ENV GROUP_ID=$GROUP_ID
 ENV USER_ID=${USER_ID:-1001}
