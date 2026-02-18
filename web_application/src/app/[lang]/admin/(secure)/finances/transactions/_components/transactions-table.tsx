@@ -97,10 +97,7 @@ export default function TransactionsTable({
             columns={columns}
             resourceName={'finances/transactions' as ResourceName}
             totalPages={totalPages}
-            canEdit={(transaction) =>
-                transaction.statement?.financeAccount?.accountType ===
-                'cash_box'
-            }
+            canEdit={false}
             canView={true}
             defaultColumn={{
                 size: 150,

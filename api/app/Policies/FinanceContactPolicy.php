@@ -53,7 +53,7 @@ class FinanceContactPolicy
             return $user->id === $financeContact->club_id;
         }
 
-        return $user->can('update financeContacts') && $financeContact->club_id === getPermissionsTeamId();
+        return $user->can('update financeContacts') && $financeContact->club_id === getPermissionsTeamId() && !$financeContact->is_external;
     }
 
     /**
@@ -65,7 +65,7 @@ class FinanceContactPolicy
             return $user->id === $financeContact->club_id;
         }
 
-        return $user->can('delete financeContacts') && $financeContact->club_id === getPermissionsTeamId();
+        return $user->can('delete financeContacts') && $financeContact->club_id === getPermissionsTeamId() && !$financeContact->is_external;
     }
 
     /**

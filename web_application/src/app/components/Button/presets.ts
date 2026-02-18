@@ -1,5 +1,5 @@
 export const BUTTON_BASE_CLASSES =
-    'py-3 block leading-tight text-center relative transition-all';
+    'py-3 block leading-tight text-center relative transition-all cursor-pointer';
 
 export const BUTTON_SIZE_CLASSES = {
     default: 'rounded-md text-[1.0625rem] h-11 font-medium',

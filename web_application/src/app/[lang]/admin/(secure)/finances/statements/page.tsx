@@ -22,7 +22,7 @@ async function getStatementsFromApi(params: ListStatementSearchParamsType) {
                 : (params.statementType ?? undefined),
             ...(params.accountId ? { financeAccountId: params.accountId } : {}),
         },
-        include: ['transactions', 'financeAccount'],
+        include: ['transactions.statement.financeAccount', 'financeAccount'],
         fields: {
             'finance-accounts': [
                 'title',

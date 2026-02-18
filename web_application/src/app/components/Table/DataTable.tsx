@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
     resourceName: ResourceName;
     canView?: boolean;
     canEdit?: boolean | ((row: TData) => boolean);
+    canDelete?: boolean | ((row: TData) => boolean);
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     totalPages?: number;
 }
@@ -39,6 +40,7 @@ export function DataTable<TData extends Model, TValue>({
     resourceName,
     canView = false,
     canEdit = false,
+    canDelete = false,
     deleteAction,
     totalPages,
 }: DataTableProps<TData, TValue>) {
@@ -100,21 +102,25 @@ export function DataTable<TData extends Model, TValue>({
                                             key="actions"
                                             className="flex items-center justify-end gap-4"
                                         >
-                                            {typeof canEdit === 'function'
-                                                ? canEdit(row.original) && (
-                                                      <TableAction
-                                                          type="edit"
-                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                          id={row.original.id}
-                                                      />
-                                                  )
-                                                : canEdit && (
-                                                      <TableAction
-                                                          type="edit"
-                                                          href={`/admin/${resourceName}/edit/${row.original.id}`}
-                                                          id={row.original.id}
-                                                      />
-                                                  )}
+                                            {typeof canEdit === 'function' ? (
+                                                <TableAction
+                                                    type="edit"
+                                                    href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                    disabled={
+                                                        canEdit(row.original) ==
+                                                        false
+                                                    }
+                                                    id={row.original.id}
+                                                />
+                                            ) : (
+                                                canEdit && (
+                                                    <TableAction
+                                                        type="edit"
+                                                        href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                        id={row.original.id}
+                                                    />
+                                                )
+                                            )}
                                             {canView && (
                                                 <TableAction
                                                     type="view"
@@ -122,13 +128,32 @@ export function DataTable<TData extends Model, TValue>({
                                                     id={row.original.id}
                                                 />
                                             )}
-                                            {deleteAction && (
+                                            {typeof canDelete === 'function' &&
+                                            deleteAction ? (
                                                 <TableAction
                                                     type="delete"
                                                     deleteAction={deleteAction}
+                                                    disabled={
+                                                        canDelete(
+                                                            row.original,
+                                                        ) === false
+                                                    }
                                                     id={row.original.id}
                                                     resourceName={resourceName}
                                                 />
+                                            ) : (
+                                                deleteAction && (
+                                                    <TableAction
+                                                        type="delete"
+                                                        deleteAction={
+                                                            deleteAction
+                                                        }
+                                                        id={row.original.id}
+                                                        resourceName={
+                                                            resourceName
+                                                        }
+                                                    />
+                                                )
                                             )}
                                         </TableCell>
                                     )}

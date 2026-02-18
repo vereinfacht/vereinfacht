@@ -82,7 +82,7 @@ JsonApiRoute::server('v1')
             ->only('index');
 
         $server->resource('finance-contacts', JsonApiController::class)
-            ->only('index', 'show', 'store', 'update');
+            ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('receipts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');
