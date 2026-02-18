@@ -27,7 +27,7 @@ export function TriStateHeaderFilter({
 }: Props) {
     const { t } = useTranslation();
     const [filterValue, setFilterValue] = useQueryState(paramKey, parser);
-    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
+    const [, setPage] = useQueryState('page', paginationSearchParamParser);
 
     const hasActiveFilter = filterValue !== null;
 

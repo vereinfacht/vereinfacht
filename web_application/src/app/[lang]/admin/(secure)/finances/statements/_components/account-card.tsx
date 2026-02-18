@@ -24,7 +24,7 @@ export default function AccountCard({ balance, account, title }: Props) {
     const [accountId, setAccountId] = useQueryState('accountId', {
         shallow: false,
     });
-    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
+    const [, setPage] = useQueryState('page', paginationSearchParamParser);
     const cardId = account ? account.id : null;
     const type =
         account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
