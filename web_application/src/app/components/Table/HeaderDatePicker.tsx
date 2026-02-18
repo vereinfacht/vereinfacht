@@ -44,7 +44,7 @@ export function HeaderDatePicker({
         fromDateParser,
     );
     const [toDate, setToDate] = useQueryState(parameterKeys.to, toDateParser);
-    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
+    const [, setPage] = useQueryState('page', paginationSearchParamParser);
     const [isOpen, setIsOpen] = useState(false);
 
     const [selectedRange, setSelectedRange] = useState<
@@ -119,7 +119,7 @@ export function HeaderDatePicker({
                         />
                         {hasActiveFilter && (
                             <Badge
-                                className="absolute right-0 top-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
+                                className="absolute top-0 right-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] text-white tabular-nums"
                                 variant="primary"
                                 data-cy="date-range-active-badge"
                             />
