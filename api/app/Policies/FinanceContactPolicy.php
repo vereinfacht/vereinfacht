@@ -83,4 +83,16 @@ class FinanceContactPolicy
     {
         return false;
     }
+
+    /**
+     * JSON:API relationship endpoints authorization
+     */
+    public function viewReceipts(User $user, FinanceContact $financeContact): bool
+    {
+        if ($user instanceof Club) {
+            return $user->id === $financeContact->club_id;
+        }
+
+        return $user->can('view receipts') && $financeContact->club_id === getPermissionsTeamId();
+    }
 }
