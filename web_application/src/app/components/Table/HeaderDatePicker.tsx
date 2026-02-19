@@ -8,6 +8,7 @@ import { enUS } from 'date-fns/locale/en-US';
 import { CalendarDays, RotateCcw } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import { ParserBuilder, useQueryState } from 'nuqs';
+import { paginationSearchParamParser } from '@/utils/search-params';
 import { useState } from 'react';
 import { DayPicker, DateRange as DayPickerDateRange } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
@@ -43,6 +44,7 @@ export function HeaderDatePicker({
         fromDateParser,
     );
     const [toDate, setToDate] = useQueryState(parameterKeys.to, toDateParser);
+    const [, setPage] = useQueryState('page', paginationSearchParamParser);
     const [isOpen, setIsOpen] = useState(false);
 
     const [selectedRange, setSelectedRange] = useState<
@@ -74,6 +76,7 @@ export function HeaderDatePicker({
             setToDate(null);
         }
 
+        setPage(null);
         setIsOpen(false);
     };
 
@@ -81,6 +84,7 @@ export function HeaderDatePicker({
         setSelectedRange(undefined);
         setFromDate(null);
         setToDate(null);
+        setPage(null);
         setIsOpen(false);
     };
 
@@ -115,7 +119,7 @@ export function HeaderDatePicker({
                         />
                         {hasActiveFilter && (
                             <Badge
-                                className="absolute right-0 top-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] tabular-nums text-white"
+                                className="absolute top-0 right-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] text-white tabular-nums"
                                 variant="primary"
                                 data-cy="date-range-active-badge"
                             />

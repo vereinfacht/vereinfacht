@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "generate-schema": "npx openapi-typescript http://verein_api/v1_openapi.json -o ./src/types/schema_v1.d.ts",
+        "generate-schema": "npx openapi-typescript http://api/v1_openapi.json -o ./src/types/schema_v1.d.ts",
         "dev": "npm run generate-schema && next dev",
         "build": "next build",
         "start": "next start",

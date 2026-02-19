@@ -1,0 +1,94 @@
+# Attention:
+# This compose file is designed to be used in a development environment.
+# It includes services for the database, API, API documentation, web application, and tooling.
+name: vereinfacht
+
+networks:
+  stack:
+    external: false
+
+volumes:
+  mariadb:
+
+services:
+  database:
+    image: mariadb:11.8
+    working_dir: /var/www/html
+    volumes:
+      - mariadb:/var/lib/mysql:cached
+    networks:
+      - stack
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=verein
+      - MARIADB_USER=verein
+      - MARIADB_PASSWORD=verein
+
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/api.Dockerfile
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
+    depends_on:
+      - database
+    environment:
+      - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
+    networks:
+      - stack
+    working_dir: /var/www/html
+    volumes:
+      - ./api:/var/www/html
+    ports:
+      - 3001:80
+    restart: always
+
+  api-docs:
+    image: docker.swagger.io/swaggerapi/swagger-ui
+    depends_on:
+      - api
+    networks:
+      - stack
+    environment:
+      - SWAGGER_JSON_URL=http://localhost:3001/v1_openapi.json
+      - BASE_URL=/
+    ports:
+      - 3002:8080
+    restart: always
+
+  web_application:
+    build:
+      context: .
+      dockerfile: ./docker/web_application/web_application.Dockerfile
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
+    depends_on:
+      - api
+      - database
+    networks:
+      - stack
+    ports:
+      - 3003:3000
+    restart: always
+
+  tooling:
+    build:
+      context: .
+      dockerfile: ./docker/tooling/tooling.Dockerfile
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
+    networks:
+      - stack
+    tty: true
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 3000:3000
+    restart: always
