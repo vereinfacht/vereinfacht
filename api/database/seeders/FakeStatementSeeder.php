@@ -32,7 +32,6 @@ class FakeStatementSeeder extends Seeder
 
         $individualStatements->each(function ($statement) {
             Transaction::factory()
-                ->count(rand(1, 5))
                 ->create([
                     'booked_at' => $statement->date,
                     'valued_at' => $statement->date,

@@ -26,6 +26,7 @@ class FinanceContactRequest extends ResourceRequest
             'zipCode' => ['required', 'string', 'min:2', 'max:255'],
             'city' => ['required', 'string', 'min:2', 'max:255'],
             'country' => ['nullable', 'string', 'min:2', 'max:255'],
+            'isExternal' => ['nullable', 'boolean'],
             'club' => ['required', JsonApiRule::toOne()],
         ];
     }

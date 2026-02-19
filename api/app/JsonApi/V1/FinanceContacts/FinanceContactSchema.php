@@ -6,6 +6,7 @@ use App\Models\FinanceContact;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Sorting\FullNameSort;
+use LaravelJsonApi\Eloquent\Fields\Boolean;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -42,6 +43,7 @@ class FinanceContactSchema extends Schema
             Str::make('phoneNumber'),
             Str::make('email'),
             Str::make('contactType'),
+            Boolean::make('isExternal'),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),

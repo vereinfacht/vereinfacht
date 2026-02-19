@@ -424,7 +424,8 @@ export interface paths {
         get: operations["finance-contacts.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one finance-contact */
+        delete: operations["finance-contacts.destroy"];
         options?: never;
         head?: never;
         /** Update one finance-contact */
@@ -1931,6 +1932,11 @@ export interface components {
                  */
                 contactType?: string;
                 /**
+                 * isExternal
+                 * @example true
+                 */
+                isExternal?: boolean;
+                /**
                  * createdAt
                  * @example 2025-10-16T13:11:34.000000Z
                  */
@@ -2039,6 +2045,11 @@ export interface components {
                  * @example person
                  */
                 contactType?: string;
+                /**
+                 * isExternal
+                 * @example true
+                 */
+                isExternal?: boolean;
                 /**
                  * createdAt
                  * @example 2025-10-16T13:11:34.000000Z
@@ -2150,6 +2161,11 @@ export interface components {
                  * @example person
                  */
                 contactType?: string;
+                /**
+                 * isExternal
+                 * @example true
+                 */
+                isExternal?: boolean;
                 /**
                  * createdAt
                  * @example 2025-10-16T13:11:34.000000Z
@@ -5997,6 +6013,29 @@ export interface operations {
                         data: components["schemas"]["resources.finance-contacts.resource.fetch"];
                     };
                 };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];

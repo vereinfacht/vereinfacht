@@ -85,7 +85,7 @@ JsonApiRoute::server('v1')
             ->relationships(function ($relations) {
                 $relations->hasMany('receipts', JsonApiController::class)->readOnly();
             })
-            ->only('index', 'show', 'store', 'update');
+            ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('receipts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update');

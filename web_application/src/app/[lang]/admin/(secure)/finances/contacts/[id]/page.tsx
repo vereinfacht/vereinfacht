@@ -99,7 +99,11 @@ export default async function ContactShowPage({ params }: Props) {
 
     return (
         <div className="container flex flex-col gap-6">
-            <EditButton href={`/admin/finances/contacts/edit/${params.id}`} />
+            {!Boolean(contact.isExternal) && (
+                <EditButton
+                    href={`/admin/finances/contacts/edit/${params.id}`}
+                />
+            )}
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
                     // @ts-expect-error: value type as element mismatch
