@@ -3887,6 +3887,200 @@
                         "$ref": "#\/components\/responses\/404"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Destroy one finance-contact",
+                "description": "",
+                "operationId": "finance-contacts.destroy",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/finance-contacts\/{finance_contact}\/receipts": {
+            "get": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Show receipts",
+                "description": "",
+                "operationId": "finance-contacts.receipts",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ShowRelated finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.receipts.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/finance-contacts\/{finance_contact}\/relationships\/receipts": {
+            "get": {
+                "tags": [
+                    "Finance-contacts"
+                ],
+                "summary": "Show receipts relation",
+                "description": "",
+                "operationId": "finance-contacts.receipts.show",
+                "parameters": [
+                    {
+                        "name": "finance_contact",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show finance-contacts",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.finance-contacts.relationship.receipts.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         },
         "\/receipts": {
@@ -9180,6 +9374,11 @@
                                 "type": "string",
                                 "example": "person"
                             },
+                            "isExternal": {
+                                "title": "isExternal",
+                                "type": "boolean",
+                                "example": true
+                            },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
@@ -9319,6 +9518,11 @@
                                 "title": "contactType",
                                 "type": "string",
                                 "example": "person"
+                            },
+                            "isExternal": {
+                                "title": "isExternal",
+                                "type": "boolean",
+                                "example": true
                             },
                             "createdAt": {
                                 "title": "createdAt",
@@ -9464,6 +9668,11 @@
                                 "title": "contactType",
                                 "type": "string",
                                 "example": "person"
+                            },
+                            "isExternal": {
+                                "title": "isExternal",
+                                "type": "boolean",
+                                "example": true
                             },
                             "createdAt": {
                                 "title": "createdAt",

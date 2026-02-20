@@ -7,6 +7,7 @@ import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TFinanceContactDeserialized } from '@/types/resources';
+import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
@@ -19,6 +20,7 @@ interface Props {
 
 export default function ContactsTable({ contacts, totalPages }: Props) {
     const { t } = useTranslation();
+    const deleteAction = createDeleteFormAction('finance-contacts');
 
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
@@ -88,8 +90,10 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
             columns={columns}
             resourceName={'finances/contacts' as ResourceName}
             totalPages={totalPages}
-            canEdit={true}
+            canEdit={(contact) => (contact.isExternal ? false : true)}
             canView={true}
+            canDelete={(contact) => (contact.isExternal ? false : true)}
+            deleteAction={deleteAction}
         />
     );
 }

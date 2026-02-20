@@ -25,12 +25,14 @@ interface Props {
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     id?: string | number;
     translationKey?: string;
+    disabled?: boolean;
 }
 
 export default function DeleteForm({
     deleteAction,
     id,
     translationKey = 'resource',
+    disabled = false,
 }: Props) {
     const { t } = useTranslation();
     const router = useRouter();
@@ -52,7 +54,14 @@ export default function DeleteForm({
                 <button
                     data-cy={`delete-${id}-button`}
                     title={t('general:delete')}
-                    className="transition-color cursor-pointer text-red-500 duration-300 hover:text-red-500/50"
+                    className={[
+                        'transition-color duration-300',
+                        disabled
+                            ? 'cursor-not-allowed opacity-30'
+                            : 'cursor-pointer text-red-400 hover:text-red-500/50',
+                    ].join(' ')}
+                    disabled={disabled}
+                    aria-disabled={disabled}
                 >
                     <Trash />
                 </button>
@@ -70,35 +79,36 @@ export default function DeleteForm({
                         </Text>
                     </DialogDescription>
                 </DialogHeader>
-
-                <form
-                    action={formAction}
-                    className="container flex flex-col gap-8"
-                >
-                    {id && <input type="hidden" name="id" value={id} />}
-                    <FormStateHandler
-                        state={formState}
-                        translationKey={translationKey}
-                        type="delete"
-                        onSuccess={() => {
-                            setIsOpen(false);
-                            router.refresh();
-                        }}
-                    />
-                    <div className="flex gap-4 self-end">
-                        <Button
-                            preset="secondary"
-                            type="button"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {capitalizeFirstLetter(t('general:cancel'))}
-                        </Button>
-                        <SubmitButton
-                            preset="destructive"
-                            title={t('general:delete')}
+                {!disabled && (
+                    <form
+                        action={formAction}
+                        className="container flex flex-col gap-8"
+                    >
+                        {id && <input type="hidden" name="id" value={id} />}
+                        <FormStateHandler
+                            state={formState}
+                            translationKey={translationKey}
+                            type="delete"
+                            onSuccess={() => {
+                                setIsOpen(false);
+                                router.refresh();
+                            }}
                         />
-                    </div>
-                </form>
+                        <div className="flex gap-4 self-end">
+                            <Button
+                                preset="secondary"
+                                type="button"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {capitalizeFirstLetter(t('general:cancel'))}
+                            </Button>
+                            <SubmitButton
+                                preset="destructive"
+                                title={t('general:delete')}
+                            />
+                        </div>
+                    </form>
+                )}
             </DialogContent>
         </Dialog>
     );

@@ -14,6 +14,7 @@ interface Props {
     id?: string | number;
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     resourceName?: string;
+    disabled?: boolean;
 }
 
 export function TableAction({
@@ -23,6 +24,7 @@ export function TableAction({
     id,
     deleteAction,
     resourceName,
+    disabled = false,
 }: Props) {
     const { t } = useTranslation();
     const iconProps = {
@@ -35,6 +37,7 @@ export function TableAction({
             <DeleteForm
                 deleteAction={deleteAction}
                 id={id}
+                disabled={disabled}
                 translationKey={resourceName}
             />
         );
@@ -44,8 +47,21 @@ export function TableAction({
         return (
             <button
                 title={t(`general:${type}`)}
-                onClick={onClick}
-                className="transition-color text-blue-500 duration-300 hover:text-blue-500/50"
+                className={[
+                    'transition-color duration-300',
+                    disabled
+                        ? 'cursor-not-allowed opacity-30'
+                        : 'text-blue-500 hover:text-blue-500/50',
+                ].join(' ')}
+                disabled={disabled}
+                aria-disabled={disabled}
+                onClick={(e) => {
+                    if (disabled) {
+                        e.preventDefault();
+                    } else {
+                        onClick();
+                    }
+                }}
             >
                 {type === 'view' ? (
                     <IconEye {...iconProps} />
@@ -61,7 +77,18 @@ export function TableAction({
             data-cy={`${type}-${id}-button`}
             href={href ?? ''}
             title={t(`general:${type}`)}
-            className="transition-color text-blue-500 duration-300 hover:text-blue-500/50"
+            className={[
+                'transition-color duration-300',
+                disabled
+                    ? 'cursor-not-allowed opacity-30'
+                    : 'text-blue-500 hover:text-blue-500/50',
+            ].join(' ')}
+            aria-disabled={disabled}
+            onClick={(e) => {
+                if (disabled) {
+                    e.preventDefault();
+                }
+            }}
         >
             {type === 'view' ? (
                 <IconEye {...iconProps} />

@@ -29,7 +29,7 @@ export function HeaderOptionFilter({
         paramKey,
         parser,
     );
-    const [_, setPage] = useQueryState('page', paginationSearchParamParser);
+    const [, setPage] = useQueryState('page', paginationSearchParamParser);
 
     function handleToggleOption(selectedOption: string, checked: boolean) {
         const currentOptions = filterQueryParam ?? [];

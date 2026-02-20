@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Club;
 use App\Models\FinanceAccount;
+use App\Models\FinanceContact;
 use App\Models\Receipt;
 use App\Models\Statement;
+use App\Models\TaxAccount;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +24,8 @@ class FakeReceiptSeeder extends Seeder
             $this->withExactTransaction($club->id, 10);
             $this->withSomeTransactions($club->id, 10);
         });
+
+        $this->attachRelationships();
 
         // @todo: fix seeding in remote environments
         if (app()->environment('local')) {
@@ -103,6 +107,21 @@ class FakeReceiptSeeder extends Seeder
                         ->toMediaCollection('receipts', 'public');
                 }
             }
+        });
+    }
+
+    protected function attachRelationships(): void
+    {
+        Receipt::all()->each(function ($receipt) {
+            if (rand(1, 100) <= 50) {
+                $receipt->financeContact()->associate(FinanceContact::where('club_id', $receipt->club_id)->inRandomOrder()->first());
+            }
+
+            if (rand(1, 100) <= 50) {
+                $receipt->taxAccount()->associate(TaxAccount::where('club_id', $receipt->club_id)->inRandomOrder()->first());
+            }
+
+            $receipt->save();
         });
     }
 }
