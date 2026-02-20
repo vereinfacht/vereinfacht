@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Club;
-use App\Models\TaxAccount;
-use App\Models\FinanceContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,13 +25,7 @@ class ReceiptFactory extends Factory
             'reference_number' => $this->faker->unique()->numerify('REF-#####'),
             'receipt_type' => $receiptType,
             'booking_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $amount,
-            'finance_contact_id' => $this->faker->boolean(70)
-                ? FinanceContact::inRandomOrder()->first()?->id
-                : null,
-            'tax_account_id' => $this->faker->boolean(80)
-                ? TaxAccount::inRandomOrder()->first()?->id
-                : null,
+            'amount' => $receiptType === 'expense' ? -$amount : $amount
         ];
     }
 }

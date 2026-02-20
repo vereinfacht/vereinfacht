@@ -25,6 +25,7 @@ class FinanceContact extends Model
         'phone_number',
         'email',
         'contact_type',
+        'is_external',
         'club_id',
     ];
 
@@ -33,6 +34,7 @@ class FinanceContact extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'is_external' => 'boolean',
         ];
     }
 

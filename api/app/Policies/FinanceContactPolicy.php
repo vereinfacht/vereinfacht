@@ -53,7 +53,7 @@ class FinanceContactPolicy
             return $user->id === $financeContact->club_id;
         }
 
-        return $user->can('update financeContacts') && $financeContact->club_id === getPermissionsTeamId();
+        return $user->can('update financeContacts') && $financeContact->club_id === getPermissionsTeamId() && !$financeContact->is_external;
     }
 
     /**
@@ -65,7 +65,7 @@ class FinanceContactPolicy
             return $user->id === $financeContact->club_id;
         }
 
-        return $user->can('delete financeContacts') && $financeContact->club_id === getPermissionsTeamId();
+        return $user->can('delete financeContacts') && $financeContact->club_id === getPermissionsTeamId() && !$financeContact->is_external;
     }
 
     /**
@@ -82,5 +82,17 @@ class FinanceContactPolicy
     public function forceDelete(User $user, FinanceContact $financeContact): bool
     {
         return false;
+    }
+
+    /**
+     * JSON:API relationship endpoints authorization
+     */
+    public function viewReceipts(User $user, FinanceContact $financeContact): bool
+    {
+        if ($user instanceof Club) {
+            return $user->id === $financeContact->club_id;
+        }
+
+        return $user->can('view receipts') && $financeContact->club_id === getPermissionsTeamId();
     }
 }
