@@ -25,7 +25,7 @@ class ReceiptFactory extends Factory
             'reference_number' => $this->faker->unique()->numerify('REF-#####'),
             'receipt_type' => $receiptType,
             'booking_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $receiptType === 'expense' ? -$amount : $amount
+            'amount' => $amount
         ];
     }
 }

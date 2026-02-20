@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Receipts;
 
+use App\JsonApi\Sorting\ReceiptAmountSort;
 use App\JsonApi\V1\PagePagination;
 use App\Models\Receipt;
 use LaravelJsonApi\Eloquent\Schema;
@@ -38,7 +39,7 @@ class ReceiptSchema extends Schema
             Str::make('receiptType'),
             DateTime::make('bookingDate')->sortable(),
             Str::make('status')->readOnly(),
-            Str::make('amount')->sortable(),
+            Str::make('amount'),
             DateTime::make('createdAt')->readOnly(),
             DateTime::make('updatedAt')->readOnly(),
             BelongsTo::make('club')->type('clubs'),
@@ -79,6 +80,13 @@ class ReceiptSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function sortables(): iterable
+    {
+        return [
+            ReceiptAmountSort::make('amount'),
+        ];
     }
 
     public function includePaths(): array

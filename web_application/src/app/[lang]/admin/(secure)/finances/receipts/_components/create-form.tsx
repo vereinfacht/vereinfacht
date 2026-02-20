@@ -109,19 +109,7 @@ export default function CreateForm({ data, action }: Props) {
     );
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
-        // @todo: try to optimise this after Zod upgrade
-        async (state, formData) => {
-            const parsedAmount = parseFloat(formData.get('amount') as string);
-            formData.set(
-                'amount',
-                (receiptType === 'expense'
-                    ? -Math.abs(parsedAmount)
-                    : Math.abs(parsedAmount)
-                ).toString(),
-            );
-
-            return action(state, formData);
-        },
+        action,
         { success: false },
     );
 
@@ -157,6 +145,7 @@ export default function CreateForm({ data, action }: Props) {
                                 id="amount"
                                 name="amount"
                                 label={t('receipt:amount.label')}
+                                help={t('receipt:amount.help')}
                                 type="number"
                                 min={0}
                                 step="0.01"

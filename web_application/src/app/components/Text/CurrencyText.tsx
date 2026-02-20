@@ -21,7 +21,6 @@ export default function CurrencyText({
             preset={'currency'}
             className={[
                 className,
-                'text-right',
                 value > 0 && colorized
                     ? 'text-green-500'
                     : value < 0 && colorized

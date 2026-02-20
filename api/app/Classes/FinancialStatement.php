@@ -12,8 +12,7 @@ class FinancialStatement
      */
     public function __construct(
         protected Collection $receipts,
-    ) {
-    }
+    ) {}
 
     public function getIncomeExpensesCalculation(): Collection
     {
@@ -28,7 +27,7 @@ class FinancialStatement
                 continue;
             }
 
-            if ($receipt->amount >= 0) {
+            if ($receipt->receipt_type === 'income') {
                 $statement->income->push($this->createStatementItem($receipt));
             } else {
                 $statement->expenses->push($this->createStatementItem($receipt));
@@ -51,7 +50,7 @@ class FinancialStatement
             'account_number' => $receipt->taxAccount->account_number,
             'type' => $receipt->receipt_type,
             'description' => $receipt->taxAccount->description,
-            'amount' => abs($receipt->amount ?? 0),
+            'amount' => $receipt->amount ?? 0,
         ]);
     }
 
@@ -69,5 +68,4 @@ class FinancialStatement
                 ];
             })->values();
     }
-
 }

@@ -21,7 +21,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         }),
     ]);
 
-    if (!receipt) {
+    if (!receipt[0]) {
         notFound();
     }
 
@@ -44,7 +44,11 @@ export default async function ReceiptShowPage({ params }: Props) {
         {
             attribute: 'amount',
             type: 'currency',
-            value: receipt[0]?.amount,
+            help: '',
+            value:
+                receipt[0]?.receiptType === 'expense'
+                    ? -(receipt[0]?.amount ?? 0)
+                    : receipt[0]?.amount,
         },
         {
             attribute: 'taxAccount',
@@ -62,6 +66,7 @@ export default async function ReceiptShowPage({ params }: Props) {
             attribute: 'media',
             type: 'media',
             value: receipt[0]?.media,
+            help: '',
         },
     ];
 

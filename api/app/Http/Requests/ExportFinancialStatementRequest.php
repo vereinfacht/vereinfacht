@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Models\Receipt;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class ExportFinancialStatementRequest extends FormRequest
 {
