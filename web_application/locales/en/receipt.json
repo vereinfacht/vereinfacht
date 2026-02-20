@@ -20,7 +20,7 @@
         "label": "Amount",
         "still_open": "Still open",
         "too_much": "Too much",
-        "help": "Only positive values are allowed. For expenses, the amount will be negative in the end."
+        "help": "Only positive values are allowed. For expenses, the amount will later be shown as negative."
     },
     "status": {
         "label": "Status",
