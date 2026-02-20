@@ -20,7 +20,7 @@
         "label": "Betrag",
         "still_open": "Noch offen",
         "too_much": "Zu viel",
-        "help": "Es sind nur positive Werte erlaubt. Bei Ausgaben wird der Betrag am Ende negativ sein."
+        "help": "Es sind nur positive Werte erlaubt. Bei Ausgaben wird der Betrag später negativ dargestellt."
     },
     "status": {
         "label": "Status",
