@@ -19,6 +19,7 @@ class Division extends Model
 
     protected $fillable = [
         'title',
+        'club_id',
     ];
 
     /**

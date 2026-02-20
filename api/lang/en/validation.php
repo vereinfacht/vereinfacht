@@ -264,4 +264,9 @@ return [
         'value' => 'value',
         'year' => 'year',
     ],
+    'custom' => [
+        'title_translation' => [
+            'required' => 'At least one language must be filled in.',
+        ],
+    ],
 ];
