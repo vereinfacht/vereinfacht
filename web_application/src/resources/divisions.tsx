@@ -3,10 +3,6 @@ import { Division } from '@/types/models';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { DetailFieldDef, Resource } from './resource';
-import {
-    getUpdateDivisionSchema,
-    updateDivision,
-} from '@/actions/divisions/update';
 
 export class DivisionResource extends Resource<Division> {
     constructor() {
@@ -16,8 +12,6 @@ export class DivisionResource extends Resource<Division> {
         this.canIndex = true;
         this.canView = true;
         this.canEdit = true;
-        this.getUpdateSchema = getUpdateDivisionSchema;
-        this.updateAction = updateDivision;
     }
 
     getIndexColumns(t: Translate) {

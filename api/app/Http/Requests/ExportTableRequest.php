@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Division;
+use App\Models\FinanceContact;
 use App\Models\Receipt;
 use App\Models\Statement;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ExportTableRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class ExportTableRequest extends FormRequest
         'receipts' => Receipt::class,
         'statements' => Statement::class,
         'finance_contacts' => FinanceContact::class,
+        'divisions' => Division::class,
     ];
 
     public function authorize(): bool

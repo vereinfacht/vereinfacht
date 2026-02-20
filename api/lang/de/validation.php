@@ -264,4 +264,9 @@ return [
         'value' => 'Wert',
         'year' => 'Jahr',
     ],
+    'custom' => [
+        'title_translation' => [
+            'required' => 'Mindestens eine Sprache muss ausgefüllt sein.',
+        ],
+    ],
 ];

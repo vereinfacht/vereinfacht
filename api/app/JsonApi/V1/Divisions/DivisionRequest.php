@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Divisions;
 
+use App\Rules\TranslationTitleRule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
@@ -13,9 +14,13 @@ class DivisionRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'titleTranslations' => ['required', 'array'],
-            'club' => ['nullable', JsonApiRule::toOne()],
-            'members' => ['nullable', JsonApiRule::toMany()],
+            ...TranslationTitleRule::getLocaleRules(),
+            'titleTranslations' => [
+                'required',
+                'array',
+                new TranslationTitleRule(),
+            ],
+            'club' => ['required', JsonApiRule::toOne()],
         ];
     }
 }
