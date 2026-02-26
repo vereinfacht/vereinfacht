@@ -46,7 +46,7 @@ JsonApiRoute::server('v1')
             });
 
         $server->resource('membership-types', JsonApiController::class)
-            ->only('index', 'show', 'update');
+            ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('members', JsonApiController::class)
             ->relationships(function ($relations) {

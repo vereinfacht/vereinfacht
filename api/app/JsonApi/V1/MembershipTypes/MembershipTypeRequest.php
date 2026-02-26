@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\MembershipTypes;
 
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
+use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
 class MembershipTypeRequest extends ResourceRequest
 {
@@ -19,6 +20,8 @@ class MembershipTypeRequest extends ResourceRequest
             'minimumNumberOfMonths' => ['required', 'integer', 'min:0', 'max:24'],
             'minimumNumberOfMembers' => ['required', 'integer', 'min:1', 'lte:maximumNumberOfMembers'],
             'maximumNumberOfMembers' => ['required', 'integer', 'gte:minimumNumberOfMembers'],
+            'club' => ['required', JsonApiRule::toOne()],
         ];
     }
 }
+

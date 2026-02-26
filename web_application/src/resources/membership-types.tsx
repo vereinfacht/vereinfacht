@@ -19,7 +19,6 @@ export class MembershipTypeResource extends Resource<MembershipType> {
         this.canView = true;
         this.canEdit = true;
         this.getUpdateSchema = getUpdateMembershipTypeSchema;
-        this.updateAction = updateMembershipType;
     }
 
     getIndexColumns(t: Translate, formatCurrency: (value: number) => string) {

@@ -50,7 +50,8 @@ export interface paths {
         /** Get all membership-types */
         get: operations["membership-types.index"];
         put?: never;
-        post?: never;
+        /** Store one membership-type */
+        post: operations["membership-types.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -68,7 +69,8 @@ export interface paths {
         get: operations["membership-types.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one membership-type */
+        delete: operations["membership-types.destroy"];
         options?: never;
         head?: never;
         /** Update one membership-type */
@@ -431,6 +433,40 @@ export interface paths {
         head?: never;
         /** Update one finance-contact */
         patch: operations["finance-contacts.update"];
+        trace?: never;
+    };
+    "/finance-contacts/{finance_contact}/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show receipts */
+        get: operations["finance-contacts.receipts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/finance-contacts/{finance_contact}/relationships/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Show receipts relation */
+        get: operations["finance-contacts.receipts.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/receipts": {
@@ -2288,6 +2324,19 @@ export interface components {
                 };
             };
         };
+        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
+        "resources.finance-contacts.relationship.receipts.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 1
+             */
+            id: string;
+        };
         /** Resource/Member/Relationship/Divisions/Attach */
         "resources.members.relationship.divisions.attach": {
             /**
@@ -2662,6 +2711,108 @@ export interface components {
                 /**
                  * updatedAt
                  * @example 2025-10-16T13:11:31.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** divisions */
+                divisions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** divisionMembershipTypes */
+                divisionMembershipTypes?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Membership-type/Store */
+        "resources.membership-types.resource.store": {
+            /**
+             * type
+             * @default membership-types
+             */
+            type: string;
+            attributes: {
+                /**
+                 * title
+                 * @example Trial Membership
+                 */
+                title?: string;
+                /**
+                 * titleTranslations
+                 * @example Trial Membership
+                 */
+                titleTranslations?: Record<string, never>;
+                /**
+                 * description
+                 * @example For all who want to get to know the club first.
+                 */
+                description?: string;
+                /**
+                 * descriptionTranslations
+                 * @example For all who want to get to know the club first.
+                 */
+                descriptionTranslations?: Record<string, never>;
+                /**
+                 * admissionFee
+                 * @example 0
+                 */
+                admissionFee?: number;
+                /**
+                 * monthlyFee
+                 * @example 3
+                 */
+                monthlyFee?: number;
+                /**
+                 * minimumNumberOfMonths
+                 * @example 1
+                 */
+                minimumNumberOfMonths?: number;
+                /**
+                 * minimumNumberOfMembers
+                 * @example 1
+                 */
+                minimumNumberOfMembers?: number;
+                /**
+                 * maximumNumberOfMembers
+                 * @example 1
+                 */
+                maximumNumberOfMembers?: number;
+                /**
+                 * sortOrder
+                 * @example 1
+                 */
+                sortOrder?: number;
+                /**
+                 * createdAt
+                 * @example 2026-02-23T07:57:09.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-02-23T07:57:09.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4716,6 +4867,44 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "membership-types.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.membership-types.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store membership-types */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.membership-types.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "membership-types.show": {
         parameters: {
             query?: never;
@@ -4744,6 +4933,29 @@ export interface operations {
                         data: components["schemas"]["resources.membership-types.resource.fetch"];
                     };
                 };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "membership-types.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                membership_type: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
@@ -6192,6 +6404,74 @@ export interface operations {
                             version?: string;
                         };
                         data: components["schemas"]["resources.finance-contacts.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description ShowRelated finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.receipts.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "finance-contacts.receipts.show": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                finance_contact: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Show finance-contacts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.finance-contacts.relationship.receipts.fetch"][];
                     };
                 };
             };
