@@ -1,14 +1,11 @@
+import { getOne } from '@/actions/fetchAdminResources';
+import { getUpdateMembershipTypeSchema } from '@/actions/membershipTypes/update';
 import TextCell from '@/app/components/Table/TextCell';
+import { Query } from '@/services/api-endpoints';
 import { MembershipType } from '@/types/models';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { Translate } from 'next-translate';
 import { DetailFieldDef, Resource } from './resource';
-import {
-    getUpdateMembershipTypeSchema,
-    updateMembershipType,
-} from '@/actions/membershipTypes/update';
-import { Query } from '@/services/api-endpoints';
-import { getOne } from '@/actions/fetchAdminResources';
 
 export class MembershipTypeResource extends Resource<MembershipType> {
     constructor() {

@@ -73,7 +73,7 @@ export default function MembershipTypesTable({
                     </TextCell>
                 );
             },
-        }
+        },
     ];
 
     return (

@@ -27,18 +27,18 @@ export default function CreateForm({ data, action }: Props) {
 
     const defaultTitleValue = data?.titleTranslations
         ? Object.entries(data.titleTranslations).map(([locale, value]) => ({
-            locale: locale as any,
-            value: value as string,
-        }))
+              locale: locale as any,
+              value: value as string,
+          }))
         : [];
 
     const defaultDescriptionValue = data?.descriptionTranslations
         ? Object.entries(data.descriptionTranslations).map(
-            ([locale, value]) => ({
-                locale: locale as any,
-                value: value as string,
-            }),
-        )
+              ([locale, value]) => ({
+                  locale: locale as any,
+                  value: value as string,
+              }),
+          )
         : [];
 
     return (
@@ -61,7 +61,9 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['descriptionTranslations']}>
+                <FormField
+                    errors={formState.errors?.['descriptionTranslations']}
+                >
                     <TranslationField
                         id="descriptionTranslations"
                         name="descriptionTranslations"
@@ -98,27 +100,37 @@ export default function CreateForm({ data, action }: Props) {
                         id="minimumNumberOfMonths"
                         name="minimumNumberOfMonths"
                         type="number"
-                        label={t('membership_type:minimum_number_of_months.label')}
+                        label={t(
+                            'membership_type:minimum_number_of_months.label',
+                        )}
                         defaultValue={data?.minimumNumberOfMonths?.toString()}
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['minimumNumberOfMembers']}>
+                <FormField
+                    errors={formState.errors?.['minimumNumberOfMembers']}
+                >
                     <TextInput
                         id="minimumNumberOfMembers"
                         name="minimumNumberOfMembers"
                         type="number"
-                        label={t('membership_type:minimum_number_of_members.label')}
+                        label={t(
+                            'membership_type:minimum_number_of_members.label',
+                        )}
                         defaultValue={data?.minimumNumberOfMembers?.toString()}
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['maximumNumberOfMembers']}>
+                <FormField
+                    errors={formState.errors?.['maximumNumberOfMembers']}
+                >
                     <TextInput
                         id="maximumNumberOfMembers"
                         name="maximumNumberOfMembers"
                         type="number"
-                        label={t('membership_type:maximum_number_of_members.label')}
+                        label={t(
+                            'membership_type:maximum_number_of_members.label',
+                        )}
                         defaultValue={data?.maximumNumberOfMembers?.toString()}
                         required
                     />
@@ -127,5 +139,3 @@ export default function CreateForm({ data, action }: Props) {
         </ActionForm>
     );
 }
-
-
