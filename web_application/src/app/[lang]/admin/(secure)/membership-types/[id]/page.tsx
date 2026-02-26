@@ -13,10 +13,13 @@ interface Props {
 
 export default async function MembershipTypeShowPage({ params }: Props) {
     const membershipType = await Promise.all([
-        getMembershipType({ id: params.id, include: ['divisions'] }),
+        getMembershipType({
+            id: params.id,
+            include: ['divisions'],
+        }),
     ]);
 
-    if (!membershipType) {
+    if (!membershipType[0]) {
         notFound();
     }
 
