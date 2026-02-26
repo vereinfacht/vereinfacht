@@ -1,5 +1,4 @@
 import { getMembershipType } from '@/actions/membershipTypes/get';
-import ResourceTable from '@/app/components/Table/ResourceTable';
 import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
 import createTranslation from 'next-translate/createTranslation';
@@ -74,7 +73,6 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
                     // @ts-expect-error: value type as element mismatch
-
                     <DetailField
                         key={index}
                         {...field}

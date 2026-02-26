@@ -100,6 +100,8 @@ export default function CreateForm({ data, action }: Props) {
                         id="minimumNumberOfMonths"
                         name="minimumNumberOfMonths"
                         type="number"
+                        min="0"
+                        max="24"
                         label={t(
                             'membership_type:minimum_number_of_months.label',
                         )}

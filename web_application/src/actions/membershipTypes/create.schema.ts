@@ -22,29 +22,52 @@ export const translationSchema = z
         },
     );
 
-export const membershipTypeAttributesSchema = z.object({
-    titleTranslations: translationSchema,
-    descriptionTranslations: translationSchema,
-    monthlyFee: z.number().min(0).or(z.string().transform((value) => parseFloat(value))),
-    admissionFee: z
-        .number()
-        .min(0)
-        .or(z.string().transform((value) => (value ? parseFloat(value) : undefined)))
-        .optional(),
-    minimumNumberOfMonths: z
-        .number()
-        .min(0)
-        .max(24)
-        .or(z.string().transform((value) => parseInt(value))),
-    minimumNumberOfMembers: z
-        .number()
-        .min(1)
-        .or(z.string().transform((value) => parseInt(value))),
-    maximumNumberOfMembers: z
-        .number()
-        .min(1)
-        .or(z.string().transform((value) => parseInt(value))),
-});
+export const membershipTypeAttributesSchema = z
+    .object({
+        titleTranslations: translationSchema,
+        descriptionTranslations: translationSchema,
+        monthlyFee: z
+            .number()
+            .min(0)
+            .or(z.string().transform((value) => parseFloat(value))),
+        admissionFee: z
+            .union([
+                z.number().min(0),
+                z
+                    .string()
+                    .transform((value) => (value ? parseFloat(value) : null)),
+            ])
+            .optional(),
+        minimumNumberOfMonths: z
+            .number()
+            .min(0)
+            .max(24)
+            .or(z.string().transform((value) => parseInt(value))),
+        minimumNumberOfMembers: z
+            .number()
+            .min(1)
+            .or(z.string().transform((value) => parseInt(value))),
+        maximumNumberOfMembers: z
+            .number()
+            .min(1)
+            .or(z.string().transform((value) => parseInt(value))),
+    })
+    .refine(
+        (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,
+        {
+            message:
+                'Minimum number of members must be less than or equal to maximum number of members.',
+            path: ['minimumNumberOfMembers'],
+        },
+    )
+    .refine(
+        (data) => data.maximumNumberOfMembers >= data.minimumNumberOfMembers,
+        {
+            message:
+                'Maximum number of members must be greater than or equal to minimum number of members.',
+            path: ['maximumNumberOfMembers'],
+        },
+    );
 
 export const membershipTypeRelationshipsSchema = z.object({
     club: z.object({
@@ -66,4 +89,3 @@ export const createMembershipTypeSchema = z.object({
 export type CreateMembershipTypeParams = z.infer<
     typeof createMembershipTypeSchema
 >;
-

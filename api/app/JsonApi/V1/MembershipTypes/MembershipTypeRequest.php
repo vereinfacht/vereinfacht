@@ -24,4 +24,3 @@ class MembershipTypeRequest extends ResourceRequest
         ];
     }
 }
-
