@@ -25,7 +25,7 @@ export default function MembershipTypesTable({
     extended = false,
 }: Props) {
     const { t, lang } = useTranslation();
-    const deleteAction = createDeleteFormAction('membershipTypes');
+    const deleteAction = createDeleteFormAction('membership-types');
 
     const columns: ColumnDef<TMembershipTypeDeserialized>[] = [
         {
