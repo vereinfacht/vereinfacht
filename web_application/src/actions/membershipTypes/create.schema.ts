@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import { SupportedLocale, supportedLocales } from '@/utils/localization';
+import { z } from 'zod';
 
 export const translationSchema = z
     .object(
@@ -26,37 +26,17 @@ export const membershipTypeAttributesSchema = z
     .object({
         titleTranslations: translationSchema,
         descriptionTranslations: translationSchema,
-        monthlyFee: z
-            .number()
-            .min(0)
-            .or(z.string().transform((value) => parseFloat(value))),
-        admissionFee: z
-            .union([
-                z.number().min(0),
-                z
-                    .string()
-                    .transform((value) => (value ? parseFloat(value) : null)),
-            ])
-            .optional(),
-        minimumNumberOfMonths: z
-            .number()
-            .min(0)
-            .max(24)
-            .or(z.string().transform((value) => parseInt(value))),
-        minimumNumberOfMembers: z
-            .number()
-            .min(1)
-            .or(z.string().transform((value) => parseInt(value))),
-        maximumNumberOfMembers: z
-            .number()
-            .min(1)
-            .or(z.string().transform((value) => parseInt(value))),
+        monthlyFee: z.coerce.number().min(0),
+        admissionFee: z.coerce.number().min(0).nullable().optional(),
+        minimumNumberOfMonths: z.coerce.number().min(0).max(24),
+        minimumNumberOfMembers: z.coerce.number().min(1),
+        maximumNumberOfMembers: z.coerce.number().min(1),
     })
     .refine(
         (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,
         {
             message:
-                'Minimum number of members must be less than or equal to maximum number of members.',
+                'Die Mindestanzahl an Mitgliedern muss kleiner oder gleich der Maximalanzahl an Mitgliedern sein.',
             path: ['minimumNumberOfMembers'],
         },
     )
@@ -64,7 +44,7 @@ export const membershipTypeAttributesSchema = z
         (data) => data.maximumNumberOfMembers >= data.minimumNumberOfMembers,
         {
             message:
-                'Maximum number of members must be greater than or equal to minimum number of members.',
+                'Die Maximalanzahl an Mitgliedern muss größer oder gleich der Mindestanzahl an Mitgliedern sein.',
             path: ['maximumNumberOfMembers'],
         },
     );
