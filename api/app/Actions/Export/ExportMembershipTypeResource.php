@@ -47,13 +47,13 @@ class ExportMembershipTypeResource extends ExportResourceCsv
                 'header' => 'Minimum Number of Members',
                 'attribute' => 'minimum_number_of_members',
             ],
-            'minimum_number_of_months' => [
-                'header' => 'Minimum Number of Months',
-                'attribute' => 'minimum_number_of_months',
-            ],
             'maximum_number_of_members' => [
                 'header' => 'Maximum Number of Members',
                 'attribute' => 'maximum_number_of_members',
+            ],
+            'minimum_number_of_months' => [
+                'header' => 'Minimum Number of Months',
+                'attribute' => 'minimum_number_of_months',
             ],
             'created_at' => [
                 'header' => 'Created At',
