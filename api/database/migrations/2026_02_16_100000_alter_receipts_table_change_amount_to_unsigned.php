@@ -12,7 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('UPDATE receipts SET amount = ABS(amount) WHERE amount < 0');
+        DB::table('receipts')
+            ->where('amount', '<', 0)
+            ->update(['amount' => DB::raw('ABS(amount)')]);
 
         Schema::table('receipts', function (Blueprint $table) {
             $table->unsignedInteger('amount')->change();
