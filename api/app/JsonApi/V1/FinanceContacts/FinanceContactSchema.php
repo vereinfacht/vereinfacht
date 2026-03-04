@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\FinanceContacts;
 
 use App\Models\FinanceContact;
+use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
 use App\JsonApi\Sorting\FullNameSort;
@@ -57,6 +58,8 @@ class FinanceContactSchema extends Schema
     public function filters(): array
     {
         return [
+            Where::make('email'),
+            Where::make('isExternal')->asBoolean(),
             WhereIdIn::make($this),
             WhereIn::make('contactType')->delimiter(','),
             QueryFilter::make('query', ['first_name', 'last_name', 'company_name']),
