@@ -43,6 +43,10 @@ class ExportMembershipTypeResource extends ExportResourceCsv
                 'header' => 'Monthly Fee',
                 'attribute' => 'monthly_fee',
             ],
+            'minimum_number_of_members' => [
+                'header' => 'Minimum Number of Members',
+                'attribute' => 'minimum_number_of_members',
+            ],
             'minimum_number_of_months' => [
                 'header' => 'Minimum Number of Months',
                 'attribute' => 'minimum_number_of_months',
