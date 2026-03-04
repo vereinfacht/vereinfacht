@@ -27,5 +27,6 @@
         "label": "Maximale Anzahl an Personen"
     },
     "create": "Mitgliedschaftsart erstellen",
-    "edit": "Mitgliedschaftsart bearbeiten"
+    "edit": "Mitgliedschaftsart bearbeiten",
+    "attach_division": "Sparte verknüpfen"
 }

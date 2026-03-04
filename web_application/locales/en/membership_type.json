@@ -27,5 +27,6 @@
         "label": "Maximum number of persons"
     },
     "create": "Create membership type",
-    "edit": "Edit membership type"
+    "edit": "Edit membership type",
+    "attach_division": "Attach Division"
 }

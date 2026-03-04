@@ -12,6 +12,7 @@ interface Props extends PropsWithChildren {
     type: 'create' | 'update' | 'delete';
     translationKey: string;
     loading?: boolean;
+    submitLabel?: string;
 }
 
 export default function ActionForm({
@@ -21,6 +22,7 @@ export default function ActionForm({
     children,
     translationKey,
     loading = false,
+    submitLabel,
 }: Props) {
     const { t } = useTranslation();
 
@@ -34,7 +36,10 @@ export default function ActionForm({
             {children}
             <div className="mt-auto flex gap-4 self-end">
                 <CancelButton />
-                <SubmitButton title={t('general:save')} loading={loading} />
+                <SubmitButton
+                    title={submitLabel || t('general:save')}
+                    loading={loading}
+                />
             </div>
         </form>
     );

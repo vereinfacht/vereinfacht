@@ -89,9 +89,11 @@ export type TStatementDeserialized = TStatementRaw['attributes'] & {
 export type TDivisionDeserialized = TDivisionRaw['attributes'] & {
     id: string;
     membershipTypes?: TMembershipTypeDeserialized[];
+    monthlyFee?: number;
 };
 
 export type TMembershipTypeDeserialized = TMembershipTypeRaw['attributes'] & {
     id: string;
     divisions?: TDivisionDeserialized[];
+    divisionMembershipTypes?: any[];
 };
