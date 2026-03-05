@@ -14,6 +14,8 @@ use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
+use App\JsonApi\Filters\QueryFilter;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
 class MembershipTypeSchema extends Schema
 {
@@ -33,7 +35,7 @@ class MembershipTypeSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('title'),
+            Str::make('title')->sortable()->readOnly(),
             ArrayHash::make('titleTranslations', 'title')->extractUsing(
                 static fn($model, $column) => $model->getTranslations($column)
             ),
@@ -52,6 +54,7 @@ class MembershipTypeSchema extends Schema
             BelongsToMany::make('divisions')->type('divisions'),
             BelongsToMany::make('divisionMembershipTypes')
                 ->type('division-membership-types'),
+            BelongsTo::make('club')->type('clubs'),
         ];
     }
 
@@ -62,6 +65,7 @@ class MembershipTypeSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            QueryFilter::make('query', ['title']),
         ];
     }
 
@@ -71,5 +75,12 @@ class MembershipTypeSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'divisions',
+        ];
     }
 }

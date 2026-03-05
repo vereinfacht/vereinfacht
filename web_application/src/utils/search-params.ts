@@ -7,6 +7,7 @@ import {
     membershipSortingOptions,
     membershipStatusOptions,
 } from '@/actions/memberships/list.schema';
+import { membershipTypeSortingOptions } from '@/actions/membershipTypes/list.schema';
 import {
     receiptSortingOptions,
     receiptStatusOptions,
@@ -142,6 +143,15 @@ export const listDivisionSearchParams = {
     }),
 };
 
+export const listMembershipTypesSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(membershipTypeSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -176,6 +186,9 @@ export const loadListDivisionsSearchParams = createLoader(
     listDivisionSearchParams,
 );
 
+export const loadListMembershipTypesSearchParams = createLoader(
+    listMembershipTypesSearchParams,
+);
 export type ListMembershipSearchParamsType = inferParserType<
     typeof listMembershipSearchParams
 >;
@@ -206,4 +219,8 @@ export type ListReceiptSearchParamsType = inferParserType<
 
 export type ListDivisionSearchParamsType = inferParserType<
     typeof listDivisionSearchParams
+>;
+
+export type ListMembershipTypesSearchParamsType = inferParserType<
+    typeof listMembershipTypesSearchParams
 >;

@@ -15,7 +15,9 @@ async function getResources(
 ) {
     const resourceClass = findResource(resourceName, locale);
     const queryParams = await resourceClass?.loadIndexParams(params);
-    const indexResponse = await resourceClass?.getIndexResources(queryParams);
+    const indexResponse = await resourceClass?.getIndexResources(
+        queryParams as any,
+    );
 
     return indexResponse;
 }

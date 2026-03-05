@@ -500,6 +500,71 @@
                         "$ref": "#\/components\/responses\/401"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Membership-types"
+                ],
+                "summary": "Store one membership-type",
+                "description": "",
+                "operationId": "membership-types.store",
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.membership-types.resource.store"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Store membership-types",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.membership-types.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         },
         "\/membership-types\/{membership_type}": {
@@ -648,6 +713,50 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Membership-types"
+                ],
+                "summary": "Destroy one membership-type",
+                "description": "",
+                "operationId": "membership-types.destroy",
+                "parameters": [
+                    {
+                        "name": "membership_type",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     },
                     "400": {
                         "$ref": "#\/components\/responses\/400"
@@ -3306,7 +3415,7 @@
                     }
                 }
             }
-        },        
+        },
         "\/media\/upload": {
             "post": {
                 "tags": [
@@ -3323,21 +3432,25 @@
                                 "type": "object",
                                 "properties": {
                                     "file": {
-                                    "type": "string",
-                                    "format": "binary",
-                                    "description": "The file to upload"
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "The file to upload"
                                     },
                                     "collectionName": {
-                                    "type": "string",
-                                    "description": "The name of the collection to which the media belongs"
+                                        "type": "string",
+                                        "description": "The name of the collection to which the media belongs"
                                     },
                                     "clubId": {
-                                    "type": "integer",
-                                    "description": "The ID of the club associated with the media"
+                                        "type": "integer",
+                                        "description": "The ID of the club associated with the media"
                                     }
                                 },
-                                "required": ["file", "collectionName", "clubId"]
-                                }
+                                "required": [
+                                    "file",
+                                    "collectionName",
+                                    "clubId"
+                                ]
+                            }
                         }
                     }
                 },
@@ -9759,6 +9872,26 @@
                     }
                 }
             },
+            "resources.finance-contacts.relationship.receipts.fetch": {
+                "title": "Resource\/Finance-contact\/Relationship\/Receipts\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "id",
+                        "type": "string",
+                        "example": "1"
+                    }
+                }
+            },
             "resources.members.relationship.divisions.attach": {
                 "title": "Resource\/Member\/Relationship\/Divisions\/Attach",
                 "type": "array",
@@ -10272,6 +10405,137 @@
                                 "type": "string",
                                 "readOnly": true,
                                 "example": "2025-10-16T13:11:31.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "divisions": {
+                                "title": "divisions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "divisionMembershipTypes": {
+                                "title": "divisionMembershipTypes",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.membership-types.resource.store": {
+                "title": "Resource\/Membership-type\/Store",
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "membership-types",
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "title": "title",
+                                "type": "string",
+                                "example": "Trial Membership"
+                            },
+                            "titleTranslations": {
+                                "title": "titleTranslations",
+                                "type": "object",
+                                "example": "Trial Membership"
+                            },
+                            "description": {
+                                "title": "description",
+                                "type": "string",
+                                "example": "For all who want to get to know the club first."
+                            },
+                            "descriptionTranslations": {
+                                "title": "descriptionTranslations",
+                                "type": "object",
+                                "example": "For all who want to get to know the club first."
+                            },
+                            "admissionFee": {
+                                "title": "admissionFee",
+                                "type": "number",
+                                "example": 0
+                            },
+                            "monthlyFee": {
+                                "title": "monthlyFee",
+                                "type": "number",
+                                "example": 3
+                            },
+                            "minimumNumberOfMonths": {
+                                "title": "minimumNumberOfMonths",
+                                "type": "number",
+                                "example": 1
+                            },
+                            "minimumNumberOfMembers": {
+                                "title": "minimumNumberOfMembers",
+                                "type": "number",
+                                "example": 1
+                            },
+                            "maximumNumberOfMembers": {
+                                "title": "maximumNumberOfMembers",
+                                "type": "number",
+                                "example": 1
+                            },
+                            "sortOrder": {
+                                "title": "sortOrder",
+                                "type": "number",
+                                "example": 1
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-02-23T07:57:09.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-02-23T07:57:09.000000Z"
                             }
                         }
                     },

@@ -55,7 +55,7 @@ export default async function Navigation() {
                     title: t('division:title.other'),
                 },
                 {
-                    href: '/admin/membershipTypes',
+                    href: '/admin/membership-types',
                     title: t('membership_type:title.other'),
                 },
                 {

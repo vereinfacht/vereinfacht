@@ -25,5 +25,7 @@
     },
     "maximum_number_of_members": {
         "label": "Maximale Anzahl an Personen"
-    }
+    },
+    "create": "Mitgliedschaftsart erstellen",
+    "edit": "Mitgliedschaftsart bearbeiten"
 }

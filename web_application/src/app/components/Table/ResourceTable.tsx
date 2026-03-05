@@ -1,6 +1,5 @@
 'use client';
 
-import useCurrency from '@/hooks/useCurrency';
 import { findResource } from '@/resources';
 import { ResourceName } from '@/resources/resource';
 import { ResourceModel } from '@/types/models';
@@ -25,9 +24,8 @@ export default function ResourceTable({
     // instead of the resource index page
     // see: https://github.com/shadcn-ui/ui/issues/457#issuecomment-1760331212
     const { t } = useTranslation();
-    const { getFormatted } = useCurrency();
     const resource = findResource(resourceName);
-    const indexColumns = resource?.getIndexColumns(t, getFormatted);
+    const indexColumns = resource?.getIndexColumns(t);
 
     if (!resources?.length || !resource || !indexColumns) {
         return (

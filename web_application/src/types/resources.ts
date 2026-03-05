@@ -93,5 +93,5 @@ export type TDivisionDeserialized = TDivisionRaw['attributes'] & {
 
 export type TMembershipTypeDeserialized = TMembershipTypeRaw['attributes'] & {
     id: string;
-    division?: TDivisionDeserialized[];
+    divisions?: TDivisionDeserialized[];
 };
