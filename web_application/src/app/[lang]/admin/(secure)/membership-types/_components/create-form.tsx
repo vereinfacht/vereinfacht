@@ -137,6 +137,36 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
+                <FormField
+                    errors={formState.errors?.['minimumNumberOfDivisions']}
+                >
+                    <TextInput
+                        id="minimumNumberOfDivisions"
+                        name="minimumNumberOfDivisions"
+                        type="number"
+                        label={t(
+                            'membership_type:minimum_number_of_divisions.label',
+                        )}
+                        defaultValue={
+                            data?.minimumNumberOfDivisions?.toString() || ''
+                        }
+                    />
+                </FormField>
+                <FormField
+                    errors={formState.errors?.['maximumNumberOfDivisions']}
+                >
+                    <TextInput
+                        id="maximumNumberOfDivisions"
+                        name="maximumNumberOfDivisions"
+                        type="number"
+                        label={t(
+                            'membership_type:maximum_number_of_divisions.label',
+                        )}
+                        defaultValue={
+                            data?.maximumNumberOfDivisions?.toString() || ''
+                        }
+                    />
+                </FormField>
             </div>
         </ActionForm>
     );

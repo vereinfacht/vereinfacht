@@ -20,6 +20,8 @@ class MembershipTypeRequest extends ResourceRequest
             'minimumNumberOfMonths' => ['required', 'integer', 'min:0', 'max:24'],
             'minimumNumberOfMembers' => ['required', 'integer', 'min:1', 'lte:maximumNumberOfMembers'],
             'maximumNumberOfMembers' => ['required', 'integer', 'gte:minimumNumberOfMembers'],
+            'minimumNumberOfDivisions' => ['nullable', 'integer', 'min:0', 'lte:maximumNumberOfDivisions'],
+            'maximumNumberOfDivisions' => ['nullable', 'integer', 'min:0', 'gte:minimumNumberOfDivisions'],
             'club' => ['required', JsonApiRule::toOne()],
         ];
     }

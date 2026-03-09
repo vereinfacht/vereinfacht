@@ -26,6 +26,12 @@
     "maximum_number_of_members": {
         "label": "Maximale Anzahl an Personen"
     },
+    "minimum_number_of_divisions": {
+        "label": "Minimale Anzahl an Sparten"
+    },
+    "maximum_number_of_divisions": {
+        "label": "Maximale Anzahl an Sparten"
+    },
     "create": "Mitgliedschaftsart erstellen",
     "edit": "Mitgliedschaftsart bearbeiten"
 }

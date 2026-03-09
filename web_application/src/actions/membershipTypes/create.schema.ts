@@ -31,6 +31,16 @@ export const membershipTypeAttributesSchema = z
         minimumNumberOfMonths: z.coerce.number().min(0).max(24),
         minimumNumberOfMembers: z.coerce.number().min(1),
         maximumNumberOfMembers: z.coerce.number().min(1),
+        minimumNumberOfDivisions: z.coerce
+            .number()
+            .min(0)
+            .nullable()
+            .optional(),
+        maximumNumberOfDivisions: z.coerce
+            .number()
+            .min(0)
+            .nullable()
+            .optional(),
     })
     .refine(
         (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,

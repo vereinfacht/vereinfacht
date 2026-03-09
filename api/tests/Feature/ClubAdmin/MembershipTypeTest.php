@@ -48,6 +48,8 @@ class MembershipTypeTest extends TestCase
                 'minimumNumberOfMonths' => 6,
                 'minimumNumberOfMembers' => 2,
                 'maximumNumberOfMembers' => 5,
+                'minimumNumberOfDivisions' => 1,
+                'maximumNumberOfDivisions' => 3,
             ],
         ];
 
@@ -81,6 +83,8 @@ class MembershipTypeTest extends TestCase
                 'minimum_number_of_months' => 6,
                 'minimum_number_of_members' => 2,
                 'maximum_number_of_members' => 5,
+                'minimum_number_of_divisions' => 1,
+                'maximum_number_of_divisions' => 3,
             ]
         );
     }

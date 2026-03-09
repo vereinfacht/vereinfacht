@@ -82,6 +82,18 @@ class MembershipTypeResource extends Resource
                     ->required()
                     ->gte('minimum_number_of_members')
                     ->rules(['numeric', 'min:0']),
+                TextInput::make('minimum_number_of_divisions')
+                    ->label(__('membership-type.minimum_number_of_divisions'))
+                    ->integer()
+                    ->nullable()
+                    ->lte('maximum_number_of_divisions')
+                    ->rules(['nullable', 'numeric', 'min:0']),
+                TextInput::make('maximum_number_of_divisions')
+                    ->label(__('membership-type.maximum_number_of_divisions'))
+                    ->integer()
+                    ->nullable()
+                    ->gte('minimum_number_of_divisions')
+                    ->rules(['nullable', 'numeric', 'min:0']),
                 DateTimePicker::make('updated_at')
                     ->label(__('validation.attributes.updated_at'))
                     ->disabled(),
@@ -116,6 +128,12 @@ class MembershipTypeResource extends Resource
                     ->sortable(),
                 TextColumn::make('maximum_number_of_members')
                     ->label(__('membership-type.maximum_number_of_members'))
+                    ->sortable(),
+                TextColumn::make('minimum_number_of_divisions')
+                    ->label(__('membership-type.minimum_number_of_divisions'))
+                    ->sortable(),
+                TextColumn::make('maximum_number_of_divisions')
+                    ->label(__('membership-type.maximum_number_of_divisions'))
                     ->sortable(),
             ])
             ->filters([

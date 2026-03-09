@@ -1978,19 +1978,6 @@ export interface components {
                 };
             };
         };
-        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
-        "resources.finance-contacts.relationship.receipts.fetch": {
-            /**
-             * type
-             * @default receipts
-             */
-            type: string;
-            /**
-             * id
-             * @example 46
-             */
-            id: string;
-        };
         /** Resource/Finance-contact/Fetch */
         "resources.finance-contacts.resource.fetch": {
             /**
@@ -2712,6 +2699,16 @@ export interface components {
                  */
                 maximumNumberOfMembers?: number;
                 /**
+                 * minimumNumberOfDivisions
+                 * @example 0
+                 */
+                minimumNumberOfDivisions?: number;
+                /**
+                 * maximumNumberOfDivisions
+                 * @example 0
+                 */
+                maximumNumberOfDivisions?: number;
+                /**
                  * sortOrder
                  * @example 1
                  */
@@ -2813,6 +2810,16 @@ export interface components {
                  * @example 1
                  */
                 maximumNumberOfMembers?: number;
+                /**
+                 * minimumNumberOfDivisions
+                 * @example 0
+                 */
+                minimumNumberOfDivisions?: number;
+                /**
+                 * maximumNumberOfDivisions
+                 * @example 0
+                 */
+                maximumNumberOfDivisions?: number;
                 /**
                  * sortOrder
                  * @example 1
@@ -2917,6 +2924,16 @@ export interface components {
                  * @example 1
                  */
                 maximumNumberOfMembers?: number;
+                /**
+                 * minimumNumberOfDivisions
+                 * @example 0
+                 */
+                minimumNumberOfDivisions?: number;
+                /**
+                 * maximumNumberOfDivisions
+                 * @example 0
+                 */
+                maximumNumberOfDivisions?: number;
                 /**
                  * sortOrder
                  * @example 1
