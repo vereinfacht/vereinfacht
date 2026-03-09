@@ -17,16 +17,14 @@ interface Props {
 }
 
 export default async function MembershipTypeShowPage({ params }: Props) {
-    const membershipTypeBody = await getMembershipType({
+    const membershipType = await getMembershipType({
         id: params.id,
         include: ['divisionMembershipTypes.division'],
     });
 
-    if (!membershipTypeBody) {
+    if (!membershipType) {
         notFound();
     }
-
-    const membershipType = membershipTypeBody;
 
     const { t } = createTranslation();
 
