@@ -34,7 +34,6 @@ export default function AttachResourceForm({
     targetResourceType,
     children,
     submitLabel,
-    onSuccess,
 }: Props) {
     const [state, formAction] = useFormState(action, { success: false });
     const { t } = useTranslation();
@@ -47,7 +46,6 @@ export default function AttachResourceForm({
                 type="create"
                 translationKey={translationKey}
                 submitLabel={submitLabel}
-                onSuccess={onSuccess}
             >
                 <div className="grid grid-cols-1 gap-6 pb-6 md:grid-cols-2">
                     <input

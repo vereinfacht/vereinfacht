@@ -10,6 +10,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
+import { ResourceName } from '@/resources/resource';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];
@@ -83,14 +84,14 @@ export default function MembershipTypesTable({
                     <CreateButton href="/admin/membership-types/create" />
                     <TableExportModal
                         ids={allIds ?? []}
-                        resourceName="membership-types"
+                        resourceName={'membership-types'}
                     />
                 </div>
             )}
             <DataTable
                 data={membershipTypes}
                 columns={columns}
-                resourceName={'membership-types'}
+                resourceName={'membership-types' as ResourceName}
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}

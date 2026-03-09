@@ -14,7 +14,7 @@ export type ResourceName =
     | 'divisions'
     | 'divisionMembershipTypes'
     | 'clubs'
-    | 'membership-types';
+    | 'membershipTypes';
 
 export type DetailFieldDef<T> =
     | DefaultDetailFieldDef<T>
