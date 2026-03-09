@@ -30,6 +30,10 @@ export function camelCaseToKebabCase(string: string) {
     return string.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 }
 
+export function kebabToCamelCase(string: string) {
+    return string.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+}
+
 export function toKebabCase(string: string) {
     return string
         .replace(/\W+/g, ' ')

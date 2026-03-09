@@ -4,6 +4,7 @@ import Text from '@/app/components/Text/Text';
 import { useRoutePattern } from '@/hooks/useRoutePattern';
 import { ResourceName } from '@/resources/resource';
 import { getI18nNamespace } from '@/utils/localization';
+import { kebabToCamelCase } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
 import { useParams, useSelectedLayoutSegments } from 'next/navigation';
 
@@ -56,7 +57,9 @@ function getTitleForCurrentPage(
         !isDynamicSegment(firstSegment) &&
         !isDynamicSegment(secondSegment)
     ) {
-        const namespace = getI18nNamespace(firstSegment as ResourceName);
+        const namespace = getI18nNamespace(
+            kebabToCamelCase(firstSegment) as ResourceName,
+        );
         const nestedTitle = safeTranslate(`${namespace}:${secondSegment}`);
         if (nestedTitle) return nestedTitle;
     }
@@ -68,7 +71,8 @@ function getTitleForCurrentPage(
     }
 
     // Case 4: Resource routes
-    const resourceName = (params.resource as string) ?? firstSegment;
+    const resourceName =
+        (params.resource as string) ?? kebabToCamelCase(firstSegment);
     const namespace = getI18nNamespace(resourceName as ResourceName);
 
     const resourceTitle = getResourceTitle(resourceName, namespace);

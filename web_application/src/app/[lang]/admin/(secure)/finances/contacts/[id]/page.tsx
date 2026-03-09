@@ -27,7 +27,7 @@ export default async function ContactShowPage({ params }: Props) {
     const { t } = createTranslation();
     const fields = [
         {
-            label: t('contact:type.label'),
+            label: t('contact:contact_type.label'),
             attribute: 'type',
             value:
                 contact.contactType === 'person' ? (

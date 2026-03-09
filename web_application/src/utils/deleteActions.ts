@@ -1,6 +1,7 @@
 import { deleteDivisionFormAction } from '@/actions/divisions/delete';
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteFinanceContactFormAction } from '@/actions/financeContacts/delete';
+import { deleteMembershipTypeFormAction } from '@/actions/membershipTypes/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
@@ -23,6 +24,9 @@ const deleteActionMap: Record<
     },
     'finance-contacts': async (id: string) => {
         return await deleteFinanceContactFormAction(id, { success: false });
+    },
+    'membership-types': async (id: string) => {
+        return await deleteMembershipTypeFormAction(id, { success: false });
     },
 };
 
