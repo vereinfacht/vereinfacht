@@ -1,29 +1,8 @@
 import { z } from 'zod';
-import { SupportedLocale, supportedLocales } from '@/utils/localization';
-
-const divisionTranslationSchema = z
-    .object(
-        supportedLocales.reduce(
-            (acc, locale) => {
-                acc[locale] = z.string().min(2).optional().or(z.literal(''));
-                return acc;
-            },
-            {} as Record<SupportedLocale, z.ZodTypeAny>,
-        ),
-    )
-    .refine(
-        (data) => {
-            return Object.values(data).some(
-                (value) => typeof value === 'string' && value.length >= 2,
-            );
-        },
-        {
-            message: 'Mindestens eine Sprache muss ausgefüllt sein.',
-        },
-    );
+import { translationSchema } from '../membershipTypes/create.schema';
 
 export const divisionAttributesSchema = z.object({
-    titleTranslations: divisionTranslationSchema,
+    titleTranslations: translationSchema,
 });
 
 export const divisionRelationshipsSchema = z.object({

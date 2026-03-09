@@ -1,54 +1,51 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
-import { z } from 'zod';
-import { update } from '../updateAdminResources';
-import { ActionState, validateAndRunAction } from '../validateForm';
-import { TranslationSchema } from '@/types/jsonapi-models';
-
-const updateMembershipTypeSchema = z.object({
-    titleTranslations: TranslationSchema,
-    descriptionTranslations: TranslationSchema,
-    monthlyFee: z.coerce.number().min(0).multipleOf(0.01).meta({ step: 0.01 }),
-    admissionFee: z.coerce
-        .number()
-        .min(0)
-        .multipleOf(0.01)
-        .meta({ step: 0.01 })
-        .optional(),
-    minimumNumberOfMonths: z.coerce
-        .number()
-        .int()
-        .min(0)
-        .max(24)
-        .multipleOf(1)
-        .meta({
-            step: 1,
-            description: 'membership_type:minimum_number_of_months.help',
-        }),
-    minimumNumberOfMembers: z.coerce.number().int().min(1),
-    maximumNumberOfMembers: z.coerce.number().int().min(1),
-});
-
-export type UpdateMembershipTypeData = z.infer<
-    typeof updateMembershipTypeSchema
->;
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
+import updateFormAction from '../base/update';
+import {
+    UpdateMembershipTypeParams,
+    updateMembershipTypeSchema,
+} from './update.schema';
 
 export async function getUpdateMembershipTypeSchema() {
     return updateMembershipTypeSchema;
 }
 
-export async function updateMembershipType(
+export const updateMembershipType = createAuthenticatedAction(
+    'update',
+    'membership-types',
+    updateMembershipTypeSchema,
+    async (body, client) => {
+        const response = await client.PATCH(
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
+            '/membership-types/{membershipType}',
+            {
+                params: {
+                    path: { membershipType: body.data.id },
+                },
+                body,
+            },
+        );
+
+        return handleApiResponse(response, 'Failed to update membership type');
+    },
+);
+
+export async function updateMembershipTypeFormAction(
     id: string,
-    _previousState: ActionState,
+    previousState: FormActionState,
     formData: FormData,
 ) {
-    return await validateAndRunAction(
-        updateMembershipTypeSchema,
+    return await updateFormAction<UpdateMembershipTypeParams>(
+        previousState,
+        updateMembershipType,
         formData,
-        (data) => update('membershipTypes', id, data),
-        () => {
-            revalidateTag('membershipTypes');
+        {
+            data: {
+                id,
+                type: 'membership-types',
+            },
         },
     );
 }

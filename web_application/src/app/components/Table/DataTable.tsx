@@ -20,6 +20,7 @@ import {
 } from '@tanstack/react-table';
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
+import { toKebabCase } from '@/utils/strings';
 
 interface DataTableProps<TData, TValue> {
     data: TData[];
@@ -105,7 +106,7 @@ export function DataTable<TData extends Model, TValue>({
                                             {typeof canEdit === 'function' ? (
                                                 <TableAction
                                                     type="edit"
-                                                    href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                    href={`/admin/${toKebabCase(resourceName)}/edit/${row.original.id}`}
                                                     disabled={
                                                         canEdit(row.original) ==
                                                         false
@@ -116,7 +117,7 @@ export function DataTable<TData extends Model, TValue>({
                                                 canEdit && (
                                                     <TableAction
                                                         type="edit"
-                                                        href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                        href={`/admin/${toKebabCase(resourceName)}/edit/${row.original.id}`}
                                                         id={row.original.id}
                                                     />
                                                 )
@@ -124,7 +125,7 @@ export function DataTable<TData extends Model, TValue>({
                                             {canView && (
                                                 <TableAction
                                                     type="view"
-                                                    href={`/admin/${resourceName}/${row.original.id}`}
+                                                    href={`/admin/${toKebabCase(resourceName)}/${row.original.id}`}
                                                     id={row.original.id}
                                                 />
                                             )}

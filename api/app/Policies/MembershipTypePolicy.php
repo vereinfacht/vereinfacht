@@ -37,7 +37,11 @@ class MembershipTypePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return true;
+        }
+
+        return $user->can('create membershipTypes');
     }
 
     /**
@@ -57,7 +61,11 @@ class MembershipTypePolicy
      */
     public function delete(User $user, MembershipType $membershipType): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $membershipType->club_id;
+        }
+
+        return $user->can('delete membershipTypes') && $membershipType->club_id === getPermissionsTeamId();
     }
 
     /**

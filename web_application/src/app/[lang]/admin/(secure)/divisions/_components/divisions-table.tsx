@@ -8,11 +8,11 @@ import {
     TDivisionDeserialized,
     TMembershipTypeDeserialized,
 } from '@/types/resources';
+import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listDivisionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
-import { createDeleteFormAction } from '@/utils/deleteActions';
 import TableExportModal from '../../components/TableExportModal';
 
 interface Props {
@@ -51,24 +51,28 @@ export default function DivisionsTable({
                 return <TextCell>{title}</TextCell>;
             },
         },
-        {
-            accessorKey: 'membershipTypes',
-            header: t('membership_type:title.other'),
-            cell: (cell) => {
-                const membershipTypes =
-                    cell.getValue() as TMembershipTypeDeserialized[];
+        ...(extended
+            ? [
+                  {
+                      accessorKey: 'membershipTypes',
+                      header: t('membership_type:title.other'),
+                      cell: (cell: any) => {
+                          const membershipTypes =
+                              cell.getValue() as TMembershipTypeDeserialized[];
 
-                return (
-                    <BelongsToManyCell
-                        truncate
-                        items={membershipTypes}
-                        basePath="/admin/membershipTypes"
-                        parentPath={`/admin/divisions/${cell.row.original.id}`}
-                        displayProperty="title"
-                    />
-                );
-            },
-        },
+                          return (
+                              <BelongsToManyCell
+                                  truncate
+                                  items={membershipTypes}
+                                  basePath="/admin/membership-types"
+                                  parentPath={`/admin/divisions/${cell.row.original.id}`}
+                                  displayProperty="title"
+                              />
+                          );
+                      },
+                  },
+              ]
+            : []),
     ];
 
     return (

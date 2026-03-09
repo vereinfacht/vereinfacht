@@ -1,11 +1,11 @@
 import { getDivision } from '@/actions/divisions/get';
+import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
+import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import DetailField from '../../components/Fields/DetailField';
-import Text from '@/app/components/Text/Text';
-import ResourceTable from '@/app/components/Table/ResourceTable';
-import createTranslation from 'next-translate/createTranslation';
+import MembershipTypesTable from '../../membership-types/_components/membership-types-table';
 
 interface Props {
     params: ShowPageParams;
@@ -50,9 +50,10 @@ export default async function DivisionShowPage({ params }: Props) {
                     <Text preset="headline" tag="h2" className="mt-6">
                         {t('membership_type:title.other')}
                     </Text>
-                    <ResourceTable
-                        resources={division[0].membershipTypes as any[]}
-                        resourceName="membershipTypes"
+                    <MembershipTypesTable
+                        membershipTypes={division[0].membershipTypes || []}
+                        extended={false}
+                        totalPages={1}
                     />
                 </>
             ) : null}

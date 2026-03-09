@@ -25,5 +25,7 @@
     },
     "maximum_number_of_members": {
         "label": "Maximum number of persons"
-    }
+    },
+    "create": "Create membership type",
+    "edit": "Edit membership type"
 }
