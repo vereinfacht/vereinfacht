@@ -90,7 +90,7 @@ export default function MembershipTypesTable({
             <DataTable
                 data={membershipTypes}
                 columns={columns}
-                resourceName={'membershipTypes'}
+                resourceName={'membership-types'}
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}
