@@ -22,7 +22,6 @@ export default function ActionForm({
     children,
     translationKey,
     loading = false,
-    submitLabel,
 }: Props) {
     const { t } = useTranslation();
 
@@ -36,10 +35,7 @@ export default function ActionForm({
             {children}
             <div className="mt-auto flex gap-4 self-end">
                 <CancelButton />
-                <SubmitButton
-                    title={submitLabel || t('general:save')}
-                    loading={loading}
-                />
+                <SubmitButton title={t('general:save')} loading={loading} />
             </div>
         </form>
     );

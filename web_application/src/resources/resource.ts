@@ -33,15 +33,15 @@ export type DefaultDetailFieldDef<T> = {
 
 export interface SimpleDetailFieldDef<T> extends DefaultDetailFieldDef<T> {
     type:
-        | 'image'
-        | 'link'
-        | 'color'
-        | 'date'
-        | 'translation'
-        | 'currency'
-        | 'boolean'
-        | 'media'
-        | 'html';
+    | 'image'
+    | 'link'
+    | 'color'
+    | 'date'
+    | 'translation'
+    | 'currency'
+    | 'boolean'
+    | 'media'
+    | 'html';
 }
 
 export interface BelongsToDetailFieldDef<T, K = any> extends Omit<

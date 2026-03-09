@@ -1,13 +1,16 @@
+import { createDivisionMembershipTypeFormAction } from '@/actions/divisionMembershipTypes/create';
+import { listDivisions } from '@/actions/divisions/list';
 import { getMembershipType } from '@/actions/membershipTypes/get';
+import TextInput from '@/app/components/Input/TextInput';
 import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
+import { TDivisionMembershipTypeDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import DetailField from '../../components/Fields/DetailField';
-import DivisionsTable from '../../divisions/_components/divisions-table';
 import AttachResourceModal from '../../components/Relation/AttachResourceModal';
-import { TDivisionDeserialized } from '@/types/resources';
+import DivisionMembershipTypesTable from '../_components/division-membership-types-table';
 
 interface Props {
     params: ShowPageParams;
@@ -16,7 +19,7 @@ interface Props {
 export default async function MembershipTypeShowPage({ params }: Props) {
     const membershipTypeBody = await getMembershipType({
         id: params.id,
-        include: ['divisions'],
+        include: ['divisionMembershipTypes.division'],
     });
 
     if (!membershipTypeBody) {
@@ -72,6 +75,36 @@ export default async function MembershipTypeShowPage({ params }: Props) {
         },
     ];
 
+    const attachDivisionAction = createDivisionMembershipTypeFormAction;
+
+    const attachDivisionModal = await AttachResourceModal({
+        title: t('membership_type:attach_division'),
+        triggerLabel: t('membership_type:attach_division'),
+        parentResourceId: params.id,
+        parentResourceType: 'membership-types',
+        parentRelationshipName: 'membershipType',
+        targetResourceType: 'divisions',
+        targetRelationshipName: 'division',
+        action: attachDivisionAction,
+        listAction: () => listDivisions(),
+        alreadyAttachedIds:
+            membershipType.divisionMembershipTypes?.map(
+                (divisionMembershipType: TDivisionMembershipTypeDeserialized) =>
+                    divisionMembershipType.division?.id || '',
+            ) || [],
+        lang: params.lang,
+        children: (
+            <TextInput
+                id="monthlyFee"
+                name="monthlyFee"
+                type="number"
+                step="0.01"
+                label={t('membership_type:monthly_fee.label')}
+                required
+            />
+        ),
+    });
+
     return (
         <div className="container flex flex-col gap-6">
             <EditButton href={`/admin/membership-types/edit/${params.id}`} />
@@ -86,30 +119,18 @@ export default async function MembershipTypeShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
-            {membershipType?.divisions ? (
-                <>
-                    <div className="mt-6 flex items-center justify-between">
-                        <Text preset="headline" tag="h2">
-                            {t('division:title.other')}
-                        </Text>
-                        <AttachResourceModal
-                            parentResourceId={params.id}
-                            parentResourceType="membership-types"
-                            alreadyAttachedIds={
-                                membershipType.divisions?.map(
-                                    (d: TDivisionDeserialized) => d.id,
-                                ) || []
-                            }
-                            lang={params.lang}
-                        />
-                    </div>
-                    <DivisionsTable
-                        divisions={membershipType.divisions || []}
-                        extended={false}
-                        totalPages={1}
-                    />
-                </>
-            ) : null}
+
+            <div className="mt-6 flex items-center justify-between">
+                <Text preset="headline" tag="h2">
+                    {t('division:title.other')}
+                </Text>
+                {attachDivisionModal}
+            </div>
+            <DivisionMembershipTypesTable
+                divisionMembershipTypes={
+                    membershipType.divisionMembershipTypes || []
+                }
+            />
         </div>
     );
 }

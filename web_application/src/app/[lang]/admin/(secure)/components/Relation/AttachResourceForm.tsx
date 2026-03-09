@@ -1,7 +1,6 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-import { useEffect } from 'react';
 import ActionForm from '../Form/ActionForm';
 import { FormActionState } from '../Form/FormStateHandler';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
@@ -20,7 +19,6 @@ interface Props {
     targetRelationshipName: string;
     targetResourceType: string;
     children?: React.ReactNode;
-    selectLabel?: string;
     submitLabel?: string;
     onSuccess?: () => void;
 }
@@ -35,18 +33,11 @@ export default function AttachResourceForm({
     targetRelationshipName,
     targetResourceType,
     children,
-    selectLabel,
     submitLabel,
     onSuccess,
 }: Props) {
     const [state, formAction] = useFormState(action, { success: false });
     const { t } = useTranslation();
-
-    useEffect(() => {
-        if (state.success && onSuccess) {
-            onSuccess();
-        }
-    }, [state.success, onSuccess]);
 
     return (
         <>
@@ -56,6 +47,7 @@ export default function AttachResourceForm({
                 type="create"
                 translationKey={translationKey}
                 submitLabel={submitLabel}
+                onSuccess={onSuccess}
             >
                 <div className="grid grid-cols-1 gap-6 pb-6 md:grid-cols-2">
                     <input
@@ -67,10 +59,9 @@ export default function AttachResourceForm({
                     <SelectInput
                         id="target_id"
                         name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
-                        label={selectLabel || t('general.select_resource')}
+                        label={t('general:select_resource')}
                         options={options}
                         required
-                        className="bg-white"
                     />
 
                     {children}

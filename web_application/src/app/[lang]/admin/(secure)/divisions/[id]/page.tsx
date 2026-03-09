@@ -1,7 +1,6 @@
 import { getDivision } from '@/actions/divisions/get';
 import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
-import { TMembershipTypeDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
@@ -13,10 +12,9 @@ interface Props {
 }
 
 export default async function DivisionShowPage({ params }: Props) {
-    const division = await getDivision({
-        id: params.id,
-        include: ['membershipTypes'],
-    });
+    const division = await Promise.all([
+        getDivision({ id: params.id, include: ['membershipTypes'] }),
+    ]);
 
     if (!division) {
         notFound();
@@ -29,7 +27,7 @@ export default async function DivisionShowPage({ params }: Props) {
             attribute: 'titleTranslations',
             type: 'translation',
             label: 'division:title.label',
-            value: division?.titleTranslations,
+            value: division[0]?.titleTranslations,
         },
     ];
 
@@ -47,26 +45,13 @@ export default async function DivisionShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
-            {division?.membershipTypes ? (
+            {division[0]?.membershipTypes ? (
                 <>
-                    <div>
-                        <Text preset="headline" tag="h2" className="mt-6">
-                            {t('membership_type:title.other')}
-                        </Text>
-                        <AttachResourceModal
-                            resourceType="membership-types"
-                            parentResourceId={params.id}
-                            parentResourceType="divisions"
-                            alreadyAttachedIds={
-                                division.membershipTypes?.map(
-                                    (m: TMembershipTypeDeserialized) => m.id,
-                                ) || []
-                            }
-                            lang={params.lang}
-                        />
-                    </div>
+                    <Text preset="headline" tag="h2" className="mt-6">
+                        {t('membership_type:title.other')}
+                    </Text>
                     <MembershipTypesTable
-                        membershipTypes={division.membershipTypes || []}
+                        membershipTypes={division[0].membershipTypes || []}
                         extended={false}
                         totalPages={1}
                     />

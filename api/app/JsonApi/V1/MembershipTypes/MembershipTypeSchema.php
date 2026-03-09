@@ -10,6 +10,7 @@ use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use App\JsonApi\V1\PagePagination;
@@ -52,7 +53,7 @@ class MembershipTypeSchema extends Schema
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
             BelongsToMany::make('divisions')->type('divisions'),
-            BelongsToMany::make('divisionMembershipTypes')
+            HasMany::make('divisionMembershipTypes')
                 ->type('division-membership-types'),
             BelongsTo::make('club')->type('clubs'),
         ];
@@ -81,6 +82,7 @@ class MembershipTypeSchema extends Schema
     {
         return [
             'divisions',
+            'divisionMembershipTypes.division',
         ];
     }
 }
