@@ -180,6 +180,9 @@ export default function CreateForm({ data, action }: Props) {
                     <TextInput
                         id="minimumNumberOfMonths"
                         name="minimumNumberOfMonths"
+                        help={t(
+                            'membership_type:minimum_number_of_months.help',
+                        )}
                         type="number"
                         min="0"
                         max="24"
