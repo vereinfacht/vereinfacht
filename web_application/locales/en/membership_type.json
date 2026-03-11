@@ -32,6 +32,12 @@
     "maximum_number_of_divisions": {
         "label": "Maximum number of divisions"
     },
+    "number_of_members": {
+        "label": "Number of persons"
+    },
+    "number_of_divisions": {
+        "label": "Number of divisions"
+    },
     "create": "Create membership type",
     "edit": "Edit membership type"
 }

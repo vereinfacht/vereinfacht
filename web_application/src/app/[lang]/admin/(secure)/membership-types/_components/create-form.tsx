@@ -8,6 +8,7 @@ import ActionForm from '../../components/Form/ActionForm';
 import FormField from '../../components/Form/FormField';
 import { FormActionState } from '../../components/Form/FormStateHandler';
 import TextInput from '@/app/components/Input/TextInput';
+import InputLabel from '@/app/components/Input/InputLabel';
 
 interface Props {
     action: (
@@ -74,28 +75,12 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
-                <FormField errors={formState.errors?.['monthlyFee']}>
-                    <TextInput
-                        id="monthlyFee"
-                        name="monthlyFee"
-                        type="number"
-                        step="0.01"
-                        label={t('membership_type:monthly_fee.label')}
-                        defaultValue={data?.monthlyFee?.toString()}
-                        required
-                    />
-                </FormField>
-                <FormField errors={formState.errors?.['admissionFee']}>
-                    <TextInput
-                        id="admissionFee"
-                        name="admissionFee"
-                        type="number"
-                        step="0.01"
-                        label={t('membership_type:admission_fee.label')}
-                        defaultValue={data?.admissionFee?.toString()}
-                    />
-                </FormField>
                 <fieldset className="relative flex flex-col gap-2 rounded-lg border border-slate-200 p-4">
+                    <InputLabel
+                        forInput="minimumNumberOfMembers"
+                        value={t('membership_type:number_of_members.label')}
+                        className="absolute -top-[0.6rem] left-2 bg-white px-2"
+                    />
                     <FormField
                         errors={formState.errors?.['minimumNumberOfMembers']}
                     >
@@ -130,6 +115,11 @@ export default function CreateForm({ data, action }: Props) {
                     </FormField>
                 </fieldset>
                 <fieldset className="relative flex flex-col gap-2 rounded-lg border border-slate-200 p-4">
+                    <InputLabel
+                        forInput="minimumNumberOfDivisions"
+                        value={t('membership_type:number_of_divisions.label')}
+                        className="absolute -top-[0.6rem] left-2 bg-white px-2"
+                    />
                     <FormField
                         errors={formState.errors?.['minimumNumberOfDivisions']}
                     >
@@ -165,6 +155,27 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </fieldset>
+                <FormField errors={formState.errors?.['monthlyFee']}>
+                    <TextInput
+                        id="monthlyFee"
+                        name="monthlyFee"
+                        type="number"
+                        step="0.01"
+                        label={t('membership_type:monthly_fee.label')}
+                        defaultValue={data?.monthlyFee?.toString()}
+                        required
+                    />
+                </FormField>
+                <FormField errors={formState.errors?.['admissionFee']}>
+                    <TextInput
+                        id="admissionFee"
+                        name="admissionFee"
+                        type="number"
+                        step="0.01"
+                        label={t('membership_type:admission_fee.label')}
+                        defaultValue={data?.admissionFee?.toString()}
+                    />
+                </FormField>
                 <FormField errors={formState.errors?.['minimumNumberOfMonths']}>
                     <TextInput
                         id="minimumNumberOfMonths"

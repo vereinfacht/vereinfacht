@@ -57,6 +57,32 @@ export const membershipTypeAttributesSchema = z
                 'Die Maximalanzahl an Mitgliedern muss größer oder gleich der Mindestanzahl an Mitgliedern sein.',
             path: ['maximumNumberOfMembers'],
         },
+    )
+    .refine(
+        (data) =>
+            data.minimumNumberOfDivisions === null ||
+            data.minimumNumberOfDivisions === undefined ||
+            data.maximumNumberOfDivisions === null ||
+            data.maximumNumberOfDivisions === undefined ||
+            data.minimumNumberOfDivisions <= data.maximumNumberOfDivisions,
+        {
+            message:
+                'Die Mindestanzahl an Sparten muss kleiner oder gleich der Maximalanzahl an Sparten sein.',
+            path: ['minimumNumberOfDivisions'],
+        },
+    )
+    .refine(
+        (data) =>
+            data.maximumNumberOfDivisions === null ||
+            data.maximumNumberOfDivisions === undefined ||
+            data.minimumNumberOfDivisions === null ||
+            data.minimumNumberOfDivisions === undefined ||
+            data.maximumNumberOfDivisions >= data.minimumNumberOfDivisions,
+        {
+            message:
+                'Die Maximalanzahl an Sparten muss größer oder gleich der Mindestanzahl an Sparten sein.',
+            path: ['maximumNumberOfDivisions'],
+        },
     );
 
 export const membershipTypeRelationshipsSchema = z.object({
