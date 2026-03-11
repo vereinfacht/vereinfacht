@@ -73,36 +73,6 @@ export default async function MembershipTypeShowPage({ params }: Props) {
         },
     ];
 
-    const attachDivisionAction = createDivisionMembershipTypeFormAction;
-
-    const attachDivisionModal = await AttachResourceModal({
-        title: t('membership_type:attach_division'),
-        triggerLabel: t('membership_type:attach_division'),
-        parentResourceId: params.id,
-        parentResourceType: 'membership-types',
-        parentRelationshipName: 'membershipType',
-        targetResourceType: 'divisions',
-        targetRelationshipName: 'division',
-        action: attachDivisionAction,
-        listAction: () => listDivisions(),
-        alreadyAttachedIds:
-            membershipType.divisionMembershipTypes?.map(
-                (divisionMembershipType: TDivisionMembershipTypeDeserialized) =>
-                    divisionMembershipType.division?.id || '',
-            ) || [],
-        lang: params.lang,
-        children: (
-            <TextInput
-                id="monthlyFee"
-                name="monthlyFee"
-                type="number"
-                step="0.01"
-                label={t('membership_type:monthly_fee.label')}
-                required
-            />
-        ),
-    });
-
     return (
         <div className="container flex flex-col gap-6">
             <EditButton href={`/admin/membership-types/edit/${params.id}`} />
@@ -117,18 +87,46 @@ export default async function MembershipTypeShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
-
-            <div className="mt-6 flex items-center justify-between">
-                <Text preset="headline" tag="h2">
-                    {t('division:title.other')}
-                </Text>
-                {attachDivisionModal}
+            <div>
+                <div className="mt-6 flex items-center justify-between">
+                    <Text preset="headline" tag="h2">
+                        {t('division:title.other')}
+                    </Text>
+                    <AttachResourceModal
+                        title={t('membership_type:attach_division')}
+                        triggerLabel={t('membership_type:attach_division')}
+                        parentResourceId={params.id}
+                        parentResourceType="membership-types"
+                        parentRelationshipName="membershipType"
+                        targetResourceType="divisions"
+                        targetRelationshipName="division"
+                        action={createDivisionMembershipTypeFormAction}
+                        listAction={() => listDivisions()}
+                        alreadyAttachedIds={
+                            membershipType.divisionMembershipTypes?.map(
+                                (
+                                    divisionMembershipType: TDivisionMembershipTypeDeserialized,
+                                ) => divisionMembershipType.division?.id || '',
+                            ) || []
+                        }
+                        lang={params.lang}
+                    >
+                        <TextInput
+                            id="monthlyFee"
+                            name="monthlyFee"
+                            type="number"
+                            step="0.01"
+                            label={t('membership_type:monthly_fee.label')}
+                            required
+                        />
+                    </AttachResourceModal>
+                </div>
+                <DivisionMembershipTypesTable
+                    divisionMembershipTypes={
+                        membershipType.divisionMembershipTypes || []
+                    }
+                />
             </div>
-            <DivisionMembershipTypesTable
-                divisionMembershipTypes={
-                    membershipType.divisionMembershipTypes || []
-                }
-            />
         </div>
     );
 }

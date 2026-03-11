@@ -36,7 +36,11 @@ export default function DivisionMembershipTypesTable({
         },
         {
             accessorKey: 'monthlyFee',
-            header: t('membership_type:monthly_fee.label'),
+            header: () => (
+                <div className="text-right">
+                    {t('membership_type:monthly_fee.label')}
+                </div>
+            ),
             cell: ({ row }) => {
                 return <CurrencyCell value={row.original.monthlyFee} />;
             },
