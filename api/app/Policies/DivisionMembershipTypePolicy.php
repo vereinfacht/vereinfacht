@@ -17,7 +17,7 @@ class DivisionMembershipTypePolicy
             return true;
         }
 
-        return $user->can('view divisions') || $user->can('view membershipTypes');
+        return $user->can('view divisions') && $user->can('view membershipTypes');
     }
 
     /**
@@ -29,7 +29,7 @@ class DivisionMembershipTypePolicy
             return $user->id === $divisionMembershipType->division->club_id;
         }
 
-        return ($user->can('view divisions') || $user->can('view membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
+        return ($user->can('view divisions') && $user->can('view membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
     }
 
     /**
@@ -41,7 +41,7 @@ class DivisionMembershipTypePolicy
             return true;
         }
 
-        return $user->can('update divisions') || $user->can('update membershipTypes');
+        return $user->can('update divisions') && $user->can('update membershipTypes');
     }
 
     /**
@@ -53,7 +53,7 @@ class DivisionMembershipTypePolicy
             return $user->id === $divisionMembershipType->division->club_id;
         }
 
-        return ($user->can('update divisions') || $user->can('update membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
+        return ($user->can('update divisions') && $user->can('update membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
     }
 
     /**
@@ -65,6 +65,6 @@ class DivisionMembershipTypePolicy
             return $user->id === $divisionMembershipType->division->club_id;
         }
 
-        return ($user->can('update divisions') || $user->can('update membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
+        return ($user->can('update divisions') && $user->can('update membershipTypes')) && $divisionMembershipType->division->club_id === getPermissionsTeamId();
     }
 }

@@ -1,10 +1,12 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-import ActionForm from '../Form/ActionForm';
-import { FormActionState } from '../Form/FormStateHandler';
+import FormStateHandler, { FormActionState } from '../Form/FormStateHandler';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import useTranslation from 'next-translate/useTranslation';
+import Button from '@/app/components/Button/Button';
+import SubmitButton from '../Form/SubmitButton';
+import { capitalizeFirstLetter } from '@/utils/strings';
 
 interface Props {
     action: (
@@ -21,6 +23,7 @@ interface Props {
     children?: React.ReactNode;
     submitLabel?: string;
     onSuccess?: () => void;
+    onCancel?: () => void;
 }
 
 export default function AttachResourceForm({
@@ -34,37 +37,49 @@ export default function AttachResourceForm({
     targetResourceType,
     children,
     submitLabel,
+    onSuccess,
+    onCancel,
 }: Props) {
     const [state, formAction] = useFormState(action, { success: false });
     const { t } = useTranslation();
 
     return (
-        <>
-            <ActionForm
+        <form
+            action={formAction}
+            className="container flex h-full flex-col gap-8"
+        >
+            <FormStateHandler
                 state={state}
-                action={formAction}
-                type="create"
                 translationKey={translationKey}
-                submitLabel={submitLabel}
-            >
-                <div className="grid grid-cols-1 gap-6 pb-6 md:grid-cols-2">
-                    <input
-                        type="hidden"
-                        name={`relationships[${parentRelationshipName}][${parentResourceType}]`}
-                        value={parentResourceId}
-                    />
+                type="create"
+                onSuccess={onSuccess}
+            />
+            <div className="grid grid-cols-1 gap-6 pb-6 md:grid-cols-2">
+                <input
+                    type="hidden"
+                    name={`relationships[${parentRelationshipName}][${parentResourceType}]`}
+                    value={parentResourceId}
+                />
 
-                    <SelectInput
-                        id="target_id"
-                        name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
-                        label={t('general:select_resource')}
-                        options={options}
-                        required
-                    />
+                <SelectInput
+                    id="target_id"
+                    name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
+                    label={t('general:select_resource')}
+                    options={options}
+                    required
+                />
 
-                    {children}
-                </div>
-            </ActionForm>
-        </>
+                {children}
+            </div>
+            <div className="mt-auto flex gap-4 self-end">
+                <Button type="button" onClick={onCancel} preset="secondary">
+                    {capitalizeFirstLetter(t('general:cancel'))}
+                </Button>
+                <SubmitButton
+                    title={submitLabel ?? t('general:save')}
+                    loading={false}
+                />
+            </div>
+        </form>
     );
 }

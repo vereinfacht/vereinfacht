@@ -15,7 +15,10 @@ import { Plus } from 'lucide-react';
 interface Props {
     triggerLabel: string;
     title: string;
-    children: ReactElement;
+    children: ReactElement<{
+        onSuccess?: () => void;
+        onCancel?: () => void;
+    }>;
 }
 
 export default function RelationModal({
@@ -31,6 +34,7 @@ export default function RelationModal({
                 setIsOpen(false);
             }, 1000);
         },
+        onCancel: () => setIsOpen(false),
     });
 
     return (
