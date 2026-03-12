@@ -41,7 +41,7 @@ class DivisionMembershipTypePolicy
             return true;
         }
 
-        return $user->can('update divisions') && $user->can('update membershipTypes');
+        return $user->can('create divisions') && $user->can('create membershipTypes');
     }
 
     /**
