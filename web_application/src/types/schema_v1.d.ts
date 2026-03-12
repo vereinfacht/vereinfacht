@@ -830,6 +830,40 @@ export interface paths {
         patch: operations["tax-accounts.update"];
         trace?: never;
     };
+    "/division-membership-types": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Store one division-membership-type */
+        post: operations["division-membership-types.store"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/division-membership-types/{division_membership_type}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Destroy one division-membership-type */
+        delete: operations["division-membership-types.destroy"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1403,6 +1437,122 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/skr-types/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Division-membership-type/Fetch */
+        "resources.division-membership-types.resource.fetch": {
+            /**
+             * type
+             * @default division-membership-types
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * monthlyFee
+                 * @example 2
+                 */
+                monthlyFee?: number;
+                /**
+                 * createdAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** division */
+                division?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** membershipType */
+                membershipType?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Division-membership-type/Store */
+        "resources.division-membership-types.resource.store": {
+            /**
+             * type
+             * @default division-membership-types
+             */
+            type: string;
+            attributes: {
+                /**
+                 * monthlyFee
+                 * @example 2
+                 */
+                monthlyFee?: number;
+                /**
+                 * createdAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** division */
+                division?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** membershipType */
+                membershipType?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
                          */
                         self?: string;
                     };
@@ -8002,6 +8152,67 @@ export interface operations {
                         data: components["schemas"]["resources.tax-accounts.resource.fetch"];
                     };
                 };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "division-membership-types.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.division-membership-types.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store division-membership-types */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.division-membership-types.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "division-membership-types.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                division_membership_type: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
