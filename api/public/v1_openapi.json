@@ -9872,26 +9872,6 @@
                     }
                 }
             },
-            "resources.finance-contacts.relationship.receipts.fetch": {
-                "title": "Resource\/Finance-contact\/Relationship\/Receipts\/Fetch",
-                "type": "object",
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "properties": {
-                    "type": {
-                        "title": "type",
-                        "default": "receipts",
-                        "type": "string"
-                    },
-                    "id": {
-                        "title": "id",
-                        "type": "string",
-                        "example": "1"
-                    }
-                }
-            },
             "resources.members.relationship.divisions.attach": {
                 "title": "Resource\/Member\/Relationship\/Divisions\/Attach",
                 "type": "array",

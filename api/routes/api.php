@@ -114,5 +114,5 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('division-membership-types', JsonApiController::class)
-            ->only('index', 'show', 'store', 'update', 'destroy');
+            ->only('store', 'destroy');
     });

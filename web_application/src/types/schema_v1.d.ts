@@ -2337,19 +2337,6 @@ export interface components {
                 };
             };
         };
-        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
-        "resources.finance-contacts.relationship.receipts.fetch": {
-            /**
-             * type
-             * @default receipts
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
-        };
         /** Resource/Member/Relationship/Divisions/Attach */
         "resources.members.relationship.divisions.attach": {
             /**
