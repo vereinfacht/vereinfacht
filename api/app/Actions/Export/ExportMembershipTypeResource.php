@@ -51,6 +51,14 @@ class ExportMembershipTypeResource extends ExportResourceCsv
                 'header' => 'Maximum Number of Members',
                 'attribute' => 'maximum_number_of_members',
             ],
+            'minimum_number_of_divisions' => [
+                'header' => 'Minimum Number of Divisions',
+                'attribute' => 'minimum_number_of_divisions',
+            ],
+            'maximum_number_of_divisions' => [
+                'header' => 'Maximum Number of Divisions',
+                'attribute' => 'maximum_number_of_divisions',
+            ],
             'minimum_number_of_months' => [
                 'header' => 'Minimum Number of Months',
                 'attribute' => 'minimum_number_of_months',

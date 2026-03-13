@@ -60,6 +60,8 @@ export interface MembershipType extends ResourceModel {
     minimumNumberOfMonths: number;
     minimumNumberOfMembers: number;
     maximumNumberOfMembers: number;
+    minimumNumberOfDivisions?: number | null;
+    maximumNumberOfDivisions?: number | null;
     divisions?: Division[] | [];
     divisionMembershipTypes?: DivisionMembershipType[] | [];
 }

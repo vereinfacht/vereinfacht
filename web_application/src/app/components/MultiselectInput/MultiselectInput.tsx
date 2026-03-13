@@ -2,7 +2,8 @@
 
 import { sortByKey } from '@/utils/objects';
 import { Combobox } from '@headlessui/react';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import HelpText from '../HelpText';
 import InputLabel from '../Input/InputLabel';
 import { Option } from '../Input/SelectInput';
 import Input from './Input';
@@ -14,6 +15,7 @@ interface Props {
     name?: string;
     options: Option[];
     label?: string | ReactNode;
+    help?: string;
     defaultValue?: Option[];
     onChange?: (selected: Option[]) => void;
     onQueryChange?: (query: string) => void;
@@ -42,6 +44,7 @@ export function sortOptions(options: Option[]) {
 
 export default function MultiselectInput({
     label,
+    help,
     id,
     name,
     options: unsortedOptions,
@@ -54,15 +57,18 @@ export default function MultiselectInput({
     const options = sortOptions(unsortedOptions);
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
     const [query, setQuery] = useState('');
+    const onChangeRef = useRef(onChange);
     const filteredOptions = onQueryChange
         ? options
         : filterOptionsByQuery(options, query);
 
     useEffect(() => {
-        if (onChange) {
-            onChange(selected);
-        }
-    }, [selected, onChange]);
+        onChangeRef.current = onChange;
+    }, [onChange]);
+
+    useEffect(() => {
+        onChangeRef.current?.(selected);
+    }, [selected]);
 
     const handleRemove = (removedOption: Option) => {
         setSelected(
@@ -115,6 +121,9 @@ export default function MultiselectInput({
                             />
                             {open && <Options options={filteredOptions} />}
                         </div>
+                        {help != null && (
+                            <HelpText text={help} className="mt-1" />
+                        )}
                         {selected.length > 0 && (
                             <SelectedOptions
                                 options={selected}

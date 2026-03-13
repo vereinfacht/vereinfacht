@@ -9407,26 +9407,6 @@
                     }
                 }
             },
-            "resources.finance-contacts.relationship.receipts.fetch": {
-                "title": "Resource\/Finance-contact\/Relationship\/Receipts\/Fetch",
-                "type": "object",
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "properties": {
-                    "type": {
-                        "title": "type",
-                        "default": "receipts",
-                        "type": "string"
-                    },
-                    "id": {
-                        "title": "id",
-                        "type": "string",
-                        "example": "46"
-                    }
-                }
-            },
             "resources.finance-contacts.resource.fetch": {
                 "title": "Resource\/Finance-contact\/Fetch",
                 "type": "object",
@@ -10389,6 +10369,16 @@
                                 "type": "number",
                                 "example": 1
                             },
+                            "minimumNumberOfDivisions": {
+                                "title": "minimumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
+                            },
+                            "maximumNumberOfDivisions": {
+                                "title": "maximumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
+                            },
                             "sortOrder": {
                                 "title": "sortOrder",
                                 "type": "number",
@@ -10519,6 +10509,16 @@
                                 "title": "maximumNumberOfMembers",
                                 "type": "number",
                                 "example": 1
+                            },
+                            "minimumNumberOfDivisions": {
+                                "title": "minimumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
+                            },
+                            "maximumNumberOfDivisions": {
+                                "title": "maximumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
                             },
                             "sortOrder": {
                                 "title": "sortOrder",
@@ -10655,6 +10655,16 @@
                                 "title": "maximumNumberOfMembers",
                                 "type": "number",
                                 "example": 1
+                            },
+                            "minimumNumberOfDivisions": {
+                                "title": "minimumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
+                            },
+                            "maximumNumberOfDivisions": {
+                                "title": "maximumNumberOfDivisions",
+                                "type": "number",
+                                "example": 0
                             },
                             "sortOrder": {
                                 "title": "sortOrder",

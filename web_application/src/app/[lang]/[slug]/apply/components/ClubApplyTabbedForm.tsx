@@ -6,7 +6,7 @@ import Text from '@/app/components/Text/Text';
 import { useApplication } from '@/hooks/application/useApplication';
 import { useTabs } from '@/hooks/tabs/useTabs';
 import { Club } from '@/types/models';
-import { Tab } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import Trans from 'next-translate/Trans';
 import AddPersonsForm from './AddPersonsForm';
 import AttachDivisionsForm from './AttachDivisionsForm';
@@ -22,6 +22,7 @@ export default function ClubApplyTabbedForm({
 }: ClubApplyTabbedFormProps) {
     const tabs = useTabs();
     const { application, isStepSkipped } = useApplication();
+
     const progressSteps = application.steps
         .filter((step) => !isStepSkipped(step.name))
         .map(({ completed }) => {
@@ -29,11 +30,11 @@ export default function ClubApplyTabbedForm({
         });
 
     return (
-        <Tab.Group
+        <TabGroup
             selectedIndex={tabs.selectedIndex}
             onChange={tabs.setSelectedIndex}
         >
-            <Tab.List>
+            <TabList>
                 <SteppedProgress
                     className={tabs.isFirstTab ? 'hidden' : 'mx-auto max-w-xs'}
                     steps={progressSteps}
@@ -59,12 +60,12 @@ export default function ClubApplyTabbedForm({
                     />
                 </SteppedProgress>
                 <Tab className="invisible hidden">Summary</Tab>
-            </Tab.List>
-            <Tab.Panels>
-                <Tab.Panel>
+            </TabList>
+            <TabPanels>
+                <TabPanel>
                     <MembershipSwiper club={club} />
-                </Tab.Panel>
-                <Tab.Panel>
+                </TabPanel>
+                <TabPanel>
                     <AddPersonsForm
                         hasConsentedMediaPublicationIsRequired={
                             club.hasConsentedMediaPublicationIsRequired
@@ -73,22 +74,22 @@ export default function ClubApplyTabbedForm({
                             club.hasConsentedMediaPublicationDefaultValue
                         }
                     />
-                </Tab.Panel>
+                </TabPanel>
                 {!isStepSkipped('divisions') && (
-                    <Tab.Panel>
+                    <TabPanel>
                         <AttachDivisionsForm club={club} />
-                    </Tab.Panel>
+                    </TabPanel>
                 )}
-                <Tab.Panel>
+                <TabPanel>
                     <MembershipForm
                         paymentPeriods={club.paymentPeriods}
                         membershipStartCycleType={club.membershipStartCycleType}
                     />
-                </Tab.Panel>
-                <Tab.Panel>
+                </TabPanel>
+                <TabPanel>
                     <SummaryForm club={club} />
-                </Tab.Panel>
-            </Tab.Panels>
-        </Tab.Group>
+                </TabPanel>
+            </TabPanels>
+        </TabGroup>
     );
 }
