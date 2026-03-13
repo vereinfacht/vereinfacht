@@ -8,6 +8,7 @@ import ActionForm from '../../components/Form/ActionForm';
 import FormField from '../../components/Form/FormField';
 import { FormActionState } from '../../components/Form/FormStateHandler';
 import TextInput from '@/app/components/Input/TextInput';
+import InputLabel from '@/app/components/Input/InputLabel';
 
 interface Props {
     action: (
@@ -74,6 +75,86 @@ export default function CreateForm({ data, action }: Props) {
                         required
                     />
                 </FormField>
+                <fieldset className="relative flex flex-col gap-2 rounded-lg border border-slate-200 p-4">
+                    <InputLabel
+                        forInput="minimumNumberOfMembers"
+                        value={t('membership_type:number_of_members.label')}
+                        className="absolute -top-[0.6rem] left-2 bg-white px-2"
+                    />
+                    <FormField
+                        errors={formState.errors?.['minimumNumberOfMembers']}
+                    >
+                        <TextInput
+                            id="minimumNumberOfMembers"
+                            name="minimumNumberOfMembers"
+                            type="number"
+                            min="0"
+                            step="1"
+                            label={t(
+                                'membership_type:minimum_number_of_members.label',
+                            )}
+                            defaultValue={data?.minimumNumberOfMembers?.toString()}
+                            required
+                        />
+                    </FormField>
+                    <FormField
+                        errors={formState.errors?.['maximumNumberOfMembers']}
+                    >
+                        <TextInput
+                            id="maximumNumberOfMembers"
+                            name="maximumNumberOfMembers"
+                            type="number"
+                            min="0"
+                            step="1"
+                            label={t(
+                                'membership_type:maximum_number_of_members.label',
+                            )}
+                            defaultValue={data?.maximumNumberOfMembers?.toString()}
+                            required
+                        />
+                    </FormField>
+                </fieldset>
+                <fieldset className="relative flex flex-col gap-2 rounded-lg border border-slate-200 p-4">
+                    <InputLabel
+                        forInput="minimumNumberOfDivisions"
+                        value={t('membership_type:number_of_divisions.label')}
+                        className="absolute -top-[0.6rem] left-2 bg-white px-2"
+                    />
+                    <FormField
+                        errors={formState.errors?.['minimumNumberOfDivisions']}
+                    >
+                        <TextInput
+                            id="minimumNumberOfDivisions"
+                            name="minimumNumberOfDivisions"
+                            type="number"
+                            min="0"
+                            step="1"
+                            label={t(
+                                'membership_type:minimum_number_of_divisions.label',
+                            )}
+                            defaultValue={
+                                data?.minimumNumberOfDivisions?.toString() || ''
+                            }
+                        />
+                    </FormField>
+                    <FormField
+                        errors={formState.errors?.['maximumNumberOfDivisions']}
+                    >
+                        <TextInput
+                            id="maximumNumberOfDivisions"
+                            name="maximumNumberOfDivisions"
+                            type="number"
+                            min="0"
+                            step="1"
+                            label={t(
+                                'membership_type:maximum_number_of_divisions.label',
+                            )}
+                            defaultValue={
+                                data?.maximumNumberOfDivisions?.toString() || ''
+                            }
+                        />
+                    </FormField>
+                </fieldset>
                 <FormField errors={formState.errors?.['monthlyFee']}>
                     <TextInput
                         id="monthlyFee"
@@ -99,6 +180,9 @@ export default function CreateForm({ data, action }: Props) {
                     <TextInput
                         id="minimumNumberOfMonths"
                         name="minimumNumberOfMonths"
+                        help={t(
+                            'membership_type:minimum_number_of_months.help',
+                        )}
                         type="number"
                         min="0"
                         max="24"
@@ -106,34 +190,6 @@ export default function CreateForm({ data, action }: Props) {
                             'membership_type:minimum_number_of_months.label',
                         )}
                         defaultValue={data?.minimumNumberOfMonths?.toString()}
-                        required
-                    />
-                </FormField>
-                <FormField
-                    errors={formState.errors?.['minimumNumberOfMembers']}
-                >
-                    <TextInput
-                        id="minimumNumberOfMembers"
-                        name="minimumNumberOfMembers"
-                        type="number"
-                        label={t(
-                            'membership_type:minimum_number_of_members.label',
-                        )}
-                        defaultValue={data?.minimumNumberOfMembers?.toString()}
-                        required
-                    />
-                </FormField>
-                <FormField
-                    errors={formState.errors?.['maximumNumberOfMembers']}
-                >
-                    <TextInput
-                        id="maximumNumberOfMembers"
-                        name="maximumNumberOfMembers"
-                        type="number"
-                        label={t(
-                            'membership_type:maximum_number_of_members.label',
-                        )}
-                        defaultValue={data?.maximumNumberOfMembers?.toString()}
                         required
                     />
                 </FormField>

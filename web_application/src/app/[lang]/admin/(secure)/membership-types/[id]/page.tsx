@@ -66,6 +66,18 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             value: membershipType?.maximumNumberOfMembers,
         },
         {
+            attribute: 'minimum_number_of_divisions',
+            type: 'number',
+            label: 'membership_type:minimum_number_of_divisions.label',
+            value: membershipType[0]?.minimumNumberOfDivisions,
+        },
+        {
+            attribute: 'maximum_number_of_divisions',
+            type: 'number',
+            label: 'membership_type:maximum_number_of_divisions.label',
+            value: membershipType[0]?.maximumNumberOfDivisions,
+        },
+        {
             attribute: 'minimum_number_of_months',
             type: 'number',
             label: 'membership_type:minimum_number_of_months.label',

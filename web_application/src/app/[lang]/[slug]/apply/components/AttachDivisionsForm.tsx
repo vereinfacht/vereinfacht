@@ -11,7 +11,7 @@ import { useTabs } from '@/hooks/tabs/useTabs';
 import { useDivisionOptions } from '@/hooks/useDivisionOptions';
 import { Club, Division } from '@/types/models';
 import useTranslation from 'next-translate/useTranslation';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useMemo, useRef, useState } from 'react';
 import BackButton from './Buttons/BackButton';
 import ButtonContainer from './Buttons/ButtonContainer';
 import NextButton from './Buttons/NextButton';
@@ -22,7 +22,7 @@ interface AttachDivisionsFormProps {
     club: Club;
 }
 
-function memberDivsionValueKey(memberIndex: number, divisionIndex: number) {
+function memberDivisionValueKey(memberIndex: number, divisionIndex: number) {
     return `members.${memberIndex}.divisions[${divisionIndex}][value]`;
 }
 
@@ -36,11 +36,72 @@ export default function AttachDivisionsForm({
     const { getOptions } = useDivisionOptions(application);
     const options = getOptions(clubDivisions);
     const [totalDivisionCosts, setTotalDivisionCosts] = useState(0);
+    const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
+
+    const minimumNumberOfDivisions =
+        application.membership.membershipType.minimumNumberOfDivisions ?? 0;
+    const maximumNumberOfDivisions =
+        application.membership.membershipType.maximumNumberOfDivisions;
+    const hasDivisionValidation =
+        minimumNumberOfDivisions > 0 ||
+        typeof maximumNumberOfDivisions === 'number';
+    const requiresDivisionSelection = minimumNumberOfDivisions > 0;
+
+    const initialSelectedDivisionIdsByMember = useMemo(
+        () =>
+            application.members.map((member) =>
+                (member.divisions ?? []).map((division) => division.id),
+            ),
+        [application.members],
+    );
+
+    const [selectedDivisionIdsByMember, setSelectedDivisionIdsByMember] =
+        useState<string[][]>(initialSelectedDivisionIdsByMember);
+
+    function getSelectedDivisionIdsByMember(formData: FormData) {
+        return application.members.map((_, memberIndex) => {
+            const selectedIds: string[] = [];
+
+            for (
+                let divisionIndex = 0;
+                divisionIndex < clubDivisions.length;
+                divisionIndex++
+            ) {
+                const selectedId = formData.get(
+                    memberDivisionValueKey(memberIndex, divisionIndex),
+                );
+
+                if (!selectedId) {
+                    continue;
+                }
+
+                selectedIds.push(String(selectedId));
+            }
+
+            return selectedIds;
+        });
+    }
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setHasTriedSubmit(true);
         const formData = new FormData(e.currentTarget);
+        const selectedDivisionIdsPerMember =
+            getSelectedDivisionIdsByMember(formData);
+
+        const hasTooFewDivisions = selectedDivisionIdsPerMember.some(
+            (selectedIds) => selectedIds.length < minimumNumberOfDivisions,
+        );
+        const hasTooManyDivisions =
+            typeof maximumNumberOfDivisions === 'number' &&
+            selectedDivisionIdsPerMember.some(
+                (selectedIds) => selectedIds.length > maximumNumberOfDivisions,
+            );
+
+        if (hasTooFewDivisions || hasTooManyDivisions) {
+            return;
+        }
 
         const newMembers = application.members.map((member, memberIndex) => {
             const newMember = { ...member };
@@ -53,12 +114,12 @@ export default function AttachDivisionsForm({
             ) {
                 if (
                     formData.has(
-                        memberDivsionValueKey(memberIndex, divisionIndex),
+                        memberDivisionValueKey(memberIndex, divisionIndex),
                     )
                 ) {
                     newMember.divisions.push({
                         id: formData.get(
-                            memberDivsionValueKey(memberIndex, divisionIndex),
+                            memberDivisionValueKey(memberIndex, divisionIndex),
                         ) as string,
                     });
                 }
@@ -83,6 +144,9 @@ export default function AttachDivisionsForm({
         }
 
         const formData = new FormData(formRef.current);
+        const selectedDivisionIdsPerMember =
+            getSelectedDivisionIdsByMember(formData);
+        setSelectedDivisionIdsByMember(selectedDivisionIdsPerMember);
 
         let sum = 0;
 
@@ -93,7 +157,7 @@ export default function AttachDivisionsForm({
                 divisionIndex++
             ) {
                 const selectedId = formData.get(
-                    memberDivsionValueKey(memberIndex, divisionIndex),
+                    memberDivisionValueKey(memberIndex, divisionIndex),
                 );
 
                 if (!selectedId) {
@@ -115,6 +179,10 @@ export default function AttachDivisionsForm({
         });
 
         setTotalDivisionCosts(sum);
+
+        if (!hasTriedSubmit) {
+            return;
+        }
     }
 
     function getMemberDivisionOptions(member: FormMember): Option[] {
@@ -131,6 +199,21 @@ export default function AttachDivisionsForm({
         return getOptions(memberDivisions);
     }
 
+    const divisionsHelpText = hasDivisionValidation
+        ? typeof maximumNumberOfDivisions === 'number'
+            ? minimumNumberOfDivisions === maximumNumberOfDivisions
+                ? t('application:division_selection_help_exact', {
+                      count: minimumNumberOfDivisions,
+                  })
+                : t('application:division_selection_help_with_max', {
+                      min: minimumNumberOfDivisions,
+                      max: maximumNumberOfDivisions,
+                  })
+            : t('application:division_selection_help_min_only', {
+                  min: minimumNumberOfDivisions,
+              })
+        : undefined;
+
     return (
         <form onSubmit={handleFormSubmit} ref={formRef}>
             <div className="mx-auto max-w-4xl px-6">
@@ -144,25 +227,55 @@ export default function AttachDivisionsForm({
                 sections={application.members}
                 renderSection={(index) => (
                     <div className="mx-auto max-w-4xl px-6">
-                        <MultiselectInput
-                            id="multiselect"
-                            name={`members.${index}.divisions`}
-                            defaultValue={getMemberDivisionOptions(
-                                application.members[index],
-                            )}
-                            onChange={handleChange}
-                            options={options}
-                            label={
-                                <InputLabel
-                                    forInput="multiselect"
-                                    className="flex items-end"
-                                >
-                                    <IconPerson className="-mb-0.5 mr-1 scale-75 fill-current" />
-                                    {application.members[index].firstName}{' '}
-                                    {application.members[index].lastName}
-                                </InputLabel>
-                            }
-                        />
+                        {(() => {
+                            const memberSelectedIds =
+                                selectedDivisionIdsByMember[index] ?? [];
+                            const hasReachedMaximum =
+                                typeof maximumNumberOfDivisions === 'number' &&
+                                memberSelectedIds.length >=
+                                    maximumNumberOfDivisions;
+                            const memberOptions = hasReachedMaximum
+                                ? options.map((option) => ({
+                                      ...option,
+                                      disabled: !memberSelectedIds.includes(
+                                          String(option.value),
+                                      ),
+                                  }))
+                                : options;
+
+                            return (
+                                <MultiselectInput
+                                    id={`members.${index}.divisions`}
+                                    name={`members.${index}.divisions`}
+                                    defaultValue={getMemberDivisionOptions(
+                                        application.members[index],
+                                    )}
+                                    onChange={handleChange}
+                                    options={memberOptions}
+                                    help={divisionsHelpText}
+                                    required={requiresDivisionSelection}
+                                    label={
+                                        <InputLabel
+                                            forInput={`members.${index}.divisions`}
+                                            className="mb-1 flex items-end"
+                                        >
+                                            <IconPerson className="mr-1 -mb-0.5 scale-75 fill-current" />
+                                            {
+                                                application.members[index]
+                                                    .firstName
+                                            }{' '}
+                                            {
+                                                application.members[index]
+                                                    .lastName
+                                            }
+                                            {requiresDivisionSelection
+                                                ? ' *'
+                                                : null}
+                                        </InputLabel>
+                                    }
+                                />
+                            );
+                        })()}
                     </div>
                 )}
             />

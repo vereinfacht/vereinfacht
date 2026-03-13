@@ -49,6 +49,8 @@ class MembershipTypeSchema extends Schema
             Number::make('minimumNumberOfMonths'),
             Number::make('minimumNumberOfMembers'),
             Number::make('maximumNumberOfMembers'),
+            Number::make('minimumNumberOfDivisions'),
+            Number::make('maximumNumberOfDivisions'),
             Number::make('sortOrder')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),

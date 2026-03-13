@@ -129,6 +129,10 @@ export default async function TransactionShowPage({ params }: Props) {
                         field.type === 'belongsTo' &&
                         field.attribute === 'receipt'
                     ) {
+                        if (!transaction[0]?.receipt) {
+                            return null;
+                        }
+
                         return (
                             // @ts-expect-error: reusing this component for now without fixing types for non-resource-class objects
                             <BelongsToField
