@@ -20,6 +20,7 @@ export type TDivisionRaw =
     components['schemas']['resources.divisions.resource.fetch'];
 export type TMembershipTypeRaw =
     components['schemas']['resources.membership-types.resource.fetch'];
+export type TDivisionMembershipTypeRaw = any;
 
 // Deserialized domain types
 export type TUserDeserialized = TUserRaw['attributes'] & {
@@ -89,9 +90,19 @@ export type TStatementDeserialized = TStatementRaw['attributes'] & {
 export type TDivisionDeserialized = TDivisionRaw['attributes'] & {
     id: string;
     membershipTypes?: TMembershipTypeDeserialized[];
+    divisionMembershipTypes?: TDivisionMembershipTypeDeserialized[];
+    monthlyFee?: number;
 };
 
 export type TMembershipTypeDeserialized = TMembershipTypeRaw['attributes'] & {
     id: string;
     divisions?: TDivisionDeserialized[];
+    divisionMembershipTypes?: TDivisionMembershipTypeDeserialized[];
 };
+
+export type TDivisionMembershipTypeDeserialized =
+    TDivisionMembershipTypeRaw['attributes'] & {
+        id: string;
+        division?: TDivisionDeserialized;
+        membershipType?: TMembershipTypeDeserialized;
+    };

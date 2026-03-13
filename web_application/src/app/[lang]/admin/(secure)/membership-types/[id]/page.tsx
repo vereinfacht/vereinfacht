@@ -1,25 +1,28 @@
+import { createDivisionMembershipTypeFormAction } from '@/actions/divisionMembershipTypes/create';
+import { listDivisions } from '@/actions/divisions/list';
 import { getMembershipType } from '@/actions/membershipTypes/get';
+import TextInput from '@/app/components/Input/TextInput';
 import Text from '@/app/components/Text/Text';
 import { ShowPageParams } from '@/types/params';
+import { TDivisionMembershipTypeDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import DetailField from '../../components/Fields/DetailField';
-import DivisionsTable from '../../divisions/_components/divisions-table';
+import AttachResourceModal from '../../components/Relation/AttachResourceModal';
+import DivisionMembershipTypesTable from '../_components/division-membership-types-table';
 
 interface Props {
     params: ShowPageParams;
 }
 
 export default async function MembershipTypeShowPage({ params }: Props) {
-    const membershipType = await Promise.all([
-        getMembershipType({
-            id: params.id,
-            include: ['divisions'],
-        }),
-    ]);
+    const membershipType = await getMembershipType({
+        id: params.id,
+        include: ['divisionMembershipTypes.division'],
+    });
 
-    if (!membershipType[0]) {
+    if (!membershipType) {
         notFound();
     }
 
@@ -30,37 +33,37 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             attribute: 'titleTranslations',
             type: 'translation',
             label: 'membership_type:title.label',
-            value: membershipType[0]?.titleTranslations,
+            value: membershipType?.titleTranslations,
         },
         {
             attribute: 'descriptionTranslations',
             type: 'translation',
             label: 'membership_type:description.label',
-            value: membershipType[0]?.descriptionTranslations,
+            value: membershipType?.descriptionTranslations,
         },
         {
             attribute: 'monthlyFee',
             type: 'currency',
             label: 'membership_type:monthly_fee.label',
-            value: membershipType[0]?.monthlyFee,
+            value: membershipType?.monthlyFee,
         },
         {
             attribute: 'admissionFee',
             type: 'currency',
             label: 'membership_type:admission_fee.label',
-            value: membershipType[0]?.admissionFee,
+            value: membershipType?.admissionFee,
         },
         {
             attribute: 'minimum_number_of_members',
             type: 'number',
             label: 'membership_type:minimum_number_of_members.label',
-            value: membershipType[0]?.minimumNumberOfMembers,
+            value: membershipType?.minimumNumberOfMembers,
         },
         {
             attribute: 'maximum_number_of_members',
             type: 'number',
             label: 'membership_type:maximum_number_of_members.label',
-            value: membershipType[0]?.maximumNumberOfMembers,
+            value: membershipType?.maximumNumberOfMembers,
         },
         {
             attribute: 'minimum_number_of_divisions',
@@ -78,7 +81,7 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             attribute: 'minimum_number_of_months',
             type: 'number',
             label: 'membership_type:minimum_number_of_months.label',
-            value: membershipType[0]?.minimumNumberOfMonths,
+            value: membershipType?.minimumNumberOfMonths,
         },
     ];
 
@@ -96,18 +99,46 @@ export default async function MembershipTypeShowPage({ params }: Props) {
                     />
                 ))}
             </ul>
-            {membershipType[0]?.divisions ? (
-                <>
-                    <Text preset="headline" tag="h2" className="mt-6">
+            <div>
+                <div className="mt-6 flex items-center justify-between">
+                    <Text preset="headline" tag="h2">
                         {t('division:title.other')}
                     </Text>
-                    <DivisionsTable
-                        divisions={membershipType[0].divisions || []}
-                        extended={false}
-                        totalPages={1}
-                    />
-                </>
-            ) : null}
+                    <AttachResourceModal
+                        title={t('membership_type:attach_division')}
+                        triggerLabel={t('membership_type:attach_division')}
+                        parentResourceId={params.id}
+                        parentResourceType="membership-types"
+                        parentRelationshipName="membershipType"
+                        targetResourceType="divisions"
+                        targetRelationshipName="division"
+                        action={createDivisionMembershipTypeFormAction}
+                        listAction={() => listDivisions()}
+                        alreadyAttachedIds={
+                            membershipType.divisionMembershipTypes?.map(
+                                (
+                                    divisionMembershipType: TDivisionMembershipTypeDeserialized,
+                                ) => divisionMembershipType.division?.id || '',
+                            ) || []
+                        }
+                        lang={params.lang}
+                    >
+                        <TextInput
+                            id="monthlyFee"
+                            name="monthlyFee"
+                            type="number"
+                            step="0.01"
+                            label={t('membership_type:monthly_fee.label')}
+                            required
+                        />
+                    </AttachResourceModal>
+                </div>
+                <DivisionMembershipTypesTable
+                    divisionMembershipTypes={
+                        membershipType.divisionMembershipTypes || []
+                    }
+                />
+            </div>
         </div>
     );
 }
