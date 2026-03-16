@@ -5,5 +5,6 @@
         "label": "Name"
     },
     "create": "Sparte erstellen",
-    "edit": "Sparte bearbeiten"
+    "edit": "Sparte bearbeiten",
+    "attach_membership_type": "Mitgliedschaftstyp verknüpfen"
 }

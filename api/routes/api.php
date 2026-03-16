@@ -112,4 +112,7 @@ JsonApiRoute::server('v1')
 
         $server->resource('tax-accounts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update', 'destroy');
+
+        $server->resource('division-membership-types', JsonApiController::class)
+            ->only('store', 'destroy');
     });
