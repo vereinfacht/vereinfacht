@@ -31,6 +31,16 @@ export const membershipTypeAttributesSchema = z
         minimumNumberOfMonths: z.coerce.number().min(0).max(24),
         minimumNumberOfMembers: z.coerce.number().min(1),
         maximumNumberOfMembers: z.coerce.number().min(1),
+        minimumNumberOfDivisions: z.coerce
+            .number()
+            .min(0)
+            .nullable()
+            .optional(),
+        maximumNumberOfDivisions: z.coerce
+            .number()
+            .min(0)
+            .nullable()
+            .optional(),
     })
     .refine(
         (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,
@@ -46,6 +56,32 @@ export const membershipTypeAttributesSchema = z
             message:
                 'Die Maximalanzahl an Mitgliedern muss größer oder gleich der Mindestanzahl an Mitgliedern sein.',
             path: ['maximumNumberOfMembers'],
+        },
+    )
+    .refine(
+        (data) =>
+            data.minimumNumberOfDivisions === null ||
+            data.minimumNumberOfDivisions === undefined ||
+            data.maximumNumberOfDivisions === null ||
+            data.maximumNumberOfDivisions === undefined ||
+            data.minimumNumberOfDivisions <= data.maximumNumberOfDivisions,
+        {
+            message:
+                'Die Mindestanzahl an Sparten muss kleiner oder gleich der Maximalanzahl an Sparten sein.',
+            path: ['minimumNumberOfDivisions'],
+        },
+    )
+    .refine(
+        (data) =>
+            data.maximumNumberOfDivisions === null ||
+            data.maximumNumberOfDivisions === undefined ||
+            data.minimumNumberOfDivisions === null ||
+            data.minimumNumberOfDivisions === undefined ||
+            data.maximumNumberOfDivisions >= data.minimumNumberOfDivisions,
+        {
+            message:
+                'Die Maximalanzahl an Sparten muss größer oder gleich der Mindestanzahl an Sparten sein.',
+            path: ['maximumNumberOfDivisions'],
         },
     );
 

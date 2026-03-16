@@ -115,11 +115,13 @@ class MT940Parser extends BaseStatementParser
     protected function createTransaction(Statement $statement, TransactionInterface $transaction, string $currency): void
     {
         Transaction::create([
-            'title' => $this->toUtf8($transaction->getTxText()) ?? '',
+            'title' => $this->toUtf8($transaction->getTxText()) ??
+                $this->extractTitleFromDescription($this->toUtf8($transaction->getDescription())),
             'description' => $this->toUtf8($transaction->getSvwz() ?? $this->toUtf8($transaction->getDescription())),
             'gvc' => (int) $transaction->getGVC(),
             'bank_iban' => $this->toUtf8($transaction->getIBAN()),
-            'bank_account_holder' => $this->toUtf8($transaction->getAccountHolder()),
+            'bank_account_holder' => $this->toUtf8($transaction->getAccountHolder()) ??
+                $this->extractAccountHolderFromDescription($this->toUtf8($transaction->getDescription())),
             'statement_id' => $statement->id,
             'currency' => $currency,
             'amount' => $transaction->getAmount(),
@@ -154,5 +156,30 @@ class MT940Parser extends BaseStatementParser
         }
 
         return mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1, Windows-1252');
+    }
+
+    protected function extractTitleFromDescription(?string $description): string
+    {
+        if ($description === null) {
+            return '';
+        }
+
+        if (preg_match('/00(.*?)\?/', $description, $matches)) {
+            return trim($matches[1]);
+        }
+
+        return '';
+    }
+
+    protected function extractAccountHolderFromDescription(?string $description): string
+    {
+        if ($description === null) {
+            return '';
+        }
+        if (preg_match('/20(.*?)\?21/', $description, $matches)) {
+            return trim($matches[1]);
+        }
+
+        return '';
     }
 }

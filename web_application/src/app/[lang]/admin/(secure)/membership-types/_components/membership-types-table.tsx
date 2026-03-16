@@ -3,6 +3,7 @@
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
+import { ResourceName } from '@/resources/resource';
 import { TMembershipTypeDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listMembershipTypesSearchParams } from '@/utils/search-params';
@@ -90,7 +91,7 @@ export default function MembershipTypesTable({
             <DataTable
                 data={membershipTypes}
                 columns={columns}
-                resourceName={'membershipTypes'}
+                resourceName={'membership-types' as ResourceName}
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}

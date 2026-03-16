@@ -33,6 +33,8 @@ class MembershipType extends Model implements Sortable
         'minimum_number_of_months',
         'minimum_number_of_members',
         'maximum_number_of_members',
+        'minimum_number_of_divisions',
+        'maximum_number_of_divisions',
     ];
 
     public $sortable = [
