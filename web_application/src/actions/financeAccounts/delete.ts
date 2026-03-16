@@ -11,6 +11,7 @@ export const deleteFinanceAccount = createAuthenticatedAction(
     baseDeleteSchema,
     async (params, client) => {
         const response = await client.DELETE(
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             '/finance-accounts/{finance_account}',
             {
                 params: {

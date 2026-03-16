@@ -42,7 +42,9 @@ export default function DivisionMembershipTypesTable({
                 </div>
             ),
             cell: ({ row }) => {
-                return <CurrencyCell value={row.original.monthlyFee} />;
+                return (
+                    <CurrencyCell value={row.original.monthlyFee as number} />
+                );
             },
         },
     ];

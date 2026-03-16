@@ -14,8 +14,8 @@ export const createDivisionMembershipType = createAuthenticatedAction(
     'division-membership-types',
     createDivisionMembershipTypeSchema,
     async (body, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.POST('/division-membership-types', {
+            // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
             body,
         });
 

@@ -20,7 +20,8 @@ export type TDivisionRaw =
     components['schemas']['resources.divisions.resource.fetch'];
 export type TMembershipTypeRaw =
     components['schemas']['resources.membership-types.resource.fetch'];
-export type TDivisionMembershipTypeRaw = any;
+export type TDivisionMembershipTypeRaw =
+    components['schemas']['resources.division-membership-types.resource.fetch'];
 
 // Deserialized domain types
 export type TUserDeserialized = TUserRaw['attributes'] & {

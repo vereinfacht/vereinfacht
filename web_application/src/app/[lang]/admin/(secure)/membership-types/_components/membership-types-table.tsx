@@ -11,7 +11,6 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
-import { ResourceName } from '@/resources/resource';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];

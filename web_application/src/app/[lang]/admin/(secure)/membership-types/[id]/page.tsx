@@ -3,6 +3,7 @@ import { listDivisions } from '@/actions/divisions/list';
 import { getMembershipType } from '@/actions/membershipTypes/get';
 import TextInput from '@/app/components/Input/TextInput';
 import Text from '@/app/components/Text/Text';
+import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
 import { TDivisionMembershipTypeDeserialized } from '@/types/resources';
 import createTranslation from 'next-translate/createTranslation';
@@ -69,13 +70,13 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             attribute: 'minimum_number_of_divisions',
             type: 'number',
             label: 'membership_type:minimum_number_of_divisions.label',
-            value: membershipType[0]?.minimumNumberOfDivisions,
+            value: membershipType?.minimumNumberOfDivisions,
         },
         {
             attribute: 'maximum_number_of_divisions',
             type: 'number',
             label: 'membership_type:maximum_number_of_divisions.label',
-            value: membershipType[0]?.maximumNumberOfDivisions,
+            value: membershipType?.maximumNumberOfDivisions,
         },
         {
             attribute: 'minimum_number_of_months',
@@ -90,11 +91,11 @@ export default async function MembershipTypeShowPage({ params }: Props) {
             <EditButton href={`/admin/membership-types/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
-                    // @ts-expect-error: value type as element mismatch
+                    // @ts-expect-error: type is not correctly inferred due to the value being optional in the resource type but required in the DetailField props
                     <DetailField
                         key={index}
                         {...field}
-                        resourceName={'membershipTypes'}
+                        resourceName={'membershipTypes' as ResourceName}
                         value={field.value}
                     />
                 ))}
