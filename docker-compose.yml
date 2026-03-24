@@ -13,7 +13,6 @@ volumes:
 services:
   database:
     image: mariadb:11.8
-    working_dir: /var/www/html
     volumes:
       - mariadb:/var/lib/mysql:cached
     networks:
