@@ -205,20 +205,4 @@ export class ApiEndpoints extends JsonApi {
             this.serialize('divisions', data),
         );
     }
-
-    async createResource(
-        type: string,
-        data: any,
-        relationships?: Record<string, string>,
-    ): Promise<any> {
-        const serializedData = this.serialize(type, data, { relationships });
-        return await this.post(type, serializedData);
-    }
-
-    async createDivisionMembershipType(data: any): Promise<any> {
-        return this.createResource('division-membership-types', data, {
-            division: 'divisions',
-            membershipType: 'membership-types',
-        });
-    }
 }
