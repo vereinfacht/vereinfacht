@@ -34,19 +34,12 @@ interface Props {
 export default async function AttachResourceModal({
     title,
     triggerLabel,
-    parentResourceId,
-    parentRelationshipName,
-    parentResourceType,
-    targetRelationshipName,
-    targetResourceType,
-    action,
     listAction,
     alreadyAttachedIds,
     lang,
-    children,
-    submitLabel,
     getOptionLabel,
     emptyState,
+    ...rest
 }: Props): Promise<JSX.Element | null> {
     const response = await listAction();
     const items = deserialize(response as DocumentObject) as AttachableItem[];
@@ -68,16 +61,10 @@ export default async function AttachResourceModal({
     return (
         <RelationModal triggerLabel={labelFallback} title={labelFallback}>
             <AttachResourceForm
-                action={action}
                 options={options}
-                parentResourceId={parentResourceId}
-                parentRelationshipName={parentRelationshipName}
-                parentResourceType={parentResourceType}
-                targetRelationshipName={targetRelationshipName}
-                targetResourceType={targetResourceType}
-                submitLabel={submitLabel}
+                {...rest}
             >
-                {children}
+                {rest.children}
             </AttachResourceForm>
         </RelationModal>
     );
