@@ -54,7 +54,8 @@ The backend is a Laravel application using the [JSON:API](https://jsonapi.org/) 
 
 #### Setup
 
-Go into the tooling container:
+First start the docker environment with `docker compose up -d`.
+Then go into the tooling container:
 
 ```sh
 docker compose exec tooling bash
@@ -118,6 +119,8 @@ The newly generated file can be found in `/api/storage/public`. For the time bei
 ### Web frontend
 
 #### Setup
+
+If not already started, please start your docker environment with `docker compose up -d`.
 
 Go into the tooling container:
 
