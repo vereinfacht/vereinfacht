@@ -69,21 +69,25 @@ function getInputProps(
     resourceName: ResourceName,
     t: Translate,
 ): FieldProps {
+    const innerField = (
+        field instanceof z.ZodPipe ? field.def.in : field
+    ) as z.ZodType<any>;
+
     let type: FieldType = 'default';
 
-    if (field instanceof z.ZodDate) {
+    if (innerField instanceof z.ZodDate) {
         type = 'date';
     }
 
-    if (field instanceof z.ZodNumber) {
+    if (innerField instanceof z.ZodNumber) {
         type = 'number';
     }
 
-    if (field instanceof z.ZodBoolean) {
+    if (innerField instanceof z.ZodBoolean) {
         type = 'checkbox';
     }
 
-    const meta = (field.meta() ?? {}) as {
+    const meta = (innerField.meta() ?? field.meta() ?? {}) as {
         label?: string;
         description?: string;
     };
@@ -92,18 +96,18 @@ function getInputProps(
         id: key,
         name: key,
         type,
-        required: !field.isOptional(),
+        required: !(field instanceof z.ZodOptional),
         label: meta.label
             ? t(meta.label)
             : getLabel(key.toString(), resourceName, t),
         help: t(meta.description ?? ''),
     };
 
-    if (field instanceof z.ZodEnum) {
-        inputProps = getEnumProps(resourceName, field, inputProps, t);
+    if (innerField instanceof z.ZodEnum) {
+        inputProps = getEnumProps(resourceName, innerField, inputProps, t);
     }
 
-    inputProps = addChecks(inputProps, field);
+    inputProps = addChecks(inputProps, innerField);
 
     return inputProps;
 }
