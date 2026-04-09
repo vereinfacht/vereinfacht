@@ -43,6 +43,30 @@ export const membershipTypeAttributesSchema = z
             .optional(),
     })
     .refine(
+        (data) =>
+            (data.minimumNumberOfDivisions === null ||
+                data.minimumNumberOfDivisions === undefined) ===
+            (data.maximumNumberOfDivisions === null ||
+                data.maximumNumberOfDivisions === undefined),
+        {
+            message:
+                'Bitte die Maximalanzahl an Sparten angeben, wenn eine Mindestanzahl gesetzt ist.',
+            path: ['maximumNumberOfDivisions'],
+        },
+    )
+    .refine(
+        (data) =>
+            (data.minimumNumberOfDivisions === null ||
+                data.minimumNumberOfDivisions === undefined) ===
+            (data.maximumNumberOfDivisions === null ||
+                data.maximumNumberOfDivisions === undefined),
+        {
+            message:
+                'Bitte die Mindestanzahl an Sparten angeben, wenn eine Maximalanzahl gesetzt ist.',
+            path: ['minimumNumberOfDivisions'],
+        },
+    )
+    .refine(
         (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,
         {
             message:
