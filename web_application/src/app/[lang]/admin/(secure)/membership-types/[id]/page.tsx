@@ -138,6 +138,7 @@ export default async function MembershipTypeShowPage({ params }: Props) {
                     divisionMembershipTypes={
                         membershipType.divisionMembershipTypes || []
                     }
+                    membershipTypeId={params.id}
                 />
             </div>
         </div>
