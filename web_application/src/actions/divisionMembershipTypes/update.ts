@@ -7,7 +7,6 @@ import {
     UpdateDivisionMembershipTypeParams,
     updateDivisionMembershipTypeSchema,
 } from './update.schema';
-import { revalidatePath } from 'next/cache';
 
 export const updateDivisionMembershipType = createAuthenticatedAction(
     'update',
@@ -38,7 +37,7 @@ export async function updateDivisionMembershipTypeFormAction(
     previousState: FormActionState,
     formData: FormData,
 ) {
-    const result = await updateFormAction<UpdateDivisionMembershipTypeParams>(
+    return await updateFormAction<UpdateDivisionMembershipTypeParams>(
         previousState,
         updateDivisionMembershipType,
         formData,
@@ -49,24 +48,4 @@ export async function updateDivisionMembershipTypeFormAction(
             },
         },
     );
-
-    if (result.success) {
-        const divisionId = formData.get(
-            'relationships[division][divisions]',
-        ) as string | null;
-        const membershipTypeId = formData.get(
-            'relationships[membershipType][membership-types]',
-        ) as string | null;
-
-        if (divisionId) {
-            revalidatePath(`/admin/divisions/${divisionId}`);
-        }
-
-        if (membershipTypeId) {
-            revalidatePath(`/admin/membership-types/${membershipTypeId}`);
-        }
-    }
-
-    return result;
 }
-

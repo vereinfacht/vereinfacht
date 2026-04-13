@@ -13,6 +13,7 @@ interface AttachableItem {
 interface Props {
     title: string;
     triggerLabel?: string;
+    translationKey?: string;
     parentResourceId: string;
     parentRelationshipName: string;
     parentResourceType: string;
@@ -60,10 +61,7 @@ export default async function AttachResourceModal({
 
     return (
         <RelationModal triggerLabel={labelFallback} title={labelFallback}>
-            <AttachResourceForm
-                options={options}
-                {...rest}
-            >
+            <AttachResourceForm options={options} {...rest}>
                 {rest.children}
             </AttachResourceForm>
         </RelationModal>

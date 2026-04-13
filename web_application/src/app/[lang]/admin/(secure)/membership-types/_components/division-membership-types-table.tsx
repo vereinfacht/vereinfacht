@@ -8,8 +8,7 @@ import { TDivisionMembershipTypeDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import { Edit } from 'lucide-react';
-import EditableMonthlyFeeCell from './EditableMonthlyFeeCell';
+import EditDivisionMembershipTypeModal from './edit-division-membership-type-modal';
 
 interface Props {
     divisionMembershipTypes: TDivisionMembershipTypeDeserialized[];
@@ -22,7 +21,8 @@ export default function DivisionMembershipTypesTable({
 }: Props) {
     const { t, lang } = useTranslation();
     const deleteAction = createDeleteFormAction('division-membership-types');
-    const [editingId, setEditingId] = useState<string | null>(null);
+    const [editingItem, setEditingItem] =
+        useState<TDivisionMembershipTypeDeserialized | null>(null);
 
     const columns: ColumnDef<TDivisionMembershipTypeDeserialized>[] = [
         {
@@ -43,44 +43,36 @@ export default function DivisionMembershipTypesTable({
                     {t('membership_type:monthly_fee.label')}
                 </div>
             ),
-            cell: ({ row }) => {
-                const isEditing = editingId === row.original.id;
-
-                if (isEditing) {
-                    return (
-                        <EditableMonthlyFeeCell
-                            divisionMembershipType={row.original}
-                            membershipTypeId={membershipTypeId}
-                            onClose={() => setEditingId(null)}
-                        />
-                    );
-                }
-
-                return (
-                    <button
-                        type="button"
-                        onClick={() => setEditingId(row.original.id)}
-                        className="ml-auto flex items-center justify-end gap-2 rounded px-2 py-1 cursor-pointer hover:bg-gray-100"
-                    >
-                        <CurrencyCell
-                            value={row.original.monthlyFee as number}
-                        />
-                        <Edit className="h-4 w-4 text-slate-500 hover:text-blue-600" />
-                    </button>
-                );
-            },
+            cell: ({ row }) => (
+                <CurrencyCell value={row.original.monthlyFee as number} />
+            ),
         },
     ];
 
     return (
-        <DataTable
-            data={divisionMembershipTypes}
-            columns={columns}
-            resourceName={'divisionMembershipTypes'}
-            totalPages={1}
-            canEdit={false}
-            canView={false}
-            deleteAction={deleteAction}
-        />
+        <>
+            <DataTable
+                data={divisionMembershipTypes}
+                columns={columns}
+                resourceName={'divisionMembershipTypes'}
+                totalPages={1}
+                canEdit={true}
+                onEdit={setEditingItem}
+                canView={false}
+                deleteAction={deleteAction}
+            />
+            {editingItem && (
+                <EditDivisionMembershipTypeModal
+                    divisionMembershipType={editingItem}
+                    membershipTypeId={membershipTypeId}
+                    lang={lang}
+                    onOpenChange={(open) => {
+                        if (!open) {
+                            setEditingItem(null);
+                        }
+                    }}
+                />
+            )}
+        </>
     );
 }

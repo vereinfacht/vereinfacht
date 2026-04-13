@@ -108,6 +108,7 @@ export default async function MembershipTypeShowPage({ params }: Props) {
                     <AttachResourceModal
                         title={t('membership_type:attach_division')}
                         triggerLabel={t('membership_type:attach_division')}
+                        translationKey="division"
                         parentResourceId={params.id}
                         parentResourceType="membership-types"
                         parentRelationshipName="membershipType"

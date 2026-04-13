@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Button from '@/app/components/Button/Button';
 import SubmitButton from '../Form/SubmitButton';
 import { capitalizeFirstLetter } from '@/utils/strings';
+import TextInput from '@/app/components/Input/TextInput';
 
 interface Props {
     action: (
@@ -15,11 +16,15 @@ interface Props {
     ) => Promise<FormActionState>;
     options: Option[];
     translationKey?: string;
+    type?: 'create' | 'update';
     parentResourceId: string;
     parentRelationshipName: string;
     parentResourceType: string;
     targetRelationshipName: string;
     targetResourceType: string;
+    selectedTargetId?: string;
+    selectedTargetLabel?: string;
+    disableTargetSelection?: boolean;
     children?: React.ReactNode;
     submitLabel?: string;
     onSuccess?: () => void;
@@ -30,11 +35,15 @@ export default function AttachResourceForm({
     action,
     options,
     translationKey = 'general',
+    type = 'create',
     parentResourceId,
     parentRelationshipName,
     parentResourceType,
     targetRelationshipName,
     targetResourceType,
+    selectedTargetId,
+    selectedTargetLabel,
+    disableTargetSelection = false,
     children,
     submitLabel,
     onSuccess,
@@ -51,7 +60,7 @@ export default function AttachResourceForm({
             <FormStateHandler
                 state={state}
                 translationKey={translationKey}
-                type="create"
+                type={type}
                 onSuccess={onSuccess}
             />
             <div className="grid grid-cols-1 gap-6 pb-6 md:grid-cols-2">
@@ -61,13 +70,30 @@ export default function AttachResourceForm({
                     value={parentResourceId}
                 />
 
-                <SelectInput
-                    id="target_id"
-                    name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
-                    label={t('general:select_resource')}
-                    options={options}
-                    required
-                />
+                {disableTargetSelection && selectedTargetId ? (
+                    <>
+                        <input
+                            type="hidden"
+                            name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
+                            value={selectedTargetId}
+                        />
+                        <TextInput
+                            id="target_id"
+                            name="target_id"
+                            label={t('general:select_resource')}
+                            value={selectedTargetLabel ?? ''}
+                            disabled
+                        />
+                    </>
+                ) : (
+                    <SelectInput
+                        id="target_id"
+                        name={`relationships[${targetRelationshipName}][${targetResourceType}]`}
+                        label={t('general:select_resource')}
+                        options={options}
+                        required
+                    />
+                )}
 
                 {children}
             </div>
