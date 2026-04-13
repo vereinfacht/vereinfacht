@@ -10,7 +10,6 @@ export const deleteDivision = createAuthenticatedAction(
     'divisions',
     baseDeleteSchema,
     async (params, client) => {
-        // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
         const response = await client.DELETE('/divisions/{division}', {
             params: {
                 path: { division: params.id },

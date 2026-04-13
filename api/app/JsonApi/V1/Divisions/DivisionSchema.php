@@ -14,6 +14,7 @@ use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 
 class DivisionSchema extends Schema
 {
@@ -38,6 +39,8 @@ class DivisionSchema extends Schema
             BelongsTo::make('club')->type('clubs'),
             BelongsToMany::make('members')->type('members'),
             BelongsToMany::make('membershipTypes')->type('membership-types'),
+            HasMany::make('divisionMembershipTypes')
+                ->type('division-membership-types'),
         ];
     }
 
@@ -64,6 +67,7 @@ class DivisionSchema extends Schema
     {
         return [
             'membershipTypes',
+            'divisionMembershipTypes.membershipType',
         ];
     }
 }

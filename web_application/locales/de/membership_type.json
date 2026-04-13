@@ -39,5 +39,6 @@
         "label": "Anzahl an Sparten"
     },
     "create": "Mitgliedschaftsart erstellen",
-    "edit": "Mitgliedschaftsart bearbeiten"
+    "edit": "Mitgliedschaftsart bearbeiten",
+    "attach_division": "Sparte verknüpfen"
 }

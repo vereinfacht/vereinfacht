@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
     resourceName: ResourceName;
     canView?: boolean;
     canEdit?: boolean | ((row: TData) => boolean);
+    onEdit?: (row: TData) => void;
     canDelete?: boolean | ((row: TData) => boolean);
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     totalPages?: number;
@@ -40,6 +41,7 @@ export function DataTable<TData extends Model, TValue>({
     resourceName,
     canView = false,
     canEdit = false,
+    onEdit,
     canDelete = false,
     deleteAction,
     totalPages,
@@ -105,7 +107,19 @@ export function DataTable<TData extends Model, TValue>({
                                             {typeof canEdit === 'function' ? (
                                                 <TableAction
                                                     type="edit"
-                                                    href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                    href={
+                                                        onEdit
+                                                            ? undefined
+                                                            : `/admin/${resourceName}/edit/${row.original.id}`
+                                                    }
+                                                    onClick={
+                                                        onEdit
+                                                            ? () =>
+                                                                  onEdit(
+                                                                      row.original,
+                                                                  )
+                                                            : undefined
+                                                    }
                                                     disabled={
                                                         canEdit(row.original) ==
                                                         false
@@ -116,7 +130,19 @@ export function DataTable<TData extends Model, TValue>({
                                                 canEdit && (
                                                     <TableAction
                                                         type="edit"
-                                                        href={`/admin/${resourceName}/edit/${row.original.id}`}
+                                                        href={
+                                                            onEdit
+                                                                ? undefined
+                                                                : `/admin/${resourceName}/edit/${row.original.id}`
+                                                        }
+                                                        onClick={
+                                                            onEdit
+                                                                ? () =>
+                                                                      onEdit(
+                                                                          row.original,
+                                                                      )
+                                                                : undefined
+                                                        }
                                                         id={row.original.id}
                                                     />
                                                 )
