@@ -1,40 +1,45 @@
 'use server';
 
-import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
-import { baseDeleteSchema, DeleteParams } from '../base/delete.schema';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import deleteFormAction from '../base/delete';
+import { baseDeleteSchema, DeleteParams } from '../base/delete.schema';
 
-export const deleteFinanceAccount = createAuthenticatedAction(
+export const deleteDivisionMembershipType = createAuthenticatedAction(
     'delete',
-    'finance-accounts',
+    'division-membership-types',
     baseDeleteSchema,
     async (params, client) => {
         const response = await client.DELETE(
             // @ts-expect-error: api specs do not include field requirements due to unimplemented function in spec generation package
-            '/finance-accounts/{finance_account}',
+            '/division-membership-types/{divisionMembershipType}',
             {
                 params: {
-                    path: { finance_account: params.id },
+                    path: { divisionMembershipType: params.id },
                 },
             },
         );
 
         if (response.error) {
-            handleApiResponse(response, 'Failed to delete finance account');
+            handleApiResponse(
+                response,
+                'Failed to delete division membership type',
+            );
         }
 
         return true;
     },
 );
 
-export async function deleteFinanceAccountFormAction(
+export async function deleteDivisionMembershipTypeFormAction(
     id: string,
     previousState: FormActionState,
 ) {
     return await deleteFormAction<DeleteParams>(
         previousState,
-        deleteFinanceAccount,
-        { id },
+        deleteDivisionMembershipType,
+        {
+            id,
+        },
     );
 }

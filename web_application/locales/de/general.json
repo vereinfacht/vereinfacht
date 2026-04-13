@@ -11,19 +11,16 @@
     "export": "exportieren",
     "delete": "löschen",
     "apply": "Anwenden",
-
     "table": {
         "export": {
             "title": "Tabelle exportieren",
             "description": "Tabelle mit {{count}} gefilterten Einträgen als CSV-Datei exportieren."
         }
     },
-
     "delete_confirmation": {
         "title": "Löschung bestätigen",
         "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
     },
-
     "imprint": "Impressum",
     "made_with": "Digitales Produkt von",
     "nothing_found": "Keine Treffer",
@@ -34,8 +31,8 @@
     "selected_count": "{{count}} ausgewählt",
     "plus_n_more": "+{{count}} mehr",
     "select": "Wählen",
+    "select_resource": "Ressource zum Verknüpfen auswählen",
     "no_media_attached": "Keine Medien angehängt.",
-
     "title": "Titel",
     "email": "E-Mail",
     "password": "Passwort",
@@ -43,15 +40,12 @@
     "password_mismatch": "Die Passwörter stimmen nicht überein",
     "created_at": "Erstellt am",
     "updated_at": "Aktualisiert am",
-
     "yes": "ja",
     "no": "nein",
-
     "pagination": {
         "previous": "Vorherige Seite",
         "next": "Nächste Seite"
     },
-
     "gender": {
         "label": "Geschlecht",
         "options": {

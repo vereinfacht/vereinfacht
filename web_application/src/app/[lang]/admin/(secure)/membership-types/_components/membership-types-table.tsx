@@ -84,7 +84,7 @@ export default function MembershipTypesTable({
                     <CreateButton href="/admin/membership-types/create" />
                     <TableExportModal
                         ids={allIds ?? []}
-                        resourceName="membership-types"
+                        resourceName={'membership-types'}
                     />
                 </div>
             )}
