@@ -15,6 +15,8 @@ class MemberRequest extends ResourceRequest
      */
     public function rules(): array
     {
+        $isUpdate = $this->model() !== null;
+
         $membership = $this->model()?->membership
             ?? Membership::find($this->input('data.relationships.membership.data.id'));
         $possibleDivisions = $membership
@@ -23,20 +25,23 @@ class MemberRequest extends ResourceRequest
             ?->pluck('division_id')
             ->toArray();
 
+        $required = $isUpdate ? 'sometimes' : 'required';
+
         return [
             'id' => ['nullable'],
-            'firstName' => ['required'],
-            'lastName' => ['required'],
+            'firstName' => [$required],
+            'lastName' => [$required],
             'gender' => ['nullable', Rule::in(GenderOptionEnum::getAllValues())],
-            'address' => ['required'],
-            'zipCode' => ['required'],
-            'city' => ['required'],
-            'country' => ['required'],
-            'birthday' => ['required'],
+            'address' => [$required],
+            'zipCode' => [$required],
+            'city' => [$required],
+            'country' => [$required],
+            'birthday' => [$required],
             'phoneNumber' => [],
-            'email' => ['required'],
+            'email' => [$required],
+            'status' => ['nullable', Rule::in(['active', 'inactive'])],
             'club' => ['nullable', JsonApiRule::toOne()],
-            'membership' => ['required', JsonApiRule::toOne()],
+            'membership' => ['nullable', JsonApiRule::toOne()],
             'hasConsentedMediaPublication' => ['nullable', JsonApiRule::boolean()],
             'divisions' => [
                 'nullable',

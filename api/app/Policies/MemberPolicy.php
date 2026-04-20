@@ -14,7 +14,11 @@ class MemberPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return true;
+        }
+
+        return $user->can('view members');
     }
 
     /**
@@ -22,7 +26,11 @@ class MemberPolicy
      */
     public function view(User $user, Member $member): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $member->club_id;
+        }
+
+        return $user->can('view members') && $member->club_id === getPermissionsTeamId();
     }
 
     /**
@@ -42,7 +50,11 @@ class MemberPolicy
      */
     public function update(User $user, Member $member): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $member->club_id;
+        }
+
+        return $user->can('update members') && $member->club_id === getPermissionsTeamId();
     }
 
     /**
@@ -50,7 +62,11 @@ class MemberPolicy
      */
     public function delete(User $user, Member $member): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $member->club_id;
+        }
+
+        return $user->can('delete members') && $member->club_id === getPermissionsTeamId();
     }
 
     /**

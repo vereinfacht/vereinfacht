@@ -29,7 +29,7 @@ export function formatDateToInputValue(date: Date) {
 export function formatDate(
     date: string | Date | number | undefined,
     locale: SupportedLocale,
-    formatStr = 'PP',
+    formatStr = 'dd.MM.yyyy',
 ) {
     if (!date) {
         return '';

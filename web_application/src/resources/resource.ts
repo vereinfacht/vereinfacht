@@ -10,6 +10,7 @@ import { SearchParams } from 'nuqs';
 import { z } from 'zod';
 
 export type ResourceName =
+    | 'members'
     | 'memberships'
     | 'divisions'
     | 'divisionMembershipTypes'

@@ -22,8 +22,12 @@ export default function BelongsToField<T>({
     const translationNamespace = camelCaseToSnakeCase(
         singularize(attribute.toString()),
     );
-    const canView = viewRoute.length > 0 || resourceClass?.canView;
-    const href = `/admin/${viewRoute.length > 0 ? viewRoute : resourceClass?.name}/${value.id}`;
+    const hasValue = value != null;
+    const canView =
+        hasValue && (viewRoute.length > 0 || resourceClass?.canView);
+    const href = canView
+        ? `/admin/${viewRoute.length > 0 ? viewRoute : resourceClass?.name}/${value.id}`
+        : '';
 
     return (
         <li className="mt-4">

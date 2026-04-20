@@ -63,7 +63,7 @@ export default function StatementsTable({
                                     {t('statement:type.collective')}
                                 </Badge>
                                 <Badge
-                                    className="absolute right-[-8px] top-[-12px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
+                                    className="absolute top-[-12px] right-[-8px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
                                     variant="primary"
                                 >
                                     {transactionCount}

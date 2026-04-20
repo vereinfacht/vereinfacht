@@ -82,9 +82,13 @@ class Server extends BaseServer
         Receipt::saved(static function (Receipt $receipt): void {
             self::handleMediaAttachment($receipt);
         });
+
+        Member::saved(static function (Member $member): void {
+            self::handleMediaAttachment($member);
+        });
     }
 
-    protected static function handleMediaAttachment(Receipt $receipt): void
+    protected static function handleMediaAttachment(Model $model): void
     {
         $request = request();
 
@@ -107,8 +111,8 @@ class Server extends BaseServer
         foreach ($mediaIds as $id) {
             $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($id);
             if ($media && (!$media->model_type || $media->model_type === 'App\\Models\\TemporaryUpload')) {
-                $media->model_type = get_class($receipt);
-                $media->model_id = $receipt->id;
+                $media->model_type = get_class($model);
+                $media->model_id = $model->id;
                 $media->save();
             }
         }

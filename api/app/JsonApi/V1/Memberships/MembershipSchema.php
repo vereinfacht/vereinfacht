@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Memberships;
 
+use App\JsonApi\Filters\QueryFilter;
 use App\Models\Membership;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -59,6 +60,7 @@ class MembershipSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('status')->delimiter(','),
+            QueryFilter::make('query', ['bank_account_holder']),
         ];
     }
 
@@ -68,5 +70,15 @@ class MembershipSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function includePaths(): array
+    {
+        return [
+            'owner',
+            'membershipType',
+            'paymentPeriod',
+            'members',
+        ];
     }
 }

@@ -1,5 +1,46 @@
 {
-    "birthday": "Geburtstag",
+    "title": {
+        "one": "Mitglied",
+        "other": "Mitglieder"
+    },
+    "name": {
+        "label": "Name"
+    },
+    "membership": {
+        "label": "Mitgliedschaft"
+    },
+    "status": {
+        "label": "Status",
+        "active": "aktiv",
+        "inactive": "inaktiv"
+    },
+    "email": {
+        "label": "E-Mail"
+    },
+    "address": {
+        "label": "Adresse"
+    },
+    "zip_code": {
+        "label": "Postleitzahl"
+    },
+    "city": {
+        "label": "Stadt"
+    },
+    "country": {
+        "label": "Land"
+    },
+    "phone_number": {
+        "label": "Telefon"
+    },
+    "has_consented_media_publication": {
+        "label": "Medien-Einwilligung"
+    },
+    "birthday": {
+        "label": "Geburtstag"
+    },
+    "media": {
+        "label": "Medien"
+    },
     "label_identical_information": "Kontakt- und Adressinformationen identisch mit {{name}}",
     "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden."
 }

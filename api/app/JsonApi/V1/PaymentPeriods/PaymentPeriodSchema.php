@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\PaymentPeriods;
 
+use App\JsonApi\Filters\QueryFilter;
 use App\Models\PaymentPeriod;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -25,7 +26,7 @@ class PaymentPeriodSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('title')->readOnly(),
+            Str::make('title'),
             Str::make('rrule'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
@@ -39,6 +40,7 @@ class PaymentPeriodSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            QueryFilter::make('query', ['title']),
         ];
     }
 

@@ -1,0 +1,248 @@
+'use client';
+
+import { listMemberships } from '@/actions/memberships/list';
+import ActionForm from '@/app/[lang]/admin/(secure)/components/Form/ActionForm';
+import FormField from '@/app/[lang]/admin/(secure)/components/Form/FormField';
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import BelongsToSelectInput, {
+    itemsPerQuery,
+} from '@/app/components/Input/BelongsToSelectInput';
+import Checkbox from '@/app/components/Input/Checkbox';
+import { MediaInput } from '@/app/components/Input/MediaInput';
+import SelectInput from '@/app/components/Input/SelectInput';
+import TextInput from '@/app/components/Input/TextInput';
+import {
+    TMemberDeserialized,
+    TMembershipDeserialized,
+} from '@/types/resources';
+import { supportedLocales } from '@/utils/localization';
+import useTranslation from 'next-translate/useTranslation';
+import { useState } from 'react';
+import { useFormState } from 'react-dom';
+
+interface Props {
+    action: (
+        state: FormActionState,
+        payload: FormData,
+    ) => Promise<FormActionState>;
+    data?: TMemberDeserialized;
+}
+
+export default function CreateForm({ data, action }: Props) {
+    const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
+    const birthdayDefaultValue = data?.birthday
+        ? data.birthday.toString().slice(0, 10)
+        : '';
+
+    const genderOptions = [
+        {
+            value: '',
+            label: t('general:gender.options.none'),
+        },
+        {
+            value: 'male',
+            label: t('general:gender.options.male'),
+        },
+        {
+            value: 'female',
+            label: t('general:gender.options.female'),
+        },
+        {
+            value: 'other',
+            label: t('general:gender.options.other'),
+        },
+    ];
+
+    const [formState, formAction] = useFormState<FormActionState, FormData>(
+        action,
+        {
+            success: false,
+        },
+    );
+
+    return (
+        <div className="container flex flex-col gap-8">
+            <ActionForm
+                action={formAction}
+                state={formState}
+                type={data ? 'update' : 'create'}
+                translationKey="member"
+                loading={loading}
+            >
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.firstName}>
+                        <TextInput
+                            id="firstName"
+                            name="firstName"
+                            label={t('contact:first_name.label')}
+                            defaultValue={data?.firstName ?? ''}
+                            required
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.lastName}>
+                        <TextInput
+                            id="lastName"
+                            name="lastName"
+                            label={t('contact:last_name.label')}
+                            defaultValue={data?.lastName ?? ''}
+                            required
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.email}>
+                        <TextInput
+                            id="email"
+                            name="email"
+                            type="email"
+                            label={t('general:email')}
+                            defaultValue={data?.email ?? ''}
+                            required
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.gender}>
+                        <SelectInput
+                            id="gender"
+                            name="gender"
+                            label={t('general:gender.label')}
+                            defaultValue={data?.gender ?? ''}
+                            options={genderOptions}
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.birthday}>
+                        <TextInput
+                            id="birthday"
+                            name="birthday"
+                            type="date"
+                            label={t('member:birthday.label')}
+                            defaultValue={birthdayDefaultValue}
+                            autoComplete="bday"
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.phoneNumber}>
+                        <TextInput
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            label={t('member:phone_number.label')}
+                            defaultValue={data?.phoneNumber ?? ''}
+                            autoComplete="tel"
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.membership}>
+                        <BelongsToSelectInput<TMembershipDeserialized>
+                            resourceName="membership"
+                            resourceType="memberships"
+                            label={t('membership:title.one')}
+                            action={(searchTerm) =>
+                                listMemberships({
+                                    page: {
+                                        size: itemsPerQuery,
+                                        number: 1,
+                                    },
+                                    filter: {
+                                        query: searchTerm,
+                                    },
+                                })
+                            }
+                            optionLabel={(item) =>
+                                item.bankAccountHolder
+                                    ? `${item.bankAccountHolder}`
+                                    : item.id
+                            }
+                            defaultValue={
+                                data?.membership?.id
+                                    ? [
+                                          {
+                                              value: data.membership.id,
+                                              label: data.membership
+                                                  .bankAccountHolder
+                                                  ? `${data.membership.bankAccountHolder}`
+                                                  : data.membership.id,
+                                          },
+                                      ]
+                                    : []
+                            }
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.address}>
+                        <TextInput
+                            id="address"
+                            name="address"
+                            label={t('member:address.label')}
+                            defaultValue={data?.address ?? ''}
+                            autoComplete="street-address"
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.status}>
+                        <SelectInput
+                            id="status"
+                            name="status"
+                            label={t('member:status.label')}
+                            defaultValue={data?.status ?? 'active'}
+                            options={[
+                                {
+                                    value: 'active',
+                                    label: t('member:status.active'),
+                                },
+                                {
+                                    value: 'inactive',
+                                    label: t('member:status.inactive'),
+                                },
+                            ]}
+                            required
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.preferredLocale}>
+                        <SelectInput
+                            id="preferredLocale"
+                            name="preferredLocale"
+                            label={t('user:preferred_locale.label')}
+                            defaultValue={data?.preferredLocale ?? ''}
+                            options={supportedLocales.map((locale) => ({
+                                value: locale,
+                                label: locale,
+                            }))}
+                        />
+                    </FormField>
+                </div>
+
+                <FormField
+                    errors={formState.errors?.hasConsentedMediaPublication}
+                >
+                    <Checkbox
+                        id="hasConsentedMediaPublication"
+                        name="hasConsentedMediaPublication"
+                        label={t('member:label_consent_media_publication')}
+                        defaultValue={Boolean(
+                            data?.hasConsentedMediaPublication,
+                        )}
+                    />
+                </FormField>
+
+                <FormField errors={formState.errors?.media}>
+                    <MediaInput
+                        id="member-media"
+                        label={t('member:media.label')}
+                        name="media"
+                        media={data?.media}
+                        multiple={true}
+                        collectionName="members"
+                        accept={'.png, .jpg, .jpeg, .pdf'}
+                        setLoading={setLoading}
+                    />
+                </FormField>
+            </ActionForm>
+        </div>
+    );
+}

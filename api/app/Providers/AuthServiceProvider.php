@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\PaymentPeriod;
 use App\Policies\RolePolicy;
+use App\Policies\PaymentPeriodPolicy;
 use App\Policies\PermissionPolicy;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Gate;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Role::class => RolePolicy::class,
         Permission::class => PermissionPolicy::class,
+        PaymentPeriod::class => PaymentPeriodPolicy::class,
     ];
 
     /**

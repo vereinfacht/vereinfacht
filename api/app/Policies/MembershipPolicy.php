@@ -61,7 +61,11 @@ class MembershipPolicy
      */
     public function delete(User $user, Membership $membership): bool
     {
-        return false;
+        if ($user instanceof Club) {
+            return $user->id === $membership->club_id;
+        }
+
+        return $user->can('delete memberships') && $membership->club_id === getPermissionsTeamId();
     }
 
     /**

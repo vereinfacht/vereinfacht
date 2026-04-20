@@ -41,15 +41,20 @@ export default async function ShowResourcePage({ params }: Props) {
             <ul className="flex flex-col gap-2">
                 {detailFields.map((field, index) => {
                     if ('type' in field && field.type === 'belongsTo') {
+                        const value =
+                            resource[
+                                field.attribute as keyof typeof resource
+                            ];
+
+                        if (!value) {
+                            return null;
+                        }
+
                         return (
                             <BelongsToField
                                 key={index}
                                 {...field}
-                                value={
-                                    resource[
-                                        field.attribute as keyof typeof resource
-                                    ]
-                                }
+                                value={value}
                             />
                         );
                     }

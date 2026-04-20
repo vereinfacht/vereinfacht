@@ -16,6 +16,7 @@ interface MediaInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     name?: string;
     media?: TMediaDeserialized[];
     multiple?: boolean;
+    collectionName?: 'receipts' | 'members';
 }
 
 export interface UploadTask {
@@ -37,6 +38,7 @@ export function MediaInput({
     name,
     media,
     multiple = false,
+    collectionName = 'receipts',
     accept,
     setLoading,
 }: MediaInputProps) {
@@ -88,7 +90,7 @@ export function MediaInput({
 
         const formData = new FormData();
         formData.append('file', task.rawFile);
-        formData.set('collectionName', 'receipts');
+        formData.set('collectionName', collectionName);
 
         const response = await fetch('/api/upload/media', {
             method: 'POST',
