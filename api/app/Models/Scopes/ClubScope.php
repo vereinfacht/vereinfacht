@@ -4,6 +4,7 @@ namespace App\Models\Scopes;
 
 use App\Models\Club;
 use App\Models\User;
+use App\Models\PaymentPeriod;
 use App\Models\TaxAccount;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,7 @@ class ClubScope implements Scope
     protected function filterByClubId(Builder $builder, Model $model, int $clubId): void
     {
         if ($model instanceof Club) {
-            $builder->where('id', $clubId);
+            $builder->where('clubs.id', $clubId);
 
             return;
         }
@@ -81,6 +82,14 @@ class ClubScope implements Scope
         if ($model instanceof DivisionMembershipType) {
             $builder->whereHas('division', function ($query) use ($clubId) {
                 $query->where('club_id', $clubId);
+            });
+
+            return;
+        }
+
+        if ($model instanceof PaymentPeriod) {
+            $builder->whereHas('clubs', function ($query) use ($clubId) {
+                $query->where('clubs.id', $clubId);
             });
 
             return;

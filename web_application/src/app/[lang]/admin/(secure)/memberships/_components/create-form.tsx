@@ -2,7 +2,6 @@
 
 import { listMembers } from '@/actions/members/list';
 import { listMembershipTypes } from '@/actions/membershipTypes/list';
-import { listPaymentPeriods } from '@/actions/paymentPeriods/list';
 import ActionForm from '@/app/[lang]/admin/(secure)/components/Form/ActionForm';
 import FormField from '@/app/[lang]/admin/(secure)/components/Form/FormField';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
@@ -19,20 +18,20 @@ import {
 import useTranslation from 'next-translate/useTranslation';
 import { useFormState } from 'react-dom';
 
-type TPaymentPeriodOption = {
-    id: string;
-    title?: string;
-};
-
 interface Props {
     action: (
         state: FormActionState,
         payload: FormData,
     ) => Promise<FormActionState>;
     data?: TMembershipDeserialized;
+    paymentPeriodOptions?: { value: string; label: string }[];
 }
 
-export default function CreateForm({ data, action }: Props) {
+export default function CreateForm({
+    data,
+    action,
+    paymentPeriodOptions = [],
+}: Props) {
     const { t } = useTranslation();
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
@@ -184,40 +183,19 @@ export default function CreateForm({ data, action }: Props) {
                                       ]
                                     : [];
                             })()}
+                            required
                         />
                     </FormField>
                 </div>
 
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.paymentPeriod}>
-                        <BelongsToSelectInput<TPaymentPeriodOption>
-                            resourceName="paymentPeriod"
-                            resourceType="payment-periods"
+                        <SelectInput
+                            id="paymentPeriod"
+                            name="relationships[paymentPeriod][payment-periods]"
                             label={t('payment_period:title.one')}
-                            action={(searchTerm) =>
-                                listPaymentPeriods({
-                                    page: {
-                                        size: itemsPerQuery,
-                                        number: 1,
-                                    },
-                                    filter: {
-                                        query: searchTerm,
-                                    },
-                                })
-                            }
-                            optionLabel={(item) => item.title || item.id}
-                            defaultValue={
-                                data?.paymentPeriod?.id
-                                    ? [
-                                          {
-                                              value: data.paymentPeriod.id,
-                                              label:
-                                                  data.paymentPeriod.title ||
-                                                  data.paymentPeriod.id,
-                                          },
-                                      ]
-                                    : []
-                            }
+                            options={paymentPeriodOptions}
+                            defaultValue={data?.paymentPeriod?.id ?? ''}
                         />
                     </FormField>
 

@@ -76,10 +76,19 @@ export default function MembersTable({
                     'membership',
                 ) as TMembershipDeserialized;
 
+                const ownerMember = membership?.owner?.id
+                    ? members.find(
+                          (member) =>
+                              (member as { id?: string }).id ===
+                              membership.owner?.id,
+                      )
+                    : undefined;
+                const ownerName = ownerMember?.fullName;
+
                 return membership ? (
                     <BelongsToCell
                         resource={membership}
-                        content={membership.id ?? `#${membership.id}`}
+                        content={ownerName}
                         path="/admin/memberships"
                     />
                 ) : (

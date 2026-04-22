@@ -79,6 +79,7 @@ class MembershipSchema extends Schema
             'membershipType',
             'paymentPeriod',
             'members',
+            'members.divisions',
         ];
     }
 }

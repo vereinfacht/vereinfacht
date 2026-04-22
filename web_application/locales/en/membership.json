@@ -58,5 +58,7 @@
     "voluntary_contribution": {
         "label": "Voluntary extra contribution",
         "help": "An optional extra contribution that is charged in addition to the membership fee. Only added if the club has activated this feature."
-    }
+    },
+    "create": "Create membership",
+    "edit": "Edit membership"
 }

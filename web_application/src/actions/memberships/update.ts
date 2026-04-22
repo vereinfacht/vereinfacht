@@ -32,6 +32,7 @@ export const updateMembershipApi = createAuthenticatedAction(
             params: {
                 path: { membership: body.data.id },
             },
+            // @ts-expect-error: path exists in backend but generated schema may lag
             body,
         });
 

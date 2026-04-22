@@ -25,6 +25,11 @@ export interface UpdateData extends Record<string, any> {
     id: string;
 }
 
+type CreateMemberData = Omit<FormMember, 'membership'> & {
+    club: { id: string };
+    membership: { id: string };
+};
+
 function addQueryParams(path: string, query?: Query) {
     if (!query || Object.keys(query).length === 0) {
         return path;
@@ -113,7 +118,7 @@ export class ApiEndpoints extends JsonApi {
         );
     }
 
-    async createMember(data: FormMember): Promise<JsonApiMember> {
+    async createMember(data: CreateMemberData): Promise<JsonApiMember> {
         const serializedData = this.serialize('members', data, {
             relationships: {
                 club: 'clubs',

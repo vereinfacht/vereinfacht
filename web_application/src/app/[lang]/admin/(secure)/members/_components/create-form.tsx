@@ -150,46 +150,36 @@ export default function CreateForm({ data, action }: Props) {
                                     filter: {
                                         query: searchTerm,
                                     },
+                                    include: ['owner'],
                                 })
                             }
-                            optionLabel={(item) =>
-                                item.bankAccountHolder
-                                    ? `${item.bankAccountHolder}`
-                                    : item.id
-                            }
+                            optionLabel={(item) => {
+                                return item.owner?.fullName;
+                            }}
                             defaultValue={
                                 data?.membership?.id
                                     ? [
                                           {
                                               value: data.membership.id,
-                                              label: data.membership
-                                                  .bankAccountHolder
-                                                  ? `${data.membership.bankAccountHolder}`
-                                                  : data.membership.id,
+                                              label:
+                                                  data.membership.owner
+                                                      ?.fullName ??
+                                                  `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim(),
                                           },
                                       ]
                                     : []
                             }
                         />
                     </FormField>
-                    <FormField errors={formState.errors?.address}>
-                        <TextInput
-                            id="address"
-                            name="address"
-                            label={t('member:address.label')}
-                            defaultValue={data?.address ?? ''}
-                            autoComplete="street-address"
-                        />
-                    </FormField>
-                </div>
-
-                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.status}>
                         <SelectInput
                             id="status"
                             name="status"
                             label={t('member:status.label')}
-                            defaultValue={data?.status ?? 'active'}
+                            defaultValue={
+                                (data as { status?: string } | undefined)
+                                    ?.status ?? 'active'
+                            }
                             options={[
                                 {
                                     value: 'active',
@@ -200,6 +190,52 @@ export default function CreateForm({ data, action }: Props) {
                                     label: t('member:status.inactive'),
                                 },
                             ]}
+                            required
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.address}>
+                        <TextInput
+                            id="address"
+                            name="address"
+                            label={t('member:address.label')}
+                            defaultValue={data?.address ?? ''}
+                            autoComplete="street-address"
+                            required
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.zipCode}>
+                        <TextInput
+                            id="zipCode"
+                            name="zipCode"
+                            label={t('contact:zip_code.label')}
+                            defaultValue={data?.zipCode ?? ''}
+                            autoComplete="postal-code"
+                            required
+                        />
+                    </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    <FormField errors={formState.errors?.city}>
+                        <TextInput
+                            id="city"
+                            name="city"
+                            label={t('contact:city.label')}
+                            defaultValue={data?.city ?? ''}
+                            autoComplete="address-level2"
+                            required
+                        />
+                    </FormField>
+                    <FormField errors={formState.errors?.country}>
+                        <TextInput
+                            id="country"
+                            name="country"
+                            label={t('contact:country.label')}
+                            defaultValue={data?.country ?? ''}
+                            autoComplete="country-name"
                             required
                         />
                     </FormField>

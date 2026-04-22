@@ -42,5 +42,7 @@
         "label": "Media"
     },
     "label_identical_information": "Contact and address information is identical to {{name}}",
-    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press."
+    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
+    "create": "Create member",
+    "edit": "Edit member"
 }

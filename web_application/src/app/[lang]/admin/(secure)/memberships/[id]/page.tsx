@@ -2,12 +2,12 @@ import { getMembership } from '@/actions/memberships/get';
 import EditButton from '../../components/EditButton';
 import BelongsToField from '../../components/Fields/Detail/BelongsToField';
 import DetailField from '../../components/Fields/DetailField';
-import MembersTable from '../../members/_components/members-table';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
 import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import Text from '@/app/components/Text/Text';
+import MembersTable from '../_components/members-table';
 
 interface Props {
     params: ShowPageParams;
@@ -16,7 +16,13 @@ interface Props {
 export default async function MembershipShowPage({ params }: Props) {
     const membership = await getMembership({
         id: params.id,
-        include: ['membershipType', 'owner', 'paymentPeriod', 'members'],
+        include: [
+            'membershipType',
+            'owner',
+            'paymentPeriod',
+            'members',
+            'members.divisions',
+        ],
     });
 
     if (!membership) {
@@ -24,7 +30,7 @@ export default async function MembershipShowPage({ params }: Props) {
     }
 
     const { t } = createTranslation();
-    console.log('Membership:', membership.membershipType.monthlyFee);
+
     const fields = [
         {
             attribute: 'status',
@@ -198,11 +204,7 @@ export default async function MembershipShowPage({ params }: Props) {
                     <Text preset="headline" tag="h2" className="mt-6">
                         {t('member:title.other')}
                     </Text>
-                    <MembersTable
-                        members={membership.members}
-                        totalPages={1}
-                        extended={false}
-                    />
+                    <MembersTable members={membership.members} totalPages={1} />
                 </>
             )}
         </div>

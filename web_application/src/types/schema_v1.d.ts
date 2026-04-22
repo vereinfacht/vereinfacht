@@ -830,6 +830,23 @@ export interface paths {
         patch: operations["tax-accounts.update"];
         trace?: never;
     };
+    "/payment-periods": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all payment-periods */
+        get: operations["payment-periods.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2410,6 +2427,11 @@ export interface components {
                  */
                 lastName?: string;
                 /**
+                 * fullName
+                 * @example Jeaniea Stantona
+                 */
+                fullName?: string;
+                /**
                  * gender
                  * @example male
                  */
@@ -2454,6 +2476,11 @@ export interface components {
                  * @example pansy.farrell@example.net
                  */
                 email?: string;
+                /**
+                 * status
+                 * @example inactive
+                 */
+                status?: string;
                 /** membershipTypeId */
                 readonly membershipTypeId?: string;
                 /** hasConsentedMediaPublication */
@@ -2511,6 +2538,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** media */
+                media?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/media/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/media/2
                          */
                         self?: string;
                     };
@@ -2580,6 +2622,11 @@ export interface components {
                  * @example pansy.farrell@example.net
                  */
                 email?: string;
+                /**
+                 * status
+                 * @example inactive
+                 */
+                status?: string;
                 /** membershipTypeId */
                 readonly membershipTypeId?: string;
                 /** hasConsentedMediaPublication */
@@ -2637,6 +2684,177 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** media */
+                media?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/media/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/media/2
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Member/Update */
+        "resources.members.resource.update": {
+            /**
+             * type
+             * @default members
+             */
+            type: string;
+            /** @example 2 */
+            id: string;
+            attributes: {
+                /**
+                 * firstName
+                 * @example Jeaniea
+                 */
+                firstName?: string;
+                /**
+                 * lastName
+                 * @example Stantona
+                 */
+                lastName?: string;
+                /**
+                 * fullName
+                 * @example Jeaniea Stantona
+                 */
+                fullName?: string;
+                /**
+                 * gender
+                 * @example other
+                 */
+                gender?: string;
+                /**
+                 * address
+                 * @example 565 Lisette Meadows
+                 */
+                address?: string;
+                /**
+                 * zipCode
+                 * @example 23634
+                 */
+                zipCode?: string;
+                /**
+                 * city
+                 * @example Lake Linwood
+                 */
+                city?: string;
+                /**
+                 * country
+                 * @example Malta
+                 */
+                country?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * birthday
+                 * @example 1974-03-07T00:00:00.000000Z
+                 */
+                birthday?: string;
+                /**
+                 * phoneNumber
+                 * @example +14588251653
+                 */
+                phoneNumber?: string;
+                /**
+                 * email
+                 * @example luettgen.corrine@example.net
+                 */
+                email?: string;
+                /**
+                 * status
+                 * @example inactive
+                 */
+                status?: string;
+                /** membershipTypeId */
+                readonly membershipTypeId?: string;
+                /**
+                 * hasConsentedMediaPublication
+                 * @example 2026-04-21T10:52:50.000000Z
+                 */
+                hasConsentedMediaPublication?: boolean;
+                /**
+                 * createdAt
+                 * @example 2026-04-01T10:18:08.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-04-21T10:52:50.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** membership */
+                membership?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/memberships/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/memberships/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** divisions */
+                divisions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** media */
+                media?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/media/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/media/2
                          */
                         self?: string;
                     };
@@ -3378,6 +3596,38 @@ export interface components {
                         self?: string;
                     };
                 };
+            };
+        };
+        /** Resource/Payment-period/Fetch */
+        "resources.payment-periods.resource.fetch": {
+            /**
+             * type
+             * @default payment-periods
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * title
+                 * @example monthly
+                 */
+                title?: string;
+                /**
+                 * rrule
+                 * @example FREQ=MONTHLY;INTERVAL=1
+                 */
+                rrule?: string;
+                /**
+                 * createdAt
+                 * @example 2026-04-01T10:18:05.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-04-01T10:18:05.000000Z
+                 */
+                readonly updatedAt?: string;
             };
         };
         /** Resource/Permission/Fetch */
@@ -8036,6 +8286,41 @@ export interface operations {
             400: components["responses"]["400"];
             401: components["responses"]["401"];
             404: components["responses"]["404"];
+        };
+    };
+    "payment-periods.index": {
+        parameters: {
+            query?: {
+                sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index payment-periods */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.payment-periods.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
         };
     };
 }

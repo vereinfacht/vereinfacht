@@ -21,18 +21,26 @@ export default async function MemberShowPage({ params }: Props) {
         notFound();
     }
 
+    const ownerId =
+        (member?.membership?.owner as { id?: string } | undefined)?.id ?? null;
+    const ownerFullName =
+        ownerId === member.id
+            ? (member.fullName ?? '')
+            : ((member?.membership?.owner as { fullName?: string } | undefined)
+                  ?.fullName ?? '');
+
     const { t } = createTranslation();
 
     const fields = [
         {
             attribute: 'status',
             label: t('member:status.label'),
-            value: member?.status,
+            value: member.status,
         },
         {
             attribute: 'name',
             label: t('member:name.label'),
-            value: member?.fullName,
+            value: member.fullName,
         },
         {
             attribute: 'gender',
@@ -91,7 +99,7 @@ export default async function MemberShowPage({ params }: Props) {
                 {
                     attribute: 'owner',
                     label: t('membership:owner.label'),
-                    value: member.membership?.owner?.fullName ?? '',
+                    value: ownerFullName,
                 },
             ],
         },

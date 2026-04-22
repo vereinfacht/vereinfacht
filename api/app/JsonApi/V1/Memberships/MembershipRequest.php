@@ -36,7 +36,7 @@ class MembershipRequest extends ResourceRequest
             'status' => ['nullable', Rule::in(MembershipStatusEnum::getAllValues())],
             'membershipType' => ['required', JsonApiRule::toOne()],
             'club' => ['required', JsonApiRule::toOne()],
-            'owner' => ['required', JsonApiRule::toOne()],
+            'owner' => ['nullable', JsonApiRule::toOne()],
             'paymentPeriod' => ['nullable', JsonApiRule::toOne()],
             'paymentPeriod.id' => ['sometimes', Rule::in($possiblePaymentPeriods)],
             'members' => [

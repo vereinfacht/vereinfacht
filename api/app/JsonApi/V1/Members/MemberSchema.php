@@ -33,7 +33,7 @@ class MemberSchema extends Schema
             ID::make(),
             Str::make('firstName'),
             Str::make('lastName'),
-            Str::make('fullName'),
+            Str::make('fullName')->readOnly(),
             Str::make('gender'),
             Str::make('address'),
             Str::make('zipCode'),

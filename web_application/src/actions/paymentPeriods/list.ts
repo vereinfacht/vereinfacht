@@ -16,7 +16,6 @@ export const listPaymentPeriods = createAuthenticatedActionWithOptionalParams(
                 query,
             },
         });
-
         return handleApiResponse(response, 'Failed to fetch payment periods');
     },
 );
