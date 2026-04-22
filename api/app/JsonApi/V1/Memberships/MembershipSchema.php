@@ -80,6 +80,7 @@ class MembershipSchema extends Schema
             'paymentPeriod',
             'members',
             'members.divisions',
+            'club',
         ];
     }
 }

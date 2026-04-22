@@ -25,10 +25,24 @@ class MembershipApplicationTest extends TestCase
 
         (new ApplyMembershipAction)->execute($membership);
 
+        $membership->refresh();
+
         $this->assertDatabaseHas('memberships', [
             'id' => $membership->getKey(),
             'status' => MembershipStatusEnum::APPLIED,
         ]);
+
+        $this->assertDatabaseHas('members', [
+            'id' => $membership->owner_member_id,
+            'status' => MembershipStatusEnum::ACTIVE->value,
+        ]);
+
+        foreach ($membership->members as $member) {
+            $this->assertDatabaseHas('members', [
+                'id' => $member->getKey(),
+                'status' => MembershipStatusEnum::ACTIVE->value,
+            ]);
+        }
     }
 
     public function test_cannot_apply_for_membership_if_status_wasnt_null()

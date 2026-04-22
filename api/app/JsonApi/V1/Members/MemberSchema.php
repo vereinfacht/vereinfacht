@@ -98,6 +98,7 @@ class MemberSchema extends Schema
             'membership.owner',
             'divisions',
             'media',
+            'club',
         ];
     }
 }

@@ -13,11 +13,18 @@ class ApplyMembershipAction
     {
         $this->validateMembershipForApplication($membership);
 
+        $membership->owner?->update([
+            'status' => MembershipStatusEnum::ACTIVE->value,
+        ]);
+
+        $membership->members()->update([
+            'status' => MembershipStatusEnum::ACTIVE->value,
+        ]);
+
         $membership->status = MembershipStatusEnum::APPLIED;
         $membership->save();
 
         AppliedForMembership::dispatch($membership);
-
     }
 
     private function validateMembershipForApplication(Membership $membership)
