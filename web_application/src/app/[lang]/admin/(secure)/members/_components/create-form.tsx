@@ -1,5 +1,6 @@
 'use client';
 
+import { listDivisions } from '@/actions/divisions/list';
 import { listMemberships } from '@/actions/memberships/list';
 import ActionForm from '@/app/[lang]/admin/(secure)/components/Form/ActionForm';
 import FormField from '@/app/[lang]/admin/(secure)/components/Form/FormField';
@@ -7,11 +8,13 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
+import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
 import Checkbox from '@/app/components/Input/Checkbox';
 import { MediaInput } from '@/app/components/Input/MediaInput';
 import SelectInput from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
 import {
+    TDivisionDeserialized,
     TMemberDeserialized,
     TMembershipDeserialized,
 } from '@/types/resources';
@@ -31,6 +34,9 @@ interface Props {
 export default function CreateForm({ data, action }: Props) {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
+    const [selectedMembershipId, setSelectedMembershipId] = useState<
+        string | undefined
+    >(data?.membership?.id);
     const birthdayDefaultValue = data?.birthday
         ? data.birthday.toString().slice(0, 10)
         : '';
@@ -141,6 +147,14 @@ export default function CreateForm({ data, action }: Props) {
                             resourceName="membership"
                             resourceType="memberships"
                             label={t('membership:title.one')}
+                            onChange={(selected) => {
+                                const membershipId = selected?.[0]?.value;
+                                setSelectedMembershipId(
+                                    membershipId
+                                        ? String(membershipId)
+                                        : undefined,
+                                );
+                            }}
                             action={(searchTerm) =>
                                 listMemberships({
                                     page: {
@@ -252,7 +266,35 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
+                <FormField errors={formState.errors?.divisions}>
+                    <BelongsToMultiselectInput<TDivisionDeserialized>
+                        resourceName="divisions"
+                        resourceType="divisions"
+                        label={t('division:title.other')}
+                        action={(searchTerm) =>
+                            listDivisions({
+                                page: {
+                                    size: itemsPerQuery,
+                                    number: 1,
+                                },
+                                filter: {
+                                    query: searchTerm,
+                                    membershipId:
+                                        selectedMembershipId ?? '__none__',
+                                },
+                            })
+                        }
+                        optionLabel={(item) => item.title as string}
+                        defaultValue={
+                            data?.divisions
+                                ? data.divisions.map((division) => ({
+                                      value: division.id,
+                                      label: division.title as string,
+                                  }))
+                                : []
+                        }
+                    />
+                </FormField>
                 <FormField
                     errors={formState.errors?.hasConsentedMediaPublication}
                 >
@@ -265,7 +307,6 @@ export default function CreateForm({ data, action }: Props) {
                         )}
                     />
                 </FormField>
-
                 <FormField errors={formState.errors?.media}>
                     <MediaInput
                         id="member-media"

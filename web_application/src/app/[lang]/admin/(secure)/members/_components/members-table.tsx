@@ -2,12 +2,14 @@
 
 import { memberStatusOptions } from '@/actions/members/list.schema';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import {
+    TDivisionDeserialized,
     TMemberDeserialized,
     TMembershipDeserialized,
 } from '@/types/resources';
@@ -93,6 +95,24 @@ export default function MembersTable({
                     />
                 ) : (
                     <TextCell>-</TextCell>
+                );
+            },
+        },
+        {
+            accessorKey: 'divisions',
+            header: t('division:title.other'),
+            cell: (cell) => {
+                const divisions =
+                    (cell.getValue() as TDivisionDeserialized[]) ?? [];
+
+                return (
+                    <BelongsToManyCell
+                        items={divisions}
+                        basePath="/admin/divisions"
+                        parentPath={`/admin/members/${cell.row.original.id}`}
+                        displayProperty="title"
+                        truncate
+                    />
                 );
             },
         },

@@ -6,6 +6,8 @@ use App\Models\Division;
 use App\JsonApi\V1\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 use App\JsonApi\Filters\QueryFilter;
+use App\JsonApi\Filters\MembershipFilter;
+use App\JsonApi\Filters\MembershipTypeFilter;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -52,6 +54,8 @@ class DivisionSchema extends Schema
         return [
             WhereIdIn::make($this),
             QueryFilter::make('query', ['title']),
+            MembershipTypeFilter::make('membershipTypeId'),
+            MembershipFilter::make('membershipId'),
         ];
     }
 

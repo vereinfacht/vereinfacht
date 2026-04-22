@@ -5,6 +5,7 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import EditButton from '../../components/EditButton';
 import BelongsToField from '../../components/Fields/Detail/BelongsToField';
+import BelongsToManyField from '../../components/Fields/Detail/BelongsToManyField';
 import DetailField from '../../components/Fields/DetailField';
 
 interface Props {
@@ -28,7 +29,7 @@ export default async function MemberShowPage({ params }: Props) {
             ? (member.fullName ?? '')
             : ((member?.membership?.owner as { fullName?: string } | undefined)
                   ?.fullName ?? '');
-
+    console.log(member);
     const { t } = createTranslation();
 
     const fields = [
@@ -92,6 +93,14 @@ export default async function MemberShowPage({ params }: Props) {
             help: '',
         },
         {
+            attribute: 'divisions',
+            label: t('division:title.other'),
+            type: 'belongsToMany' as const,
+            basePath: '/admin/divisions',
+            displayProperty: 'title',
+            value: member.divisions ?? [],
+        },
+        {
             attribute: 'membership',
             label: t('membership:title.one'),
             type: 'belongsTo' as const,
@@ -110,6 +119,23 @@ export default async function MemberShowPage({ params }: Props) {
             <EditButton href={`/admin/members/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {
+                    if (
+                        'type' in field &&
+                        field.type === 'belongsToMany'
+                    ) {
+                        return (
+                            <BelongsToManyField
+                                key={index}
+                                type="belongsToMany"
+                                attribute={field.attribute}
+                                label={field.label}
+                                basePath={'basePath' in field ? field.basePath : undefined}
+                                displayProperty={'displayProperty' in field ? field.displayProperty : 'title'}
+                                value={'value' in field && Array.isArray(field.value) ? field.value : []}
+                            />
+                        );
+                    }
+
                     if (
                         'type' in field &&
                         field.type === 'belongsTo' &&

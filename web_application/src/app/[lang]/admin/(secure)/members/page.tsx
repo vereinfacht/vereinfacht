@@ -17,7 +17,7 @@ async function getMembershipFromApi(params: ListMembersSearchParamsType) {
             status: params.status ? params.status : undefined,
             media: params.media ?? undefined,
         },
-        include: ['membership', 'membership.owner'],
+        include: ['membership', 'membership.owner', 'divisions'],
     });
 
     return response || [];

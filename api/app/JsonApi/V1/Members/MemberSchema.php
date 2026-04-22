@@ -96,6 +96,7 @@ class MemberSchema extends Schema
         return [
             'membership',
             'membership.owner',
+            'membership.membershipType',
             'divisions',
             'media',
             'club',

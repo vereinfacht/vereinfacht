@@ -46,6 +46,16 @@ export const createMemberSchema = z.object({
                         }),
                     })
                     .optional(),
+                divisions: z
+                    .object({
+                        data: z.array(
+                            z.object({
+                                id: z.string(),
+                                type: z.literal('divisions'),
+                            }),
+                        ),
+                    })
+                    .optional(),
             })
             .optional(),
     }),

@@ -12,7 +12,12 @@ export default async function Page({ params }: Props) {
     const { id } = params;
     const member = await getMember({
         id,
-        include: ['media', 'membership', 'divisions'],
+        include: [
+            'media',
+            'membership',
+            'membership.membershipType',
+            'divisions',
+        ],
     });
     const extendedAction = updateMemberFormAction.bind(null, id);
 

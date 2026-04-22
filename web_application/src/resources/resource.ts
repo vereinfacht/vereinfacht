@@ -60,6 +60,10 @@ export interface BelongsToManyDetailFieldDef<T, K = any> extends Omit<
 > {
     type: 'belongsToMany';
     value: K[];
+    /** Link base path, e.g. '/admin/divisions'. When provided, renders as linked tags instead of a ResourceTable. */
+    basePath?: string;
+    /** Property on each item to use as display text. Defaults to 'title'. */
+    displayProperty?: string;
 }
 
 export interface MediaDetailField<T> extends Omit<
