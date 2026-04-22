@@ -63,7 +63,7 @@ class MemberTest extends TestCase
             ->post('/api/v1/members');
 
         $id = $response
-            ->assertCreatedWithServerId(config('app.url').'/api/v1/members', $data)
+            ->assertCreatedWithServerId(config('app.url') . '/api/v1/members', $data)
             ->id();
 
         $this->assertDatabaseHas('members', [
@@ -183,6 +183,12 @@ class MemberTest extends TestCase
                 'hasConsentedMediaPublication' => true,
             ],
             'relationships' => [
+                'club' => [
+                    'data' => [
+                        'type' => 'clubs',
+                        'id' => (string) $club->getKey(),
+                    ],
+                ],
                 'membership' => [
                     'data' => [
                         'type' => 'memberships',
@@ -197,11 +203,11 @@ class MemberTest extends TestCase
             ->jsonApi()
             ->expects('members')
             ->withData($data)
-            ->includePaths('membership')
+            ->includePaths('membership', 'club')
             ->post('/api/v1/members');
 
         $id = $response
-            ->assertCreatedWithServerId(config('app.url').'/api/v1/members', $data)
+            ->assertCreatedWithServerId(config('app.url') . '/api/v1/members', $data)
             ->id();
 
         $this->assertDatabaseHas('members', [

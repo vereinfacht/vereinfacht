@@ -40,7 +40,7 @@ class MemberRequest extends ResourceRequest
             'phoneNumber' => [],
             'email' => [$required],
             'status' => ['require', Rule::in(['active', 'inactive'])],
-            'club' => ['nullable', JsonApiRule::toOne()],
+            'club' => ['required', JsonApiRule::toOne()],
             'membership' => ['nullable', JsonApiRule::toOne()],
             'hasConsentedMediaPublication' => ['nullable', JsonApiRule::boolean()],
             'divisions' => [
