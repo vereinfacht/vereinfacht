@@ -104,7 +104,17 @@ export default function CreateForm({
                 </div>
 
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                    <FormField errors={formState.errors?.membershipType}>
+                    <FormField
+                        errors={
+                            formState.errors?.membershipType
+                                ? [
+                                      t(
+                                          'membership:validation.membership_type_required',
+                                      ),
+                                  ]
+                                : undefined
+                        }
+                    >
                         <BelongsToSelectInput<TMembershipTypeDeserialized>
                             resourceName="membershipType"
                             resourceType="membership-types"
@@ -136,8 +146,13 @@ export default function CreateForm({
                             required
                         />
                     </FormField>
-
-                    <FormField errors={formState.errors?.owner}>
+                    <FormField
+                        errors={
+                            formState.errors?.owner
+                                ? [t('membership:validation.owner_required')]
+                                : undefined
+                        }
+                    >
                         <BelongsToSelectInput<TMemberDeserialized>
                             resourceName="owner"
                             resourceType="members"

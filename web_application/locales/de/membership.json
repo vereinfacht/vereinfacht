@@ -60,5 +60,9 @@
         "help": "Ein freiwilliger Zusatzbeitrag, der zusätzlich zum Mitgliedsbeitrag erhoben wird. Wird nur hinzugerechnet, sofern der Verein diese Funktion aktiviert hat."
     },
     "create": "Mitgliedschaft erstellen",
-    "edit": "Mitgliedschaft bearbeiten"
+    "edit": "Mitgliedschaft bearbeiten",
+    "validation": {
+        "owner_required": "Inhaber*in ist erforderlich",
+        "membership_type_required": "Mitgliedschaftsart ist erforderlich"
+    }
 }
