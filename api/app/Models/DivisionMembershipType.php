@@ -32,4 +32,9 @@ class DivisionMembershipType extends Pivot
             'club_id',
         );
     }
+
+    public function membershipType()
+    {
+        return $this->belongsTo(MembershipType::class);
+    }
 }

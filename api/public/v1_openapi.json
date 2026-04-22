@@ -104,6 +104,29 @@
                                 ]
                             }
                         }
+                    },
+                    {
+                        "name": "filter[status]",
+                        "in": "query",
+                        "description": "A list of statuss to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": {
+                                "value": []
+                            },
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "applied": {
+                                "value": "applied"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -412,6 +435,8 @@
                                 "enum": [
                                     "id",
                                     "-id",
+                                    "title",
+                                    "-title",
                                     "sortOrder",
                                     "-sortOrder",
                                     "createdAt",
@@ -457,6 +482,16 @@
                                     "3"
                                 ]
                             }
+                        }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -1303,6 +1338,8 @@
                                 "enum": [
                                     "id",
                                     "-id",
+                                    "title",
+                                    "-title",
                                     "createdAt",
                                     "-createdAt",
                                     "updatedAt",
@@ -1612,6 +1649,50 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Divisions"
+                ],
+                "summary": "Destroy one division",
+                "description": "",
+                "operationId": "divisions.destroy",
+                "parameters": [
+                    {
+                        "name": "division",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     },
                     "400": {
                         "$ref": "#\/components\/responses\/400"
@@ -3342,6 +3423,71 @@
                         "$ref": "#\/components\/responses\/401"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Store one user",
+                "description": "",
+                "operationId": "users.store",
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.users.resource.store"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Store users",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.users.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
             }
         },
         "\/users\/{user}": {
@@ -3403,6 +3549,137 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update one user",
+                "description": "",
+                "operationId": "users.update",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            },
+                            "4": {
+                                "value": "4"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.users.resource.update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update users",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.users.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Destroy one user",
+                "description": "",
+                "operationId": "users.destroy",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            },
+                            "4": {
+                                "value": "4"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     },
                     "400": {
                         "$ref": "#\/components\/responses\/400"
@@ -3646,6 +3923,126 @@
                 }
             }
         },
+        "\/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get all roles",
+                "description": "",
+                "operationId": "roles.index",
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "name",
+                                    "-name",
+                                    "createdAt",
+                                    "-createdAt",
+                                    "updatedAt",
+                                    "-updatedAt"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            },
+                            "2": {
+                                "value": [
+                                    "2"
+                                ]
+                            },
+                            "3": {
+                                "value": [
+                                    "3"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index roles",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.roles.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
         "\/finance-contacts": {
             "get": {
                 "tags": [
@@ -3700,6 +4097,39 @@
                         }
                     },
                     {
+                        "name": "filter[email]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "examples": {
+                            "kayla18@example.net": {
+                                "value": "kayla18@example.net"
+                            },
+                            "tnienow@example.org": {
+                                "value": "tnienow@example.org"
+                            },
+                            "henry.lockman@example.com": {
+                                "value": "henry.lockman@example.com"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[isExternal]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "filter[id]",
                         "in": "query",
                         "description": "A list of ids to filter by.",
@@ -3733,6 +4163,39 @@
                                     "3"
                                 ]
                             }
+                        }
+                    },
+                    {
+                        "name": "filter[contactType]",
+                        "in": "query",
+                        "description": "A list of contactTypes to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": {
+                                "value": []
+                            },
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "person": {
+                                "value": "person"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -4239,6 +4702,8 @@
                                     "bookingDate",
                                     "-bookingDate",
                                     "amount",
+                                    "-amount",
+                                    "amount",
                                     "-amount"
                                 ],
                                 "type": "string"
@@ -4282,6 +4747,16 @@
                         }
                     },
                     {
+                        "name": "filter[media]",
+                        "in": "query",
+                        "description": "Only includes records that have media.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
                         "name": "filter[status]",
                         "in": "query",
                         "description": "Filters the records",
@@ -4309,6 +4784,9 @@
                             }
                         },
                         "examples": {
+                            "expense": {
+                                "value": "expense"
+                            },
                             "income": {
                                 "value": "income"
                             }
@@ -4316,6 +4794,16 @@
                     },
                     {
                         "name": "filter[query]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[bookingDate]",
                         "in": "query",
                         "description": "Filters the records",
                         "required": false,
@@ -4675,6 +5163,35 @@
                                 ]
                             }
                         }
+                    },
+                    {
+                        "name": "filter[with-trashed]",
+                        "in": "query",
+                        "description": "Include trashed records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "filter[accountType]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "examples": {
+                            "bank_account": {
+                                "value": "bank_account"
+                            },
+                            "cash_box": {
+                                "value": "cash_box"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -4930,50 +5447,6 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "$ref": "#\/components\/responses\/400"
-                    },
-                    "401": {
-                        "$ref": "#\/components\/responses\/401"
-                    },
-                    "404": {
-                        "$ref": "#\/components\/responses\/404"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Finance-accounts"
-                ],
-                "summary": "Destroy one finance-account",
-                "description": "",
-                "operationId": "finance-accounts.destroy",
-                "parameters": [
-                    {
-                        "name": "finance_account",
-                        "in": "path",
-                        "required": true,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "1": {
-                                "value": "1"
-                            },
-                            "2": {
-                                "value": "2"
-                            },
-                            "3": {
-                                "value": "3"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content"
                     },
                     "400": {
                         "$ref": "#\/components\/responses\/400"
@@ -5687,6 +6160,8 @@
                                 "enum": [
                                     "id",
                                     "-id",
+                                    "gvc",
+                                    "-gvc",
                                     "amount",
                                     "-amount",
                                     "valuedAt",
@@ -5749,7 +6224,7 @@
                         }
                     },
                     {
-                        "name": "filter[withoutReceipts]",
+                        "name": "filter[status]",
                         "in": "query",
                         "description": "Filters the records",
                         "required": false,
@@ -5759,13 +6234,13 @@
                         }
                     },
                     {
-                        "name": "filter[status]",
+                        "name": "filter[receipt]",
                         "in": "query",
-                        "description": "Filters the records",
+                        "description": "Only includes records that have receipt.",
                         "required": false,
                         "allowEmptyValue": false,
                         "schema": {
-                            "type": "string"
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -5809,71 +6284,6 @@
                         "$ref": "#\/components\/responses\/401"
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Transactions"
-                ],
-                "summary": "Store one transaction",
-                "description": "",
-                "operationId": "transactions.store",
-                "requestBody": {
-                    "content": {
-                        "application\/vnd.api+json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "data"
-                                ],
-                                "properties": {
-                                    "data": {
-                                        "$ref": "#\/components\/schemas\/resources.transactions.resource.store"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Store transactions",
-                        "content": {
-                            "application\/vnd.api+json": {
-                                "schema": {
-                                    "type": "object",
-                                    "required": [
-                                        "jsonapi",
-                                        "data"
-                                    ],
-                                    "properties": {
-                                        "jsonapi": {
-                                            "type": "object",
-                                            "properties": {
-                                                "version": {
-                                                    "title": "version",
-                                                    "type": "string",
-                                                    "example": "1.0"
-                                                }
-                                            }
-                                        },
-                                        "data": {
-                                            "$ref": "#\/components\/schemas\/resources.transactions.resource.fetch"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "$ref": "#\/components\/responses\/400"
-                    },
-                    "401": {
-                        "$ref": "#\/components\/responses\/401"
-                    },
-                    "404": {
-                        "$ref": "#\/components\/responses\/404"
-                    }
-                }
             }
         },
         "\/transactions\/{transaction}": {
@@ -5909,93 +6319,6 @@
                 "responses": {
                     "200": {
                         "description": "Show transactions",
-                        "content": {
-                            "application\/vnd.api+json": {
-                                "schema": {
-                                    "type": "object",
-                                    "required": [
-                                        "jsonapi",
-                                        "data"
-                                    ],
-                                    "properties": {
-                                        "jsonapi": {
-                                            "type": "object",
-                                            "properties": {
-                                                "version": {
-                                                    "title": "version",
-                                                    "type": "string",
-                                                    "example": "1.0"
-                                                }
-                                            }
-                                        },
-                                        "data": {
-                                            "$ref": "#\/components\/schemas\/resources.transactions.resource.fetch"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "$ref": "#\/components\/responses\/400"
-                    },
-                    "401": {
-                        "$ref": "#\/components\/responses\/401"
-                    },
-                    "404": {
-                        "$ref": "#\/components\/responses\/404"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Transactions"
-                ],
-                "summary": "Update one transaction",
-                "description": "",
-                "operationId": "transactions.update",
-                "parameters": [
-                    {
-                        "name": "transaction",
-                        "in": "path",
-                        "required": true,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "1": {
-                                "value": "1"
-                            },
-                            "2": {
-                                "value": "2"
-                            },
-                            "3": {
-                                "value": "3"
-                            }
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application\/vnd.api+json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "data"
-                                ],
-                                "properties": {
-                                    "data": {
-                                        "$ref": "#\/components\/schemas\/resources.transactions.resource.update"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Update transactions",
                         "content": {
                             "application\/vnd.api+json": {
                                 "schema": {
@@ -6316,7 +6639,11 @@
                                     "createdAt",
                                     "-createdAt",
                                     "updatedAt",
-                                    "-updatedAt"
+                                    "-updatedAt",
+                                    "amount",
+                                    "-amount",
+                                    "amount",
+                                    "-amount"
                                 ],
                                 "type": "string"
                             }
@@ -7834,6 +8161,119 @@
                     }
                 }
             }
+        },
+        "\/division-membership-types": {
+            "post": {
+                "tags": [
+                    "Division-membership-types"
+                ],
+                "summary": "Store one division-membership-type",
+                "description": "",
+                "operationId": "division-membership-types.store",
+                "requestBody": {
+                    "content": {
+                        "application\/vnd.api+json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#\/components\/schemas\/resources.division-membership-types.resource.store"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Store division-membership-types",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/resources.division-membership-types.resource.fetch"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
+        },
+        "\/division-membership-types\/{division_membership_type}": {
+            "delete": {
+                "tags": [
+                    "Division-membership-types"
+                ],
+                "summary": "Destroy one division-membership-type",
+                "description": "",
+                "operationId": "division-membership-types.destroy",
+                "parameters": [
+                    {
+                        "name": "division_membership_type",
+                        "in": "path",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": "1"
+                            },
+                            "2": {
+                                "value": "2"
+                            },
+                            "3": {
+                                "value": "3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    },
+                    "404": {
+                        "$ref": "#\/components\/responses\/404"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -8400,12 +8840,12 @@
                                             "related": {
                                                 "title": "related",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
                                             },
                                             "self": {
                                                 "title": "self",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -8657,12 +9097,189 @@
                                             "related": {
                                                 "title": "related",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
                                             },
                                             "self": {
                                                 "title": "self",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.division-membership-types.resource.fetch": {
+                "title": "Resource\/Division-membership-type\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "division-membership-types",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "monthlyFee": {
+                                "title": "monthlyFee",
+                                "type": "number",
+                                "example": 2
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-12T07:48:15.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-12T07:48:15.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "division": {
+                                "title": "division",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "membershipType": {
+                                "title": "membershipType",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.division-membership-types.resource.store": {
+                "title": "Resource\/Division-membership-type\/Store",
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "division-membership-types",
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "monthlyFee": {
+                                "title": "monthlyFee",
+                                "type": "number",
+                                "example": 2
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-12T07:48:15.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-12T07:48:15.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "division": {
+                                "title": "division",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "membershipType": {
+                                "title": "membershipType",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -8787,6 +9404,28 @@
                                         "readOnly": true
                                     }
                                 }
+                            },
+                            "divisionMembershipTypes": {
+                                "title": "divisionMembershipTypes",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
                             }
                         }
                     }
@@ -8896,6 +9535,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "divisionMembershipTypes": {
+                                "title": "divisionMembershipTypes",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -9015,6 +9676,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "divisionMembershipTypes": {
+                                "title": "divisionMembershipTypes",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -9515,6 +10198,26 @@
                     }
                 }
             },
+            "resources.finance-contacts.relationship.receipts.fetch": {
+                "title": "Resource\/Finance-contact\/Relationship\/Receipts\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "receipts",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "id",
+                        "type": "string",
+                        "example": "2"
+                    }
+                }
+            },
             "resources.finance-contacts.resource.fetch": {
                 "title": "Resource\/Finance-contact\/Fetch",
                 "type": "object",
@@ -9957,26 +10660,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "resources.finance-contacts.relationship.receipts.fetch": {
-                "title": "Resource\/Finance-contact\/Relationship\/Receipts\/Fetch",
-                "type": "object",
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "properties": {
-                    "type": {
-                        "title": "type",
-                        "default": "receipts",
-                        "type": "string"
-                    },
-                    "id": {
-                        "title": "id",
-                        "type": "string",
-                        "example": "1"
                     }
                 }
             },
@@ -10816,6 +11499,28 @@
                                         "readOnly": true
                                     }
                                 }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
                             }
                         }
                     }
@@ -10952,6 +11657,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -11098,6 +11825,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/division-membership-types\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -12294,6 +13043,75 @@
                     }
                 }
             },
+            "resources.roles.resource.fetch": {
+                "title": "Resource\/Role\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "roles",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "title": "name",
+                                "type": "string",
+                                "example": "super admin"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:37:58.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:37:58.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "permissions": {
+                                "title": "permissions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/permissions\/1"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/permissions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "resources.statements.relationship.financeAccount.fetch": {
                 "title": "Resource\/Statement\/Relationship\/FinanceAccount\/Fetch",
                 "type": "object",
@@ -12596,30 +13414,17 @@
                             "identifier": {
                                 "title": "identifier",
                                 "type": "string",
-                                "example": "d2956879-c5f4-3d73-9e2c-329f4dbaf6f6"
+                                "example": "13ee6a69-72ce-3ddc-9468-34b423c5febb"
                             },
                             "date": {
                                 "title": "date",
                                 "type": "string",
-                                "example": "2025-01-31T16:16:40.000000Z"
+                                "example": "2025-04-28T12:18:02.000000Z"
                             },
-                            "createdAt": {
-                                "title": "createdAt",
+                            "status": {
+                                "title": "status",
                                 "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
-                            },
-                            "updatedAt": {
-                                "title": "updatedAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
-                            },
-                            "amount": {
-                                "title": "amount",
-                                "type": "number",
-                                "readOnly": true,
-                                "example": 0
+                                "example": "empty"
                             }
                         }
                     },
@@ -12664,28 +13469,6 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/1"
-                                            }
-                                        },
-                                        "readOnly": true
-                                    }
-                                }
-                            },
-                            "taxAccount": {
-                                "title": "taxAccount",
-                                "type": "object",
-                                "properties": {
-                                    "links": {
-                                        "type": "object",
-                                        "properties": {
-                                            "related": {
-                                                "title": "related",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
-                                            },
-                                            "self": {
-                                                "title": "self",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-accounts\/101"
                                             }
                                         },
                                         "readOnly": true
@@ -12742,30 +13525,17 @@
                             "identifier": {
                                 "title": "identifier",
                                 "type": "string",
-                                "example": "d2956879-c5f4-3d73-9e2c-329f4dbaf6f6"
+                                "example": "13ee6a69-72ce-3ddc-9468-34b423c5febb"
                             },
                             "date": {
                                 "title": "date",
                                 "type": "string",
-                                "example": "2025-01-31T16:16:40.000000Z"
+                                "example": "2025-04-28T12:18:02.000000Z"
                             },
-                            "createdAt": {
-                                "title": "createdAt",
+                            "status": {
+                                "title": "status",
                                 "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
-                            },
-                            "updatedAt": {
-                                "title": "updatedAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:33.000000Z"
-                            },
-                            "amount": {
-                                "title": "amount",
-                                "type": "number",
-                                "readOnly": true,
-                                "example": 0
+                                "example": "empty"
                             }
                         }
                     },
@@ -12888,12 +13658,12 @@
                                             "related": {
                                                 "title": "related",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
                                             },
                                             "self": {
                                                 "title": "self",
                                                 "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/skr-types\/1"
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/tax-account-charts\/1"
                                             }
                                         },
                                         "readOnly": true
@@ -13218,237 +13988,8 @@
                     "relationships": {
                         "type": "object",
                         "properties": {
-                            "receipts": {
-                                "title": "receipts",
-                                "type": "object",
-                                "properties": {
-                                    "links": {
-                                        "type": "object",
-                                        "properties": {
-                                            "related": {
-                                                "title": "related",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
-                                            },
-                                            "self": {
-                                                "title": "self",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
-                                            }
-                                        },
-                                        "readOnly": true
-                                    }
-                                }
-                            },
-                            "statement": {
-                                "title": "statement",
-                                "type": "object",
-                                "properties": {
-                                    "links": {
-                                        "type": "object",
-                                        "properties": {
-                                            "related": {
-                                                "title": "related",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/statements\/1"
-                                            },
-                                            "self": {
-                                                "title": "self",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/statements\/1"
-                                            }
-                                        },
-                                        "readOnly": true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "resources.transactions.resource.store": {
-                "title": "Resource\/Transaction\/Store",
-                "type": "object",
-                "required": [
-                    "type",
-                    "attributes"
-                ],
-                "properties": {
-                    "type": {
-                        "title": "type",
-                        "default": "transactions",
-                        "type": "string"
-                    },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "title": "name",
-                                "type": "string",
-                                "example": "Prof. Charlie Glover MD"
-                            },
-                            "description": {
-                                "title": "description",
-                                "type": "string",
-                                "example": "Quaerat sed corporis tempora esse."
-                            },
-                            "amount": {
-                                "title": "amount",
-                                "type": "number",
-                                "example": 3072.23
-                            },
-                            "valuedAt": {
-                                "title": "valuedAt",
-                                "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
-                            },
-                            "bookedAt": {
-                                "title": "bookedAt",
-                                "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
-                            },
-                            "createdAt": {
-                                "title": "createdAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
-                            },
-                            "updatedAt": {
-                                "title": "updatedAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
-                            },
-                            "status": {
-                                "title": "status",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "incompleted"
-                            }
-                        }
-                    },
-                    "relationships": {
-                        "type": "object",
-                        "properties": {
-                            "receipts": {
-                                "title": "receipts",
-                                "type": "object",
-                                "properties": {
-                                    "links": {
-                                        "type": "object",
-                                        "properties": {
-                                            "related": {
-                                                "title": "related",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
-                                            },
-                                            "self": {
-                                                "title": "self",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/receipts\/1"
-                                            }
-                                        },
-                                        "readOnly": true
-                                    }
-                                }
-                            },
-                            "statement": {
-                                "title": "statement",
-                                "type": "object",
-                                "properties": {
-                                    "links": {
-                                        "type": "object",
-                                        "properties": {
-                                            "related": {
-                                                "title": "related",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/statements\/1"
-                                            },
-                                            "self": {
-                                                "title": "self",
-                                                "type": "string",
-                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/statements\/1"
-                                            }
-                                        },
-                                        "readOnly": true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "resources.transactions.resource.update": {
-                "title": "Resource\/Transaction\/Update",
-                "type": "object",
-                "required": [
-                    "type",
-                    "id",
-                    "attributes"
-                ],
-                "properties": {
-                    "type": {
-                        "title": "type",
-                        "default": "transactions",
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string",
-                        "example": "1"
-                    },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "title": "name",
-                                "type": "string",
-                                "example": "Prof. Charlie Glover MD"
-                            },
-                            "description": {
-                                "title": "description",
-                                "type": "string",
-                                "example": "Quaerat sed corporis tempora esse."
-                            },
-                            "amount": {
-                                "title": "amount",
-                                "type": "number",
-                                "example": 3072.23
-                            },
-                            "valuedAt": {
-                                "title": "valuedAt",
-                                "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
-                            },
-                            "bookedAt": {
-                                "title": "bookedAt",
-                                "type": "string",
-                                "example": "2024-12-03T05:29:42.000000Z"
-                            },
-                            "createdAt": {
-                                "title": "createdAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
-                            },
-                            "updatedAt": {
-                                "title": "updatedAt",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "2025-10-16T13:11:34.000000Z"
-                            },
-                            "status": {
-                                "title": "status",
-                                "type": "string",
-                                "readOnly": true,
-                                "example": "incompleted"
-                            }
-                        }
-                    },
-                    "relationships": {
-                        "type": "object",
-                        "properties": {
-                            "receipts": {
-                                "title": "receipts",
+                            "receipt": {
+                                "title": "receipt",
                                 "type": "object",
                                 "properties": {
                                     "links": {
@@ -13511,7 +14052,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "example": "1"
+                        "example": "2"
                     },
                     "attributes": {
                         "type": "object",
@@ -13519,29 +14060,285 @@
                             "name": {
                                 "title": "name",
                                 "type": "string",
-                                "example": "Prof. Vernice Jones III"
+                                "example": "Jane Doe"
                             },
                             "email": {
                                 "title": "email",
                                 "type": "string",
-                                "example": "hello@vereinfacht.digital"
+                                "example": "club-admin-1@example.org"
+                            },
+                            "password": {
+                                "title": "password",
+                                "type": "string",
+                                "example": "$2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK"
                             },
                             "preferredLocale": {
                                 "title": "preferredLocale",
                                 "type": "string",
-                                "example": "de"
+                                "example": "en"
                             },
                             "createdAt": {
                                 "title": "createdAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:31.000000Z"
+                                "example": "2026-03-13T11:38:03.000000Z"
                             },
                             "updatedAt": {
                                 "title": "updatedAt",
                                 "type": "string",
                                 "readOnly": true,
-                                "example": "2025-10-16T13:11:31.000000Z"
+                                "example": "2026-03-13T11:38:03.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "roles": {
+                                "title": "roles",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/roles\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/roles\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "clubs": {
+                                "title": "clubs",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.users.resource.store": {
+                "title": "Resource\/User\/Store",
+                "type": "object",
+                "required": [
+                    "type",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "users",
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "title": "name",
+                                "type": "string",
+                                "example": "Jane Doe"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "club-admin-1@example.org"
+                            },
+                            "password": {
+                                "title": "password",
+                                "type": "string",
+                                "example": "$2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK"
+                            },
+                            "preferredLocale": {
+                                "title": "preferredLocale",
+                                "type": "string",
+                                "example": "en"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:38:03.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:38:03.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "roles": {
+                                "title": "roles",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/roles\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/roles\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "clubs": {
+                                "title": "clubs",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.users.resource.update": {
+                "title": "Resource\/User\/Update",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "users",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "2"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "title": "name",
+                                "type": "string",
+                                "example": "Jane Doe"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "club-admin-1@example.org"
+                            },
+                            "password": {
+                                "title": "password",
+                                "type": "string",
+                                "example": "$2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK"
+                            },
+                            "preferredLocale": {
+                                "title": "preferredLocale",
+                                "type": "string",
+                                "example": "en"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:38:03.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-03-13T11:38:03.000000Z"
                             }
                         }
                     },
@@ -13564,6 +14361,50 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/roles\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "clubs": {
+                                "title": "clubs",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
                                             }
                                         },
                                         "readOnly": true

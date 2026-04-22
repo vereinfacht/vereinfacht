@@ -160,7 +160,8 @@ export interface paths {
         get: operations["divisions.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one division */
+        delete: operations["divisions.destroy"];
         options?: never;
         head?: never;
         /** Update one division */
@@ -323,7 +324,8 @@ export interface paths {
         /** Get all users */
         get: operations["users.index"];
         put?: never;
-        post?: never;
+        /** Store one user */
+        post: operations["users.store"];
         delete?: never;
         options?: never;
         head?: never;
@@ -341,10 +343,12 @@ export interface paths {
         get: operations["users.show"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Destroy one user */
+        delete: operations["users.destroy"];
         options?: never;
         head?: never;
-        patch?: never;
+        /** Update one user */
+        patch: operations["users.update"];
         trace?: never;
     };
     "/media/upload": {
@@ -390,6 +394,23 @@ export interface paths {
         };
         /** Get all permissions */
         get: operations["permissions.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all roles */
+        get: operations["roles.index"];
         put?: never;
         post?: never;
         delete?: never;
@@ -534,8 +555,7 @@ export interface paths {
         get: operations["finance-accounts.show"];
         put?: never;
         post?: never;
-        /** Destroy one finance-account */
-        delete: operations["finance-accounts.destroy"];
+        delete?: never;
         options?: never;
         head?: never;
         /** Update one finance-account */
@@ -624,8 +644,7 @@ export interface paths {
         /** Get all transactions */
         get: operations["transactions.index"];
         put?: never;
-        /** Store one transaction */
-        post: operations["transactions.store"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -646,8 +665,7 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        /** Update one transaction */
-        patch: operations["transactions.update"];
+        patch?: never;
         trace?: never;
     };
     "/transactions/{transaction}/statement": {
@@ -842,6 +860,40 @@ export interface paths {
         put?: never;
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/division-membership-types": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Store one division-membership-type */
+        post: operations["division-membership-types.store"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/division-membership-types/{division_membership_type}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Destroy one division-membership-type */
+        delete: operations["division-membership-types.destroy"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1213,12 +1265,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         self?: string;
                     };
@@ -1414,12 +1466,128 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Division-membership-type/Fetch */
+        "resources.division-membership-types.resource.fetch": {
+            /**
+             * type
+             * @default division-membership-types
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * monthlyFee
+                 * @example 2
+                 */
+                monthlyFee?: number;
+                /**
+                 * createdAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** division */
+                division?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** membershipType */
+                membershipType?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/Division-membership-type/Store */
+        "resources.division-membership-types.resource.store": {
+            /**
+             * type
+             * @default division-membership-types
+             */
+            type: string;
+            attributes: {
+                /**
+                 * monthlyFee
+                 * @example 2
+                 */
+                monthlyFee?: number;
+                /**
+                 * createdAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-12T07:48:15.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** division */
+                division?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/divisions/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** membershipType */
+                membershipType?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/membership-types/1
                          */
                         self?: string;
                     };
@@ -1503,6 +1671,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** divisionMembershipTypes */
+                divisionMembershipTypes?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
             };
         };
         /** Resource/Division/Store */
@@ -1576,6 +1759,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** divisionMembershipTypes */
+                divisionMembershipTypes?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
                          */
                         self?: string;
                     };
@@ -1655,6 +1853,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** divisionMembershipTypes */
+                divisionMembershipTypes?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/division-membership-types/1
                          */
                         self?: string;
                     };
@@ -1994,6 +2207,19 @@ export interface components {
                     };
                 };
             };
+        };
+        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
+        "resources.finance-contacts.relationship.receipts.fetch": {
+            /**
+             * type
+             * @default receipts
+             */
+            type: string;
+            /**
+             * id
+             * @example 2
+             */
+            id: string;
         };
         /** Resource/Finance-contact/Fetch */
         "resources.finance-contacts.resource.fetch": {
@@ -2340,19 +2566,6 @@ export interface components {
                     };
                 };
             };
-        };
-        /** Resource/Finance-contact/Relationship/Receipts/Fetch */
-        "resources.finance-contacts.relationship.receipts.fetch": {
-            /**
-             * type
-             * @default receipts
-             */
-            type: string;
-            /**
-             * id
-             * @example 1
-             */
-            id: string;
         };
         /** Resource/Member/Relationship/Divisions/Attach */
         "resources.members.relationship.divisions.attach": {
@@ -2973,6 +3186,21 @@ export interface components {
                         self?: string;
                     };
                 };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        self?: string;
+                    };
+                };
             };
         };
         /** Resource/Membership-type/Store */
@@ -3081,6 +3309,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
                          */
                         self?: string;
                     };
@@ -3195,6 +3438,21 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/division-membership-types/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/1
                          */
                         self?: string;
                     };
@@ -4027,6 +4285,50 @@ export interface components {
                 };
             };
         };
+        /** Resource/Role/Fetch */
+        "resources.roles.resource.fetch": {
+            /**
+             * type
+             * @default roles
+             */
+            type: string;
+            /** @example 1 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example super admin
+                 */
+                name?: string;
+                /**
+                 * createdAt
+                 * @example 2026-03-13T11:37:58.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-13T11:37:58.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** permissions */
+                permissions?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/permissions/1
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/permissions/1
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
         /** Resource/Statement/Relationship/FinanceAccount/Fetch */
         "resources.statements.relationship.financeAccount.fetch": {
             /**
@@ -4218,29 +4520,19 @@ export interface components {
             attributes: {
                 /**
                  * identifier
-                 * @example d2956879-c5f4-3d73-9e2c-329f4dbaf6f6
+                 * @example 13ee6a69-72ce-3ddc-9468-34b423c5febb
                  */
                 identifier?: string;
                 /**
                  * date
-                 * @example 2025-01-31T16:16:40.000000Z
+                 * @example 2025-04-28T12:18:02.000000Z
                  */
                 date?: string;
                 /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * status
+                 * @example empty
                  */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * amount
-                 * @example 0
-                 */
-                readonly amount?: number;
+                status?: string;
             };
             relationships?: {
                 /** financeAccount */
@@ -4269,21 +4561,6 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/clubs/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** taxAccount */
-                taxAccount?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/tax-accounts/101
                          */
                         self?: string;
                     };
@@ -4317,29 +4594,19 @@ export interface components {
             attributes: {
                 /**
                  * identifier
-                 * @example d2956879-c5f4-3d73-9e2c-329f4dbaf6f6
+                 * @example 13ee6a69-72ce-3ddc-9468-34b423c5febb
                  */
                 identifier?: string;
                 /**
                  * date
-                 * @example 2025-01-31T16:16:40.000000Z
+                 * @example 2025-04-28T12:18:02.000000Z
                  */
                 date?: string;
                 /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:33.000000Z
+                 * status
+                 * @example empty
                  */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:33.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * amount
-                 * @example 0
-                 */
-                readonly amount?: number;
+                status?: string;
             };
             relationships?: {
                 /** financeAccount */
@@ -4416,12 +4683,12 @@ export interface components {
                     readonly links?: {
                         /**
                          * related
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         related?: string;
                         /**
                          * self
-                         * @example http://api.verein.localhost/api/v1/skr-types/1
+                         * @example http://api.verein.localhost/api/v1/tax-account-charts/1
                          */
                         self?: string;
                     };
@@ -4647,174 +4914,8 @@ export interface components {
                 readonly status?: string;
             };
             relationships?: {
-                /** receipts */
-                receipts?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** statement */
-                statement?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        self?: string;
-                    };
-                };
-            };
-        };
-        /** Resource/Transaction/Store */
-        "resources.transactions.resource.store": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            attributes: {
-                /**
-                 * name
-                 * @example Prof. Charlie Glover MD
-                 */
-                name?: string;
-                /**
-                 * description
-                 * @example Quaerat sed corporis tempora esse.
-                 */
-                description?: string;
-                /**
-                 * amount
-                 * @example 3072.23
-                 */
-                amount?: number;
-                /**
-                 * valuedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                valuedAt?: string;
-                /**
-                 * bookedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                bookedAt?: string;
-                /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * status
-                 * @example incompleted
-                 */
-                readonly status?: string;
-            };
-            relationships?: {
-                /** receipts */
-                receipts?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/receipts/1
-                         */
-                        self?: string;
-                    };
-                };
-                /** statement */
-                statement?: {
-                    readonly links?: {
-                        /**
-                         * related
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        related?: string;
-                        /**
-                         * self
-                         * @example http://api.verein.localhost/api/v1/statements/1
-                         */
-                        self?: string;
-                    };
-                };
-            };
-        };
-        /** Resource/Transaction/Update */
-        "resources.transactions.resource.update": {
-            /**
-             * type
-             * @default transactions
-             */
-            type: string;
-            /** @example 1 */
-            id: string;
-            attributes: {
-                /**
-                 * name
-                 * @example Prof. Charlie Glover MD
-                 */
-                name?: string;
-                /**
-                 * description
-                 * @example Quaerat sed corporis tempora esse.
-                 */
-                description?: string;
-                /**
-                 * amount
-                 * @example 3072.23
-                 */
-                amount?: number;
-                /**
-                 * valuedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                valuedAt?: string;
-                /**
-                 * bookedAt
-                 * @example 2024-12-03T05:29:42.000000Z
-                 */
-                bookedAt?: string;
-                /**
-                 * createdAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly createdAt?: string;
-                /**
-                 * updatedAt
-                 * @example 2025-10-16T13:11:34.000000Z
-                 */
-                readonly updatedAt?: string;
-                /**
-                 * status
-                 * @example incompleted
-                 */
-                readonly status?: string;
-            };
-            relationships?: {
-                /** receipts */
-                receipts?: {
+                /** receipt */
+                receipt?: {
                     readonly links?: {
                         /**
                          * related
@@ -4852,32 +4953,213 @@ export interface components {
              * @default users
              */
             type: string;
-            /** @example 1 */
+            /** @example 2 */
             id: string;
             attributes: {
                 /**
                  * name
-                 * @example Prof. Vernice Jones III
+                 * @example Jane Doe
                  */
                 name?: string;
                 /**
                  * email
-                 * @example hello@vereinfacht.digital
+                 * @example club-admin-1@example.org
                  */
                 email?: string;
                 /**
+                 * password
+                 * @example $2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK
+                 */
+                password?: string;
+                /**
                  * preferredLocale
-                 * @example de
+                 * @example en
                  */
                 preferredLocale?: string;
                 /**
                  * createdAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-03-13T11:38:03.000000Z
                  */
                 readonly createdAt?: string;
                 /**
                  * updatedAt
-                 * @example 2025-10-16T13:11:31.000000Z
+                 * @example 2026-03-13T11:38:03.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** roles */
+                roles?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/roles/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/roles/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/User/Store */
+        "resources.users.resource.store": {
+            /**
+             * type
+             * @default users
+             */
+            type: string;
+            attributes: {
+                /**
+                 * name
+                 * @example Jane Doe
+                 */
+                name?: string;
+                /**
+                 * email
+                 * @example club-admin-1@example.org
+                 */
+                email?: string;
+                /**
+                 * password
+                 * @example $2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK
+                 */
+                password?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * createdAt
+                 * @example 2026-03-13T11:38:03.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-13T11:38:03.000000Z
+                 */
+                readonly updatedAt?: string;
+            };
+            relationships?: {
+                /** roles */
+                roles?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/roles/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/roles/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+            };
+        };
+        /** Resource/User/Update */
+        "resources.users.resource.update": {
+            /**
+             * type
+             * @default users
+             */
+            type: string;
+            /** @example 2 */
+            id: string;
+            attributes: {
+                /**
+                 * name
+                 * @example Jane Doe
+                 */
+                name?: string;
+                /**
+                 * email
+                 * @example club-admin-1@example.org
+                 */
+                email?: string;
+                /**
+                 * password
+                 * @example $2y$10$0018Jo8OYzbJIUqWncbgD.ouEfAH41dJ0.eqr5Ze4BPhwdrGnpJQK
+                 */
+                password?: string;
+                /**
+                 * preferredLocale
+                 * @example en
+                 */
+                preferredLocale?: string;
+                /**
+                 * createdAt
+                 * @example 2026-03-13T11:38:03.000000Z
+                 */
+                readonly createdAt?: string;
+                /**
+                 * updatedAt
+                 * @example 2026-03-13T11:38:03.000000Z
                  */
                 readonly updatedAt?: string;
             };
@@ -4893,6 +5175,36 @@ export interface components {
                         /**
                          * self
                          * @example http://api.verein.localhost/api/v1/roles/1
+                         */
+                        self?: string;
+                    };
+                };
+                /** clubs */
+                clubs?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        self?: string;
+                    };
+                };
+                /** club */
+                club?: {
+                    readonly links?: {
+                        /**
+                         * related
+                         * @example http://api.verein.localhost/api/v1/clubs/2
+                         */
+                        related?: string;
+                        /**
+                         * self
+                         * @example http://api.verein.localhost/api/v1/clubs/2
                          */
                         self?: string;
                     };
@@ -4967,6 +5279,8 @@ export interface operations {
                 sort?: ("id" | "-id" | "startedAt" | "-startedAt" | "endedAt" | "-endedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description A list of statuss to filter by. */
+                "filter[status]"?: string[];
             };
             header?: never;
             path?: never;
@@ -5115,9 +5429,11 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "sortOrder" | "-sortOrder" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "title" | "-title" | "sortOrder" | "-sortOrder" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
             };
             header?: never;
             path?: never;
@@ -5517,7 +5833,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "title" | "-title" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
@@ -5617,6 +5933,29 @@ export interface operations {
                         data: components["schemas"]["resources.divisions.resource.fetch"];
                     };
                 };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "divisions.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                division: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
@@ -6387,6 +6726,44 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "users.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
     "users.show": {
         parameters: {
             query?: never;
@@ -6399,6 +6776,69 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.users.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "users.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.users.resource.update"];
+                };
+            };
+        };
+        responses: {
+            /** @description Update users */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -6518,6 +6958,43 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
+    "roles.index": {
+        parameters: {
+            query?: {
+                sort?: ("id" | "-id" | "name" | "-name" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                /** @description A list of ids to filter by. */
+                "filter[id]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Index roles */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.roles.resource.fetch"][];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+        };
+    };
     "finance-contacts.index": {
         parameters: {
             query?: {
@@ -6526,8 +7003,16 @@ export interface operations {
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
                 sort?: ("id" | "-id" | "companyName" | "-companyName" | "city" | "-city" | "fullName" | "-fullName" | "fullName" | "-fullName")[];
+                /** @description Filters the records */
+                "filter[email]"?: string;
+                /** @description Filters the records */
+                "filter[isExternal]"?: string;
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description A list of contactTypes to filter by. */
+                "filter[contactType]"?: string[];
+                /** @description Filters the records */
+                "filter[query]"?: string;
             };
             header?: never;
             path?: never;
@@ -6767,15 +7252,19 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "bookingDate" | "-bookingDate" | "amount" | "-amount")[];
+                sort?: ("id" | "-id" | "bookingDate" | "-bookingDate" | "amount" | "-amount" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Only includes records that have media. */
+                "filter[media]"?: boolean;
                 /** @description Filters the records */
                 "filter[status]"?: string;
                 /** @description A list of receiptTypes to filter by. */
                 "filter[receiptType]"?: string[];
                 /** @description Filters the records */
                 "filter[query]"?: string;
+                /** @description Filters the records */
+                "filter[bookingDate]"?: string;
             };
             header?: never;
             path?: never;
@@ -6927,6 +7416,10 @@ export interface operations {
                 sort?: ("id" | "-id" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
+                /** @description Include trashed records */
+                "filter[with-trashed]"?: boolean;
+                /** @description Filters the records */
+                "filter[accountType]"?: string;
             };
             header?: never;
             path?: never;
@@ -7022,29 +7515,6 @@ export interface operations {
                         data: components["schemas"]["resources.finance-accounts.resource.fetch"];
                     };
                 };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "finance-accounts.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                finance_account: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No Content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
@@ -7397,15 +7867,15 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "amount" | "-amount" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "gvc" | "-gvc" | "amount" | "-amount" | "valuedAt" | "-valuedAt" | "bookedAt" | "-bookedAt" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
                 "filter[query]"?: string;
                 /** @description Filters the records */
-                "filter[withoutReceipts]"?: string;
-                /** @description Filters the records */
                 "filter[status]"?: string;
+                /** @description Only includes records that have receipt. */
+                "filter[receipt]"?: boolean;
             };
             header?: never;
             path?: never;
@@ -7435,44 +7905,6 @@ export interface operations {
             401: components["responses"]["401"];
         };
     };
-    "transactions.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.resource.store"];
-                };
-            };
-        };
-        responses: {
-            /** @description Store transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
     "transactions.show": {
         parameters: {
             query?: never;
@@ -7485,46 +7917,6 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Show transactions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/vnd.api+json": {
-                        jsonapi: {
-                            /**
-                             * version
-                             * @example 1.0
-                             */
-                            version?: string;
-                        };
-                        data: components["schemas"]["resources.transactions.resource.fetch"];
-                    };
-                };
-            };
-            400: components["responses"]["400"];
-            401: components["responses"]["401"];
-            404: components["responses"]["404"];
-        };
-    };
-    "transactions.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                transaction: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/vnd.api+json": {
-                    data: components["schemas"]["resources.transactions.resource.update"];
-                };
-            };
-        };
-        responses: {
-            /** @description Update transactions */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -7663,7 +8055,7 @@ export interface operations {
                 "page[size]"?: number;
                 /** @description The page number for paginated results */
                 "page[number]"?: number;
-                sort?: ("id" | "-id" | "date" | "-date" | "statementType" | "-statementType" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt")[];
+                sort?: ("id" | "-id" | "date" | "-date" | "statementType" | "-statementType" | "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt" | "amount" | "-amount" | "amount" | "-amount")[];
                 /** @description A list of ids to filter by. */
                 "filter[id]"?: string[];
                 /** @description Filters the records */
@@ -8321,6 +8713,67 @@ export interface operations {
             };
             400: components["responses"]["400"];
             401: components["responses"]["401"];
+        };
+    };
+    "division-membership-types.store": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/vnd.api+json": {
+                    data: components["schemas"]["resources.division-membership-types.resource.store"];
+                };
+            };
+        };
+        responses: {
+            /** @description Store division-membership-types */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.api+json": {
+                        jsonapi: {
+                            /**
+                             * version
+                             * @example 1.0
+                             */
+                            version?: string;
+                        };
+                        data: components["schemas"]["resources.division-membership-types.resource.fetch"];
+                    };
+                };
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
+        };
+    };
+    "division-membership-types.destroy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                division_membership_type: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components["responses"]["400"];
+            401: components["responses"]["401"];
+            404: components["responses"]["404"];
         };
     };
 }

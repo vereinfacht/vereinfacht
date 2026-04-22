@@ -115,4 +115,7 @@ JsonApiRoute::server('v1')
 
         $server->resource('payment-periods', JsonApiController::class)
             ->only('index');
+
+        $server->resource('division-membership-types', JsonApiController::class)
+            ->only('store', 'destroy', 'update');
     });

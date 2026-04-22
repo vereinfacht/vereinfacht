@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\DivisionMembershipTypes;
 
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
+use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
 class DivisionMembershipTypeRequest extends ResourceRequest
 {
@@ -12,7 +13,9 @@ class DivisionMembershipTypeRequest extends ResourceRequest
     public function rules(): array
     {
         return [
-            'id' => ['required'],
+            'monthlyFee' => ['required', 'numeric', 'min:0'],
+            'division' => ['required', JsonApiRule::toOne()],
+            'membershipType' => ['required', JsonApiRule::toOne()],
         ];
     }
 }
