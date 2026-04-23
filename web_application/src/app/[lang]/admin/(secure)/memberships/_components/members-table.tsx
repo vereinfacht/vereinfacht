@@ -15,7 +15,6 @@ interface Props {
 }
 
 export default function MembersTable({ members, totalPages }: Props) {
-    console.log(members);
     const { t } = useTranslation();
     const deleteAction = createDeleteFormAction('members');
 

@@ -29,9 +29,8 @@ export default async function MemberShowPage({ params }: Props) {
             ? (member.fullName ?? '')
             : ((member?.membership?.owner as { fullName?: string } | undefined)
                   ?.fullName ?? '');
-    console.log(member);
-    const { t } = createTranslation();
 
+    const { t } = createTranslation();
     const fields = [
         {
             attribute: 'status',

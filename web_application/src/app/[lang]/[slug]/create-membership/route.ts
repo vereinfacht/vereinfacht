@@ -22,6 +22,7 @@ async function createMember(
 ): Promise<MemberIdentifier> {
     const memberRequest = {
         ...member,
+        status: 'inactive' as const,
         club: clubId,
         membership: membershipId,
     };

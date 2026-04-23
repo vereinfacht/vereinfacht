@@ -1,16 +1,12 @@
-import ResourceTable from '@/app/components/Table/ResourceTable';
 import Text from '@/app/components/Text/Text';
-import {
-    BelongsToManyDetailFieldDef,
-    ResourceName,
-} from '@/resources/resource';
+import { BelongsToManyDetailFieldDef } from '@/resources/resource';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 
 type Props<T> = BelongsToManyDetailFieldDef<T>;
 
 export default function BelongsToManyField<T>({
-    attribute,
+    attribute: _attribute,
     label,
     value,
     basePath,
@@ -51,12 +47,7 @@ export default function BelongsToManyField<T>({
                         ))
                     )}
                 </div>
-            ) : (
-                <ResourceTable
-                    resources={items as any}
-                    resourceName={attribute as ResourceName}
-                />
-            )}
+            ) : null}
         </li>
     );
 }

@@ -16,30 +16,27 @@ class MemberRequest extends ResourceRequest
      */
     public function rules(): array
     {
-        $isUpdate = $this->model() !== null;
-
-        $membership = $this->model()?->membership
-            ?? Membership::find($this->input('data.relationships.membership.data.id'));
+        $membershipId = $this->input('data.relationships.membership.data.id')
+            ?? $this->model()?->membership?->id;
+        $membership = $membershipId ? Membership::find($membershipId) : null;
         $possibleDivisions = $membership
             ?->membershipType
             ?->divisions()
-            ?->pluck('division_id')
-            ->toArray();
-
-        $required = $isUpdate ? 'sometimes' : 'required';
+            ?->pluck('divisions.id')
+            ->toArray() ?? [];
 
         return [
             'id' => ['nullable'],
-            'firstName' => [$required],
-            'lastName' => [$required],
+            'firstName' => ['required'],
+            'lastName' => ['required'],
             'gender' => ['nullable', Rule::in(GenderOptionEnum::getAllValues())],
-            'address' => [$required],
-            'zipCode' => [$required],
-            'city' => [$required],
-            'country' => [$required],
-            'birthday' => [$required],
+            'address' => ['required'],
+            'zipCode' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'birthday' => ['required'],
             'phoneNumber' => [],
-            'email' => [$required],
+            'email' => ['required'],
             'status' => ['required', Rule::in(MemberStatusEnum::getAllValues())],
             'club' => ['required', JsonApiRule::toOne()],
             'membership' => ['nullable', JsonApiRule::toOne()],
