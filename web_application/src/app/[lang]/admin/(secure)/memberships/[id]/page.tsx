@@ -62,6 +62,18 @@ export default async function MembershipShowPage({ params }: Props) {
             value: membership.bankIban,
         },
         {
+            attribute: 'monthlyFee',
+            label: t('membership:monthly_fee.label'),
+            type: 'currency',
+            value: membership?.membershipType?.monthlyFee,
+        },
+        {
+            attribute: 'voluntaryContribution',
+            label: t('membership:voluntary_contribution.label'),
+            type: 'currency',
+            value: membership.voluntaryContribution,
+        },
+        {
             attribute: 'startedAt',
             label: t('membership:started_at.label'),
             type: 'date',
@@ -77,12 +89,6 @@ export default async function MembershipShowPage({ params }: Props) {
             attribute: 'notes',
             label: t('membership:notes.label'),
             value: membership.notes,
-        },
-        {
-            attribute: 'monthlyFee',
-            label: t('membership:monthly_fee.label'),
-            type: 'currency',
-            value: membership?.membershipType?.monthlyFee,
         },
         {
             attribute: 'paymentPeriod',

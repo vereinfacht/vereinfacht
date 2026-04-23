@@ -93,14 +93,6 @@ export default async function MemberShowPage({ params }: Props) {
             help: '',
         },
         {
-            attribute: 'divisions',
-            label: t('division:title.other'),
-            type: 'belongsToMany' as const,
-            basePath: '/admin/divisions',
-            displayProperty: 'title',
-            value: member.divisions ?? [],
-        },
-        {
             attribute: 'membership',
             label: t('membership:title.one'),
             type: 'belongsTo' as const,
@@ -112,6 +104,14 @@ export default async function MemberShowPage({ params }: Props) {
                 },
             ],
         },
+        {
+            attribute: 'divisions',
+            label: t('division:title.other'),
+            type: 'belongsToMany' as const,
+            basePath: '/admin/divisions',
+            displayProperty: 'title',
+            value: member.divisions ?? [],
+        },
     ];
 
     return (
@@ -119,19 +119,29 @@ export default async function MemberShowPage({ params }: Props) {
             <EditButton href={`/admin/members/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {
-                    if (
-                        'type' in field &&
-                        field.type === 'belongsToMany'
-                    ) {
+                    if ('type' in field && field.type === 'belongsToMany') {
                         return (
                             <BelongsToManyField
                                 key={index}
                                 type="belongsToMany"
                                 attribute={field.attribute}
                                 label={field.label}
-                                basePath={'basePath' in field ? field.basePath : undefined}
-                                displayProperty={'displayProperty' in field ? field.displayProperty : 'title'}
-                                value={'value' in field && Array.isArray(field.value) ? field.value : []}
+                                basePath={
+                                    'basePath' in field
+                                        ? field.basePath
+                                        : undefined
+                                }
+                                displayProperty={
+                                    'displayProperty' in field
+                                        ? field.displayProperty
+                                        : 'title'
+                                }
+                                value={
+                                    'value' in field &&
+                                    Array.isArray(field.value)
+                                        ? field.value
+                                        : []
+                                }
                             />
                         );
                     }
