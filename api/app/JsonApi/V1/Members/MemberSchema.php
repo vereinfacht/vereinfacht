@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Members;
 
+use App\JsonApi\Filters\MemberMembershipFilter;
 use App\JsonApi\Sorting\FullNameSort;
 use App\JsonApi\V1\PagePagination;
 use App\Models\Member;
@@ -73,6 +74,7 @@ class MemberSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('status')->delimiter(','),
+            MemberMembershipFilter::make('membershipId'),
         ];
     }
 

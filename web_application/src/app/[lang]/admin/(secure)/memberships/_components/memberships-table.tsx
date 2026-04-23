@@ -2,6 +2,7 @@
 
 import { membershipStatusOptions } from '@/actions/memberships/list.schema';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
@@ -106,6 +107,24 @@ export default function MembershipsTable({
                     <TextCell>{paymentPeriod.title}</TextCell>
                 ) : (
                     <TextCell>-</TextCell>
+                );
+            },
+        },
+        {
+            accessorKey: 'members',
+            header: t('member:title.other'),
+            cell: ({ row }) => {
+                const members =
+                    (row.getValue('members') as TMemberDeserialized[]) ?? [];
+
+                return (
+                    <BelongsToManyCell
+                        items={members}
+                        basePath="/admin/members"
+                        parentPath={`/admin/memberships/${row.original.id}`}
+                        displayProperty="fullName"
+                        truncate
+                    />
                 );
             },
         },

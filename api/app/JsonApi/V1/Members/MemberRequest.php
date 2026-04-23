@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\Members;
 
 use App\Enums\GenderOptionEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Membership;
 use Illuminate\Validation\Rule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
@@ -39,7 +40,7 @@ class MemberRequest extends ResourceRequest
             'birthday' => [$required],
             'phoneNumber' => [],
             'email' => [$required],
-            'status' => ['required', Rule::in(['active', 'inactive'])],
+            'status' => ['required', Rule::in(MemberStatusEnum::getAllValues())],
             'club' => ['required', JsonApiRule::toOne()],
             'membership' => ['nullable', JsonApiRule::toOne()],
             'hasConsentedMediaPublication' => ['nullable', JsonApiRule::boolean()],

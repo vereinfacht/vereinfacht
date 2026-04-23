@@ -18,7 +18,7 @@ async function getMembershipsFromApi(params: ListMembershipSearchParamsType) {
                 ? params['filter[status]']
                 : undefined,
         },
-        include: ['owner', 'membershipType', 'paymentPeriod'],
+        include: ['owner', 'membershipType', 'paymentPeriod', 'members'],
     });
 
     return response || [];

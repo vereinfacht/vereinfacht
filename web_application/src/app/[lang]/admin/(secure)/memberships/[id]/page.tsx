@@ -1,4 +1,5 @@
 import { getMembership } from '@/actions/memberships/get';
+import { listMembers } from '@/actions/members/list';
 import EditButton from '../../components/EditButton';
 import BelongsToField from '../../components/Fields/Detail/BelongsToField';
 import DetailField from '../../components/Fields/DetailField';
@@ -8,6 +9,8 @@ import createTranslation from 'next-translate/createTranslation';
 import { notFound } from 'next/navigation';
 import Text from '@/app/components/Text/Text';
 import MembersTable from '../_components/members-table';
+import { deserialize, DocumentObject } from 'jsonapi-fractal';
+import { TMemberDeserialized } from '@/types/resources';
 
 interface Props {
     params: ShowPageParams;
@@ -16,18 +19,27 @@ interface Props {
 export default async function MembershipShowPage({ params }: Props) {
     const membership = await getMembership({
         id: params.id,
-        include: [
-            'membershipType',
-            'owner',
-            'paymentPeriod',
-            'members',
-            'members.divisions',
-        ],
+        include: ['membershipType', 'owner', 'paymentPeriod'],
     });
 
     if (!membership) {
         notFound();
     }
+
+    const membersResponse = await listMembers({
+        page: {
+            number: 1,
+            size: 200,
+        },
+        filter: {
+            membershipId: params.id,
+        },
+        include: ['divisions'],
+    });
+
+    const membersWithDivisions = deserialize(
+        membersResponse as DocumentObject,
+    ) as TMemberDeserialized[];
 
     const { t } = createTranslation();
 
@@ -199,12 +211,15 @@ export default async function MembershipShowPage({ params }: Props) {
                 })}
             </ul>
 
-            {membership.members && (
+            {membersWithDivisions.length > 0 && (
                 <>
                     <Text preset="headline" tag="h2" className="mt-6">
                         {t('member:title.other')}
                     </Text>
-                    <MembersTable members={membership.members} totalPages={1} />
+                    <MembersTable
+                        members={membersWithDivisions}
+                        totalPages={1}
+                    />
                 </>
             )}
         </div>

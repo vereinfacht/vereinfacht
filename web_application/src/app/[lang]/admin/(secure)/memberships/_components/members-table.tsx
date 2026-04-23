@@ -15,6 +15,7 @@ interface Props {
 }
 
 export default function MembersTable({ members, totalPages }: Props) {
+    console.log(members);
     const { t } = useTranslation();
     const deleteAction = createDeleteFormAction('members');
 
@@ -37,14 +38,16 @@ export default function MembersTable({ members, totalPages }: Props) {
             accessorKey: 'divisions',
             header: t('division:title.other'),
             cell: (cell) => {
-                const divisions = cell.getValue() as TDivisionDeserialized[];
+                const divisions =
+                    (cell.row.original.divisions as TDivisionDeserialized[]) ??
+                    [];
 
                 return (
                     <BelongsToManyCell
                         truncate
                         items={divisions}
                         basePath="/admin/divisions"
-                        parentPath={`/admin/divisions/${cell.row.original.id}`}
+                        parentPath={`/admin/members/${cell.row.original.id}`}
                         displayProperty="title"
                     />
                 );

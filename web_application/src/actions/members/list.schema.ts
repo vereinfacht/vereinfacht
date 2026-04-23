@@ -18,6 +18,7 @@ export const listMembersSchema = z.object({
         .object({
             status: z.array(z.enum(memberStatusOptions)).optional(),
             media: z.boolean().optional(),
+            membershipId: z.string().optional(),
         })
         .optional(),
 });
