@@ -1,9 +1,5 @@
 import { getOne } from '@/actions/fetchAdminResources';
 import { membershipStatusOptions } from '@/actions/memberships/list.schema';
-import {
-    getUpdateMembershipSchema,
-    updateMembership,
-} from '@/actions/memberships/update';
 import BelongsToField from '@/app/[lang]/admin/(secure)/components/Fields/Index/BelongsToField';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
@@ -34,8 +30,6 @@ export class MembershipResource extends Resource<Membership> {
         this.canIndex = true;
         this.canView = true;
         this.canEdit = true;
-        this.getUpdateSchema = getUpdateMembershipSchema;
-        this.updateAction = updateMembership;
     }
 
     async getIndexResources(query: Query = {}) {

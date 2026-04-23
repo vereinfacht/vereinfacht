@@ -38,7 +38,7 @@ class MemberSchema extends Schema
             Str::make('gender'),
             Str::make('address'),
             Str::make('zipCode'),
-            Str::make('city')->sortable(),
+            Str::make('city'),
             Str::make('country'),
             Str::make('preferredLocale'),
             Str::make('birthday'),
