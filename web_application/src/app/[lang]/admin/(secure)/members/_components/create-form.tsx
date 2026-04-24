@@ -18,6 +18,7 @@ import {
     TMemberDeserialized,
     TMembershipDeserialized,
 } from '@/types/resources';
+import { Club } from '@/types/models';
 import { supportedLocales } from '@/utils/localization';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
@@ -29,9 +30,18 @@ interface Props {
         payload: FormData,
     ) => Promise<FormActionState>;
     data?: TMemberDeserialized;
+    clubConsentSettings: Pick<
+        Club,
+        | 'hasConsentedMediaPublicationDefaultValue'
+        | 'hasConsentedMediaPublicationIsRequired'
+    >;
 }
 
-export default function CreateForm({ data, action }: Props) {
+export default function CreateForm({
+    data,
+    action,
+    clubConsentSettings,
+}: Props) {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [selectedMembershipId, setSelectedMembershipId] = useState<
@@ -96,7 +106,6 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.email}>
                         <TextInput
@@ -118,7 +127,6 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.birthday}>
                         <TextInput
@@ -140,7 +148,6 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.membership}>
                         <BelongsToSelectInput<TMembershipDeserialized>
@@ -212,7 +219,6 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.address}>
                         <TextInput
@@ -235,7 +241,6 @@ export default function CreateForm({ data, action }: Props) {
                         />
                     </FormField>
                 </div>
-
                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.city}>
                         <TextInput
@@ -308,9 +313,13 @@ export default function CreateForm({ data, action }: Props) {
                         id="hasConsentedMediaPublication"
                         name="hasConsentedMediaPublication"
                         label={t('member:label_consent_media_publication')}
-                        defaultValue={Boolean(
-                            data?.hasConsentedMediaPublication,
-                        )}
+                        defaultValue={
+                            data?.hasConsentedMediaPublication ??
+                            clubConsentSettings.hasConsentedMediaPublicationDefaultValue
+                        }
+                        required={
+                            clubConsentSettings.hasConsentedMediaPublicationIsRequired
+                        }
                     />
                 </FormField>
                 <FormField errors={formState.errors?.media}>
