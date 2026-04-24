@@ -10,6 +10,7 @@ import BelongsToSelectInput, {
 } from '@/app/components/Input/BelongsToSelectInput';
 import SelectInput from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
+import { Club } from '@/types/models';
 import {
     TMemberDeserialized,
     TMembershipDeserialized,
@@ -25,15 +26,17 @@ interface Props {
     ) => Promise<FormActionState>;
     data?: TMembershipDeserialized;
     paymentPeriodOptions?: { value: string; label: string }[];
+    voluntaryContributionSettings?: Pick<Club, 'allowVoluntaryContribution'>;
 }
 
 export default function CreateForm({
     data,
     action,
     paymentPeriodOptions = [],
+    voluntaryContributionSettings,
 }: Props) {
     const { t } = useTranslation();
-
+    console.log('voluntaryContributionSettings', voluntaryContributionSettings);
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
         {
@@ -213,23 +216,6 @@ export default function CreateForm({
                             defaultValue={data?.paymentPeriod?.id ?? ''}
                         />
                     </FormField>
-
-                    <FormField errors={formState.errors?.voluntaryContribution}>
-                        <TextInput
-                            id="voluntaryContribution"
-                            name="voluntaryContribution"
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            label={t('membership:voluntary_contribution.label')}
-                            defaultValue={
-                                data?.voluntaryContribution?.toString() || ''
-                            }
-                        />
-                    </FormField>
-                </div>
-
-                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.status}>
                         <SelectInput
                             id="status"
@@ -253,6 +239,29 @@ export default function CreateForm({
                             required
                         />
                     </FormField>
+                </div>
+
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                    {voluntaryContributionSettings?.allowVoluntaryContribution && (
+                        <FormField
+                            errors={formState.errors?.voluntaryContribution}
+                        >
+                            <TextInput
+                                id="voluntaryContribution"
+                                name="voluntaryContribution"
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                label={t(
+                                    'membership:voluntary_contribution.label',
+                                )}
+                                defaultValue={
+                                    data?.voluntaryContribution?.toString() ||
+                                    ''
+                                }
+                            />
+                        </FormField>
+                    )}
 
                     <FormField errors={formState.errors?.notes}>
                         <TextInput

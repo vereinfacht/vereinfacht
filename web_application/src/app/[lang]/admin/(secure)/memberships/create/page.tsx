@@ -3,14 +3,18 @@ import { listPaymentPeriods } from '@/actions/paymentPeriods/list';
 import { TPaymentPeriodDeserialized } from '@/types/resources';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import CreateForm from '../_components/create-form';
+import { getCurrentClub } from '@/actions/clubs/getCurrent';
 
 export default async function Page() {
-    const response = await listPaymentPeriods({
-        page: { size: 100, number: 1 },
-    });
+    const [paymentPeriodsResponse, club] = await Promise.all([
+        listPaymentPeriods({
+            page: { size: 100, number: 1 },
+        }),
+        getCurrentClub(),
+    ]);
 
     const periods = deserialize(
-        response as DocumentObject,
+        paymentPeriodsResponse as DocumentObject,
     ) as TPaymentPeriodDeserialized[];
 
     const paymentPeriodOptions = periods.map((period) => ({
@@ -22,6 +26,9 @@ export default async function Page() {
         <CreateForm
             action={createMembershipFormAction}
             paymentPeriodOptions={paymentPeriodOptions}
+            voluntaryContributionSettings={{
+                allowVoluntaryContribution: club.allowVoluntaryContribution,
+            }}
         />
     );
 }

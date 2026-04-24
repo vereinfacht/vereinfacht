@@ -6,6 +6,7 @@ import { TPaymentPeriodDeserialized } from '@/types/resources';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import { notFound } from 'next/navigation';
 import CreateForm from '../../_components/create-form';
+import { getCurrentClub } from '@/actions/clubs/getCurrent';
 
 interface Props {
     params: EditPageParams;
@@ -13,12 +14,13 @@ interface Props {
 
 export default async function Page({ params }: Props) {
     const { id } = params;
-    const [membership, periodsResponse] = await Promise.all([
+    const [membership, periodsResponse, club] = await Promise.all([
         getMembership({
             id,
             include: ['membershipType', 'owner', 'paymentPeriod'],
         }),
         listPaymentPeriods({ page: { size: 100, number: 1 } }),
+        getCurrentClub(),
     ]);
     const extendedAction = updateMembershipFormAction.bind(null, id);
 
@@ -40,6 +42,9 @@ export default async function Page({ params }: Props) {
             action={extendedAction}
             data={membership}
             paymentPeriodOptions={paymentPeriodOptions}
+            voluntaryContributionSettings={{
+                allowVoluntaryContribution: club.allowVoluntaryContribution,
+            }}
         />
     );
 }
