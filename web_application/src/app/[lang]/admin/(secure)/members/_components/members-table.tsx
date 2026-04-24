@@ -38,25 +38,6 @@ export default function MembersTable({
 
     const columns: ColumnDef<TMemberDeserialized>[] = [
         {
-            accessorKey: 'status',
-            header: ({ column }) =>
-                extended ? (
-                    <HeaderOptionFilter
-                        options={memberStatusOptions ?? []}
-                        parser={listMemberSearchParams.status}
-                        paramKey={column.id}
-                        translationKey={'member:status'}
-                    />
-                ) : (
-                    t('member:status.label')
-                ),
-            cell: ({ row }) => (
-                <TextCell>
-                    {t(`member:status.${row.getValue('status')}`)}
-                </TextCell>
-            ),
-        },
-        {
             accessorKey: 'fullName',
             header: ({ column }) =>
                 extended ? (
@@ -120,6 +101,25 @@ export default function MembersTable({
             accessorKey: 'email',
             header: t('member:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
+        },
+        {
+            accessorKey: 'status',
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderOptionFilter
+                        options={memberStatusOptions ?? []}
+                        parser={listMemberSearchParams.status}
+                        paramKey={column.id}
+                        translationKey={'member:status'}
+                    />
+                ) : (
+                    t('member:status.label')
+                ),
+            cell: ({ row }) => (
+                <TextCell>
+                    {t(`member:status.${row.getValue('status')}`)}
+                </TextCell>
+            ),
         },
     ];
 

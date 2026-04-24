@@ -40,25 +40,6 @@ export default function MembershipsTable({
 
     const columns: ColumnDef<TMembershipDeserialized>[] = [
         {
-            accessorKey: 'status',
-            header: ({ column }) =>
-                extended ? (
-                    <HeaderOptionFilter
-                        options={membershipStatusOptions ?? []}
-                        parser={listMembershipSearchParams['filter[status]']}
-                        paramKey={column.id}
-                        translationKey={'membership:status'}
-                    />
-                ) : (
-                    t('membership:status.label')
-                ),
-            cell: ({ row }) => (
-                <TextCell>
-                    {t(`membership:status.${row.getValue('status')}`)}
-                </TextCell>
-            ),
-        },
-        {
             accessorKey: 'owner',
             header: t('membership:owner.label'),
             cell: ({ row }) => {
@@ -146,6 +127,25 @@ export default function MembershipsTable({
                     />
                 );
             },
+        },
+        {
+            accessorKey: 'status',
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderOptionFilter
+                        options={membershipStatusOptions ?? []}
+                        parser={listMembershipSearchParams['filter[status]']}
+                        paramKey={column.id}
+                        translationKey={'membership:status'}
+                    />
+                ) : (
+                    t('membership:status.label')
+                ),
+            cell: ({ row }) => (
+                <TextCell>
+                    {t(`membership:status.${row.getValue('status')}`)}
+                </TextCell>
+            ),
         },
     ];
 

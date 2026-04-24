@@ -45,16 +45,16 @@ export default async function MembershipShowPage({ params }: Props) {
 
     const fields = [
         {
+            attribute: 'bankAccountHolder',
+            label: t('membership:bank_account_holder.label'),
+            value: membership.bankAccountHolder,
+        },
+        {
             attribute: 'status',
             label: t('membership:status.label'),
             value: membership.status
                 ? t(`membership:status.${membership.status}`)
                 : '',
-        },
-        {
-            attribute: 'bankAccountHolder',
-            label: t('membership:bank_account_holder.label'),
-            value: membership.bankAccountHolder,
         },
         {
             attribute: 'bankIban',
@@ -224,6 +224,11 @@ export default async function MembershipShowPage({ params }: Props) {
                     </Text>
                     <MembersTable
                         members={membersWithDivisions}
+                        ownerId={
+                            membership.owner?.id
+                                ? [membership.owner.id]
+                                : undefined
+                        }
                         totalPages={1}
                     />
                 </>

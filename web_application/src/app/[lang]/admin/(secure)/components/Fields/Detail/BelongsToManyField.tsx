@@ -23,7 +23,7 @@ export default function BelongsToManyField<T>({
             </Text>
             {basePath ? (
                 <div
-                    className="rounded-lg border border-transparent px-3 py-2 md:flex md:flex-row md:gap-6"
+                    className="rounded-lg border border-transparent px-3 py-2 md:flex md:flex-col md:gap-4"
                     style={{
                         backgroundImage:
                             'linear-gradient(white, white), linear-gradient(#F7F9FA, #EBF1F4)',

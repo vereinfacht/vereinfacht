@@ -11,23 +11,15 @@ import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     members: TMemberDeserialized[];
+    ownerId?: string[];
     totalPages: number;
 }
 
-export default function MembersTable({ members, totalPages }: Props) {
+export default function MembersTable({ members, ownerId, totalPages }: Props) {
     const { t } = useTranslation();
     const deleteAction = createDeleteFormAction('members');
 
     const columns: ColumnDef<TMemberDeserialized>[] = [
-        {
-            accessorKey: 'status',
-            header: t('member:status.label'),
-            cell: ({ row }) => (
-                <TextCell>
-                    {t(`member:status.${row.getValue('status')}`)}
-                </TextCell>
-            ),
-        },
         {
             accessorKey: 'fullName',
             header: t('member:name.label'),
@@ -57,7 +49,22 @@ export default function MembersTable({ members, totalPages }: Props) {
             header: t('member:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
+        {
+            accessorKey: 'status',
+            header: t('member:status.label'),
+            cell: ({ row }) => (
+                <TextCell>
+                    {t(`member:status.${row.getValue('status')}`)}
+                </TextCell>
+            ),
+        },
     ];
+
+    const canDeleteMember = (member: TMemberDeserialized) => {
+        const memberId = (member as { id?: string }).id;
+
+        return ownerId ? !ownerId.includes(memberId ?? '') : true;
+    };
 
     return (
         <DataTable
@@ -67,7 +74,7 @@ export default function MembersTable({ members, totalPages }: Props) {
             totalPages={totalPages}
             canEdit={true}
             canView={true}
-            canDelete={false}
+            canDelete={canDeleteMember}
             deleteAction={deleteAction}
         />
     );

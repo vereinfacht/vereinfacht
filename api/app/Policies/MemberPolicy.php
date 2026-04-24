@@ -62,6 +62,10 @@ class MemberPolicy
      */
     public function delete(User $user, Member $member): bool
     {
+        if ($member->memberships()->where('owner_id', $member->id)->exists()) {
+            return false;
+        }
+
         if ($user instanceof Club) {
             return $user->id === $member->club_id;
         }

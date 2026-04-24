@@ -33,14 +33,14 @@ export default async function MemberShowPage({ params }: Props) {
     const { t } = createTranslation();
     const fields = [
         {
-            attribute: 'status',
-            label: t('member:status.label'),
-            value: member.status,
-        },
-        {
             attribute: 'name',
             label: t('member:name.label'),
             value: member.fullName,
+        },
+        {
+            attribute: 'status',
+            label: t('member:status.label'),
+            value: member.status,
         },
         {
             attribute: 'gender',
