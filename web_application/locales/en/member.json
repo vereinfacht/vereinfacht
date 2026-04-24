@@ -35,6 +35,9 @@
     "has_consented_media_publication": {
         "label": "Media consent"
     },
+    "preferred_locale": {
+        "label": "Preferred language"
+    },
     "birthday": {
         "label": "Birthday"
     },

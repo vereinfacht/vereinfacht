@@ -86,6 +86,17 @@ export default async function MemberShowPage({ params }: Props) {
             value: member?.country,
         },
         {
+            label: t('member:preferred_locale.label'),
+            attribute: 'preferredLocale',
+            value: member?.preferredLocale,
+        },
+        {
+            label: t('member:has_consented_media_publication.label'),
+            attribute: 'hasConsentedMediaPublication',
+            type: 'boolean',
+            value: member?.hasConsentedMediaPublication,
+        },
+        {
             attribute: 'media',
             type: 'media',
             value: member?.media,

@@ -253,6 +253,8 @@ export default function CreateForm({ data, action }: Props) {
                             required
                         />
                     </FormField>
+                </div>
+                <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                     <FormField errors={formState.errors?.preferredLocale}>
                         <SelectInput
                             id="preferredLocale"
@@ -265,36 +267,36 @@ export default function CreateForm({ data, action }: Props) {
                             }))}
                         />
                     </FormField>
+                    <FormField errors={formState.errors?.divisions}>
+                        <BelongsToMultiselectInput<TDivisionDeserialized>
+                            resourceName="divisions"
+                            resourceType="divisions"
+                            label={t('division:title.other')}
+                            action={(searchTerm) =>
+                                listDivisions({
+                                    page: {
+                                        size: itemsPerQuery,
+                                        number: 1,
+                                    },
+                                    filter: {
+                                        query: searchTerm,
+                                        membershipId:
+                                            selectedMembershipId ?? '__none__',
+                                    },
+                                })
+                            }
+                            optionLabel={(item) => item.title as string}
+                            defaultValue={
+                                data?.divisions
+                                    ? data.divisions.map((division) => ({
+                                          value: division.id,
+                                          label: division.title as string,
+                                      }))
+                                    : []
+                            }
+                        />
+                    </FormField>
                 </div>
-                <FormField errors={formState.errors?.divisions}>
-                    <BelongsToMultiselectInput<TDivisionDeserialized>
-                        resourceName="divisions"
-                        resourceType="divisions"
-                        label={t('division:title.other')}
-                        action={(searchTerm) =>
-                            listDivisions({
-                                page: {
-                                    size: itemsPerQuery,
-                                    number: 1,
-                                },
-                                filter: {
-                                    query: searchTerm,
-                                    membershipId:
-                                        selectedMembershipId ?? '__none__',
-                                },
-                            })
-                        }
-                        optionLabel={(item) => item.title as string}
-                        defaultValue={
-                            data?.divisions
-                                ? data.divisions.map((division) => ({
-                                      value: division.id,
-                                      label: division.title as string,
-                                  }))
-                                : []
-                        }
-                    />
-                </FormField>
                 <FormField
                     errors={formState.errors?.hasConsentedMediaPublication}
                 >
