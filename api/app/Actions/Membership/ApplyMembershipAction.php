@@ -2,6 +2,7 @@
 
 namespace App\Actions\Membership;
 
+use App\Enums\MemberStatusEnum;
 use App\Enums\MembershipStatusEnum;
 use App\Events\AppliedForMembership;
 use App\Models\Membership;
@@ -12,6 +13,14 @@ class ApplyMembershipAction
     public function execute(Membership $membership): void
     {
         $this->validateMembershipForApplication($membership);
+
+        $membership->members()->update([
+            'status' => MemberStatusEnum::INACTIVE->value,
+        ]);
+
+        $membership->owner()->update([
+            'status' => MemberStatusEnum::INACTIVE->value,
+        ]);
 
         $membership->status = MembershipStatusEnum::APPLIED;
         $membership->save();

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Actions\Membership\ApplyMembershipAction;
 use App\Enums\MembershipStatusEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Club;
 use App\Models\Member;
 use App\Models\Membership;
@@ -34,13 +35,13 @@ class MembershipApplicationTest extends TestCase
 
         $this->assertDatabaseHas('members', [
             'id' => $membership->owner_member_id,
-            'status' => MembershipStatusEnum::ACTIVE->value,
+            'status' => MemberStatusEnum::INACTIVE->value,
         ]);
 
         foreach ($membership->members as $member) {
             $this->assertDatabaseHas('members', [
                 'id' => $member->getKey(),
-                'status' => MembershipStatusEnum::ACTIVE->value,
+                'status' => MemberStatusEnum::INACTIVE->value,
             ]);
         }
     }

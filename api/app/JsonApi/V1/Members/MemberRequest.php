@@ -37,7 +37,7 @@ class MemberRequest extends ResourceRequest
             'birthday' => ['required'],
             'phoneNumber' => [],
             'email' => ['required'],
-            'status' => ['required', Rule::in(MemberStatusEnum::getAllValues())],
+            'status' => ['nullable', Rule::in(MemberStatusEnum::getAllValues())],
             'club' => ['required', JsonApiRule::toOne()],
             'membership' => ['nullable', JsonApiRule::toOne()],
             'hasConsentedMediaPublication' => ['nullable', JsonApiRule::boolean()],
