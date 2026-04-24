@@ -164,11 +164,15 @@ export default function CreateForm({ data, action }: Props) {
                                     filter: {
                                         query: searchTerm,
                                     },
-                                    include: ['owner'],
+                                    include: ['owner', 'membershipType'],
                                 })
                             }
                             optionLabel={(item) => {
-                                return item.owner?.fullName;
+                                return (
+                                    item.owner?.fullName +
+                                    ' - ' +
+                                    item.membershipType?.title
+                                );
                             }}
                             defaultValue={
                                 data?.membership?.id
