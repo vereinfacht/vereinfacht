@@ -60,7 +60,7 @@ class MembershipSchema extends Schema
         return [
             WhereIdIn::make($this),
             WhereIn::make('status')->delimiter(','),
-            QueryFilter::make('query', ['bank_account_holder']),
+            QueryFilter::make('query', ['first_name', 'last_name']),
         ];
     }
 
