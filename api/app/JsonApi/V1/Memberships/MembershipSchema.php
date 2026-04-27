@@ -81,6 +81,8 @@ class MembershipSchema extends Schema
             'members',
             'members.divisions',
             'club',
+            'membershipType.divisionMembershipTypes',
+            'membershipType.divisionMembershipTypes.division',
         ];
     }
 }

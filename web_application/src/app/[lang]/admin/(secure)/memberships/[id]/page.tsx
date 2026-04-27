@@ -10,7 +10,10 @@ import { notFound } from 'next/navigation';
 import Text from '@/app/components/Text/Text';
 import MembersTable from '../_components/members-table';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
-import { TMemberDeserialized } from '@/types/resources';
+import {
+    TDivisionMembershipTypeDeserialized,
+    TMemberDeserialized,
+} from '@/types/resources';
 
 interface Props {
     params: ShowPageParams;
@@ -19,7 +22,13 @@ interface Props {
 export default async function MembershipShowPage({ params }: Props) {
     const membership = await getMembership({
         id: params.id,
-        include: ['membershipType', 'owner', 'paymentPeriod'],
+        include: [
+            'membershipType',
+            'membershipType.divisionMembershipTypes',
+            'membershipType.divisionMembershipTypes.division',
+            'owner',
+            'paymentPeriod',
+        ],
     });
 
     if (!membership) {
@@ -40,6 +49,11 @@ export default async function MembershipShowPage({ params }: Props) {
     const membersWithDivisions = deserialize(
         membersResponse as DocumentObject,
     ) as TMemberDeserialized[];
+
+    const divisionMembershipTypes =
+        (membership.membershipType
+            ?.divisionMembershipTypes as TDivisionMembershipTypeDeserialized[]) ??
+        [];
 
     const { t } = createTranslation();
 
@@ -224,6 +238,7 @@ export default async function MembershipShowPage({ params }: Props) {
                     </Text>
                     <MembersTable
                         members={membersWithDivisions}
+                        divisionMembershipTypes={divisionMembershipTypes}
                         ownerId={
                             membership.owner?.id
                                 ? [membership.owner.id]

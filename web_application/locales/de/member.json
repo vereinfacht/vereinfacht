@@ -44,6 +44,9 @@
     "media": {
         "label": "Medien"
     },
+    "total_cost": {
+        "label": "Beiträge"
+    },
     "label_identical_information": "Kontakt- und Adressinformationen identisch mit {{name}}",
     "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden.",
     "create": "Mitglied erstellen",

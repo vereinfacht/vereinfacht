@@ -4,18 +4,29 @@ import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
-import { TDivisionDeserialized, TMemberDeserialized } from '@/types/resources';
+import {
+    TDivisionDeserialized,
+    TDivisionMembershipTypeDeserialized,
+    TMemberDeserialized,
+} from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
+import CurrencyCell from '@/app/components/Table/CurrencyCell';
 
 interface Props {
     members: TMemberDeserialized[];
+    divisionMembershipTypes?: TDivisionMembershipTypeDeserialized[];
     ownerId?: string[];
     totalPages: number;
 }
 
-export default function MembersTable({ members, ownerId, totalPages }: Props) {
+export default function MembersTable({
+    members,
+    divisionMembershipTypes,
+    ownerId,
+    totalPages,
+}: Props) {
     const { t } = useTranslation();
     const deleteAction = createDeleteFormAction('members');
 
@@ -42,6 +53,28 @@ export default function MembersTable({ members, ownerId, totalPages }: Props) {
                         displayProperty="title"
                     />
                 );
+            },
+        },
+        {
+            id: 'totalCost',
+            accessorKey: 'divisions',
+            header: t('member:total_cost.label'),
+            cell: ({ row }) => {
+                const divisions =
+                    (row.original.divisions as TDivisionDeserialized[]) ?? [];
+
+                const totalCost = divisions.reduce((sum, div) => {
+                    const divisionMembershipType =
+                        divisionMembershipTypes?.find(
+                            (item) => item.division?.id === div.id,
+                        );
+
+                    return (
+                        sum + Number(divisionMembershipType?.monthlyFee ?? 0)
+                    );
+                }, 0);
+
+                return <CurrencyCell value={totalCost} />;
             },
         },
         {
