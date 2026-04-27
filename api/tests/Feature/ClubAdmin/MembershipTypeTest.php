@@ -128,4 +128,86 @@ class MembershipTypeTest extends TestCase
             'monthly_fee' => 200,
         ]);
     }
+
+    public function test_admin_user_can_set_only_minimum_number_of_divisions(): void
+    {
+        $user = User::factory()->create();
+        $club = Club::factory()->create();
+        $membership = Membership::factory()->create([
+            'club_id' => $club->getKey(),
+            'membership_type_id' => MembershipType::factory()->create([
+                'club_id' => $club->getKey(),
+                'minimum_number_of_divisions' => null,
+                'maximum_number_of_divisions' => null,
+            ])->getKey(),
+        ]);
+        $membershipType = $membership->membershipType;
+
+        setPermissionsTeamId($club);
+        $user->assignRole('club admin');
+
+        $data = [
+            'type' => 'membership-types',
+            'id' => (string) $membershipType->getKey(),
+            'attributes' => [
+                'minimumNumberOfDivisions' => 1,
+            ],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('membership-types')
+            ->withData($data)
+            ->patch("/api/v1/membership-types/{$membershipType->getKey()}");
+
+        $response->assertFetchedOne($membershipType);
+
+        $this->assertDatabaseHas('membership_types', [
+            'id' => $membershipType->getKey(),
+            'minimum_number_of_divisions' => 1,
+            'maximum_number_of_divisions' => null,
+        ]);
+    }
+
+    public function test_admin_user_can_set_only_maximum_number_of_divisions(): void
+    {
+        $user = User::factory()->create();
+        $club = Club::factory()->create();
+        $membership = Membership::factory()->create([
+            'club_id' => $club->getKey(),
+            'membership_type_id' => MembershipType::factory()->create([
+                'club_id' => $club->getKey(),
+                'minimum_number_of_divisions' => null,
+                'maximum_number_of_divisions' => null,
+            ])->getKey(),
+        ]);
+        $membershipType = $membership->membershipType;
+
+        setPermissionsTeamId($club);
+        $user->assignRole('club admin');
+
+        $data = [
+            'type' => 'membership-types',
+            'id' => (string) $membershipType->getKey(),
+            'attributes' => [
+                'maximumNumberOfDivisions' => 3,
+            ],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->jsonApi()
+            ->expects('membership-types')
+            ->withData($data)
+            ->patch("/api/v1/membership-types/{$membershipType->getKey()}");
+
+        $response->assertFetchedOne($membershipType);
+
+        $this->assertDatabaseHas('membership_types', [
+            'id' => $membershipType->getKey(),
+            'minimum_number_of_divisions' => null,
+            'maximum_number_of_divisions' => 3,
+        ]);
+    }
 }
