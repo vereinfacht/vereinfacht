@@ -37,6 +37,7 @@ class MemberTest extends TestCase
                 'birthday' => $member->birthday,
                 'phoneNumber' => $member->phone_number,
                 'email' => $member->email,
+                'hasConsentedMediaPublication' => true,
             ],
             'relationships' => [
                 'club' => [
@@ -107,6 +108,7 @@ class MemberTest extends TestCase
                 'birthday' => $member->birthday,
                 'phoneNumber' => $member->phone_number,
                 'email' => $member->email,
+                'hasConsentedMediaPublication' => true,
             ],
             'relationships' => [
                 'club' => [
