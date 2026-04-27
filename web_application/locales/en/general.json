@@ -33,6 +33,7 @@
     "selected_count": "{{count}} selected",
     "plus_n_more": "+{{count}} more",
     "select": "Select",
+    "select_resource": "Select resource to attach",
     "no_media_attached": "No media attached.",
 
     "title": "Title",
