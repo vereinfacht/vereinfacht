@@ -135,6 +135,11 @@ export default function MembershipForm({
                             placeholder={t('membership:started_at.placeholder')}
                             value={formData.startedAt}
                             onChange={handleInputChange}
+                            min={
+                                membershipStartCycleType === 'daily'
+                                    ? '1900-01-01'
+                                    : '1900-01'
+                            }
                             required
                         />
                         {paymentPeriodOptions.length > 1 && (
