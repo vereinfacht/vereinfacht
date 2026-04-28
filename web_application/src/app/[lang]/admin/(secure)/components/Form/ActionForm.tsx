@@ -12,6 +12,7 @@ interface Props extends PropsWithChildren {
     type: 'create' | 'update' | 'delete';
     translationKey: string;
     loading?: boolean;
+    submitLabel?: string;
 }
 
 export default function ActionForm({

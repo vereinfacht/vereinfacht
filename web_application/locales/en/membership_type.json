@@ -39,5 +39,6 @@
         "label": "Number of divisions"
     },
     "create": "Create membership type",
-    "edit": "Edit membership type"
+    "edit": "Edit membership type",
+    "attach_division": "Attach division"
 }
