@@ -31,16 +31,14 @@ export const membershipTypeAttributesSchema = z
         minimumNumberOfMonths: z.coerce.number().min(0).max(24),
         minimumNumberOfMembers: z.coerce.number().min(1),
         maximumNumberOfMembers: z.coerce.number().min(1),
-        minimumNumberOfDivisions: z.coerce
-            .number()
-            .min(0)
-            .nullable()
-            .optional(),
-        maximumNumberOfDivisions: z.coerce
-            .number()
-            .min(0)
-            .nullable()
-            .optional(),
+        minimumNumberOfDivisions: z.preprocess(
+            (value) => (value === '' || value === undefined ? null : value),
+            z.coerce.number().int().min(0).nullable(),
+        ),
+        maximumNumberOfDivisions: z.preprocess(
+            (value) => (value === '' || value === undefined ? null : value),
+            z.coerce.number().int().min(0).nullable(),
+        ),
     })
     .refine(
         (data) => data.minimumNumberOfMembers <= data.maximumNumberOfMembers,
