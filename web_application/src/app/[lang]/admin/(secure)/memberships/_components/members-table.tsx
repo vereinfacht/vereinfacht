@@ -87,7 +87,9 @@ export default function MembersTable({
             header: t('member:status.label'),
             cell: ({ row }) => (
                 <TextCell>
-                    {t(`member:status.${row.getValue('status')}`)}
+                    {row.getValue('status')
+                        ? t(`member:status.${row.getValue('status')}`)
+                        : '–'}
                 </TextCell>
             ),
         },

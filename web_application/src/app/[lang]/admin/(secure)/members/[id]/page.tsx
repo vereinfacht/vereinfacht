@@ -40,14 +40,14 @@ export default async function MemberShowPage({ params }: Props) {
         {
             attribute: 'status',
             label: t('member:status.label'),
-            value: member.status,
+            value: member.status ? t('member:status.' + member.status) : '–',
         },
         {
             attribute: 'gender',
             label: t('general:gender.label'),
             value: member.gender
                 ? t('general:gender.options.' + member.gender)
-                : '',
+                : '–',
         },
         {
             attribute: 'birthday',
