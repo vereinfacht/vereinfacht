@@ -9,8 +9,8 @@ import { ibanSchema } from '../financeAccounts/create.schema';
 const updateMembershipSchema = z.object({
     bankIban: ibanSchema,
     bankAccountHolder: z.string().min(2).max(255),
-    startedAt: z.coerce.date(),
-    endedAt: z.coerce.date().optional().or(z.literal('')),
+    startedAt: z.coerce.date().min(new Date('1900-01-01')),
+    endedAt: z.coerce.date().min(new Date('1900-01-01')).optional().or(z.literal('')),
     status: z.enum(['active', 'applied', 'cancelled']),
 });
 

@@ -29,7 +29,7 @@ class MembershipRequest extends ResourceRequest
         return [
             'bankIban' => ['required', 'regex:/[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}/'],
             'bankAccountHolder' => ['required', 'string', 'min:2', 'max:255'],
-            'startedAt' => ['required', 'date'],
+            'startedAt' => ['required', 'date', 'after:1899-12-31'],
             'endedAt' => ['nullable', 'date', 'after:startedAt'],
             'notes' => ['nullable', 'string', 'max:1500'],
             'voluntaryContribution' => ['nullable', 'numeric', 'min:0'],
@@ -42,8 +42,8 @@ class MembershipRequest extends ResourceRequest
             'members' => [
                 'nullable',
                 'array',
-                'min:'.$membershipType?->minimum_number_of_members,
-                'max:'.$membershipType?->maximum_number_of_members,
+                'min:' . $membershipType?->minimum_number_of_members,
+                'max:' . $membershipType?->maximum_number_of_members,
                 JsonApiRule::toMany(),
             ],
         ];
