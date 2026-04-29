@@ -6,17 +6,15 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     protected $permissionNames = [
-        'view members',
-        'create members',
-        'update members',
-        'delete members',
-        'delete memberships',
+        'view paymentPeriods',
+        'create paymentPeriods',
+        'update paymentPeriods',
+        'delete paymentPeriods',
     ];
 
     public function up(): void
     {
         $now = now();
-        $clubAdminRoleId = DB::table('roles')->where('name', 'club admin')->first()?->id;
 
         foreach ($this->permissionNames as $permissionName) {
             DB::table('permissions')->insertOrIgnore([
@@ -30,10 +28,19 @@ return new class extends Migration
 
             $permissionId = DB::table('permissions')->where('name', $permissionName)->first()?->id;
 
-            if ($permissionId && $clubAdminRoleId) {
-                DB::table('role_has_permissions')->insertOrIgnore([
-                    ['permission_id' => $permissionId, 'role_id' => $clubAdminRoleId],
-                ]);
+            if ($permissionId) {
+                $roleIds = DB::table('roles')
+                    ->whereIn('name', ['club admin', 'club treasurer'])
+                    ->pluck('id');
+
+                foreach ($roleIds as $roleId) {
+                    DB::table('role_has_permissions')->insertOrIgnore([
+                        [
+                            'permission_id' => $permissionId,
+                            'role_id' => $roleId,
+                        ],
+                    ]);
+                }
             }
         }
 
