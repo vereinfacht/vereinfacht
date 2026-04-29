@@ -18,17 +18,17 @@ export const membershipAttributesSchema = z.object({
 });
 
 export const membershipDateRefinement = (
-    attributes: { startedAt: string; endedAt?: string },
+    attributes: { startedAt: Date; endedAt?: Date | '' },
     ctx: z.RefinementCtx,
 ) => {
     if (!attributes.endedAt) {
         return;
     }
 
-    const startedAt = new Date(attributes.startedAt);
-    const endedAt = new Date(attributes.endedAt);
+    const startedAt = attributes.startedAt;
+    const endedAt = attributes.endedAt;
 
-    if (Number.isNaN(startedAt.getTime()) || Number.isNaN(endedAt.getTime())) {
+    if (!(startedAt instanceof Date) || !(endedAt instanceof Date)) {
         return;
     }
 
