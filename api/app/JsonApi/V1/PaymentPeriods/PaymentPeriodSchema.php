@@ -26,7 +26,7 @@ class PaymentPeriodSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('title'),
+            Str::make('title')->readOnly(),
             Str::make('rrule'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
