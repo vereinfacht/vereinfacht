@@ -6,8 +6,12 @@ export const membershipStatus = ['active', 'applied', 'cancelled'] as const;
 export const membershipAttributesSchema = z.object({
     bankIban: ibanSchema,
     bankAccountHolder: z.string().min(2).max(255),
-    startedAt: z.string().min(1),
-    endedAt: z.string().optional(),
+    startedAt: z.coerce.date().min(new Date('1900-01-01')),
+    endedAt: z.coerce
+        .date()
+        .min(new Date('1900-01-01'))
+        .optional()
+        .or(z.literal('')),
     notes: z.string().optional(),
     voluntaryContribution: z.coerce.number().min(0).optional(),
     status: z.enum(membershipStatus),
