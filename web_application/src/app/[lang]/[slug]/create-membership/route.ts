@@ -22,10 +22,13 @@ async function createMember(
 ): Promise<MemberIdentifier> {
     const memberRequest = {
         ...member,
+        status: 'inactive' as const,
         club: clubId,
         membership: membershipId,
     };
-    const createMemberResponse = await clubApi.createMember(memberRequest);
+    const createMemberResponse = await clubApi.createMember(
+        memberRequest as any,
+    );
 
     if (!createMemberResponse.data.id) {
         return Promise.reject('Could not create member');

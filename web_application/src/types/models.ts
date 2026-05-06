@@ -1,5 +1,6 @@
 import { TranslatableAttribute } from './jsonapi-models';
 import { TTaxAccountDeserialized } from './resources';
+import { TMediaDeserialized } from './resources';
 
 export interface Model {
     id?: string;
@@ -29,6 +30,9 @@ export interface Member extends Model {
     birthday: string;
     phoneNumber: string;
     email: string;
+    status?: 'active' | 'inactive';
+    membership?: Membership;
+    media?: TMediaDeserialized[];
     divisions?: Division[] | [];
     hasConsentedMediaPublication?: boolean;
 }

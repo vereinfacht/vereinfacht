@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Media;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class UploadMediaRequest extends FormRequest
 {
@@ -30,7 +29,7 @@ class UploadMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'collectionName' => ['required', 'string', 'in:receipts'],
+            'collectionName' => ['required', 'string', 'in:receipts,members'],
             'clubId' => ['required', 'integer', 'exists:clubs,id'],
             'file' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf'],
         ];

@@ -4,6 +4,10 @@ import {
     financeContactTypeOptions,
 } from '@/actions/financeContacts/list.schema';
 import {
+    memberSortingOptions,
+    memberStatusOptions,
+} from '@/actions/members/list.schema';
+import {
     membershipSortingOptions,
     membershipStatusOptions,
 } from '@/actions/memberships/list.schema';
@@ -152,6 +156,21 @@ export const listMembershipTypesSearchParams = {
     }),
 };
 
+export const listMemberSearchParams = {
+    page: paginationSearchParamParser,
+    sort: parseAsArrayOf(
+        parseAsStringLiteral(memberSortingOptions),
+    ).withOptions({
+        shallow: false,
+    }),
+    status: parseAsArrayOf(parseAsStringLiteral(memberStatusOptions))
+        .withDefault([])
+        .withOptions({
+            shallow: false,
+        }),
+    media: parseAsBoolean.withOptions({ shallow: false }),
+};
+
 export const loadListSearchParams = createLoader({
     page: paginationSearchParamParser,
 });
@@ -189,6 +208,9 @@ export const loadListDivisionsSearchParams = createLoader(
 export const loadListMembershipTypesSearchParams = createLoader(
     listMembershipTypesSearchParams,
 );
+
+export const loadListMembersSearchParams = createLoader(listMemberSearchParams);
+
 export type ListMembershipSearchParamsType = inferParserType<
     typeof listMembershipSearchParams
 >;
@@ -223,4 +245,8 @@ export type ListDivisionSearchParamsType = inferParserType<
 
 export type ListMembershipTypesSearchParamsType = inferParserType<
     typeof listMembershipTypesSearchParams
+>;
+
+export type ListMembersSearchParamsType = inferParserType<
+    typeof listMemberSearchParams
 >;

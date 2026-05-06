@@ -40,7 +40,7 @@ JsonApiRoute::server('v1')
     ->middleware(ChangeLocaleFromHeader::class)
     ->resources(function ($server) {
         $server->resource('memberships', MembershipController::class)
-            ->only('index', 'show', 'store', 'update')
+            ->only('index', 'show', 'store', 'update', 'destroy')
             ->actions('-actions', function (ActionRegistrar $actions) {
                 $actions->withId()->post('apply');
             });
@@ -52,7 +52,7 @@ JsonApiRoute::server('v1')
             ->relationships(function ($relations) {
                 $relations->hasMany('divisions', JsonApiController::class);
             })
-            ->only('store');
+            ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('divisions', JsonApiController::class)
             ->only('index', 'show',  'store', 'update', 'destroy');
@@ -112,6 +112,9 @@ JsonApiRoute::server('v1')
 
         $server->resource('tax-accounts', JsonApiController::class)
             ->only('index', 'show', 'store', 'update', 'destroy');
+
+        $server->resource('payment-periods', JsonApiController::class)
+            ->only('index');
 
         $server->resource('division-membership-types', JsonApiController::class)
             ->only('store', 'destroy', 'update');

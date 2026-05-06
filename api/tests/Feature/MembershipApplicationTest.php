@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Actions\Membership\ApplyMembershipAction;
 use App\Enums\MembershipStatusEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Club;
 use App\Models\Member;
 use App\Models\Membership;
@@ -25,10 +26,24 @@ class MembershipApplicationTest extends TestCase
 
         (new ApplyMembershipAction)->execute($membership);
 
+        $membership->refresh();
+
         $this->assertDatabaseHas('memberships', [
             'id' => $membership->getKey(),
             'status' => MembershipStatusEnum::APPLIED,
         ]);
+
+        $this->assertDatabaseHas('members', [
+            'id' => $membership->owner_member_id,
+            'status' => MemberStatusEnum::INACTIVE->value,
+        ]);
+
+        foreach ($membership->members as $member) {
+            $this->assertDatabaseHas('members', [
+                'id' => $member->getKey(),
+                'status' => MemberStatusEnum::INACTIVE->value,
+            ]);
+        }
     }
 
     public function test_cannot_apply_for_membership_if_status_wasnt_null()

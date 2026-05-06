@@ -3,7 +3,7 @@ import z from 'zod';
 import { idSchema } from '../base/get.schema';
 
 export const uploadSchema = z.object({
-    collectionName: z.enum(['receipts']),
+    collectionName: z.enum(['receipts', 'members']),
     file: z
         .any()
         .or(z.instanceof(File))

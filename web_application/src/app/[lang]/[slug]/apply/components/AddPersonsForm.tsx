@@ -144,7 +144,7 @@ export default function AddPersonsForm(props: Props) {
                             rightComponent={
                                 Boolean(
                                     index + 2 >
-                                        membershipType.minimumNumberOfMembers,
+                                    membershipType.minimumNumberOfMembers,
                                 ) && (
                                     <IconTrash
                                         className="[stroke-linejoin:round h-9 w-9 cursor-pointer stroke-red-500 stroke-2 [stroke-linecap:round]"
@@ -202,7 +202,7 @@ function fillMemberFromFormData(
 
         if (formData.has(`members.${index}.${key}`)) {
             newMember[key] =
-                (formData.get(`members.${index}.${key}`) as string) || '';
+                (formData.get(`members.${index}.${key}`) as any) || '';
         }
     }
 

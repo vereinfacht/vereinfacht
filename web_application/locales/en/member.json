@@ -1,5 +1,54 @@
 {
-    "birthday": "Birthday",
+    "title": {
+        "one": "Member",
+        "other": "Members"
+    },
+    "name": {
+        "label": "Name"
+    },
+    "membership": {
+        "label": "Membership"
+    },
+    "status": {
+        "label": "Status",
+        "active": "active",
+        "inactive": "inactive"
+    },
+    "email": {
+        "label": "Email"
+    },
+    "address": {
+        "label": "Address"
+    },
+    "zip_code": {
+        "label": "Zip code"
+    },
+    "city": {
+        "label": "City"
+    },
+    "country": {
+        "label": "Country"
+    },
+    "phone_number": {
+        "label": "Phone"
+    },
+    "has_consented_media_publication": {
+        "label": "Media consent"
+    },
+    "preferred_locale": {
+        "label": "Preferred language"
+    },
+    "birthday": {
+        "label": "Birthday"
+    },
+    "media": {
+        "label": "Media"
+    },
+    "total_cost": {
+        "label": "Contributions"
+    },
     "label_identical_information": "Contact and address information is identical to {{name}}",
-    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press."
+    "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
+    "create": "Create member",
+    "edit": "Edit member"
 }

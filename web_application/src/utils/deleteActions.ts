@@ -2,6 +2,8 @@ import { deleteDivisionFormAction } from '@/actions/divisions/delete';
 import { deleteDivisionMembershipTypeFormAction } from '@/actions/divisionMembershipTypes/delete';
 import { deleteFinanceAccountFormAction } from '@/actions/financeAccounts/delete';
 import { deleteFinanceContactFormAction } from '@/actions/financeContacts/delete';
+import { deleteMemberFormAction } from '@/actions/members/delete';
+import { deleteMembershipFormAction } from '@/actions/memberships/delete';
 import { deleteMembershipTypeFormAction } from '@/actions/membershipTypes/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
@@ -22,6 +24,12 @@ const deleteActionMap: Record<
     },
     divisions: async (id: string) => {
         return await deleteDivisionFormAction(id, { success: false });
+    },
+    members: async (id: string) => {
+        return await deleteMemberFormAction(id, { success: false });
+    },
+    memberships: async (id: string) => {
+        return await deleteMembershipFormAction(id, { success: false });
     },
     'finance-contacts': async (id: string) => {
         return await deleteFinanceContactFormAction(id, { success: false });

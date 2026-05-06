@@ -15,8 +15,14 @@ export default function ListItem({ title, href }: NavigationListItemProps) {
     const pathname = usePathname();
     const { lang } = useTranslation();
 
+    const unlocalizedPath = getUnlocalizedPath(
+        pathname,
+        lang as SupportedLocale,
+    );
     const isActive = href
-        ? getUnlocalizedPath(pathname, lang as SupportedLocale).includes(href)
+        ? unlocalizedPath === href ||
+          unlocalizedPath.startsWith(href + '/') ||
+          unlocalizedPath.startsWith(href + '?')
         : false;
 
     return (

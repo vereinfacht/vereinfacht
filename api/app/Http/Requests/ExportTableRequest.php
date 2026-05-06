@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\Division;
 use App\Models\FinanceContact;
+use App\Models\Member;
+use App\Models\Membership;
 use App\Models\Receipt;
 use App\Models\Statement;
 use App\Models\MembershipType;
@@ -18,6 +20,8 @@ class ExportTableRequest extends FormRequest
         'finance_contacts' => FinanceContact::class,
         'divisions' => Division::class,
         'membership-types' => MembershipType::class,
+        'members' => Member::class,
+        'memberships' => Membership::class,
     ];
 
     public function authorize(): bool

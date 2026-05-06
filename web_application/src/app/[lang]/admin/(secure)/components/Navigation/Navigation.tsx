@@ -23,6 +23,10 @@ export default async function Navigation() {
             title: t('admin:dashboard'),
         },
         {
+            href: '/admin/members',
+            title: t('member:title.other'),
+        },
+        {
             href: '/admin/memberships',
             title: t('membership:title.other'),
         },

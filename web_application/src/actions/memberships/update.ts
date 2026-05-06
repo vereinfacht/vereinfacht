@@ -1,36 +1,44 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
-import { z } from 'zod';
-import { update } from '../updateAdminResources';
-import { ActionState, validateAndRunAction } from '../validateForm';
-import { ibanSchema } from '../financeAccounts/create.schema';
+import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
+import updateFormAction from '../base/update';
+import {
+    UpdateMembershipParams,
+    updateMembershipSchema,
+} from './update.schema';
 
-const updateMembershipSchema = z.object({
-    bankIban: ibanSchema,
-    bankAccountHolder: z.string().min(2).max(255),
-    startedAt: z.coerce.date().min(new Date('1900-01-01')),
-    endedAt: z.coerce.date().min(new Date('1900-01-01')).optional().or(z.literal('')),
-    status: z.enum(['active', 'applied', 'cancelled']),
-});
+export const updateMembershipApi = createAuthenticatedAction(
+    'update',
+    'memberships',
+    updateMembershipSchema,
+    async (body, client) => {
+        const response = await client.PATCH('/memberships/{membership}', {
+            params: {
+                path: { membership: body.data.id },
+            },
+            // @ts-expect-error: path exists in backend but generated schema may lag
+            body,
+        });
 
-export type UpdateMembershipData = z.infer<typeof updateMembershipSchema>;
+        return handleApiResponse(response, 'Failed to update membership');
+    },
+);
 
-export async function getUpdateMembershipSchema() {
-    return updateMembershipSchema;
-}
-
-export async function updateMembership(
+export async function updateMembershipFormAction(
     id: string,
-    _previousState: ActionState,
+    previousState: FormActionState,
     formData: FormData,
 ) {
-    return await validateAndRunAction(
-        updateMembershipSchema,
+    return await updateFormAction<UpdateMembershipParams>(
+        previousState,
+        updateMembershipApi,
         formData,
-        (data) => update('memberships', id, data),
-        () => {
-            revalidateTag('memberships');
+        {
+            data: {
+                id,
+                type: 'memberships',
+            },
         },
     );
 }

@@ -73,10 +73,14 @@ export async function handleZodError(error: ZodError) {
             (acc, err) => {
                 const path = err.path;
                 const attributeIndex = path.indexOf('attributes');
+                const relationshipIndex = path.indexOf('relationships');
                 const attribute =
                     attributeIndex >= 0 && attributeIndex + 1 < path.length
                         ? (path[attributeIndex + 1] as string)
-                        : (path[path.length - 1] as string);
+                        : relationshipIndex >= 0 &&
+                            relationshipIndex + 1 < path.length
+                          ? (path[relationshipIndex + 1] as string)
+                          : (path[path.length - 1] as string);
 
                 if (!acc[attribute]) {
                     acc[attribute] = [];

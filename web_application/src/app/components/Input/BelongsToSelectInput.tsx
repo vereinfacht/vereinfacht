@@ -13,7 +13,7 @@ interface Props<T> {
     action: (searchTerm: string) => Promise<any>;
     optionLabel: (item: T) => React.ReactNode;
     label?: string | React.ReactNode;
-    onChange?: () => void;
+    onChange?: (selected: Option[]) => void;
     required?: boolean;
     defaultValue?: Option[];
 }
@@ -23,6 +23,7 @@ export default function BelongsToSelectInput<T>({
     resourceType,
     label,
     action,
+    onChange,
     optionLabel,
     defaultValue,
     required = false,
@@ -81,6 +82,7 @@ export default function BelongsToSelectInput<T>({
             onQueryChange={setQuery}
             query={query}
             multiple={false}
+            onChange={onChange}
         />
     );
 }

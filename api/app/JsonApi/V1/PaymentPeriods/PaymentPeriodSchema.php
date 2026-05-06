@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\PaymentPeriods;
 
+use App\JsonApi\Filters\PaymentPeriodTitleFilter;
 use App\Models\PaymentPeriod;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;

@@ -77,7 +77,7 @@ export default function PersonForm({
                     <div className="w-1/2 pr-2.5">
                         <TextInput
                             id={`birthday-${index}`}
-                            label={t('member:birthday')}
+                            label={t('member:birthday.label')}
                             type="date"
                             name={`members.${index}.birthday`}
                             value={formData.birthday}

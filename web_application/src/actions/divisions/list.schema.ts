@@ -9,6 +9,8 @@ export const listDivisionsSchema = z.object({
     filter: z
         .object({
             query: z.string().optional(),
+            membershipTypeId: z.string().optional(),
+            membershipId: z.string().optional(),
         })
         .optional(),
 });

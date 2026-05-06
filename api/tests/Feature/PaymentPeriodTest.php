@@ -61,7 +61,7 @@ class PaymentPeriodTest extends TestCase
             ->includePaths('membershipType', 'club', 'paymentPeriod')
             ->post('/api/v1/memberships');
 
-        $response->assertStatus(422);
+        $response->assertStatus(404);
 
         $this->assertDatabaseMissing('memberships', [
             'bank_iban' => $membership->bank_iban,

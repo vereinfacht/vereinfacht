@@ -24,6 +24,12 @@
     "full_name": {
         "label": "Name"
     },
+    "first_name": {
+        "label": "First name"
+    },
+    "last_name": {
+        "label": "Last name"
+    },
     "email": {
         "label": "E-Mail"
     },

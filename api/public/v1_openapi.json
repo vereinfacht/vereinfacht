@@ -8054,6 +8054,114 @@
                 }
             }
         },
+        "\/payment-periods": {
+            "get": {
+                "tags": [
+                    "Payment-periods"
+                ],
+                "summary": "Get all payment-periods",
+                "description": "",
+                "operationId": "payment-periods.index",
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "createdAt",
+                                    "-createdAt",
+                                    "updatedAt",
+                                    "-updatedAt"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            },
+                            "2": {
+                                "value": [
+                                    "2"
+                                ]
+                            },
+                            "3": {
+                                "value": [
+                                    "3"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index payment-periods",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.payment-periods.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
+        },
         "\/division-membership-types": {
             "post": {
                 "tags": [
@@ -10678,6 +10786,11 @@
                                 "type": "string",
                                 "example": "Hudson"
                             },
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Jeaniea Stantona"
+                            },
                             "gender": {
                                 "title": "gender",
                                 "type": "string",
@@ -10722,6 +10835,11 @@
                                 "title": "email",
                                 "type": "string",
                                 "example": "pansy.farrell@example.net"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "example": "inactive"
                             },
                             "membershipTypeId": {
                                 "title": "membershipTypeId",
@@ -10809,6 +10927,28 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "media": {
+                                "title": "media",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
                                             }
                                         },
                                         "readOnly": true
@@ -10890,6 +11030,11 @@
                                 "type": "string",
                                 "example": "pansy.farrell@example.net"
                             },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "example": "inactive"
+                            },
                             "membershipTypeId": {
                                 "title": "membershipTypeId",
                                 "type": "string",
@@ -10976,6 +11121,233 @@
                                                 "title": "self",
                                                 "type": "string",
                                                 "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/1"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "media": {
+                                "title": "media",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.members.resource.update": {
+                "title": "Resource\/Member\/Update",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "members",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "2"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "firstName": {
+                                "title": "firstName",
+                                "type": "string",
+                                "example": "Jeaniea"
+                            },
+                            "lastName": {
+                                "title": "lastName",
+                                "type": "string",
+                                "example": "Stantona"
+                            },
+                            "fullName": {
+                                "title": "fullName",
+                                "type": "string",
+                                "example": "Jeaniea Stantona"
+                            },
+                            "gender": {
+                                "title": "gender",
+                                "type": "string",
+                                "example": "other"
+                            },
+                            "address": {
+                                "title": "address",
+                                "type": "string",
+                                "example": "565 Lisette Meadows"
+                            },
+                            "zipCode": {
+                                "title": "zipCode",
+                                "type": "string",
+                                "example": "23634"
+                            },
+                            "city": {
+                                "title": "city",
+                                "type": "string",
+                                "example": "Lake Linwood"
+                            },
+                            "country": {
+                                "title": "country",
+                                "type": "string",
+                                "example": "Malta"
+                            },
+                            "preferredLocale": {
+                                "title": "preferredLocale",
+                                "type": "string",
+                                "example": "en"
+                            },
+                            "birthday": {
+                                "title": "birthday",
+                                "type": "string",
+                                "example": "1974-03-07T00:00:00.000000Z"
+                            },
+                            "phoneNumber": {
+                                "title": "phoneNumber",
+                                "type": "string",
+                                "example": "+14588251653"
+                            },
+                            "email": {
+                                "title": "email",
+                                "type": "string",
+                                "example": "luettgen.corrine@example.net"
+                            },
+                            "status": {
+                                "title": "status",
+                                "type": "string",
+                                "example": "inactive"
+                            },
+                            "membershipTypeId": {
+                                "title": "membershipTypeId",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "hasConsentedMediaPublication": {
+                                "title": "hasConsentedMediaPublication",
+                                "type": "boolean",
+                                "example": "2026-04-21T10:52:50.000000Z"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-04-01T10:18:08.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-04-21T10:52:50.000000Z"
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "club": {
+                                "title": "club",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/clubs\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "membership": {
+                                "title": "membership",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/memberships\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/memberships\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "divisions": {
+                                "title": "divisions",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/divisions\/2"
+                                            }
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "media": {
+                                "title": "media",
+                                "type": "object",
+                                "properties": {
+                                    "links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "related": {
+                                                "title": "related",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
+                                            },
+                                            "self": {
+                                                "title": "self",
+                                                "type": "string",
+                                                "example": "http:\/\/api.verein.localhost\/api\/v1\/media\/2"
                                             }
                                         },
                                         "readOnly": true
@@ -12048,6 +12420,53 @@
                                         "readOnly": true
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.payment-periods.resource.fetch": {
+                "title": "Resource\/Payment-period\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "payment-periods",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "title": "title",
+                                "type": "string",
+                                "example": "monthly"
+                            },
+                            "rrule": {
+                                "title": "rrule",
+                                "type": "string",
+                                "example": "FREQ=MONTHLY;INTERVAL=1"
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-04-01T10:18:05.000000Z"
+                            },
+                            "updatedAt": {
+                                "title": "updatedAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-04-01T10:18:05.000000Z"
                             }
                         }
                     }
