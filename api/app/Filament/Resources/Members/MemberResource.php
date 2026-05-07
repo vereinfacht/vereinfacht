@@ -128,6 +128,10 @@ class MemberResource extends Resource
                     ->sortable(),
                 TextColumn::make('membership.title')
                     ->label(trans_choice('membership.label', 1)),
+                TextColumn::make('membership.started_at')
+                    ->label(__('membership.started_at'))
+                    ->date('d.m.Y')
+                    ->sortable(),
                 IconColumn::make('consented_media_publication_at')
                     ->label(__('member.has_consented_media_publication'))
                     ->icon(fn(string $state): string => Carbon::parse($state)->isPast() ? 'heroicon-o-check' : ''),

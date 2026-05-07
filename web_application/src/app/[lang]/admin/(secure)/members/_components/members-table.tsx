@@ -18,6 +18,7 @@ import { listMemberSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
+import DateField from '../../components/Fields/Detail/DateField';
 import TableExportModal from '../../components/TableExportModal';
 
 interface Props {
@@ -78,6 +79,21 @@ export default function MembersTable({
                     <TextCell>-</TextCell>
                 );
             },
+        },
+        {
+            id: 'startedAt',
+            accessorFn: (row) => row.membership?.startedAt,
+            header: ({ column }) =>
+                extended ? (
+                    <HeaderSort
+                        parser={listMemberSearchParams.sort}
+                        columnId={column.id}
+                        columnTitle={t('membership:started_at.label')}
+                    />
+                ) : (
+                    t('membership:started_at.label')
+                ),
+            cell: ({ row }) => <DateField value={row.getValue('startedAt')} />,
         },
         {
             accessorKey: 'divisions',

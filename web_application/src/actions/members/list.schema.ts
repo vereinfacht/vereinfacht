@@ -9,6 +9,8 @@ export const memberSortingOptions = [
     '-fullName',
     'city',
     '-city',
+    'startedAt',
+    '-startedAt',
 ] as const;
 
 export const listMembersSchema = z.object({
