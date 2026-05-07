@@ -135,7 +135,7 @@ export default function MembershipsTable({
                     <HeaderOptionFilter
                         options={membershipStatusOptions ?? []}
                         parser={listMembershipSearchParams['filter[status]']}
-                        paramKey={column.id}
+                        paramKey={'filter[status]'}
                         translationKey={'membership:status'}
                     />
                 ) : (
