@@ -130,7 +130,7 @@ export default function MembershipsTable({
         },
         {
             accessorKey: 'status',
-            header: ({ column }) =>
+            header: () =>
                 extended ? (
                     <HeaderOptionFilter
                         options={membershipStatusOptions ?? []}
