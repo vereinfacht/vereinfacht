@@ -26,6 +26,8 @@ class MemberSchema extends Schema
      */
     public static string $model = Member::class;
 
+    protected $defaultSort = '-startedAt';
+
     /**
      * Get the resource fields.
      */
