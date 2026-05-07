@@ -4,6 +4,7 @@ namespace App\JsonApi\V1\Members;
 
 use App\JsonApi\Filters\MemberMembershipFilter;
 use App\JsonApi\Sorting\FullNameSort;
+use App\JsonApi\Sorting\MemberStartedAtSort;
 use App\JsonApi\V1\PagePagination;
 use App\Models\Member;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
@@ -24,6 +25,8 @@ class MemberSchema extends Schema
      * The model the schema corresponds to.
      */
     public static string $model = Member::class;
+
+    protected $defaultSort = '-startedAt';
 
     /**
      * Get the resource fields.
@@ -82,6 +85,7 @@ class MemberSchema extends Schema
     {
         return [
             FullNameSort::make('fullName'),
+            MemberStartedAtSort::make('startedAt'),
         ];
     }
 

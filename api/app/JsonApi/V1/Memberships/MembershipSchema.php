@@ -23,7 +23,7 @@ class MembershipSchema extends Schema
      */
     public static string $model = Membership::class;
 
-    protected $defaultSort = '-createdAt';
+    protected $defaultSort = '-startedAt';
 
     /**
      * Get the resource fields.
