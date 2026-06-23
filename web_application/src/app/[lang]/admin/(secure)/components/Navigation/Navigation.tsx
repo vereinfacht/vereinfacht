@@ -17,8 +17,7 @@ import DivisionsIcon from '/public/svg/divisions.svg';
 import MembershipTypeIcon from '/public/svg/membership_type.svg';
 import TaxAccountsIcon from '/public/svg/tax_accounts.svg';
 import UsersIcon from '/public/svg/users.svg';
-import Text from '@/app/components/Text/Text';
-import Logo from '/public/svg/vereinfacht_logo.svg';
+import SidebarFooter from '@/app/components/SidebarFooter';
 
 export default async function Navigation() {
     const { t } = createTranslation();
@@ -123,6 +122,7 @@ export default async function Navigation() {
                 <Title className="md:hidden" />
             </div>
             <List items={items} />
+            <SidebarFooter />
         </div>
     );
 }
