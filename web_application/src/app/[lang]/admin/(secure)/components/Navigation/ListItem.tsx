@@ -1,6 +1,6 @@
 'use client';
 
-import StatusDot from '@/app/components/StatusDot/StatusDot';
+import NavigationIcon from '@/app/components/NavigationIcon/NavigationIcon';
 import Text from '@/app/components/Text/Text';
 import { SupportedLocale, getUnlocalizedPath } from '@/utils/localization';
 import useTranslation from 'next-translate/useTranslation';
@@ -9,9 +9,14 @@ import { usePathname } from 'next/navigation';
 export interface NavigationListItemProps {
     href: string;
     title: string;
+    icon: React.ReactNode;
 }
 
-export default function ListItem({ title, href }: NavigationListItemProps) {
+export default function ListItem({
+    title,
+    href,
+    icon,
+}: NavigationListItemProps) {
     const pathname = usePathname();
     const { lang } = useTranslation();
 
@@ -26,11 +31,8 @@ export default function ListItem({ title, href }: NavigationListItemProps) {
         : false;
 
     return (
-        <div className="flex items-start gap-2 text-lg font-medium">
-            <StatusDot
-                status={isActive ? 'success' : 'inactive'}
-                className="mt-[0.2em]"
-            />
+        <div className="flex items-center gap-3 px-5 py-3 text-lg font-medium">
+            <NavigationIcon isActive={isActive} icon={icon} />
             <Text
                 className={[
                     'leading-[1em] font-semibold text-slate-700',
