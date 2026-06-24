@@ -35,8 +35,8 @@ export default function ListItem({
             <NavigationIcon isActive={isActive} icon={icon} />
             <Text
                 className={[
-                    'leading-[1em] font-semibold text-slate-700',
-                    isActive && 'text-slate-900',
+                    'leading-[1em] font-semibold',
+                    isActive ? 'text-blue-600' : 'text-slate-700',
                 ].join(' ')}
             >
                 {title}
