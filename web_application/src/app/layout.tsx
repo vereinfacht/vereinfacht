@@ -14,8 +14,8 @@ interface Props {
 export const metadata: Metadata = getDefaultMetadata();
 
 const font = localFont({
-    src: '../fonts/KantumruyPro-VariableFont_wght.ttf',
-    variable: '--font-kantumruy',
+    src: '../fonts/Rubik-VariableFont_wght.ttf',
+    variable: '--font-rubik',
     display: 'swap',
 });
 
