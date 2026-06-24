@@ -114,8 +114,8 @@ export default async function Navigation() {
                         <img
                             src={club?.logoUrl}
                             alt={`Logo ${club?.title}`}
-                            height={48}
-                            width={48}
+                            height={40}
+                            width={36}
                         />
                     </picture>
                 </Link>
