@@ -107,7 +107,7 @@ export default async function Navigation() {
     ];
 
     return (
-        <div className="flex h-screen flex-col justify-between bg-linear-to-b from-white via-white to-slate-400 md:shrink-0 md:bg-linear-to-r">
+        <div className="sticky top-0 flex h-screen flex-col justify-between bg-linear-to-b from-white via-white to-slate-400 md:shrink-0 md:bg-linear-to-r">
             <div className="flex items-center border-b">
                 <Link href="/admin/dashboard">
                     <picture className="mt-[0.1em] flex h-20 items-center px-5 py-4">
