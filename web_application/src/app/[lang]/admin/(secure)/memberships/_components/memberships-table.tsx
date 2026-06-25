@@ -141,11 +141,14 @@ export default function MembershipsTable({
                 ) : (
                     t('membership:status.label')
                 ),
-            cell: ({ row }) => (
-                <TextCell>
-                    {t(`membership:status.${row.getValue('status')}`)}
-                </TextCell>
-            ),
+            cell: ({ row }) => {
+                const status = row.getValue('status');
+                return (
+                    <TextCell>
+                        {status ? t(`membership:status.${status}`) : '-'}
+                    </TextCell>
+                );
+            },
         },
     ];
 
