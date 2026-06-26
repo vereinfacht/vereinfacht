@@ -79,7 +79,7 @@ export default async function MembershipShowPage({ params }: Props) {
             attribute: 'monthlyFee',
             label: t('membership:monthly_fee.label'),
             type: 'currency',
-            value: membership?.membershipType?.monthlyFee,
+            value: membership?.monthlyFee,
         },
         {
             attribute: 'voluntaryContribution',
