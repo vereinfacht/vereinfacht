@@ -10,7 +10,7 @@ export interface MessageBoxProps {
 
 const presets = {
     default: 'border-slate-500 bg-slate-400 text-slate-700',
-    hint: 'border-blue-300 bg-blue-100 text-blue-600',
+    hint: 'border-blue-300 bg-blue-100 text-blue-500',
     error: 'border-red-500 bg-red-200 text-red-500',
 };
 

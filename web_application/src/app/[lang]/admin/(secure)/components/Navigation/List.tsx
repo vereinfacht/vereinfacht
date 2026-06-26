@@ -6,6 +6,7 @@ import { toKebabCase } from '@/utils/strings';
 type NavigatableItem = {
     title: string;
     href: string;
+    icon: React.ReactNode;
 };
 
 type GroupItem = {
@@ -25,18 +26,18 @@ function getDataCy(item: NavigationListItemType) {
 
 export default function List({ items }: Props) {
     return (
-        <nav className="py-6 pl-2 pr-9">
+        <nav className="flex-1 overflow-y-auto p-5">
             {/* <MobileMenu items={items} /> */}
 
-            <ul className="hidden flex-col gap-y-6 md:flex">
+            <ul className="hidden flex-col gap-y-5 md:flex">
                 {items.map((item, index) => {
                     if ('items' in item) {
                         return (
-                            <li className="mt-4 pl-4" key={index}>
-                                <Text className="font leading-[1em] tracking-wide text-slate-800">
+                            <li key={index}>
+                                <Text className="font py-2 text-xs leading-[1em] tracking-wide text-slate-800 uppercase">
                                     {item.title}
                                 </Text>
-                                <ul className="flex-col gap-y-6 pt-4 md:flex">
+                                <ul className="flex-col md:flex">
                                     {item.items?.map((subItem, subIndex) => (
                                         <li key={subIndex}>
                                             <Link
@@ -46,6 +47,7 @@ export default function List({ items }: Props) {
                                                 <ListItem
                                                     href={subItem.href}
                                                     title={subItem.title}
+                                                    icon={subItem.icon}
                                                 />
                                             </Link>
                                         </li>
@@ -61,7 +63,11 @@ export default function List({ items }: Props) {
                                 href={item.href ?? '/'}
                                 data-cy={getDataCy(item)}
                             >
-                                <ListItem href={item.href} title={item.title} />
+                                <ListItem
+                                    href={item.href}
+                                    title={item.title}
+                                    icon={item.icon}
+                                />
                             </Link>
                         </li>
                     );

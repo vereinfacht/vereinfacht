@@ -64,7 +64,7 @@ export function TriStateHeaderFilter({
                                     setFilterValue(checked);
                                     setPage(null);
                                 }}
-                                className="relative h-6 w-11 cursor-pointer rounded-full bg-gray-300 transition-colors data-[state=checked]:bg-blue-600"
+                                className="relative h-6 w-11 cursor-pointer rounded-full bg-gray-300 transition-colors data-[state=checked]:bg-blue-500"
                             >
                                 <RadixSwitch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform data-[state=checked]:translate-x-5" />
                             </RadixSwitch.Root>
