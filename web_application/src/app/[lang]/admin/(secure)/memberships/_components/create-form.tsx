@@ -221,7 +221,7 @@ export default function CreateForm({
                             id="status"
                             name="status"
                             label={t('membership:status.label')}
-                            defaultValue={data?.status ?? 'active'}
+                            defaultValue={data?.status}
                             options={[
                                 {
                                     value: 'active',
