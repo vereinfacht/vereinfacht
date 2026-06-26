@@ -1,6 +1,5 @@
 'use client';
 
-import NavigationIcon from '@/app/components/NavigationIcon/NavigationIcon';
 import Text from '@/app/components/Text/Text';
 import { SupportedLocale, getUnlocalizedPath } from '@/utils/localization';
 import useTranslation from 'next-translate/useTranslation';
@@ -31,16 +30,16 @@ export default function ListItem({
         : false;
 
     return (
-        <div className="flex items-center gap-3 px-5 py-3 text-lg font-medium">
-            <NavigationIcon isActive={isActive} icon={icon} />
-            <Text
-                className={[
-                    'leading-[1em] font-semibold',
-                    isActive ? 'text-blue-600' : 'text-slate-700',
-                ].join(' ')}
-            >
-                {title}
-            </Text>
+        <div
+            className={[
+                'flex items-center gap-3 px-5 py-3 text-lg font-medium',
+                isActive ? 'text-blue-500' : 'text-slate-700',
+            ].join(' ')}
+        >
+            <span className="flex shrink-0 items-center justify-center">
+                {icon}
+            </span>
+            <Text className="leading-[1em] font-semibold">{title}</Text>
         </div>
     );
 }
