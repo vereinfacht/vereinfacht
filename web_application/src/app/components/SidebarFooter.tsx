@@ -9,13 +9,15 @@ export default function SidebarFooter() {
     const { t } = useTranslation();
 
     return (
-        <footer className="mt-auto flex flex-col justify-start gap-4 border-t border-slate-200 p-5 text-sm text-gray-700">
-            <div className="flex flex-col items-start gap-1 self-stretch">
-                <Text className="text-sm">{t('general:made_with')}</Text>{' '}
-                <Link href="/" target="_blank">
+        <footer className="flex flex-col justify-start gap-4 border-t border-slate-200 p-5 text-sm text-gray-700">
+            <div className="flex flex-row items-center gap-3 self-stretch md:flex-col md:items-start md:gap-1">
+                <Text className="text-sm">{t('general:made_with')}</Text>
+
+                <Link href="/" target="_blank" className="flex items-center">
                     <Logo className="h-5 pt-1" />
                 </Link>
             </div>
+
             <div className="flex flex-row items-center">
                 <a
                     href="https://vereinfacht.digital/impressum"
