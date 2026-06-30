@@ -20,6 +20,7 @@ interface Props {
 export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
+    const navButtonClass = 'cursor-pointer p-3';
 
     useEffect(() => {
         setIsOpen(false);
@@ -38,18 +39,18 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
     return (
         <div className="md:hidden">
-            <div className="flex items-center gap-1 text-zinc-600">
-                <button className="p-3 transition-colors hover:text-slate-900">
+            <div className="flex items-center gap-1 text-slate-700">
+                <button className={navButtonClass}>
                     <IconGlobe />
                 </button>
 
-                <button className="p-3 transition-colors hover:text-slate-900">
+                <button className={navButtonClass}>
                     <IconAccount />
                 </button>
 
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="p-3 transition-colors hover:text-slate-900"
+                    className={navButtonClass}
                     aria-label="open menu"
                 >
                     <IconMenu />
@@ -63,10 +64,10 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
                             <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
                         </div>
 
-                        <div className="flex items-center text-zinc-600">
+                        <div className="flex items-center text-slate-700">
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="p-3 transition-colors hover:text-slate-900"
+                                className={navButtonClass}
                                 aria-label="close menu"
                             >
                                 <IconClose />
