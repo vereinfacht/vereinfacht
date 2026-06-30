@@ -76,9 +76,11 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
                     <div className="flex-1 overflow-y-auto">
                         <List items={items} />
-                    </div>
 
-                    <SidebarFooter />
+                        <div>
+                            <SidebarFooter />
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
