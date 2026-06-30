@@ -57,8 +57,8 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
             </div>
 
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex flex-col bg-slate-50">
-                    <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-2">
+                <div className="fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]">
+                    <div className="flex items-center justify-between border-b border-slate-200 px-5 py-2">
                         <div onClick={() => setIsOpen(false)}>
                             <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
                         </div>

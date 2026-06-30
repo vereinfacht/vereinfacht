@@ -105,7 +105,7 @@ export default async function Navigation() {
 
     return (
         <>
-            <div className="flex w-full items-center justify-between border-b border-slate-300 bg-linear-to-b from-white via-white to-slate-400 px-5 py-2 md:hidden md:shrink-0 md:bg-linear-to-r">
+            <div className="flex w-full items-center justify-between border-b border-slate-200 bg-white px-5 py-2 md:hidden md:shrink-0">
                 <div className="flex items-center gap-3">
                     <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
                     <Title />
