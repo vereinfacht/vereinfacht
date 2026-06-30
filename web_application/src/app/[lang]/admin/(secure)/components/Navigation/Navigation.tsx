@@ -1,7 +1,6 @@
 import { getOne } from '@/actions/fetchAdminResources';
 import { Club } from '@/types/models';
 import { auth } from '@/utils/auth';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import List from './List';
 import Title from './Title';
@@ -18,6 +17,8 @@ import MembershipTypeIcon from '/public/svg/membership_type.svg';
 import TaxAccountsIcon from '/public/svg/tax_accounts.svg';
 import UsersIcon from '/public/svg/users.svg';
 import SidebarFooter from '@/app/components/SidebarFooter';
+import MobileMenu from './MobileMenu';
+import ClubLogo from './ClubLogo';
 
 export default async function Navigation() {
     const { t } = createTranslation();
@@ -98,31 +99,32 @@ export default async function Navigation() {
                     title: t('user:title.other'),
                     icon: <UsersIcon />,
                 },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('user:title.other'),
-                // },
             ],
         },
     ];
 
     return (
-        <div className="sticky top-0 flex h-screen flex-col justify-between bg-linear-to-b from-white via-white to-slate-400 md:shrink-0 md:bg-linear-to-r">
-            <div className="flex items-center border-b">
-                <Link href="/admin/dashboard">
-                    <picture className="mt-[0.1em] flex h-20 items-center px-5 py-4">
-                        <img
-                            src={club?.logoUrl}
-                            alt={`Logo ${club?.title}`}
-                            height={40}
-                            width={36}
-                        />
-                    </picture>
-                </Link>
-                <Title className="md:hidden" />
+        <>
+            <div className="flex w-full items-center justify-between border-b border-slate-200 bg-white px-5 py-2 md:hidden md:shrink-0">
+                <div className="flex items-center gap-3">
+                    <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
+                    <Title />
+                </div>
+                <MobileMenu items={items} clubLogoUrl={club?.logoUrl} />
             </div>
-            <List items={items} />
-            <SidebarFooter />
-        </div>
+
+            <div className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between bg-white md:flex">
+                <div className="flex items-center border-b border-slate-200 px-5 py-4">
+                    <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
+                </div>
+
+                <div className="flex-1 overflow-y-auto">
+                    <List items={items} />
+                </div>
+                <div>
+                    <SidebarFooter />
+                </div>
+            </div>
+        </>
     );
 }

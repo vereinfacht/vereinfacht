@@ -26,10 +26,8 @@ function getDataCy(item: NavigationListItemType) {
 
 export default function List({ items }: Props) {
     return (
-        <nav className="flex-1 overflow-y-auto p-5">
-            {/* <MobileMenu items={items} /> */}
-
-            <ul className="hidden flex-col gap-y-5 md:flex">
+        <nav className="p-5">
+            <ul className="flex flex-col gap-y-5">
                 {items.map((item, index) => {
                     if ('items' in item) {
                         return (
