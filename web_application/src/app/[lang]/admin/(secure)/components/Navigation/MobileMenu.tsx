@@ -15,9 +15,15 @@ interface Props {
     items: NavigationListItemType[];
     clubLogoUrl?: string;
     clubTitle?: string;
+    children?: React.ReactNode;
 }
 
-export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
+export default function MobileMenu({
+    items,
+    clubLogoUrl,
+    clubTitle,
+    children,
+}: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const navButtonClass = 'cursor-pointer p-3';
@@ -39,52 +45,62 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     }, [isOpen]);
 
     return (
-        <div className="md:hidden">
-            <div className="flex items-center gap-1 text-neutral-600">
-                <button className={navButtonClass}>
-                    <IconGlobe className={iconClass} />
-                </button>
+        <>
+            <div className="flex w-full items-center justify-between border-b border-neutral-200 bg-white px-5 py-2 md:hidden">
+                <div className="flex items-center gap-3">
+                    <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
+                    {children}
+                </div>
 
-                <button className={navButtonClass}>
-                    <IconAccount className={iconClass} />
-                </button>
+                <div className="flex items-center text-neutral-600">
+                    <button className={navButtonClass}>
+                        <IconGlobe className={iconClass} />
+                    </button>
 
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className={navButtonClass}
-                    aria-label="open menu"
-                >
-                    <IconMenu className={iconClass} />
-                </button>
+                    <button className={navButtonClass}>
+                        <IconAccount className={iconClass} />
+                    </button>
+
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className={navButtonClass}
+                    >
+                        <IconMenu className={iconClass} />
+                    </button>
+                </div>
             </div>
 
-            {isOpen && (
-                <div className="fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]">
-                    <div className="flex items-center justify-between border-b border-neutral-300 px-5 py-2">
-                        <div onClick={() => setIsOpen(false)}>
-                            <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-                        </div>
-
-                        <div className="flex items-center text-neutral-600">
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className={navButtonClass}
-                                aria-label="close menu"
-                            >
-                                <IconClose className={iconClass} />
-                            </button>
-                        </div>
+            <div
+                className={` ${isOpen ? 'fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]' : 'hidden'} md:sticky md:top-0 md:flex md:h-screen md:w-64 md:flex-col md:justify-between md:bg-white md:bg-none`}
+            >
+                <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-2 md:py-4">
+                    <div
+                        onClick={() => setIsOpen(false)}
+                        className="cursor-pointer md:cursor-default"
+                    >
+                        <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
                     </div>
 
-                    <div className="flex-1 overflow-y-auto">
-                        <List items={items} />
-
-                        <div>
-                            <SidebarFooter />
-                        </div>
+                    <div className="flex items-center text-neutral-600 md:hidden">
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className={navButtonClass}
+                        >
+                            <IconClose className={iconClass} />
+                        </button>
                     </div>
                 </div>
-            )}
-        </div>
+
+                <div className="flex flex-1 flex-col overflow-y-auto md:overflow-hidden">
+                    <div className="flex-1 md:overflow-y-auto">
+                        <List items={items} />
+                    </div>
+
+                    <div className="pb-0">
+                        <SidebarFooter />
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }

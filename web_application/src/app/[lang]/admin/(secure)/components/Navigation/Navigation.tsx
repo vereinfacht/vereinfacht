@@ -2,7 +2,6 @@ import { getOne } from '@/actions/fetchAdminResources';
 import { Club } from '@/types/models';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
-import List from './List';
 import Title from './Title';
 import createTranslation from 'next-translate/createTranslation';
 import MembershipsIcon from '/public/svg/memberships.svg';
@@ -16,9 +15,7 @@ import DivisionsIcon from '/public/svg/divisions.svg';
 import MembershipTypeIcon from '/public/svg/membership_type.svg';
 import TaxAccountsIcon from '/public/svg/tax_accounts.svg';
 import UsersIcon from '/public/svg/users.svg';
-import SidebarFooter from '@/app/components/SidebarFooter';
 import MobileMenu from './MobileMenu';
-import ClubLogo from './ClubLogo';
 
 export default async function Navigation() {
     const { t } = createTranslation();
@@ -104,27 +101,12 @@ export default async function Navigation() {
     ];
 
     return (
-        <>
-            <div className="flex w-full items-center justify-between border-b border-neutral-200 bg-white px-5 py-2 md:hidden md:shrink-0">
-                <div className="flex items-center gap-3">
-                    <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
-                    <Title />
-                </div>
-                <MobileMenu items={items} clubLogoUrl={club?.logoUrl} />
-            </div>
-
-            <div className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between bg-white md:flex">
-                <div className="flex items-center border-b border-neutral-200 px-5 py-4">
-                    <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
-                </div>
-
-                <div className="flex-1 overflow-y-auto">
-                    <List items={items} />
-                </div>
-                <div>
-                    <SidebarFooter />
-                </div>
-            </div>
-        </>
+        <MobileMenu
+            items={items}
+            clubLogoUrl={club?.logoUrl}
+            clubTitle={club?.title}
+        >
+            <Title />
+        </MobileMenu>
     );
 }
