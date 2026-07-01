@@ -105,7 +105,7 @@ export default async function Navigation() {
 
     return (
         <>
-            <div className="flex w-full items-center justify-between border-b border-slate-200 bg-white px-5 py-2 md:hidden md:shrink-0">
+            <div className="flex w-full items-center justify-between border-b border-neutral-200 bg-white px-5 py-2 md:hidden md:shrink-0">
                 <div className="flex items-center gap-3">
                     <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
                     <Title />
@@ -114,7 +114,7 @@ export default async function Navigation() {
             </div>
 
             <div className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between bg-white md:flex">
-                <div className="flex items-center border-b border-slate-200 px-5 py-4">
+                <div className="flex items-center border-b border-neutral-200 px-5 py-4">
                     <ClubLogo logoUrl={club?.logoUrl} title={club?.title} />
                 </div>
 

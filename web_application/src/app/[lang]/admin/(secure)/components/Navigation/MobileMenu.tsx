@@ -40,7 +40,7 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
     return (
         <div className="md:hidden">
-            <div className="flex items-center gap-1 text-slate-700">
+            <div className="flex items-center gap-1 text-neutral-600">
                 <button className={navButtonClass}>
                     <IconGlobe className={iconClass} />
                 </button>
@@ -60,12 +60,12 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
             {isOpen && (
                 <div className="fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]">
-                    <div className="flex items-center justify-between border-b border-slate-200 px-5 py-2">
+                    <div className="flex items-center justify-between border-b border-neutral-300 px-5 py-2">
                         <div onClick={() => setIsOpen(false)}>
                             <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
                         </div>
 
-                        <div className="flex items-center text-slate-700">
+                        <div className="flex items-center text-neutral-600">
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className={navButtonClass}

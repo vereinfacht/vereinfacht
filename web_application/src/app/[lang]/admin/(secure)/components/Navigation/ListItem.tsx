@@ -33,7 +33,7 @@ export default function ListItem({
         <div
             className={[
                 'flex items-center gap-3 px-5 py-3 text-lg font-medium',
-                isActive ? 'text-blue-500' : 'text-slate-700',
+                isActive ? 'text-blue-500' : 'text-neutral-600',
             ].join(' ')}
         >
             <span className="flex shrink-0 items-center justify-center">
