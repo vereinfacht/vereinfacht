@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '/public/svg/menu.svg';
 import { NavigationListItemType } from './List';
-import IconClose from '/public/svg/x_close.svg';
+import IconClose from '/public/svg/close-new.svg';
 import SidebarFooter from '@/app/components/SidebarFooter';
-import IconAccount from '/public/svg/account.svg';
-import IconGlobe from '/public/svg/globe_language.svg';
+import IconAccount from '/public/svg/person_new.svg';
+import IconGlobe from '/public/svg/globe.svg';
 import List from './List';
 import ClubLogo from './ClubLogo';
 
@@ -21,6 +21,7 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const navButtonClass = 'cursor-pointer p-3';
+    const iconClass = 'fill-current';
 
     useEffect(() => {
         setIsOpen(false);
@@ -41,11 +42,11 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
         <div className="md:hidden">
             <div className="flex items-center gap-1 text-slate-700">
                 <button className={navButtonClass}>
-                    <IconGlobe />
+                    <IconGlobe className={iconClass} />
                 </button>
 
                 <button className={navButtonClass}>
-                    <IconAccount />
+                    <IconAccount className={iconClass} />
                 </button>
 
                 <button
@@ -53,7 +54,7 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
                     className={navButtonClass}
                     aria-label="open menu"
                 >
-                    <IconMenu />
+                    <IconMenu className={iconClass} />
                 </button>
             </div>
 
@@ -70,7 +71,7 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
                                 className={navButtonClass}
                                 aria-label="close menu"
                             >
-                                <IconClose />
+                                <IconClose className={iconClass} />
                             </button>
                         </div>
                     </div>

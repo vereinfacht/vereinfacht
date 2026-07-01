@@ -40,7 +40,7 @@ export default function LanguageSelector() {
                 className="flex items-center justify-end gap-x-2"
                 data-cy="language-selector"
             >
-                <IconGlobe className="h-6 w-6 stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
+                <IconGlobe className="fill-current" />
                 <Text preset="label" className="w-[1em]">
                     {lang.toUpperCase()}
                 </Text>
