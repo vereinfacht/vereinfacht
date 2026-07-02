@@ -16,7 +16,10 @@ export default async function TopBar() {
             <Title className="hidden flex-1 md:block" />
             <div className="flex w-full justify-between gap-x-6 md:w-auto">
                 <LanguageSelector />
-                <ProfileMenu userName={session?.user?.attributes.name} />
+                <ProfileMenu
+                    userName={session?.user?.attributes.name}
+                    showArrow={true}
+                />
             </div>
         </div>
     );

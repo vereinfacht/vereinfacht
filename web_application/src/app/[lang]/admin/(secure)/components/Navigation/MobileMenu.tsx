@@ -6,10 +6,9 @@ import IconMenu from '/public/svg/menu.svg';
 import { NavigationListItemType } from './List';
 import IconClose from '/public/svg/close-new.svg';
 import SidebarFooter from '@/app/components/SidebarFooter';
-import IconAccount from '/public/svg/person_new.svg';
-import IconGlobe from '/public/svg/globe.svg';
 import List from './List';
 import ClubLogo from './ClubLogo';
+import ProfileMenu from '../ProfileMenu';
 
 interface Props {
     items: NavigationListItemType[];
@@ -53,14 +52,9 @@ export default function MobileMenu({
                 </div>
 
                 <div className="flex items-center text-neutral-600">
-                    <button className={navButtonClass}>
-                        <IconGlobe className={iconClass} />
-                    </button>
-
-                    <button className={navButtonClass}>
-                        <IconAccount className={iconClass} />
-                    </button>
-
+                    <div className={navButtonClass}>
+                        <ProfileMenu />
+                    </div>
                     <button
                         onClick={() => setIsOpen(true)}
                         className={navButtonClass}
