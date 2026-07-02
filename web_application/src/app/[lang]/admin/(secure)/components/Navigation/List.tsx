@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ListItem from './ListItem';
 import Text from '@/app/components/Text/Text';
 import { toKebabCase } from '@/utils/strings';
+import useTranslation from 'next-translate/useTranslation';
 
 type NavigatableItem = {
     title: string;
@@ -25,8 +26,10 @@ function getDataCy(item: NavigationListItemType) {
 }
 
 export default function List({ items }: Props) {
+    const { t } = useTranslation('admin');
+
     return (
-        <nav className="p-5">
+        <nav aria-label={t('main_navigation')} className="p-5">
             <ul className="flex flex-col gap-y-5">
                 {items.map((item, index) => {
                     if ('items' in item) {

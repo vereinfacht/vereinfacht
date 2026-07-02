@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '/public/svg/menu.svg';
 import { NavigationListItemType } from './List';
@@ -10,6 +10,7 @@ import List from './List';
 import ClubLogo from './ClubLogo';
 import ProfileMenu from '../ProfileMenu';
 import LanguageSelector from '@/app/components/LanguageSelector';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     items: NavigationListItemType[];
@@ -28,6 +29,9 @@ export default function MobileMenu({
     const pathname = usePathname();
     const navButtonClass = 'cursor-pointer p-3';
     const iconClass = 'fill-current';
+    const openButtonRef = useRef<HTMLButtonElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const { t } = useTranslation('admin');
 
     useEffect(() => {
         setIsOpen(false);
@@ -41,6 +45,30 @@ export default function MobileMenu({
         }
         return () => {
             document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (isOpen) {
+            closeButtonRef.current?.focus();
+        } else {
+            openButtonRef.current?.focus();
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isOpen]);
 
@@ -60,31 +88,38 @@ export default function MobileMenu({
                         <ProfileMenu />
                     </div>
                     <button
+                        ref={openButtonRef}
+                        type="button"
                         onClick={() => setIsOpen(true)}
                         className={navButtonClass}
+                        aria-expanded={isOpen}
+                        aria-controls="main-navigation"
+                        aria-label={t('open_navigation_menu')}
                     >
-                        <IconMenu className={iconClass} />
+                        <IconMenu className={iconClass} aria-hidden="true" />
                     </button>
                 </div>
             </div>
 
             <div
+                id="main-navigation"
                 className={` ${isOpen ? 'fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]' : 'hidden'} md:sticky md:top-0 md:flex md:h-screen md:w-64 md:flex-col md:justify-between md:bg-white md:bg-none`}
             >
                 <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-2 md:py-4">
-                    <div
-                        onClick={() => setIsOpen(false)}
-                        className="cursor-pointer md:cursor-default"
-                    >
-                        <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-                    </div>
+                    <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
 
                     <div className="flex items-center text-neutral-600 md:hidden">
                         <button
+                            ref={closeButtonRef}
+                            type="button"
                             onClick={() => setIsOpen(false)}
                             className={navButtonClass}
+                            aria-label={t('close_navigation_menu')}
                         >
-                            <IconClose className={iconClass} />
+                            <IconClose
+                                className={iconClass}
+                                aria-hidden="true"
+                            />
                         </button>
                     </div>
                 </div>

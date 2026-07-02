@@ -27,5 +27,8 @@
     "memberships": "Memberships",
 
     "unnamed": "Unnamed",
-    "general": "General"
+    "general": "General",
+    "open_navigation_menu": "Open navigation menu",
+    "close_navigation_menu": "Close navigation menu",
+    "main_navigation": "Main navigation"
 }
