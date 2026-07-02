@@ -9,6 +9,7 @@ import SidebarFooter from '@/app/components/SidebarFooter';
 import List from './List';
 import ClubLogo from './ClubLogo';
 import ProfileMenu from '../ProfileMenu';
+import LanguageSelector from '@/app/components/LanguageSelector';
 
 interface Props {
     items: NavigationListItemType[];
@@ -52,6 +53,9 @@ export default function MobileMenu({
                 </div>
 
                 <div className="flex items-center text-neutral-600">
+                    <div className={navButtonClass}>
+                        <LanguageSelector showLang={false} />
+                    </div>
                     <div className={navButtonClass}>
                         <ProfileMenu />
                     </div>

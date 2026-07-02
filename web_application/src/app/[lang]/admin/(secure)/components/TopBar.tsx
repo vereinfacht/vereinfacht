@@ -15,7 +15,7 @@ export default async function TopBar() {
         <div className="flex items-center justify-between p-4 md:h-20 md:px-6 md:py-0">
             <Title className="hidden flex-1 md:block" />
             <div className="flex w-full justify-between gap-x-6 md:w-auto">
-                <LanguageSelector />
+                <LanguageSelector showLang={true} />
                 <ProfileMenu
                     userName={session?.user?.attributes.name}
                     showArrow={true}
