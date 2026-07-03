@@ -73,7 +73,7 @@ export default function MobileMenu({
     }, [isOpen]);
 
     return (
-        <>
+        <div className={`group ${isOpen ? 'is-open' : ''}`}>
             <div className="flex w-full items-center justify-between border-b border-neutral-200 bg-white px-5 py-2 md:hidden">
                 <div className="flex items-center gap-3">
                     <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
@@ -103,7 +103,7 @@ export default function MobileMenu({
 
             <div
                 id="main-navigation"
-                className={` ${isOpen ? 'fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)]' : 'hidden'} md:sticky md:top-0 md:flex md:h-screen md:w-64 md:flex-col md:justify-between md:bg-white md:bg-none`}
+                className="invisible fixed inset-0 z-50 flex flex-col bg-white bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)] opacity-0 group-[.is-open]:visible group-[.is-open]:opacity-100 md:visible md:sticky md:top-0 md:flex md:h-screen md:w-64 md:flex-col md:justify-between md:bg-white md:bg-none md:opacity-100"
             >
                 <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-2 md:py-4">
                     <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
@@ -134,6 +134,6 @@ export default function MobileMenu({
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
