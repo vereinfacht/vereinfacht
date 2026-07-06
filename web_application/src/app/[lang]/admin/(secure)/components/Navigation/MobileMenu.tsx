@@ -94,7 +94,7 @@ export default function MobileMenu({
                         className={navButtonClass}
                         aria-expanded={isOpen}
                         aria-controls="main-navigation"
-                        aria-label={t('open_navigation_menu')}
+                        aria-label={t('open_navigation')}
                     >
                         <IconMenu className={iconClass} aria-hidden="true" />
                     </button>
@@ -114,7 +114,7 @@ export default function MobileMenu({
                             type="button"
                             onClick={() => setIsOpen(false)}
                             className={navButtonClass}
-                            aria-label={t('close_navigation_menu')}
+                            aria-label={t('close_navigation')}
                         >
                             <IconClose
                                 className={iconClass}
