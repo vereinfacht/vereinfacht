@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '/public/svg/menu.svg';
 import { NavigationListItemType } from './List';
-import IconClose from '/public/svg/close-new.svg';
+import IconClose from '/public/svg/close_new.svg';
 import SidebarFooter from '@/app/components/SidebarFooter';
 import List from './List';
 import ClubLogo from './ClubLogo';
