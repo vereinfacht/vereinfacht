@@ -28,6 +28,7 @@
     --color-primary-500: var(--color-blue-500);
     --color-borderSubtle: var(--color-neutral-200);
     --color-textSecondary: var(--color-neutral-600);
+    --color-iconSecondary: var(--color-neutral-600);
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,

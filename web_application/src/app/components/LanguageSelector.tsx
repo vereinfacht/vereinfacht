@@ -46,7 +46,7 @@ export default function LanguageSelector({
                 className="flex items-center justify-end gap-x-2"
                 data-cy="language-selector"
             >
-                <IconGlobe className="fill-text-secondary" />
+                <IconGlobe className="fill-iconSecondary" />
                 {showLang && (
                     <Text preset="label" className="text-textSecondary w-[1em]">
                         {lang.toUpperCase()}

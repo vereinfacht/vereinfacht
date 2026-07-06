@@ -22,7 +22,7 @@ export default function ProfileMenu({ userName }: ProfileMenuProps) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-x-2 text-sm font-medium">
-                <IconPerson className="fill-text-secondary" />
+                <IconPerson className="fill-iconSecondary" />
 
                 {userName && (
                     <Text className="text-textSecondary" preset="label">
