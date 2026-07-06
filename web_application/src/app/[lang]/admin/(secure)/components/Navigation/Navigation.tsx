@@ -2,7 +2,6 @@ import { getOne } from '@/actions/fetchAdminResources';
 import { Club } from '@/types/models';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
-import Title from './Title';
 import createTranslation from 'next-translate/createTranslation';
 import MembershipsIcon from '/public/svg/memberships.svg';
 import ClubIcon from '/public/svg/club.svg';
@@ -105,8 +104,6 @@ export default async function Navigation() {
             items={items}
             clubLogoUrl={club?.logoUrl}
             clubTitle={club?.title}
-        >
-            <Title />
-        </MobileMenu>
+        />
     );
 }

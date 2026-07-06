@@ -16,15 +16,9 @@ interface Props {
     items: NavigationListItemType[];
     clubLogoUrl?: string;
     clubTitle?: string;
-    children?: React.ReactNode;
 }
 
-export default function MobileMenu({
-    items,
-    clubLogoUrl,
-    clubTitle,
-    children,
-}: Props) {
+export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const navButtonClass = 'cursor-pointer p-3';
@@ -60,7 +54,6 @@ export default function MobileMenu({
             <div className="border-borderSubtle flex w-full items-center justify-between border-b bg-white px-5 py-2 md:hidden">
                 <div className="flex items-center gap-3">
                     <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-                    {children}
                 </div>
 
                 <div className="text-textSecondary flex items-center">
