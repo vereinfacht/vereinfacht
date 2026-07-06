@@ -6,7 +6,7 @@ import Text from '@/app/components/Text/Text';
 import Logo from '/public/svg/vereinfacht_logo.svg';
 
 export default function SidebarFooter() {
-    const { t } = useTranslation();
+    const { t } = useTranslation('general');
 
     return (
         <footer className="flex flex-col justify-start gap-4 border-t border-neutral-300 p-5 text-sm text-gray-700">
@@ -24,7 +24,7 @@ export default function SidebarFooter() {
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm capitalize">{t('imprint')}</Text>
+                    <Text className="text-sm">{t('imprint')}</Text>
                 </a>
                 <span className="px-2">&bull;</span>
                 <a
@@ -32,7 +32,7 @@ export default function SidebarFooter() {
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm capitalize">{t('privacy')}</Text>
+                    <Text className="text-sm">{t('privacy')}</Text>
                 </a>
             </div>
         </footer>
