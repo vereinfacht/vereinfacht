@@ -6,12 +6,13 @@
 @custom-variant dark-primary (&:is(.dark-primary *));
 
 @theme {
-    --color-primary-500: #0059ff;
-
+    /* some color values here will be replaced gradually with new color values from Figme redesign */
     --color-blue-500: #0059ff;
     --color-blue-300: #00aeff;
 
     --color-green-500: #00d13b;
+
+    --color-red-500: #ce1924;
 
     --color-slate-300: #f7f9fa;
     --color-slate-400: #ebf1f4;
@@ -20,12 +21,13 @@
     --color-slate-700: #5b656a;
     --color-slate-900: #050e13;
 
-    --color-red-500: #ce1924;
+    --color-neutral-200: #e9ecef;
+    --color-neutral-600: #495057;
 
-    /* todo: During the redesign, slate and neutral are used side by side. Slate will be replaced gradually. */
-    --color-border-subtle: #e9ecef;
-
-    --color-text-secondary: #495057;
+    /* semantic color tokens as in figma design */
+    --color-primary-500: var(--color-blue-500);
+    --color-borderSubtle: var(--color-neutral-200);
+    --color-textSecondary: var(--color-neutral-600);
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,

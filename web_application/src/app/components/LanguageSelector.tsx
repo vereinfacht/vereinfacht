@@ -48,10 +48,7 @@ export default function LanguageSelector({
             >
                 <IconGlobe className="fill-text-secondary" />
                 {showLang && (
-                    <Text
-                        preset="label"
-                        className="text-text-secondary w-[1em]"
-                    >
+                    <Text preset="label" className="text-textSecondary w-[1em]">
                         {lang.toUpperCase()}
                     </Text>
                 )}

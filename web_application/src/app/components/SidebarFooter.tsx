@@ -9,7 +9,7 @@ export default function SidebarFooter() {
     const { t } = useTranslation('general');
 
     return (
-        <footer className="border-border-subtle flex flex-col justify-start gap-4 border-t p-5 text-sm text-gray-700">
+        <footer className="border-borderSubtle flex flex-col justify-start gap-4 border-t p-5 text-sm text-gray-700">
             <div className="flex flex-row items-center gap-3 self-stretch md:flex-col md:items-start md:gap-1">
                 <Text className="text-sm">{t('general:made_with')}</Text>
 

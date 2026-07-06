@@ -25,7 +25,7 @@ export default function ProfileMenu({ userName }: ProfileMenuProps) {
                 <IconPerson className="fill-text-secondary" />
 
                 {userName && (
-                    <Text className="text-text-secondary" preset="label">
+                    <Text className="text-textSecondary" preset="label">
                         {userName}
                     </Text>
                 )}
