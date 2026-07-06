@@ -27,16 +27,16 @@ export default function ProfileMenu({
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-x-2 text-sm font-medium">
-                <IconPerson className="fill-neutral-600" />
+                <IconPerson className="fill-text-secondary" />
 
                 {userName && (
-                    <Text className="text-neutral-600" preset="label">
+                    <Text className="text-text-secondary" preset="label">
                         {userName}
                     </Text>
                 )}
 
                 {showArrow && (
-                    <IconChevronDown className="h-6 w-6 stroke-neutral-600 stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
+                    <IconChevronDown className="stroke-text-secondary h-6 w-6 stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                 )}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

@@ -23,8 +23,9 @@
     --color-red-500: #ce1924;
 
     /* todo: During the redesign, slate and neutral are used side by side. Slate will be replaced gradually. */
-    --color-neutral-600: #495057;
-    --color-neutral-200: #e9ecef;
+    --color-border-subtle: #e9ecef;
+
+    --color-text-secondary: #495057;
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,

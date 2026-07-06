@@ -35,7 +35,7 @@ export default function List({ items }: Props) {
                     if ('items' in item) {
                         return (
                             <li key={index}>
-                                <Text className="font py-2 text-xs leading-[1em] tracking-wide text-slate-800 uppercase">
+                                <Text className="font text-text-secondary py-2 text-xs leading-[1em] tracking-wide uppercase">
                                     {item.title}
                                 </Text>
                                 <ul className="flex-col md:flex">
