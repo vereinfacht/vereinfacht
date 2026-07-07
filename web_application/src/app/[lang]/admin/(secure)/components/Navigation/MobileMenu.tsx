@@ -7,10 +7,11 @@ import { NavigationListItemType } from './List';
 import IconClose from '/public/svg/close_new.svg';
 import SidebarFooter from '@/app/components/SidebarFooter';
 import List from './List';
-import ClubLogo from './ClubLogo';
 import ProfileMenu from '../ProfileMenu';
 import LanguageSelector from '@/app/components/LanguageSelector';
 import useTranslation from 'next-translate/useTranslation';
+import ActionBar from './ActionBar';
+import NavigationToggle from './NavigationToggle';
 
 interface Props {
     items: NavigationListItemType[];
@@ -21,8 +22,6 @@ interface Props {
 export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-    const navButtonClass = 'cursor-pointer p-3';
-    const iconClass = 'fill-current';
     const openButtonRef = useRef<HTMLButtonElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const { t } = useTranslation('admin');
@@ -51,31 +50,29 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
     return (
         <div className={`group ${isOpen ? 'is-open' : ''}`}>
-            <div className="border-borderSubtle flex w-full items-center justify-between border-b bg-white px-5 py-2 md:hidden">
-                <div className="flex items-center gap-3">
-                    <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-                </div>
-
-                <div className="text-textSecondary flex items-center">
-                    <div className={navButtonClass}>
-                        <LanguageSelector showLang={false} />
-                    </div>
-                    <div className={navButtonClass}>
-                        <ProfileMenu />
-                    </div>
-                    <button
-                        ref={openButtonRef}
-                        type="button"
-                        onClick={() => setIsOpen(true)}
-                        className={navButtonClass}
-                        aria-expanded={isOpen}
-                        aria-controls="main-navigation"
-                        aria-label={t('open_navigation')}
-                    >
-                        <IconMenu className={iconClass} aria-hidden="true" />
-                    </button>
-                </div>
-            </div>
+            <ActionBar
+                clubLogoUrl={clubLogoUrl}
+                clubTitle={clubTitle}
+                className="w-full bg-white md:hidden"
+                rightContent={
+                    <>
+                        <div className="cursor-pointer p-3">
+                            <LanguageSelector showLang={false} />
+                        </div>
+                        <div className="cursor-pointer p-3">
+                            <ProfileMenu />
+                        </div>
+                        <NavigationToggle
+                            ref={openButtonRef}
+                            icon={IconMenu}
+                            onClick={() => setIsOpen(true)}
+                            aria-expanded={isOpen}
+                            aria-controls="main-navigation"
+                            aria-label={t('open_navigation')}
+                        />
+                    </>
+                }
+            />
 
             <div
                 id="main-navigation"
@@ -86,24 +83,22 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
                     }
                 }}
             >
-                <div className="border-borderSubtle flex items-center justify-between border-b px-5 py-2 md:py-4">
-                    <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-
-                    <div className="text-textSecondary flex items-center md:hidden">
-                        <button
-                            ref={closeButtonRef}
-                            type="button"
-                            onClick={() => setIsOpen(false)}
-                            className={navButtonClass}
-                            aria-label={t('close_navigation')}
-                        >
-                            <IconClose
-                                className={iconClass}
-                                aria-hidden="true"
+                <ActionBar
+                    clubLogoUrl={clubLogoUrl}
+                    clubTitle={clubTitle}
+                    className="md:py-4"
+                    onLogoClick={() => setIsOpen(false)}
+                    rightContent={
+                        <div className="md:hidden">
+                            <NavigationToggle
+                                ref={closeButtonRef}
+                                icon={IconClose}
+                                onClick={() => setIsOpen(false)}
+                                aria-label={t('close_navigation')}
                             />
-                        </button>
-                    </div>
-                </div>
+                        </div>
+                    }
+                />
 
                 <div className="flex flex-1 flex-col overflow-y-auto md:overflow-hidden">
                     <div className="flex-1 md:overflow-y-auto">
