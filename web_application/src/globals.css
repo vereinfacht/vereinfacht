@@ -22,6 +22,7 @@
     --color-slate-900: #050e13;
 
     --color-neutral-200: #e9ecef;
+    --color-neutral-500: #868e96;
     --color-neutral-600: #495057;
 
     /* semantic color tokens as in figma design */
@@ -29,6 +30,12 @@
     --color-borderSubtle: var(--color-neutral-200);
     --color-textSecondary: var(--color-neutral-600);
     --color-iconSecondary: var(--color-neutral-600);
+    --color-iconSecondary: var(--color-neutral-600);
+    --color-btnTetriaryHover: color-mix(
+        in srgb,
+        var(--color-neutral-500) 12%,
+        transparent
+    );
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,
@@ -51,6 +58,7 @@
     --shadow-negative-sm: 0px -10px 40px rgba(0, 82, 127, 0.05);
     --shadow-inset-sm: 0px -10px 10px inset rgba(0, 82, 127, 0.03);
     --shadow-navigation: 0px 4px 40px 0 rgba(0, 0, 0, 0.05);
+    --shadow-navigationItem: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
 
     --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
 
