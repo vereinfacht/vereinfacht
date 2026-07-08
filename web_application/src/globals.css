@@ -6,7 +6,7 @@
 @custom-variant dark-primary (&:is(.dark-primary *));
 
 @theme {
-    /* some color values here will be replaced gradually with new color values from Figme redesign */
+    /* some color values here will be replaced gradually with new color values from Figma redesign */
     --color-blue-500: #0059ff;
     --color-blue-300: #00aeff;
 
