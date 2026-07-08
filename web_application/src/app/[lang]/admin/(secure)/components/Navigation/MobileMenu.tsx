@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '/public/svg/menu.svg';
 import { NavigationListItemType } from './List';
@@ -22,8 +22,6 @@ interface Props {
 export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-    const openButtonRef = useRef<HTMLButtonElement>(null);
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
     const { t } = useTranslation('admin');
 
     useEffect(() => {
@@ -31,20 +29,23 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
     }, [pathname]);
 
     useEffect(() => {
-        if (isOpen) {
-            document.body.classList.add('overflow-hidden');
-        } else {
-            document.body.classList.remove('overflow-hidden');
-        }
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsOpen(false);
+            }
+        };
 
         if (isOpen) {
-            closeButtonRef.current?.focus();
+            document.body.classList.add('overflow-hidden');
+            document.addEventListener('keydown', handleEscape);
         } else {
-            openButtonRef.current?.focus();
+            document.body.classList.remove('overflow-hidden');
+            document.removeEventListener('keydown', handleEscape);
         }
 
         return () => {
             document.body.classList.remove('overflow-hidden');
+            document.removeEventListener('keydown', handleEscape);
         };
     }, [isOpen]);
 
@@ -60,7 +61,6 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
                         <LanguageSelector showLang={false} />
                         <ProfileMenu />
                         <NavigationToggle
-                            ref={openButtonRef}
                             icon={isOpen ? IconClose : IconMenu}
                             onClick={() => setIsOpen(!isOpen)}
                             aria-expanded={isOpen}
@@ -77,11 +77,6 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
             <div
                 id="main-navigation"
                 className="animate-move-down hidden h-full flex-col overflow-y-auto group-[.is-open]:flex md:flex md:animate-none md:justify-between md:overflow-auto"
-                onKeyDown={(event) => {
-                    if (event.key === 'Escape') {
-                        setIsOpen(false);
-                    }
-                }}
             >
                 <List items={items} />
                 <SidebarFooter />

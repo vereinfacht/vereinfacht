@@ -8,22 +8,15 @@ interface NavigationToggleProps {
     'aria-controls'?: string;
 }
 
-const NavigationToggle = React.forwardRef<
-    HTMLButtonElement,
-    NavigationToggleProps
->(
-    (
-        {
-            icon: Icon,
-            onClick,
-            'aria-label': ariaLabel,
-            'aria-expanded': ariaExpanded,
-            'aria-controls': ariaControls,
-        },
-        ref,
-    ) => (
+export default function NavigationToggle({
+    icon: Icon,
+    onClick,
+    'aria-label': ariaLabel,
+    'aria-expanded': ariaExpanded,
+    'aria-controls': ariaControls,
+}: NavigationToggleProps) {
+    return (
         <button
-            ref={ref}
             type="button"
             className="cursor-pointer p-3"
             onClick={onClick}
@@ -33,8 +26,5 @@ const NavigationToggle = React.forwardRef<
         >
             <Icon className="fill-current" aria-hidden="true" />
         </button>
-    ),
-);
-
-NavigationToggle.displayName = 'NavigationToggle';
-export default NavigationToggle;
+    );
+}
