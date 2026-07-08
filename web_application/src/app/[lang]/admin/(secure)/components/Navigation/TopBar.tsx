@@ -10,7 +10,7 @@ interface MenuHeaderProps {
     onLogoClick?: () => void;
 }
 
-export default function MenuHeader({
+export default function TopBar({
     clubLogoUrl,
     clubTitle,
     className = '',
@@ -21,7 +21,7 @@ export default function MenuHeader({
     return (
         <div
             className={[
-                'border-borderSubtle flex items-center justify-between border-b px-5 py-2',
+                'border-borderSubtle flex w-full items-center justify-between border-b px-5 py-2 md:p-4',
                 className,
             ].join(' ')}
         >
@@ -32,7 +32,7 @@ export default function MenuHeader({
                 <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
                 {leftContent}
             </div>
-            <div className="text-textSecondary flex items-center">
+            <div className="text-textSecondary flex items-center md:hidden">
                 {rightContent}
             </div>
         </div>

@@ -7,7 +7,7 @@ import {
 } from '@/utils/colors';
 import { PropsWithChildren } from 'react';
 import ContentContainer from './components/ContentContainer';
-import TopBar from './components/TopBar';
+import TitleBar from './components/TitleBar';
 
 export default async function SecureLayout({ children }: PropsWithChildren) {
     const club = await getCurrentClub();
@@ -26,8 +26,8 @@ export default async function SecureLayout({ children }: PropsWithChildren) {
             ].join(' ')}
         >
             <Navigation />
-            <div className="flex w-full flex-1 flex-col overflow-hidden rounded-t-3xl bg-white md:rounded-l-3xl md:rounded-tr-none">
-                <TopBar />
+            <div className="flex w-full flex-1 flex-col overflow-hidden bg-white">
+                <TitleBar />
                 <ContentContainer>{children}</ContentContainer>
             </div>
         </div>

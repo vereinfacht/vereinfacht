@@ -29,7 +29,10 @@ export default function List({ items }: Props) {
     const { t } = useTranslation('admin');
 
     return (
-        <nav aria-label={t('main_navigation')} className="p-5">
+        <nav
+            aria-label={t('main_navigation')}
+            className="p-5 md:overflow-y-auto"
+        >
             <ul className="flex flex-col gap-y-5">
                 {items.map((item, index) => {
                     if ('items' in item) {

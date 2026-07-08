@@ -43,7 +43,7 @@ export default function LanguageSelector({
     return (
         <DropdownMenu>
             <DropdownMenuTrigger
-                className="flex items-center justify-end gap-x-2"
+                className="flex cursor-pointer items-center justify-end gap-x-2 p-3"
                 data-cy="language-selector"
             >
                 <IconGlobe className="fill-iconSecondary" />

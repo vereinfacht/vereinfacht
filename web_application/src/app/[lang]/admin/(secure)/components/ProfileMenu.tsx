@@ -21,7 +21,7 @@ export default function ProfileMenu({ userName }: ProfileMenuProps) {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-x-2 text-sm font-medium">
+            <DropdownMenuTrigger className="flex cursor-pointer items-center gap-x-2 p-3 text-sm font-medium">
                 <IconPerson className="fill-iconSecondary" />
 
                 {userName && (
