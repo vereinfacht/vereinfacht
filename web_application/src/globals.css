@@ -50,6 +50,7 @@
     --shadow-negative: 0px -10px 40px rgba(5, 14, 19, 0.3);
     --shadow-negative-sm: 0px -10px 40px rgba(0, 82, 127, 0.05);
     --shadow-inset-sm: 0px -10px 10px inset rgba(0, 82, 127, 0.03);
+    --shadow-navigation: 0px 4px 40px 0 rgba(0, 0, 0, 0.05);
 
     --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
 
