@@ -32,10 +32,10 @@ export default function ListItem({
     return (
         <div
             className={[
-                'flex cursor-pointer items-center gap-3 rounded-full border border-transparent px-5 py-3 text-lg font-medium transition-all duration-200 focus:border-2 focus:border-blue-500',
+                'flex cursor-pointer items-center gap-2 rounded-full px-4 py-3 text-lg font-medium transition-all duration-200 focus:border-2 focus:border-blue-500',
                 isActive
-                    ? 'shadow-navigationItem border-white bg-white/80 text-blue-500'
-                    : 'text-textSecondary hover:bg-btnTetriaryHover hover:border-white',
+                    ? 'shadow-navigationItem bg-white/80 text-blue-500'
+                    : 'text-textSecondary hover:bg-btnTetriaryHover',
             ].join(' ')}
         >
             <span className="flex shrink-0 items-center justify-center">
