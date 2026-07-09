@@ -47,6 +47,7 @@ export default function CreateForm({
     const [selectedMembershipId, setSelectedMembershipId] = useState<
         string | undefined
     >(data?.membership?.id);
+    const currentMembershipId = data?.membership?.id;
     const birthdayDefaultValue = data?.birthday
         ? data.birthday.toString().slice(0, 10)
         : '';
@@ -177,14 +178,21 @@ export default function CreateForm({
                             optionLabel={(item) => {
                                 const maximumNumberOfMembers = item.membershipType?.maximumNumberOfMembers ?? 1;
 
+                                const postfix = item.id === currentMembershipId 
+                                ? ` (${t('membership:current')})`
+                                : ` (${item.membersCount ?? 0}/${maximumNumberOfMembers})`;
+
                                 return (
                                     item.owner?.fullName +
                                     ' - ' +
-                                    item.membershipType?.title +
-                                    ' (' + item.membersCount + '/' + maximumNumberOfMembers + ')'
+                                    item.membershipType?.title + postfix
                                 );
                             }}
                             optionDisabled={(item) => {
+                                if (item.id === currentMembershipId) {
+                                    return false;
+                                }
+
                                 const membersCount = item.membersCount ?? 0;
                                 const maximumNumberOfMembers =
                                     item.membershipType

@@ -64,5 +64,6 @@
     "validation": {
         "owner_required": "Owner is required",
         "membership_type_required": "Membership type is required"
-    }
+    },
+    "current": "current"
 }

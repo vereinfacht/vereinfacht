@@ -64,5 +64,6 @@
     "validation": {
         "owner_required": "Inhaber*in ist erforderlich",
         "membership_type_required": "Mitgliedschaftsart ist erforderlich"
-    }
+    },
+    "current": "aktuell"
 }
