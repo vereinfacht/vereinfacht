@@ -48,6 +48,9 @@ class MembershipSchema extends Schema
             BelongsTo::make('membershipType')->type('membership-types'),
             BelongsTo::make('owner')->type('members'),
             BelongsTo::make('paymentPeriod')->type('payment-periods'),
+            Number::make('membersCount')->extractUsing(
+                static fn($model) => $model->members()->count()
+            )->readOnly(),
             HasMany::make('members')->type('members'),
         ];
     }

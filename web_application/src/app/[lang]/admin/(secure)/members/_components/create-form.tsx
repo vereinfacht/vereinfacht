@@ -175,11 +175,22 @@ export default function CreateForm({
                                 })
                             }
                             optionLabel={(item) => {
+                                const maximumNumberOfMembers = item.membershipType?.maximumNumberOfMembers ?? 1;
+
                                 return (
                                     item.owner?.fullName +
                                     ' - ' +
-                                    item.membershipType?.title
+                                    item.membershipType?.title +
+                                    ' (' + item.membersCount + '/' + maximumNumberOfMembers + ')'
                                 );
+                            }}
+                            optionDisabled={(item) => {
+                                const membersCount = item.membersCount ?? 0;
+                                const maximumNumberOfMembers =
+                                    item.membershipType
+                                        ?.maximumNumberOfMembers ?? 1;
+
+                                return membersCount >= maximumNumberOfMembers;
                             }}
                             defaultValue={
                                 data?.membership?.id

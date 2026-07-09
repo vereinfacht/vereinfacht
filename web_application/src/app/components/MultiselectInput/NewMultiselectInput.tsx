@@ -177,6 +177,7 @@ export function NewMultiselectInput({
                                         value={option.value.toString()}
                                         key={option.value}
                                         onSelect={handleSelectionChange}
+                                        disabled={option.disabled}
                                     >
                                         {option.label}
                                         <Check

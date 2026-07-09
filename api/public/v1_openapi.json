@@ -11928,6 +11928,12 @@
                                 "type": "string",
                                 "readOnly": true,
                                 "example": "2025-10-16T13:11:32.000000Z"
+                            },
+                            "membersCount": {
+                                "title": "membersCount",
+                                "type": "integer",
+                                "readOnly": true,
+                                "example": 2
                             }
                         }
                     },
