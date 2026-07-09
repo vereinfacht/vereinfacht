@@ -51,7 +51,7 @@ export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
 
     return (
         <div
-            className={`group md:shadow-navigation z-10 flex w-full flex-col bg-white transition-colors duration-500 md:h-screen md:w-64 ${isOpen ? 'is-open fixed h-full bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)] shadow-none md:relative md:bg-none' : 'shadow-navigation sticky top-0'}`}
+            className={`group md:shadow-navigation z-10 flex w-full flex-col bg-white transition-colors duration-500 md:h-screen md:w-64 md:bg-white/50 ${isOpen ? 'is-open fixed h-full bg-linear-to-br from-[rgba(251,231,224,0.6)] via-[rgba(221,240,254,0.6)] to-[rgba(203,248,223,0.6)] shadow-none md:relative md:bg-none' : 'shadow-navigation sticky top-0'}`}
         >
             <TopBar
                 clubLogoUrl={clubLogoUrl}
