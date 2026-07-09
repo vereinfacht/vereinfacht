@@ -24,10 +24,12 @@
     --color-neutral-200: #e9ecef;
     --color-neutral-500: #868e96;
     --color-neutral-600: #495057;
+    --color-neutral-800: #212529;
 
     /* semantic color tokens as in figma design */
     --color-primary-500: var(--color-blue-500);
     --color-borderSubtle: var(--color-neutral-200);
+    --color-textPrimary: var(--color-neutral-800);
     --color-textSecondary: var(--color-neutral-600);
     --color-iconSecondary: var(--color-neutral-600);
     --color-iconSecondary: var(--color-neutral-600);
