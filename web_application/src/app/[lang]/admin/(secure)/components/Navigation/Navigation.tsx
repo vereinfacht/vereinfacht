@@ -1,10 +1,7 @@
 import { getOne } from '@/actions/fetchAdminResources';
 import { Club } from '@/types/models';
 import { auth } from '@/utils/auth';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import List from './List';
-import Title from './Title';
 import createTranslation from 'next-translate/createTranslation';
 import MembershipsIcon from '/public/svg/memberships.svg';
 import ClubIcon from '/public/svg/club.svg';
@@ -17,7 +14,7 @@ import DivisionsIcon from '/public/svg/divisions.svg';
 import MembershipTypeIcon from '/public/svg/membership_type.svg';
 import TaxAccountsIcon from '/public/svg/tax_accounts.svg';
 import UsersIcon from '/public/svg/users.svg';
-import SidebarFooter from '@/app/components/SidebarFooter';
+import Menu from './Menu';
 
 export default async function Navigation() {
     const { t } = createTranslation();
@@ -98,31 +95,15 @@ export default async function Navigation() {
                     title: t('user:title.other'),
                     icon: <UsersIcon />,
                 },
-                // {
-                //     href: '/admin/dashboard',
-                //     title: t('user:title.other'),
-                // },
             ],
         },
     ];
 
     return (
-        <div className="sticky top-0 flex h-screen flex-col justify-between bg-linear-to-b from-white via-white to-slate-400 md:shrink-0 md:bg-linear-to-r">
-            <div className="flex items-center border-b">
-                <Link href="/admin/dashboard">
-                    <picture className="mt-[0.1em] flex h-20 items-center px-5 py-4">
-                        <img
-                            src={club?.logoUrl}
-                            alt={`Logo ${club?.title}`}
-                            height={40}
-                            width={36}
-                        />
-                    </picture>
-                </Link>
-                <Title className="md:hidden" />
-            </div>
-            <List items={items} />
-            <SidebarFooter />
-        </div>
+        <Menu
+            items={items}
+            clubLogoUrl={club?.logoUrl}
+            clubTitle={club?.title}
+        />
     );
 }

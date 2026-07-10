@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ListItem from './ListItem';
 import Text from '@/app/components/Text/Text';
 import { toKebabCase } from '@/utils/strings';
+import useTranslation from 'next-translate/useTranslation';
 
 type NavigatableItem = {
     title: string;
@@ -25,16 +26,19 @@ function getDataCy(item: NavigationListItemType) {
 }
 
 export default function List({ items }: Props) {
-    return (
-        <nav className="flex-1 overflow-y-auto p-5">
-            {/* <MobileMenu items={items} /> */}
+    const { t } = useTranslation('admin');
 
-            <ul className="hidden flex-col gap-y-5 md:flex">
+    return (
+        <nav
+            aria-label={t('main_navigation')}
+            className="p-5 md:overflow-y-auto"
+        >
+            <ul className="flex flex-col gap-y-5">
                 {items.map((item, index) => {
                     if ('items' in item) {
                         return (
                             <li key={index}>
-                                <Text className="font py-2 text-xs leading-[1em] tracking-wide text-slate-800 uppercase">
+                                <Text className="font text-textSecondary py-2 text-xs leading-[1em] tracking-wide uppercase">
                                     {item.title}
                                 </Text>
                                 <ul className="flex-col md:flex">
