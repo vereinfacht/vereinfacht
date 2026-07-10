@@ -32,11 +32,7 @@
     --color-textPrimary: var(--color-neutral-800);
     --color-textSecondary: var(--color-neutral-600);
     --color-iconSecondary: var(--color-neutral-600);
-    --color-btnTertiaryHover: color-mix(
-        in srgb,
-        var(--color-neutral-500) 12%,
-        transparent
-    );
+    --color-btnTertiaryHover: --alpha(var(--color-neutral-500) / 12%);
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,
