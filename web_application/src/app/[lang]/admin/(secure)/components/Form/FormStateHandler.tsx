@@ -52,7 +52,6 @@ export default function FormStateHandler({
                 ),
             });
 
-        
             if (onSuccess) {
                 onSuccess();
                 return;
