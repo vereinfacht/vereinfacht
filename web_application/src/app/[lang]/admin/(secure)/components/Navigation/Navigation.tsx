@@ -14,7 +14,7 @@ import DivisionsIcon from '/public/svg/divisions.svg';
 import MembershipTypeIcon from '/public/svg/membership_type.svg';
 import TaxAccountsIcon from '/public/svg/tax_accounts.svg';
 import UsersIcon from '/public/svg/users.svg';
-import MobileMenu from './MobileMenu';
+import Menu from './Menu';
 
 export default async function Navigation() {
     const { t } = createTranslation();
@@ -100,7 +100,7 @@ export default async function Navigation() {
     ];
 
     return (
-        <MobileMenu
+        <Menu
             items={items}
             clubLogoUrl={club?.logoUrl}
             clubTitle={club?.title}

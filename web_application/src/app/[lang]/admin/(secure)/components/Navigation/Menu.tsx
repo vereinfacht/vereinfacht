@@ -19,7 +19,7 @@ interface Props {
     clubTitle?: string;
 }
 
-export default function MobileMenu({ items, clubLogoUrl, clubTitle }: Props) {
+export default function Menu({ items, clubLogoUrl, clubTitle }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const { t } = useTranslation('admin');
