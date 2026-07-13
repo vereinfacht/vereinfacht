@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Filament\Panel;
 use App\Models\Scopes\ClubScope;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Behaviors\HasRoles;
 use Illuminate\Support\Collection;
@@ -19,7 +20,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable implements FilamentUser, HasLocalePreference, HasTenants
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable, PrefersLocale;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, PrefersLocale, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
