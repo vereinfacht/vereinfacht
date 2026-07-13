@@ -99,8 +99,8 @@ class Membership extends Model
     }
 
     public function hasCapacity(?int $ignoreMemberId = null): bool
-    {  
-        if (! $maximumNumberOfMembers = $this->maximum_number_of_members) {
+    {
+        if (! $maximumNumberOfMembers = $this->membershipType?->maximum_number_of_members) {
             return true;
         }
 
