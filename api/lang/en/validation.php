@@ -265,6 +265,9 @@ return [
         'year' => 'year',
     ],
     'custom' => [
+        'membership' => [
+            'maximum_members_reached' => 'This membership has already reached its maximum number of members.',
+        ],
         'title_translation' => [
             'required' => 'At least one language must be filled in.',
         ],

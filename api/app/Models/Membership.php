@@ -98,6 +98,19 @@ class Membership extends Model
         return $result;
     }
 
+    public function hasCapacity(?int $ignoreMemberId = null): bool
+    {  
+        if (! $maximumNumberOfMembers = $this->maximum_number_of_members) {
+            return true;
+        }
+
+        $membersCount = $this->members()
+            ->when($ignoreMemberId, fn ($query) => $query->whereKeyNot($ignoreMemberId))
+            ->count();
+
+        return $membersCount < $maximumNumberOfMembers;
+    }
+
     protected function title(): Attribute
     {
         return Attribute::make(
