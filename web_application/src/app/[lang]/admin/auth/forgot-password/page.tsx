@@ -6,25 +6,41 @@ import TextInput from '@/app/components/Input/TextInput';
 import MessageBox from '@/app/components/MessageBox';
 import { FormEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import { requestPasswordReset } from '@/actions/users/requestPasswordReset';
+import { useRouter } from 'next/navigation';
 
 export default function ForgotPassword() {
     const { t } = useTranslation();
+    const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
+    const [successMessage, setSuccessMessage] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setServerError(undefined);
+        setSuccessMessage(undefined);
 
         const formData = new FormData(event.currentTarget);
         const email = formData.get('email') as string;
 
-        // TODO: Backend route is not yet configured.
-        setTimeout(() => {
+        try {
+            const response = await requestPasswordReset(email);
+
+            if (response.success) {
+                setSuccessMessage(response.message);
+                router.push('/login');
+            } else {
+                setServerError(response.message);
+            }
+        } catch (error) {
+            setServerError(t('auth:forgot_password_failed'));
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
+
     return (
         <>
             <form
@@ -51,11 +67,11 @@ export default function ForgotPassword() {
                     </Button>
                 </div>
             </form>
-            {serverError != null && (
+            {(serverError || successMessage) && (
                 <MessageBox
-                    preset="error"
-                    className="my-10"
-                    message={serverError}
+                    preset={serverError ? 'error' : 'default'}
+                    className="self-start"
+                    message={(serverError || successMessage) as string}
                 />
             )}
         </>
