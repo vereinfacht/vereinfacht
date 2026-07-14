@@ -62,5 +62,6 @@
     "next": "Next",
     "forgot_password_failed": "We couldn't process your request. Please try again.",
     "reset_password": "Reset Password",
-    "repeat_password": "Repeat Password"
+    "repeat_password": "Repeat Password",
+    "set_new_password": "Set a new password"
 }

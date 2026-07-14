@@ -71,6 +71,7 @@ JsonApiRoute::server('v1')
                 $actions->post('login');
                 $actions->post('logout');
                 $actions->post('forgot-password');
+                $actions->post('reset-password');
             });
 
         $server->resource('media', MediaController::class)

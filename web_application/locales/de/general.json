@@ -61,5 +61,6 @@
     "next": "Weiter",
     "forgot_password_failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
     "reset_password": "Passwort ändern",
-    "repeat_password": "Passwort wiederholen"
+    "repeat_password": "Passwort wiederholen",
+    "set_new_password": "Neues Passwort festlegen"
 }
