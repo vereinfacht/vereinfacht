@@ -35,7 +35,7 @@ export default function ForgotPassword() {
                 setServerError(response.message);
             }
         } catch (error) {
-            setServerError(t('auth:forgot_password_failed'));
+            setServerError(t('general:forgot_password_failed'));
         } finally {
             setIsLoading(false);
         }
@@ -47,7 +47,7 @@ export default function ForgotPassword() {
                 onSubmit={handleSubmit}
                 className="shadow-card-sm mx-auto flex w-full max-w-sm flex-col space-y-4 rounded-xl p-6"
             >
-                <FormIntro headline={t('auth:forgot_password')} />
+                <FormIntro headline={t('general:forgot_password')} />
                 <TextInput
                     id="email"
                     name="email"
@@ -58,19 +58,15 @@ export default function ForgotPassword() {
                 />
 
                 <div className="flex justify-center">
-                    <Button
-                        type="submit"
-                        data-cy="submit-login-form"
-                        isLoading={isLoading}
-                    >
-                        {t('auth:next')}
+                    <Button type="submit" isLoading={isLoading}>
+                        {t('general:next')}
                     </Button>
                 </div>
             </form>
             {(serverError || successMessage) && (
                 <MessageBox
                     preset={serverError ? 'error' : 'default'}
-                    className="self-start"
+                    className="my-10"
                     message={(serverError || successMessage) as string}
                 />
             )}

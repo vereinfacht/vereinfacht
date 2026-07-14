@@ -71,7 +71,7 @@ export default function LoginForm() {
                         href="forgot-password"
                         className="hover:text-primary-500 text-xs"
                     >
-                        {t('auth:problem')}
+                        {t('general:problem')}
                     </Link>
                 </div>
                 <div className="flex justify-center">
