@@ -9,12 +9,14 @@ export interface NavigationListItemProps {
     href: string;
     title: string;
     icon: React.ReactNode;
+    activeIcon?: React.ReactNode;
 }
 
 export default function ListItem({
     title,
     href,
     icon,
+    activeIcon,
 }: NavigationListItemProps) {
     const pathname = usePathname();
     const { lang } = useTranslation();
@@ -39,7 +41,7 @@ export default function ListItem({
             ].join(' ')}
         >
             <span className="flex shrink-0 items-center justify-center">
-                {icon}
+                {isActive ? activeIcon : icon}
             </span>
             <Text className="leading-[1em] font-semibold">{title}</Text>
         </div>

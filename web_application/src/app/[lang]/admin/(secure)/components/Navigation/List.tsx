@@ -8,6 +8,7 @@ type NavigatableItem = {
     title: string;
     href: string;
     icon: React.ReactNode;
+    activeIcon?: React.ReactNode;
 };
 
 type GroupItem = {
@@ -52,6 +53,9 @@ export default function List({ items }: Props) {
                                                     href={subItem.href}
                                                     title={subItem.title}
                                                     icon={subItem.icon}
+                                                    activeIcon={
+                                                        subItem.activeIcon
+                                                    }
                                                 />
                                             </Link>
                                         </li>
@@ -71,6 +75,7 @@ export default function List({ items }: Props) {
                                     href={item.href}
                                     title={item.title}
                                     icon={item.icon}
+                                    activeIcon={item.activeIcon}
                                 />
                             </Link>
                         </li>
