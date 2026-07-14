@@ -3513,6 +3513,11 @@ export interface components {
                  * @example 2025-10-16T13:11:32.000000Z
                  */
                 readonly updatedAt?: string;
+                /**
+                 * membersCount
+                 * @example 2
+                 */
+                readonly membersCount?: number;
             };
             relationships?: {
                 /** club */

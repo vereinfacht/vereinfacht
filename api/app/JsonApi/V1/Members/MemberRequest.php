@@ -6,6 +6,7 @@ use App\Enums\GenderOptionEnum;
 use App\Enums\MemberStatusEnum;
 use App\Models\Club;
 use App\Models\Membership;
+use App\Rules\MembershipHasCapacityRule;
 use Illuminate\Validation\Rule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;
@@ -49,6 +50,7 @@ class MemberRequest extends ResourceRequest
             'status' => ['nullable', Rule::in(MemberStatusEnum::getAllValues())],
             'club' => ['required', JsonApiRule::toOne()],
             'membership' => ['nullable', JsonApiRule::toOne()],
+            'membership.id' => ['sometimes', new MembershipHasCapacityRule($this->model()?->getKey())],
             'hasConsentedMediaPublication' => [$consentRule, JsonApiRule::boolean()],
             'divisions' => [
                 'nullable',

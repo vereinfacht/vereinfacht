@@ -12,6 +12,7 @@ interface Props<T> {
     resourceType: string;
     action: (searchTerm: string) => Promise<any>;
     optionLabel: (item: T) => React.ReactNode;
+    optionDisabled?: (item: T) => boolean;
     label?: string | React.ReactNode;
     onChange?: (selected: Option[]) => void;
     required?: boolean;
@@ -25,6 +26,7 @@ export default function BelongsToSelectInput<T>({
     action,
     onChange,
     optionLabel,
+    optionDisabled,
     defaultValue,
     required = false,
 }: Props<T>) {
@@ -46,6 +48,7 @@ export default function BelongsToSelectInput<T>({
                     // @ts-expect-error: T has no id property
                     value: resource.id,
                     label: optionLabel(resource as T),
+                    disabled: optionDisabled?.(resource as T) ?? false,
                 }));
 
                 setOptions(newOptions);
@@ -56,7 +59,7 @@ export default function BelongsToSelectInput<T>({
                 setOptions([]);
             }
         },
-        [optionLabel, action],
+        [optionLabel, optionDisabled, action],
     );
 
     useEffect(() => {
