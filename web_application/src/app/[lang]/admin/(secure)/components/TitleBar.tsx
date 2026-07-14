@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import Title from './Navigation/Title';
 import ProfileMenu from './ProfileMenu';
 
-export default async function TopBar() {
+export default async function TitleBar() {
     const session = await auth();
 
     if (!session) {
@@ -13,9 +13,9 @@ export default async function TopBar() {
 
     return (
         <div className="flex items-center justify-between p-4 md:h-20 md:px-6 md:py-0">
-            <Title className="hidden flex-1 md:block" />
-            <div className="flex w-full justify-between gap-x-6 md:w-auto">
-                <LanguageSelector />
+            <Title className="md:flex-1" />
+            <div className="hidden w-auto justify-between gap-x-6 md:flex">
+                <LanguageSelector showLang={true} />
                 <ProfileMenu userName={session?.user?.attributes.name} />
             </div>
         </div>

@@ -19,7 +19,13 @@ import {
 import Text from './Text/Text';
 import { setLocaleCookie } from '@/actions/cookies';
 
-export default function LanguageSelector() {
+interface LanguageSelectorProps {
+    showLang?: boolean;
+}
+
+export default function LanguageSelector({
+    showLang = false,
+}: LanguageSelectorProps) {
     const pathname = usePathname();
     const { lang } = useTranslation();
     const router = useRouter();
@@ -37,13 +43,15 @@ export default function LanguageSelector() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger
-                className="flex items-center justify-end gap-x-2"
+                className="flex cursor-pointer items-center justify-end gap-x-2 p-3"
                 data-cy="language-selector"
             >
-                <IconGlobe className="h-6 w-6 stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
-                <Text preset="label" className="w-[1em]">
-                    {lang.toUpperCase()}
-                </Text>
+                <IconGlobe className="fill-iconSecondary" />
+                {showLang && (
+                    <Text preset="label" className="text-textSecondary w-[1em]">
+                        {lang.toUpperCase()}
+                    </Text>
+                )}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 {supportedLocales.map((locale) => (

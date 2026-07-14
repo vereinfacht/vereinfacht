@@ -11,7 +11,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
     return (
         <div className="flex min-h-screen flex-col items-center px-6">
             <div className="flex h-20 w-full items-center justify-end">
-                <LanguageSelector />
+                <LanguageSelector showLang={true} />
             </div>
             <div className="flex w-full flex-1 flex-col items-center gap-y-6">
                 <Logo className="h-8" />

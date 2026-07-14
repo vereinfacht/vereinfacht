@@ -23,3 +23,14 @@ public/css
 public/fonts
 /storage/media-library/**
 ray.php
+
+.mcp.json
+boost.json
+CLAUDE.md
+AGENTS.md
+junie/
+opencode.json
+.codex
+.claude
+.github/skills
+.agents

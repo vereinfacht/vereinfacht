@@ -16,6 +16,7 @@ interface Props {
     type?: 'create' | 'update' | 'delete' | 'action';
     customNotificationTranslationKey?: string;
     onSuccess?: () => void;
+    routingOnSuccess?: 'back' | 'reload';
 }
 
 export default function FormStateHandler({
@@ -24,6 +25,7 @@ export default function FormStateHandler({
     translationKey,
     customNotificationTranslationKey,
     onSuccess,
+    routingOnSuccess = 'back',
 }: Props) {
     const { toast } = useToast();
     const { t } = useTranslation();
@@ -34,6 +36,11 @@ export default function FormStateHandler({
 
     useEffect(() => {
         if (state.success) {
+            if (routingOnSuccess === 'reload') {
+                window.location.reload();
+                return;
+            }
+
             toast({
                 variant: 'success',
                 description: t(
@@ -44,6 +51,7 @@ export default function FormStateHandler({
                     translationKey ? translationParams : { ...state },
                 ),
             });
+
             if (onSuccess) {
                 onSuccess();
                 return;

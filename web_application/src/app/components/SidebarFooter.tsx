@@ -6,23 +6,25 @@ import Text from '@/app/components/Text/Text';
 import Logo from '/public/svg/vereinfacht_logo.svg';
 
 export default function SidebarFooter() {
-    const { t } = useTranslation();
+    const { t } = useTranslation('general');
 
     return (
-        <footer className="mt-auto flex flex-col justify-start gap-4 border-t border-slate-200 p-5 text-sm text-gray-700">
-            <div className="flex flex-col items-start gap-1 self-stretch">
-                <Text className="text-sm">{t('general:made_with')}</Text>{' '}
-                <Link href="/" target="_blank">
+        <footer className="border-borderSubtle text-textSecondary flex flex-col justify-start gap-4 border-t p-5 text-sm md:px-4">
+            <div className="flex flex-row items-center gap-3 self-stretch md:flex-col md:items-start md:gap-1">
+                <Text className="text-sm">{t('general:made_with')}</Text>
+
+                <Link href="/" target="_blank" className="flex items-center">
                     <Logo className="h-5 pt-1" />
                 </Link>
             </div>
+
             <div className="flex flex-row items-center">
                 <a
                     href="https://vereinfacht.digital/impressum"
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm capitalize">{t('imprint')}</Text>
+                    <Text className="text-sm">{t('imprint')}</Text>
                 </a>
                 <span className="px-2">&bull;</span>
                 <a
@@ -30,7 +32,7 @@ export default function SidebarFooter() {
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm capitalize">{t('privacy')}</Text>
+                    <Text className="text-sm">{t('privacy')}</Text>
                 </a>
             </div>
         </footer>
