@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
 use App\Actions\User\ForgotPassword;
+use App\Actions\User\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -121,6 +122,22 @@ class UserController extends Controller
         $status = (new ForgotPassword())->execute($request);
 
         if ($status === Password::RESET_LINK_SENT) {
+            return response()->json([
+                'message' => __($status),
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => __($status),
+            'errors' => ['email' => [__($status)]]
+        ], 422);
+    }
+
+    public function resetPassword(Request $request): JsonResponse
+    {
+        $status = (new ResetPassword())->execute($request);
+
+        if ($status === Password::PASSWORD_RESET) {
             return response()->json([
                 'message' => __($status),
             ], 200);
