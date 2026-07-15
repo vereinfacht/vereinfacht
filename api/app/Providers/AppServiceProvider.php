@@ -35,10 +35,12 @@ class AppServiceProvider extends ServiceProvider
             $this->app['request']->server->set('HTTPS', true);
         }
 
-        ResetPassword::createUrlUsing(function ($user, string $token) {
-            return config('app.frontend_url')
-                . '/reset-password?token=' . $token
-                . '&email=' . urlencode($user->email);
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            $frontendUrl = config('app.frontend_url');
+            $locale = app()->getLocale();
+            $email = urlencode($notifiable->getEmailForPasswordReset());
+
+            return "{$frontendUrl}/{$locale}/admin/auth/reset-password?token={$token}&email={$email}";
         });
     }
 }
