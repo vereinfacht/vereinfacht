@@ -9,7 +9,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { requestPasswordReset } from '@/actions/users/requestPasswordReset';
 import { useRouter } from 'next/navigation';
 
-export default function ForgotPassword() {
+export default function ForgotPassword({
+    params,
+}: {
+    params: { lang: string };
+}) {
     const { t } = useTranslation();
     const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
@@ -26,7 +30,7 @@ export default function ForgotPassword() {
         const email = formData.get('email') as string;
 
         try {
-            const response = await requestPasswordReset(email);
+            const response = await requestPasswordReset(email, params.lang);
 
             if (response.success) {
                 setSuccessMessage(response.message);
