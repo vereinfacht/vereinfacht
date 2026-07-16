@@ -10,6 +10,7 @@ import { FormEvent, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { resetPassword } from '@/actions/users/resetPassword';
 import { resetPasswordSchema } from '@/actions/users/password.schema';
+import { useToast } from '@/hooks/toast/use-toast';
 
 export default function ResetPassword({
     params,
@@ -17,9 +18,10 @@ export default function ResetPassword({
     params: { lang: string };
 }) {
     const { t } = useTranslation();
+    const { toast } = useToast();
     const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
-    const [successMessage, setSuccessMessage] = useState<string | undefined>();
+    const [successMessage] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
     const searchParams = useSearchParams();
     const email = searchParams.get('email') ?? '';
@@ -28,7 +30,6 @@ export default function ResetPassword({
         event.preventDefault();
         setIsLoading(true);
         setServerError(undefined);
-        setSuccessMessage(undefined);
 
         try {
             const formData = new FormData(event.currentTarget);
@@ -57,13 +58,17 @@ export default function ResetPassword({
             );
 
             if (response.success) {
-                setSuccessMessage(response.message);
+                toast({
+                    variant: 'success',
+                    description: response.message,
+                });
+
                 router.push('/login');
             } else {
                 setServerError(response.message);
             }
         } catch (error) {
-            setServerError(t('general:forgot_password_failed'));
+            setServerError(t('general:reset_password.forgot_password_failed'));
         } finally {
             setIsLoading(false);
         }
@@ -75,7 +80,7 @@ export default function ResetPassword({
                 onSubmit={handleSubmit}
                 className="shadow-card-sm mx-auto flex w-full max-w-sm flex-col space-y-4 rounded-xl p-6"
             >
-                <FormIntro headline={t('general:reset_password')} />
+                <FormIntro headline={t('general:reset_password.title')} />
                 <TextInput
                     id="email"
                     name="email"
@@ -87,25 +92,25 @@ export default function ResetPassword({
                 <TextInput
                     id="password"
                     name="password"
-                    label={t('general:set_new_password')}
+                    label={t('general:reset_password.set_new_password')}
                     type="password"
                     required
                 />
                 <TextInput
                     id="password_confirmation"
                     name="password_confirmation"
-                    label={t('general:repeat_password')}
+                    label={t('general:reset_password.repeat_password')}
                     type="password"
                     required
                 />
 
                 <div className="flex justify-center">
                     <Button type="submit" isLoading={isLoading}>
-                        {t('general:reset_password')}
+                        {t('general:reset_password.title')}
                     </Button>
                 </div>
             </form>
-            {(serverError || successMessage) && (
+            {serverError != null && (
                 <MessageBox
                     preset={serverError ? 'error' : 'default'}
                     className="my-10"

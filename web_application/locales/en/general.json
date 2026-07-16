@@ -57,11 +57,14 @@
             "other": "diverse"
         }
     },
-    "problem": "Having problems logging in?",
-    "forgot_password": "Forgotten your password?",
     "next": "Next",
-    "forgot_password_failed": "We couldn't process your request. Please try again.",
-    "reset_password": "Reset Password",
-    "repeat_password": "Repeat Password",
-    "set_new_password": "Set a new password"
+    "reset_password": {
+        "email_sent": "Reset email sent.",
+        "forgot_password": "Forgot password?",
+        "failed": "We couldn't process your request. Please try again.",
+        "title": "Reset password",
+        "repeat_password": "Repeat password",
+        "set_new_password": "Set new password",
+        "instruction": "Enter your email address here to reset your password."
+    }
 }

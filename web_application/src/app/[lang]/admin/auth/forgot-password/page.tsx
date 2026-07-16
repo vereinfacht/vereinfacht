@@ -9,6 +9,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { requestPasswordReset } from '@/actions/users/requestPasswordReset';
 import { useRouter } from 'next/navigation';
 import { forgotPasswordSchema } from '@/actions/users/password.schema';
+import { useToast } from '@/hooks/toast/use-toast';
+import Text from '@/app/components/Text/Text';
 
 export default function ForgotPassword({
     params,
@@ -16,16 +18,16 @@ export default function ForgotPassword({
     params: { lang: string };
 }) {
     const { t } = useTranslation();
+    const { toast } = useToast();
     const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
-    const [successMessage, setSuccessMessage] = useState<string | undefined>();
+    const [successMessage] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setServerError(undefined);
-        setSuccessMessage(undefined);
 
         const formData = new FormData(event.currentTarget);
         const result = forgotPasswordSchema.safeParse({
@@ -45,13 +47,17 @@ export default function ForgotPassword({
             );
 
             if (response.success) {
-                setSuccessMessage(response.message);
+                toast({
+                    variant: 'success',
+                    description: t('general:reset_password.email_sent'),
+                });
+
                 router.push('/login');
             } else {
                 setServerError(response.message);
             }
         } catch (error) {
-            setServerError(t('general:forgot_password_failed'));
+            setServerError(t('general:reset_password.failed'));
         } finally {
             setIsLoading(false);
         }
@@ -63,7 +69,12 @@ export default function ForgotPassword({
                 onSubmit={handleSubmit}
                 className="shadow-card-sm mx-auto flex w-full max-w-sm flex-col space-y-4 rounded-xl p-6"
             >
-                <FormIntro headline={t('general:forgot_password')} />
+                <FormIntro
+                    headline={t('general:reset_password.forgot_password')}
+                />
+                <Text className="text-sm">
+                    {t('general:reset_password.instruction')}
+                </Text>
                 <TextInput
                     id="email"
                     name="email"
@@ -79,7 +90,7 @@ export default function ForgotPassword({
                     </Button>
                 </div>
             </form>
-            {(serverError || successMessage) && (
+            {serverError != null && (
                 <MessageBox
                     preset={serverError ? 'error' : 'default'}
                     className="my-10"

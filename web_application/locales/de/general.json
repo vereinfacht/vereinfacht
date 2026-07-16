@@ -56,11 +56,14 @@
             "other": "divers"
         }
     },
-    "problem": "Probleme beim Einloggen?",
-    "forgot_password": "Passwort vergessen?",
     "next": "Weiter",
-    "forgot_password_failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
-    "reset_password": "Passwort ändern",
-    "repeat_password": "Passwort wiederholen",
-    "set_new_password": "Neues Passwort festlegen"
+    "reset_password": {
+        "email_sent": "E-Mail zum Zurücksetzen gesendet.",
+        "forgot_password": "Passwort vergessen?",
+        "failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
+        "title": "Passwort ändern",
+        "repeat_password": "Passwort wiederholen",
+        "set_new_password": "Neues Passwort festlegen",
+        "instruction": "Geben Sie hier Ihre E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen."
+    }
 }
