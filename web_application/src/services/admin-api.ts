@@ -38,4 +38,19 @@ export class AdminApi extends ApiEndpoints {
             },
         );
     }
+
+    async resetPassword(data: {
+        token: string;
+        email: string;
+        password: string;
+        password_confirmation: string;
+    }) {
+        return await this.post<{ message: string }>(
+            'users/reset-password',
+            data,
+            {
+                Authorization: '',
+            },
+        );
+    }
 }

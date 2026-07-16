@@ -7,27 +7,54 @@ import MessageBox from '@/app/components/MessageBox';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { resetPassword } from '@/actions/users/resetPassword';
 
-export interface ResetPasswordData {
-    email?: string;
-    password?: string;
-}
-
-export default function ResetPassword() {
+export default function ResetPassword({
+    params,
+}: {
+    params: { lang: string };
+}) {
     const { t } = useTranslation();
     const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
+    const [successMessage, setSuccessMessage] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email') ?? '';
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setServerError(undefined);
+        setSuccessMessage(undefined);
 
-        // TODO: Backend route is not yet configured.
-        setTimeout(() => {
+        try {
+            const formData = new FormData(event.currentTarget);
+
+            const response = await resetPassword(
+                {
+                    token: searchParams.get('token')!,
+                    email: email,
+                    password: formData.get('password') as string,
+                    password_confirmation: formData.get(
+                        'password_confirmation',
+                    ) as string,
+                },
+                params.lang,
+            );
+
+            if (response.success) {
+                setSuccessMessage(response.message);
+                router.push('/login');
+            } else {
+                setServerError(response.message);
+            }
+        } catch (error) {
+            setServerError(t('general:forgot_password_failed'));
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     return (
@@ -42,7 +69,7 @@ export default function ResetPassword() {
                     name="email"
                     label={t('general:email')}
                     type="email"
-                    autoComplete="email"
+                    defaultValue={email}
                     required
                 />
                 <TextInput
@@ -53,8 +80,8 @@ export default function ResetPassword() {
                     required
                 />
                 <TextInput
-                    id="password"
-                    name="password"
+                    id="password_confirmation"
+                    name="password_confirmation"
                     label={t('general:repeat_password')}
                     type="password"
                     required
@@ -66,11 +93,11 @@ export default function ResetPassword() {
                     </Button>
                 </div>
             </form>
-            {serverError != null && (
+            {(serverError || successMessage) && (
                 <MessageBox
-                    preset="error"
+                    preset={serverError ? 'error' : 'default'}
                     className="my-10"
-                    message={serverError}
+                    message={(serverError || successMessage) as string}
                 />
             )}
         </>
