@@ -36,11 +36,12 @@ class AppServiceProvider extends ServiceProvider
         }
 
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
-            $frontendUrl = config('app.frontend_url');
+            $url = env('WEB_APPLICATION_URL', 'https://app.vereinfacht.digital');
+
             $locale = app()->getLocale();
             $email = urlencode($notifiable->getEmailForPasswordReset());
 
-            return "{$frontendUrl}/{$locale}/admin/auth/reset-password?token={$token}&email={$email}";
+            return "{$url}/{$locale}/admin/auth/reset-password?token={$token}&email={$email}";
         });
     }
 }
