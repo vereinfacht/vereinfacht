@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             $locale = app()->getLocale();
             $email = urlencode($notifiable->getEmailForPasswordReset());
 
-            return "{$url}/{$locale}/admin/auth/reset-password?token={$token}&email={$email}";
+            return "{$url}/{$locale}/admin/auth/reset-password?token={$token}";
         });
     }
 }

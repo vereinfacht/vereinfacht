@@ -87,7 +87,7 @@ export default function ResetPassword({
                     label={t('general:email')}
                     type="email"
                     defaultValue={email}
-                    readOnly
+                    required
                 />
                 <TextInput
                     id="password"
