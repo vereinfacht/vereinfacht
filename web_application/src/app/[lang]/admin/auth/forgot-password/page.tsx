@@ -8,6 +8,7 @@ import { FormEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { requestPasswordReset } from '@/actions/users/requestPasswordReset';
 import { useRouter } from 'next/navigation';
+import { forgotPasswordSchema } from '@/actions/users/password.schema';
 
 export default function ForgotPassword({
     params,
@@ -27,10 +28,21 @@ export default function ForgotPassword({
         setSuccessMessage(undefined);
 
         const formData = new FormData(event.currentTarget);
-        const email = formData.get('email') as string;
+        const result = forgotPasswordSchema.safeParse({
+            email: formData.get('email'),
+        });
+
+        if (!result.success) {
+            setServerError(result.error.issues[0].message);
+            setIsLoading(false);
+            return;
+        }
 
         try {
-            const response = await requestPasswordReset(email, params.lang);
+            const response = await requestPasswordReset(
+                result.data.email,
+                params.lang,
+            );
 
             if (response.success) {
                 setSuccessMessage(response.message);

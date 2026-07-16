@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { resetPassword } from '@/actions/users/resetPassword';
+import { resetPasswordSchema } from '@/actions/users/password.schema';
 
 export default function ResetPassword({
     params,
@@ -32,14 +33,25 @@ export default function ResetPassword({
         try {
             const formData = new FormData(event.currentTarget);
 
+            const result = resetPasswordSchema.safeParse({
+                token: searchParams.get('token'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                password_confirmation: formData.get('password_confirmation'),
+            });
+
+            if (!result.success) {
+                setServerError(result.error.issues[0].message);
+                setIsLoading(false);
+                return;
+            }
+
             const response = await resetPassword(
                 {
-                    token: searchParams.get('token')!,
-                    email: email,
-                    password: formData.get('password') as string,
-                    password_confirmation: formData.get(
-                        'password_confirmation',
-                    ) as string,
+                    token: result.data.token,
+                    email: result.data.email,
+                    password: result.data.password,
+                    password_confirmation: result.data.password_confirmation,
                 },
                 params.lang,
             );
@@ -70,7 +82,7 @@ export default function ResetPassword({
                     label={t('general:email')}
                     type="email"
                     defaultValue={email}
-                    required
+                    readOnly
                 />
                 <TextInput
                     id="password"
