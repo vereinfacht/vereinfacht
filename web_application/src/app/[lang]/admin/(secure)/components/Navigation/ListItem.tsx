@@ -12,6 +12,15 @@ export interface NavigationListItemProps {
     activeIcon?: React.ReactNode;
 }
 
+const normalizePath = (path?: string) => {
+    if (!path) return '/';
+    let cleanPath = path.split('?')[0];
+    if (cleanPath.endsWith('/') && cleanPath.length > 1) {
+        cleanPath = cleanPath.slice(0, -1);
+    }
+    return cleanPath;
+};
+
 export default function ListItem({
     title,
     href,
@@ -25,10 +34,13 @@ export default function ListItem({
         pathname,
         lang as SupportedLocale,
     );
+
+    const normalizedCurrentPath = normalizePath(unlocalizedPath);
+    const normalizedHref = normalizePath(href);
+
     const isActive = href
-        ? unlocalizedPath === href ||
-          unlocalizedPath.startsWith(href + '/') ||
-          unlocalizedPath.startsWith(href + '?')
+        ? normalizedCurrentPath === normalizedHref ||
+          normalizedCurrentPath.startsWith(normalizedHref + '/')
         : false;
 
     return (
