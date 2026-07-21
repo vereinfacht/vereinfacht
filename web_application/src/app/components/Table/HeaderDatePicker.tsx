@@ -109,9 +109,9 @@ export function HeaderDatePicker({
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                 <DropdownMenuTrigger asChild>
                     <Button
-                        variant="ghost"
-                        className="relative h-8 w-8 p-0 hover:bg-gray-100"
-                        size="sm"
+                        variant="tertiaryGrey"
+                        className="relative h-8 w-8 p-0"
+                        size="icon"
                         data-cy="date-range-trigger"
                     >
                         <CalendarDays
@@ -158,7 +158,9 @@ export function HeaderDatePicker({
                         <div className="mt-2 flex gap-2">
                             <Button
                                 onClick={handleApply}
+                                variant="primary"
                                 className="flex-1"
+                                size={'default'}
                                 disabled={
                                     !selectedRange?.from && !selectedRange?.to
                                 }
@@ -168,7 +170,8 @@ export function HeaderDatePicker({
                             </Button>
                             <Button
                                 onClick={handleClear}
-                                variant="outline"
+                                variant="tertiary"
+                                size={'icon'}
                                 data-cy="date-range-clear-button"
                             >
                                 <RotateCcw />

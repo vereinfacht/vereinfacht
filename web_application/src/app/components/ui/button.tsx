@@ -5,50 +5,81 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300',
+    'inline-flex rounded-full justify-center items-center gap-2 font-medium not-italic tracking-[0.1px] transition-all disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:text-textDisabled disabled:bg-transparent',
     {
         variants: {
             variant: {
-                default:
-                    'bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90',
-                destructive:
-                    'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
-                outline:
-                    'border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+                primary:
+                    'bg-btnBgPrimary text-white-solid shadow-buttonPrimary hover:bg-btnBgPrimaryHover focus-visible:bg-btnBgPrimaryHover focus-visible:ring-offset-2 disabled:shadow-none disabled:bg-btnBgPrimaryDisabled',
+                tertiaryDanger:
+                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
+                tertiary:
+                    'text-textLink hover:bg-btnBgTertiaryHover hover:text-textHover focus-visible:text-textLink focus-visible:bg-btnBgTertiaryHover ',
                 secondary:
-                    'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
-                ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
-                link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
+                    'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled',
+                tertiaryGrey: 'text-textSecondary hover:bg-btnTertiaryHover',
             },
             size: {
-                default: 'h-10 px-4 py-2',
-                sm: 'h-9 rounded-md px-3',
-                lg: 'h-11 rounded-md px-8',
-                icon: 'h-10 w-10',
+                default: 'px-4 py-2.5 text-base leading-6 ',
+                sm: 'px-3 py-2 text-sm leading-5',
+                icon: 'p-3 leading-6 aspect-square',
             },
         },
         defaultVariants: {
-            variant: 'default',
+            variant: 'primary',
             size: 'default',
         },
     },
 );
 
 export interface ButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    extends
+        React.ButtonHTMLAttributes<HTMLButtonElement>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, asChild = false, ...props }, ref) => {
+    (
+        {
+            className,
+            variant,
+            size,
+            asChild = false,
+            leftIcon,
+            rightIcon,
+            children,
+            ...props
+        },
+        ref,
+    ) => {
         const Comp = asChild ? Slot : 'button';
         return (
             <Comp
                 className={cn(buttonVariants({ variant, size, className }))}
                 ref={ref}
                 {...props}
-            />
+            >
+                {leftIcon && (
+                    <span
+                        className={cn('[&_svg]:shrink-0 [&_svg]:fill-current')}
+                    >
+                        {leftIcon}
+                    </span>
+                )}
+
+                {children}
+
+                {rightIcon && (
+                    <span
+                        className={cn('[&_svg]:shrink-0 [&_svg]:fill-current')}
+                    >
+                        {rightIcon}
+                    </span>
+                )}
+            </Comp>
         );
     },
 );
