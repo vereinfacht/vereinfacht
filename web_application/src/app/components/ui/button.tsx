@@ -20,9 +20,10 @@ const buttonVariants = cva(
                 tertiaryGrey: 'text-textSecondary hover:bg-btnTertiaryHover',
             },
             size: {
-                default: 'px-4 py-2.5 text-base leading-6 ',
-                sm: 'px-3 py-2 text-sm leading-5',
+                default: 'px-4 py-2.5 min-w-11 text-base leading-6 ',
+                sm: 'px-3 py-2 min-w-9 text-sm leading-5',
                 icon: 'p-3 leading-6 aspect-square',
+                paginationNumber: 'p-2 min-w-9 text-sm leading-5',
             },
         },
         defaultVariants: {
