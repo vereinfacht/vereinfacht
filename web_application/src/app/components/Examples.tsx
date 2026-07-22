@@ -2,9 +2,7 @@
 
 import { hexToCssString, shouldUseDarkMode } from '@/utils/colors';
 import useTranslation from 'next-translate/useTranslation';
-import IconCheck from '/public/svg/check.svg';
 import { useState } from 'react';
-import Button from './Button/Button';
 import FormIntro from './FormIntro';
 import InputLabel from './Input/InputLabel';
 import SelectInput from './Input/SelectInput';
@@ -16,11 +14,14 @@ import MultiselectInput from './MultiselectInput/MultiselectInput';
 import Text from './Text/Text';
 import IconPerson from '/public/svg/person.svg';
 import IconTrash from '/public/svg/trash.svg';
+import IconEmpty from '/public/svg/empty.svg';
+import { Button } from '@/app/components/ui/button';
 
 export default function Examples() {
     const [color, setColor] = useState<string | undefined>();
     const { t } = useTranslation();
     const [sections, setSections] = useState<Record<string, any>[]>([]);
+    const btnClass = 'flex flex-row items-center gap-4';
 
     return (
         <>
@@ -139,21 +140,174 @@ export default function Examples() {
                 <Text preset="label">Lorem ipsum label</Text>
                 <Text preset="display">Lorem ipsum display</Text>
                 <Text preset="headline">Lorem ipsum headline</Text>
-                <Button
-                    icon={<IconCheck width={16} height={16} />}
-                    href="/test"
-                >
-                    Lorem
-                </Button>
-                <Button icon={<IconCheck width={16} height={16} />} iconLeft>
-                    Lorem
-                </Button>
-                <Button
-                    icon={<IconCheck width={16} height={16} />}
-                    preset="secondary"
-                >
-                    Lorem
-                </Button>
+                <div className="flex flex-col gap-6">
+                    {/* primary*/}
+                    <div className={btnClass}>
+                        <Button
+                            variant="primary"
+                            size={'default'}
+                            disabled={true}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="primary"
+                            size={'default'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="primary"
+                            size={'sm'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="primary"
+                            size={'icon'}
+                            rightIcon={<IconEmpty />}
+                        ></Button>
+                    </div>
+                    {/* secondary*/}
+                    <div className={btnClass}>
+                        <Button
+                            variant="secondary"
+                            size={'default'}
+                            disabled={true}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size={'default'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size={'sm'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size={'icon'}
+                            rightIcon={<IconEmpty />}
+                        ></Button>
+                    </div>
+                    {/* tertiary */}
+                    <div className={btnClass}>
+                        <Button
+                            variant="tertiary"
+                            size={'default'}
+                            disabled={true}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiary"
+                            size={'default'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiary"
+                            size={'sm'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiary"
+                            size={'icon'}
+                            rightIcon={<IconEmpty />}
+                        ></Button>
+                    </div>
+                    {/* tertiaryGrey */}
+                    <div className={btnClass}>
+                        <Button
+                            variant="tertiaryGrey"
+                            size={'default'}
+                            disabled={true}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryGrey"
+                            size={'default'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryGrey"
+                            size={'sm'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryGrey"
+                            size={'icon'}
+                            rightIcon={<IconEmpty />}
+                        ></Button>
+                    </div>
+                    {/* tertiaryDanger */}
+                    <div className={btnClass}>
+                        <Button
+                            variant="tertiaryDanger"
+                            size={'default'}
+                            disabled={true}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryDanger"
+                            size={'default'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryDanger"
+                            size={'sm'}
+                            leftIcon={<IconEmpty />}
+                            rightIcon={<IconEmpty />}
+                        >
+                            Button
+                        </Button>
+                        <Button
+                            variant="tertiaryDanger"
+                            size={'icon'}
+                            rightIcon={<IconEmpty />}
+                        ></Button>
+                    </div>
+                </div>
+
                 <TextInput
                     id="text-input"
                     label="TextInput"

@@ -135,7 +135,7 @@ export function NewMultiselectInput({
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
-                        variant="outline"
+                        variant="tertiary"
                         role="combobox"
                         className={cn(
                             'mt-1 w-full justify-between',

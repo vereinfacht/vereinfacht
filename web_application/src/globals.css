@@ -7,12 +7,14 @@
 
 @theme {
     /* some color values here will be replaced gradually with new color values from Figma redesign */
+    --color-blue-600: #0047d8;
     --color-blue-500: #0059ff;
     --color-blue-300: #00aeff;
 
     --color-green-500: #00d13b;
 
     --color-red-500: #ce1924;
+    --color-red-700: #dc2626;
 
     --color-slate-300: #f7f9fa;
     --color-slate-400: #ebf1f4;
@@ -21,18 +23,39 @@
     --color-slate-700: #5b656a;
     --color-slate-900: #050e13;
 
+    --color-neutral-100: #f4f5f7;
     --color-neutral-200: #e9ecef;
+    --color-neutral-400: #adb5bd;
     --color-neutral-500: #868e96;
     --color-neutral-600: #495057;
     --color-neutral-800: #212529;
 
+    --color-white-solid: #fff;
+
     /* semantic color tokens as in figma design */
     --color-primary-500: var(--color-blue-500);
-    --color-borderSubtle: var(--color-neutral-200);
+
     --color-textPrimary: var(--color-neutral-800);
     --color-textSecondary: var(--color-neutral-600);
+    --color-textDisabled: var(--color-neutral-400);
+    --color-textError: var(--color-red-700);
+    --color-textHover: var(--color-blue-600);
+    --color-textLink: var(--color-blue-500);
+
+    --color-borderSubtle: var(--color-neutral-200);
+    --color-borderFocus: var(--color-blue-500);
+
     --color-iconSecondary: var(--color-neutral-600);
+
     --color-btnTertiaryHover: --alpha(var(--color-neutral-500) / 12%);
+    --color-btnBgPrimary: var(--color-blue-500);
+    --color-btnBgPrimaryHover: var(--color-blue-600);
+    --color-btnBgPrimaryDisabled: var(--color-neutral-100);
+    --color-btnBgSecondary: --alpha(var(--color-white-solid) / 80%);
+    --color-btnSecondaryHover: var(--color-white-solid);
+    --color-btnBgSecondaryDisabled: --alpha(var(--color-white-solid) / 10%);
+    --color-btnBgTertiaryHover: --alpha(var(--color-blue-500) / 8%);
+    --color-btnTertiaryDangerHover: --alpha(var(--color-red-700) / 8%);
 
     --font-sans:
         var(--font-rubik), ui-sans-serif, system-ui, sans-serif,
@@ -60,6 +83,9 @@
     --shadow-navigationItem:
         0 4px 15px 0 rgba(0, 0, 0, 0.05),
         inset -0.5px 1px 0.5px 0 rgb(255, 255, 255, 0.9);
+    --shadow-buttonPrimary: 0 4px 15px 0 rgba(0, 0, 0, 0.07);
+    --shadow-buttonSecondary: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    --shadow-buttonSecondaryDisabled: var(--shadow-navigationItem);
 
     --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
 

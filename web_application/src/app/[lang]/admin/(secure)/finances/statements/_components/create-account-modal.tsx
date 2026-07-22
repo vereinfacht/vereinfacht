@@ -46,7 +46,9 @@ export default function CreateAccountModal() {
     return (
         <Dialog onOpenChange={handleOpenChange} open={isOpen}>
             <DialogTrigger asChild>
-                <ShadCNButton variant="outline">+</ShadCNButton>
+                <ShadCNButton variant="secondary" size="icon">
+                    +
+                </ShadCNButton>
             </DialogTrigger>
             <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
                 <DialogHeader>

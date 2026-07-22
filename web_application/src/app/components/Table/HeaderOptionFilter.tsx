@@ -52,7 +52,8 @@ export function HeaderOptionFilter({
                     <Button
                         data-cy={`${paramKey}-button`}
                         className="relative"
-                        variant="ghost"
+                        variant="tertiaryGrey"
+                        size={'icon'}
                     >
                         <ListFilter
                             className={[
