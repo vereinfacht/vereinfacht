@@ -111,7 +111,7 @@ export function HeaderDatePicker({
                     <Button
                         variant="tertiaryGrey"
                         className="relative h-8 w-8 p-0"
-                        size="icon"
+                        size="iconDefault"
                         data-cy="date-range-trigger"
                     >
                         <CalendarDays
@@ -171,7 +171,7 @@ export function HeaderDatePicker({
                             <Button
                                 onClick={handleClear}
                                 variant="tertiary"
-                                size={'icon'}
+                                size={'iconDefault'}
                                 data-cy="date-range-clear-button"
                             >
                                 <RotateCcw />

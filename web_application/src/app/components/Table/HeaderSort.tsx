@@ -22,7 +22,7 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
             <Button
                 className="cursor-pointer"
                 variant="tertiaryGrey"
-                size={'icon'}
+                size={'iconDefault'}
                 data-cy={`sort-${columnId}`}
                 onClick={() =>
                     setSort((previous) => {

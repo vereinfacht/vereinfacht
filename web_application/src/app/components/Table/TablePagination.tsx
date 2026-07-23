@@ -153,7 +153,7 @@ export default function TablePagination({ totalPages }: Props) {
                             changeCurrentPage(event, currentPage - 1)
                         }
                         variant="secondary"
-                        size={'sm'}
+                        size={'small'}
                         leftIcon={<IconChevronLeft />}
                         disabled={currentPage <= 1}
                         data-cy="table-pagination-previous-button"
@@ -178,7 +178,7 @@ export default function TablePagination({ totalPages }: Props) {
                                 variant={
                                     item.disabled ? 'primary' : 'secondary'
                                 }
-                                size={'paginationNumber'}
+                                size={'circularSmall'}
                                 data-cy={`table-pagination-button-${item.index}`}
                             >
                                 {item.index}
@@ -193,7 +193,7 @@ export default function TablePagination({ totalPages }: Props) {
                             changeCurrentPage(event, currentPage + 1)
                         }
                         variant="secondary"
-                        size={'sm'}
+                        size={'small'}
                         rightIcon={<IconChevronRight />}
                         disabled={currentPage >= totalPages}
                         data-cy="table-pagination-next-button"
