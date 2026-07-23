@@ -162,7 +162,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="primary"
-                            size={'sm'}
+                            size={'small'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
                         >
@@ -170,7 +170,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="primary"
-                            size={'icon'}
+                            size={'iconDefault'}
                             rightIcon={<IconEmpty />}
                         ></Button>
                     </div>
@@ -195,7 +195,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="secondary"
-                            size={'sm'}
+                            size={'small'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
                         >
@@ -203,7 +203,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="secondary"
-                            size={'icon'}
+                            size={'iconDefault'}
                             rightIcon={<IconEmpty />}
                         ></Button>
                     </div>
@@ -228,7 +228,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiary"
-                            size={'sm'}
+                            size={'small'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
                         >
@@ -236,7 +236,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiary"
-                            size={'icon'}
+                            size={'iconDefault'}
                             rightIcon={<IconEmpty />}
                         ></Button>
                     </div>
@@ -261,7 +261,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiaryGrey"
-                            size={'sm'}
+                            size={'small'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
                         >
@@ -269,7 +269,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiaryGrey"
-                            size={'icon'}
+                            size={'iconDefault'}
                             rightIcon={<IconEmpty />}
                         ></Button>
                     </div>
@@ -294,7 +294,7 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiaryDanger"
-                            size={'sm'}
+                            size={'small'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
                         >
@@ -302,9 +302,37 @@ export default function Examples() {
                         </Button>
                         <Button
                             variant="tertiaryDanger"
-                            size={'icon'}
+                            size={'iconDefault'}
                             rightIcon={<IconEmpty />}
                         ></Button>
+                    </div>
+                    <div className={btnClass}>
+                        <Button variant="primary" size={'circularSmall'}>
+                            1
+                        </Button>
+                        <Button variant="primary" size={'circularSmall'}>
+                            22
+                        </Button>
+                        <Button variant="primary" size={'circularSmall'}>
+                            333
+                        </Button>
+                        <Button variant="primary" size={'circularSmall'}>
+                            4444
+                        </Button>
+                    </div>
+                    <div className={btnClass}>
+                        <Button variant="primary" size={'circularDefault'}>
+                            1
+                        </Button>
+                        <Button variant="primary" size={'circularDefault'}>
+                            22
+                        </Button>
+                        <Button variant="primary" size={'circularDefault'}>
+                            333
+                        </Button>
+                        <Button variant="primary" size={'circularDefault'}>
+                            4444
+                        </Button>
                     </div>
                 </div>
 

@@ -10,6 +10,8 @@ import { Button } from '../ui/button';
 import { useQueryState } from 'nuqs';
 import { paginationSearchParamParser } from '@/utils/search-params';
 import useTranslation from 'next-translate/useTranslation';
+import IconChevronRight from '/public/svg/chevron-right.svg';
+import IconChevronLeft from '/public/svg/chevron-left.svg';
 
 interface Props {
     totalPages?: number;
@@ -150,7 +152,9 @@ export default function TablePagination({ totalPages }: Props) {
                         onClick={(event) =>
                             changeCurrentPage(event, currentPage - 1)
                         }
-                        variant="primary"
+                        variant="secondary"
+                        size={'small'}
+                        leftIcon={<IconChevronLeft />}
                         disabled={currentPage <= 1}
                         data-cy="table-pagination-previous-button"
                     >
@@ -168,12 +172,13 @@ export default function TablePagination({ totalPages }: Props) {
                     return (
                         <PaginationItem key={index}>
                             <Button
-                                className="w-10"
                                 onClick={(event) =>
                                     changeCurrentPage(event, item.index)
                                 }
-                                variant={item.disabled ? 'primary' : 'tertiary'}
-                                disabled={item.disabled ?? false}
+                                variant={
+                                    item.disabled ? 'primary' : 'secondary'
+                                }
+                                size={'circularSmall'}
                                 data-cy={`table-pagination-button-${item.index}`}
                             >
                                 {item.index}
@@ -187,7 +192,9 @@ export default function TablePagination({ totalPages }: Props) {
                         onClick={(event) =>
                             changeCurrentPage(event, currentPage + 1)
                         }
-                        variant="primary"
+                        variant="secondary"
+                        size={'small'}
+                        rightIcon={<IconChevronRight />}
                         disabled={currentPage >= totalPages}
                         data-cy="table-pagination-next-button"
                     >

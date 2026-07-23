@@ -46,7 +46,7 @@ export default function CreateAccountModal() {
     return (
         <Dialog onOpenChange={handleOpenChange} open={isOpen}>
             <DialogTrigger asChild>
-                <ShadCNButton variant="secondary" size="icon">
+                <ShadCNButton variant="secondary" size="iconDefault">
                     +
                 </ShadCNButton>
             </DialogTrigger>

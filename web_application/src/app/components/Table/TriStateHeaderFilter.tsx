@@ -44,7 +44,7 @@ export function TriStateHeaderFilter({
                         data-cy={`${paramKey}-button`}
                         className="relative"
                         variant="tertiaryGrey"
-                        size={'icon'}
+                        size={'iconDefault'}
                     >
                         <ListFilter
                             className={`ml-auto h-4 w-4 text-gray-400${hasActiveFilter ? 'scale-125 text-green-800' : ''}`}
