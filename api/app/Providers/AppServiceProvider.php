@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -33,5 +34,14 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', true);
         }
+
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            $url = env('WEB_APPLICATION_URL', 'https://app.vereinfacht.digital');
+
+            $locale = app()->getLocale();
+            $email = urlencode($notifiable->getEmailForPasswordReset());
+
+            return "{$url}/{$locale}/admin/auth/reset-password?token={$token}";
+        });
     }
 }

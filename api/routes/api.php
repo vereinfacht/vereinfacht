@@ -55,7 +55,7 @@ JsonApiRoute::server('v1')
             ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('divisions', JsonApiController::class)
-            ->only('index', 'show',  'store', 'update', 'destroy');
+            ->only('index', 'show', 'store', 'update', 'destroy');
 
         $server->resource('clubs', JsonApiController::class)
             ->relationships(function ($relations) {
@@ -68,8 +68,10 @@ JsonApiRoute::server('v1')
         $server->resource('users', UserController::class)
             ->only('index', 'show', 'login', 'logout', 'store', 'update', 'destroy')
             ->actions(function (ActionRegistrar $actions) {
-                $actions->post('login');
+                $actions->post('login')->middleware('throttle:auth');
                 $actions->post('logout');
+                $actions->post('forgot-password')->middleware('throttle:auth');
+                $actions->post('reset-password')->middleware('throttle:auth');
             });
 
         $server->resource('media', MediaController::class)

@@ -28,4 +28,29 @@ export class AdminApi extends ApiEndpoints {
     async logout() {
         return await this.post<User>('users/logout', {});
     }
+
+    async forgotPassword(data: { email: string }) {
+        return await this.post<{ message: string }>(
+            'users/forgot-password',
+            data,
+            {
+                Authorization: '',
+            },
+        );
+    }
+
+    async resetPassword(data: {
+        token: string;
+        email: string;
+        password: string;
+        password_confirmation: string;
+    }) {
+        return await this.post<{ message: string }>(
+            'users/reset-password',
+            data,
+            {
+                Authorization: '',
+            },
+        );
+    }
 }

@@ -6,6 +6,8 @@ use Throwable;
 use App\Models\User;
 use App\Actions\User\Login;
 use App\Actions\User\Logout;
+use App\Actions\User\ForgotPassword;
+use App\Actions\User\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -24,6 +26,7 @@ use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelationship;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions\AttachRelationship;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions\DetachRelationship;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions\UpdateRelationship;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -112,5 +115,30 @@ class UserController extends Controller
                 'detail' => "User could not be logged out: {$th->getMessage()}}",
             ]));
         }
+    }
+
+    public function forgotPassword(Request $request): JsonResponse
+    {
+        (new ForgotPassword())->execute($request);
+
+        return response()->json([
+            'message' => 'if a user with that email address exists, we\'ve send them a link to reset their password.',
+        ]);
+    }
+
+    public function resetPassword(Request $request): JsonResponse
+    {
+        $status = (new ResetPassword())->execute($request);
+
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json([
+                'message' => __($status),
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => __($status),
+            'errors' => ['email' => [__($status)]]
+        ], 422);
     }
 }

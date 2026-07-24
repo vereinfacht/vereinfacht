@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-{{ isset($header) && trim($header) !== '' ? $header : 'https://vereinfacht.digital/img/logo-verein.svg' }}
+{{ isset($header) && trim($header) !== '' ? $header : 'https://vereinfacht.digital/svg/logo-verein.svg' }}
 </x-mail::header>
 </x-slot:header>
 

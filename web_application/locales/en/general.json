@@ -12,7 +12,6 @@
     "export": "export",
     "delete": "delete",
     "apply": "apply",
-
     "table": {
         "export": {
             "title": "Export table",
@@ -23,7 +22,6 @@
         "title": "Confirm deletion",
         "description": "Are you sure you want to delete this item? This action cannot be undone."
     },
-
     "imprint": "Imprint",
     "made_with": "Digital product by",
     "nothing_found": "Nothing found",
@@ -44,15 +42,12 @@
     "password_mismatch": "Passwords do not match",
     "created_at": "Created at",
     "updated_at": "Updated at",
-
     "yes": "yes",
     "no": "no",
-
     "pagination": {
         "previous": "Previous page",
         "next": "Next page"
     },
-
     "gender": {
         "label": "Gender",
         "options": {
@@ -61,5 +56,15 @@
             "none": "not specified",
             "other": "diverse"
         }
+    },
+    "next": "Next",
+    "reset_password": {
+        "email_sent": "Reset email sent.",
+        "forgot_password": "Forgot password?",
+        "failed": "We couldn't process your request. Please try again.",
+        "title": "Reset password",
+        "confirm_password": "Confirm password",
+        "new_password": "New password",
+        "instruction": "Enter your email address here to reset your password."
     }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Filament\Panel;
 use App\Models\Scopes\ClubScope;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Behaviors\HasRoles;
 use Illuminate\Support\Collection;
@@ -19,7 +21,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable implements FilamentUser, HasLocalePreference, HasTenants
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable, PrefersLocale;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, PrefersLocale, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -95,5 +97,13 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     public function getDefaultClub(): ?Club
     {
         return $this->clubs()->withoutGlobalScope(ClubScope::class)->first();
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(
+            (new ResetPassword($token))
+                ->locale(app()->getLocale())
+        );
     }
 }

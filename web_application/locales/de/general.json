@@ -55,5 +55,15 @@
             "none": "keine Angabe",
             "other": "divers"
         }
+    },
+    "next": "Weiter",
+    "reset_password": {
+        "email_sent": "E-Mail zum Zurücksetzen gesendet.",
+        "forgot_password": "Passwort vergessen?",
+        "failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
+        "title": "Passwort ändern",
+        "confirm_password": "Passwort bestätigen",
+        "new_password": "Neues Passwort",
+        "instruction": "Geben Sie hier Ihre E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen."
     }
 }

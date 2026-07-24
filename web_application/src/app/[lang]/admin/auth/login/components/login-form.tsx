@@ -8,6 +8,7 @@ import { signIn } from 'next-auth/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import Link from 'next/link';
 
 export interface LoginFormData {
     email?: string;
@@ -46,7 +47,7 @@ export default function LoginForm() {
         <>
             <form
                 onSubmit={handleSubmit}
-                className="mx-auto flex w-full max-w-sm flex-col space-y-4 rounded-xl p-6 shadow-card-sm"
+                className="shadow-card-sm mx-auto flex w-full max-w-sm flex-col space-y-4 rounded-xl p-6"
             >
                 <FormIntro headline={t('auth:login')} />
                 <TextInput
@@ -65,6 +66,14 @@ export default function LoginForm() {
                     autoComplete="current-password"
                     required
                 />
+                <div className="flex flex-row justify-end">
+                    <Link
+                        href="forgot-password"
+                        className="hover:text-primary-500 text-xs"
+                    >
+                        {t('general:reset_password.forgot_password')}
+                    </Link>
+                </div>
                 <div className="flex justify-center">
                     <Button
                         type="submit"
