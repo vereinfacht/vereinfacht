@@ -21,7 +21,6 @@ export default function ForgotPassword({
     const { toast } = useToast();
     const router = useRouter();
     const [serverError, setServerError] = useState<string | undefined>();
-    const [successMessage] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -92,9 +91,9 @@ export default function ForgotPassword({
             </form>
             {serverError != null && (
                 <MessageBox
-                    preset={serverError ? 'error' : 'default'}
+                    preset="error"
                     className="my-10"
-                    message={(serverError || successMessage) as string}
+                    message={serverError}
                 />
             )}
         </>
