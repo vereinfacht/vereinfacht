@@ -91,14 +91,14 @@ export default function ResetPassword({
                 <TextInput
                     id="password"
                     name="password"
-                    label={t('general:reset_password.set_new_password')}
+                    label={t('general:reset_password.new_password')}
                     type="password"
                     required
                 />
                 <TextInput
                     id="password_confirmation"
                     name="password_confirmation"
-                    label={t('general:reset_password.repeat_password')}
+                    label={t('general:reset_password.confirm_password')}
                     type="password"
                     required
                 />

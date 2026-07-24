@@ -62,8 +62,8 @@
         "forgot_password": "Passwort vergessen?",
         "failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
         "title": "Passwort ändern",
-        "repeat_password": "Passwort wiederholen",
-        "set_new_password": "Neues Passwort festlegen",
+        "confirm_password": "Passwort bestätigen",
+        "new_password": "Neues Passwort",
         "instruction": "Geben Sie hier Ihre E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen."
     }
 }

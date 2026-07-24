@@ -63,8 +63,8 @@
         "forgot_password": "Forgot password?",
         "failed": "We couldn't process your request. Please try again.",
         "title": "Reset password",
-        "repeat_password": "Repeat password",
-        "set_new_password": "Set new password",
+        "confirm_password": "Confirm password",
+        "new_password": "New password",
         "instruction": "Enter your email address here to reset your password."
     }
 }
