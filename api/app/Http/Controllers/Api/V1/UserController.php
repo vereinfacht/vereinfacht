@@ -119,18 +119,11 @@ class UserController extends Controller
 
     public function forgotPassword(Request $request): JsonResponse
     {
-        $status = (new ForgotPassword())->execute($request);
-
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json([
-                'message' => __($status),
-            ], 200);
-        }
+        (new ForgotPassword())->execute($request);
 
         return response()->json([
-            'message' => __($status),
-            'errors' => ['email' => [__($status)]]
-        ], 422);
+            'message' => 'if a user with that email address exists, we\'ve send them a link to reset their password.',
+        ]);
     }
 
     public function resetPassword(Request $request): JsonResponse
