@@ -68,10 +68,10 @@ JsonApiRoute::server('v1')
         $server->resource('users', UserController::class)
             ->only('index', 'show', 'login', 'logout', 'store', 'update', 'destroy')
             ->actions(function (ActionRegistrar $actions) {
-                $actions->post('login');
+                $actions->post('login')->middleware('throttle:auth');
                 $actions->post('logout');
-                $actions->post('forgot-password');
-                $actions->post('reset-password');
+                $actions->post('forgot-password')->middleware('throttle:auth');
+                $actions->post('reset-password')->middleware('throttle:auth');
             });
 
         $server->resource('media', MediaController::class)
