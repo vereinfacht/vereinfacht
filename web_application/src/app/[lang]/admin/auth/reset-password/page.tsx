@@ -64,10 +64,10 @@ export default function ResetPassword({
 
                 router.push('/login');
             } else {
-                setServerError(response.message);
+                setServerError(t('general:reset_password.failed'));
             }
         } catch (error) {
-            setServerError(t('general:reset_password.forgot_password_failed'));
+            setServerError(t('general:reset_password.failed'));
         } finally {
             setIsLoading(false);
         }

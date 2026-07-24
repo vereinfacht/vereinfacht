@@ -53,7 +53,7 @@ export default function ForgotPassword({
 
                 router.push('/login');
             } else {
-                setServerError(response.message);
+                setServerError(t('general:reset_password.failed'));
             }
         } catch (error) {
             setServerError(t('general:reset_password.failed'));
