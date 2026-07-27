@@ -172,13 +172,25 @@ export default function TablePagination({ totalPages }: Props) {
                     return (
                         <PaginationItem key={index}>
                             <Button
-                                onClick={(event) =>
-                                    changeCurrentPage(event, item.index)
-                                }
+                                onClick={(event) => {
+                                    if (item.disabled) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                    changeCurrentPage(event, item.index);
+                                }}
                                 variant={
                                     item.disabled ? 'primary' : 'secondary'
                                 }
                                 size={'circularSmall'}
+                                className={
+                                    item.disabled ? 'pointer-events-none' : ''
+                                }
+                                tabIndex={item.disabled ? -1 : undefined}
+                                aria-disabled={item.disabled}
+                                aria-current={
+                                    item.disabled ? 'page' : undefined
+                                }
                                 data-cy={`table-pagination-button-${item.index}`}
                             >
                                 {item.index}
