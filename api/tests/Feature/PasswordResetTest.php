@@ -37,7 +37,7 @@ class PasswordResetTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson([
-            'message' => 'if a user with that email address exists, we\'ve send them a link to reset their password.'
+            'message' => 'if a user with that email address exists, we\'ve sent them a link to reset their password.'
         ]);
     }
 
