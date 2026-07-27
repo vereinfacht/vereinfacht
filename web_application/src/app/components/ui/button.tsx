@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled [&_svg]:shrink-0 [&_svg]:fill-current',
+    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled',
     {
         variants: {
             variant: {
@@ -71,11 +71,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 {...props}
             >
-                {leftIcon}
+                {leftIcon && (
+                    <span
+                        className={cn('[&_svg]:shrink-0 [&_svg]:fill-current')}
+                    >
+                        {leftIcon}
+                    </span>
+                )}
 
                 {children && <span className={textPadding}>{children}</span>}
 
-                {rightIcon}
+                {rightIcon && (
+                    <span
+                        className={cn('[&_svg]:shrink-0 [&_svg]:fill-current')}
+                    >
+                        {rightIcon}
+                    </span>
+                )}
             </Comp>
         );
     },
