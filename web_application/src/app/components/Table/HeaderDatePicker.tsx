@@ -110,13 +110,15 @@ export function HeaderDatePicker({
                 <DropdownMenuTrigger asChild>
                     <Button
                         variant="tertiaryGrey"
-                        className="relative h-8 w-8 p-0"
+                        className="relative"
                         size="icon"
                         data-cy="date-range-trigger"
+                        leftIcon={
+                            <CalendarDays
+                                className={`h-4 w-4 fill-none! text-slate-500 ${hasActiveFilter ? 'text-slate-900' : ''}`}
+                            />
+                        }
                     >
-                        <CalendarDays
-                            className={`h-4 w-4 text-slate-500 ${hasActiveFilter ? 'text-slate-900' : ''}`}
-                        />
                         {hasActiveFilter && (
                             <Badge
                                 className="absolute top-0 right-0 flex h-3 w-3 flex-col items-center justify-center rounded-full px-1 text-[10px] text-white tabular-nums"
@@ -173,9 +175,8 @@ export function HeaderDatePicker({
                                 variant="tertiary"
                                 size={'icon'}
                                 data-cy="date-range-clear-button"
-                            >
-                                <RotateCcw />
-                            </Button>
+                                leftIcon={<RotateCcw className="fill-none!" />}
+                            />
                         </div>
                     </div>
                 </DropdownMenuContent>

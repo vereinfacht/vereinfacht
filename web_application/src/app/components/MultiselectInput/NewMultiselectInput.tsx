@@ -135,12 +135,13 @@ export function NewMultiselectInput({
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
-                        variant="tertiary"
+                        variant="tertiaryGrey"
                         role="combobox"
                         className={cn(
                             'mt-1 w-full justify-between',
                             selected.length < 1 && 'text-muted-foreground',
                         )}
+                        rightIcon={<ChevronsUpDown />}
                     >
                         {selected.length > 0
                             ? multiple
@@ -149,7 +150,6 @@ export function NewMultiselectInput({
                                   })
                                 : selected[0].label
                             : t('general:select')}
-                        <ChevronsUpDown className="opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="PopoverContent p-0" align="start">
@@ -163,7 +163,7 @@ export function NewMultiselectInput({
                             }
                         />
                         {loading && (
-                            <div className="absolute right-2 top-2 h-6 w-6 animate-spin">
+                            <div className="absolute top-2 right-2 h-6 w-6 animate-spin">
                                 <IconLoading />
                             </div>
                         )}

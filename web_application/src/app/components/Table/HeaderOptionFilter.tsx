@@ -54,15 +54,17 @@ export function HeaderOptionFilter({
                         className="relative"
                         variant="tertiaryGrey"
                         size={'icon'}
+                        rightIcon={
+                            <ListFilter
+                                className={[
+                                    'h-4 w-4',
+                                    filterQueryParam?.length
+                                        ? 'text-slate-800'
+                                        : 'text-gray-400',
+                                ].join(' ')}
+                            />
+                        }
                     >
-                        <ListFilter
-                            className={[
-                                'ml-auto h-4 w-4 text-gray-400',
-                                filterQueryParam?.length
-                                    ? 'text-slate-800'
-                                    : '',
-                            ].join(' ')}
-                        />
                         {filterQueryParam?.length ? (
                             <Badge
                                 className="absolute top-0 right-0 flex h-5 w-5 flex-col items-center justify-center rounded-full px-1 text-[10px] text-white tabular-nums"
