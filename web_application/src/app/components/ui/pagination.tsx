@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-
+import { MoreHorizontal } from 'lucide-react';
+import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
-import { ButtonProps, buttonVariants } from '@/app/components/ui/button';
+import useTranslation from 'next-translate/useTranslation';
+import IconChevronRight from '/public/svg/chevron-right.svg';
+import IconChevronLeft from '/public/svg/chevron-left.svg';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
     <nav
@@ -36,59 +38,78 @@ PaginationItem.displayName = 'PaginationItem';
 
 type PaginationLinkProps = {
     isActive?: boolean;
-} & Pick<ButtonProps, 'size'> &
-    React.ComponentProps<'a'>;
+} & ButtonProps;
 
 const PaginationLink = ({
     className,
     isActive,
-    size = 'icon',
+    size = 'circularSm',
+    onClick,
+    children,
     ...props
 }: PaginationLinkProps) => (
-    <a
+    <Button
+        onClick={(e) => {
+            if (isActive) {
+                e.preventDefault();
+                return;
+            }
+            onClick?.(e);
+        }}
         aria-current={isActive ? 'page' : undefined}
-        className={cn(
-            buttonVariants({
-                variant: isActive ? 'tertiary' : 'tertiaryGray',
-                size,
-            }),
-            className,
-        )}
+        aria-disabled={isActive}
+        variant={isActive ? 'primary' : 'secondary'}
+        className={cn(isActive ? 'pointer-events-none' : '', className)}
+        tabIndex={isActive ? -1 : undefined}
         {...props}
-    />
+    >
+        {children}
+    </Button>
 );
 PaginationLink.displayName = 'PaginationLink';
 
 const PaginationPrevious = ({
     className,
     ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink
-        aria-label="Go to previous page"
-        size="default"
-        className={cn('gap-1 pl-2.5', className)}
-        {...props}
-    >
-        <ChevronLeft className="h-4 w-4" />
-        <span>Previous</span>
-    </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+    const { t } = useTranslation('general');
+
+    return (
+        <PaginationLink
+            aria-label="Go to previous page"
+            size="sm"
+            variant="secondary"
+            className={cn('gap-1', className)}
+            leftIcon={<IconChevronLeft />}
+            data-cy="table-pagination-previous-button"
+            {...props}
+        >
+            {t('pagination.previous')}
+        </PaginationLink>
+    );
+};
 PaginationPrevious.displayName = 'PaginationPrevious';
 
 const PaginationNext = ({
     className,
     ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink
-        aria-label="Go to next page"
-        size="default"
-        className={cn('gap-1 pr-2.5', className)}
-        {...props}
-    >
-        <span>Next</span>
-        <ChevronRight className="h-4 w-4" />
-    </PaginationLink>
-);
+}: React.ComponentProps<typeof PaginationLink>) => {
+    const { t } = useTranslation('general');
+
+    return (
+        <PaginationLink
+            aria-label="Go to next page"
+            size="sm"
+            variant="secondary"
+            className={cn('gap-1', className)}
+            rightIcon={<IconChevronRight />}
+            data-cy="table-pagination-next-button"
+            {...props}
+        >
+            {t('pagination.next')}
+        </PaginationLink>
+    );
+};
 PaginationNext.displayName = 'PaginationNext';
 
 const PaginationEllipsis = ({

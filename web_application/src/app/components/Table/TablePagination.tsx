@@ -4,14 +4,13 @@ import {
     PaginationContent,
     PaginationEllipsis,
     PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from '@/app/components/ui/pagination';
 
-import { Button } from '../ui/button';
 import { useQueryState } from 'nuqs';
 import { paginationSearchParamParser } from '@/utils/search-params';
-import useTranslation from 'next-translate/useTranslation';
-import IconChevronRight from '/public/svg/chevron-right.svg';
-import IconChevronLeft from '/public/svg/chevron-left.svg';
 
 interface Props {
     totalPages?: number;
@@ -30,7 +29,6 @@ type PageItemType = {
 type PaginationItemType = EllipsesItemType | PageItemType;
 
 export default function TablePagination({ totalPages }: Props) {
-    const { t } = useTranslation('general');
     const [currentPage, setCurrentPage] = useQueryState(
         'page',
         paginationSearchParamParser,
@@ -148,18 +146,12 @@ export default function TablePagination({ totalPages }: Props) {
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
-                    <Button
+                    <PaginationPrevious
                         onClick={(event) =>
                             changeCurrentPage(event, currentPage - 1)
                         }
-                        variant="secondary"
-                        size={'sm'}
-                        leftIcon={<IconChevronLeft />}
                         disabled={currentPage <= 1}
-                        data-cy="table-pagination-previous-button"
-                    >
-                        {t('pagination.previous')}
-                    </Button>
+                    />
                 </PaginationItem>
 
                 {getPaginationItems().map((item, index) => {
@@ -171,47 +163,26 @@ export default function TablePagination({ totalPages }: Props) {
 
                     return (
                         <PaginationItem key={index}>
-                            <Button
-                                onClick={(event) => {
-                                    if (item.disabled) {
-                                        event.preventDefault();
-                                        return;
-                                    }
-                                    changeCurrentPage(event, item.index);
-                                }}
-                                variant={
-                                    item.disabled ? 'primary' : 'secondary'
-                                }
-                                size={'circularSm'}
-                                className={
-                                    item.disabled ? 'pointer-events-none' : ''
-                                }
-                                tabIndex={item.disabled ? -1 : undefined}
-                                aria-disabled={item.disabled}
-                                aria-current={
-                                    item.disabled ? 'page' : undefined
+                            <PaginationLink
+                                isActive={item.disabled}
+                                onClick={(event) =>
+                                    changeCurrentPage(event, item.index)
                                 }
                                 data-cy={`table-pagination-button-${item.index}`}
                             >
                                 {item.index}
-                            </Button>
+                            </PaginationLink>
                         </PaginationItem>
                     );
                 })}
 
                 <PaginationItem>
-                    <Button
+                    <PaginationNext
                         onClick={(event) =>
                             changeCurrentPage(event, currentPage + 1)
                         }
-                        variant="secondary"
-                        size={'sm'}
-                        rightIcon={<IconChevronRight />}
                         disabled={currentPage >= totalPages}
-                        data-cy="table-pagination-next-button"
-                    >
-                        {t('pagination.next')}
-                    </Button>
+                    />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
