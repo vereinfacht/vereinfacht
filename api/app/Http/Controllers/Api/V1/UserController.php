@@ -122,7 +122,7 @@ class UserController extends Controller
         (new ForgotPassword())->execute($request);
 
         return response()->json([
-            'message' => 'if a user with that email address exists, we\'ve sent them a link to reset their password.',
+            'message' => __('passwords.password_reset_email_sent'),
         ]);
     }
 
