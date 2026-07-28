@@ -109,7 +109,7 @@ export function HeaderDatePicker({
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                 <DropdownMenuTrigger asChild>
                     <Button
-                        variant="tertiaryGrey"
+                        variant="tertiaryGray"
                         className="relative"
                         size="icon"
                         data-cy="date-range-trigger"

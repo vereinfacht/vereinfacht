@@ -16,15 +16,15 @@ const buttonVariants = cva(
                     'text-textLink hover:bg-btnBgTertiaryHover hover:text-textHover focus-visible:bg-btnBgTertiaryHover focus-visible:text-textLink',
                 tertiaryDanger:
                     'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
-                tertiaryGrey: 'text-textSecondary hover:bg-btnTertiaryHover',
+                tertiaryGray: 'text-textSecondary hover:bg-btnTertiaryHover',
             },
             size: {
                 default: 'min-w-11 px-4 py-2.5 text-base leading-6',
-                small: 'min-w-9 px-3 py-2 text-sm leading-5',
+                sm: 'min-w-9 px-3 py-2 text-sm leading-5',
                 icon: 'aspect-square p-3',
-                iconSmall: 'aspect-square p-2',
+                iconSm: 'aspect-square p-2',
                 circular: 'min-w-11 p-2.5 text-base leading-6',
-                circularSmall: 'min-w-9 p-2 text-sm leading-5',
+                circularSm: 'min-w-9 p-2 text-sm leading-5',
             },
         },
         defaultVariants: {
@@ -58,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref,
     ) => {
         const Comp = asChild ? Slot : 'button';
-        const isTextButton = size === 'default' || size === 'small';
+        const isTextButton = size === 'default' || size === 'sm';
 
         const textPadding = cn(
             isTextButton && !leftIcon && 'pl-2',

@@ -43,7 +43,7 @@ export function TriStateHeaderFilter({
                     <Button
                         data-cy={`${paramKey}-button`}
                         className="relative"
-                        variant="tertiaryGrey"
+                        variant="tertiaryGray"
                         size={'icon'}
                         rightIcon={
                             <ListFilter
