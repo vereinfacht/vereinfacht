@@ -102,7 +102,7 @@ class PasswordResetTest extends TestCase
         $response->assertStatus(422);
     }
 
-    public function test_reset_password_fails_wth_expired_token(): void
+    public function test_reset_password_fails_with_expired_token(): void
     {
         $user = User::factory()->create();
         $token = Password::createToken($user);
