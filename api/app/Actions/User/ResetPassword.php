@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password as PasswordRule;
 class ResetPassword
 {
     public function execute(Request $request)
@@ -19,13 +20,15 @@ class ResetPassword
             'password' => [
                 'required',
                 'string',
-                'min:8',
-                'max:255',
                 'confirmed',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[^a-zA-Z0-9]/',
+                PasswordRule::min(8)
+                    ->max(255)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+                ,
             ],
         ]);
 
