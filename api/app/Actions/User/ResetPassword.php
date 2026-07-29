@@ -26,9 +26,7 @@ class ResetPassword
                     ->letters()
                     ->mixedCase()
                     ->numbers()
-                    ->symbols()
-                    ->uncompromised()
-                ,
+                    ->symbols(),
             ],
         ]);
 
