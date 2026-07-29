@@ -1,6 +1,5 @@
 import { z } from 'zod';
-
-export const idSchema = z.string().min(1, 'ID is required');
+import { idSchema } from './base.schema';
 
 export const baseGetSchema = z.object({
     id: idSchema,

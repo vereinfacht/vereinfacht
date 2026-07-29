@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { idSchema } from './get.schema';
+import { idSchema } from './base.schema';
 
 export const baseDeleteSchema = z.object({
     id: idSchema,

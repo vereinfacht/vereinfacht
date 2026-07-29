@@ -1,6 +1,6 @@
 import { File } from 'node:buffer';
 import z from 'zod';
-import { idSchema } from '../base/get.schema';
+import { idSchema } from '../base/base.schema';
 
 export const importStatementsSchema = z.object({
     financeAccountId: idSchema,

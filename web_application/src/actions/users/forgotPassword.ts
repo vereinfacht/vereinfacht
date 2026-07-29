@@ -4,7 +4,7 @@ import { AdminApi } from '@/services/admin-api';
 
 const adminApi = new AdminApi();
 
-export async function requestPasswordReset(email: string, lang: string) {
+export async function forgotPassword(email: string, lang: string) {
     adminApi.setLocale(lang);
 
     if (!email) {

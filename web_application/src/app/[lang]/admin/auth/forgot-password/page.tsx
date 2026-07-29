@@ -6,7 +6,7 @@ import TextInput from '@/app/components/Input/TextInput';
 import MessageBox from '@/app/components/MessageBox';
 import { FormEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { requestPasswordReset } from '@/actions/users/requestPasswordReset';
+import { forgotPassword } from '@/actions/users/forgotPassword';
 import { useRouter } from 'next/navigation';
 import { forgotPasswordSchema } from '@/actions/users/password.schema';
 import { useToast } from '@/hooks/toast/use-toast';
@@ -40,7 +40,7 @@ export default function ForgotPassword({
         }
 
         try {
-            const response = await requestPasswordReset(
+            const response = await forgotPassword(
                 result.data.email,
                 params.lang,
             );

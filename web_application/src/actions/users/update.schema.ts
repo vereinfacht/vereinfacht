@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { idSchema } from '../base/get.schema';
+import { idSchema } from '../base/base.schema';
 import { userAttributesSchema } from './create.schema';
+import { passwordSchema } from '../base/base.schema';
 
 export const updateUserAttributesSchema = userAttributesSchema.extend({
-    password: z.string().min(8).max(255).optional(),
+    password: passwordSchema.optional(),
 });
 
 export const updateUserSchema = z.object({

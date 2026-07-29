@@ -1,11 +1,12 @@
 import { z } from 'zod';
+import { passwordSchema } from '../base/base.schema';
 
 export const preferredLocale = ['de', 'en'] as const;
 
 export const userAttributesSchema = z.object({
     name: z.string().min(2).max(255),
     email: z.email().max(255),
-    password: z.string().min(8).max(255),
+    password: passwordSchema,
     preferredLocale: z.enum(preferredLocale),
 });
 

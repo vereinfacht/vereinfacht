@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { receiptAttributesSchema } from './create.schema';
-import { idSchema } from '../base/get.schema';
+import { idSchema } from '../base/base.schema';
 
 export const updateReceiptSchema = z.object({
     data: z.object({

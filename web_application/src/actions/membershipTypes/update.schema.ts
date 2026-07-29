@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { idSchema } from '../base/get.schema';
+import { idSchema } from '../base/base.schema';
 import {
     membershipTypeAttributesSchema,
     membershipTypeRelationshipsSchema,

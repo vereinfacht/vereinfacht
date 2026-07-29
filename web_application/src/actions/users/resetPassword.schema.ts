@@ -1,10 +1,6 @@
 import { z } from 'zod';
 import { passwordSchema } from '../base/base.schema';
 
-export const forgotPasswordSchema = z.object({
-    email: z.email(),
-});
-
 export const resetPasswordSchema = z
     .object({
         token: z

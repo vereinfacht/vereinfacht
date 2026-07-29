@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { idSchema } from '../base/get.schema';
+import { idSchema } from '../base/base.schema';
 import { statementAttributesSchema } from './create.schema';
 
 export const updateStatementSchema = z.object({
