@@ -39,6 +39,8 @@ PaginationItem.displayName = 'PaginationItem';
 type PaginationLinkProps = {
     isActive?: boolean;
     disabled?: boolean;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
 } & Pick<ButtonProps, 'size' | 'variant'> &
     React.ComponentProps<'a'>;
 
@@ -49,9 +51,18 @@ const PaginationLink = ({
     size = 'circularSm',
     variant,
     onClick,
+    leftIcon,
+    rightIcon,
     children,
     ...props
 }: PaginationLinkProps) => {
+    const isTextButton = size === 'default' || size === 'sm';
+
+    const textPadding = cn(
+        isTextButton && !leftIcon && 'pl-2',
+        isTextButton && !rightIcon && 'pr-2',
+    );
+
     return (
         <a
             onClick={(e) => {
@@ -78,7 +89,11 @@ const PaginationLink = ({
             tabIndex={isActive || disabled ? -1 : undefined}
             {...props}
         >
-            {children}
+            {leftIcon && <span>{leftIcon}</span>}
+
+            <span className={textPadding}>{children}</span>
+
+            {rightIcon && <span>{rightIcon}</span>}
         </a>
     );
 };
@@ -97,10 +112,10 @@ const PaginationPrevious = ({
             variant="secondary"
             className={cn('gap-1', className)}
             data-cy="table-pagination-previous-button"
+            leftIcon={<IconChevronLeft />}
             {...props}
         >
-            <IconChevronLeft />
-            <span>{t('pagination.previous')}</span>
+            {t('pagination.previous')}
         </PaginationLink>
     );
 };
@@ -119,10 +134,10 @@ const PaginationNext = ({
             variant="secondary"
             className={cn('gap-1', className)}
             data-cy="table-pagination-next-button"
+            rightIcon={<IconChevronRight />}
             {...props}
         >
-            <span>{t('pagination.next')}</span>
-            <IconChevronRight />
+            {t('pagination.next')}
         </PaginationLink>
     );
 };
