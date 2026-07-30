@@ -39,7 +39,7 @@ export default function TablePagination({ totalPages }: Props) {
     }
 
     function changeCurrentPage(
-        event: React.MouseEvent<HTMLButtonElement>,
+        event: React.MouseEvent<HTMLAnchorElement>,
         page: number,
     ) {
         event.preventDefault();

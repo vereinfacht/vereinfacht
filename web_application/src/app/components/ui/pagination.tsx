@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MoreHorizontal } from 'lucide-react';
-import { Button, ButtonProps } from '@/app/components/ui/button';
+import { ButtonProps, buttonVariants } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
 import useTranslation from 'next-translate/useTranslation';
 import IconChevronRight from '/public/svg/chevron-right.svg';
@@ -38,34 +38,50 @@ PaginationItem.displayName = 'PaginationItem';
 
 type PaginationLinkProps = {
     isActive?: boolean;
-} & ButtonProps;
+    disabled?: boolean;
+} & Pick<ButtonProps, 'size' | 'variant'> &
+    React.ComponentProps<'a'>;
 
 const PaginationLink = ({
     className,
     isActive,
+    disabled,
     size = 'circularSm',
+    variant,
     onClick,
     children,
     ...props
-}: PaginationLinkProps) => (
-    <Button
-        onClick={(e) => {
-            if (isActive) {
-                e.preventDefault();
-                return;
-            }
-            onClick?.(e);
-        }}
-        aria-current={isActive ? 'page' : undefined}
-        aria-disabled={isActive}
-        variant={isActive ? 'primary' : 'secondary'}
-        className={cn(isActive ? 'pointer-events-none' : '', className)}
-        tabIndex={isActive ? -1 : undefined}
-        {...props}
-    >
-        {children}
-    </Button>
-);
+}: PaginationLinkProps) => {
+    return (
+        <a
+            onClick={(e) => {
+                if (isActive || disabled) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
+                onClick?.(e);
+            }}
+            aria-current={isActive ? 'page' : undefined}
+            aria-disabled={isActive || disabled}
+            className={cn(
+                buttonVariants({
+                    variant: isActive ? 'primary' : variant || 'secondary',
+                    size,
+                }),
+                isActive && 'pointer-events-none',
+                disabled &&
+                    'text-textDisabled pointer-events-none cursor-not-allowed',
+                !isActive && !disabled && 'cursor-pointer',
+                className,
+            )}
+            tabIndex={isActive || disabled ? -1 : undefined}
+            {...props}
+        >
+            {children}
+        </a>
+    );
+};
 PaginationLink.displayName = 'PaginationLink';
 
 const PaginationPrevious = ({
@@ -80,11 +96,11 @@ const PaginationPrevious = ({
             size="sm"
             variant="secondary"
             className={cn('gap-1', className)}
-            leftIcon={<IconChevronLeft />}
             data-cy="table-pagination-previous-button"
             {...props}
         >
-            {t('pagination.previous')}
+            <IconChevronLeft />
+            <span>{t('pagination.previous')}</span>
         </PaginationLink>
     );
 };
@@ -102,11 +118,11 @@ const PaginationNext = ({
             size="sm"
             variant="secondary"
             className={cn('gap-1', className)}
-            rightIcon={<IconChevronRight />}
             data-cy="table-pagination-next-button"
             {...props}
         >
-            {t('pagination.next')}
+            <span>{t('pagination.next')}</span>
+            <IconChevronRight />
         </PaginationLink>
     );
 };
