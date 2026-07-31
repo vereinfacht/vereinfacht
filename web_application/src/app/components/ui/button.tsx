@@ -41,6 +41,8 @@ export interface ButtonProps
     asChild?: boolean;
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
+    render?: React.ReactElement;
+    nativeButton?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -53,11 +55,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             leftIcon,
             rightIcon,
             children,
+            render,
+            nativeButton,
             ...props
         },
         ref,
     ) => {
-        const Comp = asChild ? Slot : 'button';
         const isTextButton = size === 'default' || size === 'sm';
 
         const textPadding = cn(
@@ -65,12 +68,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             isTextButton && !rightIcon && 'pr-2',
         );
 
-        return (
-            <Comp
-                className={cn(buttonVariants({ variant, size, className }))}
-                ref={ref}
-                {...props}
-            >
+        const innerContent = (
+            <>
                 {leftIcon && (
                     <span
                         className={cn('[&_svg]:shrink-0 [&_svg]:fill-current')}
@@ -88,6 +87,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         {rightIcon}
                     </span>
                 )}
+            </>
+        );
+
+        const buttonClassName = cn(
+            buttonVariants({ variant, size, className }),
+        );
+
+        if (render) {
+            return (
+                <Slot className={buttonClassName} ref={ref} {...props}>
+                    {React.cloneElement(render, undefined, innerContent)}
+                </Slot>
+            );
+        }
+
+        const Comp = asChild ? Slot : 'button';
+
+        return (
+            <Comp className={buttonClassName} ref={ref} {...props}>
+                {asChild ? children : innerContent}
             </Comp>
         );
     },
