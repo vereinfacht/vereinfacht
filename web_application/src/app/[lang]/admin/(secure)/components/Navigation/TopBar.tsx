@@ -1,40 +1,53 @@
-import React from 'react';
-import ClubLogo from './ClubLogo';
+'use client';
 
-interface MenuHeaderProps {
+import LanguageSelector from '@/app/components/LanguageSelector';
+import IconMenu from '/public/svg/menu.svg';
+import IconClose from '/public/svg/close_new.svg';
+import useTranslation from 'next-translate/useTranslation';
+import { useMenu } from './MenuProvider';
+import ClubLogo from './ClubLogo';
+import ProfileMenu from '../ProfileMenu';
+import NavigationToggle from './NavigationToggle';
+
+interface TopBarProps {
     clubLogoUrl?: string;
     clubTitle?: string;
-    className?: string;
-    leftContent?: React.ReactNode;
-    rightContent?: React.ReactNode;
-    onLogoClick?: () => void;
+    userName?: string;
 }
 
 export default function TopBar({
     clubLogoUrl,
     clubTitle,
-    className = '',
-    leftContent,
-    rightContent,
-    onLogoClick,
-}: MenuHeaderProps) {
+    userName,
+}: TopBarProps) {
+    const { t } = useTranslation('admin');
+    const { isOpen, toggleMenu } = useMenu();
+
     return (
-        <div
-            className={[
-                'border-borderSubtle flex w-full items-center justify-between border-b px-5 py-2 md:p-4',
-                className,
-            ].join(' ')}
-        >
-            <div
-                className={`flex items-center gap-3 ${onLogoClick ? 'cursor-pointer' : ''}`}
-                onClick={onLogoClick}
-            >
+        <header className="bg-bgSurfaceGlassSubtle relative z-20 flex w-full shrink-0 items-center justify-between">
+            <div className="flex items-center px-4 py-3">
                 <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
-                {leftContent}
             </div>
-            <div className="text-textSecondary flex items-center md:hidden">
-                {rightContent}
+
+            <div className="flex items-center px-4">
+                <LanguageSelector showLang={true} showArrow={true} />
+
+                <ProfileMenu userName={userName} showArrow={true} />
+
+                <div className="flex items-center md:hidden">
+                    <NavigationToggle
+                        icon={isOpen ? IconClose : IconMenu}
+                        onClick={toggleMenu}
+                        aria-expanded={isOpen}
+                        aria-controls="main-navigation"
+                        aria-label={
+                            isOpen
+                                ? t('close_navigation')
+                                : t('open_navigation')
+                        }
+                    />
+                </div>
             </div>
-        </div>
+        </header>
     );
 }

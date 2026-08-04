@@ -1,5 +1,3 @@
-import { getOne } from '@/actions/fetchAdminResources';
-import { Club } from '@/types/models';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import createTranslation from 'next-translate/createTranslation';
@@ -34,8 +32,6 @@ export default async function Navigation() {
     if (!session || !session.club_id) {
         return redirect('/login');
     }
-
-    const [club] = await getOne<Club>('clubs', session.club_id, {});
 
     const items = [
         {
@@ -121,11 +117,5 @@ export default async function Navigation() {
         },
     ];
 
-    return (
-        <Menu
-            items={items}
-            clubLogoUrl={club?.logoUrl}
-            clubTitle={club?.title}
-        />
-    );
+    return <Menu items={items} />;
 }
