@@ -51,7 +51,7 @@ export default function Checkbox({
                     onChange={onChange}
                 />
                 {Boolean(checked) && (
-                    <IconCheck className="pointer-events-none absolute inset-0 h-5 w-5 animate-move-up border-2 border-transparent stroke-white stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
+                    <IconCheck className="animate-move-up pointer-events-none absolute inset-0 h-5 w-5 border-2 border-transparent stroke-white stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" />
                 )}
                 {children || label ? (
                     <Text

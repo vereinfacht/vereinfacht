@@ -33,7 +33,7 @@ export default function EditView({
         <div className="container">
             {hint && (
                 <MessageBox
-                    className="mb-10 mb-4"
+                    className="mb-4 mb-10"
                     preset="hint"
                     message={t(hint)}
                 />

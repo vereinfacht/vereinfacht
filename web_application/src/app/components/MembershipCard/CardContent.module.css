@@ -1,5 +1,5 @@
 @import '../../../globals.css' reference;
 
 .description a {
-    @apply underline hover:text-primary-500;
+    @apply hover:text-primary-500 underline;
 }

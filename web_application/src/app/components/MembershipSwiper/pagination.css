@@ -1,7 +1,7 @@
 @import '../../../globals.css' reference;
 
 .swiper-pagination-bullet {
-    @apply pointer-events-auto w-[6rem] cursor-pointer select-none text-center text-sm leading-tight text-slate-600;
+    @apply pointer-events-auto w-[6rem] cursor-pointer text-center text-sm leading-tight text-slate-600 select-none;
 }
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active {

@@ -66,7 +66,7 @@ export default function ResetPassword({
             } else {
                 setServerError(t('general:reset_password.failed'));
             }
-        } catch (error) {
+        } catch {
             setServerError(t('general:reset_password.failed'));
         } finally {
             setIsLoading(false);

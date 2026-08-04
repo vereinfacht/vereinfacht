@@ -47,10 +47,7 @@ export default function ActionForm({
                         onClick={() => setRoutingOnSuccess('reload')}
                     />
                 )}
-                <SubmitButton
-                    title={t('general:save')}
-                    loading={loading}
-                />
+                <SubmitButton title={t('general:save')} loading={loading} />
             </div>
         </form>
     );

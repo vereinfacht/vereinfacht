@@ -14,7 +14,7 @@ export default function MultiselectOption({ option }: Props) {
         <ComboboxOption
             key={option.value}
             className={({ focus, disabled }) => {
-                const baseClasses = 'relative select-none py-2 pl-10 pr-4';
+                const baseClasses = 'relative py-2 pr-4 pl-10 select-none';
 
                 return [
                     baseClasses,

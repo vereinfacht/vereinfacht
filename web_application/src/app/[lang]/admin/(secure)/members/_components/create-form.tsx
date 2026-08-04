@@ -176,16 +176,20 @@ export default function CreateForm({
                                 })
                             }
                             optionLabel={(item) => {
-                                const maximumNumberOfMembers = item.membershipType?.maximumNumberOfMembers ?? 1;
+                                const maximumNumberOfMembers =
+                                    item.membershipType
+                                        ?.maximumNumberOfMembers ?? 1;
 
-                                const postfix = item.id === currentMembershipId 
-                                ? ` (${t('membership:current')})`
-                                : ` (${item.membersCount ?? 0}/${maximumNumberOfMembers})`;
+                                const postfix =
+                                    item.id === currentMembershipId
+                                        ? ` (${t('membership:current')})`
+                                        : ` (${item.membersCount ?? 0}/${maximumNumberOfMembers})`;
 
                                 return (
                                     item.owner?.fullName +
                                     ' - ' +
-                                    item.membershipType?.title + postfix
+                                    item.membershipType?.title +
+                                    postfix
                                 );
                             }}
                             optionDisabled={(item) => {

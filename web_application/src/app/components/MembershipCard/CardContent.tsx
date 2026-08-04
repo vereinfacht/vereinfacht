@@ -96,7 +96,7 @@ export default function CardContent({
             )}
             <div className="px-8">
                 {Boolean(description) && (
-                    <Text className="mb-8 mt-6 text-center">
+                    <Text className="mt-6 mb-8 text-center">
                         <span
                             className={styles.description}
                             dangerouslySetInnerHTML={{

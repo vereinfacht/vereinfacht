@@ -13,7 +13,7 @@ export default function Step({ completed, isActive }: Props) {
     return (
         <Tab
             className={[
-                'flex h-5 w-5 items-center justify-center rounded-md transition-all hover:scale-110 hover:shadow-step',
+                'hover:shadow-step flex h-5 w-5 items-center justify-center rounded-md transition-all hover:scale-110',
                 completed
                     ? 'cursor-pointer bg-green-500'
                     : 'cursor-not-allowed bg-slate-400',

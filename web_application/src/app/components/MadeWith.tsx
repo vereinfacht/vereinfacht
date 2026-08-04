@@ -12,7 +12,7 @@ export default function MadeWith() {
         <div className={`flex self-center text-slate-600 ${textSizeClass}`}>
             <Text className={textSizeClass}>{t('general:made_with')}</Text>{' '}
             <Link href="/" target="_blank">
-                <Logo className="ml-[0.5em] mt-[0.2em] h-[1.2em]" />
+                <Logo className="mt-[0.2em] ml-[0.5em] h-[1.2em]" />
             </Link>
         </div>
     );

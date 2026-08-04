@@ -21,11 +21,11 @@ export default function Options({ options }: Props) {
             leaveTo="opacity-0"
         >
             <ComboboxOptions
-                className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden sm:text-sm"
+                className="ring-opacity-5 absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black focus:outline-hidden sm:text-sm"
                 static
             >
                 {options.length === 0 ? (
-                    <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
+                    <div className="relative cursor-default px-4 py-2 text-gray-700 select-none">
                         {t('general:nothing_found')}
                     </div>
                 ) : (

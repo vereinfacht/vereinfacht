@@ -12,7 +12,7 @@ export default function MediaField({ value = [] }: Props) {
 
     if (!value.length) {
         return (
-            <Text className="text-sm italic text-slate-500">
+            <Text className="text-sm text-slate-500 italic">
                 {t('no_media_attached')}
             </Text>
         );
@@ -53,7 +53,7 @@ export default function MediaField({ value = [] }: Props) {
                             href={`/api/media/${media.id}/download`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="absolute inset-0 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+                            className="absolute inset-0 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-hidden"
                             aria-label={`Open ${media.fileName}`}
                         />
                     </figure>

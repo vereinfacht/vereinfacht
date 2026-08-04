@@ -56,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             rightIcon,
             children,
             render,
-            nativeButton,
+            nativeButton: _nativeButton,
             ...props
         },
         ref,

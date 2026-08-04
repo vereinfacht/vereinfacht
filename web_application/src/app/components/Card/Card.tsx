@@ -13,9 +13,9 @@ export default function Card({
     return (
         <div
             className={[
-                'overflow-hidden rounded-3xl bg-white shadow-card',
+                'shadow-card overflow-hidden rounded-3xl bg-white',
                 hoverAnimations
-                    ? 'transition-all duration-300 ease-out will-change-transform hover:translate-y-1 hover:shadow-card-hover'
+                    ? 'hover:shadow-card-hover transition-all duration-300 ease-out will-change-transform hover:translate-y-1'
                     : '',
                 className,
             ].join(' ')}

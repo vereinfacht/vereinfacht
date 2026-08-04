@@ -99,7 +99,7 @@ function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
     };
 
     return (
-        <div className="relative mb-8 mt-4 overflow-hidden">
+        <div className="relative mt-4 mb-8 overflow-hidden">
             <details className="px-8" open={showDivisions}>
                 <summary
                     className={[styles.summary, 'cursor-pointer'].join(' ')}
@@ -130,8 +130,8 @@ function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
                 className={[
                     'absolute bottom-0 flex w-full items-center justify-center gap-2 bg-linear-to-b from-white/40 via-white/60 to-white px-8 py-[0.32rem] text-center text-slate-600 backdrop-blur-[0.2rem]',
                     showDivisions
-                        ? 'rounded-b-2xl shadow-inset-sm'
-                        : 'rounded-t-2xl shadow-negative-sm',
+                        ? 'shadow-inset-sm rounded-b-2xl'
+                        : 'shadow-negative-sm rounded-t-2xl',
                 ].join(' ')}
                 type="button"
                 aria-label="Toggle showing all divisions"

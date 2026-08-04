@@ -12,7 +12,7 @@ export default function Section({ children, index, hasMiddleSection }: Props) {
     return (
         <li
             className={[
-                '-mb-6 bg-slate-400 pb-12 pt-4',
+                '-mb-6 bg-slate-400 pt-4 pb-12',
                 index > 0 && 'shadow-negative-sm',
                 hasMiddleSection
                     ? 'animate-move-up rounded-3xl'

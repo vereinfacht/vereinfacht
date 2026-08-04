@@ -36,7 +36,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
     return (
         <>
             <MessageBox
-                className="mb-10 mb-4"
+                className="mb-4 mb-10"
                 preset="hint"
                 message={t('custom_hint', {
                     link: `<a href="/admin/club#taxAccountChartSource" class="underline">`,

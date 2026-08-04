@@ -15,7 +15,7 @@ export default function Pagination({ swiperIndex }: Props) {
     return (
         <div className="pointer-events-none relative h-20 items-center overflow-hidden bg-linear-to-r from-white via-white/0 to-white">
             <div
-                className="swiper-pagination absolute left-1/2 top-1/2 -z-10 flex items-center gap-4 transition-transform"
+                className="swiper-pagination absolute top-1/2 left-1/2 -z-10 flex items-center gap-4 transition-transform"
                 style={{
                     transform: `translate(${paginationOffsetInRem}rem, -50%)`,
                 }}
