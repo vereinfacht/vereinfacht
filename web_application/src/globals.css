@@ -43,6 +43,7 @@
     --color-textLink: var(--color-blue-500);
 
     --color-bgSurfaceGlassSubtle: --alpha(var(--color-white-solid) / 50%);
+    --color-bgSurfaceGlassStrong: --alpha(var(--color-white-solid) / 95%);
 
     --color-borderSubtle: var(--color-neutral-200);
     --color-borderFocus: var(--color-blue-500);
@@ -89,7 +90,14 @@
     --shadow-buttonSecondary: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
     --shadow-buttonSecondaryDisabled: var(--shadow-navigationItem);
 
+    --shadow-topbar:
+        inset 0px 1px 100px 0px rgba(0, 0, 0, 0.01),
+        inset 0px -1px 2px 0px rgba(255, 255, 255, 0.8),
+        0px 4px 40px 0px rgba(0, 0, 0, 0.05);
+
     --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
+
+    --blur-topbar: 2px;
 
     --animate-move-up: move-up 0.3s cubic-bezier(0.39, 1.42, 0.43, 1);
     --animate-move-down: move-down 0.4s cubic-bezier(0.39, 1.42, 0.43, 1);

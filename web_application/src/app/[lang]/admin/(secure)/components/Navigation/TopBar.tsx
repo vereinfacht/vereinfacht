@@ -24,7 +24,7 @@ export default function TopBar({
     const { isOpen, toggleMenu } = useMenu();
 
     return (
-        <header className="bg-bgSurfaceGlassSubtle relative z-20 flex w-full shrink-0 items-center justify-between">
+        <header className="shadow-topbar backdrop-blur-topbar bg-bgSurfaceGlassStrong md:bg-bgSurfaceGlassSubtle relative z-20 flex w-full shrink-0 items-center justify-between">
             <div className="flex items-center px-4 py-3">
                 <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
             </div>
