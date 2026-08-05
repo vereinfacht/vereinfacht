@@ -9,18 +9,12 @@ import { PropsWithChildren } from 'react';
 import ContentContainer from './components/ContentContainer';
 import TitleBar from './components/TitleBar';
 import { auth } from '@/utils/auth';
-import { redirect } from 'next/navigation';
 import { MenuProvider } from './components/Navigation/MenuProvider';
 import TopBar from './components/Navigation/TopBar';
 
 export default async function SecureLayout({ children }: PropsWithChildren) {
     const club = await getCurrentClub();
     const session = await auth();
-
-    if (!session) {
-        return redirect('/login');
-    }
-
     const clubPrimaryColor = club?.primaryColor ?? defaultClubPrimaryColor;
 
     return (
