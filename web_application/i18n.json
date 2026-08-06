@@ -33,7 +33,8 @@
             "user",
             "tax_account",
             "role",
-            "permission"
+            "permission",
+            "activity"
         ],
         "rgx:/admin/[resource]/.*": ["admin", "auth", "membership"]
     }

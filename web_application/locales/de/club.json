@@ -8,6 +8,23 @@
         "label": "Erweiterter Name",
         "help": "Der vollständige Name des Vereins"
     },
+    "address": {
+        "label": "Adresse"
+    },
+    "zip_code": {
+        "label": "Postleitzahl"
+    },
+    "city": {
+        "label": "Stadt"
+    },
+    "country": {
+        "label": "Land"
+    },
+    "preferred_locale": {
+        "label": "Bevorzugte Sprache",
+        "de": "deutsch",
+        "en": "englisch"
+    },
     "apply_title": {
         "label": "Antragstitel",
         "help": "Titel in der Kopfzeile des Antragsformulars"
