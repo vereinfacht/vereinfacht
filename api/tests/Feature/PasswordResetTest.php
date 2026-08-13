@@ -37,7 +37,7 @@ class PasswordResetTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson([
-            'message' => 'if a user with that email address exists, we\'ve sent them a link to reset their password.'
+            'message' => 'If an account with that email address exists, we\'ve sent a link to reset the password.'
         ]);
     }
 
@@ -72,8 +72,8 @@ class PasswordResetTest extends TestCase
             ->post('/api/v1/users/reset-password', [
                 'token' => $token,
                 'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
+                'password' => 'StrongP@ssw0rd1',
+                'password_confirmation' => 'StrongP@ssw0rd1',
 
             ]);
 
@@ -81,7 +81,7 @@ class PasswordResetTest extends TestCase
 
         $this->assertTrue(
             Hash::check(
-                'password',
+                'StrongP@ssw0rd1',
                 $user->fresh()->password,
             )
         );
@@ -95,8 +95,8 @@ class PasswordResetTest extends TestCase
             ->post('/api/v1/users/reset-password', [
                 'token' => "invalid_token",
                 'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
+                'password' => 'StrongP@ssw0rd1',
+                'password_confirmation' => 'StrongP@ssw0rd1',
             ]);
 
         $response->assertStatus(422);
@@ -112,8 +112,8 @@ class PasswordResetTest extends TestCase
             ->post('/api/v1/users/reset-password', [
                 'token' => $token,
                 'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
+                'password' => 'StrongP@ssw0rd1',
+                'password_confirmation' => 'StrongP@ssw0rd1',
             ]);
 
         $response->assertStatus(422);
