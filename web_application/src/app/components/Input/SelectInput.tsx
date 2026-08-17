@@ -5,6 +5,7 @@ import { ChangeEvent, HTMLProps, ReactNode, useState } from 'react';
 import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
 import HelpText from '../HelpText';
+import { cn } from '@/utils/shadcn';
 
 export interface Option {
     label: string | React.ReactNode;
@@ -28,16 +29,17 @@ export default function SelectInput({
     help,
     icon,
     options,
+    className,
     ...props
 }: Props) {
     const { t } = useTranslation('general');
     const [value, setValue] = useState(props.defaultValue ?? '');
-    const classes = [
-        'appearance-none pr-10 mt-1 bg-slate-300 w-full p-3 rounded-md shadow-input outline-hidden focus:ring-3 focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
-        props.className ? props.className : null,
-        props.disabled ? 'bg-slate-400' : null,
-        value === '' && 'text-slate-600',
-    ];
+    const classes = cn(
+        'border-borderDefault bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover h-12 w-full appearance-none rounded-xl border p-3 pr-10 outline-hidden transition-all',
+        props.disabled ? 'cursor-not-allowed bg-slate-200 opacity-50' : '',
+        value === '' ? 'text-textSecondary' : '',
+        className,
+    );
 
     function onChange(event: ChangeEvent<HTMLSelectElement>) {
         if (handleChange) {
@@ -48,7 +50,7 @@ export default function SelectInput({
     }
 
     return (
-        <div className="flex flex-col items-start">
+        <div className="flex w-full flex-col items-start">
             {label ? (
                 <InputLabel
                     forInput={props.id}
@@ -57,10 +59,10 @@ export default function SelectInput({
                 />
             ) : null}
 
-            <div className="relative w-full">
+            <div className="relative mt-1 w-full">
                 <select
                     {...props}
-                    className={classes.join(' ')}
+                    className={classes}
                     defaultValue={props.defaultValue ?? ''}
                     onChange={onChange}
                     data-cy={props.id}

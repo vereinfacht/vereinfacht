@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 import {
     Command,
@@ -23,6 +23,7 @@ import { filterOptionsByQuery, sortOptions } from './MultiselectInput';
 import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import IconLoading from '/public/svg/loading.svg';
+import IconChevronDown from '/public/svg/chevron_down.svg';
 import SelectedOptions from './SelectedOptions';
 
 interface Props {
@@ -138,10 +139,10 @@ export function NewMultiselectInput({
                         variant="tertiaryGray"
                         role="combobox"
                         className={cn(
-                            'mt-1 w-full justify-between',
-                            selected.length < 1 && 'text-muted-foreground',
+                            'border-borderDefault bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover mt-1 h-12 w-full justify-between rounded-xl border px-3 py-2 text-base font-normal outline-hidden transition-all',
+                            selected.length < 1 && 'text-textSecondary',
                         )}
-                        rightIcon={<ChevronsUpDown />}
+                        rightIcon={<IconChevronDown />}
                     >
                         {selected.length > 0
                             ? multiple

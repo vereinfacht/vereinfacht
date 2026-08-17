@@ -44,9 +44,12 @@
 
     --color-bgSurfaceGlassSubtle: --alpha(var(--color-white-solid) / 50%);
     --color-bgSurfaceGlassStrong: --alpha(var(--color-white-solid) / 95%);
+    --color-bgSolidSubtle: var(--color-neutral-100);
+    --color-bgSurfaceSolidInput: var(--color-white-solid);
 
     --color-borderSubtle: var(--color-neutral-200);
     --color-borderFocus: var(--color-blue-500);
+    --color-borderDefault: var(--color-neutral-500);
 
     --color-iconSecondary: var(--color-neutral-600);
 
