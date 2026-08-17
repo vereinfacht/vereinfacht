@@ -47,6 +47,9 @@ export default function ReceiptsTable({
     const columns: ColumnDef<TReceiptDeserialized>[] = [
         {
             accessorKey: 'receiptType',
+            meta: {
+                mobileLabel: t('receipt:receipt_type'),
+            } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderOptionFilter
@@ -58,14 +61,26 @@ export default function ReceiptsTable({
                 ) : (
                     t('receipt:receipt_type.label')
                 ),
-            cell: ({ row }) => (
-                <TextCell>
-                    {t('receipt:receipt_type.' + row.getValue('receiptType'))}
-                </TextCell>
-            ),
+            cell: ({ row }) => {
+                const receipt = row.original as TReceiptDeserialized;
+
+                return (
+                    <BelongsToCell
+                        resource={receipt}
+                        path="/admin/finances/receipts"
+                        content={t(
+                            `receipt:receipt_type.${receipt.receiptType}`,
+                        )}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'referenceNumber',
+            meta: {
+                mobileLabel: t('receipt:reference_number.label'),
+            } as any,
             header: t('receipt:reference_number.label'),
             cell: ({ row }) => (
                 <TextCell>{row.getValue('referenceNumber')}</TextCell>
@@ -73,6 +88,9 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'bookingDate',
+            meta: {
+                mobileLabel: t('receipt:booking_date.label'),
+            } as any,
             header: () =>
                 extended ? (
                     <HeaderDatePicker
@@ -93,6 +111,9 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'status',
+            meta: {
+                mobileLabel: t('receipt:status.label'),
+            } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderOptionFilter
@@ -114,6 +135,9 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'media',
+            meta: {
+                mobileLabel: t('receipt:media.label'),
+            } as any,
             header: () =>
                 extended ? (
                     <TriStateHeaderFilter
@@ -135,6 +159,9 @@ export default function ReceiptsTable({
         },
         {
             accessorKey: 'amount',
+            meta: {
+                mobileLabel: t('receipt:amount.label'),
+            } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderSort
@@ -158,6 +185,9 @@ export default function ReceiptsTable({
     if (extended) {
         const financeContactColumn: ColumnDef<TReceiptDeserialized> = {
             accessorKey: 'financeContact',
+            meta: {
+                mobileLabel: t('contact:title.one'),
+            } as any,
             header: t('contact:title.one'),
             cell: (cell) => {
                 const financeContact =
@@ -186,6 +216,9 @@ export default function ReceiptsTable({
 
         const transactionsColumn: ColumnDef<TTransactionDeserialized> = {
             accessorKey: 'transactions',
+            meta: {
+                mobileLabel: t('transaction:title.one'),
+            } as any,
             header: t('transaction:title.one'),
             cell: (cell) => {
                 const transactions =
@@ -214,25 +247,25 @@ export default function ReceiptsTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-between">
+                <div className="col-span-1 flex justify-end gap-1">
+                    <FinancialStatementExportModal receiptIds={allIds} />
+                    <TableExportModal
+                        ids={allIds ?? []}
+                        resourceName="receipts"
+                    />
                     <CreateButton href="/admin/finances/receipts/create" />
-                    <div className="flex gap-2">
-                        <FinancialStatementExportModal receiptIds={allIds} />
-                        <TableExportModal
-                            ids={allIds ?? []}
-                            resourceName="receipts"
-                        />
-                    </div>
                 </div>
             )}
-            <DataTable
-                data={receipts}
-                columns={columns}
-                resourceName={'finances/receipts' as ResourceName}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-            />
+            <div className="col-span-2">
+                <DataTable
+                    data={receipts}
+                    columns={columns}
+                    resourceName={'finances/receipts' as ResourceName}
+                    totalPages={totalPages}
+                    canEdit={true}
+                    canView={true}
+                />
+            </div>
         </>
     );
 }

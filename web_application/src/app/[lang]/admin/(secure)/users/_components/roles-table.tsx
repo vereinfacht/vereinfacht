@@ -35,6 +35,9 @@ export default function RolesTable({ roles, defaultPermissions }: Props) {
         },
         {
             accessorKey: 'permissions',
+            meta: {
+                mobileLabel: t('permission:title.other'),
+            } as any,
             header: t('permission:title.other'),
             cell: ({ row }) => (
                 <PermissionTable

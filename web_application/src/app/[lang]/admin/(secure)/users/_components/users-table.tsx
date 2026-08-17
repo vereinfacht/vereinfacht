@@ -12,6 +12,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import DateField from '../../components/Fields/Detail/DateField';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 
 interface Props {
     users: TUserDeserialized[];
@@ -31,16 +32,33 @@ export default function UsersTable({ users }: Props) {
                     columnTitle={t('user:title.label')}
                 />
             ),
-            cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
+            cell: ({ row }) => {
+                const user = row.original;
+
+                return (
+                    <BelongsToCell
+                        resource={user}
+                        path="/admin/users"
+                        content={user.name}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'email',
+            meta: {
+                mobileLabel: t('general:email'),
+            } as any,
             header: t('general:email'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'role',
             header: t('role:title.other'),
+            meta: {
+                mobileLabel: t('role:title.other'),
+            } as any,
             cell: ({ row }) => {
                 const roles = row.original.roles as
                     | { name: string }[]
@@ -71,26 +89,36 @@ export default function UsersTable({ users }: Props) {
         {
             accessorKey: 'createdAt',
             header: t('general:created_at'),
+            meta: {
+                mobileLabel: t('general:created_at'),
+            } as any,
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
         },
         {
             accessorKey: 'updatedAt',
             header: t('general:updated_at'),
+            meta: {
+                mobileLabel: t('general:updated_at'),
+            } as any,
             cell: ({ row }) => <DateField value={row.getValue('updatedAt')} />,
         },
     ];
 
     return (
         <>
-            <CreateButton href={`/admin/users/create/`} />
-            <DataTable
-                data={users}
-                columns={columns}
-                resourceName={'users' as ResourceName}
-                canView={true}
-                canEdit={true}
-                deleteAction={deleteAction}
-            />
+            <div className="col-span-1 flex justify-end">
+                <CreateButton href={`/admin/users/create/`} />
+            </div>
+            <div className="col-span-2">
+                <DataTable
+                    data={users}
+                    columns={columns}
+                    resourceName={'users' as ResourceName}
+                    canView={true}
+                    canEdit={true}
+                    deleteAction={deleteAction}
+                />
+            </div>
         </>
     );
 }

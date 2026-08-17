@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
@@ -6,13 +9,28 @@ import useTranslation from 'next-translate/useTranslation';
 import IconChevronRight from '/public/svg/chevron-right.svg';
 import IconChevronLeft from '/public/svg/chevron-left.svg';
 
+export function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
+        checkIsMobile();
+
+        window.addEventListener('resize', checkIsMobile);
+
+        return () => window.removeEventListener('resize', checkIsMobile);
+    }, []);
+
+    return isMobile;
+}
+
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
     return (
         <nav
             role="navigation"
             aria-label="pagination"
             data-slot="pagination"
-            className={cn('mx-auto flex w-full justify-center', className)}
+            className={cn('mx-auto flex w-full justify-start', className)}
             {...props}
         />
     );
@@ -25,7 +43,7 @@ function PaginationContent({
     return (
         <ul
             data-slot="pagination-content"
-            className={cn('flex items-center gap-1', className)}
+            className={cn('flex items-center gap-2', className)}
             {...props}
         />
     );
@@ -54,6 +72,12 @@ function PaginationLink({
     ...props
 }: PaginationLinkProps) {
     const isNonInteractable = isActive || disabled;
+    const isTextButton = size === 'default' || size === 'sm';
+
+    const textPadding = cn(
+        isTextButton && !leftIcon && 'pl-2',
+        isTextButton && !rightIcon && 'pr-2',
+    );
 
     return (
         <Button
@@ -64,7 +88,7 @@ function PaginationLink({
             className={cn(
                 isActive && 'pointer-events-none',
                 disabled &&
-                    'text-textDisabled pointer-events-none cursor-not-allowed',
+                    'bg-btnBgSecondaryDisabled shadow-buttonSecondaryDisabled backdrop-blur-topbar text-textDisabled pointer-events-none cursor-not-allowed',
                 !isActive && !disabled && 'cursor-pointer',
                 className,
             )}
@@ -91,7 +115,7 @@ function PaginationLink({
                         {leftIcon}
                     </span>
                 )}
-                {children && <span>{children}</span>}
+                {children && <span className={textPadding}>{children}</span>}
                 {rightIcon && (
                     <span className="[&_svg]:shrink-0 [&_svg]:fill-current">
                         {rightIcon}
@@ -107,18 +131,19 @@ function PaginationPrevious({
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     const { t } = useTranslation('general');
+    const isMobile = useIsMobile();
 
     return (
         <PaginationLink
             aria-label="Go to previous page"
-            size="sm"
+            size={isMobile ? 'iconSm' : 'sm'}
             variant="secondary"
             className={cn('gap-1', className)}
             data-cy="table-pagination-previous-button"
             leftIcon={<IconChevronLeft />}
             {...props}
         >
-            {t('pagination.previous')}
+            {isMobile ? '' : t('pagination.previous')}
         </PaginationLink>
     );
 }
@@ -128,18 +153,19 @@ function PaginationNext({
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     const { t } = useTranslation('general');
+    const isMobile = useIsMobile();
 
     return (
         <PaginationLink
             aria-label="Go to next page"
-            size="sm"
+            size={isMobile ? 'iconSm' : 'sm'}
             variant="secondary"
             className={cn('gap-1', className)}
             data-cy="table-pagination-next-button"
             rightIcon={<IconChevronRight />}
             {...props}
         >
-            {t('pagination.next')}
+            {isMobile ? '' : t('pagination.next')}
         </PaginationLink>
     );
 }

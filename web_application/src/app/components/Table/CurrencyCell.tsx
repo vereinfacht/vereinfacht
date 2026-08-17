@@ -5,11 +5,5 @@ interface Props {
 }
 
 export default function CurrencyCell({ value }: Props) {
-    return (
-        <CurrencyText
-            suppressHydrationWarning
-            value={value}
-            className="text-right"
-        />
-    );
+    return <CurrencyText suppressHydrationWarning value={value} />;
 }

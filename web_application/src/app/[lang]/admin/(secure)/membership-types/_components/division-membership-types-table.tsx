@@ -38,6 +38,9 @@ export default function DivisionMembershipTypesTable({
         },
         {
             accessorKey: 'monthlyFee',
+            meta: {
+                mobileLabel: t('membership_type:monthly_fee.label'),
+            } as any,
             header: () => (
                 <div className="text-right">
                     {t('membership_type:monthly_fee.label')}

@@ -53,5 +53,8 @@
     },
     "updated_at": {
         "label": "Updated at"
+    },
+    "actions": {
+        "label": "Actions"
     }
 }

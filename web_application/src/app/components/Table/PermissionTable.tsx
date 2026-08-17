@@ -90,6 +90,9 @@ export default function PermissionTable({
         },
         ...ACTIONS.map((action) => ({
             accessorKey: action,
+            meta: {
+                mobileLabel: t(`permission:action.${action}`),
+            } as any,
             header: t(`permission:action.${action}`),
             cell: ({ row }: { row: Row<PermissionTable> }) =>
                 isForm ? (

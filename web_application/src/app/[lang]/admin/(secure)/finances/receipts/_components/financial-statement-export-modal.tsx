@@ -12,10 +12,11 @@ import {
 } from '@/app/components/ui/dialog';
 import { useToast } from '@/hooks/toast/use-toast';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { Download } from 'lucide-react';
+import IconDownload from '/public/svg/download.svg';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import SubmitButton from '../../../components/Form/SubmitButton';
+import { Button as ShadCNBtn } from '@/app/components/ui/button';
 
 interface Props {
     receiptIds?: string[];
@@ -70,14 +71,13 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button
-                    className="mb-6 w-fit"
-                    type="button"
+                <ShadCNBtn
+                    className="text-white-solid mx-1 my-6 w-fit"
+                    leftIcon={<IconDownload />}
                     disabled={!receiptIds || receiptIds.length === 0}
                 >
-                    <Download className="mr-2 h-4 w-4" />
                     {t('financial_statement:export')}
-                </Button>
+                </ShadCNBtn>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

@@ -15,7 +15,7 @@ import {
     DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { Trash } from 'lucide-react';
+import IconBin from '/public/svg/bin.svg';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ export default function DeleteForm({
                     data-cy={`delete-${id}-button`}
                     title={t('general:delete')}
                     className={[
-                        'transition-color duration-300',
+                        'transition-color p-2 duration-300',
                         disabled
                             ? 'cursor-not-allowed opacity-30'
                             : 'cursor-pointer text-red-400 hover:text-red-500/50',
@@ -63,7 +63,7 @@ export default function DeleteForm({
                     disabled={disabled}
                     aria-disabled={disabled}
                 >
-                    <Trash />
+                    <IconBin />
                 </button>
             </DialogTrigger>
             <DialogContent className="max-w-md">

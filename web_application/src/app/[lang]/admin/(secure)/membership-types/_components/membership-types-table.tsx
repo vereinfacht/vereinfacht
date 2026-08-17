@@ -11,6 +11,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];
@@ -44,14 +45,26 @@ export default function MembershipTypesTable({
                     t('membership_type:title.label', { count: 1 })
                 ),
             cell: ({ row }) => {
+                const membershipType = row.original;
                 const title =
-                    row.original.titleTranslations?.[lang] ||
-                    row.getValue('title');
-                return <TextCell>{title}</TextCell>;
+                    membershipType.titleTranslations?.[lang] ||
+                    membershipType.title;
+
+                return (
+                    <BelongsToCell
+                        resource={membershipType}
+                        path="/admin/membership-types"
+                        content={title}
+                        truncate
+                    />
+                );
             },
         },
         {
             accessorKey: 'description',
+            meta: {
+                mobileLabel: t('membership_type:description.label'),
+            } as any,
             header: t('membership_type:description.label'),
             cell: ({ row }) => {
                 const description =
@@ -62,6 +75,9 @@ export default function MembershipTypesTable({
         },
         {
             accessorKey: 'monthlyFee',
+            meta: {
+                mobileLabel: t('membership_type:monthly_fee.label'),
+            } as any,
             header: t('membership_type:monthly_fee.label'),
             cell: ({ getValue }) => {
                 const monthlyFee = getValue() as number;
@@ -80,23 +96,25 @@ export default function MembershipTypesTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-between">
-                    <CreateButton href="/admin/membership-types/create" />
+                <div className="col-span-1 flex justify-end">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName={'membership-types'}
                     />
+                    <CreateButton href="/admin/membership-types/create" />
                 </div>
             )}
-            <DataTable
-                data={membershipTypes}
-                columns={columns}
-                resourceName={'membership-types' as ResourceName}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-                deleteAction={deleteAction}
-            />
+            <div className="col-span-2">
+                <DataTable
+                    data={membershipTypes}
+                    columns={columns}
+                    resourceName={'membership-types' as ResourceName}
+                    totalPages={totalPages}
+                    canEdit={true}
+                    canView={true}
+                    deleteAction={deleteAction}
+                />
+            </div>
         </>
     );
 }

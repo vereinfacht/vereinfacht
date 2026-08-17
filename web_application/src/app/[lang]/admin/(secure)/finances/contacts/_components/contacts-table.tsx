@@ -1,6 +1,7 @@
 'use client';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -25,6 +26,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
     const columns: ColumnDef<TFinanceContactDeserialized>[] = [
         {
             accessorKey: 'contactType',
+            meta: { mobileLabel: t('contact:contact_type.label') } as any,
             header: ({ column }) => (
                 <HeaderOptionFilter
                     options={financeContactTypeOptions ?? []}
@@ -44,6 +46,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
         },
         {
             accessorKey: 'fullName',
+            meta: { isMobileHeader: true } as any,
             header: ({ column }) => (
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
@@ -51,10 +54,22 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                     columnTitle={t('contact:name.label')}
                 />
             ),
-            cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
+            cell: ({ row }) => {
+                const contact = row.original as TFinanceContactDeserialized;
+
+                return (
+                    <BelongsToCell
+                        resource={contact}
+                        path="/admin/finances/contacts"
+                        content={contact.fullName}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'companyName',
+            meta: { mobileLabel: t('contact:company_name.label') } as any,
             header: ({ column }) => (
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
@@ -68,6 +83,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
         },
         {
             accessorKey: 'city',
+            meta: { mobileLabel: t('contact:city.label') } as any,
             header: ({ column }) => (
                 <HeaderSort
                     parser={listFinanceContactSearchParams.sort}
@@ -79,21 +95,24 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
         },
         {
             accessorKey: 'email',
+            meta: { mobileLabel: t('contact:email.label') } as any,
             header: t('contact:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
     ];
 
     return (
-        <DataTable
-            data={contacts}
-            columns={columns}
-            resourceName={'finances/contacts' as ResourceName}
-            totalPages={totalPages}
-            canEdit={(contact) => (contact.isExternal ? false : true)}
-            canView={true}
-            canDelete={(contact) => (contact.isExternal ? false : true)}
-            deleteAction={deleteAction}
-        />
+        <div className="col-span-2">
+            <DataTable
+                data={contacts}
+                columns={columns}
+                resourceName={'finances/contacts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={(contact) => (contact.isExternal ? false : true)}
+                canView={true}
+                canDelete={(contact) => (contact.isExternal ? false : true)}
+                deleteAction={deleteAction}
+            />
+        </div>
     );
 }

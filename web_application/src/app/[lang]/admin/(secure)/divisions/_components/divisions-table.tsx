@@ -3,7 +3,6 @@
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
-import TextCell from '@/app/components/Table/TextCell';
 import {
     TDivisionDeserialized,
     TMembershipTypeDeserialized,
@@ -14,6 +13,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
 import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 
 interface Props {
     divisions: TDivisionDeserialized[];
@@ -34,6 +34,7 @@ export default function DivisionsTable({
     const columns: ColumnDef<TDivisionDeserialized>[] = [
         {
             accessorKey: 'title',
+            meta: { isMobileHeader: true } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderSort
@@ -45,16 +46,27 @@ export default function DivisionsTable({
                     t('division:title.label', { count: 1 })
                 ),
             cell: ({ row }) => {
+                const division = row.original as TDivisionDeserialized;
                 const title =
-                    row.original.titleTranslations?.[lang] ||
-                    row.getValue('title');
-                return <TextCell>{title}</TextCell>;
+                    division.titleTranslations?.[lang] || division.title;
+
+                return (
+                    <BelongsToCell
+                        resource={division}
+                        path="/admin/divisions"
+                        content={title}
+                        truncate
+                    />
+                );
             },
         },
         ...(extended
             ? [
                   {
                       accessorKey: 'membershipTypes',
+                      meta: {
+                          mobileLabel: t('membership_type:title.other'),
+                      } as any,
                       header: t('membership_type:title.other'),
                       cell: (cell: any) => {
                           const membershipTypes =
@@ -78,23 +90,25 @@ export default function DivisionsTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-between">
-                    <CreateButton href="/admin/divisions/create" />
+                <div className="col-span-1 flex justify-end">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName="divisions"
                     />
+                    <CreateButton href="/admin/divisions/create" />
                 </div>
             )}
-            <DataTable
-                data={divisions}
-                columns={columns}
-                resourceName={'divisions'}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-                deleteAction={deleteAction}
-            />
+            <div className="col-span-2">
+                <DataTable
+                    data={divisions}
+                    columns={columns}
+                    resourceName={'divisions'}
+                    totalPages={totalPages}
+                    canEdit={true}
+                    canView={true}
+                    deleteAction={deleteAction}
+                />
+            </div>
         </>
     );
 }

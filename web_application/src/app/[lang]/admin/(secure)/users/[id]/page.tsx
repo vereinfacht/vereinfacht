@@ -59,7 +59,7 @@ export default async function UserShowPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-12">
+        <div className="col-span-2 container flex flex-col gap-12">
             <EditButton href={`/admin/users/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (

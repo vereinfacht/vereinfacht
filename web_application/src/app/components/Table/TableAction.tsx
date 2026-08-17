@@ -4,13 +4,12 @@ import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/For
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import DeleteForm from './DeleteForm';
-import IconEye from '/public/svg/eye.svg';
-import IconPen from '/public/svg/pen.svg';
+import IconPen from '/public/svg/edit.svg';
 
 interface Props {
     href?: string;
     onClick?: () => void;
-    type?: 'view' | 'edit' | 'delete';
+    type?: 'edit' | 'delete';
     id?: string | number;
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     resourceName?: string;
@@ -18,7 +17,7 @@ interface Props {
 }
 
 export function TableAction({
-    type = 'view',
+    type = 'edit',
     onClick,
     href,
     id,
@@ -27,10 +26,6 @@ export function TableAction({
     disabled = false,
 }: Props) {
     const { t } = useTranslation();
-    const iconProps = {
-        className:
-            'stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]',
-    };
 
     if (type === 'delete') {
         return (
@@ -63,11 +58,7 @@ export function TableAction({
                     }
                 }}
             >
-                {type === 'view' ? (
-                    <IconEye {...iconProps} />
-                ) : (
-                    <IconPen {...iconProps} />
-                )}
+                {type === 'edit' && <IconPen />}
             </button>
         );
     }
@@ -78,7 +69,7 @@ export function TableAction({
             href={href ?? ''}
             title={t(`general:${type}`)}
             className={[
-                'transition-color duration-300',
+                'transition-color p-2 duration-300',
                 disabled
                     ? 'cursor-not-allowed opacity-30'
                     : 'text-blue-500 hover:text-blue-500/50',
@@ -90,11 +81,7 @@ export function TableAction({
                 }
             }}
         >
-            {type === 'view' ? (
-                <IconEye {...iconProps} />
-            ) : type === 'edit' ? (
-                <IconPen {...iconProps} />
-            ) : null}
+            {type === 'edit' && <IconPen />}
         </Link>
     );
 }

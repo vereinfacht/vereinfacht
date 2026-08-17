@@ -8,7 +8,7 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listTaxAccountSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 
 interface Props {
     taxAccounts: TTaxAccountDeserialized[];
@@ -29,6 +29,18 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
                 />
             ),
             accessorKey: 'accountNumber',
+            cell: ({ row }) => {
+                const taxAccount = row.original;
+
+                return (
+                    <BelongsToCell
+                        resource={taxAccount}
+                        path="/admin/tax-accounts"
+                        content={taxAccount.accountNumber}
+                        truncate
+                    />
+                );
+            },
         },
         {
             header: ({ column }) => (
@@ -39,21 +51,25 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
                 />
             ),
             accessorKey: 'description',
+            meta: {
+                mobileLabel: t('tax_account:description.label'),
+            } as any,
         },
     ];
 
     return (
         <>
-            <CreateButton href="/admin/tax-accounts/create" />
-            <DataTable
-                data={taxAccounts}
-                columns={columns}
-                resourceName={'tax-accounts' as ResourceName}
-                totalPages={totalPages}
-                canEdit={true}
-                canView={true}
-                deleteAction={deleteAction}
-            />
+            <div className="col-span-2">
+                <DataTable
+                    data={taxAccounts}
+                    columns={columns}
+                    resourceName={'tax-accounts' as ResourceName}
+                    totalPages={totalPages}
+                    canEdit={true}
+                    canView={true}
+                    deleteAction={deleteAction}
+                />
+            </div>
         </>
     );
 }

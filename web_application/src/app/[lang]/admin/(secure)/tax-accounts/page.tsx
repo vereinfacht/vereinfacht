@@ -10,6 +10,7 @@ import {
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import createTranslation from 'next-translate/createTranslation';
 import TaxAccountsTable from './_components/tax-accounts-table';
+import CreateButton from '../components/CreateButton';
 
 async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
     const response = await listTaxAccounts({
@@ -35,18 +36,26 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
+            <div className="col-span-1 flex justify-end">
+                <CreateButton
+                    href="/admin/tax-accounts/create"
+                    className="justify-self-end"
+                />
+            </div>
             <MessageBox
-                className="mb-4 mb-10"
+                className="col-span-2 mb-4"
                 preset="hint"
                 message={t('custom_hint', {
                     link: `<a href="/admin/club#taxAccountChartSource" class="underline">`,
                 })}
                 allowHtml={true}
             />
-            <TaxAccountsTable
-                taxAccounts={taxAccounts}
-                totalPages={totalPages}
-            />
+            <div className="col-span-2">
+                <TaxAccountsTable
+                    taxAccounts={taxAccounts}
+                    totalPages={totalPages}
+                />
+            </div>
         </>
     );
 }

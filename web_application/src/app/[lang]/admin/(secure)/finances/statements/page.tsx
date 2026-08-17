@@ -47,16 +47,15 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
-            <div className="flex items-center justify-between">
-                <CreateButton href="/admin/finances/statements/create" />
+            <div className="col-span-1 flex items-center justify-end">
                 <TableExportModal
                     ids={meta.page?.allIds}
                     resourceName="statements"
                 />
+                <CreateButton href="/admin/finances/statements/create" />
             </div>
-            <div className="flex gap-6">
+            <div className="col-span-2 flex gap-6">
                 <AccountsList />
-
                 <StatementsTable
                     statements={statements}
                     totalPages={totalPages}

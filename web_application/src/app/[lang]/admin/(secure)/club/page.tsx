@@ -110,7 +110,7 @@ export default async function ClubPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-6">
+        <div className="col-span-2 container flex flex-col gap-6">
             <EditButton href="/admin/club/edit" />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
