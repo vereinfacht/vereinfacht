@@ -93,6 +93,8 @@ export default function CreateForm({
                 translationKey="membership"
                 loading={false}
             >
+                <input type="hidden" name="activeTab" value={activeTab} />
+
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('membership:title.one')}
@@ -198,11 +200,15 @@ export default function CreateForm({
                                                 className="text-textPrimary"
                                             />
                                             <RadioGroup
+                                                id="memberType"
                                                 name="memberType"
                                                 className="flex w-full flex-row gap-3"
                                                 defaultValue="person"
                                                 required={
                                                     activeTab === 'create'
+                                                }
+                                                disabled={
+                                                    activeTab !== 'create'
                                                 }
                                             >
                                                 <RadioGroupItem
@@ -217,7 +223,6 @@ export default function CreateForm({
 
                                                 <RadioGroupItem
                                                     className="w-full"
-
                                                     value="firma"
                                                     icon={
                                                         <IconBuilding className="text-textPrimary" />
@@ -242,6 +247,9 @@ export default function CreateForm({
                                                 required={
                                                     activeTab === 'create'
                                                 }
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
 
@@ -256,6 +264,9 @@ export default function CreateForm({
                                                 )}
                                                 required={
                                                     activeTab === 'create'
+                                                }
+                                                disabled={
+                                                    activeTab !== 'create'
                                                 }
                                             />
                                         </FormField>
@@ -272,6 +283,9 @@ export default function CreateForm({
                                                 label={t(
                                                     'member:birthday.label',
                                                 )}
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
 
@@ -285,6 +299,9 @@ export default function CreateForm({
                                                     'general:gender.label',
                                                 )}
                                                 options={genderOptions}
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
                                     </div>
@@ -301,6 +318,9 @@ export default function CreateForm({
                                                 required={
                                                     activeTab === 'create'
                                                 }
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
 
@@ -315,6 +335,9 @@ export default function CreateForm({
                                                 label={t(
                                                     'member:phone_number.label',
                                                 )}
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
                                     </div>
@@ -329,6 +352,9 @@ export default function CreateForm({
                                                 label={t(
                                                     'member:address.label',
                                                 )}
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
 
@@ -343,6 +369,9 @@ export default function CreateForm({
                                                 )}
                                                 required={
                                                     activeTab === 'create'
+                                                }
+                                                disabled={
+                                                    activeTab !== 'create'
                                                 }
                                             />
                                         </FormField>
@@ -359,6 +388,9 @@ export default function CreateForm({
                                                 required={
                                                     activeTab === 'create'
                                                 }
+                                                disabled={
+                                                    activeTab !== 'create'
+                                                }
                                             />
                                         </FormField>
 
@@ -373,6 +405,9 @@ export default function CreateForm({
                                                 )}
                                                 required={
                                                     activeTab === 'create'
+                                                }
+                                                disabled={
+                                                    activeTab !== 'create'
                                                 }
                                             />
                                         </FormField>
@@ -398,6 +433,7 @@ export default function CreateForm({
                                                 'member:label_consent_media_publication',
                                             )}
                                             defaultValue={true}
+                                            disabled={activeTab !== 'create'}
                                         />
                                     </FormField>
 
@@ -456,10 +492,7 @@ export default function CreateForm({
 
                                     <hr />
                                     <FormField
-                                        errors={
-                                            formState.errors
-                                                ?.hasConsentedMediaPublication
-                                        }
+                                        errors={formState.errors?.isPayer}
                                     >
                                         <Checkbox
                                             id="isPayer"
@@ -468,6 +501,7 @@ export default function CreateForm({
                                                 'member:member_as_billing_contact',
                                             )}
                                             defaultValue={true}
+                                            disabled={activeTab !== 'create'}
                                         />
                                     </FormField>
                                 </div>
@@ -532,7 +566,7 @@ export default function CreateForm({
                                                       ]
                                                     : [];
                                             })()}
-                                            required
+                                            required={activeTab === 'select'}
                                         />
                                     </FormField>
                                 </div>
