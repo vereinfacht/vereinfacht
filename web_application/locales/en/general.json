@@ -66,5 +66,6 @@
         "confirm_password": "Confirm password",
         "new_password": "New password",
         "instruction": "Enter your email address here to reset your password."
-    }
+    },
+    "required": "Required"
 }

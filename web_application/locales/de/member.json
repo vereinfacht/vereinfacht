@@ -48,7 +48,11 @@
         "label": "Beiträge"
     },
     "label_identical_information": "Kontakt- und Adressinformationen identisch mit {{name}}",
+    "consent_media_publication": "Foto-/Video-Einwilligung",
     "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden.",
     "create": "Mitglied erstellen",
-    "edit": "Mitglied bearbeiten"
+    "edit": "Mitglied bearbeiten",
+    "add_division": "Sparte hinzufügen",
+    "member_as_billing_contact": "Dieses Mitglied auch als Zahler*in festlegen",
+    "type": "Typ"
 }
