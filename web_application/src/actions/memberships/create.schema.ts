@@ -54,12 +54,14 @@ export const membershipRelationshipsSchema = z.object({
             type: z.literal('membership-types'),
         }),
     }),
-    owner: z.object({
-        data: z.object({
-            id: z.string(),
-            type: z.literal('members'),
-        }),
-    }),
+    owner: z
+        .object({
+            data: z.object({
+                id: z.string(),
+                type: z.literal('members'),
+            }),
+        })
+        .optional(),
     paymentPeriod: z.object({
         data: z.object({
             id: z.string(),
