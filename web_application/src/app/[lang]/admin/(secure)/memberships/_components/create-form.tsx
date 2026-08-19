@@ -190,7 +190,7 @@ export default function CreateForm({
                             <TabsContent value="create">
                                 <div className="flex flex-col justify-evenly gap-6 rounded-2xl">
                                     <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
-                                        <div className="flex flex-col gap-1">
+                                        <div className="flex flex-col gap-1 pt-6">
                                             <InputLabel
                                                 forInput="memberType"
                                                 value={t('member:type')}
