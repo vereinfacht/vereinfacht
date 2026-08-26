@@ -68,5 +68,7 @@
         "membership_type_required": "Mitgliedschaftsart ist erforderlich"
     },
     "current": "aktuell",
-    "payment_information": "Zahlungsinformationen"
+    "payment_information": "Zahlungsinformationen",
+    "choose_member_error": "Bitte wählen Sie ein Mitglied",
+    "add_another_member": "Weiteres Mitglied hinzufügen"
 }

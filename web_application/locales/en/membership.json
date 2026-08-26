@@ -69,5 +69,7 @@
     },
     "current": "current",
 
-    "payment_information": "Payment information"
+    "payment_information": "Payment information",
+    "choose_member_error": "Please select a member",
+    "add_another_member": "Add another member"
 }

@@ -70,6 +70,17 @@ export const membershipRelationshipsSchema = z.object({
     }),
 });
 
+export const uiMemberFields = z.object({
+    mode: z.enum(['create', 'select']).default('create'),
+    existingMemberId: z.string().optional(),
+    divisions: z.array(z.string()).optional(),
+});
+
+export const formMemberSchema = z
+    .object({})
+    .catchall(z.any())
+    .and(uiMemberFields);
+
 export const createMembershipSchema = z.object({
     data: z.object({
         type: z.literal('memberships'),
@@ -78,6 +89,7 @@ export const createMembershipSchema = z.object({
         ),
         relationships: membershipRelationshipsSchema,
     }),
+    members: z.array(formMemberSchema).min(1),
 });
 
 export type CreateMembershipParams = z.infer<typeof createMembershipSchema>;

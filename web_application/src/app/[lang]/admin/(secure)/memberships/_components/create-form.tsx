@@ -53,16 +53,15 @@ export default function CreateForm({
     voluntaryContributionSettings,
 }: Props) {
     const { t } = useTranslation();
-    const [activeTab, setActiveTab] = useState('create');
-    const membershipDivisions = (
-        data as TMembershipDeserialized & {
-            divisions?: TDivisionDeserialized[];
-        }
-    )?.divisions;
+    const [isFamily, setIsFamily] = useState(false);
 
-    const [showDivisionField, setShowDivisionField] = useState(
-        !!(membershipDivisions && membershipDivisions.length > 0),
-    );
+    const [membersList, setMembersList] = useState([
+        {
+            id: 'initial-member-1',
+            mode: 'create',
+            showDivisionField: false,
+        },
+    ]);
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
@@ -84,6 +83,47 @@ export default function CreateForm({
         { value: 'other', label: t('general:gender.options.other') },
     ];
 
+    const addMember = () => {
+        setMembersList([
+            ...membersList,
+            {
+                id: Math.random().toString(36).substr(2, 9),
+                mode: 'create',
+                showDivisionField: false,
+            },
+        ]);
+    };
+
+    const updateMemberProperty = (index: number, key: string, value: any) => {
+        const updated = [...membersList];
+        (updated[index] as any)[key] = value;
+        setMembersList(updated);
+    };
+
+    const handleMembershipTypeChange = (selectedType: any) => {
+        const option = Array.isArray(selectedType)
+            ? selectedType[0]
+            : selectedType;
+        const typeName = (option?.label || option?.title || '').toLowerCase();
+        const familySelected =
+            typeName.includes('familie') || typeName.includes('family');
+
+        setIsFamily(familySelected);
+
+        if (familySelected && membersList.length < 2) {
+            setMembersList([
+                membersList[0],
+                {
+                    id: Math.random().toString(36).substr(2, 9),
+                    mode: 'create',
+                    showDivisionField: false,
+                },
+            ]);
+        } else if (!familySelected && membersList.length > 1) {
+            setMembersList([membersList[0]]);
+        }
+    };
+
     return (
         <div className="container flex flex-col gap-8">
             <ActionForm
@@ -93,7 +133,11 @@ export default function CreateForm({
                 translationKey="membership"
                 loading={false}
             >
-                <input type="hidden" name="activeTab" value={activeTab} />
+                <input
+                    type="hidden"
+                    name="activeTab"
+                    value={membersList[0].mode}
+                />
 
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
@@ -118,6 +162,7 @@ export default function CreateForm({
                                     })
                                 }
                                 optionLabel={(item) => item.title || item.id}
+                                onChange={handleMembershipTypeChange}
                                 required
                             />
                         </FormField>
@@ -176,403 +221,472 @@ export default function CreateForm({
                         {t('member:title.one')}
                     </span>
 
-                    <div className="rounded-2xl border p-8">
-                        <Tabs value={activeTab} onValueChange={setActiveTab}>
-                            <TabsList className="w-full">
-                                <TabsTrigger className="w-full" value="create">
-                                    {t('membership:create_new')}
-                                </TabsTrigger>
-                                <TabsTrigger className="w-full" value="select">
-                                    {t('membership:select')}
-                                </TabsTrigger>
-                            </TabsList>
+                    {membersList.map((member, index) => {
+                        if (!isFamily && index > 0) return null;
 
-                            <TabsContent value="create">
-                                <div className="flex flex-col justify-evenly gap-6 rounded-2xl">
-                                    <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
-                                        <div className="flex flex-col gap-1 pt-6">
-                                            <InputLabel
-                                                forInput="memberType"
-                                                value={t('member:type')}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                className="text-textPrimary"
-                                            />
-                                            <RadioGroup
-                                                id="memberType"
-                                                name="memberType"
-                                                className="flex w-full flex-row gap-3"
-                                                defaultValue="person"
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
+                        return (
+                            <div
+                                key={member.id}
+                                className={`mb-4 rounded-2xl bg-white ${isFamily ? 'border p-8' : ''}`}
+                            >
+                                {isFamily && (
+                                    <span className="mb-6 block text-lg leading-7 font-bold not-italic">
+                                        {t('member:title.one')} {index + 1}
+                                    </span>
+                                )}
+                                {index === 0 && (
+                                    <div className="py-3 pb-4">
+                                        <Text className="text-textSecondary text-sm">
+                                            {t('application:intro_owner')}
+                                        </Text>
+                                    </div>
+                                )}
+
+                                <input
+                                    type="hidden"
+                                    name={`members[${index}][mode]`}
+                                    value={member.mode}
+                                />
+
+                                <Tabs
+                                    value={member.mode}
+                                    onValueChange={(val) =>
+                                        updateMemberProperty(index, 'mode', val)
+                                    }
+                                >
+                                    <TabsList className="mb-6 w-full">
+                                        <TabsTrigger
+                                            className="w-full"
+                                            value="create"
+                                        >
+                                            {t('membership:create_new')}
+                                        </TabsTrigger>
+                                        <TabsTrigger
+                                            className="w-full"
+                                            value="select"
+                                        >
+                                            {t('membership:select')}
+                                        </TabsTrigger>
+                                    </TabsList>
+
+                                    <TabsContent value="create">
+                                        <div className="flex flex-col justify-evenly gap-6">
+                                            <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
+                                                <div className="flex flex-col gap-1">
+                                                    <InputLabel
+                                                        forInput={`memberType_${index}`}
+                                                        value={t('member:type')}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        className="text-textPrimary"
+                                                    />
+                                                    <RadioGroup
+                                                        id={`memberType_${index}`}
+                                                        name={`members[${index}][memberType]`}
+                                                        className="flex w-full flex-row gap-3"
+                                                        defaultValue="person"
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    >
+                                                        <RadioGroupItem
+                                                            className="w-full"
+                                                            value="person"
+                                                            icon={
+                                                                <IconUser className="text-textPrimary" />
+                                                            }
+                                                        >
+                                                            Person
+                                                        </RadioGroupItem>
+                                                        <RadioGroupItem
+                                                            className="w-full"
+                                                            value="company"
+                                                            icon={
+                                                                <IconBuilding className="text-textPrimary" />
+                                                            }
+                                                        >
+                                                            {t(
+                                                                'contact:company_name.label',
+                                                            )}
+                                                        </RadioGroupItem>
+                                                    </RadioGroup>
+                                                </div>
+                                            </div>
+
+                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.firstName`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`firstName_${index}`}
+                                                        name={`members[${index}][firstName]`}
+                                                        label={t(
+                                                            'contact:first_name.label',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.lastName`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`lastName_${index}`}
+                                                        name={`members[${index}][lastName]`}
+                                                        label={t(
+                                                            'contact:last_name.label',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                            </div>
+
+                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.birthday`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`birthday_${index}`}
+                                                        name={`members[${index}][birthday]`}
+                                                        type="date"
+                                                        label={t(
+                                                            'member:birthday.label',
+                                                        )}
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.gender`
+                                                        ]
+                                                    }
+                                                >
+                                                    <SelectInput
+                                                        id={`gender_${index}`}
+                                                        name={`members[${index}][gender]`}
+                                                        label={t(
+                                                            'general:gender.label',
+                                                        )}
+                                                        options={genderOptions}
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                            </div>
+
+                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.email`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`email_${index}`}
+                                                        name={`members[${index}][email]`}
+                                                        type="email"
+                                                        label={t(
+                                                            'general:email',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.phoneNumber`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`phoneNumber_${index}`}
+                                                        name={`members[${index}][phoneNumber]`}
+                                                        label={t(
+                                                            'member:phone_number.label',
+                                                        )}
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                            </div>
+
+                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.address`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`address_${index}`}
+                                                        name={`members[${index}][address]`}
+                                                        label={t(
+                                                            'member:address.label',
+                                                        )}
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.zipCode`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`zipCode_${index}`}
+                                                        name={`members[${index}][zipCode]`}
+                                                        label={t(
+                                                            'contact:zip_code.label',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                            </div>
+
+                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.city`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`city_${index}`}
+                                                        name={`members[${index}][city]`}
+                                                        label={t(
+                                                            'contact:city.label',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.country`
+                                                        ]
+                                                    }
+                                                >
+                                                    <TextInput
+                                                        id={`country_${index}`}
+                                                        name={`members[${index}][country]`}
+                                                        label={t(
+                                                            'contact:country.label',
+                                                        )}
+                                                        required={
+                                                            member.mode ===
+                                                            'create'
+                                                        }
+                                                        disabled={
+                                                            member.mode !==
+                                                            'create'
+                                                        }
+                                                    />
+                                                </FormField>
+                                            </div>
+
+                                            <FormField
+                                                errors={
+                                                    formState.errors?.[
+                                                        `members.${index}.hasConsentedMediaPublication`
+                                                    ]
                                                 }
                                             >
-                                                <RadioGroupItem
-                                                    className="w-full"
-                                                    value="person"
-                                                    icon={
-                                                        <IconUser className="text-textPrimary" />
+                                                <InputLabel
+                                                    forInput="hasConsentedMediaPublication"
+                                                    value={t(
+                                                        'member:consent_media_publication',
+                                                    )}
+                                                    className="text-textPrimary"
+                                                />
+                                                <Checkbox
+                                                    id={`hasConsentedMediaPublication_${index}`}
+                                                    name={`members[${index}][hasConsentedMediaPublication]`}
+                                                    label={t(
+                                                        'member:label_consent_media_publication',
+                                                    )}
+                                                    defaultValue={true}
+                                                    disabled={
+                                                        member.mode !== 'create'
+                                                    }
+                                                />
+                                            </FormField>
+
+                                            {!member.showDivisionField ? (
+                                                <div
+                                                    onClick={() =>
+                                                        updateMemberProperty(
+                                                            index,
+                                                            'showDivisionField',
+                                                            true,
+                                                        )
+                                                    }
+                                                    role="button"
+                                                    className="text-textLink hover:text-textHover flex cursor-pointer items-start gap-2 py-2 text-sm font-medium transition-all duration-200"
+                                                >
+                                                    <span className="flex shrink-0 items-center justify-center">
+                                                        <IconPlus />
+                                                    </span>
+                                                    <Text className="leading-[1em]">
+                                                        {t(
+                                                            'member:add_division',
+                                                        )}
+                                                    </Text>
+                                                </div>
+                                            ) : (
+                                                <FormField
+                                                    errors={
+                                                        formState.errors?.[
+                                                            `members.${index}.divisions`
+                                                        ]
                                                     }
                                                 >
-                                                    Person
-                                                </RadioGroupItem>
+                                                    <BelongsToMultiselectInput<TDivisionDeserialized>
+                                                        resourceName={`member_${index}_divisions`}
+                                                        resourceType="divisions"
+                                                        label={t(
+                                                            'division:title.other',
+                                                        )}
+                                                        action={(searchTerm) =>
+                                                            listDivisions({
+                                                                page: {
+                                                                    size: itemsPerQuery,
+                                                                    number: 1,
+                                                                },
+                                                                filter: {
+                                                                    query: searchTerm,
+                                                                },
+                                                            })
+                                                        }
+                                                        optionLabel={(item) =>
+                                                            item.title as string
+                                                        }
+                                                    />
+                                                </FormField>
+                                            )}
+                                        </div>
+                                    </TabsContent>
 
-                                                <RadioGroupItem
-                                                    className="w-full"
-                                                    value="firma"
-                                                    icon={
-                                                        <IconBuilding className="text-textPrimary" />
+                                    <TabsContent value="select">
+                                        <div className="flex flex-col gap-6 p-4">
+                                            <FormField
+                                                errors={
+                                                    formState.errors?.[
+                                                        `members.${index}.existingMemberId`
+                                                    ]
+                                                }
+                                            >
+                                                <BelongsToSelectInput<TMemberDeserialized>
+                                                    resourceName={`existingMember_${index}`}
+                                                    resourceType="members"
+                                                    label={t(
+                                                        'member:title.one',
+                                                    )}
+                                                    action={() =>
+                                                        listMembers({})
                                                     }
-                                                >
-                                                    Firma
-                                                </RadioGroupItem>
-                                            </RadioGroup>
+                                                    optionLabel={(item) => {
+                                                        const member =
+                                                            item as TMemberDeserialized & {
+                                                                id?: string;
+                                                                fullName?: string;
+                                                            };
+                                                        return (
+                                                            member.fullName ||
+                                                            `${member.firstName ?? ''} ${member.lastName ?? ''}`.trim() ||
+                                                            member.id ||
+                                                            ''
+                                                        );
+                                                    }}
+                                                    required={
+                                                        member.mode === 'select'
+                                                    }
+                                                />
+                                            </FormField>
                                         </div>
-                                    </div>
+                                    </TabsContent>
+                                </Tabs>
+                            </div>
+                        );
+                    })}
 
-                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                        <FormField
-                                            errors={formState.errors?.firstName}
-                                        >
-                                            <TextInput
-                                                id="firstName"
-                                                name="firstName"
-                                                label={t(
-                                                    'contact:first_name.label',
-                                                )}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-
-                                        <FormField
-                                            errors={formState.errors?.lastName}
-                                        >
-                                            <TextInput
-                                                id="lastName"
-                                                name="lastName"
-                                                label={t(
-                                                    'contact:last_name.label',
-                                                )}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-                                    </div>
-
-                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                        <FormField
-                                            errors={formState.errors?.birthday}
-                                        >
-                                            <TextInput
-                                                id="birthday"
-                                                name="birthday"
-                                                type="date"
-                                                label={t(
-                                                    'member:birthday.label',
-                                                )}
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-
-                                        <FormField
-                                            errors={formState.errors?.gender}
-                                        >
-                                            <SelectInput
-                                                id="gender"
-                                                name="gender"
-                                                label={t(
-                                                    'general:gender.label',
-                                                )}
-                                                options={genderOptions}
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-                                    </div>
-
-                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                        <FormField
-                                            errors={formState.errors?.email}
-                                        >
-                                            <TextInput
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                label={t('general:email')}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-
-                                        <FormField
-                                            errors={
-                                                formState.errors?.phoneNumber
-                                            }
-                                        >
-                                            <TextInput
-                                                id="phoneNumber"
-                                                name="phoneNumber"
-                                                label={t(
-                                                    'member:phone_number.label',
-                                                )}
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-                                    </div>
-
-                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                        <FormField
-                                            errors={formState.errors?.address}
-                                        >
-                                            <TextInput
-                                                id="address"
-                                                name="address"
-                                                label={t(
-                                                    'member:address.label',
-                                                )}
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-
-                                        <FormField
-                                            errors={formState.errors?.zipCode}
-                                        >
-                                            <TextInput
-                                                id="zipCode"
-                                                name="zipCode"
-                                                label={t(
-                                                    'contact:zip_code.label',
-                                                )}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-                                    </div>
-
-                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                        <FormField
-                                            errors={formState.errors?.city}
-                                        >
-                                            <TextInput
-                                                id="city"
-                                                name="city"
-                                                label={t('contact:city.label')}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-
-                                        <FormField
-                                            errors={formState.errors?.country}
-                                        >
-                                            <TextInput
-                                                id="country"
-                                                name="country"
-                                                label={t(
-                                                    'contact:country.label',
-                                                )}
-                                                required={
-                                                    activeTab === 'create'
-                                                }
-                                                disabled={
-                                                    activeTab !== 'create'
-                                                }
-                                            />
-                                        </FormField>
-                                    </div>
-
-                                    <FormField
-                                        errors={
-                                            formState.errors
-                                                ?.hasConsentedMediaPublication
-                                        }
-                                    >
-                                        <InputLabel
-                                            forInput="hasConsentedMediaPublication"
-                                            value={t(
-                                                'member:consent_media_publication',
-                                            )}
-                                            className="text-textPrimary"
-                                        />
-                                        <Checkbox
-                                            id="hasConsentedMediaPublication"
-                                            name="hasConsentedMediaPublication"
-                                            label={t(
-                                                'member:label_consent_media_publication',
-                                            )}
-                                            defaultValue={true}
-                                            disabled={activeTab !== 'create'}
-                                        />
-                                    </FormField>
-
-                                    {!showDivisionField ? (
-                                        <div
-                                            onClick={() =>
-                                                setShowDivisionField(true)
-                                            }
-                                            role="button"
-                                            className="text-textLink hover:text-textHover flex cursor-pointer items-start gap-2 px-3 py-2 text-sm font-medium transition-all duration-200"
-                                        >
-                                            <span className="flex shrink-0 items-center justify-center">
-                                                <IconPlus />
-                                            </span>
-                                            <Text className="leading-[1em]">
-                                                {t('member:add_division')}
-                                            </Text>
-                                        </div>
-                                    ) : (
-                                        <FormField
-                                            errors={formState.errors?.divisions}
-                                        >
-                                            <BelongsToMultiselectInput<TDivisionDeserialized>
-                                                resourceName="divisions"
-                                                resourceType="divisions"
-                                                label={t(
-                                                    'division:title.other',
-                                                )}
-                                                action={(searchTerm) =>
-                                                    listDivisions({
-                                                        page: {
-                                                            size: itemsPerQuery,
-                                                            number: 1,
-                                                        },
-                                                        filter: {
-                                                            query: searchTerm,
-                                                        },
-                                                    })
-                                                }
-                                                optionLabel={(item) =>
-                                                    item.title as string
-                                                }
-                                                defaultValue={
-                                                    membershipDivisions
-                                                        ? membershipDivisions.map(
-                                                              (division) => ({
-                                                                  value: division.id,
-                                                                  label: division.title as string,
-                                                              }),
-                                                          )
-                                                        : []
-                                                }
-                                            />
-                                        </FormField>
-                                    )}
-
-                                    <hr />
-                                    <FormField
-                                        errors={formState.errors?.isPayer}
-                                    >
-                                        <Checkbox
-                                            id="isPayer"
-                                            name="isPayer"
-                                            label={t(
-                                                'member:member_as_billing_contact',
-                                            )}
-                                            defaultValue={true}
-                                            disabled={activeTab !== 'create'}
-                                        />
-                                    </FormField>
-                                </div>
-                            </TabsContent>
-
-                            <TabsContent value="select">
-                                <div className="flex flex-col gap-6 p-8">
-                                    <FormField
-                                        errors={
-                                            formState.errors?.owner
-                                                ? [
-                                                      t(
-                                                          'membership:validation.owner_required',
-                                                      ),
-                                                  ]
-                                                : undefined
-                                        }
-                                    >
-                                        <BelongsToSelectInput<TMemberDeserialized>
-                                            resourceName="owner"
-                                            resourceType="members"
-                                            label={t('membership:owner.label')}
-                                            action={() =>
-                                                listMembers({
-                                                    page: {
-                                                        size: itemsPerQuery,
-                                                        number: 1,
-                                                    },
-                                                })
-                                            }
-                                            optionLabel={(item) => {
-                                                const owner =
-                                                    item as TMemberDeserialized & {
-                                                        id?: string;
-                                                        fullName?: string;
-                                                    };
-
-                                                return (
-                                                    owner.fullName ||
-                                                    `${owner.firstName ?? ''} ${owner.lastName ?? ''}`.trim() ||
-                                                    owner.id ||
-                                                    ''
-                                                );
-                                            }}
-                                            defaultValue={(() => {
-                                                const owner = data?.owner as
-                                                    | (TMemberDeserialized & {
-                                                          id?: string;
-                                                          fullName?: string;
-                                                      })
-                                                    | undefined;
-
-                                                return owner?.id
-                                                    ? [
-                                                          {
-                                                              value: owner.id,
-                                                              label:
-                                                                  owner.fullName ||
-                                                                  `${owner.firstName ?? ''} ${owner.lastName ?? ''}`.trim() ||
-                                                                  owner.id,
-                                                          },
-                                                      ]
-                                                    : [];
-                                            })()}
-                                            required={activeTab === 'select'}
-                                        />
-                                    </FormField>
-                                </div>
-                            </TabsContent>
-                        </Tabs>
-                    </div>
+                    {isFamily && (
+                        <div
+                            onClick={addMember}
+                            role="button"
+                            className="text-textLink hover:text-textHover flex cursor-pointer items-center gap-2 px-2 py-4 text-base font-bold transition-all duration-200"
+                        >
+                            <span className="flex shrink-0 items-center justify-center">
+                                <IconPlus />
+                            </span>
+                            <Text className="leading-[1em]">
+                                {t('membership:add_another_member')}
+                            </Text>
+                        </div>
+                    )}
                 </div>
 
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
@@ -588,6 +702,7 @@ export default function CreateForm({
                                 label={t('payment_period:title.one')}
                                 options={paymentPeriodOptions}
                                 defaultValue={data?.paymentPeriod?.id ?? ''}
+                                required
                             />
                         </FormField>
                     </div>
@@ -602,7 +717,6 @@ export default function CreateForm({
                                 required
                             />
                         </FormField>
-
                         <FormField errors={formState.errors?.bankAccountHolder}>
                             <TextInput
                                 id="bankAccountHolder"
