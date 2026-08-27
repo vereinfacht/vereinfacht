@@ -60,6 +60,7 @@ export default function CreateForm({
             id: 'initial-member-1',
             mode: 'create',
             showDivisionField: false,
+            useSameAddressAsMember1: false,
         },
     ]);
 
@@ -90,13 +91,14 @@ export default function CreateForm({
                 id: Math.random().toString(36).substr(2, 9),
                 mode: 'create',
                 showDivisionField: false,
+                useSameAddressAsMember1: false,
             },
         ]);
     };
 
     const updateMemberProperty = (index: number, key: string, value: any) => {
         const updated = [...membersList];
-        (updated[index] as any)[key] = value;
+        updated[index] = { ...updated[index], [key]: value };
         setMembersList(updated);
     };
 
@@ -117,6 +119,7 @@ export default function CreateForm({
                     id: Math.random().toString(36).substr(2, 9),
                     mode: 'create',
                     showDivisionField: false,
+                    useSameAddressAsMember1: false,
                 },
             ]);
         } else if (!familySelected && membersList.length > 1) {
@@ -133,12 +136,6 @@ export default function CreateForm({
                 translationKey="membership"
                 loading={false}
             >
-                <input
-                    type="hidden"
-                    name="activeTab"
-                    value={membersList[0].mode}
-                />
-
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('membership:title.one')}
@@ -247,6 +244,15 @@ export default function CreateForm({
                                     name={`members[${index}][mode]`}
                                     value={member.mode}
                                 />
+                                <input
+                                    type="hidden"
+                                    name={`members[${index}][useSameAddressAsMember1]`}
+                                    value={
+                                        member.useSameAddressAsMember1
+                                            ? 'true'
+                                            : 'false'
+                                    }
+                                />
 
                                 <Tabs
                                     value={member.mode}
@@ -272,7 +278,7 @@ export default function CreateForm({
                                     <TabsContent value="create">
                                         <div className="flex flex-col justify-evenly gap-6">
                                             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
-                                                <div className="flex flex-col gap-1">
+                                                <div className="flex flex-col gap-1 pt-6">
                                                     <InputLabel
                                                         forInput={`memberType_${index}`}
                                                         value={t('member:type')}
@@ -286,7 +292,9 @@ export default function CreateForm({
                                                         id={`memberType_${index}`}
                                                         name={`members[${index}][memberType]`}
                                                         className="flex w-full flex-row gap-3"
-                                                        defaultValue="person"
+                                                        defaultValue={t(
+                                                            'member:person',
+                                                        )}
                                                         disabled={
                                                             member.mode !==
                                                             'create'
@@ -299,7 +307,7 @@ export default function CreateForm({
                                                                 <IconUser className="text-textPrimary" />
                                                             }
                                                         >
-                                                            Person
+                                                            {t('member:person')}
                                                         </RadioGroupItem>
                                                         <RadioGroupItem
                                                             className="w-full"
@@ -454,99 +462,160 @@ export default function CreateForm({
                                                 </FormField>
                                             </div>
 
-                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                            {isFamily && index > 0 && (
                                                 <FormField
                                                     errors={
                                                         formState.errors?.[
-                                                            `members.${index}.address`
+                                                            `members.${index}.useSameAddressAsMember1`
                                                         ]
                                                     }
                                                 >
-                                                    <TextInput
-                                                        id={`address_${index}`}
-                                                        name={`members[${index}][address]`}
+                                                    <Checkbox
+                                                        id={`useSameAddress_${index}`}
+                                                        name={`members[${index}][useSameAddressAsMember1]`}
                                                         label={t(
-                                                            'member:address.label',
+                                                            'member:label_identical_information',
+                                                            {
+                                                                name: `${t('member:title.one')} 1`,
+                                                            },
                                                         )}
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.zipCode`
-                                                        ]
-                                                    }
-                                                >
-                                                    <TextInput
-                                                        id={`zipCode_${index}`}
-                                                        name={`members[${index}][zipCode]`}
-                                                        label={t(
-                                                            'contact:zip_code.label',
-                                                        )}
-                                                        required={
-                                                            member.mode ===
-                                                            'create'
-                                                        }
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                            </div>
 
-                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.city`
-                                                        ]
-                                                    }
-                                                >
-                                                    <TextInput
-                                                        id={`city_${index}`}
-                                                        name={`members[${index}][city]`}
-                                                        label={t(
-                                                            'contact:city.label',
-                                                        )}
-                                                        required={
-                                                            member.mode ===
-                                                            'create'
+                                                        defaultValue={
+                                                            member.useSameAddressAsMember1
                                                         }
+
+                                                        handleChange={(e) => {
+                                                            setMembersList(
+                                                                (prev) => {
+                                                                    const updated =
+                                                                        [
+                                                                            ...prev,
+                                                                        ];
+                                                                    updated[
+                                                                        index
+                                                                    ] = {
+                                                                        ...updated[
+                                                                            index
+                                                                        ],
+                                                                        useSameAddressAsMember1:
+                                                                            e
+                                                                                .target
+                                                                                .checked,
+                                                                    };
+                                                                    return updated;
+                                                                },
+                                                            );
+                                                        }}
+
                                                         disabled={
                                                             member.mode !==
                                                             'create'
                                                         }
                                                     />
                                                 </FormField>
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.country`
-                                                        ]
-                                                    }
-                                                >
-                                                    <TextInput
-                                                        id={`country_${index}`}
-                                                        name={`members[${index}][country]`}
-                                                        label={t(
-                                                            'contact:country.label',
-                                                        )}
-                                                        required={
-                                                            member.mode ===
-                                                            'create'
-                                                        }
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                            </div>
+                                            )}
+
+                                            {!member.useSameAddressAsMember1 && (
+                                                <>
+                                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.address`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`address_${index}`}
+                                                                name={`members[${index}][address]`}
+                                                                label={t(
+                                                                    'member:address.label',
+                                                                )}
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.zipCode`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`zipCode_${index}`}
+                                                                name={`members[${index}][zipCode]`}
+                                                                label={t(
+                                                                    'contact:zip_code.label',
+                                                                )}
+                                                                required={
+                                                                    member.mode ===
+                                                                    'create'
+                                                                }
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                    </div>
+
+                                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.city`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`city_${index}`}
+                                                                name={`members[${index}][city]`}
+                                                                label={t(
+                                                                    'contact:city.label',
+                                                                )}
+                                                                required={
+                                                                    member.mode ===
+                                                                    'create'
+                                                                }
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.country`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`country_${index}`}
+                                                                name={`members[${index}][country]`}
+                                                                label={t(
+                                                                    'contact:country.label',
+                                                                )}
+                                                                required={
+                                                                    member.mode ===
+                                                                    'create'
+                                                                }
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                    </div>
+                                                </>
+                                            )}
 
                                             <FormField
                                                 errors={

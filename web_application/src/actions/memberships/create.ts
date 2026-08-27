@@ -137,6 +137,11 @@ export async function createMembershipFormAction(
                 city: formData.get(`members[${i}][city]`),
                 country: formData.get(`members[${i}][country]`),
                 divisions: divisionsIds,
+                useSameAddressAsMember1:
+                    formData.get(`members[${i}][useSameAddressAsMember1]`) ===
+                        'true' ||
+                    formData.get(`members[${i}][useSameAddressAsMember1]`) ===
+                        'on',
                 hasConsentedMediaPublication:
                     formData.get(
                         `members[${i}][hasConsentedMediaPublication]`,
@@ -217,6 +222,17 @@ export async function createMembershipFormAction(
                 let finalZip = memberData.zipCode;
                 let finalCity = memberData.city;
                 let finalCountry = memberData.country;
+
+                if (
+                    j > 0 &&
+                    memberData.useSameAddressAsMember1 &&
+                    membersList[0]
+                ) {
+                    finalAddress = membersList[0].address;
+                    finalZip = membersList[0].zipCode;
+                    finalCity = membersList[0].city;
+                    finalCountry = membersList[0].country;
+                }
 
                 const memberPayload = {
                     data: {

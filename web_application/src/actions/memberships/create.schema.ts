@@ -73,6 +73,7 @@ export const membershipRelationshipsSchema = z.object({
 export const uiMemberFields = z.object({
     mode: z.enum(['create', 'select']).default('create'),
     existingMemberId: z.string().optional(),
+    useSameAddressAsMember1: z.boolean().optional().default(false),
     divisions: z.array(z.string()).optional(),
 });
 

@@ -54,5 +54,6 @@
     "edit": "Mitglied bearbeiten",
     "add_division": "Sparte hinzufügen",
     "member_as_billing_contact": "Dieses Mitglied auch als Zahler*in festlegen",
-    "type": "Typ"
+    "type": "Typ",
+    "person": "Person"
 }
