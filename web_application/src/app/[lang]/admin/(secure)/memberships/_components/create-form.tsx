@@ -106,9 +106,22 @@ export default function CreateForm({
         const option = Array.isArray(selectedType)
             ? selectedType[0]
             : selectedType;
-        const typeName = (option?.label || option?.title || '').toLowerCase();
+
+        let membershipTypeName = '';
+
+        if (typeof option?.label === 'string') {
+            membershipTypeName = option.label;
+        } else if (option?.title) {
+            membershipTypeName = option.title;
+        } else if (option?.label?.props?.children?.[0]?.props?.children) {
+            membershipTypeName = option.label.props.children[0].props.children;
+        }
+
+        const normalizedTypeName = String(membershipTypeName).toLowerCase();
+
         const familySelected =
-            typeName.includes('familie') || typeName.includes('family');
+            normalizedTypeName.includes('familie') ||
+            normalizedTypeName.includes('family');
 
         setIsFamily(familySelected);
 
@@ -158,7 +171,16 @@ export default function CreateForm({
                                         },
                                     })
                                 }
-                                optionLabel={(item) => item.title || item.id}
+                                optionLabel={(item) => (
+                                    <div className="flex w-full items-center justify-between">
+                                        <span className="pr-1">
+                                            {item.title || item.id}
+                                        </span>
+                                        <span className="bg-bgSolidSubtle text-textSecondary rounded-md px-1 py-0.5 text-sm font-normal">
+                                            {item.monthlyFee ?? 0}€
+                                        </span>
+                                    </div>
+                                )}
                                 onChange={handleMembershipTypeChange}
                                 required
                             />
@@ -292,9 +314,7 @@ export default function CreateForm({
                                                         id={`memberType_${index}`}
                                                         name={`members[${index}][memberType]`}
                                                         className="flex w-full flex-row gap-3"
-                                                        defaultValue={t(
-                                                            'member:person',
-                                                        )}
+                                                        defaultValue="person"
                                                         disabled={
                                                             member.mode !==
                                                             'create'
