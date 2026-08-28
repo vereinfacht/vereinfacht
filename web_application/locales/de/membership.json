@@ -70,5 +70,8 @@
     "current": "aktuell",
     "payment_information": "Zahlungsinformationen",
     "choose_member_error": "Bitte wählen Sie ein Mitglied",
-    "add_another_member": "Weiteres Mitglied hinzufügen"
+    "add_another_member": "Weiteres Mitglied hinzufügen",
+    "no_membership_types_title": "Noch keine Mitgliedschaftsarten angelegt",
+    "no_membership_types_description": "Ohne Mitgliedschaftsart lässt sich keine Mitgliedschaft anlegen. Lege zuerst in den Vereinseinstellungen eine Art an.",
+    "go_to_membership_types": "Zu den Mitgliedschaftsarten"
 }

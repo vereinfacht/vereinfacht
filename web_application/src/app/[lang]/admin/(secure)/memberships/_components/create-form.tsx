@@ -28,10 +28,11 @@ import {
 } from '@/types/resources';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormState } from 'react-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Text from '@/app/components/Text/Text';
 import IconPlus from '/public/svg/plus_new.svg';
 import IconUser from '/public/svg/user.svg';
+import IconLink from '/public/svg/link_external.svg';
 import IconBuilding from '/public/svg/building.svg';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import InputLabel from '@/app/components/Input/InputLabel';
@@ -54,6 +55,8 @@ export default function CreateForm({
 }: Props) {
     const { t } = useTranslation();
     const [isFamily, setIsFamily] = useState(false);
+    const [maxMembers, setMaxMembers] = useState<number | null>(null);
+    const [rawMembershipTypes, setRawMembershipTypes] = useState<any[]>([]);
 
     const [membersList, setMembersList] = useState([
         {
@@ -107,6 +110,17 @@ export default function CreateForm({
             ? selectedType[0]
             : selectedType;
 
+        if (option?.value === 'empty-placeholder') return;
+
+        const dbRecord = rawMembershipTypes.find((t) => t.id === option.value);
+
+        const maxLimit =
+            dbRecord?.attributes?.maximumNumberOfMembers ??
+            dbRecord?.maximumNumberOfMembers ??
+            null;
+
+        setMaxMembers(maxLimit);
+
         let membershipTypeName = '';
 
         if (typeof option?.label === 'string') {
@@ -140,6 +154,88 @@ export default function CreateForm({
         }
     };
 
+    const fetchMembershipTypesAction = useCallback(
+        async (searchTerm: string) => {
+            const response = await listMembershipTypes({
+                page: { size: itemsPerQuery, number: 1 },
+                filter: { query: searchTerm },
+            });
+
+            const items = response?.data || response || [];
+
+            setRawMembershipTypes((prev) => {
+                const prevIds = prev.map((p: any) => p.id).join(',');
+                const newIds = items.map((i: any) => i.id).join(',');
+                return prevIds === newIds ? prev : items;
+            });
+
+            if (!items || items.length === 0) {
+                return {
+                    ...response,
+                    data: [
+                        {
+                            id: 'empty-placeholder',
+                            type: 'membership-types',
+                            attributes: { title: 'EMPTY_STATE' },
+                        },
+                    ],
+                };
+            }
+
+            return response;
+        },
+        [],
+    );
+
+    const renderMembershipTypeOption = useCallback(
+        (item: any) => {
+            if (
+                item.id === 'empty-placeholder' ||
+                item.title === 'EMPTY_STATE'
+            ) {
+                return (
+                    <div
+                        className="flex cursor-default flex-col items-start p-2 text-left whitespace-normal"
+                        onPointerDown={(e) => e.stopPropagation()}
+                        onPointerUp={(e) => e.stopPropagation()}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <span className="text-textPrimary mb-1 text-base font-bold">
+                            {t('membership:no_membership_types_title')}
+                        </span>
+                        <span className="text-textSecondary mb-3 text-sm font-normal">
+                            {t('membership:no_membership_types_description')}
+                        </span>
+                        <a
+                            href="/admin/settings/membership-types"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-textLink hover:cursor flex items-center gap-1 text-sm font-medium hover:underline"
+                        >
+                            {t('membership:go_to_membership_types')}
+                            <IconLink className="h-4 w-4 fill-current" />
+                        </a>
+                    </div>
+                );
+            }
+
+            const itemPrice =
+                item.price ?? item.amount ?? item.monthlyFee ?? item.fee;
+
+            return (
+                <div className="flex w-full items-center justify-between">
+                    <span className="pr-1">{item.title}</span>
+                    {itemPrice !== undefined && itemPrice !== null && (
+                        <span className="bg-bgSolidSubtle text-textSecondary rounded-md px-1 py-0.5 text-sm font-medium">
+                            {itemPrice}€
+                        </span>
+                    )}
+                </div>
+            );
+        },
+        [t],
+    );
+
     return (
         <div className="container flex flex-col gap-8">
             <ActionForm
@@ -160,27 +256,8 @@ export default function CreateForm({
                                 resourceName="membershipType"
                                 resourceType="membership-types"
                                 label={t('membership_type:title.one')}
-                                action={(searchTerm) =>
-                                    listMembershipTypes({
-                                        page: {
-                                            size: itemsPerQuery,
-                                            number: 1,
-                                        },
-                                        filter: {
-                                            query: searchTerm,
-                                        },
-                                    })
-                                }
-                                optionLabel={(item) => (
-                                    <div className="flex w-full items-center justify-between">
-                                        <span className="pr-1">
-                                            {item.title || item.id}
-                                        </span>
-                                        <span className="bg-bgSolidSubtle text-textSecondary rounded-md px-1 py-0.5 text-sm font-normal">
-                                            {item.monthlyFee ?? 0}€
-                                        </span>
-                                    </div>
-                                )}
+                                action={fetchMembershipTypesAction}
+                                optionLabel={renderMembershipTypeOption}
                                 onChange={handleMembershipTypeChange}
                                 required
                             />
@@ -499,11 +576,9 @@ export default function CreateForm({
                                                                 name: `${t('member:title.one')} 1`,
                                                             },
                                                         )}
-
                                                         defaultValue={
                                                             member.useSameAddressAsMember1
                                                         }
-
                                                         handleChange={(e) => {
                                                             setMembersList(
                                                                 (prev) => {
@@ -526,7 +601,6 @@ export default function CreateForm({
                                                                 },
                                                             );
                                                         }}
-
                                                         disabled={
                                                             member.mode !==
                                                             'create'
@@ -762,20 +836,22 @@ export default function CreateForm({
                         );
                     })}
 
-                    {isFamily && (
-                        <div
-                            onClick={addMember}
-                            role="button"
-                            className="text-textLink hover:text-textHover flex cursor-pointer items-center gap-2 px-2 py-4 text-base font-bold transition-all duration-200"
-                        >
-                            <span className="flex shrink-0 items-center justify-center">
-                                <IconPlus />
-                            </span>
-                            <Text className="leading-[1em]">
-                                {t('membership:add_another_member')}
-                            </Text>
-                        </div>
-                    )}
+                    {isFamily &&
+                        (maxMembers === null ||
+                            membersList.length < maxMembers) && (
+                            <div
+                                onClick={addMember}
+                                role="button"
+                                className="text-textLink hover:text-textHover flex cursor-pointer items-center gap-2 px-2 py-4 text-base font-bold transition-all duration-200"
+                            >
+                                <span className="flex shrink-0 items-center justify-center">
+                                    <IconPlus />
+                                </span>
+                                <Text className="leading-[1em]">
+                                    {t('membership:add_another_member')}
+                                </Text>
+                            </div>
+                        )}
                 </div>
 
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
