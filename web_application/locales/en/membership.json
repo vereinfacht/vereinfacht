@@ -74,5 +74,6 @@
     "add_another_member": "Add another member",
     "no_membership_types_title": "No membership types created yet",
     "no_membership_types_description": "Without a membership type, no membership can be created. Please create a type in the club settings first.",
-    "go_to_membership_types": "Go to membership types"
+    "go_to_membership_types": "Go to membership types",
+    "remove": "Remove"
 }

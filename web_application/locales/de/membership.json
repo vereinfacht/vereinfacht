@@ -73,5 +73,6 @@
     "add_another_member": "Weiteres Mitglied hinzufügen",
     "no_membership_types_title": "Noch keine Mitgliedschaftsarten angelegt",
     "no_membership_types_description": "Ohne Mitgliedschaftsart lässt sich keine Mitgliedschaft anlegen. Lege zuerst in den Vereinseinstellungen eine Art an.",
-    "go_to_membership_types": "Zu den Mitgliedschaftsarten"
+    "go_to_membership_types": "Zu den Mitgliedschaftsarten",
+    "remove": "Entfernen"
 }

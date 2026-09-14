@@ -33,6 +33,7 @@ import Text from '@/app/components/Text/Text';
 import IconPlus from '/public/svg/plus_new.svg';
 import IconUser from '/public/svg/user.svg';
 import IconLink from '/public/svg/link_external.svg';
+import IconBin from '/public/svg/bin.svg';
 import IconBuilding from '/public/svg/building.svg';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import InputLabel from '@/app/components/Input/InputLabel';
@@ -236,6 +237,14 @@ export default function CreateForm({
         [t],
     );
 
+    const handleRemoveClick = (memberToRemove: number) => {
+        const updatedList = membersList.filter(
+            (_, index) => index !== memberToRemove,
+        );
+
+        setMembersList(updatedList);
+    };
+
     return (
         <div className="container flex flex-col gap-8">
             <ActionForm
@@ -250,7 +259,7 @@ export default function CreateForm({
                         {t('membership:title.one')}
                     </span>
 
-                    <div className="grid gap-x-8 gap-y-4 pt-6 lg:grid-cols-2">
+                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                         <FormField errors={formState.errors?.membershipType}>
                             <BelongsToSelectInput<TMembershipTypeDeserialized>
                                 resourceName="membershipType"
@@ -323,15 +332,33 @@ export default function CreateForm({
                         return (
                             <div
                                 key={member.id}
-                                className={`mb-4 rounded-2xl bg-white ${isFamily ? 'border p-8' : ''}`}
+                                className={`rounded-2xl bg-white ${isFamily ? 'border p-6' : ''}`}
                             >
                                 {isFamily && (
-                                    <span className="mb-6 block text-lg leading-7 font-bold not-italic">
-                                        {t('member:title.one')} {index + 1}
-                                    </span>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-textPrimary mb-6 text-lg leading-7 font-bold not-italic">
+                                            {t('member:title.one')} {index + 1}
+                                        </span>
+
+                                        {index > 0 && (
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleRemoveClick(index)
+                                                }
+                                                className="text-textError flex items-center px-3 py-2 text-sm font-medium transition-colors hover:cursor-pointer"
+                                            >
+                                                <IconBin className="" />
+                                                <span className="p-2">
+                                                    {t('membership:remove')}
+                                                </span>
+                                            </button>
+                                        )}
+                                    </div>
                                 )}
+
                                 {index === 0 && (
-                                    <div className="py-3 pb-4">
+                                    <div>
                                         <Text className="text-textSecondary text-sm">
                                             {t('application:intro_owner')}
                                         </Text>
@@ -359,7 +386,7 @@ export default function CreateForm({
                                         updateMemberProperty(index, 'mode', val)
                                     }
                                 >
-                                    <TabsList className="mb-6 w-full">
+                                    <TabsList className="my-5 w-full">
                                         <TabsTrigger
                                             className="w-full"
                                             value="create"
@@ -377,7 +404,7 @@ export default function CreateForm({
                                     <TabsContent value="create">
                                         <div className="flex flex-col justify-evenly gap-6">
                                             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
-                                                <div className="flex flex-col gap-1 pt-6">
+                                                <div className="flex flex-col gap-1">
                                                     <InputLabel
                                                         forInput={`memberType_${index}`}
                                                         value={t('member:type')}
