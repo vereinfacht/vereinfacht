@@ -37,6 +37,15 @@ import IconBin from '/public/svg/bin.svg';
 import IconBuilding from '/public/svg/building.svg';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import InputLabel from '@/app/components/Input/InputLabel';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
 
 interface Props {
     action: (
@@ -57,6 +66,7 @@ export default function CreateForm({
     const { t } = useTranslation();
     const [isFamily, setIsFamily] = useState(false);
     const [maxMembers, setMaxMembers] = useState<number | null>(null);
+    const [minMembers, setMinMembers] = useState<number>(1);
     const [rawMembershipTypes, setRawMembershipTypes] = useState<any[]>([]);
 
     const [membersList, setMembersList] = useState([
@@ -67,6 +77,10 @@ export default function CreateForm({
             useSameAddressAsMember1: false,
         },
     ]);
+
+    const [memberToRemoveIndex, setMemberToRemoveIndex] = useState<
+        number | null
+    >(null);
 
     const [formState, formAction] = useFormState<FormActionState, FormData>(
         action,
@@ -120,6 +134,12 @@ export default function CreateForm({
             dbRecord?.maximumNumberOfMembers ??
             null;
 
+        const minLimit =
+            dbRecord?.attributes?.minimumNumberOfMembers ??
+            dbRecord?.minimumNumberOfMembers ??
+            1;
+
+        setMinMembers(minLimit);
         setMaxMembers(maxLimit);
 
         let membershipTypeName = '';
@@ -237,6 +257,24 @@ export default function CreateForm({
         [t],
     );
 
+    const isMemberCardEmpty = (index: number) => {
+        const card = document.getElementById(`member-card-${index}`);
+        if (!card) return true;
+
+        const inputs = card.querySelectorAll(
+            'input:not([type="hidden"]):not([type="radio"]):not([type="checkbox"])',
+        );
+
+        for (let i = 0; i < inputs.length; i++) {
+            const el = inputs[i] as HTMLInputElement;
+            if (el.value && el.value.trim() !== '') {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
     const handleRemoveClick = (memberToRemove: number) => {
         const updatedList = membersList.filter(
             (_, index) => index !== memberToRemove,
@@ -332,6 +370,7 @@ export default function CreateForm({
                         return (
                             <div
                                 key={member.id}
+                                id={`member-card-${index}`}
                                 className={`rounded-2xl bg-white ${isFamily ? 'border p-6' : ''}`}
                             >
                                 {isFamily && (
@@ -340,20 +379,33 @@ export default function CreateForm({
                                             {t('member:title.one')} {index + 1}
                                         </span>
 
-                                        {index > 0 && (
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    handleRemoveClick(index)
-                                                }
-                                                className="text-textError flex items-center px-3 py-2 text-sm font-medium transition-colors hover:cursor-pointer"
-                                            >
-                                                <IconBin className="" />
-                                                <span className="p-2">
-                                                    {t('membership:remove')}
-                                                </span>
-                                            </button>
-                                        )}
+                                        {index > 0 &&
+                                            membersList.length > minMembers && (
+                                                <Button
+                                                    type="button"
+                                                    variant="tertiaryDanger"
+                                                    onClick={() => {
+                                                        if (
+                                                            isMemberCardEmpty(
+                                                                index,
+                                                            )
+                                                        ) {
+                                                            handleRemoveClick(
+                                                                index,
+                                                            );
+                                                        } else {
+                                                            setMemberToRemoveIndex(
+                                                                index,
+                                                            );
+                                                        }
+                                                    }}
+                                                    leftIcon={<IconBin />}
+                                                >
+                                                    {t(
+                                                        'membership:remove_member.remove',
+                                                    )}
+                                                </Button>
+                                            )}
                                     </div>
                                 )}
 
@@ -953,6 +1005,45 @@ export default function CreateForm({
                         </FormField>
                     </div>
                 </div>
+
+                <Dialog
+                    open={memberToRemoveIndex !== null}
+                    onOpenChange={(isOpen) => {
+                        if (!isOpen) setMemberToRemoveIndex(null);
+                    }}
+                >
+                    <DialogContent className="bg-bgSurfaceGlassStrong shadow-dialoge backdrop-blur-topbar rounded-2xl p-6 sm:max-w-lg sm:rounded-2xl">
+                        <DialogHeader className="flex gap-2">
+                            <DialogTitle className="text-textPrimary text-lg font-bold">
+                                {t('membership:remove_member.title')}
+                            </DialogTitle>
+                            <DialogDescription className="text-textPrimary text-base font-normal">
+                                {t('membership:remove_member.description')}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className="flex gap-2 sm:justify-end">
+                            <Button
+                                type="button"
+                                variant="tertiaryGray"
+                                onClick={() => setMemberToRemoveIndex(null)}
+                            >
+                                {t('membership:remove_member.cancel')}
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="primaryDanger"
+                                onClick={() => {
+                                    if (memberToRemoveIndex !== null) {
+                                        handleRemoveClick(memberToRemoveIndex);
+                                        setMemberToRemoveIndex(null);
+                                    }
+                                }}
+                            >
+                                {t('membership:remove_member.remove')}
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </ActionForm>
         </div>
     );

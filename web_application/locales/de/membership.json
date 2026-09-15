@@ -74,5 +74,10 @@
     "no_membership_types_title": "Noch keine Mitgliedschaftsarten angelegt",
     "no_membership_types_description": "Ohne Mitgliedschaftsart lässt sich keine Mitgliedschaft anlegen. Lege zuerst in den Vereinseinstellungen eine Art an.",
     "go_to_membership_types": "Zu den Mitgliedschaftsarten",
-    "remove": "Entfernen"
+    "remove_member": {
+        "title": "Mitglied entfernen?",
+        "description": "Alle Angaben zu diesem Mitglied gehen verloren.",
+        "remove": "Entfernen",
+        "cancel": "Abbrechen"
+    }
 }
