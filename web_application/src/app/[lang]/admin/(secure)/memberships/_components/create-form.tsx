@@ -46,6 +46,7 @@ import {
     DialogTitle,
 } from '@/app/components/ui/dialog';
 import { Button } from '@/app/components/ui/button';
+import TextAreaInput from '@/app/components/Input/TextAreaInput';
 
 interface Props {
     action: (
@@ -354,6 +355,18 @@ export default function CreateForm({
                                 type="date"
                                 label={t('membership:ended_at.label')}
                                 defaultValue={endedAtDefaultValue}
+                            />
+                        </FormField>
+                    </div>
+                    <div>
+                        <FormField errors={formState.errors?.notes}>
+                            <TextAreaInput
+                                className="h-30"
+                                id="notes"
+                                name="notes"
+                                label={t('membership:notes.title')}
+                                defaultValue={data?.notes ?? ''}
+                                onChange={() => {}}
                             />
                         </FormField>
                     </div>
@@ -937,20 +950,6 @@ export default function CreateForm({
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('membership:payment_information')}
                     </span>
-
-                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                        <FormField errors={formState.errors?.paymentPeriod}>
-                            <SelectInput
-                                id="paymentPeriod"
-                                name="relationships[paymentPeriod][payment-periods]"
-                                label={t('payment_period:title.one')}
-                                options={paymentPeriodOptions}
-                                defaultValue={data?.paymentPeriod?.id ?? ''}
-                                required
-                            />
-                        </FormField>
-                    </div>
-
                     <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                         <FormField errors={formState.errors?.bankIban}>
                             <TextInput
@@ -974,6 +973,16 @@ export default function CreateForm({
                         </FormField>
                     </div>
                     <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                        <FormField errors={formState.errors?.paymentPeriod}>
+                            <SelectInput
+                                id="paymentPeriod"
+                                name="relationships[paymentPeriod][payment-periods]"
+                                label={t('payment_period:title.one')}
+                                options={paymentPeriodOptions}
+                                defaultValue={data?.paymentPeriod?.id ?? ''}
+                                required
+                            />
+                        </FormField>
                         {voluntaryContributionSettings?.allowVoluntaryContribution && (
                             <FormField
                                 errors={formState.errors?.voluntaryContribution}
@@ -994,15 +1003,6 @@ export default function CreateForm({
                                 />
                             </FormField>
                         )}
-
-                        <FormField errors={formState.errors?.notes}>
-                            <TextInput
-                                id="notes"
-                                name="notes"
-                                label={t('membership:notes.label')}
-                                defaultValue={data?.notes ?? ''}
-                            />
-                        </FormField>
                     </div>
                 </div>
 

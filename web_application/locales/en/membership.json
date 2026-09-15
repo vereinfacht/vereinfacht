@@ -41,6 +41,7 @@
     },
     "owner_email": "Owner email",
     "notes": {
+        "title": "Note",
         "label": "Other",
         "help": "Information provided by applying person.",
         "placeholder": "Hints, questions, notes"

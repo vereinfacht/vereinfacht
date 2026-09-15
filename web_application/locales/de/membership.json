@@ -41,6 +41,7 @@
     },
     "owner_email": "Inhaber*in-E-Mail",
     "notes": {
+        "title": "Notiz",
         "label": "Sonstiges",
         "help": "Angaben der antragestellenden Person",
         "placeholder": "Anmerkungen, Fragen, Notizen"
