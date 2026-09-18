@@ -13,6 +13,8 @@
 
     --color-green-500: #00d13b;
 
+    --color-red-50: #fff1f1;
+    --color-red-100: #ffb9b9;
     --color-red-500: #ce1924;
     --color-red-700: #dc2626;
     --color-red-800: #b91c1c;
@@ -48,11 +50,13 @@
     --color-bgSolidSubtle: var(--color-neutral-100);
     --color-bgSurfaceSolidInput: var(--color-white-solid);
     --color-bgDisabled: var(--color-neutral-100);
+    --color-bgErrorSoft: var(--color-red-50);
 
     --color-borderSubtle: var(--color-neutral-200);
     --color-borderFocus: var(--color-blue-500);
     --color-borderDefault: var(--color-neutral-500);
     --color-borderDisabled: var(--color-neutral-300);
+    --color-borderError: var(--color-red-100);
 
     --color-iconSecondary: var(--color-neutral-600);
 

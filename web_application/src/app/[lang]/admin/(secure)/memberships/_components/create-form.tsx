@@ -28,13 +28,14 @@ import {
 } from '@/types/resources';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormState } from 'react-dom';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Text from '@/app/components/Text/Text';
 import IconPlus from '/public/svg/plus_new.svg';
 import IconUser from '/public/svg/user.svg';
 import IconLink from '/public/svg/link_external.svg';
 import IconBin from '/public/svg/bin.svg';
 import IconBuilding from '/public/svg/building.svg';
+import IconXCircle from '/public/svg/x_circle.svg';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import InputLabel from '@/app/components/Input/InputLabel';
 import {
@@ -83,8 +84,53 @@ export default function CreateForm({
         number | null
     >(null);
 
+    const [rawMembers, setRawMembers] = useState<any[]>([]);
+    const [selectedMembers, setSelectedMembers] = useState<{
+        [key: number]: any;
+    }>({});
+    const [existingMembershipIds, setExistingMembershipIds] = useState<{
+        [key: number]: string | null;
+    }>({});
+
+    const existingMembershipsRef = useRef(existingMembershipIds);
+    useEffect(() => {
+        existingMembershipsRef.current = existingMembershipIds;
+    }, [existingMembershipIds]);
+
+    const handleFormSubmit = async (
+        prevState: FormActionState,
+        payload: FormData,
+    ): Promise<FormActionState> => {
+        const existingMemberships = existingMembershipsRef.current;
+        const hasExistingMemberships = Object.values(existingMemberships).some(
+            (id) => id !== null,
+        );
+
+        if (hasExistingMemberships) {
+            const validationErrors: Record<string, string[]> = {};
+
+            Object.entries(existingMemberships).forEach(([i, id]) => {
+                if (id !== null) {
+                    validationErrors[`members.${i}.existingMemberId`] = [
+                        t('membership:error_existing_membership.title'),
+                    ];
+                }
+            });
+
+            const failureState = {
+                success: false,
+                errors: validationErrors,
+                error: t('membership:error_existing_membership.title'),
+            };
+
+            return failureState as unknown as FormActionState;
+        }
+
+        return action(prevState, payload);
+    };
+
     const [formState, formAction] = useFormState<FormActionState, FormData>(
-        action,
+        handleFormSubmit,
         { success: false },
     );
 
@@ -281,8 +327,118 @@ export default function CreateForm({
             (_, index) => index !== memberToRemove,
         );
 
+        setExistingMembershipIds((prev) => {
+            const detectedMembershipIds = { ...prev };
+            delete detectedMembershipIds[memberToRemove];
+            return detectedMembershipIds;
+        });
+
+        setSelectedMembers((prev) => {
+            const newSelected = { ...prev };
+            delete newSelected[memberToRemove];
+            return newSelected;
+        });
+
         setMembersList(updatedList);
     };
+
+    const fetchExistingMembersAction = useCallback(async () => {
+        const response = await listMembers({
+            include: ['membership'],
+        });
+
+        const items = response?.data || response || [];
+        const itemsArray = Array.isArray(items) ? items : [items];
+
+        setRawMembers((prev) => {
+            const next = [...prev];
+            let hasChanges = false;
+
+            itemsArray.forEach((newItem: any) => {
+                const existingIndex = next.findIndex(
+                    (p) => p.id === newItem.id,
+                );
+                if (existingIndex !== -1) {
+                    if (
+                        JSON.stringify(next[existingIndex]) !==
+                        JSON.stringify(newItem)
+                    ) {
+                        next[existingIndex] = newItem;
+                        hasChanges = true;
+                    }
+                } else {
+                    next.push(newItem);
+                    hasChanges = true;
+                }
+            });
+
+            return hasChanges ? next : prev;
+        });
+
+        return response;
+    }, []);
+
+    const handleExistingMemberSelect = (index: number, selectedItem: any) => {
+        const option = Array.isArray(selectedItem)
+            ? selectedItem[0]
+            : selectedItem;
+
+        setSelectedMembers((prev) => ({ ...prev, [index]: option || null }));
+    };
+
+    useEffect(() => {
+        const detectedMembershipIds: { [key: number]: string | null } = {};
+
+        Object.keys(selectedMembers).forEach((key) => {
+            const index = Number(key);
+            const option = selectedMembers[index];
+
+            if (!option || !option.value) {
+                detectedMembershipIds[index] = null;
+                return;
+            }
+
+            const dbMember = rawMembers.find((m) => m.id === option.value);
+            const existingMembershipId =
+                dbMember?.relationships?.membership?.data?.id ?? null;
+
+            if (
+                existingMembershipId &&
+                String(existingMembershipId) !== String(data?.id)
+            ) {
+                detectedMembershipIds[index] = existingMembershipId;
+            } else {
+                detectedMembershipIds[index] = null;
+            }
+        });
+
+        setExistingMembershipIds((prev) => {
+            if (JSON.stringify(prev) === JSON.stringify(detectedMembershipIds))
+                return prev;
+            return detectedMembershipIds;
+        });
+    }, [rawMembers, selectedMembers, data?.id]);
+
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                const hasSelectedMembers = Object.values(selectedMembers).some(
+                    (opt) => opt && opt.value,
+                );
+                if (hasSelectedMembers) {
+                    fetchExistingMembersAction();
+                }
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener(
+                'visibilitychange',
+                handleVisibilityChange,
+            );
+        };
+    }, [selectedMembers, fetchExistingMembersAction]);
 
     return (
         <div className="container flex flex-col gap-8">
@@ -900,8 +1056,8 @@ export default function CreateForm({
                                                     label={t(
                                                         'member:title.one',
                                                     )}
-                                                    action={() =>
-                                                        listMembers({})
+                                                    action={
+                                                        fetchExistingMembersAction
                                                     }
                                                     optionLabel={(item) => {
                                                         const member =
@@ -919,8 +1075,45 @@ export default function CreateForm({
                                                     required={
                                                         member.mode === 'select'
                                                     }
+                                                    onChange={(selected) =>
+                                                        handleExistingMemberSelect(
+                                                            index,
+                                                            selected,
+                                                        )
+                                                    }
                                                 />
                                             </FormField>
+
+                                            {existingMembershipIds[index] && (
+                                                <div className="bg-bgErrorSoft border-borderError flex items-start gap-2 rounded-xl border p-4">
+                                                    <div className="text-textError">
+                                                        <IconXCircle />
+                                                    </div>
+                                                    <div className="flex flex-col items-start">
+                                                        <span className="text-textPrimary text-sm font-medium">
+                                                            {t(
+                                                                'membership:error_existing_membership.title',
+                                                            )}
+                                                        </span>
+                                                        <span className="text-textPrimary text-sm">
+                                                            {t(
+                                                                'membership:error_existing_membership.description',
+                                                            )}
+                                                        </span>
+
+                                                        <a
+                                                            href={`/admin/memberships/${existingMembershipIds[index]}`}
+                                                            target="_blank"
+                                                            className="text-textLink flex items-center gap-1 py-1 text-sm font-medium underline"
+                                                        >
+                                                            {t(
+                                                                'membership:error_existing_membership.open_membership',
+                                                            )}
+                                                            <IconLink className="fill-current" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </TabsContent>
                                 </Tabs>

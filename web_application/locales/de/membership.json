@@ -80,5 +80,10 @@
         "description": "Alle Angaben zu diesem Mitglied gehen verloren.",
         "remove": "Entfernen",
         "cancel": "Abbrechen"
+    },
+    "error_existing_membership": {
+        "title": "Dieser Kontakt ist  bereits Mitglied   einer anderen  Mitgliedschaft",
+        "description": "Eine Person kann nur in einer Mitgliedschaft Mitglied sein. Entferne das Mitglied dort oder wähle hier einen anderen Kontakt.",
+        "open_membership": "Mitgliedschaft öffnen"
     }
 }

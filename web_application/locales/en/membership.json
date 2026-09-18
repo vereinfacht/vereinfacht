@@ -81,5 +81,10 @@
         "description": "All information about this member will be removed.",
         "remove": "Remove",
         "cancel": "Cancel"
+    },
+    "error_existing_membership": {
+        "title": "This contact is already part of another membership",
+        "description": "A person can only belong to one membership. Remove the member from that membership or select a different contact here.",
+        "open_membership": "Open membership"
     }
 }
