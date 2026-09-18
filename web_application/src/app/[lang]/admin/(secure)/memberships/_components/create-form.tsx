@@ -93,6 +93,7 @@ export default function CreateForm({
     }>({});
 
     const existingMembershipsRef = useRef(existingMembershipIds);
+
     useEffect(() => {
         existingMembershipsRef.current = existingMembershipIds;
     }, [existingMembershipIds]);
@@ -125,6 +126,24 @@ export default function CreateForm({
 
             return failureState as unknown as FormActionState;
         }
+
+        membersList.forEach((member, index) => {
+            if (member.mode === 'create') {
+                payload.delete(`members[${index}][existingMemberId]`);
+            } else if (member.mode === 'select') {
+                const allKeys = Array.from(payload.keys());
+                allKeys.forEach((key) => {
+                    if (
+                        key.startsWith(`members[${index}]`) &&
+                        !key.includes('[existingMemberId]') &&
+                        !key.includes('[mode]') &&
+                        !key.includes('[useSameAddressAsMember1]')
+                    ) {
+                        payload.delete(key);
+                    }
+                });
+            }
+        });
 
         return action(prevState, payload);
     };
@@ -389,11 +408,10 @@ export default function CreateForm({
     useEffect(() => {
         const detectedMembershipIds: { [key: number]: string | null } = {};
 
-        Object.keys(selectedMembers).forEach((key) => {
-            const index = Number(key);
+        membersList.forEach((member, index) => {
             const option = selectedMembers[index];
 
-            if (!option || !option.value) {
+            if (member.mode !== 'select' || !option || !option.value) {
                 detectedMembershipIds[index] = null;
                 return;
             }
@@ -417,7 +435,7 @@ export default function CreateForm({
                 return prev;
             return detectedMembershipIds;
         });
-    }, [rawMembers, selectedMembers, data?.id]);
+    }, [rawMembers, selectedMembers, data?.id, membersList]);
 
     useEffect(() => {
         const handleVisibilityChange = () => {
@@ -622,7 +640,16 @@ export default function CreateForm({
                                         </TabsTrigger>
                                     </TabsList>
 
-                                    <TabsContent value="create">
+                                    <TabsContent
+                                        value="create"
+                                        forceMount
+                                        hidden={member.mode !== 'create'}
+                                        className={
+                                            member.mode !== 'create'
+                                                ? 'hidden'
+                                                : ''
+                                        }
+                                    >
                                         <div className="flex flex-col justify-evenly gap-6">
                                             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
                                                 <div className="flex flex-col gap-1">
@@ -1041,7 +1068,16 @@ export default function CreateForm({
                                         </div>
                                     </TabsContent>
 
-                                    <TabsContent value="select">
+                                    <TabsContent
+                                        value="select"
+                                        forceMount
+                                        hidden={member.mode !== 'select'}
+                                        className={
+                                            member.mode !== 'select'
+                                                ? 'hidden'
+                                                : ''
+                                        }
+                                    >
                                         <div className="flex flex-col gap-6 p-4">
                                             <FormField
                                                 errors={
