@@ -5,6 +5,7 @@ namespace App\JsonApi\V1;
 use App\Models\Club;
 use App\Models\User;
 use App\Models\Member;
+use App\Models\ActivityLog;
 use App\Models\PaymentPeriod;
 use App\Models\Receipt;
 use App\Models\Division;
@@ -38,6 +39,7 @@ use App\JsonApi\V1\FinanceAccounts\FinanceAccountSchema;
 use App\JsonApi\V1\FinanceContacts\FinanceContactSchema;
 use App\JsonApi\V1\MembershipTypes\MembershipTypeSchema;
 use App\JsonApi\V1\TaxAccountCharts\TaxAccountChartSchema;
+use App\JsonApi\V1\ActivityLogs\ActivityLogSchema;
 use App\JsonApi\V1\DivisionMembershipTypes\DivisionMembershipTypeSchema;
 
 class Server extends BaseServer
@@ -162,6 +164,7 @@ class Server extends BaseServer
             MembershipSchema::class,
             PermissionSchema::class,
             StatementSchema::class,
+            ActivityLogSchema::class,
             TransactionSchema::class,
             PaymentPeriodSchema::class,
             MembershipTypeSchema::class,
@@ -193,5 +196,6 @@ class Server extends BaseServer
         Statement::addGlobalScope(new ClubScope);
         PaymentPeriod::addGlobalScope(new ClubScope);
         TaxAccount::addGlobalScope(new ClubScope);
+        ActivityLog::addGlobalScope(new ClubScope);
     }
 }

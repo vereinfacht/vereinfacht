@@ -8274,6 +8274,134 @@
                     }
                 }
             }
+        },
+        "\/activity-logs": {
+            "get": {
+                "tags": [
+                    "Activity-logs"
+                ],
+                "summary": "Get all activity-logs",
+                "description": "",
+                "operationId": "activity-logs.index",
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "id",
+                                    "-id",
+                                    "createdAt",
+                                    "-createdAt"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[id]",
+                        "in": "query",
+                        "description": "A list of ids to filter by.",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "style": "form",
+                        "explode": false,
+                        "schema": {
+                            "default": [],
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "empty": {
+                                "value": []
+                            },
+                            "1": {
+                                "value": [
+                                    "1"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[subjectType]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "examples": {
+                            "App\\Models\\Club": {
+                                "value": "App\\Models\\Club"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filter[subjectId]",
+                        "in": "query",
+                        "description": "Filters the records",
+                        "required": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "examples": {
+                            "1": {
+                                "value": 1
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Index activity-logs",
+                        "content": {
+                            "application\/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "jsonapi",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "jsonapi": {
+                                            "type": "object",
+                                            "properties": {
+                                                "version": {
+                                                    "title": "version",
+                                                    "type": "string",
+                                                    "example": "1.0"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/resources.activity-logs.resource.fetch"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#\/components\/responses\/400"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/401"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -14416,6 +14544,73 @@
                                         "readOnly": true
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "resources.activity-logs.resource.fetch": {
+                "title": "Resource\/Activity-log\/Fetch",
+                "type": "object",
+                "required": [
+                    "type",
+                    "id",
+                    "attributes"
+                ],
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "default": "activity-logs",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "event": {
+                                "title": "event",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "updated"
+                            },
+                            "subjectType": {
+                                "title": "subjectType",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "App\\Models\\Club"
+                            },
+                            "subjectId": {
+                                "title": "subjectId",
+                                "type": "number",
+                                "readOnly": true,
+                                "example": 1
+                            },
+                            "causerName": {
+                                "title": "causerName",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "properties": {
+                                "title": "properties",
+                                "type": "object",
+                                "readOnly": true,
+                                "example": {
+                                    "attributes": {
+                                        "title": "Example"
+                                    },
+                                    "old": {
+                                        "title": "Old example"
+                                    }
+                                }
+                            },
+                            "createdAt": {
+                                "title": "createdAt",
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "2026-07-16T13:48:36.000000Z"
                             }
                         }
                     }

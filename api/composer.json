@@ -16,6 +16,7 @@
         "simshaun/recurr": "^5.0",
         "spatie/cpu-load-health-check": "^1.0",
         "spatie/eloquent-sortable": "^5.0",
+        "spatie/laravel-activitylog": "^4.12",
         "spatie/laravel-health": "^1.32",
         "spatie/laravel-medialibrary": "^11.15",
         "spatie/laravel-permission": "^6.4",
