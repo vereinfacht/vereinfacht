@@ -467,7 +467,7 @@ export default function CreateForm({
                 translationKey="membership"
                 loading={false}
             >
-                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
+                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-5 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('membership:title.one')}
                     </span>
@@ -546,7 +546,7 @@ export default function CreateForm({
                     </div>
                 </div>
 
-                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
+                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-5 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('member:title.one')}
                     </span>
@@ -650,7 +650,7 @@ export default function CreateForm({
                                                 : ''
                                         }
                                     >
-                                        <div className="flex flex-col justify-evenly gap-6">
+                                        <div className="flex flex-col justify-evenly gap-5">
                                             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
                                                 <div className="flex flex-col gap-1">
                                                     <InputLabel
@@ -1012,59 +1012,6 @@ export default function CreateForm({
                                                     }
                                                 />
                                             </FormField>
-
-                                            {!member.showDivisionField ? (
-                                                <div
-                                                    onClick={() =>
-                                                        updateMemberProperty(
-                                                            index,
-                                                            'showDivisionField',
-                                                            true,
-                                                        )
-                                                    }
-                                                    role="button"
-                                                    className="text-textLink hover:text-textHover flex cursor-pointer items-start gap-2 py-2 text-sm font-medium transition-all duration-200"
-                                                >
-                                                    <span className="flex shrink-0 items-center justify-center">
-                                                        <IconPlus />
-                                                    </span>
-                                                    <Text className="leading-[1em]">
-                                                        {t(
-                                                            'member:add_division',
-                                                        )}
-                                                    </Text>
-                                                </div>
-                                            ) : (
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.divisions`
-                                                        ]
-                                                    }
-                                                >
-                                                    <BelongsToMultiselectInput<TDivisionDeserialized>
-                                                        resourceName={`member_${index}_divisions`}
-                                                        resourceType="divisions"
-                                                        label={t(
-                                                            'division:title.other',
-                                                        )}
-                                                        action={(searchTerm) =>
-                                                            listDivisions({
-                                                                page: {
-                                                                    size: itemsPerQuery,
-                                                                    number: 1,
-                                                                },
-                                                                filter: {
-                                                                    query: searchTerm,
-                                                                },
-                                                            })
-                                                        }
-                                                        optionLabel={(item) =>
-                                                            item.title as string
-                                                        }
-                                                    />
-                                                </FormField>
-                                            )}
                                         </div>
                                     </TabsContent>
 
@@ -1078,7 +1025,7 @@ export default function CreateForm({
                                                 : ''
                                         }
                                     >
-                                        <div className="flex flex-col gap-6 p-4">
+                                        <div className="flex flex-col gap-5">
                                             <FormField
                                                 errors={
                                                     formState.errors?.[
@@ -1119,7 +1066,6 @@ export default function CreateForm({
                                                     }
                                                 />
                                             </FormField>
-
                                             {existingMembershipIds[index] && (
                                                 <div className="bg-bgErrorSoft border-borderError flex items-start gap-2 rounded-xl border p-4">
                                                     <div className="text-textError">
@@ -1153,6 +1099,59 @@ export default function CreateForm({
                                         </div>
                                     </TabsContent>
                                 </Tabs>
+
+                                <div className="mt-5">
+                                    {!member.showDivisionField ? (
+                                        <div
+                                            onClick={() =>
+                                                updateMemberProperty(
+                                                    index,
+                                                    'showDivisionField',
+                                                    true,
+                                                )
+                                            }
+                                            role="button"
+                                            className="text-textLink hover:text-textHover flex cursor-pointer items-start gap-2 text-sm font-medium transition-all duration-200"
+                                        >
+                                            <span className="flex shrink-0 items-center justify-center">
+                                                <IconPlus />
+                                            </span>
+                                            <Text className="leading-[1em]">
+                                                {t('member:add_division')}
+                                            </Text>
+                                        </div>
+                                    ) : (
+                                        <FormField
+                                            errors={
+                                                formState.errors?.[
+                                                    `members.${index}.divisions`
+                                                ]
+                                            }
+                                        >
+                                            <BelongsToMultiselectInput<TDivisionDeserialized>
+                                                resourceName={`member_${index}_divisions`}
+                                                resourceType="divisions"
+                                                label={t(
+                                                    'division:title.other',
+                                                )}
+                                                action={(searchTerm) =>
+                                                    listDivisions({
+                                                        page: {
+                                                            size: itemsPerQuery,
+                                                            number: 1,
+                                                        },
+                                                        filter: {
+                                                            query: searchTerm,
+                                                        },
+                                                    })
+                                                }
+                                                optionLabel={(item) =>
+                                                    item.title as string
+                                                }
+                                            />
+                                        </FormField>
+                                    )}
+                                </div>
                             </div>
                         );
                     })}
@@ -1175,7 +1174,7 @@ export default function CreateForm({
                         )}
                 </div>
 
-                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-6 rounded-2xl p-8">
+                <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-5 rounded-2xl p-8">
                     <span className="text-2xl leading-9 font-bold not-italic">
                         {t('membership:payment_information')}
                     </span>

@@ -214,6 +214,17 @@ export async function createMembershipFormAction(
                             membership: {
                                 data: { type: 'memberships', id: membershipId },
                             },
+                            ...(memberData.divisions &&
+                                memberData.divisions.length > 0 && {
+                                    divisions: {
+                                        data: memberData.divisions.map(
+                                            (id: string) => ({
+                                                type: 'divisions',
+                                                id,
+                                            }),
+                                        ),
+                                    },
+                                }),
                         },
                     },
                 } as any);
