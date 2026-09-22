@@ -145,6 +145,20 @@ export default function CreateForm({
             }
         });
 
+        if (membersList.length > 1 && membersList[0].mode === 'select') {
+            const option = selectedMembers[0];
+            const dbMember = rawMembers.find((m) => m.id === option?.value);
+            if (dbMember) {
+                const attrs = dbMember.attributes || dbMember;
+                payload.set('members[0][address]', attrs.address || '');
+                payload.set('members[0][zipCode]', attrs.zipCode || '');
+                payload.set('members[0][city]', attrs.city || '');
+                payload.set('members[0][country]', attrs.country || '');
+                payload.set('members[0][email]', attrs.email || '');
+                payload.set('members[0][phoneNumber]', attrs.phoneNumber || '');
+            }
+        }
+
         return action(prevState, payload);
     };
 
@@ -458,6 +472,30 @@ export default function CreateForm({
         };
     }, [selectedMembers, fetchExistingMembersAction]);
 
+    const member1 = membersList[0];
+    let member1HasAddress = false;
+
+    if (member1?.mode === 'create') {
+        member1HasAddress = true;
+    } else {
+        const option = selectedMembers[0];
+        if (option && option.value) {
+            const dbMember = rawMembers.find((m) => m.id === option.value);
+            const attrs = dbMember?.attributes || dbMember;
+
+            if (
+                attrs?.address &&
+                attrs?.zipCode &&
+                attrs?.city &&
+                attrs?.country &&
+                attrs?.email &&
+                attrs?.phoneNumber
+            ) {
+                member1HasAddress = true;
+            }
+        }
+    }
+
     return (
         <div className="container flex flex-col gap-8">
             <ActionForm
@@ -613,6 +651,7 @@ export default function CreateForm({
                                     type="hidden"
                                     name={`members[${index}][useSameAddressAsMember1]`}
                                     value={
+                                        member1HasAddress &&
                                         member.useSameAddressAsMember1
                                             ? 'true'
                                             : 'false'
@@ -787,105 +826,112 @@ export default function CreateForm({
                                                     />
                                                 </FormField>
                                             </div>
-
-                                            <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.email`
-                                                        ]
-                                                    }
-                                                >
-                                                    <TextInput
-                                                        id={`email_${index}`}
-                                                        name={`members[${index}][email]`}
-                                                        type="email"
-                                                        label={t(
-                                                            'general:email',
-                                                        )}
-                                                        required={
-                                                            member.mode ===
-                                                            'create'
+                                            {isFamily &&
+                                                index > 0 &&
+                                                member1HasAddress && (
+                                                    <FormField
+                                                        errors={
+                                                            formState.errors?.[
+                                                                `members.${index}.useSameAddressAsMember1`
+                                                            ]
                                                         }
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.phoneNumber`
-                                                        ]
-                                                    }
-                                                >
-                                                    <TextInput
-                                                        id={`phoneNumber_${index}`}
-                                                        name={`members[${index}][phoneNumber]`}
-                                                        label={t(
-                                                            'member:phone_number.label',
-                                                        )}
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                            </div>
-
-                                            {isFamily && index > 0 && (
-                                                <FormField
-                                                    errors={
-                                                        formState.errors?.[
-                                                            `members.${index}.useSameAddressAsMember1`
-                                                        ]
-                                                    }
-                                                >
-                                                    <Checkbox
-                                                        id={`useSameAddress_${index}`}
-                                                        name={`members[${index}][useSameAddressAsMember1]`}
-                                                        label={t(
-                                                            'member:label_identical_information',
-                                                            {
-                                                                name: `${t('member:title.one')} 1`,
-                                                            },
-                                                        )}
-                                                        defaultValue={
-                                                            member.useSameAddressAsMember1
-                                                        }
-                                                        handleChange={(e) => {
-                                                            setMembersList(
-                                                                (prev) => {
-                                                                    const updated =
-                                                                        [
-                                                                            ...prev,
-                                                                        ];
-                                                                    updated[
-                                                                        index
-                                                                    ] = {
-                                                                        ...updated[
-                                                                            index
-                                                                        ],
-                                                                        useSameAddressAsMember1:
-                                                                            e
-                                                                                .target
-                                                                                .checked,
-                                                                    };
-                                                                    return updated;
+                                                    >
+                                                        <Checkbox
+                                                            id={`useSameAddress_${index}`}
+                                                            name={`members[${index}][useSameAddressAsMember1]`}
+                                                            label={t(
+                                                                'member:label_identical_information',
+                                                                {
+                                                                    name: `${t('member:title.one')} 1`,
                                                                 },
-                                                            );
-                                                        }}
-                                                        disabled={
-                                                            member.mode !==
-                                                            'create'
-                                                        }
-                                                    />
-                                                </FormField>
-                                            )}
-
-                                            {!member.useSameAddressAsMember1 && (
+                                                            )}
+                                                            defaultValue={
+                                                                member.useSameAddressAsMember1
+                                                            }
+                                                            handleChange={(
+                                                                e,
+                                                            ) => {
+                                                                setMembersList(
+                                                                    (prev) => {
+                                                                        const updated =
+                                                                            [
+                                                                                ...prev,
+                                                                            ];
+                                                                        updated[
+                                                                            index
+                                                                        ] = {
+                                                                            ...updated[
+                                                                                index
+                                                                            ],
+                                                                            useSameAddressAsMember1:
+                                                                                e
+                                                                                    .target
+                                                                                    .checked,
+                                                                        };
+                                                                        return updated;
+                                                                    },
+                                                                );
+                                                            }}
+                                                            disabled={
+                                                                member.mode !==
+                                                                'create'
+                                                            }
+                                                        />
+                                                    </FormField>
+                                                )}
+                                            {!(
+                                                member1HasAddress &&
+                                                member.useSameAddressAsMember1
+                                            ) && (
                                                 <>
+                                                    <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.email`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`email_${index}`}
+                                                                name={`members[${index}][email]`}
+                                                                type="email"
+                                                                label={t(
+                                                                    'general:email',
+                                                                )}
+                                                                required={
+                                                                    member.mode ===
+                                                                    'create'
+                                                                }
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                        <FormField
+                                                            errors={
+                                                                formState
+                                                                    .errors?.[
+                                                                    `members.${index}.phoneNumber`
+                                                                ]
+                                                            }
+                                                        >
+                                                            <TextInput
+                                                                id={`phoneNumber_${index}`}
+                                                                name={`members[${index}][phoneNumber]`}
+                                                                label={t(
+                                                                    'member:phone_number.label',
+                                                                )}
+                                                                disabled={
+                                                                    member.mode !==
+                                                                    'create'
+                                                                }
+                                                            />
+                                                        </FormField>
+                                                    </div>
+
                                                     <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
                                                         <FormField
                                                             errors={

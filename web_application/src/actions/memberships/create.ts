@@ -233,6 +233,8 @@ export async function createMembershipFormAction(
                 let finalZip = memberData.zipCode;
                 let finalCity = memberData.city;
                 let finalCountry = memberData.country;
+                let finalEmail = memberData.email;
+                let finalPhone = memberData.phoneNumber;
 
                 if (
                     j > 0 &&
@@ -243,6 +245,8 @@ export async function createMembershipFormAction(
                     finalZip = membersList[0].zipCode;
                     finalCity = membersList[0].city;
                     finalCountry = membersList[0].country;
+                    finalEmail = membersList[0].email;
+                    finalPhone = membersList[0].phoneNumber;
                 }
 
                 const memberPayload = {
@@ -252,10 +256,10 @@ export async function createMembershipFormAction(
                             memberType: memberData.memberType || 'person',
                             firstName: memberData.firstName || '',
                             lastName: memberData.lastName || '',
-                            email: memberData.email || '',
+                            email: finalEmail || '',
                             gender: memberData.gender || undefined,
                             birthday: memberData.birthday || undefined,
-                            phoneNumber: memberData.phoneNumber || undefined,
+                            phoneNumber: finalPhone || undefined,
                             address: finalAddress || undefined,
                             zipCode: finalZip || '',
                             city: finalCity || '',
