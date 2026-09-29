@@ -13,6 +13,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
     help?: string;
     icon?: ReactNode;
     'data-cy'?: string;
+    error?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -24,6 +25,7 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
         help,
         icon,
         className,
+        error,
         ...props
     },
     forwardedRef,
@@ -40,15 +42,18 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
     }
 
     const classes = cn(
-        'appearance-none bg-surfaceSolidInput w-full h-12 p-3 rounded-xl border border-borderDefault text-textPrimary outline-hidden transition-all placeholder:text-textSecondary focus:border-borderFocus focus:bg-btnBgTertiaryHover ',
+        'appearance-none bg-surfaceSolidInput w-full h-12 p-3 rounded-xl border text-textPrimary outline-hidden transition-all placeholder:text-textSecondary focus:border-borderFocus focus:bg-btnBgTertiaryHover ',
         props.disabled ? 'bg-slate-400' : '',
         type === 'date' ? styles.noIcon : '',
+        error ? 'border-borderError' : 'border-borderDefault',
+
         className,
     );
     return (
         <div className="flex w-full flex-col items-start">
             {label ? (
                 <InputLabel
+                    className={error ? 'text-textError' : 'text-textPrimary'}
                     forInput={props.id}
                     value={label}
                     required={props.required}

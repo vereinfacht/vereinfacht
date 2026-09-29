@@ -56,7 +56,8 @@
     --color-borderFocus: var(--color-blue-500);
     --color-borderDefault: var(--color-neutral-500);
     --color-borderDisabled: var(--color-neutral-300);
-    --color-borderError: var(--color-red-100);
+    --color-borderStatusError: var(--color-red-100);
+    --color-borderError: var(--color-red-700);
 
     --color-iconSecondary: var(--color-neutral-600);
 

@@ -36,6 +36,7 @@ interface Props {
     multiple?: boolean;
     options: Option[];
     defaultValue?: Option[];
+    error?: boolean;
     onChange?: (selected: Option[]) => void;
     onQueryChange?: (query: string) => void;
 }
@@ -52,6 +53,7 @@ export function NewMultiselectInput({
     onQueryChange,
     onChange,
     defaultValue,
+    error,
 }: Props) {
     const { t } = useTranslation();
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
@@ -126,6 +128,9 @@ export function NewMultiselectInput({
             {label &&
                 (typeof label === 'string' ? (
                     <InputLabel
+                        className={
+                            error ? 'text-textError' : 'text-textPrimary'
+                        }
                         forInput={id}
                         value={label}
                         required={required}
@@ -139,8 +144,11 @@ export function NewMultiselectInput({
                         variant="tertiaryGray"
                         role="combobox"
                         className={cn(
-                            'border-borderDefault bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover mt-1 h-12 w-full justify-between rounded-xl border px-3 py-2 text-base font-normal outline-hidden transition-all',
+                            'bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover mt-1 h-12 w-full justify-between rounded-xl border px-3 py-2 text-base font-normal outline-hidden transition-all',
                             selected.length < 1 && 'text-textSecondary',
+                            error
+                                ? 'border-borderError'
+                                : 'border-borderDefault',
                         )}
                         rightIcon={<IconChevronDown />}
                     >

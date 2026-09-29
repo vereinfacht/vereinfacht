@@ -20,6 +20,7 @@ export interface Props extends HTMLProps<HTMLSelectElement> {
     label?: string;
     help?: string;
     icon?: ReactNode;
+    error?: boolean;
     handleChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -30,14 +31,16 @@ export default function SelectInput({
     icon,
     options,
     className,
+    error,
     ...props
 }: Props) {
     const { t } = useTranslation('general');
     const [value, setValue] = useState(props.defaultValue ?? '');
     const classes = cn(
-        'border-borderDefault bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover h-12 w-full appearance-none rounded-xl border p-3 pr-10 outline-hidden transition-all',
+        'bg-surfaceSolidInput text-textPrimary focus:border-borderFocus focus:bg-btnBgTertiaryHover h-12 w-full appearance-none rounded-xl border p-3 pr-10 outline-hidden transition-all',
         props.disabled ? 'cursor-not-allowed bg-slate-200 opacity-50' : '',
         value === '' ? 'text-textSecondary' : '',
+        error ? 'border-borderError' : 'border-borderDefault',
         className,
     );
 
@@ -53,6 +56,7 @@ export default function SelectInput({
         <div className="flex w-full flex-col items-start">
             {label ? (
                 <InputLabel
+                    className={error ? 'text-textError' : 'text-textPrimary'}
                     forInput={props.id}
                     value={label}
                     required={props.required}
