@@ -33,14 +33,24 @@ import IconXCircle from '/public/svg/x_circle.svg';
 
 interface MemberCardProps {
     index: number;
-    member: any;
+    member: {
+        id: string;
+        mode: 'create' | 'select';
+        showDivisionField: boolean;
+        useSameAddressAsMember1: boolean;
+    };
+    selectedMember: { value: string; label: string } | null;
     isFamily: boolean;
     minMembers: number;
     totalMembers: number;
     formState: FormActionState;
-    member1HasAddress: boolean;
+    canUseMember1ContactInfo: boolean;
     existingMembershipId: string | null;
-    updateMemberProperty: (index: number, key: string, value: any) => void;
+    updateMemberProperty: (
+        index: number,
+        key: 'mode' | 'showDivisionField' | 'useSameAddressAsMember1',
+        value: 'create' | 'select' | boolean,
+    ) => void;
     onRemoveRequest: (isEmpty: boolean) => void;
     fetchExistingMembersAction: (searchTerm?: string) => Promise<any>;
     handleExistingMemberSelect: (index: number, selectedItem: any) => void;
@@ -49,11 +59,12 @@ interface MemberCardProps {
 export default function MemberCard({
     index,
     member,
+    selectedMember,
     isFamily,
     minMembers,
     totalMembers,
     formState,
-    member1HasAddress,
+    canUseMember1ContactInfo,
     existingMembershipId,
     updateMemberProperty,
     onRemoveRequest,
@@ -70,6 +81,14 @@ export default function MemberCard({
     ];
 
     const handleRemoveClick = () => {
+        if (
+            member.mode === 'select' ||
+            member.showDivisionField ||
+            member.useSameAddressAsMember1
+        ) {
+            onRemoveRequest(false);
+            return;
+        }
         let isEmpty = true;
         if (cardRef.current) {
             const inputs = cardRef.current.querySelectorAll(
@@ -121,6 +140,11 @@ export default function MemberCard({
 
             <input
                 type="hidden"
+                name={`members[${index}][formMemberId]`}
+                value={member.id}
+            />
+            <input
+                type="hidden"
                 name={`members[${index}][mode]`}
                 value={member.mode}
             />
@@ -128,7 +152,7 @@ export default function MemberCard({
                 type="hidden"
                 name={`members[${index}][useSameAddressAsMember1]`}
                 value={
-                    member1HasAddress && member.useSameAddressAsMember1
+                    canUseMember1ContactInfo && member.useSameAddressAsMember1
                         ? 'true'
                         : 'false'
                 }
@@ -136,9 +160,11 @@ export default function MemberCard({
 
             <Tabs
                 value={member.mode}
-                onValueChange={(val) =>
-                    updateMemberProperty(index, 'mode', val)
-                }
+                onValueChange={(val) => {
+                    if (val === 'create' || val === 'select') {
+                        updateMemberProperty(index, 'mode', val);
+                    }
+                }}
             >
                 <TabsList className="my-5 w-full">
                     <TabsTrigger className="w-full" value="create">
@@ -207,6 +233,11 @@ export default function MemberCard({
                                     label={t('contact:first_name.label')}
                                     required={member.mode === 'create'}
                                     disabled={member.mode !== 'create'}
+                                    error={
+                                        !!formState.errors?.[
+                                            `members.${index}.firstName`
+                                        ]
+                                    }
                                 />
                             </FormField>
                             <FormField
@@ -222,6 +253,11 @@ export default function MemberCard({
                                     label={t('contact:last_name.label')}
                                     required={member.mode === 'create'}
                                     disabled={member.mode !== 'create'}
+                                    error={
+                                        !!formState.errors?.[
+                                            `members.${index}.lastName`
+                                        ]
+                                    }
                                 />
                             </FormField>
                         </div>
@@ -239,6 +275,11 @@ export default function MemberCard({
                                     name={`members[${index}][birthday]`}
                                     type="date"
                                     label={t('member:birthday.label')}
+                                    error={
+                                        !!formState.errors?.[
+                                            `members.${index}.birthday`
+                                        ]
+                                    }
                                     disabled={member.mode !== 'create'}
                                 />
                             </FormField>
@@ -255,11 +296,16 @@ export default function MemberCard({
                                     label={t('general:gender.label')}
                                     options={genderOptions}
                                     disabled={member.mode !== 'create'}
+                                    error={
+                                        !!formState.errors?.[
+                                            `members.${index}.gender`
+                                        ]
+                                    }
                                 />
                             </FormField>
                         </div>
 
-                        {isFamily && index > 0 && member1HasAddress && (
+                        {isFamily && index > 0 && canUseMember1ContactInfo && (
                             <FormField
                                 errors={
                                     formState.errors?.[
@@ -292,7 +338,8 @@ export default function MemberCard({
                         )}
 
                         {!(
-                            member1HasAddress && member.useSameAddressAsMember1
+                            canUseMember1ContactInfo &&
+                            member.useSameAddressAsMember1
                         ) && (
                             <>
                                 <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
@@ -310,6 +357,11 @@ export default function MemberCard({
                                             label={t('general:email')}
                                             required={member.mode === 'create'}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.email`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                     <FormField
@@ -326,6 +378,11 @@ export default function MemberCard({
                                                 'member:phone_number.label',
                                             )}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.phoneNumber`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                 </div>
@@ -343,6 +400,11 @@ export default function MemberCard({
                                             name={`members[${index}][address]`}
                                             label={t('member:address.label')}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.address`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                     <FormField
@@ -358,6 +420,11 @@ export default function MemberCard({
                                             label={t('contact:zip_code.label')}
                                             required={member.mode === 'create'}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.zipCode`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                 </div>
@@ -376,6 +443,11 @@ export default function MemberCard({
                                             label={t('contact:city.label')}
                                             required={member.mode === 'create'}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.city`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                     <FormField
@@ -391,6 +463,11 @@ export default function MemberCard({
                                             label={t('contact:country.label')}
                                             required={member.mode === 'create'}
                                             disabled={member.mode !== 'create'}
+                                            error={
+                                                !!formState.errors?.[
+                                                    `members.${index}.country`
+                                                ]
+                                            }
                                         />
                                     </FormField>
                                 </div>
@@ -405,7 +482,7 @@ export default function MemberCard({
                             }
                         >
                             <InputLabel
-                                forInput="hasConsentedMediaPublication"
+                                forInput={`hasConsentedMediaPublication_${index}`}
                                 value={t('member:consent_media_publication')}
                                 className="text-textPrimary"
                             />
@@ -437,7 +514,10 @@ export default function MemberCard({
                             }
                         >
                             <BelongsToSelectInput<TMemberDeserialized>
-                                resourceName={`existingMember_${index}`}
+                                resourceName={`existingMember_${member.id}`}
+                                defaultValue={
+                                    selectedMember ? [selectedMember] : []
+                                }
                                 resourceType="members"
                                 label={t('member:title.one')}
                                 action={fetchExistingMembersAction}
@@ -458,11 +538,16 @@ export default function MemberCard({
                                 onChange={(selected) =>
                                     handleExistingMemberSelect(index, selected)
                                 }
+                                error={
+                                    !!formState.errors?.[
+                                        `members.${index}.existingMemberId`
+                                    ]
+                                }
                             />
                         </FormField>
 
                         {existingMembershipId && (
-                            <div className="bg-bgErrorSoft border-borderError flex items-start gap-2 rounded-xl border p-4">
+                            <div className="bg-bgErrorSoft border-borderStatusError flex items-start gap-2 rounded-xl border p-4">
                                 <div className="text-textError">
                                     <IconXCircle />
                                 </div>
@@ -523,7 +608,7 @@ export default function MemberCard({
                         }
                     >
                         <BelongsToMultiselectInput<TDivisionDeserialized>
-                            resourceName={`member_${index}_divisions`}
+                            resourceName={`member_${member.id}_divisions`}
                             resourceType="divisions"
                             label={t('division:title.other')}
                             action={(searchTerm) =>

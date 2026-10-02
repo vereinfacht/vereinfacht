@@ -7,9 +7,12 @@ import { redirect } from 'next/navigation';
 import { ZodError, z } from 'zod';
 import { handleZodError } from '../base/create';
 import { createMember } from '../members/create';
-import { createMembershipSchema } from './create.schema';
+import { getMember } from '../members/get';
+import {
+    createMembershipSchema,
+    sharedMemberContactSchema,
+} from './create.schema';
 import { parseFormData } from '../base/parser/formDataParser';
-import useTranslation from 'next-translate/useTranslation';
 
 export const createMembership = createAuthenticatedAction(
     'create',
@@ -74,7 +77,6 @@ export async function createMembershipFormAction(
     formData: FormData,
 ): Promise<FormActionState> {
     const session = await auth();
-    const { t } = useTranslation('error');
 
     if (!session?.accessToken) redirect('/admin/auth/login');
 
@@ -105,16 +107,23 @@ export async function createMembershipFormAction(
         }
 
         const rawMembers: any[] = [];
-        let i = 0;
+        var i = 0;
 
         while (formData.has(`members[${i}][mode]`)) {
+            const formMemberId = formData.get(`members[${i}][formMemberId]`);
+            if (typeof formMemberId !== 'string' || formMemberId.length === 0) {
+                throw new Error(
+                    `Missing form member ID for member at index ${i}`,
+                );
+            }
             const selectedMemberId =
-                parsedRelationships[`existingMember_${i}`]?.data?.id ||
-                formData.get(`existingMember_${i}`) ||
+                parsedRelationships[`existingMember_${formMemberId}`]?.data
+                    ?.id ||
+                formData.get(`existingMember_${formMemberId}`) ||
                 undefined;
 
             const rawDivisions =
-                parsedRelationships[`member_${i}_divisions`]?.data;
+                parsedRelationships[`member_${formMemberId}_divisions`]?.data;
             const divisionsIds = Array.isArray(rawDivisions)
                 ? rawDivisions.map((d: any) => d.id).filter(Boolean)
                 : rawDivisions?.id
@@ -152,7 +161,6 @@ export async function createMembershipFormAction(
             });
             i++;
         }
-
         const rawData = {
             data: {
                 type: 'memberships',
@@ -163,23 +171,80 @@ export async function createMembershipFormAction(
         };
 
         const parsedData = createMembershipSchema.parse(rawData);
-        const membersList = parsedData.members || [];
+        const membersList = parsedData.members;
 
-        for (let j = 0; j < membersList.length; j++) {
-            if (
-                membersList[j].mode === 'select' &&
-                !membersList[j].existingMemberId
-            ) {
-                return {
-                    success: false,
-                    errors: {
-                        [`members.${j}.existingMemberId`]: [
-                            t('membership:choose_member_error'),
-                        ],
-                    },
-                };
+        const dependentIndexes = membersList.flatMap((member, index) =>
+            index > 0 &&
+            member.mode === 'create' &&
+            member.useSameAddressAsMember1
+                ? [index]
+                : [],
+        );
+
+        type SharedContact = z.infer<typeof sharedMemberContactSchema>;
+        var sharedContact: SharedContact | null = null;
+
+        if (dependentIndexes.length > 0) {
+            const firstMember = membersList[0];
+            var contactSource: unknown;
+
+            if (firstMember.mode === 'select') {
+                try {
+                    contactSource = await getMember({
+                        id: firstMember.existingMemberId!,
+                    });
+                } catch {
+                    return {
+                        success: false,
+                        errors: {
+                            'members.0.existingMemberId': [
+                                'Could not retrieve Member 1 contact information.',
+                            ],
+                        },
+                    };
+                }
+            } else {
+                contactSource = firstMember;
             }
+
+            const contactResult =
+                sharedMemberContactSchema.safeParse(contactSource);
+
+            if (!contactResult.success) {
+                const errorMessage =
+                    'Member 1 has incomplete or invalid contact information.';
+                const errors: Record<string, string[]> = {};
+
+                for (const index of dependentIndexes) {
+                    errors[`members.${index}.useSameAddressAsMember1`] = [
+                        errorMessage,
+                    ];
+                }
+
+                if (firstMember.mode === 'select') {
+                    errors['members.0.existingMemberId'] = [errorMessage];
+                }
+
+                return { success: false, errors };
+            }
+
+            sharedContact = contactResult.data;
         }
+
+        const resolvedMembers = membersList.map((member, index) => {
+            if (
+                index === 0 ||
+                member.mode !== 'create' ||
+                !member.useSameAddressAsMember1
+            ) {
+                return member;
+            }
+            if (!sharedContact) {
+                throw new Error('Shared contact information is missing');
+            }
+
+            return { ...member, ...sharedContact };
+        });
 
         const membershipPayload = {
             data: {
@@ -199,9 +264,9 @@ export async function createMembershipFormAction(
 
         const createdMemberIds: string[] = [];
 
-        for (let j = 0; j < membersList.length; j++) {
-            const memberData = membersList[j];
-            let currentMemberId = '';
+        for (var j = 0; j < resolvedMembers.length; j++) {
+            const memberData = resolvedMembers[j];
+            var currentMemberId = '';
 
             if (memberData.mode === 'select') {
                 currentMemberId = memberData.existingMemberId as string;
@@ -229,25 +294,12 @@ export async function createMembershipFormAction(
                     },
                 } as any);
             } else {
-                let finalAddress = memberData.address;
-                let finalZip = memberData.zipCode;
-                let finalCity = memberData.city;
-                let finalCountry = memberData.country;
-                let finalEmail = memberData.email;
-                let finalPhone = memberData.phoneNumber;
-
-                if (
-                    j > 0 &&
-                    memberData.useSameAddressAsMember1 &&
-                    membersList[0]
-                ) {
-                    finalAddress = membersList[0].address;
-                    finalZip = membersList[0].zipCode;
-                    finalCity = membersList[0].city;
-                    finalCountry = membersList[0].country;
-                    finalEmail = membersList[0].email;
-                    finalPhone = membersList[0].phoneNumber;
-                }
+                const finalAddress = memberData.address;
+                const finalZip = memberData.zipCode;
+                const finalCity = memberData.city;
+                const finalCountry = memberData.country;
+                const finalEmail = memberData.email;
+                const finalPhone = memberData.phoneNumber;
 
                 const memberPayload = {
                     data: {
@@ -316,7 +368,31 @@ export async function createMembershipFormAction(
 
         return { success: true };
     } catch (error: any) {
-        if (error instanceof ZodError) return handleZodError(error);
+        if (error instanceof ZodError) {
+            const memberValidationIssues = error.issues.filter(
+                (issue) => issue.path[0] === 'members',
+            );
+
+            const membershipValidationIssues = error.issues.filter(
+                (issue) => issue.path[0] !== 'members',
+            );
+
+            const result = await handleZodError(
+                new ZodError(membershipValidationIssues),
+            );
+
+            for (const issue of memberValidationIssues) {
+                const key = issue.path.join('.');
+
+                if (!result.errors[key]) {
+                    result.errors[key] = [];
+                }
+
+                result.errors[key].push(issue.message);
+            }
+
+            return result;
+        }
 
         console.error('Error creating membership:', error);
 

@@ -66,7 +66,9 @@
     "create_new": "Neu anlegen",
     "validation": {
         "owner_required": "Inhaber*in ist erforderlich",
-        "membership_type_required": "Mitgliedschaftsart ist erforderlich"
+        "membership_type_required": "Mitgliedschaftsart ist erforderlich",
+        "min_members": "Mindestens {{count}} Mitglieder sind erforderlich.",
+        "max_members": "Es sind maximal {{count}} Mitglieder erlaubt."
     },
     "current": "aktuell",
     "payment_information": "Zahlungsinformationen",

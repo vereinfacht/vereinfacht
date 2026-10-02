@@ -17,7 +17,7 @@ import {
 } from '@/types/resources';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormState } from 'react-dom';
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import Text from '@/app/components/Text/Text';
 import IconPlus from '/public/svg/plus_new.svg';
 import IconLink from '/public/svg/link_external.svg';
@@ -32,6 +32,38 @@ import {
 import { Button } from '@/app/components/ui/button';
 import TextAreaInput from '@/app/components/Input/TextAreaInput';
 import MemberCard from '../../members/_components/member-card';
+
+type MembershipTypeRecord = {
+    id: string;
+    minimumNumberOfMembers?: number | null;
+    maximumNumberOfMembers?: number | null;
+    attributes?: {
+        minimumNumberOfMembers?: number | null;
+        maximumNumberOfMembers?: number | null;
+    };
+};
+
+type FormMember = {
+    id: string;
+    mode: 'create' | 'select';
+    showDivisionField: boolean;
+    useSameAddressAsMember1: boolean;
+};
+
+type SelectedMemberOption = {
+    value: string;
+    label: string;
+};
+
+function parseMemberLimit(value: unknown, fallback: number | null) {
+    if (value === null || value === undefined || value === '') {
+        return fallback;
+    }
+    const numberValue = Number(value);
+    return Number.isInteger(numberValue) && numberValue >= 1
+        ? numberValue
+        : fallback;
+}
 
 interface Props {
     action: (
@@ -50,75 +82,153 @@ export default function CreateForm({
     voluntaryContributionSettings,
 }: Props) {
     const { t } = useTranslation();
-    const [isFamily, setIsFamily] = useState(false);
-    const [maxMembers, setMaxMembers] = useState<number | null>(null);
-    const [minMembers, setMinMembers] = useState<number>(1);
-    const [rawMembershipTypes, setRawMembershipTypes] = useState<any[]>([]);
+    const [selectedMembershipTypeId, setSelectedMembershipTypeId] = useState<
+        string | null
+    >(data?.membershipType?.id ?? null);
+    const [rawMembershipTypes, setRawMembershipTypes] = useState<
+        MembershipTypeRecord[]
+    >([]);
 
-    const [membersList, setMembersList] = useState([
+    const [membersList, setMembersList] = useState<FormMember[]>([
         {
-            id: 'initial-member-1',
+            id: 'draft-member-0',
             mode: 'create',
             showDivisionField: false,
             useSameAddressAsMember1: false,
         },
     ]);
-
-    const [memberToRemoveIndex, setMemberToRemoveIndex] = useState<
-        number | null
-    >(null);
+    const nextMemberIdRef = useRef(1);
+    const [memberToRemoveId, setMemberToRemoveId] = useState<string | null>(
+        null,
+    );
 
     const [rawMembers, setRawMembers] = useState<any[]>([]);
-    const [selectedMembers, setSelectedMembers] = useState<{
-        [key: number]: any;
-    }>({});
-    const [existingMembershipIds, setExistingMembershipIds] = useState<{
-        [key: number]: string | null;
-    }>({});
+    const [selectedMembers, setSelectedMembers] = useState<
+        Record<string, SelectedMemberOption | null>
+    >({});
 
-    const existingMembershipsRef = useRef(existingMembershipIds);
+    const selectedMembershipType =
+        rawMembershipTypes.find(
+            (type) => type.id === selectedMembershipTypeId,
+        ) ??
+        (data?.membershipType?.id === selectedMembershipTypeId
+            ? (data.membershipType as MembershipTypeRecord)
+            : null);
+
+    const minMembers = selectedMembershipType
+        ? (parseMemberLimit(
+              selectedMembershipType.attributes?.minimumNumberOfMembers ??
+                  selectedMembershipType.minimumNumberOfMembers,
+              1,
+          ) as number)
+        : 1;
+    const maxMembers = selectedMembershipType
+        ? parseMemberLimit(
+              selectedMembershipType.attributes?.maximumNumberOfMembers ??
+                  selectedMembershipType.maximumNumberOfMembers,
+              null,
+          )
+        : 1;
 
     useEffect(() => {
-        existingMembershipsRef.current = existingMembershipIds;
-    }, [existingMembershipIds]);
+        if (!selectedMembershipType) return;
+
+        setMembersList((previous) => {
+            const missingCount = minMembers - previous.length;
+
+            if (missingCount <= 0) {
+                return previous;
+            }
+
+            const newMembers: FormMember[] = Array.from(
+                { length: missingCount },
+                () => ({
+                    id: `draft-member-${nextMemberIdRef.current++}`,
+                    mode: 'create',
+                    showDivisionField: false,
+                    useSameAddressAsMember1: false,
+                }),
+            );
+
+            return [...previous, ...newMembers];
+        });
+    }, [selectedMembershipTypeId, minMembers, !!selectedMembershipType]);
+
+    const isFamily =
+        selectedMembershipType !== null &&
+        (minMembers > 1 || maxMembers === null || maxMembers > 1);
+    const canAddMember =
+        isFamily && (maxMembers === null || membersList.length < maxMembers);
+    const hasTooFewMembers =
+        selectedMembershipType !== null && membersList.length < minMembers;
+    const hasTooManyMembers =
+        selectedMembershipType !== null &&
+        maxMembers !== null &&
+        membersList.length > maxMembers;
+
+    const existingMembershipIds = useMemo(() => {
+        const result: Record<string, string | null> = {};
+        for (const member of membersList) {
+            const option = selectedMembers[member.id];
+            if (member.mode !== 'select' || !option?.value) {
+                result[member.id] = null;
+                continue;
+            }
+            const dbMember = rawMembers.find(
+                (item) => item.id === option.value,
+            );
+            const membershipId =
+                dbMember?.relationships?.membership?.data?.id ?? null;
+            result[member.id] =
+                membershipId && String(membershipId) !== String(data?.id)
+                    ? String(membershipId)
+                    : null;
+        }
+        return result;
+    }, [membersList, selectedMembers, rawMembers, data?.id]);
 
     const handleFormSubmit = async (
         prevState: FormActionState,
         payload: FormData,
     ): Promise<FormActionState> => {
-        const existingMemberships = existingMembershipsRef.current;
-        const hasExistingMemberships = Object.values(existingMemberships).some(
-            (id) => id !== null,
-        );
+        const validationErrors: Record<string, string[]> = {};
 
-        if (hasExistingMemberships) {
-            const validationErrors: Record<string, string[]> = {};
+        if (hasTooFewMembers || hasTooManyMembers) {
+            validationErrors._form = [
+                hasTooFewMembers
+                    ? t('membership:validation.min_members', {
+                          count: minMembers,
+                      })
+                    : t('membership:validation.max_members', {
+                          count: maxMembers,
+                      }),
+            ];
+        }
 
-            Object.entries(existingMemberships).forEach(([i, id]) => {
-                if (id !== null) {
-                    validationErrors[`members.${i}.existingMemberId`] = [
-                        t('membership:error_existing_membership.title'),
-                    ];
-                }
-            });
+        membersList.forEach((member, index) => {
+            if (existingMembershipIds[member.id]) {
+                validationErrors[`members.${index}.existingMemberId`] = [
+                    t('membership:error_existing_membership.title'),
+                ];
+            }
+        });
 
-            const failureState = {
+        if (Object.keys(validationErrors).length > 0) {
+            return {
                 success: false,
                 errors: validationErrors,
-                error: t('membership:error_existing_membership.title'),
             };
-
-            return failureState as unknown as FormActionState;
         }
 
         membersList.forEach((member, index) => {
             if (member.mode === 'create') {
                 payload.delete(`members[${index}][existingMemberId]`);
-            } else if (member.mode === 'select') {
+            } else {
                 const allKeys = Array.from(payload.keys());
                 allKeys.forEach((key) => {
                     if (
                         key.startsWith(`members[${index}]`) &&
+                        !key.includes('[formMemberId]') &&
                         !key.includes('[existingMemberId]') &&
                         !key.includes('[mode]') &&
                         !key.includes('[useSameAddressAsMember1]')
@@ -128,20 +238,6 @@ export default function CreateForm({
                 });
             }
         });
-
-        if (membersList.length > 1 && membersList[0].mode === 'select') {
-            const option = selectedMembers[0];
-            const dbMember = rawMembers.find((m) => m.id === option?.value);
-            if (dbMember) {
-                const attrs = dbMember.attributes || dbMember;
-                payload.set('members[0][address]', attrs.address || '');
-                payload.set('members[0][zipCode]', attrs.zipCode || '');
-                payload.set('members[0][city]', attrs.city || '');
-                payload.set('members[0][country]', attrs.country || '');
-                payload.set('members[0][email]', attrs.email || '');
-                payload.set('members[0][phoneNumber]', attrs.phoneNumber || '');
-            }
-        }
 
         return action(prevState, payload);
     };
@@ -160,21 +256,33 @@ export default function CreateForm({
         : '';
 
     const addMember = () => {
-        setMembersList([
-            ...membersList,
-            {
-                id: Math.random().toString(36).substr(2, 9),
-                mode: 'create',
-                showDivisionField: false,
-                useSameAddressAsMember1: false,
-            },
-        ]);
+        if (!canAddMember) return;
+        const newMember: FormMember = {
+            id: `draft-member-${nextMemberIdRef.current++}`,
+            mode: 'create',
+            showDivisionField: false,
+            useSameAddressAsMember1: false,
+        };
+
+        setMembersList((previous) => {
+            if (maxMembers !== null && previous.length >= maxMembers) {
+                return previous;
+            }
+
+            return [...previous, newMember];
+        });
     };
 
-    const updateMemberProperty = (index: number, key: string, value: any) => {
-        const updated = [...membersList];
-        updated[index] = { ...updated[index], [key]: value };
-        setMembersList(updated);
+    const updateMemberProperty = (
+        index: number,
+        key: 'mode' | 'showDivisionField' | 'useSameAddressAsMember1',
+        value: 'create' | 'select' | boolean,
+    ) => {
+        setMembersList((previous) =>
+            previous.map((member, currentIndex) =>
+                currentIndex === index ? { ...member, [key]: value } : member,
+            ),
+        );
     };
 
     const handleMembershipTypeChange = (selectedType: any) => {
@@ -182,54 +290,11 @@ export default function CreateForm({
             ? selectedType[0]
             : selectedType;
 
-        if (option?.value === 'empty-placeholder') return;
-
-        const dbRecord = rawMembershipTypes.find((t) => t.id === option.value);
-
-        const maxLimit =
-            dbRecord?.attributes?.maximumNumberOfMembers ??
-            dbRecord?.maximumNumberOfMembers ??
-            null;
-
-        const minLimit =
-            dbRecord?.attributes?.minimumNumberOfMembers ??
-            dbRecord?.minimumNumberOfMembers ??
-            1;
-
-        setMinMembers(minLimit);
-        setMaxMembers(maxLimit);
-
-        let membershipTypeName = '';
-
-        if (typeof option?.label === 'string') {
-            membershipTypeName = option.label;
-        } else if (option?.title) {
-            membershipTypeName = option.title;
-        } else if (option?.label?.props?.children?.[0]?.props?.children) {
-            membershipTypeName = option.label.props.children[0].props.children;
-        }
-
-        const normalizedTypeName = String(membershipTypeName).toLowerCase();
-
-        const familySelected =
-            normalizedTypeName.includes('familie') ||
-            normalizedTypeName.includes('family');
-
-        setIsFamily(familySelected);
-
-        if (familySelected && membersList.length < 2) {
-            setMembersList([
-                membersList[0],
-                {
-                    id: Math.random().toString(36).substr(2, 9),
-                    mode: 'create',
-                    showDivisionField: false,
-                    useSameAddressAsMember1: false,
-                },
-            ]);
-        } else if (!familySelected && membersList.length > 1) {
-            setMembersList([membersList[0]]);
-        }
+        setSelectedMembershipTypeId(
+            option?.value && option.value !== 'empty-placeholder'
+                ? String(option.value)
+                : null,
+        );
     };
 
     const fetchMembershipTypesAction = useCallback(
@@ -238,16 +303,32 @@ export default function CreateForm({
                 page: { size: itemsPerQuery, number: 1 },
                 filter: { query: searchTerm },
             });
+            const items = (response?.data ||
+                response ||
+                []) as MembershipTypeRecord[];
 
-            const items = response?.data || response || [];
-
-            setRawMembershipTypes((prev) => {
-                const prevIds = prev.map((p: any) => p.id).join(',');
-                const newIds = items.map((i: any) => i.id).join(',');
-                return prevIds === newIds ? prev : items;
+            setRawMembershipTypes((previous) => {
+                const next = [...previous];
+                let changed = false;
+                items.forEach((item) => {
+                    const existingIndex = next.findIndex(
+                        (record) => record.id === item.id,
+                    );
+                    if (existingIndex === -1) {
+                        next.push(item);
+                        changed = true;
+                    } else if (
+                        JSON.stringify(next[existingIndex]) !==
+                        JSON.stringify(item)
+                    ) {
+                        next[existingIndex] = item;
+                        changed = true;
+                    }
+                });
+                return changed ? next : previous;
             });
 
-            if (!items || items.length === 0) {
+            if (items.length === 0) {
                 return {
                     ...response,
                     data: [
@@ -259,7 +340,6 @@ export default function CreateForm({
                     ],
                 };
             }
-
             return response;
         },
         [],
@@ -314,24 +394,16 @@ export default function CreateForm({
         [t],
     );
 
-    const handleRemoveClick = (memberToRemove: number) => {
-        const updatedList = membersList.filter(
-            (_, index) => index !== memberToRemove,
+    const handleRemoveClick = (memberId: string) => {
+        if (membersList.length <= minMembers) return;
+        setMembersList((previous) =>
+            previous.filter((member) => member.id !== memberId),
         );
-
-        setExistingMembershipIds((prev) => {
-            const detectedMembershipIds = { ...prev };
-            delete detectedMembershipIds[memberToRemove];
-            return detectedMembershipIds;
+        setSelectedMembers((previous) => {
+            const next = { ...previous };
+            delete next[memberId];
+            return next;
         });
-
-        setSelectedMembers((prev) => {
-            const newSelected = { ...prev };
-            delete newSelected[memberToRemove];
-            return newSelected;
-        });
-
-        setMembersList(updatedList);
     };
 
     const fetchExistingMembersAction = useCallback(async () => {
@@ -370,45 +442,18 @@ export default function CreateForm({
         return response;
     }, []);
 
-    const handleExistingMemberSelect = (index: number, selectedItem: any) => {
+    const handleExistingMemberSelect = (
+        memberId: string,
+        selectedItem: SelectedMemberOption | SelectedMemberOption[] | null,
+    ) => {
         const option = Array.isArray(selectedItem)
             ? selectedItem[0]
             : selectedItem;
-
-        setSelectedMembers((prev) => ({ ...prev, [index]: option || null }));
+        setSelectedMembers((previous) => ({
+            ...previous,
+            [memberId]: option || null,
+        }));
     };
-
-    useEffect(() => {
-        const detectedMembershipIds: { [key: number]: string | null } = {};
-
-        membersList.forEach((member, index) => {
-            const option = selectedMembers[index];
-
-            if (member.mode !== 'select' || !option || !option.value) {
-                detectedMembershipIds[index] = null;
-                return;
-            }
-
-            const dbMember = rawMembers.find((m) => m.id === option.value);
-            const existingMembershipId =
-                dbMember?.relationships?.membership?.data?.id ?? null;
-
-            if (
-                existingMembershipId &&
-                String(existingMembershipId) !== String(data?.id)
-            ) {
-                detectedMembershipIds[index] = existingMembershipId;
-            } else {
-                detectedMembershipIds[index] = null;
-            }
-        });
-
-        setExistingMembershipIds((prev) => {
-            if (JSON.stringify(prev) === JSON.stringify(detectedMembershipIds))
-                return prev;
-            return detectedMembershipIds;
-        });
-    }, [rawMembers, selectedMembers, data?.id, membersList]);
 
     useEffect(() => {
         const handleVisibilityChange = () => {
@@ -432,28 +477,11 @@ export default function CreateForm({
     }, [selectedMembers, fetchExistingMembersAction]);
 
     const member1 = membersList[0];
-    let member1HasAddress = false;
 
-    if (member1?.mode === 'create') {
-        member1HasAddress = true;
-    } else {
-        const option = selectedMembers[0];
-        if (option && option.value) {
-            const dbMember = rawMembers.find((m) => m.id === option.value);
-            const attrs = dbMember?.attributes || dbMember;
-
-            if (
-                attrs?.address &&
-                attrs?.zipCode &&
-                attrs?.city &&
-                attrs?.country &&
-                attrs?.email &&
-                attrs?.phoneNumber
-            ) {
-                member1HasAddress = true;
-            }
-        }
-    }
+    const canUseMember1ContactInfo =
+        member1?.mode === 'create' ||
+        (member1?.mode === 'select' &&
+            Boolean(selectedMembers[member1.id]?.value));
 
     return (
         <div className="container flex flex-col gap-8">
@@ -478,6 +506,20 @@ export default function CreateForm({
                                 action={fetchMembershipTypesAction}
                                 optionLabel={renderMembershipTypeOption}
                                 onChange={handleMembershipTypeChange}
+                                error={!!formState.errors?.membershipType}
+                                defaultValue={
+                                    data?.membershipType
+                                        ? [
+                                              {
+                                                  value: data.membershipType.id,
+                                                  label:
+                                                      data.membershipType
+                                                          .title ||
+                                                      data.membershipType.id,
+                                              },
+                                          ]
+                                        : []
+                                }
                                 required
                             />
                         </FormField>
@@ -503,6 +545,7 @@ export default function CreateForm({
                                     },
                                 ]}
                                 required
+                                error={!!formState.errors?.status}
                             />
                         </FormField>
                     </div>
@@ -516,6 +559,7 @@ export default function CreateForm({
                                 label={t('membership:started_at.label')}
                                 defaultValue={startedAtDefaultValue}
                                 required
+                                error={!!formState.errors?.startedAt}
                             />
                         </FormField>
 
@@ -526,6 +570,7 @@ export default function CreateForm({
                                 type="date"
                                 label={t('membership:ended_at.label')}
                                 defaultValue={endedAtDefaultValue}
+                                error={!!formState.errors?.endedAt}
                             />
                         </FormField>
                     </div>
@@ -538,6 +583,7 @@ export default function CreateForm({
                                 label={t('membership:notes.title')}
                                 defaultValue={data?.notes ?? ''}
                                 onChange={() => {}}
+                                error={!!formState.errors?.notes}
                             />
                         </FormField>
                     </div>
@@ -548,55 +594,51 @@ export default function CreateForm({
                         {t('member:title.one')}
                     </span>
 
-                    {membersList.map((member, index) => {
-                        if (!isFamily && index > 0) return null;
-                        return (
-                            <MemberCard
-                                key={member.id}
-                                index={index}
-                                member={member}
-                                isFamily={isFamily}
-                                minMembers={minMembers}
-                                totalMembers={membersList.length}
-                                formState={formState}
-                                member1HasAddress={member1HasAddress}
-                                existingMembershipId={
-                                    existingMembershipIds[index]
+                    {membersList.map((member, index) => (
+                        <MemberCard
+                            key={member.id}
+                            index={index}
+                            member={member}
+                            isFamily={isFamily || membersList.length > 1}
+                            selectedMember={selectedMembers[member.id] ?? null}
+                            minMembers={minMembers}
+                            totalMembers={membersList.length}
+                            formState={formState}
+                            canUseMember1ContactInfo={canUseMember1ContactInfo}
+                            existingMembershipId={
+                                existingMembershipIds[member.id] ?? null
+                            }
+                            updateMemberProperty={updateMemberProperty}
+                            onRemoveRequest={(isEmpty) => {
+                                if (isEmpty) {
+                                    handleRemoveClick(member.id);
+                                } else {
+                                    setMemberToRemoveId(member.id);
                                 }
-                                updateMemberProperty={updateMemberProperty}
-                                onRemoveRequest={(isEmpty) => {
-                                    if (isEmpty) {
-                                        handleRemoveClick(index);
-                                    } else {
-                                        setMemberToRemoveIndex(index);
-                                    }
-                                }}
-                                fetchExistingMembersAction={
-                                    fetchExistingMembersAction
-                                }
-                                handleExistingMemberSelect={
-                                    handleExistingMemberSelect
-                                }
-                            />
-                        );
-                    })}
+                            }}
+                            fetchExistingMembersAction={
+                                fetchExistingMembersAction
+                            }
+                            handleExistingMemberSelect={(_, selected) =>
+                                handleExistingMemberSelect(member.id, selected)
+                            }
+                        />
+                    ))}
 
-                    {isFamily &&
-                        (maxMembers === null ||
-                            membersList.length < maxMembers) && (
-                            <div
-                                onClick={addMember}
-                                role="button"
-                                className="text-textLink hover:text-textHover flex cursor-pointer items-center gap-2 px-2 py-4 text-base font-bold transition-all duration-200"
-                            >
-                                <span className="flex shrink-0 items-center justify-center">
-                                    <IconPlus />
-                                </span>
-                                <Text className="leading-[1em]">
-                                    {t('membership:add_another_member')}
-                                </Text>
-                            </div>
-                        )}
+                    {canAddMember && (
+                        <button
+                            type="button"
+                            onClick={addMember}
+                            className="text-textLink hover:text-textHover flex cursor-pointer items-center gap-2 px-2 py-4 text-base font-bold transition-all duration-200"
+                        >
+                            <span className="flex shrink-0 items-center justify-center">
+                                <IconPlus />
+                            </span>
+                            <Text className="leading-[1em]">
+                                {t('membership:add_another_member')}
+                            </Text>
+                        </button>
+                    )}
                 </div>
 
                 <div className="bg-bgSurfaceGlassStrong flex flex-col justify-evenly gap-5 rounded-2xl p-8">
@@ -611,6 +653,7 @@ export default function CreateForm({
                                 label={t('membership:bank_iban.label')}
                                 defaultValue={data?.bankIban ?? ''}
                                 required
+                                error={!!formState.errors?.bankIban}
                             />
                         </FormField>
                         <FormField errors={formState.errors?.bankAccountHolder}>
@@ -622,6 +665,7 @@ export default function CreateForm({
                                 )}
                                 defaultValue={data?.bankAccountHolder ?? ''}
                                 required
+                                error={!!formState.errors?.bankAccountHolder}
                             />
                         </FormField>
                     </div>
@@ -634,6 +678,7 @@ export default function CreateForm({
                                 options={paymentPeriodOptions}
                                 defaultValue={data?.paymentPeriod?.id ?? ''}
                                 required
+                                error={!!formState.errors?.paymentPeriod}
                             />
                         </FormField>
                         {voluntaryContributionSettings?.allowVoluntaryContribution && (
@@ -653,6 +698,10 @@ export default function CreateForm({
                                         data?.voluntaryContribution?.toString() ||
                                         ''
                                     }
+                                    error={
+                                        !!formState.errors
+                                            ?.voluntaryContribution
+                                    }
                                 />
                             </FormField>
                         )}
@@ -660,9 +709,9 @@ export default function CreateForm({
                 </div>
 
                 <Dialog
-                    open={memberToRemoveIndex !== null}
+                    open={memberToRemoveId !== null}
                     onOpenChange={(isOpen) => {
-                        if (!isOpen) setMemberToRemoveIndex(null);
+                        if (!isOpen) setMemberToRemoveId(null);
                     }}
                 >
                     <DialogContent className="bg-bgSurfaceGlassStrong shadow-dialoge backdrop-blur-topbar rounded-2xl p-6 sm:max-w-lg sm:rounded-2xl">
@@ -678,7 +727,7 @@ export default function CreateForm({
                             <Button
                                 type="button"
                                 variant="tertiaryGray"
-                                onClick={() => setMemberToRemoveIndex(null)}
+                                onClick={() => setMemberToRemoveId(null)}
                             >
                                 {t('membership:remove_member.cancel')}
                             </Button>
@@ -686,9 +735,9 @@ export default function CreateForm({
                                 type="button"
                                 variant="primaryDanger"
                                 onClick={() => {
-                                    if (memberToRemoveIndex !== null) {
-                                        handleRemoveClick(memberToRemoveIndex);
-                                        setMemberToRemoveIndex(null);
+                                    if (memberToRemoveId !== null) {
+                                        handleRemoveClick(memberToRemoveId);
+                                        setMemberToRemoveId(null);
                                     }
                                 }}
                             >
