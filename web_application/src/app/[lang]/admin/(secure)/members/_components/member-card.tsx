@@ -3,10 +3,7 @@
 import { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import FormField from '@/app/[lang]/admin/(secure)/components/Form/FormField';
-import BelongsToSelectInput, {
-    itemsPerQuery,
-} from '@/app/components/Input/BelongsToSelectInput';
-import BelongsToMultiselectInput from '@/app/components/Input/BelongsToMultiselectInput';
+import BelongsToSelectInput from '@/app/components/Input/BelongsToSelectInput';
 import Checkbox from '@/app/components/Input/Checkbox';
 import SelectInput from '@/app/components/Input/SelectInput';
 import TextInput from '@/app/components/Input/TextInput';
@@ -20,8 +17,7 @@ import {
     TabsTrigger,
 } from '@/app/components/ui/tabs';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
-import { listDivisions } from '@/actions/divisions/list';
-import { TMemberDeserialized, TDivisionDeserialized } from '@/types/resources';
+import { TMemberDeserialized } from '@/types/resources';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 
 import IconPlus from '/public/svg/plus_new.svg';
@@ -30,6 +26,7 @@ import IconLink from '/public/svg/link_external.svg';
 import IconBin from '/public/svg/bin.svg';
 import IconBuilding from '/public/svg/building.svg';
 import IconXCircle from '/public/svg/x_circle.svg';
+import DivisionFields from './division-fields';
 
 interface MemberCardProps {
     index: number;
@@ -597,29 +594,13 @@ export default function MemberCard({
                         <span className="flex shrink-0 items-center justify-center">
                             <IconPlus />
                         </span>
+
                         <Text className="leading-[1em]">
                             {t('member:add_division')}
                         </Text>
                     </div>
                 ) : (
-                    <FormField
-                        errors={
-                            formState.errors?.[`members.${index}.divisions`]
-                        }
-                    >
-                        <BelongsToMultiselectInput<TDivisionDeserialized>
-                            resourceName={`member_${member.id}_divisions`}
-                            resourceType="divisions"
-                            label={t('division:title.other')}
-                            action={(searchTerm) =>
-                                listDivisions({
-                                    page: { size: itemsPerQuery, number: 1 },
-                                    filter: { query: searchTerm },
-                                })
-                            }
-                            optionLabel={(item) => item.title as string}
-                        />
-                    </FormField>
+                    <DivisionFields memberId={member.id} />
                 )}
             </div>
         </div>

@@ -55,6 +55,7 @@ export const updateMembershipOwner = createAuthenticatedAction(
             params: { path: { id: body.data.id } },
             body,
         });
+
         return handleApiResponse(response, 'Failed to update membership owner');
     },
 );
@@ -68,6 +69,7 @@ export const updateMemberMembership = createAuthenticatedAction(
             params: { path: { id: body.data.id } },
             body,
         });
+
         return handleApiResponse(response, 'Failed to update existing member');
     },
 );
@@ -96,18 +98,25 @@ export async function createMembershipFormAction(
             status: attributes.status,
         };
 
-        const membershipRelationships: any = {
-            ...parsedRelationships,
-            club: { data: { type: 'clubs', id: clubId } },
+        const membershipRelationships: any = Object.fromEntries(
+            Object.entries(parsedRelationships).filter(([key]) => {
+                return (
+                    key !== 'owner' &&
+                    key !== 'divisions' &&
+                    !key.startsWith('existingMember_') &&
+                    !key.startsWith('member_')
+                );
+            }),
+        );
+
+        membershipRelationships.club = {
+            data: {
+                type: 'clubs',
+                id: clubId,
+            },
         };
-
-        delete membershipRelationships.owner;
-        if (membershipRelationships.divisions) {
-            delete membershipRelationships.divisions;
-        }
-
         const rawMembers: any[] = [];
-        var i = 0;
+        let i = 0;
 
         while (formData.has(`members[${i}][mode]`)) {
             const formMemberId = formData.get(`members[${i}][formMemberId]`);
@@ -122,13 +131,25 @@ export async function createMembershipFormAction(
                 formData.get(`existingMember_${formMemberId}`) ||
                 undefined;
 
-            const rawDivisions =
-                parsedRelationships[`member_${formMemberId}_divisions`]?.data;
-            const divisionsIds = Array.isArray(rawDivisions)
-                ? rawDivisions.map((d: any) => d.id).filter(Boolean)
-                : rawDivisions?.id
-                  ? [rawDivisions.id]
-                  : [];
+            const divisionRelationshipPrefix = `member_${formMemberId}_division_`;
+
+            const divisionsIds = Object.entries(parsedRelationships)
+                .filter(([key]) => key.startsWith(divisionRelationshipPrefix))
+                .flatMap(([, relationship]) => {
+                    const data = (relationship as any)?.data;
+
+                    if (!data) {
+                        return [];
+                    }
+
+                    if (Array.isArray(data)) {
+                        return data
+                            .map((division: any) => division.id)
+                            .filter(Boolean);
+                    }
+
+                    return data.id ? [data.id] : [];
+                });
 
             rawMembers.push({
                 mode: formData.get(`members[${i}][mode]`),
@@ -182,11 +203,11 @@ export async function createMembershipFormAction(
         );
 
         type SharedContact = z.infer<typeof sharedMemberContactSchema>;
-        var sharedContact: SharedContact | null = null;
+        let sharedContact: SharedContact | null = null;
 
         if (dependentIndexes.length > 0) {
             const firstMember = membersList[0];
-            var contactSource: unknown;
+            let contactSource: unknown;
 
             if (firstMember.mode === 'select') {
                 try {
@@ -264,9 +285,9 @@ export async function createMembershipFormAction(
 
         const createdMemberIds: string[] = [];
 
-        for (var j = 0; j < resolvedMembers.length; j++) {
+        for (let j = 0; j < resolvedMembers.length; j++) {
             const memberData = resolvedMembers[j];
-            var currentMemberId = '';
+            let currentMemberId = '';
 
             if (memberData.mode === 'select') {
                 currentMemberId = memberData.existingMemberId as string;
