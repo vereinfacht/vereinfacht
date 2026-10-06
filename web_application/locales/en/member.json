@@ -53,7 +53,5 @@
     "create": "Create member",
     "edit": "Edit member",
     "add_division": "Add division",
-    "member_as_billing_contact": "Set this member as the billing contact",
-    "type": "Type",
-    "person": "Person"
+    "member_as_billing_contact": "Set this member as the billing contact"
 }
