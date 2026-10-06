@@ -48,7 +48,10 @@
         "label": "Contributions"
     },
     "label_identical_information": "Contact and address information is identical to {{name}}",
+    "consent_media_publication": "Photo/Video Consent",
     "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
     "create": "Create member",
-    "edit": "Edit member"
+    "edit": "Edit member",
+    "add_division": "Add division",
+    "member_as_billing_contact": "Set this member as the billing contact"
 }

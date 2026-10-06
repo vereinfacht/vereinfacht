@@ -58,9 +58,7 @@ export default function LanguageSelector({
                         {lang.toUpperCase()}
                     </Text>
                 )}
-                {showArrow && (
-                    <IconChevronDown className="stroke-iconSecondary hidden stroke-2 [stroke-linecap:round] [stroke-linejoin:round] md:block" />
-                )}
+                {showArrow && <IconChevronDown className="md:block" />}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 {supportedLocales.map((locale) => (
