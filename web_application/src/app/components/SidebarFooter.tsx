@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import Text from '@/app/components/Text/Text';
-import Logo from '/public/svg/vereinfacht_logo.svg';
 
 export default function SidebarFooter() {
     const { t } = useTranslation('general');
@@ -14,7 +13,11 @@ export default function SidebarFooter() {
                 <Text className="text-sm">{t('general:made_with')}</Text>
 
                 <Link href="/" target="_blank" className="flex items-center">
-                    <Logo className="h-5 pt-1" />
+                    <img
+                        src="/svg/vereinfacht_logo.svg"
+                        alt="vereinfacht logo"
+                        className="h-5 pt-1"
+                    />
                 </Link>
             </div>
 
