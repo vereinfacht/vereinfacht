@@ -51,13 +51,11 @@ export default function RolesTable({ roles, defaultPermissions }: Props) {
     ];
 
     return (
-        <div>
-            <Text className="mb-4">{t('role:title.other')}</Text>
-            <DataTable
-                data={roles}
-                columns={columns}
-                resourceName={'roles' as ResourceName}
-            />
-        </div>
+        <DataTable
+            data={roles}
+            header={true}
+            columns={columns}
+            resourceName={'roles' as ResourceName}
+        />
     );
 }

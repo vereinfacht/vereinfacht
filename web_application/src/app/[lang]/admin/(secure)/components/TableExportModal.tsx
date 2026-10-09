@@ -75,7 +75,7 @@ export default function TableExportModal({ ids, resourceName }: Props) {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <ShadCNBtn
-                    className="text-white-solid mx-1 my-6"
+                    className="text-white-solid"
                     leftIcon={<IconTable />}
                 >
                     {t('general:table.export.title')}

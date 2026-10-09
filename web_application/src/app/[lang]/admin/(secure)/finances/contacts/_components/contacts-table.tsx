@@ -102,17 +102,15 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
     ];
 
     return (
-        <div className="col-span-2">
-            <DataTable
-                data={contacts}
-                columns={columns}
-                resourceName={'finances/contacts' as ResourceName}
-                totalPages={totalPages}
-                canEdit={(contact) => (contact.isExternal ? false : true)}
-                canView={true}
-                canDelete={(contact) => (contact.isExternal ? false : true)}
-                deleteAction={deleteAction}
-            />
-        </div>
+        <DataTable
+            data={contacts}
+            columns={columns}
+            resourceName={'finances/contacts' as ResourceName}
+            totalPages={totalPages}
+            canEdit={(contact) => (contact.isExternal ? false : true)}
+            canView={true}
+            canDelete={(contact) => (contact.isExternal ? false : true)}
+            deleteAction={deleteAction}
+        />
     );
 }

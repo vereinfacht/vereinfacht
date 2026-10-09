@@ -72,7 +72,7 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <ShadCNBtn
-                    className="text-white-solid mx-1 my-6 w-fit"
+                    className="text-white-solid"
                     leftIcon={<IconDownload />}
                     disabled={!receiptIds || receiptIds.length === 0}
                 >

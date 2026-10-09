@@ -61,8 +61,7 @@ export default function UsersTable({ users }: Props) {
             } as any,
             cell: ({ row }) => {
                 const roles = row.original.roles as
-                    | { name: string }[]
-                    | undefined;
+                    { name: string }[] | undefined;
 
                 if (!roles || roles.length === 0) {
                     return <TextCell>-</TextCell>;
@@ -109,16 +108,14 @@ export default function UsersTable({ users }: Props) {
             <div className="col-span-1 flex justify-end">
                 <CreateButton href={`/admin/users/create/`} />
             </div>
-            <div className="col-span-2">
-                <DataTable
-                    data={users}
-                    columns={columns}
-                    resourceName={'users' as ResourceName}
-                    canView={true}
-                    canEdit={true}
-                    deleteAction={deleteAction}
-                />
-            </div>
+            <DataTable
+                data={users}
+                columns={columns}
+                resourceName={'users' as ResourceName}
+                canView={true}
+                canEdit={true}
+                deleteAction={deleteAction}
+            />
         </>
     );
 }

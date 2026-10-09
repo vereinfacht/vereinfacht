@@ -247,7 +247,7 @@ export default function ReceiptsTable({
     return (
         <>
             {extended && (
-                <div className="col-span-1 flex justify-end gap-1">
+                <div className="col-span-2 flex flex-wrap items-center justify-start gap-1 md:col-span-1 md:justify-end">
                     <FinancialStatementExportModal receiptIds={allIds} />
                     <TableExportModal
                         ids={allIds ?? []}
@@ -256,16 +256,14 @@ export default function ReceiptsTable({
                     <CreateButton href="/admin/finances/receipts/create" />
                 </div>
             )}
-            <div className="col-span-2">
-                <DataTable
-                    data={receipts}
-                    columns={columns}
-                    resourceName={'finances/receipts' as ResourceName}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                />
-            </div>
+            <DataTable
+                data={receipts}
+                columns={columns}
+                resourceName={'finances/receipts' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+            />
         </>
     );
 }

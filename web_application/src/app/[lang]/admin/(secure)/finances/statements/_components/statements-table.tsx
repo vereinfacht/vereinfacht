@@ -160,21 +160,20 @@ export default function StatementsTable({
     ];
 
     return (
-        <>
-            <DataTable
-                data={statements}
-                columns={columns}
-                resourceName={'finances/statements' as ResourceName}
-                totalPages={totalPages}
-                canEdit={(statement) =>
-                    statement.financeAccount?.accountType === 'cash_box'
-                }
-                canView={true}
-                defaultColumn={{
-                    size: 150,
-                    enableResizing: false,
-                }}
-            />
-        </>
+        <DataTable
+            className="w-full"
+            data={statements}
+            columns={columns}
+            resourceName={'finances/statements' as ResourceName}
+            totalPages={totalPages}
+            canEdit={(statement) =>
+                statement.financeAccount?.accountType === 'cash_box'
+            }
+            canView={true}
+            defaultColumn={{
+                size: 150,
+                enableResizing: false,
+            }}
+        />
     );
 }

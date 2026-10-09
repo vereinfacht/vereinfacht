@@ -13,7 +13,7 @@ export default function CreateButton({ href, ...props }: Props) {
 
     return (
         <Button
-            className="text-white-solid mx-1 my-6 w-fit"
+            className="text-white-solid"
             size={'default'}
             data-cy="create-button"
             leftIcon={<IconPlus />}

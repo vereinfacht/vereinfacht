@@ -104,17 +104,15 @@ export default function MembershipTypesTable({
                     <CreateButton href="/admin/membership-types/create" />
                 </div>
             )}
-            <div className="col-span-2">
-                <DataTable
-                    data={membershipTypes}
-                    columns={columns}
-                    resourceName={'membership-types' as ResourceName}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                    deleteAction={deleteAction}
-                />
-            </div>
+            <DataTable
+                data={membershipTypes}
+                columns={columns}
+                resourceName={'membership-types' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+                deleteAction={deleteAction}
+            />
         </>
     );
 }

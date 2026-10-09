@@ -184,17 +184,15 @@ export default function MembershipsTable({
                     </div>
                 </div>
             )}
-            <div className="col-span-2">
-                <DataTable
-                    data={memberships}
-                    columns={columns}
-                    resourceName={'memberships' as ResourceName}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                    deleteAction={deleteAction}
-                />
-            </div>
+            <DataTable
+                data={memberships}
+                columns={columns}
+                resourceName={'memberships' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+                deleteAction={deleteAction}
+            />
         </>
     );
 }

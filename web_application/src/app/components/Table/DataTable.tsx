@@ -9,7 +9,8 @@ import {
     TableToolbar,
     TableHeader,
     TableRow,
-} from '@/app/components/Table/Table';
+    TableCaption,
+} from '@/ui/table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
 import {
@@ -22,6 +23,10 @@ import {
 import { TableAction } from './TableAction';
 import TablePagination from './TablePagination';
 import createTranslation from 'next-translate/createTranslation';
+import { cn } from '@/utils/shadcn';
+import Text from '../Text/Text';
+import { singularize } from '@/utils/strings';
+import { getI18nNamespace } from '@/utils/localization';
 
 interface DataTableProps<TData, TValue> {
     data: TData[];
@@ -34,6 +39,8 @@ interface DataTableProps<TData, TValue> {
     canDelete?: boolean | ((row: TData) => boolean);
     deleteAction?: (formData: FormData) => Promise<FormActionState>;
     totalPages?: number;
+    className?: string;
+    header?: boolean | string;
 }
 
 export function DataTable<TData extends Model, TValue>({
@@ -46,6 +53,8 @@ export function DataTable<TData extends Model, TValue>({
     onEdit,
     canDelete = false,
     deleteAction,
+    className,
+    header,
     totalPages,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
@@ -57,7 +66,19 @@ export function DataTable<TData extends Model, TValue>({
     const { t } = createTranslation();
 
     return (
-        <div className="flex flex-col gap-4 overflow-auto">
+        <div
+            className={cn(
+                'col-span-2 flex flex-col gap-4 overflow-auto',
+                className,
+            )}
+        >
+            {header && (
+                <Text preset="headline">
+                    {header === true
+                        ? t(`${getI18nNamespace(resourceName)}:title.one`)
+                        : header}
+                </Text>
+            )}
             <div>
                 <TableToolbar />
                 <Table>
@@ -81,9 +102,7 @@ export function DataTable<TData extends Model, TValue>({
                                 })}
                                 <TableHead>
                                     <div className="text-textSecondary text-sm font-medium">
-                                        <span>
-                                            {t('contact:actions.label')}
-                                        </span>
+                                        <span>{t('general:actions')}</span>
                                     </div>
                                 </TableHead>
                             </TableRow>

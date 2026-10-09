@@ -98,17 +98,15 @@ export default function DivisionsTable({
                     <CreateButton href="/admin/divisions/create" />
                 </div>
             )}
-            <div className="col-span-2">
-                <DataTable
-                    data={divisions}
-                    columns={columns}
-                    resourceName={'divisions'}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                    deleteAction={deleteAction}
-                />
-            </div>
+            <DataTable
+                data={divisions}
+                columns={columns}
+                resourceName={'divisions'}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+                deleteAction={deleteAction}
+            />
         </>
     );
 }

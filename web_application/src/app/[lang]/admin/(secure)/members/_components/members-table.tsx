@@ -170,7 +170,7 @@ export default function MembersTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-end">
+                <div className="col-span-2 flex flex-wrap items-center justify-start gap-1 md:col-span-1 md:justify-end">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName="members"
@@ -178,18 +178,16 @@ export default function MembersTable({
                     <CreateButton href="/admin/members/create" />
                 </div>
             )}
-            <div className="col-span-2">
-                <DataTable
-                    data={members}
-                    columns={columns}
-                    resourceName={'members' as ResourceName}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                    canDelete={canDeleteMember}
-                    deleteAction={deleteAction}
-                />
-            </div>
+            <DataTable
+                data={members}
+                columns={columns}
+                resourceName={'members' as ResourceName}
+                totalPages={totalPages}
+                canEdit={true}
+                canView={true}
+                canDelete={canDeleteMember}
+                deleteAction={deleteAction}
+            />
         </>
     );
 }

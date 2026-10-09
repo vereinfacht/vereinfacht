@@ -58,18 +58,14 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
     ];
 
     return (
-        <>
-            <div className="col-span-2">
-                <DataTable
-                    data={taxAccounts}
-                    columns={columns}
-                    resourceName={'tax-accounts' as ResourceName}
-                    totalPages={totalPages}
-                    canEdit={true}
-                    canView={true}
-                    deleteAction={deleteAction}
-                />
-            </div>
-        </>
+        <DataTable
+            data={taxAccounts}
+            columns={columns}
+            resourceName={'tax-accounts' as ResourceName}
+            totalPages={totalPages}
+            canEdit={true}
+            canView={true}
+            deleteAction={deleteAction}
+        />
     );
 }
