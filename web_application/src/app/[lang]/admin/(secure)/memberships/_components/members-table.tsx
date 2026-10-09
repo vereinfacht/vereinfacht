@@ -39,6 +39,9 @@ export default function MembersTable({
         {
             accessorKey: 'divisions',
             header: t('division:title.other'),
+            meta: {
+                mobileLabel: t('division:title.other'),
+            } as any,
             cell: (cell) => {
                 const divisions =
                     (cell.row.original.divisions as TDivisionDeserialized[]) ??
@@ -59,6 +62,9 @@ export default function MembersTable({
             id: 'totalCost',
             accessorKey: 'divisions',
             header: t('member:total_cost.label'),
+            meta: {
+                mobileLabel: t('member:total_cost.label'),
+            } as any,
             cell: ({ row }) => {
                 const divisions =
                     (row.original.divisions as TDivisionDeserialized[]) ?? [];
@@ -80,11 +86,17 @@ export default function MembersTable({
         {
             accessorKey: 'email',
             header: t('member:email.label'),
+            meta: {
+                mobileLabel: t('member:email.label'),
+            } as any,
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'status',
             header: t('member:status.label'),
+            meta: {
+                mobileLabel: t('member:status.label'),
+            } as any,
             cell: ({ row }) => (
                 <TextCell>
                     {row.getValue('status')

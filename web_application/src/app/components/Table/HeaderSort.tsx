@@ -41,11 +41,11 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
                 }
                 rightIcon={
                     matchedSort === `-${columnId}` ? (
-                        <ArrowDown className="h-4 w-4 stroke-slate-900" />
+                        <ArrowDown className="stroke-iconSecondary h-4 w-4" />
                     ) : matchedSort === columnId ? (
-                        <ArrowUp className="h-4 w-4 stroke-slate-900" />
+                        <ArrowUp className="stroke-iconSecondary h-4 w-4" />
                     ) : (
-                        <ArrowUpDown className="h-4 w-4 stroke-slate-500" />
+                        <ArrowUpDown className="stroke-iconSecondary h-4 w-4" />
                     )
                 }
             />

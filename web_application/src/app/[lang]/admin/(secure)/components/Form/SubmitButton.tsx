@@ -1,20 +1,19 @@
 'use client';
 
-import Button from '@/app/components/Button/Button';
-import { ButtonPresets } from '@/app/components/Button/presets';
+import { Button } from '@/app/components/ui/button';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { ButtonHTMLAttributes } from 'react';
 import { useFormStatus } from 'react-dom';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
-    preset?: ButtonPresets;
+    variant?: 'primary' | 'secondary' | 'tertiary';
     loading?: boolean;
 }
 
 export default function SubmitButton({
     title,
-    preset = 'primary',
+    variant = 'primary',
     loading,
     ...props
 }: Props) {
@@ -27,7 +26,7 @@ export default function SubmitButton({
             type="submit"
             isLoading={isLoading}
             data-cy="submit-button"
-            preset={preset}
+            variant={variant}
         >
             {capitalizeFirstLetter(title)}
         </Button>

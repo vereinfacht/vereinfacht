@@ -3,7 +3,6 @@ import { BelongsToDetailFieldDef, ResourceName } from '@/resources/resource';
 import { camelCaseToSnakeCase, singularize } from '@/utils/strings';
 import useTranslation from 'next-translate/useTranslation';
 import DetailField from '../DetailField';
-import { TableAction } from '@/app/components/Table/TableAction';
 
 interface Props<T> extends BelongsToDetailFieldDef<T> {
     viewRoute?: string;
@@ -20,15 +19,11 @@ export default function BelongsToField<T>({
     const translationNamespace = camelCaseToSnakeCase(
         singularize(attribute.toString()),
     );
-    const hasValue = value != null;
-    const canView = hasValue && viewRoute.length > 0;
-    const href = canView ? `/admin/${viewRoute}/${value.id}` : '';
 
     return (
         <li className="mt-4">
             <Text className="mb-2 flex gap-2 font-light text-slate-600 md:hyphens-auto">
                 {t(label ?? `${translationNamespace}:title`, { count: 1 })}
-                {canView && <TableAction type="view" href={href} />}
             </Text>
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {

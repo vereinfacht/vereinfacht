@@ -59,8 +59,8 @@ export function HeaderOptionFilter({
                                 className={[
                                     'h-4 w-4',
                                     filterQueryParam?.length
-                                        ? 'text-slate-800'
-                                        : 'text-gray-400',
+                                        ? 'text-gray-400'
+                                        : 'text-iconSecondary',
                                 ].join(' ')}
                             />
                         }

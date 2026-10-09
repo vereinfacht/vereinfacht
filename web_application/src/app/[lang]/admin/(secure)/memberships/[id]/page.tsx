@@ -142,7 +142,7 @@ export default async function MembershipShowPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-6">
+        <div className="col-span-2 container flex flex-col gap-6">
             <EditButton href={`/admin/memberships/edit/${params.id}`} />
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {
@@ -233,19 +233,24 @@ export default async function MembershipShowPage({ params }: Props) {
 
             {membersWithDivisions.length > 0 && (
                 <>
-                    <Text preset="headline" tag="h2" className="mt-6">
-                        {t('member:title.other')}
-                    </Text>
-                    <MembersTable
-                        members={membersWithDivisions}
-                        divisionMembershipTypes={divisionMembershipTypes}
-                        ownerId={
-                            membership.owner?.id
-                                ? [membership.owner.id]
-                                : undefined
-                        }
-                        totalPages={1}
-                    />
+                    {' '}
+                    <div className="col-span-1 flex justify-end">
+                        <Text preset="headline" tag="h2" className="mt-6">
+                            {t('member:title.other')}
+                        </Text>
+                    </div>
+                    <div className="col-span-2">
+                        <MembersTable
+                            members={membersWithDivisions}
+                            divisionMembershipTypes={divisionMembershipTypes}
+                            ownerId={
+                                membership.owner?.id
+                                    ? [membership.owner.id]
+                                    : undefined
+                            }
+                            totalPages={1}
+                        />
+                    </div>
                 </>
             )}
         </div>

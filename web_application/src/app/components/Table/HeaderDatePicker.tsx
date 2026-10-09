@@ -115,7 +115,7 @@ export function HeaderDatePicker({
                         data-cy="date-range-trigger"
                         leftIcon={
                             <CalendarDays
-                                className={`h-4 w-4 fill-none! text-slate-500 ${hasActiveFilter ? 'text-slate-900' : ''}`}
+                                className={`text-textSecondary h-4 w-4 fill-none! ${hasActiveFilter ? 'text-slate-900' : ''}`}
                             />
                         }
                     >
@@ -157,7 +157,7 @@ export function HeaderDatePicker({
                             />
                         </div>
 
-                        <div className="mt-2 flex gap-2">
+                        <div className="textSecondaryflex mt-2 gap-2">
                             <Button
                                 onClick={handleApply}
                                 variant="primary"

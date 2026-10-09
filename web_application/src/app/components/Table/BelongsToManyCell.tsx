@@ -59,7 +59,7 @@ export default function BelongsToManyCell({
                         <Link
                             href={`${basePath}/${item.id}`}
                             className={[
-                                'text-base font-medium whitespace-nowrap text-blue-500 hover:underline',
+                                'text-base whitespace-nowrap underline hover:cursor-pointer',
                                 truncate
                                     ? 'w-40 overflow-hidden text-ellipsis'
                                     : '',
@@ -85,7 +85,7 @@ export default function BelongsToManyCell({
         >
             <Link
                 href={`${parentPath}`}
-                className="text-base font-medium whitespace-nowrap text-blue-500 hover:underline"
+                className="text-base font-medium whitespace-nowrap underline hover:cursor-pointer"
             >
                 {getDisplayValue(firstItem)},{' '}
                 {t('plus_n_more', { count: remainingCount })}

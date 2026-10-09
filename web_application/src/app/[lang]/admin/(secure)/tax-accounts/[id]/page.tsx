@@ -31,7 +31,7 @@ export default async function TaxAccountShowPage({ params }: Props) {
     ];
 
     return (
-        <div className="container flex flex-col gap-6">
+        <div className="col-span-2 container flex flex-col gap-6">
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (
                     <DetailField

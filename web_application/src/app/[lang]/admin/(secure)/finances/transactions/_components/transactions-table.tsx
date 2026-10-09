@@ -28,11 +28,17 @@ export default function TransactionsTable({
     const columns: ColumnDef<TTransactionDeserialized>[] = [
         {
             accessorKey: 'title',
+            meta: {
+                mobileLabel: t('transaction:title.label'),
+            } as any,
             header: t('transaction:title.label'),
             cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
         },
         {
             accessorKey: 'description',
+            meta: {
+                mobileLabel: t('transaction:description.label'),
+            } as any,
             header: t('transaction:description.label'),
             cell: ({ row }) => (
                 <TextCell truncate>{row.getValue('description')}</TextCell>
@@ -40,11 +46,17 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'bankIban',
+            meta: {
+                mobileLabel: t('transaction:iban.label'),
+            } as any,
             header: t('transaction:iban.label'),
             cell: ({ row }) => <TextCell>{row.getValue('bankIban')}</TextCell>,
         },
         {
             accessorKey: 'valuedAt',
+            meta: {
+                mobileLabel: t('transaction:valued_at.label'),
+            } as any,
             header: t('transaction:valued_at.label'),
             cell: ({ row }) => (
                 <TextCell>
@@ -54,6 +66,9 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'bookedAt',
+            meta: {
+                mobileLabel: t('transaction:booked_at.label'),
+            } as any,
             header: t('transaction:booked_at.label'),
             cell: ({ row }) => (
                 <TextCell>
@@ -63,6 +78,9 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'status',
+            meta: {
+                mobileLabel: t('transaction:status.label'),
+            } as any,
             header: t('transaction:status.label'),
             cell: ({ row }) => (
                 <StatusCell
@@ -74,6 +92,9 @@ export default function TransactionsTable({
         },
         {
             accessorKey: 'amount',
+            meta: {
+                mobileLabel: t('transaction:amount.label'),
+            } as any,
             header: t('transaction:amount.label'),
             cell: ({ row }) => <CurrencyCell value={row.getValue('amount')} />,
         },

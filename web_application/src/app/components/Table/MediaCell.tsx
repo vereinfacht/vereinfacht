@@ -48,7 +48,7 @@ export default function MediaCell({
                 target={mediaCount === 1 ? '_blank' : undefined}
                 rel="noopener noreferrer"
                 href={href}
-                className="relative block w-fit"
+                className="relative mt-3 block w-fit"
             >
                 <Paperclip className="text-blue-500" />
                 <Badge

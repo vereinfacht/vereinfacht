@@ -4,14 +4,14 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled',
+    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled break-normal overflow-ellipsis text-nowrap text-ellipsize',
     {
         variants: {
             variant: {
                 primary:
                     'bg-btnBgPrimary text-white-solid shadow-buttonPrimary hover:bg-btnBgPrimaryHover focus-visible:bg-btnBgPrimaryHover focus-visible:ring-offset-2 disabled:bg-btnBgPrimaryDisabled disabled:shadow-none',
                 secondary:
-                    'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled',
+                    'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled disabled:backdrop-blur-secondaryButton',
                 tertiary:
                     'text-textLink hover:bg-btnBgTertiaryHover hover:text-textHover focus-visible:bg-btnBgTertiaryHover focus-visible:text-textLink',
                 tertiaryDanger:
