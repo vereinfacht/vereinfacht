@@ -54,8 +54,5 @@
     },
     "updated_at": {
         "label": "Aktualisiert am"
-    },
-    "actions": {
-        "label": "Aktionen"
     }
 }
