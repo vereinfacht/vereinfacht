@@ -233,7 +233,6 @@ export default async function MembershipShowPage({ params }: Props) {
 
             {membersWithDivisions.length > 0 && (
                 <>
-                    {' '}
                     <div className="col-span-1 flex justify-end">
                         <Text preset="headline" tag="h2" className="mt-6">
                             {t('member:title.other')}
