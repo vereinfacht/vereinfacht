@@ -1,28 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
 import useTranslation from 'next-translate/useTranslation';
 import IconChevronRight from '/public/svg/chevron-right.svg';
 import IconChevronLeft from '/public/svg/chevron-left.svg';
-
-export function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
-        checkIsMobile();
-
-        window.addEventListener('resize', checkIsMobile);
-
-        return () => window.removeEventListener('resize', checkIsMobile);
-    }, []);
-
-    return isMobile;
-}
+import { useIsMobile } from '@/app/hooks/use-mobile';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
     return (
