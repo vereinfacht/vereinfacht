@@ -79,7 +79,7 @@ export function DataTable<TData extends Model, TValue>({
                         : header}
                 </Text>
             )}
-            <div>
+            <div className="w-full min-w-max">
                 <TableToolbar />
                 <Table>
                     <TableHeader>
