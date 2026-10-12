@@ -9,7 +9,7 @@ import { itemsPerPage } from '@/services/api-endpoints';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import { listFinanceContacts } from '@/actions/financeContacts/list';
 import TableExportModal from '../../components/TableExportModal';
-import CreateButton from '../../components/CreateButton';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 async function getContactsFromApi(params: ListFinanceContactSearchParamsType) {
     const response = await listFinanceContacts({
@@ -34,13 +34,12 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
-            <div className="col-span-1 flex justify-end">
+            <TableToolbarActions createHref="/admin/finances/contacts/create/">
                 <TableExportModal
                     ids={meta.page?.allIds}
                     resourceName="finance_contacts"
                 />
-                <CreateButton href={`/admin/finances/contacts/create/`} />
-            </div>
+            </TableToolbarActions>
             <ContactsTable contacts={contacts} totalPages={totalPages} />
         </>
     );

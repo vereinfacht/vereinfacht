@@ -9,9 +9,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listMembershipTypesSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];
@@ -96,13 +96,12 @@ export default function MembershipTypesTable({
     return (
         <>
             {extended && (
-                <div className="col-span-1 flex justify-end">
+                <TableToolbarActions createHref="/admin/membership-types/create">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName={'membership-types'}
                     />
-                    <CreateButton href="/admin/membership-types/create" />
-                </div>
+                </TableToolbarActions>
             )}
             <DataTable
                 data={membershipTypes}

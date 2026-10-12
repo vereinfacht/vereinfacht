@@ -10,9 +10,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
 import DateField from '../../components/Fields/Detail/DateField';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 interface Props {
     users: TUserDeserialized[];
@@ -105,9 +105,7 @@ export default function UsersTable({ users }: Props) {
 
     return (
         <>
-            <div className="col-span-1 flex justify-end">
-                <CreateButton href={`/admin/users/create/`} />
-            </div>
+            <TableToolbarActions createHref="/admin/users/create/" />
             <DataTable
                 data={users}
                 columns={columns}

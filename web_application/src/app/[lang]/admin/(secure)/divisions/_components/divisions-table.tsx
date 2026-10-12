@@ -11,7 +11,7 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listDivisionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
+import TableToolbarActions from '../../components/TableToolbarActions';
 import TableExportModal from '../../components/TableExportModal';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 
@@ -90,13 +90,12 @@ export default function DivisionsTable({
     return (
         <>
             {extended && (
-                <div className="col-span-1 flex justify-end">
+                <TableToolbarActions createHref="/admin/divisions/create">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName="divisions"
                     />
-                    <CreateButton href="/admin/divisions/create" />
-                </div>
+                </TableToolbarActions>
             )}
             <DataTable
                 data={divisions}
