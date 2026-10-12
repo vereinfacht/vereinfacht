@@ -9,7 +9,6 @@ import {
     TableToolbar,
     TableHeader,
     TableRow,
-    TableCaption,
 } from '@/ui/table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
@@ -25,7 +24,6 @@ import TablePagination from './TablePagination';
 import createTranslation from 'next-translate/createTranslation';
 import { cn } from '@/utils/shadcn';
 import Text from '../Text/Text';
-import { singularize } from '@/utils/strings';
 import { getI18nNamespace } from '@/utils/localization';
 
 interface DataTableProps<TData, TValue> {
@@ -239,7 +237,11 @@ export function DataTable<TData extends Model, TValue>({
                                                         ).meta?.mobileLabel ||
                                                             cell.column.id}
                                                     </span>
-                                                    <div className="wrap-break text-textPrimary flex w-1/2 justify-start overflow-hidden text-left md:w-auto md:flex-auto [&_*]:!text-sm [&_*]:!leading-5 [&_*]:!font-normal md:[&_*]:!leading-6">
+                                                    <div
+                                                        className={cn(
+                                                            'wrap-break text-textPrimary flex w-1/2 justify-start overflow-visible text-left md:w-auto md:flex-auto',
+                                                        )}
+                                                    >
                                                         {flexRender(
                                                             cell.column
                                                                 .columnDef.cell,
