@@ -1,6 +1,5 @@
 'use client';
 
-import Button from '@/app/components/Button/Button';
 import Text from '@/app/components/Text/Text';
 import {
     Dialog,
@@ -10,13 +9,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
 import { useToast } from '@/hooks/toast/use-toast';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import IconDownload from '/public/svg/download.svg';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import SubmitButton from '../../../components/Form/SubmitButton';
-import { Button as ShadCNBtn } from '@/app/components/ui/button';
 
 interface Props {
     receiptIds?: string[];
@@ -71,13 +70,13 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <ShadCNBtn
+                <Button
                     className="text-white-solid"
                     leftIcon={<IconDownload />}
                     disabled={!receiptIds || receiptIds.length === 0}
                 >
                     {t('financial_statement:export')}
-                </ShadCNBtn>
+                </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
@@ -100,7 +99,7 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
                 >
                     <div className="flex gap-4 self-end">
                         <Button
-                            preset="secondary"
+                            variant="tertiaryGray"
                             type="button"
                             onClick={() => setIsOpen(false)}
                         >
