@@ -1,0 +1,22 @@
+{
+    "title": "Change history",
+    "created_at": {
+        "label": "Date"
+    },
+    "causer": {
+        "label": "Changed by",
+        "system": "System"
+    },
+    "event": {
+        "label": "Action",
+        "created": "Created",
+        "updated": "Updated",
+        "deleted": "Deleted"
+    },
+    "changes": {
+        "label": "Changes",
+        "old": "Old",
+        "new": "New"
+    },
+    "empty": "No changes have been recorded yet."
+}

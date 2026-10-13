@@ -27,6 +27,12 @@
     "country": {
         "label": "Country"
     },
+    "preferred_locale": {
+        "label": "Preferred language"
+    },
+    "tax_account_chart": {
+        "label": "Tax account group"
+    },
     "email": {
         "label": "Email",
         "help": "Filled out application forms will be sent to this address"
