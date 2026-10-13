@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
 import {
     Table,
@@ -41,6 +42,19 @@ interface DataTableProps<TData, TValue> {
     header?: boolean | string;
 }
 
+interface TableActionsProps {
+    renderActions: () => ReactNode;
+    hasActions: boolean;
+}
+
+function TableActions({ renderActions, hasActions }: TableActionsProps) {
+    if (!hasActions) {
+        return null;
+    }
+
+    return <div className="flex items-center gap-2">{renderActions()}</div>;
+}
+
 export function DataTable<TData extends Model, TValue>({
     data,
     defaultColumn,
@@ -62,6 +76,7 @@ export function DataTable<TData extends Model, TValue>({
         getCoreRowModel: getCoreRowModel(),
     });
     const { t } = createTranslation();
+    const hasActions = Boolean(canEdit || canView || deleteAction);
 
     return (
         <div
@@ -98,11 +113,13 @@ export function DataTable<TData extends Model, TValue>({
                                         </TableHead>
                                     );
                                 })}
-                                <TableHead>
-                                    <div className="text-textSecondary text-sm font-medium">
-                                        <span>{t('general:actions')}</span>
-                                    </div>
-                                </TableHead>
+                                {hasActions && (
+                                    <TableHead>
+                                        <div className="text-textSecondary text-sm font-medium">
+                                            <span>{t('general:actions')}</span>
+                                        </div>
+                                    </TableHead>
+                                )}
                             </TableRow>
                         ))}
                     </TableHeader>
@@ -204,13 +221,10 @@ export function DataTable<TData extends Model, TValue>({
                                                     mobileHeaderCell.getContext(),
                                                 )}
                                             </div>
-                                            {(canEdit ||
-                                                canView ||
-                                                deleteAction) && (
-                                                <div className="flex items-center gap-2">
-                                                    {renderActions()}
-                                                </div>
-                                            )}
+                                            <TableActions
+                                                hasActions={hasActions}
+                                                renderActions={renderActions}
+                                            />
                                         </td>
 
                                         {cells.map((cell, index) => {
@@ -252,14 +266,17 @@ export function DataTable<TData extends Model, TValue>({
                                             );
                                         })}
 
-                                        {(canEdit ||
-                                            canView ||
-                                            deleteAction) && (
+                                        {hasActions && (
                                             <TableCell
                                                 key="actions"
-                                                className="hidden items-center justify-start gap-2 md:flex"
+                                                className="hidden md:table-cell"
                                             >
-                                                {renderActions()}
+                                                <TableActions
+                                                    hasActions={hasActions}
+                                                    renderActions={
+                                                        renderActions
+                                                    }
+                                                />
                                             </TableCell>
                                         )}
                                     </TableRow>
@@ -269,10 +286,7 @@ export function DataTable<TData extends Model, TValue>({
                             <TableRow>
                                 <TableCell
                                     colSpan={
-                                        columns.length +
-                                        (canEdit || canView || deleteAction
-                                            ? 1
-                                            : 0)
+                                        columns.length + (hasActions ? 1 : 0)
                                     }
                                     className="flex h-24 justify-center text-center md:table-cell"
                                 >
