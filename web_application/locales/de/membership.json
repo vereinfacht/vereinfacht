@@ -41,6 +41,7 @@
     },
     "owner_email": "Inhaber*in-E-Mail",
     "notes": {
+        "title": "Notiz",
         "label": "Sonstiges",
         "help": "Angaben der antragestellenden Person",
         "placeholder": "Anmerkungen, Fragen, Notizen"
@@ -59,11 +60,32 @@
         "label": "Freiwilliger Zusatzbeitrag",
         "help": "Ein freiwilliger Zusatzbeitrag, der zusätzlich zum Mitgliedsbeitrag erhoben wird. Wird nur hinzugerechnet, sofern der Verein diese Funktion aktiviert hat."
     },
-    "create": "Mitgliedschaft erstellen",
+    "create": "Neue Mitgliedschaft",
     "edit": "Mitgliedschaft bearbeiten",
+    "select": "Auswählen",
+    "create_new": "Neu anlegen",
     "validation": {
         "owner_required": "Inhaber*in ist erforderlich",
-        "membership_type_required": "Mitgliedschaftsart ist erforderlich"
+        "membership_type_required": "Mitgliedschaftsart ist erforderlich",
+        "min_members": "Mindestens {{count}} Mitglieder sind erforderlich.",
+        "max_members": "Es sind maximal {{count}} Mitglieder erlaubt."
     },
-    "current": "aktuell"
+    "current": "aktuell",
+    "payment_information": "Zahlungsinformationen",
+    "choose_member_error": "Bitte wählen Sie ein Mitglied",
+    "add_another_member": "Weiteres Mitglied hinzufügen",
+    "no_membership_types_title": "Noch keine Mitgliedschaftsarten angelegt",
+    "no_membership_types_description": "Ohne Mitgliedschaftsart lässt sich keine Mitgliedschaft anlegen. Lege zuerst in den Vereinseinstellungen eine Art an.",
+    "go_to_membership_types": "Zu den Mitgliedschaftsarten",
+    "remove_member": {
+        "title": "Mitglied entfernen?",
+        "description": "Alle Angaben zu diesem Mitglied gehen verloren.",
+        "remove": "Entfernen",
+        "cancel": "Abbrechen"
+    },
+    "error_existing_membership": {
+        "title": "Dieser Kontakt ist  bereits Mitglied   einer anderen  Mitgliedschaft",
+        "description": "Eine Person kann nur in einer Mitgliedschaft Mitglied sein. Entferne das Mitglied dort oder wähle hier einen anderen Kontakt.",
+        "open_membership": "Mitgliedschaft öffnen"
+    }
 }

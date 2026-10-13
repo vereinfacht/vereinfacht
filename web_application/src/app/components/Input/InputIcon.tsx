@@ -9,7 +9,7 @@ interface Props {
 
 function IconContainer({ children }: { children: ReactNode }) {
     return (
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+        <div className="text-textSecondary pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             {children}
         </div>
     );
@@ -29,11 +29,7 @@ export default function InputIcon({ icon, type }: Props) {
     if (type === 'select') {
         return (
             <IconContainer>
-                <IconChevron
-                    width={24}
-                    height={24}
-                    className="stroke-current stroke-2 text-slate-600 [stroke-linecap:round] [stroke-linejoin:round]"
-                />
+                <IconChevron className="text-textSecondary" />
             </IconContainer>
         );
     }
@@ -41,11 +37,7 @@ export default function InputIcon({ icon, type }: Props) {
     if (type === 'date') {
         return (
             <IconContainer>
-                <IconCalendar
-                    width={24}
-                    height={24}
-                    className="stroke-current stroke-2 text-slate-600 [stroke-linecap:round] [stroke-linejoin:round]"
-                />
+                <IconCalendar className="text-textSecondary" />
             </IconContainer>
         );
     }

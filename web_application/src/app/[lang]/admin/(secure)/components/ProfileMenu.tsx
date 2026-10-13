@@ -38,9 +38,7 @@ export default function ProfileMenu({
                     </Text>
                 )}
 
-                {showArrow && (
-                    <IconChevronDown className="stroke-iconSecondary hidden stroke-2 [stroke-linecap:round] [stroke-linejoin:round] md:block" />
-                )}
+                {showArrow && <IconChevronDown className="md:block" />}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => signOut()}>

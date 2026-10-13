@@ -17,6 +17,7 @@ interface Props<T> {
     onChange?: (selected: Option[]) => void;
     required?: boolean;
     defaultValue?: Option[];
+    error?: boolean;
 }
 
 export default function BelongsToSelectInput<T>({
@@ -29,6 +30,7 @@ export default function BelongsToSelectInput<T>({
     optionDisabled,
     defaultValue,
     required = false,
+    error,
 }: Props<T>) {
     const [options, setOptions] = useState<Option[]>([]);
     const [query, setQuery] = useState('');
@@ -86,6 +88,7 @@ export default function BelongsToSelectInput<T>({
             query={query}
             multiple={false}
             onChange={onChange}
+            error={error}
         />
     );
 }

@@ -10,6 +10,8 @@ const buttonVariants = cva(
             variant: {
                 primary:
                     'bg-btnBgPrimary text-white-solid shadow-buttonPrimary hover:bg-btnBgPrimaryHover focus-visible:bg-btnBgPrimaryHover focus-visible:ring-offset-2 disabled:bg-btnBgPrimaryDisabled disabled:shadow-none',
+                primaryDanger:
+                    'bg-btnBgPrimaryDanger text-white-solid shadow-buttonPrimary hover:bg-btnBgPrimaryDangerHover focus-visible:bg-btnBgPrimaryDangerHover focus-visible:ring-offset-2 disabled:bg-btnBgPrimaryDisabled disabled:shadow-none',
                 secondary:
                     'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled',
                 tertiary:

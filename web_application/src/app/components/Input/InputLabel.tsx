@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
+
 interface Props {
     forInput: string;
     value?: string;
@@ -7,11 +9,12 @@ interface Props {
 }
 
 function indicateRequirement(value: string, required?: boolean | undefined) {
+    const { t } = useTranslation();
     if (!required) {
         return value;
     }
 
-    return `${value} *`;
+    return `${value} (${t('general:required')}) `;
 }
 
 export default function InputLabel({

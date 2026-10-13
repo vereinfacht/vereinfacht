@@ -41,6 +41,7 @@
     },
     "owner_email": "Owner email",
     "notes": {
+        "title": "Note",
         "label": "Other",
         "help": "Information provided by applying person.",
         "placeholder": "Hints, questions, notes"
@@ -59,11 +60,33 @@
         "label": "Voluntary extra contribution",
         "help": "An optional extra contribution that is charged in addition to the membership fee. Only added if the club has activated this feature."
     },
-    "create": "Create membership",
+    "create": "New membership",
     "edit": "Edit membership",
+    "select": "Select",
+    "create_new": "Create new",
     "validation": {
         "owner_required": "Owner is required",
-        "membership_type_required": "Membership type is required"
+        "membership_type_required": "Membership type is required",
+        "min_members": "At least {{count}} members are required.",
+        "max_members": "A maximum of {{count}} members is allowed."
     },
-    "current": "current"
+    "current": "current",
+
+    "payment_information": "Payment information",
+    "choose_member_error": "Please select a member",
+    "add_another_member": "Add another member",
+    "no_membership_types_title": "No membership types created yet",
+    "no_membership_types_description": "Without a membership type, no membership can be created. Please create a type in the club settings first.",
+    "go_to_membership_types": "Go to membership types",
+    "remove_member": {
+        "title": "Remove Member?",
+        "description": "All information about this member will be removed.",
+        "remove": "Remove",
+        "cancel": "Cancel"
+    },
+    "error_existing_membership": {
+        "title": "This contact is already part of another membership",
+        "description": "A person can only belong to one membership. Remove the member from that membership or select a different contact here.",
+        "open_membership": "Open membership"
+    }
 }
