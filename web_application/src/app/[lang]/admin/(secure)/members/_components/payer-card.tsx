@@ -6,7 +6,6 @@ import FormField from '../../components/Form/FormField';
 import { FormActionState } from '../../components/Form/FormStateHandler';
 import BelongsToSelectInput from '@/app/components/Input/BelongsToSelectInput';
 import InputLabel from '@/app/components/Input/InputLabel';
-import Text from '@/app/components/Text/Text';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import {
     Tabs,
@@ -18,6 +17,12 @@ import { TMemberDeserialized } from '@/types/resources';
 import IconBuilding from '/public/svg/building.svg';
 import IconUser from '/public/svg/user.svg';
 import ContactCard from './contact-card';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@/app/components/ui/card';
 
 interface PayerCardProps {
     formPath: string;
@@ -42,117 +47,124 @@ export default function PayerCard({
     };
 
     return (
-        <div className="rounded-2xl border bg-white p-6">
-            <Text className="text-textPrimary text-lg font-bold">
-                {t('contact:payer')}
-            </Text>
+        <Card className="rounded-2xl bg-white shadow-none">
+            <CardHeader className="p-6 pb-0">
+                <CardTitle className="text-textPrimary text-lg font-bold">
+                    {t('contact:payer')}
+                </CardTitle>
+            </CardHeader>
 
-            <Tabs
-                value={mode}
-                onValueChange={(value) => {
-                    if (value === 'create' || value === 'select') {
-                        setMode(value);
-                    }
-                }}
-            >
-                <TabsList className="my-5 w-full">
-                    <TabsTrigger className="w-full" value="create">
-                        {t('membership:create_new')}
-                    </TabsTrigger>
+            <CardContent className="p-6">
+                <Tabs
+                    value={mode}
+                    onValueChange={(value) => {
+                        if (value === 'create' || value === 'select') {
+                            setMode(value);
+                        }
+                    }}
+                >
+                    <TabsList className="my-5 w-full">
+                        <TabsTrigger className="w-full" value="create">
+                            {t('membership:create_new')}
+                        </TabsTrigger>
 
-                    <TabsTrigger className="w-full" value="select">
-                        {t('membership:select')}
-                    </TabsTrigger>
-                </TabsList>
+                        <TabsTrigger className="w-full" value="select">
+                            {t('membership:select')}
+                        </TabsTrigger>
+                    </TabsList>
 
-                <TabsContent value="create">
-                    <div className="flex flex-col gap-5">
-                        <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
-                            <div className="flex flex-col gap-1">
-                                <InputLabel
-                                    forInput="payerType"
-                                    value={t('contact:contact_type.label')}
-                                    required
-                                    className="text-textPrimary"
-                                />
+                    <TabsContent value="create">
+                        <div className="flex flex-col gap-5">
+                            <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
+                                <div className="flex flex-col gap-1">
+                                    <InputLabel
+                                        forInput="payerType"
+                                        value={t('contact:contact_type.label')}
+                                        required
+                                        className="text-textPrimary"
+                                    />
 
-                                <RadioGroup
-                                    id="payerType"
-                                    className="flex w-full flex-row gap-3"
-                                    value={payerType}
-                                    onValueChange={(value) => {
-                                        if (
-                                            value === 'person' ||
-                                            value === 'company'
-                                        ) {
-                                            setPayerType(value);
-                                        }
-                                    }}
-                                >
-                                    <RadioGroupItem
-                                        className="w-full"
-                                        value="person"
-                                        icon={
-                                            <IconUser className="text-textPrimary" />
-                                        }
+                                    <RadioGroup
+                                        id="payerType"
+                                        className="flex w-full flex-row gap-3"
+                                        value={payerType}
+                                        onValueChange={(value) => {
+                                            if (
+                                                value === 'person' ||
+                                                value === 'company'
+                                            ) {
+                                                setPayerType(value);
+                                            }
+                                        }}
                                     >
-                                        {t('contact:contact_type.person')}
-                                    </RadioGroupItem>
+                                        <RadioGroupItem
+                                            className="w-full"
+                                            value="person"
+                                            icon={
+                                                <IconUser className="text-textPrimary" />
+                                            }
+                                        >
+                                            {t('contact:contact_type.person')}
+                                        </RadioGroupItem>
 
-                                    <RadioGroupItem
-                                        className="w-full"
-                                        value="company"
-                                        disabled
-                                        icon={
-                                            <IconBuilding className="text-textPrimary" />
-                                        }
-                                    >
-                                        {t('contact:company_name.label')}
-                                    </RadioGroupItem>
-                                </RadioGroup>
+                                        <RadioGroupItem
+                                            className="w-full"
+                                            value="company"
+                                            disabled
+                                            icon={
+                                                <IconBuilding className="text-textPrimary" />
+                                            }
+                                        >
+                                            {t('contact:company_name.label')}
+                                        </RadioGroupItem>
+                                    </RadioGroup>
+                                </div>
                             </div>
+
+                            <ContactCard
+                                contactType={payerType}
+                                idPrefix="payer"
+                                formPath={formPath}
+                                errors={formState.errors}
+                                errorPrefix="payer"
+                                disabled={mode !== 'create'}
+                            />
                         </div>
+                    </TabsContent>
 
-                        <ContactCard
-                            contactType={payerType}
-                            idPrefix="payer"
-                            formPath={formPath}
-                            errors={formState.errors}
-                            errorPrefix="payer"
-                            disabled={mode !== 'create'}
-                        />
-                    </div>
-                </TabsContent>
+                    <TabsContent value="select">
+                        <FormField errors={formState.errors?.payer}>
+                            <BelongsToSelectInput<TMemberDeserialized>
+                                resourceName="payer"
+                                resourceType="members"
+                                label={t('contact:payer')}
+                                required
+                                action={fetchExistingMembersAction}
+                                defaultValue={
+                                    selectedPayer ? [selectedPayer] : []
+                                }
+                                optionLabel={(item) => {
+                                    const payer =
+                                        item as TMemberDeserialized & {
+                                            id?: string;
+                                            fullName?: string;
+                                        };
 
-                <TabsContent value="select">
-                    <FormField errors={formState.errors?.payer}>
-                        <BelongsToSelectInput<TMemberDeserialized>
-                            resourceName="payer"
-                            resourceType="members"
-                            label={t('contact:payer')}
-                            required
-                            action={fetchExistingMembersAction}
-                            defaultValue={selectedPayer ? [selectedPayer] : []}
-                            optionLabel={(item) => {
-                                const payer = item as TMemberDeserialized & {
-                                    id?: string;
-                                    fullName?: string;
-                                };
-
-                                return (
-                                    payer.fullName ||
-                                    `${payer.firstName ?? ''} ${
-                                        payer.lastName ?? ''
-                                    }`.trim() ||
-                                    payer.id ||
-                                    ''
-                                );
-                            }}
-                            onChange={handlePayerSelect}
-                        />
-                    </FormField>
-                </TabsContent>
-            </Tabs>
-        </div>
+                                    return (
+                                        payer.fullName ||
+                                        `${payer.firstName ?? ''} ${
+                                            payer.lastName ?? ''
+                                        }`.trim() ||
+                                        payer.id ||
+                                        ''
+                                    );
+                                }}
+                                onChange={handlePayerSelect}
+                            />
+                        </FormField>
+                    </TabsContent>
+                </Tabs>
+            </CardContent>
+        </Card>
     );
 }
