@@ -1,6 +1,6 @@
 <x-mail::message>
 <x-slot:header>
-https://app.vereinfacht.digital/svg/vereinfacht_logo.svg
+https://app.vereinfacht.digital/images/vereinfacht_logo.svg
 </x-slot:header>
 
 {!! __('email.welcome_club_admin.intro', [
