@@ -45,12 +45,10 @@ export default async function Page({ searchParams }: WithSearchParams) {
                 })}
                 allowHtml={true}
             />
-            <div className="col-span-2">
-                <TaxAccountsTable
-                    taxAccounts={taxAccounts}
-                    totalPages={totalPages}
-                />
-            </div>
+            <TaxAccountsTable
+                taxAccounts={taxAccounts}
+                totalPages={totalPages}
+            />
         </>
     );
 }
