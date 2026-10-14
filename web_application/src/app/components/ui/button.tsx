@@ -27,19 +27,21 @@ const buttonVariants = cva(
             },
             danger: {
                 true: null,
-                false: null
-            }
+                false: null,
+            },
         },
         compoundVariants: [
             {
                 variant: 'primary',
                 danger: true,
-                className: 'bg-btnBgPrimaryDanger hover:bg-btnBgPrimaryDangerHover focus-visible:bg-btnBgPrimaryDanger',
+                className:
+                    'bg-btnBgPrimaryDanger hover:bg-btnBgPrimaryDangerHover focus-visible:bg-btnBgPrimaryDanger',
             },
             {
                 variant: 'tertiary',
                 danger: true,
-                className: 'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
+                className:
+                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
             },
         ],
         defaultVariants: {
@@ -106,8 +108,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         {rightIcon}
                     </span>
                 )}
-                
-                {isLoading && <Spinner className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 size-6" />}
+
+                {isLoading && (
+                    <Spinner className="absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2 transform" />
+                )}
             </>
         );
 

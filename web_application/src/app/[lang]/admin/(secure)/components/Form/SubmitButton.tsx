@@ -8,11 +8,7 @@ interface Props extends ButtonProps {
     title: string;
 }
 
-export default function SubmitButton({
-    title,
-    isLoading,
-    ...props
-}: Props) {
+export default function SubmitButton({ title, isLoading, ...props }: Props) {
     const { pending } = useFormStatus();
 
     return (

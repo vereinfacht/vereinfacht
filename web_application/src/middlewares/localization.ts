@@ -14,8 +14,7 @@ import { cookies } from 'next/headers';
 function getPreferredLocale(request: NextRequest) {
     const cookieStore = cookies();
     let locale = cookieStore.get('NEXT_LOCALE')?.value as
-        | undefined
-        | SupportedLocale;
+        undefined | SupportedLocale;
 
     if (locale && supportedLocales.includes(locale)) {
         return locale;
