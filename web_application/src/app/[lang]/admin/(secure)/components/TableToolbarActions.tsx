@@ -13,7 +13,7 @@ export default function TableToolbarActions({
     children,
 }: TableActionsProps) {
     return (
-        <div className="col-span-2 flex flex-wrap items-center justify-start gap-1 md:col-span-1 md:justify-end">
+        <div className="col-span-2 flex flex-wrap items-center justify-start gap-1 py-2 md:col-span-1 md:justify-end">
             {children}
             <CreateButton href={createHref} />
         </div>
