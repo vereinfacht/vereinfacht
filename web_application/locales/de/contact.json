@@ -54,5 +54,6 @@
     },
     "updated_at": {
         "label": "Aktualisiert am"
-    }
+    },
+    "payer": "Zahler*in"
 }

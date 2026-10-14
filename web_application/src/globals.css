@@ -110,10 +110,13 @@
         0 1px 100px 0 rgba(0, 0, 0, 0.02) inset,
         -1px 1px 1px 0 rgba(255, 255, 255, 0.8) inset,
         0 10px 30px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-glassTable: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
     --drop-shadow-display: 0px 4px 6px rgba(0, 0, 0, 0.3);
 
     --blur-topbar: 2px;
+    
+    --radius-3xl: 1.25rem;
 
     --animate-move-up: move-up 0.3s cubic-bezier(0.39, 1.42, 0.43, 1);
     --animate-move-down: move-down 0.4s cubic-bezier(0.39, 1.42, 0.43, 1);

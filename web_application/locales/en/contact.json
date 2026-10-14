@@ -53,5 +53,6 @@
     },
     "updated_at": {
         "label": "Updated at"
-    }
+    },
+    "payer": "Payer"
 }
