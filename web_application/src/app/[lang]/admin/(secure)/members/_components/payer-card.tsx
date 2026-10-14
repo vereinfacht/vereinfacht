@@ -47,7 +47,7 @@ export default function PayerCard({
     };
 
     return (
-        <Card className="rounded-2xl bg-white shadow-none">
+        <Card className="rounded-2xl border border-slate-200 bg-white shadow-none">
             <CardHeader className="p-6 pb-0">
                 <CardTitle className="text-textPrimary text-lg font-bold">
                     {t('contact:payer')}
