@@ -273,10 +273,10 @@ export default function Examples() {
                             rightIcon={<IconEmpty />}
                         ></Button>
                     </div>
-                    {/* tertiaryDanger */}
+                    {/* tertiary, danger = true */}
                     <div className={btnClass}>
                         <Button
-                            variant="tertiaryDanger"
+                            danger={true}
                             size={'default'}
                             disabled={true}
                             leftIcon={<IconEmpty />}
@@ -285,7 +285,7 @@ export default function Examples() {
                             Button
                         </Button>
                         <Button
-                            variant="tertiaryDanger"
+                            danger={true}
                             size={'default'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
@@ -293,7 +293,7 @@ export default function Examples() {
                             Button
                         </Button>
                         <Button
-                            variant="tertiaryDanger"
+                            danger={true}
                             size={'sm'}
                             leftIcon={<IconEmpty />}
                             rightIcon={<IconEmpty />}
@@ -301,7 +301,7 @@ export default function Examples() {
                             Button
                         </Button>
                         <Button
-                            variant="tertiaryDanger"
+                            danger={true}
                             size={'icon'}
                             rightIcon={<IconEmpty />}
                         ></Button>

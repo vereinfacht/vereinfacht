@@ -15,8 +15,6 @@ const buttonVariants = cva(
                     'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled disabled:backdrop-blur-secondaryButton',
                 tertiary:
                     'text-textLink hover:bg-btnBgTertiaryHover hover:text-textHover focus-visible:bg-btnBgTertiaryHover focus-visible:text-textLink',
-                tertiaryDanger:
-                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
                 tertiaryGray: 'text-textSecondary hover:bg-btnTertiaryHover',
             },
             size: {
@@ -27,7 +25,23 @@ const buttonVariants = cva(
                 circular: 'min-w-11 p-2.5 text-base leading-6',
                 circularSm: 'min-w-9 p-2 text-sm leading-5',
             },
+            danger: {
+                true: null,
+                false: null
+            }
         },
+        compoundVariants: [
+            {
+                variant: 'primary',
+                danger: true,
+                className: 'bg-btnBgPrimaryDanger hover:bg-btnBgPrimaryDangerHover focus-visible:bg-btnBgPrimaryDanger',
+            },
+            {
+                variant: 'tertiary',
+                danger: true,
+                className: 'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
+            },
+        ],
         defaultVariants: {
             variant: 'primary',
             size: 'default',
@@ -54,6 +68,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             variant,
             size,
             asChild = false,
+            danger = false,
             leftIcon,
             rightIcon,
             children,
@@ -97,7 +112,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         );
 
         const buttonClassName = cn(
-            buttonVariants({ variant, size, className }),
+            buttonVariants({ variant, size, className, danger }),
         );
 
         if (render) {

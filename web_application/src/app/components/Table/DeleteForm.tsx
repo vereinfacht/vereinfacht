@@ -103,7 +103,7 @@ export default function DeleteForm({
                                 {capitalizeFirstLetter(t('general:cancel'))}
                             </Button>
                             <SubmitButton
-                                preset="destructive"
+                                danger={true}
                                 title={t('general:delete')}
                             />
                         </div>

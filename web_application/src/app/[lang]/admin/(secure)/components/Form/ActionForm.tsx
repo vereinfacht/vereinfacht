@@ -46,11 +46,11 @@ export default function ActionForm({
                 {type === 'create' && (
                     <SubmitButton
                         title={t('general:save_and_create_another')}
-                        loading={loading}
+                        isLoading={loading}
                         onClick={() => setRoutingOnSuccess('reload')}
                     />
                 )}
-                <SubmitButton title={t('general:save')} loading={loading} />
+                <SubmitButton title={t('general:save')} isLoading={loading} />
             </div>
         </form>
     );

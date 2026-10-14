@@ -15,6 +15,7 @@
 
     --color-red-500: #ce1924;
     --color-red-700: #dc2626;
+    --color-red-800: #b91c1c;
 
     --color-slate-300: #f7f9fa;
     --color-slate-400: #ebf1f4;
@@ -56,6 +57,8 @@
     --color-btnBgPrimary: var(--color-blue-500);
     --color-btnBgPrimaryHover: var(--color-blue-600);
     --color-btnBgPrimaryDisabled: var(--color-neutral-100);
+    --color-btnBgPrimaryDanger: var(--color-red-700);
+    --color-btnBgPrimaryDangerHover: var(--color-red-800);
     --color-btnBgSecondary: --alpha(var(--color-white-solid) / 80%);
     --color-btnSecondaryHover: var(--color-white-solid);
     --color-btnBgSecondaryDisabled: --alpha(var(--color-white-solid) / 10%);

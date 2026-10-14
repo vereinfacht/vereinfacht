@@ -64,7 +64,7 @@ export default function ActivationForm({ account, setIsOpen }: Props) {
                 </Button>
                 {accountStatus === 'active' ? (
                     <SubmitButton
-                        preset="destructive"
+                        danger={true}
                         title={t('finance_account:deactivate')}
                     />
                 ) : (
