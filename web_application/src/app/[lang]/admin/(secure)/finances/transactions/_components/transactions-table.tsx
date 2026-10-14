@@ -50,7 +50,11 @@ export default function TransactionsTable({
                 mobileLabel: t('transaction:iban.label'),
             } as any,
             header: t('transaction:iban.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('bankIban')}</TextCell>,
+            cell: ({ row }) => (
+                <TextCell className="break-all whitespace-normal! md:break-normal md:whitespace-nowrap!">
+                    {row.getValue('bankIban')}
+                </TextCell>
+            ),
         },
         {
             accessorKey: 'valuedAt',
