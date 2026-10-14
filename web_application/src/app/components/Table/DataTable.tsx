@@ -81,7 +81,7 @@ export function DataTable<TData extends Model, TValue>({
     return (
         <div
             className={cn(
-                'col-span-2 flex flex-col gap-4 overflow-auto',
+                'col-span-2',
                 className,
             )}
         >
@@ -92,7 +92,6 @@ export function DataTable<TData extends Model, TValue>({
                         : header}
                 </Text>
             )}
-            <div className="w-full min-w-max">
                 <TableToolbar />
                 <Table>
                     <TableHeader>
@@ -296,7 +295,6 @@ export function DataTable<TData extends Model, TValue>({
                         )}
                     </TableBody>
                 </Table>
-            </div>
             <TablePagination totalPages={totalPages} />
         </div>
     );
