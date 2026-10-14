@@ -8,13 +8,12 @@ interface Props {
     children?: React.ReactNode;
 }
 
-function indicateRequirement(value: string, required?: boolean | undefined) {
-    const { t } = useTranslation();
+function indicateRequirement(value: string, required?: boolean | undefined, t?: (key: string) => string) {
     if (!required) {
         return value;
     }
-
-    return `${value} (${t('general:required')}) `;
+    
+    return `${value} (${t ? t('general:required') : 'required'}) `;
 }
 
 export default function InputLabel({
@@ -24,12 +23,14 @@ export default function InputLabel({
     className,
     children,
 }: Props) {
+    const { t } = useTranslation();
+    
     return (
         <label
             htmlFor={forInput}
             className={`block text-sm font-medium ` + className}
         >
-            {value ? indicateRequirement(value, required) : children}
+            {value ? indicateRequirement(value, required, t) : children}
         </label>
     );
 }
