@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
+import { Spinner } from './spinner';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled break-normal overflow-ellipsis text-nowrap text-ellipsis',
+    'inline-flex relative items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled break-normal overflow-ellipsis text-nowrap text-ellipsis',
     {
         variants: {
             variant: {
@@ -43,6 +44,7 @@ export interface ButtonProps
     rightIcon?: React.ReactNode;
     render?: React.ReactElement;
     nativeButton?: boolean;
+    isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -56,11 +58,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             rightIcon,
             children,
             render,
+            isLoading,
             nativeButton: _nativeButton,
             ...props
         },
         ref,
     ) => {
+        props.disabled = props.disabled || isLoading;
         const isTextButton = size === 'default' || size === 'sm';
 
         const textPadding = cn(
@@ -87,6 +91,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         {rightIcon}
                     </span>
                 )}
+                
+                {isLoading && <Spinner className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 size-6" />}
             </>
         );
 
