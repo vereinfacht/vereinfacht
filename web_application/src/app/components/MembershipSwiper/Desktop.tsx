@@ -84,7 +84,7 @@ export default function Desktop({ children, color }: Props) {
                 // @ts-expect-error: className and class-name won't work when
                 // using the swiper as a web component and class give
                 // the typical react className ts error
-                class="px-12 pb-12"
+                class="px-12 pb-12!"
             >
                 {children}
             </swiper-container>
