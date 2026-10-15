@@ -8,7 +8,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     href: string;
 };
 
-export default function CreateButton({ href, ...props }: Props) {
+export default function CreateButton({ href }: Props) {
     const { t } = useTranslation();
 
     return (

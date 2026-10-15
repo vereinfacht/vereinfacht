@@ -13,7 +13,6 @@ export default function BelongsToField<T>({
     label,
     value,
     fields,
-    viewRoute = '',
 }: Props<T>) {
     const { t } = useTranslation();
     const translationNamespace = camelCaseToSnakeCase(
