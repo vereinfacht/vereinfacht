@@ -23,7 +23,7 @@ export default async function DashboardPage() {
     }
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="col-span-2 flex flex-col gap-4">
             <div className="grid w-full auto-rows-[12rem] gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                 {club?.applyUrl != null && (
                     <CardVisitApplyForm url={club?.applyUrl} />

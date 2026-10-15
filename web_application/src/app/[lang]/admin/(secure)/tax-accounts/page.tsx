@@ -10,6 +10,7 @@ import {
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import createTranslation from 'next-translate/createTranslation';
 import TaxAccountsTable from './_components/tax-accounts-table';
+import TableToolbarActions from '../components/TableToolbarActions';
 
 async function getTaxAccountsFromApi(params: ListTaxAccountSearchParamsType) {
     const response = await listTaxAccounts({
@@ -35,8 +36,9 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
+            <TableToolbarActions createHref="/admin/tax-accounts/create" />
             <MessageBox
-                className="mb-4 mb-10"
+                className="col-span-2 mb-4"
                 preset="hint"
                 message={t('custom_hint', {
                     link: `<a href="/admin/club#taxAccountChartSource" class="underline">`,

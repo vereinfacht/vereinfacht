@@ -30,7 +30,7 @@ export default function EditView({
     const fields = getEditFields(updateSchema, resourceName, resource, t);
 
     return (
-        <div className="container">
+        <div className="col-span-2 container">
             {hint && (
                 <MessageBox
                     className="mb-4 mb-10"

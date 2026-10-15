@@ -2,20 +2,19 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
+import { Spinner } from './spinner';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled',
+    'inline-flex relative items-center justify-center gap-2 rounded-full font-medium not-italic tracking-[0.1px] transition-all hover:cursor-pointer disabled:pointer-events-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-borderFocus disabled:bg-transparent disabled:text-textDisabled break-normal overflow-ellipsis text-nowrap text-ellipsis',
     {
         variants: {
             variant: {
                 primary:
                     'bg-btnBgPrimary text-white-solid shadow-buttonPrimary hover:bg-btnBgPrimaryHover focus-visible:bg-btnBgPrimaryHover focus-visible:ring-offset-2 disabled:bg-btnBgPrimaryDisabled disabled:shadow-none',
                 secondary:
-                    'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled',
+                    'bg-btnBgSecondary text-textPrimary shadow-buttonSecondary hover:bg-btnSecondaryHover hover:text-textHover focus-visible:bg-btnBgSecondary focus-visible:text-textLink disabled:bg-btnBgSecondaryDisabled disabled:shadow-buttonSecondaryDisabled disabled:backdrop-blur-secondaryButton',
                 tertiary:
                     'text-textLink hover:bg-btnBgTertiaryHover hover:text-textHover focus-visible:bg-btnBgTertiaryHover focus-visible:text-textLink',
-                tertiaryDanger:
-                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
                 tertiaryGray: 'text-textSecondary hover:bg-btnTertiaryHover',
             },
             size: {
@@ -26,7 +25,25 @@ const buttonVariants = cva(
                 circular: 'min-w-11 p-2.5 text-base leading-6',
                 circularSm: 'min-w-9 p-2 text-sm leading-5',
             },
+            danger: {
+                true: null,
+                false: null,
+            },
         },
+        compoundVariants: [
+            {
+                variant: 'primary',
+                danger: true,
+                className:
+                    'bg-btnBgPrimaryDanger hover:bg-btnBgPrimaryDangerHover focus-visible:bg-btnBgPrimaryDanger',
+            },
+            {
+                variant: 'tertiary',
+                danger: true,
+                className:
+                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
+            },
+        ],
         defaultVariants: {
             variant: 'primary',
             size: 'default',
@@ -43,6 +60,7 @@ export interface ButtonProps
     rightIcon?: React.ReactNode;
     render?: React.ReactElement;
     nativeButton?: boolean;
+    isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -52,15 +70,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             variant,
             size,
             asChild = false,
+            danger = false,
             leftIcon,
             rightIcon,
             children,
             render,
+            isLoading,
             nativeButton: _nativeButton,
             ...props
         },
         ref,
     ) => {
+        props.disabled = props.disabled || isLoading;
         const isTextButton = size === 'default' || size === 'sm';
 
         const textPadding = cn(
@@ -87,11 +108,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         {rightIcon}
                     </span>
                 )}
+
+                {isLoading && (
+                    <Spinner className="absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2 transform" />
+                )}
             </>
         );
 
         const buttonClassName = cn(
-            buttonVariants({ variant, size, className }),
+            buttonVariants({ variant, size, className, danger }),
         );
 
         if (render) {

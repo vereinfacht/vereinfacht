@@ -10,8 +10,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
 import DateField from '../../components/Fields/Detail/DateField';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 interface Props {
     users: TUserDeserialized[];
@@ -31,20 +32,36 @@ export default function UsersTable({ users }: Props) {
                     columnTitle={t('user:title.label')}
                 />
             ),
-            cell: ({ row }) => <TextCell>{row.getValue('name')}</TextCell>,
+            cell: ({ row }) => {
+                const user = row.original;
+
+                return (
+                    <BelongsToCell
+                        resource={user}
+                        path="/admin/users"
+                        content={user.name}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'email',
+            meta: {
+                mobileLabel: t('general:email'),
+            } as any,
             header: t('general:email'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'role',
             header: t('role:title.other'),
+            meta: {
+                mobileLabel: t('role:title.other'),
+            } as any,
             cell: ({ row }) => {
                 const roles = row.original.roles as
-                    | { name: string }[]
-                    | undefined;
+                    { name: string }[] | undefined;
 
                 if (!roles || roles.length === 0) {
                     return <TextCell>-</TextCell>;
@@ -71,18 +88,24 @@ export default function UsersTable({ users }: Props) {
         {
             accessorKey: 'createdAt',
             header: t('general:created_at'),
+            meta: {
+                mobileLabel: t('general:created_at'),
+            } as any,
             cell: ({ row }) => <DateField value={row.getValue('createdAt')} />,
         },
         {
             accessorKey: 'updatedAt',
             header: t('general:updated_at'),
+            meta: {
+                mobileLabel: t('general:updated_at'),
+            } as any,
             cell: ({ row }) => <DateField value={row.getValue('updatedAt')} />,
         },
     ];
 
     return (
         <>
-            <CreateButton href={`/admin/users/create/`} />
+            <TableToolbarActions createHref="/admin/users/create/" />
             <DataTable
                 data={users}
                 columns={columns}

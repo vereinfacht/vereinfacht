@@ -103,7 +103,7 @@ export default function AttachResourceForm({
                 </Button>
                 <SubmitButton
                     title={submitLabel ?? t('general:save')}
-                    loading={false}
+                    isLoading={false}
                 />
             </div>
         </form>

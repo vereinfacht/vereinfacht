@@ -7,10 +7,10 @@ import {
     loadListStatementsSearchParams,
 } from '@/utils/search-params';
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
-import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
 import AccountsList from './_components/accounts-list';
 import StatementsTable from './_components/statements-table';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 async function getStatementsFromApi(params: ListStatementSearchParamsType) {
     const response = await listStatements({
@@ -47,16 +47,14 @@ export default async function Page({ searchParams }: WithSearchParams) {
 
     return (
         <>
-            <div className="flex items-center justify-between">
-                <CreateButton href="/admin/finances/statements/create" />
+            <TableToolbarActions createHref="/admin/finances/statements/create">
                 <TableExportModal
                     ids={meta.page?.allIds}
                     resourceName="statements"
                 />
-            </div>
-            <div className="flex gap-6">
+            </TableToolbarActions>
+            <div className="col-span-2 flex gap-6">
                 <AccountsList />
-
                 <StatementsTable
                     statements={statements}
                     totalPages={totalPages}

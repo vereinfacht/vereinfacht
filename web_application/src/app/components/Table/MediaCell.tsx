@@ -5,6 +5,7 @@ import { TMediaDeserialized } from '@/types/resources';
 import { Paperclip } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
 import IconTooltip from '../Tooltip/IconTooltip';
+import BadgeCount from './BadgeCount';
 
 export interface MediaCellProps {
     media: TMediaDeserialized[];
@@ -51,12 +52,7 @@ export default function MediaCell({
                 className="relative block w-fit"
             >
                 <Paperclip className="text-blue-500" />
-                <Badge
-                    className="absolute top-[-10px] right-[-10px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
-                    variant="primary"
-                >
-                    {mediaCount}
-                </Badge>
+                <BadgeCount count={mediaCount} />
             </a>
         ) : (
             <Paperclip className="text-slate-500" />

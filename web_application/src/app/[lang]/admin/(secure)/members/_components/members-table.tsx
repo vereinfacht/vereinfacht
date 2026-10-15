@@ -17,9 +17,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listMemberSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
 import DateField from '../../components/Fields/Detail/DateField';
 import TableExportModal from '../../components/TableExportModal';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 interface Props {
     members: TMemberDeserialized[];
@@ -40,6 +40,7 @@ export default function MembersTable({
     const columns: ColumnDef<TMemberDeserialized>[] = [
         {
             accessorKey: 'fullName',
+            meta: { isMobileHeader: true } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderSort
@@ -50,10 +51,22 @@ export default function MembersTable({
                 ) : (
                     t('member:name.label')
                 ),
-            cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
+            cell: ({ row }) => {
+                const member = row.original as TMemberDeserialized;
+
+                return (
+                    <BelongsToCell
+                        resource={member}
+                        path="/admin/members"
+                        content={member.fullName}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'membership',
+            meta: { mobileLabel: t('member:membership.label') } as any,
             header: t('member:membership.label'),
             cell: ({ row }) => {
                 const membership = row.getValue(
@@ -83,6 +96,7 @@ export default function MembersTable({
         {
             id: 'startedAt',
             accessorFn: (row) => row.membership?.startedAt,
+            meta: { mobileLabel: t('membership:started_at.label') } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderSort
@@ -97,6 +111,7 @@ export default function MembersTable({
         },
         {
             accessorKey: 'divisions',
+            meta: { mobileLabel: t('division:title.other') } as any,
             header: t('division:title.other'),
             cell: (cell) => {
                 const divisions =
@@ -115,11 +130,13 @@ export default function MembersTable({
         },
         {
             accessorKey: 'email',
+            meta: { mobileLabel: t('member:email.label') } as any,
             header: t('member:email.label'),
             cell: ({ row }) => <TextCell>{row.getValue('email')}</TextCell>,
         },
         {
             accessorKey: 'status',
+            meta: { mobileLabel: t('member:status.label') } as any,
             header: ({ column }) =>
                 extended ? (
                     <HeaderOptionFilter
@@ -153,13 +170,12 @@ export default function MembersTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-between">
-                    <CreateButton href="/admin/members/create" />
+                <TableToolbarActions createHref="/admin/members/create">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName="members"
                     />
-                </div>
+                </TableToolbarActions>
             )}
             <DataTable
                 data={members}

@@ -47,7 +47,7 @@ export function TriStateHeaderFilter({
                         size={'icon'}
                         rightIcon={
                             <ListFilter
-                                className={`ml-auto h-4 w-4 text-gray-400${hasActiveFilter ? 'scale-125 text-green-800' : ''}`}
+                                className={`text-textSecondary ml-auto h-4 w-4 ${hasActiveFilter ? 'scale-125 text-green-800' : ''}`}
                             />
                         }
                     ></Button>

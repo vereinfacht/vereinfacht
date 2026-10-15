@@ -7,7 +7,6 @@ import {
 } from '@/utils/colors';
 import { PropsWithChildren } from 'react';
 import ContentContainer from './components/ContentContainer';
-import TitleBar from './components/TitleBar';
 import { auth } from '@/utils/auth';
 import { MenuProvider } from './components/Navigation/MenuProvider';
 import TopBar from './components/Navigation/TopBar';
@@ -25,7 +24,7 @@ export default async function SecureLayout({ children }: PropsWithChildren) {
                     ['--color-primary-500']: hexToCssString(clubPrimaryColor),
                 }}
                 className={[
-                    'flex min-h-screen w-full flex-col bg-slate-400',
+                    'bg-backgroundGradient flex min-h-screen w-full flex-col',
                     shouldUseDarkMode(clubPrimaryColor) ? 'dark-primary' : '',
                 ].join(' ')}
             >
@@ -37,8 +36,7 @@ export default async function SecureLayout({ children }: PropsWithChildren) {
 
                 <div className="flex w-full flex-1 flex-col overflow-hidden md:flex-row">
                     <Navigation />
-                    <div className="flex w-full flex-1 flex-col overflow-y-auto bg-white">
-                        <TitleBar />
+                    <div className="flex w-full flex-1 flex-col overflow-y-auto">
                         <ContentContainer>{children}</ContentContainer>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ export default function BelongsToCell({
         <Link
             href={`${path}/${resource.id}`}
             className={[
-                'flex gap-2 text-base font-medium whitespace-nowrap text-blue-500 hover:underline',
+                'text-textPrimary flex gap-2 text-base whitespace-nowrap underline hover:cursor-pointer',
                 truncate
                     ? 'w-40 overflow-hidden text-ellipsis whitespace-nowrap'
                     : '',

@@ -9,8 +9,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listMembershipTypesSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import useTranslation from 'next-translate/useTranslation';
-import CreateButton from '../../components/CreateButton';
 import TableExportModal from '../../components/TableExportModal';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import TableToolbarActions from '../../components/TableToolbarActions';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];
@@ -44,14 +45,26 @@ export default function MembershipTypesTable({
                     t('membership_type:title.label', { count: 1 })
                 ),
             cell: ({ row }) => {
+                const membershipType = row.original;
                 const title =
-                    row.original.titleTranslations?.[lang] ||
-                    row.getValue('title');
-                return <TextCell>{title}</TextCell>;
+                    membershipType.titleTranslations?.[lang] ||
+                    membershipType.title;
+
+                return (
+                    <BelongsToCell
+                        resource={membershipType}
+                        path="/admin/membership-types"
+                        content={title}
+                        truncate
+                    />
+                );
             },
         },
         {
             accessorKey: 'description',
+            meta: {
+                mobileLabel: t('membership_type:description.label'),
+            } as any,
             header: t('membership_type:description.label'),
             cell: ({ row }) => {
                 const description =
@@ -62,6 +75,9 @@ export default function MembershipTypesTable({
         },
         {
             accessorKey: 'monthlyFee',
+            meta: {
+                mobileLabel: t('membership_type:monthly_fee.label'),
+            } as any,
             header: t('membership_type:monthly_fee.label'),
             cell: ({ getValue }) => {
                 const monthlyFee = getValue() as number;
@@ -80,13 +96,12 @@ export default function MembershipTypesTable({
     return (
         <>
             {extended && (
-                <div className="flex justify-between">
-                    <CreateButton href="/admin/membership-types/create" />
+                <TableToolbarActions createHref="/admin/membership-types/create">
                     <TableExportModal
                         ids={allIds ?? []}
                         resourceName={'membership-types'}
                     />
-                </div>
+                </TableToolbarActions>
             )}
             <DataTable
                 data={membershipTypes}

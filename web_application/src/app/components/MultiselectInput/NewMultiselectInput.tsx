@@ -23,6 +23,7 @@ import { filterOptionsByQuery, sortOptions } from './MultiselectInput';
 import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import IconLoading from '/public/svg/loading.svg';
+import IconSorting from '/public/svg/sorting.svg';
 import SelectedOptions from './SelectedOptions';
 
 interface Props {
@@ -141,7 +142,7 @@ export function NewMultiselectInput({
                             'mt-1 w-full justify-between',
                             selected.length < 1 && 'text-muted-foreground',
                         )}
-                        rightIcon={<ChevronsUpDown />}
+                        rightIcon={<IconSorting />}
                     >
                         {selected.length > 0
                             ? multiple

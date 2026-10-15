@@ -1,6 +1,5 @@
 'use client';
 
-import Button from '@/app/components/Button/Button';
 import Text from '@/app/components/Text/Text';
 import {
     Dialog,
@@ -10,9 +9,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
 import { useToast } from '@/hooks/toast/use-toast';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { Table } from 'lucide-react';
+import IconTable from '/public/svg/table.svg';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import SubmitButton from './Form/SubmitButton';
@@ -73,8 +73,7 @@ export default function TableExportModal({ ids, resourceName }: Props) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="mb-6 w-fit" type="button">
-                    <Table className="mr-2 h-4 w-4" />
+                <Button className="text-white-solid" leftIcon={<IconTable />}>
                     {t('general:table.export.title')}
                     {ids && ids.length > 0 ? ` (${ids.length})` : ''}
                 </Button>
@@ -101,7 +100,7 @@ export default function TableExportModal({ ids, resourceName }: Props) {
                 >
                     <div className="flex gap-4 self-end">
                         <Button
-                            preset="secondary"
+                            variant="tertiaryGray"
                             type="button"
                             onClick={() => setIsOpen(false)}
                         >

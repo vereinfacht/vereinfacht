@@ -102,7 +102,7 @@ export default function AccountCard({ balance, account, title }: Props) {
                 )}
                 <CurrencyText
                     value={balance ?? 0}
-                    className="w-full justify-self-end text-lg"
+                    className="w-full justify-self-start text-lg"
                 ></CurrencyText>
             </CardFooter>
         </Card>

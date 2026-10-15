@@ -30,7 +30,10 @@ export default function ActionForm({
         useState<RoutingOnSuccess>('back');
 
     return (
-        <form action={action} className="container flex h-full flex-col gap-8">
+        <form
+            action={action}
+            className="col-span-2 container mt-4 flex h-full flex-col gap-8"
+        >
             <FormStateHandler
                 state={state}
                 translationKey={translationKey}
@@ -43,11 +46,11 @@ export default function ActionForm({
                 {type === 'create' && (
                     <SubmitButton
                         title={t('general:save_and_create_another')}
-                        loading={loading}
+                        isLoading={loading}
                         onClick={() => setRoutingOnSuccess('reload')}
                     />
                 )}
-                <SubmitButton title={t('general:save')} loading={loading} />
+                <SubmitButton title={t('general:save')} isLoading={loading} />
             </div>
         </form>
     );

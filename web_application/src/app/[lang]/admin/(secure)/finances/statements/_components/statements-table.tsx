@@ -1,6 +1,8 @@
 'use client';
 
 import { statementTypeOptions } from '@/actions/statements/list.schema';
+import BadgeCount from '@/app/components/Table/BadgeCount';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
@@ -35,12 +37,27 @@ export default function StatementsTable({
         {
             accessorKey: 'title',
             header: t('statement:title.label'),
-            cell: ({ row }) => (
-                <TextCell truncate>{row.getValue('title')}</TextCell>
-            ),
+            meta: {
+                mobileLabel: t('statement:title.label'),
+            } as any,
+            cell: ({ row }) => {
+                const statement = row.original as TStatementDeserialized;
+
+                return (
+                    <BelongsToCell
+                        resource={statement}
+                        path="/admin/finances/statements"
+                        content={statement.title}
+                        truncate
+                    />
+                );
+            },
         },
         {
             accessorKey: 'transactions',
+            meta: {
+                mobileLabel: t('statement:type.label'),
+            } as any,
             header: () => (
                 <HeaderOptionFilter
                     options={statementTypeOptions ?? []}
@@ -62,12 +79,7 @@ export default function StatementsTable({
                                 >
                                     {t('statement:type.collective')}
                                 </Badge>
-                                <Badge
-                                    className="absolute top-[-12px] right-[-8px] flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] font-semibold"
-                                    variant="primary"
-                                >
-                                    {transactionCount}
-                                </Badge>
+                                <BadgeCount count={transactionCount} />
                             </>
                         ) : (
                             <Badge
@@ -83,6 +95,9 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'date',
+            meta: {
+                mobileLabel: t('statement:date.label'),
+            } as any,
             header: ({ column }) => (
                 <HeaderSort
                     parser={listStatementSearchParams.sort}
@@ -98,6 +113,9 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'status',
+            meta: {
+                mobileLabel: t('transaction:status.label'),
+            } as any,
             header: t('transaction:status.label'),
             cell: ({ row }) => (
                 <StatusCell
@@ -109,6 +127,9 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'financeAccount.title',
+            meta: {
+                mobileLabel: t('finance_account:title.one'),
+            } as any,
             header: () => (
                 <span className={accountId !== null ? 'text-slate-900' : ''}>
                     {t('finance_account:title.one')}
@@ -120,6 +141,9 @@ export default function StatementsTable({
         },
         {
             accessorKey: 'amount',
+            meta: {
+                mobileLabel: t('statement:amount.label'),
+            } as any,
             header: ({ column }) => (
                 <HeaderSort
                     parser={listStatementSearchParams.sort}
@@ -132,21 +156,20 @@ export default function StatementsTable({
     ];
 
     return (
-        <>
-            <DataTable
-                data={statements}
-                columns={columns}
-                resourceName={'finances/statements' as ResourceName}
-                totalPages={totalPages}
-                canEdit={(statement) =>
-                    statement.financeAccount?.accountType === 'cash_box'
-                }
-                canView={true}
-                defaultColumn={{
-                    size: 150,
-                    enableResizing: false,
-                }}
-            />
-        </>
+        <DataTable
+            className="w-full"
+            data={statements}
+            columns={columns}
+            resourceName={'finances/statements' as ResourceName}
+            totalPages={totalPages}
+            canEdit={(statement) =>
+                statement.financeAccount?.accountType === 'cash_box'
+            }
+            canView={true}
+            defaultColumn={{
+                size: 150,
+                enableResizing: false,
+            }}
+        />
     );
 }

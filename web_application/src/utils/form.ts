@@ -11,12 +11,7 @@ import { ResourceName } from '@/resources/resource';
 const TRANSLATION_ATTRIBUTE_SUFFIX = 'Translations';
 
 type FieldType =
-    | 'default'
-    | 'translation'
-    | 'date'
-    | 'select'
-    | 'number'
-    | 'checkbox';
+    'default' | 'translation' | 'date' | 'select' | 'number' | 'checkbox';
 
 // @TODO: add custom types for each field type and make a union type
 export interface FieldProps {
