@@ -1,6 +1,5 @@
 'use client';
 
-import { Badge } from '@/app/components/ui/badge';
 import { TMediaDeserialized } from '@/types/resources';
 import { Paperclip } from 'lucide-react';
 import useTranslation from 'next-translate/useTranslation';
