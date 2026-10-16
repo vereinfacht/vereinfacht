@@ -1,8 +1,8 @@
 # use to copy alpine node binaries later
-FROM node:20-alpine3.23 AS node
+FROM node:26-alpine3.24 AS node
 
 # Define base image
-FROM php:8.3-cli-alpine3.23
+FROM php:8.3-cli-alpine3.24
 
 # Define build arguments
 ARG USER_ID

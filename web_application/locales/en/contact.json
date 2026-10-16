@@ -21,9 +21,6 @@
     "contact_person": {
         "label": "Ansprechperson"
     },
-    "full_name": {
-        "label": "Name"
-    },
     "first_name": {
         "label": "First name"
     },
@@ -47,6 +44,10 @@
     },
     "country": {
         "label": "Country"
+    },
+    "country_options": {
+        "denmark": "Denmark",
+        "germany": "Germany"
     },
     "created_at": {
         "label": "Created at"
