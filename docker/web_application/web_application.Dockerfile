@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:26-alpine3.24 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -16,7 +16,7 @@ COPY web_application/package.json \
 
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f package-lock.json ]; then npm install; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
