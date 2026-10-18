@@ -28,11 +28,26 @@ export type TPaymentPeriodRaw =
     components['schemas']['resources.payment-periods.resource.fetch'];
 export type TDivisionMembershipTypeRaw =
     components['schemas']['resources.division-membership-types.resource.fetch'];
+export type TActivityLogRaw =
+    components['schemas']['resources.activity-logs.resource.fetch'];
 
 // Deserialized domain types
 export type TUserDeserialized = TUserRaw['attributes'] & {
     id: string;
     roles?: TRoleDeserialized[];
+};
+
+export type TActivityLogProperties = {
+    attributes?: Record<string, unknown>;
+    old?: Record<string, unknown>;
+};
+
+export type TActivityLogDeserialized = Omit<
+    TActivityLogRaw['attributes'],
+    'properties'
+> & {
+    id: string;
+    properties?: TActivityLogProperties;
 };
 
 export type TRoleDeserialized = {

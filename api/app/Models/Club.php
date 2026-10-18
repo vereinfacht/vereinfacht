@@ -9,6 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
 use App\Models\Behaviors\PrefersLocale;
 use Filament\Models\Contracts\HasAvatar;
+use App\Models\Behaviors\LogsModelActivity;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -23,6 +24,7 @@ class Club extends Authenticatable implements HasAvatar, HasLocalePreference, Ha
     use HasApiTokens;
     use HasFactory;
     use HasTranslations;
+    use LogsModelActivity;
     use Notifiable;
     use PrefersLocale;
 

@@ -4,6 +4,7 @@ namespace App\Models\Scopes;
 
 use App\Models\Club;
 use App\Models\User;
+use App\Models\ActivityLog;
 use App\Models\PaymentPeriod;
 use App\Models\TaxAccount;
 use App\Models\Transaction;
@@ -59,6 +60,20 @@ class ClubScope implements Scope
     {
         if ($model instanceof Club) {
             $builder->where('clubs.id', $clubId);
+
+            return;
+        }
+
+        if ($model instanceof ActivityLog) {
+            $builder->whereHasMorph('subject', '*', function ($query, $type) use ($clubId) {
+                if ($type === Club::class) {
+                    $query->where('clubs.id', $clubId);
+
+                    return;
+                }
+
+                $query->where('club_id', $clubId);
+            });
 
             return;
         }
