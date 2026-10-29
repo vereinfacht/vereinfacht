@@ -28,12 +28,14 @@ export function formatDateToInputValue(date: Date) {
 
 export function formatDate(
     date: string | Date | number | undefined,
-    locale: SupportedLocale,
+    locale: string,
     formatStr = 'dd.MM.yyyy',
 ) {
     if (!date) {
         return '';
     }
 
-    return format(date, formatStr, { locale: dateFnsLocales[locale] });
+    return format(date, formatStr, {
+        locale: dateFnsLocales[locale as SupportedLocale],
+    });
 }

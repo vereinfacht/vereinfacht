@@ -1,6 +1,6 @@
 'use client';
-import { useTranslations } from 'next-intl';
 
+import { useLocale, useTranslations } from 'next-intl';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
@@ -26,7 +26,8 @@ export default function MembershipTypesTable({
     totalPages,
     extended = false,
 }: Props) {
-    const { t, lang } = useTranslations();
+    const t = useTranslations();
+    const locale = useLocale();
     const deleteAction = createDeleteFormAction('membership-types');
 
     const columns: ColumnDef<TMembershipTypeDeserialized>[] = [
@@ -47,7 +48,7 @@ export default function MembershipTypesTable({
             cell: ({ row }) => {
                 const membershipType = row.original;
                 const title =
-                    membershipType.titleTranslations?.[lang] ||
+                    membershipType.titleTranslations?.[locale] ||
                     membershipType.title;
 
                 return (
@@ -68,7 +69,7 @@ export default function MembershipTypesTable({
             header: t('membership_type.description.label'),
             cell: ({ row }) => {
                 const description =
-                    row.original.descriptionTranslations?.[lang] ||
+                    row.original.descriptionTranslations?.[locale] ||
                     row.getValue('description');
                 return <TextCell>{description}</TextCell>;
             },
@@ -83,7 +84,7 @@ export default function MembershipTypesTable({
                 const monthlyFee = getValue() as number;
                 return (
                     <TextCell>
-                        {monthlyFee.toLocaleString(lang, {
+                        {monthlyFee.toLocaleString(locale, {
                             style: 'currency',
                             currency: 'EUR',
                         })}

@@ -1,6 +1,6 @@
 'use client';
-import { useTranslations } from 'next-intl';
 
+import { useLocale, useTranslations } from 'next-intl';
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -28,7 +28,8 @@ export default function DivisionsTable({
     totalPages,
     extended = false,
 }: Props) {
-    const { t, lang } = useTranslations();
+    const t = useTranslations();
+    const locale = useLocale();
     const deleteAction = createDeleteFormAction('divisions');
 
     const columns: ColumnDef<TDivisionDeserialized>[] = [
@@ -48,7 +49,7 @@ export default function DivisionsTable({
             cell: ({ row }) => {
                 const division = row.original as TDivisionDeserialized;
                 const title =
-                    division.titleTranslations?.[lang] || division.title;
+                    division.titleTranslations?.[locale] || division.title;
 
                 return (
                     <BelongsToCell

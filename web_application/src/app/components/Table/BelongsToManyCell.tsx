@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import Link from 'next/link';
 import React from 'react';
@@ -27,7 +27,8 @@ export default function BelongsToManyCell({
     truncate = false,
     className = '',
 }: BelongsToManyCellProps) {
-    const { t, lang } = useTranslations();
+    const t = useTranslations();
+    const locale = useLocale();
 
     const getDisplayValue = (item: BelongsToManyItem) => {
         const translationsKey = `${displayProperty}Translations`;
@@ -35,7 +36,7 @@ export default function BelongsToManyCell({
             item[translationsKey] &&
             typeof item[translationsKey] === 'object'
         ) {
-            return item[translationsKey][lang] || item[displayProperty];
+            return item[translationsKey][locale] || item[displayProperty];
         }
         return item[displayProperty];
     };

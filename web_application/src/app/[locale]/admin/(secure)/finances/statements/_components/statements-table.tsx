@@ -14,7 +14,6 @@ import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TStatementDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
-import type { SupportedLocale } from '@/i18n/routing';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
@@ -29,9 +28,8 @@ export default function StatementsTable({
     totalPages,
 }: StatementsListProps) {
     const [accountId] = useQueryState('accountId');
-    const translationHook = { lang: useLocale(), t: useTranslations() };
-    const lang = translationHook.lang as SupportedLocale;
-    const { t } = translationHook;
+    const t = useTranslations();
+    const locale = useLocale();
 
     const columns: ColumnDef<TStatementDeserialized>[] = [
         {
@@ -107,7 +105,7 @@ export default function StatementsTable({
             ),
             cell: ({ row }) => (
                 <TextCell>
-                    {formatDate(row.getValue('date'), lang, 'dd.MM.yyyy')}
+                    {formatDate(row.getValue('date'), locale, 'dd.MM.yyyy')}
                 </TextCell>
             ),
         },

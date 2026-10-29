@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { useState } from 'react';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
@@ -19,7 +19,8 @@ export default function DivisionMembershipTypesTable({
     divisionMembershipTypes,
     membershipTypeId,
 }: Props) {
-    const { t, lang } = useTranslations();
+    const t = useTranslations();
+    const locale = useLocale();
     const deleteAction = createDeleteFormAction('division-membership-types');
     const [editingItem, setEditingItem] =
         useState<TDivisionMembershipTypeDeserialized | null>(null);
@@ -31,7 +32,7 @@ export default function DivisionMembershipTypesTable({
             cell: ({ row }) => (
                 <BelongsToCell
                     resource={row.original.division}
-                    content={row.original.division?.titleTranslations?.[lang]}
+                    content={row.original.division?.titleTranslations?.[locale]}
                     path={'/admin/divisions'}
                 />
             ),
@@ -68,7 +69,7 @@ export default function DivisionMembershipTypesTable({
                 <EditDivisionMembershipTypeModal
                     divisionMembershipType={editingItem}
                     membershipTypeId={membershipTypeId}
-                    lang={lang}
+                    lang={locale}
                     onOpenChange={(open) => {
                         if (!open) {
                             setEditingItem(null);

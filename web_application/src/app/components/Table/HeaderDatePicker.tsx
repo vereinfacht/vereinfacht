@@ -1,6 +1,6 @@
 'use client';
-import { useTranslations, useLocale } from 'next-intl';
 
+import { useTranslations, useLocale } from 'next-intl';
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { format, parseISO } from 'date-fns';
@@ -38,7 +38,6 @@ export function HeaderDatePicker({
     const t = useTranslations();
     const lang = useLocale();
     const locale = lang === 'de' ? de : enUS;
-
     const [fromDate, setFromDate] = useQueryState(
         parameterKeys.from,
         fromDateParser,

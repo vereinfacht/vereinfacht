@@ -1,6 +1,6 @@
 'use client';
-import { useTranslations, useLocale } from 'next-intl';
 
+import { useTranslations, useLocale } from 'next-intl';
 import Empty from '@/app/components/Empty';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
@@ -9,7 +9,6 @@ import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
-import type { SupportedLocale } from '@/i18n/routing';
 import { ColumnDef } from '@tanstack/react-table';
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
@@ -20,9 +19,8 @@ export default function TransactionsTable({
     transactions,
     totalPages,
 }: TransactionsListProps) {
-    const translationHook = { lang: useLocale(), t: useTranslations() };
-    const lang = translationHook.lang as SupportedLocale;
-    const { t } = translationHook;
+    const t = useTranslations();
+    const locale = useLocale();
 
     const columns: ColumnDef<TTransactionDeserialized>[] = [
         {
@@ -63,7 +61,7 @@ export default function TransactionsTable({
             header: t('transaction.valued_at.label'),
             cell: ({ row }) => (
                 <TextCell>
-                    {formatDate(row.getValue('valuedAt'), lang, 'dd.MM.yyyy')}
+                    {formatDate(row.getValue('valuedAt'), locale, 'dd.MM.yyyy')}
                 </TextCell>
             ),
         },
@@ -75,7 +73,7 @@ export default function TransactionsTable({
             header: t('transaction.booked_at.label'),
             cell: ({ row }) => (
                 <TextCell>
-                    {formatDate(row.getValue('bookedAt'), lang, 'dd.MM.yyyy')}
+                    {formatDate(row.getValue('bookedAt'), locale, 'dd.MM.yyyy')}
                 </TextCell>
             ),
         },
