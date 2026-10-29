@@ -1,6 +1,6 @@
 'use server';
 
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import createFormAction from '../base/create';
 import { CreateStatementParams, createStatementSchema } from './create.schema';

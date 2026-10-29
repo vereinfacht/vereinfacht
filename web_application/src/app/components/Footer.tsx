@@ -1,11 +1,11 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 import Text from './Text/Text';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<HTMLAttributes<HTMLElement>>;
 
 function Footer({ children, className: classOverrides, ...props }: Props) {
-    const { t } = useTranslation('general');
+    const t = useTranslations();
 
     return (
         <footer
@@ -21,7 +21,7 @@ function Footer({ children, className: classOverrides, ...props }: Props) {
                             target="_blank"
                         >
                             <Text className="text-xs text-slate-600">
-                                {t('imprint')}
+                                {t('general.imprint')}
                             </Text>
                         </a>
                     </li>
@@ -31,7 +31,7 @@ function Footer({ children, className: classOverrides, ...props }: Props) {
                             target="_blank"
                         >
                             <Text className="text-xs text-slate-600">
-                                {t('privacy')}
+                                {t('general.privacy')}
                             </Text>
                         </a>
                     </li>

@@ -1,8 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { useMembershipSwiper } from '@/hooks/membershipSwiper/useMembershipSwiper';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import CardItem from '../MembershipCard/CardItem';
 import Text from '../Text/Text';
@@ -24,18 +23,18 @@ function getTranslationKey(
     includedDivisionsCount: number,
 ) {
     if (includedDivisionsCount === 0) {
-        return 'membership:divisions_none';
+        return 'membership.divisions_none';
     }
 
     if (includedDivisionsCount === totalDivisionCount) {
-        return 'membership:divisions_all';
+        return 'membership.divisions_all';
     }
 
     if (includedDivisionsCount >= Math.ceil(totalDivisionCount / 2)) {
-        return 'membership:divisions_most';
+        return 'membership.divisions_most';
     }
 
-    return 'membership:divisions_some';
+    return 'membership.divisions_some';
 }
 
 function ListHeadline({
@@ -45,18 +44,21 @@ function ListHeadline({
     total: number;
     included: number;
 }) {
+    const t = useTranslations();
+
     return (
         <CardItem hasLine>
-            <Trans
-                i18nKey={getTranslationKey(total, included)}
-                components={[<span key="0" className={'font-semibold'} />]}
-            />
+            {t.rich(getTranslationKey(total, included), {
+                tag0: (chunks) => (
+                    <span className="font-semibold">{chunks}</span>
+                ),
+            })}
         </CardItem>
     );
 }
 
 function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
-    const { t } = useTranslation('membership');
+    const t = useTranslations();
     const { showDivisions, setShowDivisions } = useMembershipSwiper();
 
     const membershipTypeDivisionIds =

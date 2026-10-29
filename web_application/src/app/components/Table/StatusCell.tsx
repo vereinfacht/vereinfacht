@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { CircleCheck, CircleDashed, CircleDotDashed } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import IconTooltip from '../Tooltip/IconTooltip';
 
 export interface StatusCellProps {
@@ -17,10 +17,9 @@ export default function StatusCell({
     className,
     translateNamespace,
 }: StatusCellProps) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const tooltipId = `status-tooltip-${rowId}`;
-    const statusDescription = t(
-        `${translateNamespace}:status.description.${status}`,
+    const statusDescription = t(`${translateNamespace}.status.description.${status}`,
     );
 
     const icon =

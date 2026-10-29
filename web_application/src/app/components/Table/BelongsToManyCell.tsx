@@ -1,6 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import React from 'react';
 import Text from '../Text/Text';
@@ -27,7 +27,7 @@ export default function BelongsToManyCell({
     truncate = false,
     className = '',
 }: BelongsToManyCellProps) {
-    const { t, lang } = useTranslation('general');
+    const { t, lang } = useTranslations();
 
     const getDisplayValue = (item: BelongsToManyItem) => {
         const translationsKey = `${displayProperty}Translations`;
@@ -88,7 +88,7 @@ export default function BelongsToManyCell({
                 className="text-base font-medium whitespace-nowrap underline hover:cursor-pointer"
             >
                 {getDisplayValue(firstItem)},{' '}
-                {t('plus_n_more', { count: remainingCount })}
+                {t('general.plus_n_more', { count: remainingCount })}
             </Link>
         </div>
     );

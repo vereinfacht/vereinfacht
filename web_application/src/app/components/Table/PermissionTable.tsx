@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import Checkbox from '@/app/components/Input/Checkbox';
 import { DataTable } from '@/app/components/Table/DataTable';
 import Text from '@/app/components/Text/Text';
@@ -6,8 +7,6 @@ import { TPermissionDeserialized } from '@/types/resources';
 import { resourceNameToTranslateKey } from '@/utils/strings';
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
-
 interface Props {
     allPermissions: TPermissionDeserialized[];
     activePermissions: TPermissionDeserialized[];
@@ -31,7 +30,7 @@ export default function PermissionTable({
     allPermissions,
     isForm = false,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     const tableData = () => {
         const activePermissionSet = new Set(
@@ -71,18 +70,17 @@ export default function PermissionTable({
     const columns: ColumnDef<PermissionTable>[] = [
         {
             accessorKey: 'resource',
-            header: t('resource:title.other'),
+            header: t('resource.title.other'),
             cell: ({ row }) => {
                 const resource = row.original.resource;
-                const translated = t(
-                    `${resourceNameToTranslateKey(resource)}:title.one`,
+                const translated = t(`${resourceNameToTranslateKey(resource)}.title.one`,
                 );
 
                 return (
                     <Text>
                         {translated ===
-                        `${resourceNameToTranslateKey(resource)}:title.one`
-                            ? t(`permission:resource.${resource}.title.one`)
+                        `${resourceNameToTranslateKey(resource)}.title.one`
+                            ? t(`permission.resource.${resource}.title.one`)
                             : translated}
                     </Text>
                 );
@@ -91,9 +89,9 @@ export default function PermissionTable({
         ...ACTIONS.map((action) => ({
             accessorKey: action,
             meta: {
-                mobileLabel: t(`permission:action.${action}`),
+                mobileLabel: t(`permission.action.${action}`),
             } as any,
-            header: t(`permission:action.${action}`),
+            header: t(`permission.action.${action}`),
             cell: ({ row }: { row: Row<PermissionTable> }) =>
                 isForm ? (
                     <Checkbox

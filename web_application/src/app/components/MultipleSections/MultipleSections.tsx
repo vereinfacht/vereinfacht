@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { capitalizeFirstLetter } from '@/utils/strings';
-import useTranslation from 'next-translate/useTranslation';
 import React, { ReactNode } from 'react';
 import Button from '../Button/Button';
 import Section from './Section';
@@ -20,7 +20,7 @@ export default function MultipleSections({
     addSection,
     renderSection,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const hasMiddleSection = typeof addSection === 'function';
 
     return (
@@ -44,7 +44,7 @@ export default function MultipleSections({
                             className="mx-auto"
                             onClick={addSection}
                         >
-                            {capitalizeFirstLetter(addText ?? t('general:add'))}
+                            {capitalizeFirstLetter(addText ?? t('general.add'))}
                         </Button>
                     </div>
                     <div className="shadow-negative h-6 w-full rounded-t-3xl bg-white"></div>

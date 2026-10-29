@@ -1,6 +1,6 @@
 'use server';
 
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import { ZodError } from 'zod';

@@ -6,7 +6,7 @@ import {
     CreateFinanceContactParams,
     createFinanceContactSchema,
 } from './create.schema';
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 
 export const createFinanceContact = createAuthenticatedAction(
     'create',

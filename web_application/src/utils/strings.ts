@@ -46,3 +46,6 @@ export function resourceNameToTranslateKey(resourceName: string) {
     const singularResource = singularize(resourceName);
     return camelCaseToSnakeCase(singularResource);
 }
+export function getI18nNamespace(resourceName: string) {
+    return camelCaseToSnakeCase(singularize(resourceName));
+}

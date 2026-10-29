@@ -1,8 +1,8 @@
+import { getTranslations } from 'next-intl/server';
 import { createServerClient } from '@/lib/api/server-client';
 import { mockHasPermission } from '@/lib/permissions';
 import { auth } from '@/utils/auth';
 import { prepareQuery } from '@/utils/query-params';
-import createTranslation from 'next-translate/createTranslation';
 import { notFound, redirect } from 'next/navigation';
 import { z } from 'zod';
 
@@ -110,9 +110,9 @@ export function createAuthenticatedAction<TInput, TOutput>(
         try {
             return await handler(validatedParams, client);
         } catch (error) {
-            console.error(`Error ${action}ing ${resource}:`, error);
+            console.error(`Error ${action}ing ${resource}.`, error);
 
-            throw new Error(createTranslation().t('error:unknown'));
+            throw new Error((await getTranslations())('error.unknown'));
         }
     };
 }
@@ -149,9 +149,9 @@ export function createAuthenticatedActionWithOptionalParams<TInput, TOutput>(
         try {
             return await handler(preparedQuery, client);
         } catch (error) {
-            console.error(`Error ${action}ing ${resource}:`, error);
+            console.error(`Error ${action}ing ${resource}.`, error);
 
-            throw new Error(createTranslation().t('error:unknown'));
+            throw new Error((await getTranslations())('error.unknown'));
         }
     };
 }
@@ -180,9 +180,9 @@ export function createSimpleAuthenticatedAction<TOutput>(
         try {
             return await handler(client);
         } catch (error) {
-            console.error(`Error ${action}ing ${resource}:`, error);
+            console.error(`Error ${action}ing ${resource}.`, error);
 
-            throw new Error(createTranslation().t('error:unknown'));
+            throw new Error((await getTranslations())('error.unknown'));
         }
     };
 }

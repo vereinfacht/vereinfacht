@@ -1,6 +1,6 @@
 'use server';
 
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 import { importStatementsSchema } from './import.schema';
 import { redirect } from 'next/navigation';
 import { auth } from '@/utils/auth';

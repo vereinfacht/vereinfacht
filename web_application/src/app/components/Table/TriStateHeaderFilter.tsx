@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import {
     DropdownMenu,
@@ -9,7 +10,6 @@ import {
 import { Button } from '@/app/components/ui/button';
 import * as RadixSwitch from '@radix-ui/react-switch';
 import { ListFilter, RotateCcw } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import { ParserBuilder, useQueryState } from 'nuqs';
 import { paginationSearchParamParser } from '@/utils/search-params';
 import Text from '../Text/Text';
@@ -25,7 +25,7 @@ export function TriStateHeaderFilter({
     paramKey,
     translationKey,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const [filterValue, setFilterValue] = useQueryState(paramKey, parser);
     const [, setPage] = useQueryState('page', paginationSearchParamParser);
 

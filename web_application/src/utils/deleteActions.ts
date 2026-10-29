@@ -7,7 +7,7 @@ import { deleteMembershipFormAction } from '@/actions/memberships/delete';
 import { deleteMembershipTypeFormAction } from '@/actions/membershipTypes/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 
 const deleteActionMap: Record<
     string,

@@ -1,10 +1,10 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { useApplication } from '@/hooks/application/useApplication';
 import { useTabs } from '@/hooks/tabs/useTabs';
 import { MembershipType } from '@/types/models';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import useTranslation from 'next-translate/useTranslation';
 import Button from '../Button/Button';
 import IconChecked from '/public/svg/check.svg';
 import { scrollToTop } from '@/utils/scrolling';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function CardFooter({ membershipType }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const tabs = useTabs();
     const { application, dispatch } = useApplication();
     const { id, maximumNumberOfMembers } = membershipType;
@@ -53,7 +53,7 @@ export default function CardFooter({ membershipType }: Props) {
                 onClick={handleChoose}
                 data-cy={`choose-${id}`}
             >
-                {capitalizeFirstLetter(t('general:choose'))}
+                {capitalizeFirstLetter(t('general.choose'))}
             </Button>
         </div>
     );

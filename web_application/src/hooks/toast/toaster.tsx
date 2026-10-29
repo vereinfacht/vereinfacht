@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { useToast } from '@/hooks/toast/use-toast';
 import {
@@ -9,17 +10,11 @@ import {
     ToastViewport,
 } from '@/hooks/toast/toast';
 import Text from '@/app/components/Text/Text';
-import createTranslation from 'next-translate/createTranslation';
 import StatusDot from '@/app/components/StatusDot/StatusDot';
-
-// temporary solution due to this problem: https://github.com/aralroca/next-translate/issues/1191#issue-2116553225
-function t(key: string) {
-    const { t } = createTranslation('common');
-    return t(key);
-}
 
 export function Toaster() {
     const { toasts } = useToast();
+    const t = useTranslations();
 
     return (
         <ToastProvider>
@@ -49,7 +44,7 @@ export function Toaster() {
                                     {title
                                         ? title
                                         : t(
-                                              `notification:title.${props.variant ?? 'default'}`,
+                                              `notification.title.${props.variant ?? 'default'}`,
                                           )}
                                 </Text>
                             </div>

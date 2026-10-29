@@ -1,13 +1,13 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import * as React from 'react';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
-import useTranslation from 'next-translate/useTranslation';
 import IconChevronRight from '/public/svg/chevron-right.svg';
 import IconChevronLeft from '/public/svg/chevron-left.svg';
-import { useIsMobile } from '@/app/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/useMobile';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
     return (
@@ -115,7 +115,7 @@ function PaginationPrevious({
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
-    const { t } = useTranslation('general');
+    const t = useTranslations();
     const isMobile = useIsMobile();
 
     return (
@@ -128,7 +128,7 @@ function PaginationPrevious({
             leftIcon={<IconChevronLeft />}
             {...props}
         >
-            {isMobile ? '' : t('pagination.previous')}
+            {isMobile ? '' : t('general.pagination.previous')}
         </PaginationLink>
     );
 }
@@ -137,7 +137,7 @@ function PaginationNext({
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
-    const { t } = useTranslation('general');
+    const t = useTranslations();
     const isMobile = useIsMobile();
 
     return (
@@ -150,7 +150,7 @@ function PaginationNext({
             rightIcon={<IconChevronRight />}
             {...props}
         >
-            {isMobile ? '' : t('pagination.next')}
+            {isMobile ? '' : t('general.pagination.next')}
         </PaginationLink>
     );
 }

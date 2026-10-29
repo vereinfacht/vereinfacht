@@ -1,0 +1,33 @@
+import { useTranslations } from 'next-intl';
+import React, { PropsWithChildren } from 'react';
+import Text from '@/app/components/Text/Text';
+import Footer from '@/app/components/Footer';
+import LanguageSelector from '@/app/components/LanguageSelector';
+
+export default function AuthLayout({ children }: PropsWithChildren) {
+    const t = useTranslations();
+
+    return (
+        <div className="flex min-h-screen flex-col items-center px-6">
+            <div className="flex h-20 w-full items-center justify-end">
+                <LanguageSelector showLang={true} />
+            </div>
+            <div className="flex w-full flex-1 flex-col items-center gap-y-6">
+                <img
+                    src="/svg/vereinfacht_logo.svg"
+                    alt="vereinfacht logo"
+                    className="h-8"
+                />
+                <Text
+                    tag="h2"
+                    preset="display-light"
+                    className="text-base text-xl text-slate-600"
+                >
+                    {t('admin.title')}
+                </Text>
+                {children}
+            </div>
+            <Footer />
+        </div>
+    );
+}

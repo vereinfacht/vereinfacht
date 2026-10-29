@@ -1,0 +1,35 @@
+import { useTranslations } from 'next-intl';
+import Text from '@/app/components/Text/Text';
+import { usePattern } from '@/hooks/usePattern';
+import React from 'react';
+import Card from '@/app/components/Card/Card';
+
+interface Props {
+    url: string;
+}
+
+export default function CardVisitApplyForm({ url }: Props) {
+    const t = useTranslations();
+    const pattern = usePattern(1);
+
+    return (
+        <Card>
+            <a
+                href={url}
+                target="_blank"
+                className="relative flex h-full items-center justify-center p-4"
+            >
+                <div className="absolute inset-0 origin-center scale-150 -rotate-6 overflow-hidden">
+                    {pattern}
+                </div>
+                <Text
+                    preset="headline"
+                    tag="h3"
+                    className="text-headline dark-primary:text-slate-900 relative text-center text-white"
+                >
+                    {t('admin.visit_apply_form')}
+                </Text>
+            </a>
+        </Card>
+    );
+}

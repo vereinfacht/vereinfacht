@@ -1,9 +1,9 @@
-import { SupportedLocale, supportedLocales } from '@/utils/localization';
+import { routing, type SupportedLocale } from '@/i18n/routing';
 import { z } from 'zod';
 
 export const translationSchema = z
     .object(
-        supportedLocales.reduce(
+        routing.locales.reduce(
             (acc, locale) => {
                 acc[locale] = z.string().min(2).optional().or(z.literal(''));
                 return acc;

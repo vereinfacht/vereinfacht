@@ -70,11 +70,12 @@ export const authOptions = {
                     'next-auth.callback-url',
                     'next-auth.csrf-token',
                 ];
+                const cookieStore = await cookies();
 
                 cookieNames.forEach((cookieName) => {
-                    cookies().delete(cookieName);
+                    cookieStore.delete(cookieName);
 
-                    cookies().set(cookieName, '', {
+                    cookieStore.set(cookieName, '', {
                         expires: new Date(Date.now()),
                         httpOnly: true,
                         sameSite: 'none',

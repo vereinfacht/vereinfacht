@@ -1,5 +1,5 @@
+import { useTranslations } from 'next-intl';
 import { useToast } from '@/hooks/toast/use-toast';
-import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useRef, useState } from 'react';
 import HelpText from '../HelpText';
 import { Input } from '../ui/input';
@@ -43,7 +43,7 @@ export function MediaInput({
     setLoading,
 }: MediaInputProps) {
     const { toast } = useToast();
-    const { t } = useTranslation();
+    const t = useTranslations();
     const [uploadQueue, setUploadQueue] = useState<UploadTask[]>(
         media
             ? media.map((m) => ({
@@ -111,7 +111,7 @@ export function MediaInput({
 
             toast({
                 variant: 'success',
-                description: t('notification:media.upload.success', {
+                description: t('notification.media.upload.success', {
                     fileName: task.rawFile.name,
                 }),
             });
@@ -119,7 +119,7 @@ export function MediaInput({
             setUploadQueue((queue) => queue.filter((_, i) => i !== index));
             toast({
                 variant: 'error',
-                description: t('notification:media.upload.error', {
+                description: t('notification.media.upload.error', {
                     fileName: task.rawFile.name,
                 }),
             });

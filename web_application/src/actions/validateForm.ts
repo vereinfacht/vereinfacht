@@ -1,7 +1,7 @@
 'use server';
 
 import { ZodObject } from 'zod';
-import { supportedLocales } from '@/utils/localization';
+import { routing } from '@/i18n/routing';
 
 export type ActionState = {
     message?: string;
@@ -44,7 +44,7 @@ function getFormData(schema: ZodObject, formData: FormData) {
 }
 
 function getTranslationFieldData(data: FormDataEntryValue[]) {
-    return supportedLocales.reduce(
+    return routing.locales.reduce(
         (object, key, index) => ({ ...object, [key]: data[index] }),
         {},
     );
@@ -60,7 +60,7 @@ export async function validateAndRunAction(
 
     if (!validatedFields.success) {
         return {
-            message: 'error:validation.general',
+            message: 'error.validation.general',
             errors: validatedFields.error.flatten().fieldErrors,
         };
     }
