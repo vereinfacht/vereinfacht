@@ -2,8 +2,8 @@
 import { useTranslations } from 'next-intl';
 
 import React, { useState } from 'react';
-import { useFormState } from 'react-dom';
-import { FormActionState } from '../../../components/Form/FormStateHandler';
+import { useActionState } from 'react';
+import type { FormActionState } from '@/types/form-actions';
 import { TFinanceContactDeserialized } from '@/types/resources';
 import TextInput from '@/app/components/Input/TextInput';
 import InputLabel from '@/app/components/Input/InputLabel';
@@ -25,7 +25,7 @@ export default function CreateForm({ data, action }: Props) {
     const [contactType, setContactType] = useState<string>(
         data?.contactType ?? 'person',
     );
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         action,
         {
             success: false,

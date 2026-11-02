@@ -10,10 +10,10 @@ import TextInput from '@/app/components/Input/TextInput';
 import { Badge } from '@/app/components/ui/badge';
 import { TRoleDeserialized, TUserDeserialized } from '@/types/resources';
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import ActionForm from '../../components/Form/ActionForm';
 import FormField from '../../components/Form/FormField';
-import { FormActionState } from '../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 
 interface Props {
     action: (
@@ -48,7 +48,7 @@ export default function CreateForm({ data, action }: Props) {
         data?.preferredLocale ?? 'de',
     );
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         action,
         {
             success: false,

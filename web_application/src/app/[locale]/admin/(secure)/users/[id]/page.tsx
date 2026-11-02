@@ -34,6 +34,7 @@ export default async function UserShowPage({ params }: Props) {
         permissionResponse as DocumentObject,
     ) as TPermissionDeserialized[];
     const t = await getTranslations();
+
     const fields = [
         {
             label: t('user.title.label'),

@@ -1,8 +1,9 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import { useFormState } from 'react-dom';
-import FormStateHandler, { FormActionState } from '../Form/FormStateHandler';
+import { useActionState } from 'react';
+import type { FormAction } from '@/types/form-actions';
+import FormStateHandler from '../Form/FormStateHandler';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
 import Button from '@/app/components/Button/Button';
 import SubmitButton from '../Form/SubmitButton';
@@ -10,10 +11,7 @@ import { capitalizeFirstLetter } from '@/utils/strings';
 import TextInput from '@/app/components/Input/TextInput';
 
 interface Props {
-    action: (
-        state: FormActionState,
-        formData: FormData,
-    ) => Promise<FormActionState>;
+    action: FormAction;
     options: Option[];
     translationKey?: string;
     type?: 'create' | 'update';
@@ -49,7 +47,7 @@ export default function AttachResourceForm({
     onSuccess,
     onCancel,
 }: Props) {
-    const [state, formAction] = useFormState(action, { success: false });
+    const [state, formAction] = useActionState(action, { success: false });
     const t = useTranslations();
 
     return (

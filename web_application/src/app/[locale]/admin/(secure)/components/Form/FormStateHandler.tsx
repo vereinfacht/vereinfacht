@@ -1,14 +1,15 @@
 'use client';
-import { useTranslations } from 'next-intl';
 
+import { useTranslations } from 'next-intl';
 import { useToast } from '@/hooks/toast/use-toast';
+import type { FormActionState } from '@/types/form-actions';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-
-export interface FormActionState {
-    success: boolean;
-    errors?: Record<string, string[]>;
-}
+import {
+    getI18nNamespace,
+    kebabToCamelCase,
+    singularize,
+} from '@/utils/strings';
 
 interface Props {
     state: FormActionState;
@@ -31,7 +32,7 @@ export default function FormStateHandler({
     const t = useTranslations();
     const router = useRouter();
     const translationParams = {
-        resource: t(`${translationKey}.title.one`),
+        resource: t(`${getI18nNamespace(translationKey ?? '')}.title.one`),
     };
 
     useEffect(() => {
@@ -43,7 +44,8 @@ export default function FormStateHandler({
 
             toast({
                 variant: 'success',
-                description: t(`${
+                description: t(
+                    `${
                         customNotificationTranslationKey ??
                         `notification.resource.${type}`
                     }.success`,
@@ -62,7 +64,8 @@ export default function FormStateHandler({
         if (state.errors != null) {
             toast({
                 variant: 'error',
-                description: t(`${
+                description: t(
+                    `${
                         customNotificationTranslationKey ??
                         `notification.resource.${type}`
                     }.error`,

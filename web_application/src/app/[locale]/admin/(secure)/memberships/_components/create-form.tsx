@@ -5,7 +5,7 @@ import { listMembers } from '@/actions/members/list';
 import { listMembershipTypes } from '@/actions/membershipTypes/list';
 import ActionForm from '@/app/[locale]/admin/(secure)/components/Form/ActionForm';
 import FormField from '@/app/[locale]/admin/(secure)/components/Form/FormField';
-import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import BelongsToSelectInput, {
     itemsPerQuery,
 } from '@/app/components/Input/BelongsToSelectInput';
@@ -17,7 +17,7 @@ import {
     TMembershipDeserialized,
     TMembershipTypeDeserialized,
 } from '@/types/resources';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 
 interface Props {
     action: (
@@ -37,7 +37,7 @@ export default function CreateForm({
 }: Props) {
     const t = useTranslations();
     console.log('voluntaryContributionSettings', voluntaryContributionSettings);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         action,
         {
             success: false,

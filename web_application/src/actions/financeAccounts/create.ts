@@ -6,7 +6,7 @@ import {
     CreateFinanceAccountParams,
     createFinanceAccountSchema,
 } from './create.schema';
-import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 
 export const createFinanceAccount = createAuthenticatedAction(
     'create',

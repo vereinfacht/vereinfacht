@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 
 import type { ReactNode } from 'react';
-import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormAction } from '@/types/form-actions';
 import {
     Table,
     TableBody,
@@ -36,7 +36,7 @@ interface DataTableProps<TData, TValue> {
     canEdit?: boolean | ((row: TData) => boolean);
     onEdit?: (row: TData) => void;
     canDelete?: boolean | ((row: TData) => boolean);
-    deleteAction?: (formData: FormData) => Promise<FormActionState>;
+    deleteAction?: FormAction;
     totalPages?: number;
     className?: string;
     header?: boolean | string;

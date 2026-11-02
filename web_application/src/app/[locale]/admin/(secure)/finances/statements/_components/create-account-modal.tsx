@@ -17,11 +17,10 @@ import {
 import { ibanPattern } from '@/utils/patterns';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import FormField from '../../../components/Form/FormField';
-import FormStateHandler, {
-    FormActionState,
-} from '../../../components/Form/FormStateHandler';
+import FormStateHandler from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import SubmitButton from '../../../components/Form/SubmitButton';
 import AccountTypeCard from './account-type-card';
 import { useRouter } from 'next/navigation';
@@ -31,7 +30,7 @@ export default function CreateAccountModal() {
     const router = useRouter();
     const [type, setType] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         createFinanceAccountFormAction,
         {
             success: false,

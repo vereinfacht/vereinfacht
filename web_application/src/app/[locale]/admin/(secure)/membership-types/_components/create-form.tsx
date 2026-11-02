@@ -2,11 +2,11 @@
 import { useTranslations } from 'next-intl';
 
 import { TMembershipTypeDeserialized } from '@/types/resources';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import TranslationField from '../../components/Fields/Form/TranslationField';
 import ActionForm from '../../components/Form/ActionForm';
 import FormField from '../../components/Form/FormField';
-import { FormActionState } from '../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import TextInput from '@/app/components/Input/TextInput';
 import InputLabel from '@/app/components/Input/InputLabel';
 
@@ -21,7 +21,7 @@ interface Props {
 export default function CreateForm({ data, action }: Props) {
     const t = useTranslations();
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         action,
         { success: false },
     );

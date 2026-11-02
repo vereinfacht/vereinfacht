@@ -34,6 +34,10 @@ export function kebabToCamelCase(string: string) {
     return string.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 }
 
+export function kebabToSnakeCase(string: string) {
+    return string.replace(/-/g, '_');
+}
+
 export function toKebabCase(string: string) {
     return string
         .replace(/\W+/g, ' ')
@@ -42,10 +46,6 @@ export function toKebabCase(string: string) {
         .join('-');
 }
 
-export function resourceNameToTranslateKey(resourceName: string) {
-    const singularResource = singularize(resourceName);
-    return camelCaseToSnakeCase(singularResource);
-}
 export function getI18nNamespace(resourceName: string) {
-    return camelCaseToSnakeCase(singularize(resourceName));
+    return kebabToSnakeCase(camelCaseToSnakeCase(singularize(resourceName)));
 }

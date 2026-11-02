@@ -1,6 +1,6 @@
 import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import AttachResourceForm from './AttachResourceForm';
-import { FormActionState } from '../Form/FormStateHandler';
+import type { FormAction } from '@/types/form-actions';
 import RelationModal from './RelationModal';
 
 interface AttachableItem {
@@ -19,10 +19,7 @@ interface Props {
     parentResourceType: string;
     targetRelationshipName: string;
     targetResourceType: string;
-    action: (
-        state: FormActionState,
-        formData: FormData,
-    ) => Promise<FormActionState>;
+    action: FormAction;
     listAction: () => Promise<any>;
     alreadyAttachedIds: string[];
     lang: string;

@@ -1,6 +1,6 @@
 'use server';
 
-import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import { createAuthenticatedAction, handleApiResponse } from '@/lib/api/utils';
 import updateFormAction from '../base/update';
 import { UpdateDivisionParams, updateDivisionSchema } from './update.schema';

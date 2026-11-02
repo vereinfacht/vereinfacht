@@ -1,7 +1,5 @@
-import { useTranslations } from 'next-intl';
 import Text from '@/app/components/Text/Text';
 import { BelongsToDetailFieldDef, ResourceName } from '@/resources/resource';
-import { camelCaseToSnakeCase, singularize } from '@/utils/strings';
 import DetailField from '../DetailField';
 
 interface Props<T> extends BelongsToDetailFieldDef<T> {
@@ -14,17 +12,10 @@ export default function BelongsToField<T>({
     value,
     fields,
 }: Props<T>) {
-    const t = useTranslations();
-    const translationNamespace = camelCaseToSnakeCase(
-        singularize(attribute.toString()),
-    );
-
     return (
         <li className="mt-4">
             <Text className="mb-2 flex gap-2 font-light text-slate-600 md:hyphens-auto">
-                {label
-                    ? t(label)
-                    : t(`${translationNamespace}.title.one`)}
+                {label}
             </Text>
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => {

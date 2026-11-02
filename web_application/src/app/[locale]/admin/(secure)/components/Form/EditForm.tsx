@@ -1,14 +1,14 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import { ActionState, UpdateAction } from '@/actions/validateForm';
+import type { ActionState, UpdateAction } from '@/types/form-actions';
 import MessageBox from '@/app/components/MessageBox';
 import { useToast } from '@/hooks/toast/use-toast';
 import { ResourceName } from '@/resources/resource';
 import { getI18nNamespace } from '@/utils/strings';
 import { useRouter } from 'next/navigation';
 import { ReactElement, useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import CancelButton from './CancelButton';
 import FormField from './FormField';
 import SubmitButton from './SubmitButton';
@@ -25,7 +25,7 @@ export default function EditForm({ id, fields, action, resourceName }: Props) {
     const router = useRouter();
     const { toast } = useToast();
     const extendedAction = action.bind(null, id);
-    const [state, formAction] = useFormState<ActionState, FormData>(
+    const [state, formAction] = useActionState<ActionState, FormData>(
         extendedAction,
         {},
     );

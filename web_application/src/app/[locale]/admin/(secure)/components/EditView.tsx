@@ -8,7 +8,7 @@ import { ResourceName } from '@/resources/resource';
 import { ResourceModel } from '@/types/models';
 import MessageBox from '@/app/components/MessageBox';
 import { ZodObject } from 'zod';
-import { UpdateAction } from '@/actions/validateForm';
+import type { UpdateAction } from '@/types/form-actions';
 import Checkbox from '@/app/components/Input/Checkbox';
 
 interface Props {

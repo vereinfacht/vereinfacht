@@ -4,7 +4,7 @@ import { DataTable } from '@/app/components/Table/DataTable';
 import Text from '@/app/components/Text/Text';
 import { ResourceName } from '@/resources/resource';
 import { TPermissionDeserialized } from '@/types/resources';
-import { resourceNameToTranslateKey } from '@/utils/strings';
+import { getI18nNamespace } from '@/utils/strings';
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
 interface Props {
@@ -73,13 +73,12 @@ export default function PermissionTable({
             header: t('resource.title.other'),
             cell: ({ row }) => {
                 const resource = row.original.resource;
-                const translated = t(`${resourceNameToTranslateKey(resource)}.title.one`,
-                );
+                const translated = t(`${getI18nNamespace(resource)}.title.one`);
 
                 return (
                     <Text>
                         {translated ===
-                        `${resourceNameToTranslateKey(resource)}.title.one`
+                        `${getI18nNamespace(resource)}.title.one`
                             ? t(`permission.resource.${resource}.title.one`)
                             : translated}
                     </Text>

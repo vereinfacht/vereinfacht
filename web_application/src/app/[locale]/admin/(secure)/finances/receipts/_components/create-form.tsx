@@ -22,10 +22,10 @@ import {
 import { format } from 'date-fns/format';
 import { Building2, CircleUserRound } from 'lucide-react';
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
-import { FormActionState } from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import ReceiptProgressBar from './receipt-progress-bar';
 
 interface Props {
@@ -108,7 +108,7 @@ export default function CreateForm({ data, action }: Props) {
         0,
     );
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         action,
         { success: false },
     );

@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import { FormActionState } from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormAction } from '@/types/form-actions';
 import Link from 'next/link';
 import DeleteForm from './DeleteForm';
 import IconPen from '/public/svg/edit.svg';
@@ -11,7 +11,7 @@ interface Props {
     onClick?: () => void;
     type?: 'edit' | 'delete';
     id?: string | number;
-    deleteAction?: (formData: FormData) => Promise<FormActionState>;
+    deleteAction?: FormAction;
     resourceName?: string;
     disabled?: boolean;
 }

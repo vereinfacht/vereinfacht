@@ -1,23 +1,8 @@
 'use server';
 
+import type { ActionState } from '@/types/form-actions';
 import { ZodObject } from 'zod';
 import { routing } from '@/i18n/routing';
-
-export type ActionState = {
-    message?: string;
-    errors?: {
-        [x: string]: string[] | undefined;
-        [x: number]: string[] | undefined;
-    };
-};
-
-export interface UpdateAction {
-    (
-        id: string,
-        initialState: ActionState,
-        formData: FormData,
-    ): Promise<ActionState>;
-}
 
 function getFormData(schema: ZodObject, formData: FormData) {
     const result: { [key: string]: string | object } = {};

@@ -10,10 +10,10 @@ import {
 } from '@/types/resources';
 import { format } from 'date-fns/format';
 import { useEffect, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import ActionForm from '../../../components/Form/ActionForm';
 import FormField from '../../../components/Form/FormField';
-import { FormActionState } from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 
 interface Props {
     action: (
@@ -47,7 +47,7 @@ export default function CreateForm({ data, action }: Props) {
         data?.financeAccount?.id ?? '',
     );
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         // @todo: try to optimise this after Zod upgrade
         async (state, formData) => {
             return action(state, formData);

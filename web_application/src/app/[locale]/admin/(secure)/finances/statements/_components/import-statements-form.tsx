@@ -8,11 +8,10 @@ import { Input } from '@/app/components/ui/input';
 import { TFinanceAccountDeserialized } from '@/types/resources';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { useRouter } from 'next/navigation';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import FormField from '../../../components/Form/FormField';
-import FormStateHandler, {
-    FormActionState,
-} from '../../../components/Form/FormStateHandler';
+import FormStateHandler from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import SubmitButton from '../../../components/Form/SubmitButton';
 
 interface Props {
@@ -25,7 +24,7 @@ export default function ImportStatementsForm({ account, setIsOpen }: Props) {
     const router = useRouter();
     const { id } = account;
     const extendedFormAction = importStatementsFormAction.bind(null, id);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         extendedFormAction,
         {
             success: false,

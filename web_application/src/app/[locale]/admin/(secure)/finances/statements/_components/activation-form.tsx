@@ -6,10 +6,9 @@ import Button from '@/app/components/Button/Button';
 import { TFinanceAccountDeserialized } from '@/types/resources';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import { isPast } from 'date-fns';
-import { useFormState } from 'react-dom';
-import FormStateHandler, {
-    FormActionState,
-} from '../../../components/Form/FormStateHandler';
+import { useActionState } from 'react';
+import FormStateHandler from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import SubmitButton from '../../../components/Form/SubmitButton';
 import { useRouter } from 'next/navigation';
 
@@ -25,7 +24,7 @@ export default function ActivationForm({ account, setIsOpen }: Props) {
     const accountStatus =
         account && isPast(account.deletedAt ?? '') ? 'deactivated' : 'active';
     const extendedFormAction = updateFinanceAccountFormAction.bind(null, id);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         extendedFormAction,
         {
             success: false,

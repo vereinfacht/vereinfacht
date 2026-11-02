@@ -1,9 +1,8 @@
 'use client';
-import { useTranslations } from 'next-intl';
 
-import FormStateHandler, {
-    FormActionState,
-} from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import { useTranslations } from 'next-intl';
+import FormStateHandler from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormAction, FormActionState } from '@/types/form-actions';
 import SubmitButton from '@/app/[locale]/admin/(secure)/components/Form/SubmitButton';
 import Button from '@/app/components/Button/Button';
 import Text from '@/app/components/Text/Text';
@@ -19,10 +18,10 @@ import { capitalizeFirstLetter } from '@/utils/strings';
 import IconBin from '/public/svg/bin.svg';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 
 interface Props {
-    deleteAction?: (formData: FormData) => Promise<FormActionState>;
+    deleteAction?: FormAction;
     id?: string | number;
     translationKey?: string;
     disabled?: boolean;
@@ -38,14 +37,12 @@ export default function DeleteForm({
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
-        deleteAction
-            ? (_prevState: FormActionState, formData: FormData) =>
-                  deleteAction(formData)
-            : async () => ({ success: false }),
-        {
-            success: false,
-        },
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
+        deleteAction ??
+            (async (_state: FormActionState, _formData: FormData) => ({
+                success: false,
+            })),
+        { success: false },
     );
 
     return (

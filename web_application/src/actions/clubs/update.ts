@@ -2,8 +2,9 @@
 
 import { revalidateTag } from 'next/cache';
 import { z } from 'zod';
+import type { ActionState } from '@/types/form-actions';
 import { update } from '../updateAdminResources';
-import { ActionState, validateAndRunAction } from '../validateForm';
+import { validateAndRunAction } from '../validateForm';
 
 const updateClubSchema = z.object({
     title: z.string().min(2).max(255),

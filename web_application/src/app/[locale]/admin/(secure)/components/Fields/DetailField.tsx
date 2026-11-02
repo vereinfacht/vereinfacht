@@ -37,13 +37,15 @@ export default function DetailField<T>({
     const type = 'type' in props ? props.type : 'default';
     const displayValue = formatValue ? formatValue(value) : value;
     const translationKey = camelCaseToSnakeCase(attribute.toString());
-    const helpText =
-        help != null
-            ? help
-            : t(`${translationNamespace}.${translationKey}.help`,
-                  {},
-                  { fallback: '' },
-              );
+    let helpText = help;
+
+    if (!helpText) {
+        const translationHelpKey = `${translationNamespace}.${translationKey}.help`;
+        if (t.has(translationHelpKey)) {
+            helpText = t(translationHelpKey);
+        }
+    }
+
     let component;
 
     switch (type) {
@@ -93,12 +95,9 @@ export default function DetailField<T>({
         >
             <div className="shrink pt-0.5 md:w-64">
                 <Text preset="label" className="md:hyphens-auto">
-                    {t(
-                        label ??
-                            `${translationNamespace}.${translationKey}.label`,
-                    )}
+                    {label}
                 </Text>
-                {helpText != '' && <HelpText text={helpText} />}
+                {helpText && <HelpText text={helpText} />}
             </div>
             <div className="flex-1">{component}</div>
         </li>

@@ -3,7 +3,8 @@ import { useTranslations } from 'next-intl';
 
 import { PropsWithChildren, useState } from 'react';
 import CancelButton from './CancelButton';
-import FormStateHandler, { FormActionState } from './FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
+import FormStateHandler from './FormStateHandler';
 import SubmitButton from './SubmitButton';
 
 type RoutingOnSuccess = 'back' | 'reload';

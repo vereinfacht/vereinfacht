@@ -7,11 +7,10 @@ import TextInput from '@/app/components/Input/TextInput';
 import { TFinanceAccountDeserialized } from '@/types/resources';
 import { ibanPattern } from '@/utils/patterns';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import FormField from '../../../components/Form/FormField';
-import FormStateHandler, {
-    FormActionState,
-} from '../../../components/Form/FormStateHandler';
+import FormStateHandler from '../../../components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 import SubmitButton from '../../../components/Form/SubmitButton';
 import { useRouter } from 'next/navigation';
 
@@ -25,7 +24,7 @@ export default function EditAccountForm({ account, setIsOpen }: Props) {
     const router = useRouter();
     const { id } = account;
     const extendedFormAction = updateFinanceAccountFormAction.bind(null, id);
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
         extendedFormAction,
         {
             success: false,

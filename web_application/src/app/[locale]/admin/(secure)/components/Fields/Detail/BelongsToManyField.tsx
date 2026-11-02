@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import Text from '@/app/components/Text/Text';
 import { BelongsToManyDetailFieldDef } from '@/resources/resource';
 import Link from 'next/link';
@@ -12,14 +11,12 @@ export default function BelongsToManyField<T>({
     basePath,
     displayProperty = 'title',
 }: Props<T>) {
-    const t = useTranslations();
-    const title = t(label ?? '');
     const items = value as Array<{ id: string | number; [key: string]: any }>;
 
     return (
         <li className="mt-4">
             <Text className="mb-2 font-light text-slate-600 md:hyphens-auto">
-                {title}
+                {label}
             </Text>
             {basePath ? (
                 <div
