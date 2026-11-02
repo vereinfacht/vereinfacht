@@ -11,7 +11,8 @@ export default function NextButton() {
         <Button
             type="submit"
             onClick={scrollToTop}
-            icon={<IconArrow width={16} height={16} data-cy="next-button" />}
+            icon={<IconArrow width={16} height={16} />}
+            data-cy="next-button"
         >
             {t('application.next')}
         </Button>

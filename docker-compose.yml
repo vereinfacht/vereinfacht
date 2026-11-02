@@ -91,3 +91,19 @@ services:
     ports:
       - 3000:3000
     restart: always
+
+  e2e:
+    build:
+      context: .
+      dockerfile: ./docker/e2e/e2e.Dockerfile
+    depends_on:
+      - web_application
+      - api
+      - database
+    networks:
+      - stack
+    tty: true
+    working_dir: /var/www/html/e2e
+    volumes:
+      - ./e2e:/var/www/html
+    restart: always

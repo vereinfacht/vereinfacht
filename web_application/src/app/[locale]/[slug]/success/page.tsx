@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Text from '@/app/components/Text/Text';
 import IconCheck from '/public/svg/check.svg';
 
@@ -7,7 +7,7 @@ export default async function SuccessPage({
 }: {
     searchParams: Promise<{ membershipType: string }>;
 }) {
-    const t = useTranslations();
+    const t = await getTranslations();
     const { membershipType } = await searchParams;
 
     return (
