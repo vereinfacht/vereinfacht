@@ -139,7 +139,9 @@ function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
                 aria-label="Toggle showing all divisions"
                 onClick={handleClick}
             >
-                <Text preset="label">{t(showDivisions ? 'hide' : 'show')}</Text>
+                <Text preset="label">
+                    {t(showDivisions ? 'membership.hide' : 'membership.show')}
+                </Text>
                 <IconChevronDown
                     width={24}
                     height={24}
