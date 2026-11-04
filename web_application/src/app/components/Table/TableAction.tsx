@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
-import useTranslation from 'next-translate/useTranslation';
+import type { FormAction } from '@/types/form-actions';
 import Link from 'next/link';
 import DeleteForm from './DeleteForm';
 import IconPen from '/public/svg/edit.svg';
@@ -11,7 +11,7 @@ interface Props {
     onClick?: () => void;
     type?: 'edit' | 'delete';
     id?: string | number;
-    deleteAction?: (formData: FormData) => Promise<FormActionState>;
+    deleteAction?: FormAction;
     resourceName?: string;
     disabled?: boolean;
 }
@@ -25,7 +25,7 @@ export function TableAction({
     resourceName,
     disabled = false,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     if (type === 'delete') {
         return (
@@ -41,7 +41,7 @@ export function TableAction({
     if (onClick && href === undefined) {
         return (
             <button
-                title={t(`general:${type}`)}
+                title={t(`general.${type}`)}
                 className={[
                     'transition-color duration-300',
                     disabled
@@ -67,7 +67,7 @@ export function TableAction({
         <Link
             data-cy={`${type}-${id}-button`}
             href={href ?? ''}
-            title={t(`general:${type}`)}
+            title={t(`general.${type}`)}
             className={[
                 'transition-color p-2 duration-300',
                 disabled

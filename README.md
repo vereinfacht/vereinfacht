@@ -177,7 +177,7 @@ In order to use the component testing feature of Cypress, we would need to integ
 To run the tests, you'll first need to run a development process of the web_application app from the tooling container and make sure, the project is reachable under http://localhost:3000. Afterwards you can run the tests headlessly by entering `npm run test` from the `e2e` container:
 
 ```sh
-docker exec -it verein_e2e bash
+docker compose exec e2e bash
 npm run test
 ```
 

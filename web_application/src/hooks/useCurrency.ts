@@ -1,8 +1,8 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useLocale } from 'next-intl';
 type NumberFormatPartNames = 'currency' | 'decimal' | 'integer' | 'fraction';
 
 export default function useCurrency(currency = 'EUR') {
-    const { lang } = useTranslation();
+    const lang = useLocale();
 
     const formatter = new Intl.NumberFormat(lang, {
         style: 'currency',

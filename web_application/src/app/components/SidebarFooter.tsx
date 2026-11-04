@@ -1,16 +1,16 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import Link from 'next/link';
-import useTranslation from 'next-translate/useTranslation';
 import Text from '@/app/components/Text/Text';
 
 export default function SidebarFooter() {
-    const { t } = useTranslation('general');
+    const t = useTranslations();
 
     return (
         <footer className="border-borderSubtle text-textSecondary flex flex-col justify-start gap-4 border-t p-5 text-sm md:px-4">
             <div className="flex flex-row items-center gap-3 self-stretch md:flex-col md:items-start md:gap-1">
-                <Text className="text-sm">{t('general:made_with')}</Text>
+                <Text className="text-sm">{t('general.made_with')}</Text>
 
                 <Link href="/" target="_blank" className="flex items-center">
                     <img
@@ -27,7 +27,7 @@ export default function SidebarFooter() {
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm">{t('imprint')}</Text>
+                    <Text className="text-sm">{t('general.imprint')}</Text>
                 </a>
                 <span className="px-2">&bull;</span>
                 <a
@@ -35,7 +35,7 @@ export default function SidebarFooter() {
                     target="_blank"
                     className="underline transition-colors hover:text-slate-600"
                 >
-                    <Text className="text-sm">{t('privacy')}</Text>
+                    <Text className="text-sm">{t('general.privacy')}</Text>
                 </a>
             </div>
         </footer>

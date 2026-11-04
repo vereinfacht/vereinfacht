@@ -1,14 +1,14 @@
+import { useTranslations } from 'next-intl';
 import { Option } from '@/app/components/Input/SelectInput';
-import useTranslation from 'next-translate/useTranslation';
 import { Application } from './application/ApplicationProvider';
 import useCurrency from './useCurrency';
 import { Division } from '@/types/models';
 
 export function useDivisionOptions(application: Application) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const { getFormatted } = useCurrency();
     const membershipType = application.membership.membershipType;
-    const notIncludedString = ` (${t('membership:division_not_included', {
+    const notIncludedString = ` (${t('membership.division_not_included', {
         title: membershipType?.title,
     })})`;
 

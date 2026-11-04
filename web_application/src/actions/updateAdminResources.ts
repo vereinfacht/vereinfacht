@@ -4,7 +4,7 @@ import { ResourceName } from '@/resources/resource';
 import { AdminApi } from '@/services/admin-api';
 import { UpdateData } from '@/services/api-endpoints';
 import { auth } from '@/utils/auth';
-import { SupportedLocale } from '@/utils/localization';
+import type { SupportedLocale } from '@/i18n/routing';
 import { singularize } from '@/utils/strings';
 import { deserialize } from 'jsonapi-fractal';
 import { redirect } from 'next/navigation';

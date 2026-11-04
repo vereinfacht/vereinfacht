@@ -1,12 +1,13 @@
 'use client';
 
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import { SwiperOptions } from 'swiper';
+import type { SwiperContainer } from 'swiper/element';
+import type { SwiperOptions } from 'swiper/types';
 import styles from './Mobile.module.css';
 import { customInjectStyles } from './utils';
 
 export default function Mobile({ children }: { children: ReactNode }) {
-    const swiperElRef = useRef<HTMLElement>(null);
+    const swiperElRef = useRef<SwiperContainer>(null);
     const [opacity, setOpacity] = useState(0);
 
     useEffect(() => {
@@ -30,13 +31,12 @@ export default function Mobile({ children }: { children: ReactNode }) {
         }
 
         Object.assign(swiperEl, params);
-        swiperEl.addEventListener('init', handleInit);
-        // @ts-expect-error: correct swiper ref type doesn't exist currently: https://github.com/nolimits4web/swiper/issues/5241 – UPDATE: this is probably solved by now, but we're unsure if we want to upgrade to newest swiper version or even continue using it altogether
+        swiperEl.addEventListener('swiperinit', handleInit);
         swiperEl.initialize();
         customInjectStyles(swiperEl);
 
         return () => {
-            swiperEl.removeEventListener('afterInit', handleInit);
+            swiperEl.removeEventListener('swiperinit', handleInit);
         };
     }, [swiperElRef]);
 
@@ -47,12 +47,12 @@ export default function Mobile({ children }: { children: ReactNode }) {
         >
             <swiper-container
                 ref={swiperElRef}
-                init={false}
+                init="false"
                 effect="cards"
                 // @ts-expect-error: className and class-name won't work when
                 // using the swiper as a web component and class give
                 // the typical react className ts error
-                class="max-w-88"
+                class="mx-auto max-w-88"
                 wrapperClass={styles['swiper-wrapper']}
             >
                 {children}

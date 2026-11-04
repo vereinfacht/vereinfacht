@@ -7,40 +7,38 @@ import { deleteMembershipFormAction } from '@/actions/memberships/delete';
 import { deleteMembershipTypeFormAction } from '@/actions/membershipTypes/delete';
 import { deleteTaxAccountFormAction } from '@/actions/taxAccounts/delete';
 import { deleteUserFormAction } from '@/actions/users/delete';
-import { FormActionState } from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormActionState } from '@/types/form-actions';
 
 const deleteActionMap: Record<
     string,
-    (id: string, formData: FormData) => Promise<FormActionState>
+    (id: string, previousState: FormActionState) => Promise<FormActionState>
 > = {
-    'finance-accounts': async (id: string) => {
-        return await deleteFinanceAccountFormAction(id, { success: false });
+    'finance-accounts': async (id, previousState) => {
+        return await deleteFinanceAccountFormAction(id, previousState);
     },
-    'tax-accounts': async (id: string) => {
-        return await deleteTaxAccountFormAction(id, { success: false });
+    'tax-accounts': async (id, previousState) => {
+        return await deleteTaxAccountFormAction(id, previousState);
     },
-    users: async (id: string) => {
-        return await deleteUserFormAction(id, { success: false });
+    users: async (id, previousState) => {
+        return await deleteUserFormAction(id, previousState);
     },
-    divisions: async (id: string) => {
-        return await deleteDivisionFormAction(id, { success: false });
+    divisions: async (id, previousState) => {
+        return await deleteDivisionFormAction(id, previousState);
     },
-    members: async (id: string) => {
-        return await deleteMemberFormAction(id, { success: false });
+    members: async (id, previousState) => {
+        return await deleteMemberFormAction(id, previousState);
     },
-    memberships: async (id: string) => {
-        return await deleteMembershipFormAction(id, { success: false });
+    memberships: async (id, previousState) => {
+        return await deleteMembershipFormAction(id, previousState);
     },
-    'finance-contacts': async (id: string) => {
-        return await deleteFinanceContactFormAction(id, { success: false });
+    'finance-contacts': async (id, previousState) => {
+        return await deleteFinanceContactFormAction(id, previousState);
     },
-    'membership-types': async (id: string) => {
-        return await deleteMembershipTypeFormAction(id, { success: false });
+    'membership-types': async (id, previousState) => {
+        return await deleteMembershipTypeFormAction(id, previousState);
     },
-    'division-membership-types': async (id: string) => {
-        return await deleteDivisionMembershipTypeFormAction(id, {
-            success: false,
-        });
+    'division-membership-types': async (id, previousState) => {
+        return await deleteDivisionMembershipTypeFormAction(id, previousState);
     },
 };
 
@@ -51,16 +49,19 @@ export function createDeleteFormAction(resourceName: string) {
         return undefined;
     }
 
-    return async (formData: FormData): Promise<FormActionState> => {
-        const id = formData.get('id') as string;
+    return async (
+        previousState: FormActionState,
+        formData: FormData,
+    ): Promise<FormActionState> => {
+        const id = formData.get('id');
 
-        if (!id) {
+        if (typeof id !== 'string' || id.length === 0) {
             return {
                 success: false,
                 errors: { id: ['ID is required for deletion'] },
             };
         }
 
-        return await deleteHandler(id, formData);
+        return await deleteHandler(id, previousState);
     };
 }

@@ -1,4 +1,4 @@
-import { supportedLocales } from '@/utils/localization';
+import { routing } from '@/i18n/routing';
 
 export async function parseRelationship(key: string, value: any) {
     const resourceName = key.split('[')[1]?.split(']')[0];
@@ -79,7 +79,7 @@ export async function parseFormData(form: FormData) {
 
         const allValues = form.getAll(key);
         if (allValues.length > 1) {
-            attributes[key] = supportedLocales.reduce(
+            attributes[key] = routing.locales.reduce(
                 (object, locale, index) => ({
                     ...object,
                     [locale]: allValues[index] || '',

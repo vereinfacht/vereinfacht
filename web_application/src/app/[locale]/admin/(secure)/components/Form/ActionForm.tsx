@@ -1,0 +1,58 @@
+'use client';
+import { useTranslations } from 'next-intl';
+
+import { PropsWithChildren, useState } from 'react';
+import CancelButton from './CancelButton';
+import type { FormActionState } from '@/types/form-actions';
+import FormStateHandler from './FormStateHandler';
+import SubmitButton from './SubmitButton';
+
+type RoutingOnSuccess = 'back' | 'reload';
+
+interface Props extends PropsWithChildren {
+    state: FormActionState;
+    action: (payload: FormData) => void;
+    type: 'create' | 'update' | 'delete';
+    translationKey: string;
+    loading?: boolean;
+    submitLabel?: string;
+}
+
+export default function ActionForm({
+    state,
+    action,
+    type,
+    children,
+    translationKey,
+    loading = false,
+}: Props) {
+    const t = useTranslations();
+    const [routingOnSuccess, setRoutingOnSuccess] =
+        useState<RoutingOnSuccess>('back');
+
+    return (
+        <form
+            action={action}
+            className="col-span-2 container mt-4 flex h-full flex-col gap-8"
+        >
+            <FormStateHandler
+                state={state}
+                translationKey={translationKey}
+                type={type}
+                routingOnSuccess={routingOnSuccess}
+            />
+            {children}
+            <div className="mt-auto flex flex-wrap justify-end gap-4 self-end">
+                <CancelButton />
+                {type === 'create' && (
+                    <SubmitButton
+                        title={t('general.save_and_create_another')}
+                        isLoading={loading}
+                        onClick={() => setRoutingOnSuccess('reload')}
+                    />
+                )}
+                <SubmitButton title={t('general.save')} isLoading={loading} />
+            </div>
+        </form>
+    );
+}

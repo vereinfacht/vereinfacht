@@ -1,22 +1,25 @@
 import { ResourceName } from '@/resources/resource';
 import { SearchParams } from 'nuqs';
 
-export interface LocalizedPageParams {
-    lang: string;
+interface LocalizedRouteParams {
+    locale: string;
 }
-export interface ClubPageParams extends LocalizedPageParams {
+
+interface ClubRouteParams extends LocalizedRouteParams {
     slug: string;
 }
 
-export interface ResourcePageParams extends LocalizedPageParams {
+interface ResourceRouteParams extends LocalizedRouteParams {
     resource: ResourceName;
 }
 
-export interface ResourceIndexPageParams extends ResourcePageParams {
-    resource: ResourceName;
-}
-
-export type ResourceShowPageParams = ResourcePageParams & ShowPageParams;
+export type LocalizedPageParams = Promise<LocalizedRouteParams>;
+export type ClubPageParams = Promise<ClubRouteParams>;
+export type ResourcePageParams = Promise<ResourceRouteParams>;
+export type ResourceIndexPageParams = ResourcePageParams;
+export type ResourceShowPageParams = Promise<
+    ResourceRouteParams & { id: string }
+>;
 
 export type WithSearchParams = {
     searchParams: Promise<SearchParams>;
@@ -24,10 +27,11 @@ export type WithSearchParams = {
 
 export type ResourceEditPageParams = ResourceShowPageParams;
 
-export interface ShowPageParams extends LocalizedPageParams {
+interface ShowRouteParams extends LocalizedRouteParams {
     id: string;
 }
 
+export type ShowPageParams = Promise<ShowRouteParams>;
 export type EditPageParams = ShowPageParams;
 
 export type SecurePageParams = LocalizedPageParams;

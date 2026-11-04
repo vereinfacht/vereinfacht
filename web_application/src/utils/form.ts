@@ -1,11 +1,13 @@
-import { TranslationValue } from '@/app/[lang]/admin/(secure)/components/Fields/Form/TranslationField';
+import { TranslationValue } from '@/app/[locale]/admin/(secure)/components/Fields/Form/TranslationField';
 import { Option } from '@/app/components/Input/SelectInput';
 import { TranslationSchemaType } from '@/types/jsonapi-models';
 import { camelCaseToSnakeCase } from '@/utils/strings';
-import { Translate } from 'next-translate';
+import { useTranslations } from 'next-intl';
 import { z, ZodCustomStringFormat } from 'zod';
-import { getI18nNamespace } from './localization';
+import { getI18nNamespace } from './strings';
 import { ResourceName } from '@/resources/resource';
+
+type Translate = ReturnType<typeof useTranslations>;
 
 // asuming the translation attribute in the resource is suffixed with "Translations"
 const TRANSLATION_ATTRIBUTE_SUFFIX = 'Translations';
@@ -38,7 +40,7 @@ function getLabel(key: string, resourceName: ResourceName, t: Translate) {
         snakedCasedKey = key.split(TRANSLATION_ATTRIBUTE_SUFFIX)[0];
     }
 
-    return t(`${getI18nNamespace(resourceName)}:${snakedCasedKey}.label`);
+    return t(`${getI18nNamespace(resourceName)}.${snakedCasedKey}.label`);
 }
 
 function generateFieldFromSchemaDefinition(
@@ -125,7 +127,7 @@ function getEnumProps(
         inputProps.options = field.options.map((value: string) => ({
             value,
             label: t(
-                `${getI18nNamespace(resourceName)}:${camelCaseToSnakeCase(inputProps.id)}.${value}`,
+                `${getI18nNamespace(resourceName)}.${camelCaseToSnakeCase(inputProps.id)}.${value}`,
             ),
         }));
     }

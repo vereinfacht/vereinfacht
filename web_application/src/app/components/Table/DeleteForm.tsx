@@ -1,9 +1,9 @@
 'use client';
 
-import FormStateHandler, {
-    FormActionState,
-} from '@/app/[lang]/admin/(secure)/components/Form/FormStateHandler';
-import SubmitButton from '@/app/[lang]/admin/(secure)/components/Form/SubmitButton';
+import { useTranslations } from 'next-intl';
+import FormStateHandler from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
+import type { FormAction, FormActionState } from '@/types/form-actions';
+import SubmitButton from '@/app/[locale]/admin/(secure)/components/Form/SubmitButton';
 import Button from '@/app/components/Button/Button';
 import Text from '@/app/components/Text/Text';
 import {
@@ -16,13 +16,12 @@ import {
 } from '@/app/components/ui/dialog';
 import { capitalizeFirstLetter } from '@/utils/strings';
 import IconBin from '/public/svg/bin.svg';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 
 interface Props {
-    deleteAction?: (formData: FormData) => Promise<FormActionState>;
+    deleteAction?: FormAction;
     id?: string | number;
     translationKey?: string;
     disabled?: boolean;
@@ -34,18 +33,16 @@ export default function DeleteForm({
     translationKey = 'resource',
     disabled = false,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
 
-    const [formState, formAction] = useFormState<FormActionState, FormData>(
-        deleteAction
-            ? (_prevState: FormActionState, formData: FormData) =>
-                  deleteAction(formData)
-            : async () => ({ success: false }),
-        {
-            success: false,
-        },
+    const [formState, formAction] = useActionState<FormActionState, FormData>(
+        deleteAction ??
+            (async (_state: FormActionState, _formData: FormData) => ({
+                success: false,
+            })),
+        { success: false },
     );
 
     return (
@@ -53,7 +50,7 @@ export default function DeleteForm({
             <DialogTrigger asChild>
                 <button
                     data-cy={`delete-${id}-button`}
-                    title={t('general:delete')}
+                    title={t('general.delete')}
                     className={[
                         'transition-color p-2 duration-300',
                         disabled
@@ -70,12 +67,12 @@ export default function DeleteForm({
                 <DialogHeader>
                     <DialogTitle asChild>
                         <Text preset="headline">
-                            {t('general:delete_confirmation.title')}
+                            {t('general.delete_confirmation.title')}
                         </Text>
                     </DialogTitle>
                     <DialogDescription asChild>
                         <Text>
-                            {t('general:delete_confirmation.description')}
+                            {t('general.delete_confirmation.description')}
                         </Text>
                     </DialogDescription>
                 </DialogHeader>
@@ -100,11 +97,11 @@ export default function DeleteForm({
                                 type="button"
                                 onClick={() => setIsOpen(false)}
                             >
-                                {capitalizeFirstLetter(t('general:cancel'))}
+                                {capitalizeFirstLetter(t('general.cancel'))}
                             </Button>
                             <SubmitButton
                                 danger={true}
-                                title={t('general:delete')}
+                                title={t('general.delete')}
                             />
                         </div>
                     </form>

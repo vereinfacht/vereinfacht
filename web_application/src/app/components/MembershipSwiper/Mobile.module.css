@@ -5,11 +5,11 @@
     content: '';
 }
 
-.swiper-slide:not(:global .swiper-slide-active) {
+.swiper-slide:not(:global(.swiper-slide-active)) {
     @apply shadow-slate-900/[0.02];
 }
 
-.swiper-slide:not(:global .swiper-slide-active)::after {
+.swiper-slide:not(:global(.swiper-slide-active))::after {
     @apply bg-white/20;
 }
 

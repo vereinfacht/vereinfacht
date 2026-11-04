@@ -1,5 +1,4 @@
 import { NextRequestWithAuth } from 'next-auth/middleware';
-import { NextURL } from 'next/dist/server/web/next-url';
 import { NextResponse } from 'next/server';
 
 const LOGIN_PATHNAME = process.env.ADMIN_LOGIN_PATHNAME ?? '/admin/auth/login';
@@ -11,16 +10,16 @@ const PUBLIC_AUTH_PATHS = [
 
 export function handleAdminPaths(
     request: NextRequestWithAuth,
-    nextUrl: NextURL,
 ) {
     if (request.nextauth.token === null) {
-        return handleUnauthenticated(request, nextUrl);
+        return handleUnauthenticated(request);
     }
 
     return NextResponse.next();
 }
 
-function handleUnauthenticated(request: NextRequestWithAuth, nextUrl: NextURL) {
+function handleUnauthenticated(request: NextRequestWithAuth) {
+    const { nextUrl } = request;
     const isPublicPath = PUBLIC_AUTH_PATHS.some((path) =>
         nextUrl.pathname.includes(path),
     );

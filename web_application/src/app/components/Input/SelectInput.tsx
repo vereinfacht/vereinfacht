@@ -1,6 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
-import useTranslation from 'next-translate/useTranslation';
 import { ChangeEvent, HTMLProps, ReactNode, useState } from 'react';
 import InputIcon from './InputIcon';
 import InputLabel from './InputLabel';
@@ -30,7 +30,7 @@ export default function SelectInput({
     options,
     ...props
 }: Props) {
-    const { t } = useTranslation('general');
+    const t = useTranslations();
     const [value, setValue] = useState(props.defaultValue ?? '');
     const classes = [
         'appearance-none pr-10 mt-1 bg-slate-300 w-full p-3 rounded-md shadow-input outline-hidden focus:ring-3 focus:ring-2 focus:ring-slate-600 placeholder:text-slate-600',
@@ -72,7 +72,7 @@ export default function SelectInput({
                                 (option) => option.value === '',
                             ) && (
                                 <option value="" disabled hidden>
-                                    {t('select')}
+                                    {t('general.select')}
                                 </option>
                             )}
                             {options?.map((option, index) => (

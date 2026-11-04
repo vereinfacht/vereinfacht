@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { Check } from 'lucide-react';
 
@@ -21,7 +22,6 @@ import InputLabel from '../Input/InputLabel';
 import { Option } from '../Input/SelectInput';
 import { filterOptionsByQuery, sortOptions } from './MultiselectInput';
 import { useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
 import IconLoading from '/public/svg/loading.svg';
 import IconSorting from '/public/svg/sorting.svg';
 import SelectedOptions from './SelectedOptions';
@@ -53,7 +53,7 @@ export function NewMultiselectInput({
     onChange,
     defaultValue,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const [selected, setSelected] = useState<Option[]>(defaultValue || []);
     const shouldFilter = !onQueryChange;
     const options = shouldFilter
@@ -146,18 +146,18 @@ export function NewMultiselectInput({
                     >
                         {selected.length > 0
                             ? multiple
-                                ? t('general:selected_count', {
+                                ? t('general.selected_count', {
                                       count: selected.length,
                                   })
                                 : selected[0].label
-                            : t('general:select')}
+                            : t('general.select')}
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="PopoverContent p-0" align="start">
                     <Command shouldFilter={shouldFilter}>
                         <CommandInput
                             name={name}
-                            placeholder={t('general:search')}
+                            placeholder={t('general.search')}
                             className="h-9"
                             onValueChange={(text: string) =>
                                 onQueryChange?.(text)
@@ -170,7 +170,7 @@ export function NewMultiselectInput({
                         )}
                         <CommandList>
                             <CommandEmpty>
-                                {t('general:nothing_found')}
+                                {t('general.nothing_found')}
                             </CommandEmpty>
                             <CommandGroup>
                                 {filteredOptions.map((option) => (

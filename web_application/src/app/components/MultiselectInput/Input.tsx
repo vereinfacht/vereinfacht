@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { ComboboxButton, ComboboxInput } from '@headlessui/react';
-import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import { Option } from '../Input/SelectInput';
 import IconSearch from '/public/svg/search.svg';
@@ -17,7 +17,7 @@ export default function Input({
     required = false,
     multiple = true,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     return (
         <div className="shadow-input relative w-full cursor-default rounded-md bg-slate-300 text-left placeholder:text-slate-600 focus-within:ring-2 focus-within:ring-slate-600">
@@ -28,8 +28,8 @@ export default function Input({
                 }
                 placeholder={
                     multiple
-                        ? t('general:search_add')
-                        : t('general:search_select')
+                        ? t('general.search_add')
+                        : t('general.search_select')
                 }
                 onChange={(event) => setQuery(event.target.value)}
                 multiple={multiple}

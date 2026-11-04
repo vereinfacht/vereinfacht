@@ -1,7 +1,7 @@
 import { MembershipStartCycleType } from './../types/models';
 import { Locale, addMonths, format, formatISO } from 'date-fns';
 import { enGB, de } from 'date-fns/locale';
-import { SupportedLocale } from './localization';
+import type { SupportedLocale } from '@/i18n/routing';
 
 const dateFnsLocales: Record<SupportedLocale, Locale> = { en: enGB, de };
 
@@ -28,12 +28,14 @@ export function formatDateToInputValue(date: Date) {
 
 export function formatDate(
     date: string | Date | number | undefined,
-    locale: SupportedLocale,
+    locale: string,
     formatStr = 'dd.MM.yyyy',
 ) {
     if (!date) {
         return '';
     }
 
-    return format(date, formatStr, { locale: dateFnsLocales[locale] });
+    return format(date, formatStr, {
+        locale: dateFnsLocales[locale as SupportedLocale],
+    });
 }

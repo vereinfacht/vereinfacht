@@ -1,0 +1,834 @@
+{
+    "admin": {
+        "title": "Vereinsverwaltung",
+        "dashboard": "Dashboard",
+        "welcome": "Willkommen, {name}.",
+        "menu": "Menü",
+        "visit_apply_form": "Formular für Mitgliedsanträge besuchen",
+        "visit_club_website": "Website besuchen",
+        "join_signal_chat_title": "Signal-Chat beitreten",
+        "join_signal_chat_description": "Feedback geben, Support erhalten und vereinfacht mitgestalten.",
+        "support_phone": "Telefonischer Support",
+        "support_email": "E-Mail Support",
+        "finances": "Finanzen",
+        "bank_and_cashier": "Bank & Kassen",
+        "invoices": "Rechnungen",
+        "donations": "Spenden",
+        "evaluations": "Auswertungen",
+        "contacts": "Kontakte",
+        "users": "Benutzer*innen",
+        "tax-accounts": "Steuerkonten",
+        "settings": "Einstellungen",
+        "club": "Verein",
+        "divisions": "Sparten",
+        "membership-types": "Mitgliedschaftsarten",
+        "members": "Mitglieder",
+        "memberships": "Mitgliedschaften",
+        "unnamed": "Unbenannt",
+        "general": "Allgemein",
+        "open_navigation": "Navigation öffnen",
+        "close_navigation": "Navigation schließen",
+        "main_navigation": "Hauptnavigation"
+    },
+    "application": {
+        "add_person": "Person hinzufügen",
+        "confirm": "Bestätigen",
+        "division_text": "Sofern gekennzeichnet, kann die Auswahl gewisser Sparten zusätzliche monatliche Kosten verursachen.",
+        "division_selection_help_exact": "Bitte wähle pro Person genau {count} Sparte(n) aus.",
+        "division_selection_help_with_max": "Bitte wähle pro Person mindestens {min} und höchstens {max} Sparte(n) aus.",
+        "division_selection_help_min_only": "Bitte wähle pro Person mindestens {min} Sparte(n) aus.",
+        "header_subline": "Mitglied werden",
+        "headline_billing": "Zahlungsdaten",
+        "headline_division": "Sparten auswählen",
+        "headline_person": "Person {count}",
+        "headline_personal_data": "Angaben zur Person",
+        "headline_summary": "Zusammenfassung",
+        "intro_owner": "Diese Person ist außerdem Inhaber:in dieser Mitgliedschaft und wird in diesem Zusammhang kontaktiert werden, sofern notwendig.",
+        "next": "Weiter",
+        "persons": "Personen",
+        "steps_missing_modal": {
+            "description": "Du hast nicht alle Schritte vervollständigt. Bitte vervollständige diese und fahre anschließend fort.",
+            "ok": "Ok",
+            "title": "Fehlende Schritte"
+        },
+        "success": {
+            "headline": "<tag0>Mitgliedschaft <tag1></tag1><tag2>„{membershipType}”</tag2> erfolgreich beantragt.</tag0>",
+            "text": "Wir haben deinen Mitgliedsantrag erhalten und werden dir, sowie weiteren angegebenen Personen, in Kürze eine E-Mail mit den hinterlegten Daten senden. Sobald wir deinen Antrag vollständig bearbeitet haben, melden wir uns wieder bei dir."
+        },
+        "summary": {
+            "checkbox": {
+                "club_terms": "Ich stimme der <constitutionLink>Vereinssatzung</constitutionLink>, der <contributionLink>Beitragsordnung</contributionLink>, der <privacyLink>Datenschutzordnung</privacyLink> und der Abbuchung vom angegebenen Konto zu den entsprechenden Zyklen zu.",
+                "vereinfacht_terms": "Ich stimme der Verarbeitung der personenbezogenen Daten durch vereinfacht zu, habe die zugehörige <privacyLink>Datenschutzerklärung</privacyLink> gelesen und stimme diesen zu."
+            },
+            "label": {
+                "billing": "Zahlung",
+                "contact": "Kontakt",
+                "monthly_fee": "Monatliche Kosten",
+                "one_time_fee": "Einmalige Kosten",
+                "voluntary_contribution": "Freiw. Zusatzbeitrag",
+                "membership_fee": "Beitrag „{title}“",
+                "persons": "Personen",
+                "start_of_membership": "Beginn der Mitgliedschaft",
+                "sum": "Summe",
+                "your_membership": "Deine Mitgliedschaft"
+            }
+        },
+        "total_division_costs": "Zusätzliche monatliche Kosten durch Spartenauswahl"
+    },
+    "auth": {
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "club": {
+        "title": {
+            "one": "Verein",
+            "other": "Vereine",
+            "label": "Name"
+        },
+        "extended_title": {
+            "label": "Erweiterter Name",
+            "help": "Der vollständige Name des Vereins"
+        },
+        "apply_title": {
+            "label": "Antragstitel",
+            "help": "Titel in der Kopfzeile des Antragsformulars"
+        },
+        "apply_url": {
+            "label": "Link zum Antragsformular"
+        },
+        "email": {
+            "label": "E-Mail",
+            "help": "An diese E-Mail-Adresse werden die ausgefüllten Antragsformulare verschickt"
+        },
+        "website_url": {
+            "label": "Homepage",
+            "help": "Link zur Homepage des Vereins"
+        },
+        "primary_color": {
+            "label": "Primäre Farbe",
+            "help": "Wird für die Farbgebung des Antragsformulars verwendet"
+        },
+        "logo": {
+            "label": "Logo",
+            "help": "Wird unter anderen im Antragsformular verwendet"
+        },
+        "logo_url": {
+            "label": "URL des Logos",
+            "help": "Das Logo muss derzeit über eine externe URL eingebunden werden"
+        },
+        "privacy_statement_url": {
+            "label": "Link zur Datenschutzerklärung",
+            "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+        },
+        "contribution_statement_url": {
+            "label": "Link zur Beitragsordnung",
+            "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+        },
+        "constitution_url": {
+            "label": "Link zur Vereinssatzung",
+            "help": "Wird im Antragsformular angezeigt und muss zugestimmt werden"
+        },
+        "membership_start_cycle_type": {
+            "label": "Mitgliedschaftsstartzyklus",
+            "daily": "täglich",
+            "monthly": "monatlich",
+            "help": "Gibt an, zu welchem Zyklus Mitgliedschaften beginnen können"
+        },
+        "allow_voluntary_contribution": {
+            "label": "Freiwilligen Zusatzbeitrag erlauben"
+        },
+        "has_consented_media_publication_is_required": {
+            "label": "Einwilligung Medienveröffentlichung erforderlich",
+            "help": "Muss für die Antragstellung zwingend zugestimmt werden"
+        },
+        "has_consented_media_publication_default_value": {
+            "label": "Standardwert für Einwilligung Medienveröffentlichung"
+        },
+        "edit_hint": "Nur bestimmte Angaben zu deinem Verein können eigenständig geändert werden. Für alle weiteren, nimm bitte Kontakt mit uns auf.",
+        "tax_account_chart": {
+            "label": "Steuerkontenkreis",
+            "help": "Der Steuerkontenkreis, der für diesen Verein verwendet wird."
+        },
+        "tax_account_chart_source": {
+            "label": "Quelle des Steuerkontenkreises",
+            "content": "SKR03 von spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> mit Ziel, den zugrundeliegenden Standardkontenrahmen 03 abzubilden <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>."
+        }
+    },
+    "contact": {
+        "title": {
+            "one": "Kontakt",
+            "other": "Kontakte",
+            "label": "Name"
+        },
+        "contact_type": {
+            "person": "Person",
+            "company": "Firma",
+            "label": "Typ"
+        },
+        "company_name": {
+            "label": "Firma"
+        },
+        "name": {
+            "label": "Name"
+        },
+        "personal_information": {
+            "label": "Persönliche Angaben"
+        },
+        "contact_person": {
+            "label": "Ansprechperson"
+        },
+        "first_name": {
+            "label": "Vorname"
+        },
+        "last_name": {
+            "label": "Nachname"
+        },
+        "email": {
+            "label": "E-Mail"
+        },
+        "phone_number": {
+            "label": "Telefon"
+        },
+        "address": {
+            "label": "Straße"
+        },
+        "zip_code": {
+            "label": "Postleitzahl"
+        },
+        "city": {
+            "label": "Stadt"
+        },
+        "country": {
+            "label": "Land"
+        },
+        "country_options": {
+            "denmark": "Dänemark",
+            "germany": "Deutschland"
+        },
+        "created_at": {
+            "label": "Erstellt am"
+        },
+        "updated_at": {
+            "label": "Aktualisiert am"
+        }
+    },
+    "division": {
+        "title": {
+            "one": "Sparte",
+            "other": "Sparten",
+            "label": "Name"
+        },
+        "create": "Sparte erstellen",
+        "edit": "Sparte bearbeiten",
+        "attach_membership_type": "Mitgliedschaftsart verknüpfen"
+    },
+    "error": {
+        "unknown": "Unbekannter Fehler",
+        "description": "Entschuldigung, etwas lief falsch. Bitte versuche es erneut.",
+        "headline": "Etwas ist schief gelaufen",
+        "membership_failed": "Erstellen der Mitgliedschaft fehlgeschlagen, bitte versuche es erneut.",
+        "try_again": "Nochmal versuchen",
+        "validation": {
+            "general": "Validierung fehlgeschlagen. Bitte überprüfe deine Eingaben.",
+            "iban": "Bitte gib eine gültige IBAN ein."
+        },
+        "status": {
+            "404": {
+                "headline": "Fehler 404",
+                "subline": "Seite nicht gefunden",
+                "description": "Die Seite, die du suchst, existiert nicht."
+            }
+        }
+    },
+    "finance": {
+        "title": "Finanzen",
+        "balance": "Saldo",
+        "initial_balance": "Startguthaben",
+        "account_id": "Konto ID",
+        "amount": "Betrag",
+        "transactions": "Transaktionen",
+        "statements": "Umsätze",
+        "contacts": "Kontakte",
+        "receipts": "Buchungen",
+        "name": "Name",
+        "purpose": "Zweck",
+        "booking": "Buchung",
+        "valuation": "Valuta",
+        "credit": "Haben",
+        "debit": "Soll",
+        "receipt": "Buchung",
+        "close": "Schließen",
+        "new_badge": "Neu",
+        "info_badge": "Info",
+        "add_account": "Konto hinzufügen",
+        "select_account": "Konto auswählen",
+        "transaction_count": "{count} von {total}",
+        "search_placeholder": "Transaktionen durchsuchen",
+        "account_management": {
+            "select_account_description": "Wählen Sie ein Bankkonto aus der Seitenleiste, um dessen Details und Transaktionen anzuzeigen.",
+            "account_information": "Kontoinformationen",
+            "account_info_description": "Kontoinformationen und Transaktionsverlauf",
+            "show_transactions": "Transaktionen anzeigen",
+            "no_accounts": "Keine Bankkonten",
+            "no_accounts_description": "Erstellen Sie Ihr erstes Konto.",
+            "no_transactions": "Keine Transaktionen",
+            "no_transactions_description": "Dieses Konto hat noch keine Transaktionen.",
+            "error_loading_accounts": "Fehler beim Laden der Konten",
+            "error_loading_transactions": "Fehler beim Laden der Transaktionen",
+            "account_not_found": "Konto nicht gefunden",
+            "online_bank_account": "Online Bankkonto",
+            "cash_account": "Kasse"
+        },
+        "default_values": {
+            "person_name": "Maria Musterfrau",
+            "purpose": "Miete Tennisplatz"
+        },
+        "transaction_details": {
+            "title": "Details Transaktion",
+            "assigned_on": "Zugeordnet am",
+            "assigned_by": "Zugeordnet von",
+            "transaction_overview": "Transaktionsübersicht",
+            "financial_information": "Finanzinformationen",
+            "additional_details": "Zusätzliche Details"
+        }
+    },
+    "finance_account": {
+        "title": {
+            "one": "Umsatzquelle",
+            "other": "Umsatzquellen",
+            "label": "Name"
+        },
+        "initial_balance": {
+            "label": "Betrag zu Beginn"
+        },
+        "account_type": {
+            "cash_box": "Kasse",
+            "bank_account": "Bankkonto"
+        },
+        "rename": "Umbenennen",
+        "activate": "Aktivieren",
+        "deactivate": "Deaktivieren",
+        "deactivated": "Deaktivierte Quellen",
+        "import_transactions": "Transaktionen importieren",
+        "create_modal": {
+            "title": "Neue Umsatzquelle erstellen",
+            "choose_type": "Typ wählen",
+            "edit_type": "{type} einrichten"
+        },
+        "edit_modal": {
+            "description": "Passen Sie die Einstellungen der Umsatzquelle an."
+        },
+        "activate_modal": {
+            "title": "Umsatzquelle reaktivieren",
+            "description": "<tag0>Möchten Sie die Quelle <tag1>{name}</tag1> reaktivieren?</tag0>",
+            "notification": {
+                "activate": {
+                    "success": "{resource} wurde reaktiviert",
+                    "error": "{resource} konnte nicht reaktiviert werden"
+                }
+            }
+        },
+        "deactivate_modal": {
+            "title": "Umsatzquelle deaktivieren",
+            "description": "<tag0>Wenn Sie die Quelle <tag1>{name}</tag1> deaktivieren, bleiben alle bestehenden Transaktions- und Belegzuordnungen bestehen. Allerdings erscheint diese Quelle nicht mehr in der Übersicht und es erfolgen für unzugeordnete Transaktionen keine Hinweise oder Erinnerungen mehr. Dieser Schritt kann rückgängig gemacht werden.</tag0>",
+            "notification": {
+                "deactivate": {
+                    "success": "{resource} wurde deaktiviert",
+                    "error": "{resource} konnte nicht deaktiviert werden"
+                }
+            }
+        }
+    },
+    "financial_statement": {
+        "export": "Auswertung exportieren",
+        "export_form": {
+            "title": "Auswertung exportieren",
+            "description": "Exportiere eine Auswertung für alle {count} gefilterten Buchungen.",
+            "include_media_title": "Anhänge einbeziehen",
+            "include_media_help": "Inklusive aller verknüpften Belegdateien der Buchungen",
+            "evaluation_description": "Eine zusammengefasste Auswertung kann hier heruntergeladen werden."
+        }
+    },
+    "general": {
+        "add": "hinzufügen",
+        "choose": "auswählen",
+        "edit": "bearbeiten",
+        "save": "speichern",
+        "save_and_create_another": "speichern und weitere erstellen",
+        "cancel": "abbrechen",
+        "view": "ansehen",
+        "back": "zurück",
+        "create": "erstellen",
+        "import": "importieren",
+        "export": "exportieren",
+        "delete": "löschen",
+        "apply": "Anwenden",
+        "table": {
+            "export": {
+                "title": "Tabelle exportieren",
+                "description": "Tabelle mit {count} gefilterten Einträgen als CSV-Datei exportieren."
+            }
+        },
+        "delete_confirmation": {
+            "title": "Löschung bestätigen",
+            "description": "Sind Sie sicher, dass Sie diesen Eintrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+        },
+        "imprint": "Impressum",
+        "made_with": "Digitales Produkt von",
+        "nothing_found": "Keine Treffer",
+        "privacy": "Datenschutz",
+        "search": "Suchen",
+        "search_add": "Suchen und hinzufügen",
+        "search_select": "Suchen und auswählen",
+        "selected_count": "{count} ausgewählt",
+        "plus_n_more": "+{count} mehr",
+        "select": "Wählen",
+        "select_resource": "Ressource zum Verknüpfen auswählen",
+        "no_media_attached": "Keine Medien angehängt.",
+        "title": "Titel",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirm_password": "Passwort bestätigen",
+        "password_mismatch": "Die Passwörter stimmen nicht überein",
+        "created_at": "Erstellt am",
+        "updated_at": "Aktualisiert am",
+        "yes": "ja",
+        "no": "nein",
+        "pagination": {
+            "previous": "Vorherige Seite",
+            "next": "Nächste Seite"
+        },
+        "gender": {
+            "label": "Geschlecht",
+            "options": {
+                "female": "weiblich",
+                "male": "männlich",
+                "none": "keine Angabe",
+                "other": "divers"
+            }
+        },
+        "next": "Weiter",
+        "reset_password": {
+            "email_sent": "E-Mail zum Zurücksetzen gesendet.",
+            "forgot_password": "Passwort vergessen?",
+            "failed": "Wir konnten Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es erneut.",
+            "title": "Passwort ändern",
+            "confirm_password": "Passwort bestätigen",
+            "new_password": "Neues Passwort",
+            "instruction": "Geben Sie hier Ihre E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen."
+        },
+        "actions": "Aktionen"
+    },
+    "member": {
+        "title": {
+            "one": "Mitglied",
+            "other": "Mitglieder"
+        },
+        "name": {
+            "label": "Name"
+        },
+        "membership": {
+            "label": "Mitgliedschaft"
+        },
+        "status": {
+            "label": "Status",
+            "active": "aktiv",
+            "inactive": "inaktiv"
+        },
+        "email": {
+            "label": "E-Mail"
+        },
+        "address": {
+            "label": "Adresse"
+        },
+        "zip_code": {
+            "label": "Postleitzahl"
+        },
+        "city": {
+            "label": "Stadt"
+        },
+        "country": {
+            "label": "Land"
+        },
+        "phone_number": {
+            "label": "Telefon"
+        },
+        "has_consented_media_publication": {
+            "label": "Medien-Einwilligung"
+        },
+        "preferred_locale": {
+            "label": "Bevorzugte Sprache"
+        },
+        "birthday": {
+            "label": "Geburtstag"
+        },
+        "media": {
+            "label": "Medien"
+        },
+        "total_cost": {
+            "label": "Beiträge"
+        },
+        "label_identical_information": "Kontakt- und Adressinformationen identisch mit {name}",
+        "label_consent_media_publication": "Von dieser Person dürfen vereinsbezogene Fotos und Videos gemacht und in sozialen Medien, auf der Vereinswebsite oder in der Presse veröffentlicht werden.",
+        "create": "Mitglied erstellen",
+        "edit": "Mitglied bearbeiten"
+    },
+    "membership": {
+        "title": {
+            "one": "Mitgliedschaft",
+            "other": "Mitgliedschaften"
+        },
+        "apply_to": "<tag0>Antrag für: <tag1>{membershipType}</tag1>.</tag0>",
+        "bank_account_holder": {
+            "label": "Kontoinhaber:in",
+            "placeholder": "Vor- und Nachname"
+        },
+        "bank_iban": {
+            "label": "IBAN"
+        },
+        "division_not_included": "Nicht in „{title}“ enthalten",
+        "divisions_all": "<tag0>Alle</tag0> Sparten wählbar:",
+        "divisions_most": "<tag0>Großteil</tag0> der Sparten wählbar:",
+        "divisions_none": "<tag0>Keine</tag0> Sparten wählbar:",
+        "divisions_some": "<tag0>Einige</tag0> Sparten wählbar:",
+        "hide": "Verbergen",
+        "minimum_month_count": "{count, plural, one {Minimale Laufzeit von <tag0>{count}</tag0> Monat} other {Minimale Laufzeit von <tag0>{count}</tag0> Monaten}}",
+        "per_month": "pro Monat",
+        "person_count": "{count, plural, one {Für <tag0>eine</tag0> Person} other {Für <tag0>{count}</tag0> Personen}}",
+        "person_count_range": "Für <tag0>{minimum}</tag0> bis <tag0>{maximum}</tag0> Personen",
+        "show": "Anzeigen",
+        "started_at": {
+            "label": "Beginn der Mitgliedschaft",
+            "placeholder": "DD.MM.YYYY"
+        },
+        "ended_at": {
+            "label": "Ende der Mitgliedschaft",
+            "placeholder": "DD.MM.YYYY"
+        },
+        "owner": {
+            "label": "Inhaber*in"
+        },
+        "owner_email": "Inhaber*in-E-Mail",
+        "notes": {
+            "label": "Sonstiges",
+            "help": "Angaben der antragestellenden Person",
+            "placeholder": "Anmerkungen, Fragen, Notizen"
+        },
+        "status": {
+            "applied": "beantragt",
+            "active": "aktiv",
+            "cancelled": "gekündigt",
+            "label": "Status"
+        },
+        "monthly_fee": {
+            "label": "Monatlicher Beitrag",
+            "help": "Inklusive aller Spartenbeiträge und ggf. freiwilliger Zusatzbeiträge"
+        },
+        "voluntary_contribution": {
+            "label": "Freiwilliger Zusatzbeitrag",
+            "help": "Ein freiwilliger Zusatzbeitrag, der zusätzlich zum Mitgliedsbeitrag erhoben wird. Wird nur hinzugerechnet, sofern der Verein diese Funktion aktiviert hat."
+        },
+        "create": "Mitgliedschaft erstellen",
+        "edit": "Mitgliedschaft bearbeiten",
+        "validation": {
+            "owner_required": "Inhaber*in ist erforderlich",
+            "membership_type_required": "Mitgliedschaftsart ist erforderlich"
+        },
+        "current": "aktuell"
+    },
+    "membership_type": {
+        "title": {
+            "one": "Mitgliedschaftsart",
+            "other": "Mitgliedschaftsarten",
+            "label": "Name"
+        },
+        "admission_fee": {
+            "label": "Aufnahmegebühr"
+        },
+        "no_admission_fee": {
+            "label": "Keine Aufnahmegebühr"
+        },
+        "monthly_fee": {
+            "label": "Monatlicher Beitrag"
+        },
+        "description": {
+            "label": "Beschreibung"
+        },
+        "minimum_number_of_months": {
+            "label": "Minimale Laufzeit",
+            "help": "In Monaten"
+        },
+        "minimum_number_of_members": {
+            "label": "Minimale Anzahl an Personen"
+        },
+        "maximum_number_of_members": {
+            "label": "Maximale Anzahl an Personen"
+        },
+        "minimum_number_of_divisions": {
+            "label": "Minimale Anzahl an Sparten"
+        },
+        "maximum_number_of_divisions": {
+            "label": "Maximale Anzahl an Sparten"
+        },
+        "number_of_members": {
+            "label": "Anzahl an Personen"
+        },
+        "number_of_divisions": {
+            "label": "Anzahl an Sparten"
+        },
+        "create": "Mitgliedschaftsart erstellen",
+        "edit": "Mitgliedschaftsart bearbeiten",
+        "attach_division": "Sparte verknüpfen"
+    },
+    "notification": {
+        "title": {
+            "default": "Information",
+            "success": "Erfolg",
+            "error": "Fehler",
+            "warning": "Warnung"
+        },
+        "resource": {
+            "update": {
+                "success": "{resource} wurde aktualisiert",
+                "error": "{resource} konnte nicht aktualisiert werden"
+            },
+            "create": {
+                "success": "{resource} wurde erstellt",
+                "error": "{resource} konnte nicht erstellt werden"
+            },
+            "action": {
+                "success": "Aktion erfolgreich",
+                "error": "Aktion fehlgeschlagen"
+            },
+            "delete": {
+                "success": "{resource} wurde gelöscht",
+                "error": "{resource} konnte nicht gelöscht werden"
+            }
+        },
+        "media": {
+            "delete": {
+                "success": "{fileName} wurde erfolgreich entfernt",
+                "error": "{fileName} konnte nicht entfernt werden, bitte versuchen Sie es erneut"
+            },
+            "upload": {
+                "success": "{fileName} wurde erfolgreich hochgeladen",
+                "error": "{fileName} konnte nicht hochgeladen werden, bitte versuchen Sie es erneut"
+            }
+        }
+    },
+    "payment_period": {
+        "title": {
+            "one": "Abrechnungsturnus",
+            "other": "Abrechnungsturnusse",
+            "label": "Abrechnungsturnus"
+        }
+    },
+    "permission": {
+        "action": {
+            "create": "Erstellen",
+            "view": "Ansehen",
+            "update": "Bearbeiten",
+            "delete": "Löschen"
+        },
+        "title": {
+            "one": "Berechtigung",
+            "other": "Berechtigungen"
+        },
+        "resource": {
+            "financeContacts": {
+                "title": {
+                    "one": "Kontakt",
+                    "other": "Kontakte"
+                }
+            },
+            "members": {
+                "title": {
+                    "one": "Mitglied",
+                    "other": "Mitglieder"
+                }
+            },
+            "own club": {
+                "title": {
+                    "one": "Eigener Verein",
+                    "other": "Eigene Vereine"
+                }
+            },
+            "media": {
+                "title": {
+                    "one": "Medium",
+                    "other": "Medien"
+                }
+            }
+        }
+    },
+    "receipt": {
+        "title": {
+            "one": "Buchung",
+            "other": "Buchungen",
+            "label": "Name"
+        },
+        "receipt_type": {
+            "label": "Typ",
+            "income": "Einnahme",
+            "expense": "Ausgabe"
+        },
+        "booking_date": {
+            "label": "Buchungsdatum"
+        },
+        "reference_number": {
+            "label": "Referenznummer",
+            "help": "Bezeichnung für die interne Zuordnung (bspw. Mitgliedsnummer)"
+        },
+        "amount": {
+            "label": "Betrag",
+            "still_open": "Noch offen",
+            "too_much": "Zu viel",
+            "help": "Es sind nur positive Werte erlaubt. Bei Ausgaben wird der Betrag später negativ dargestellt."
+        },
+        "status": {
+            "label": "Status",
+            "completed": "Vollständig",
+            "incompleted": "Unvollständig",
+            "empty": "Leer",
+            "description": {
+                "completed": "Die Buchung ist vollständig.",
+                "incompleted": "Die Buchung ist unvollständig: Es fehlen Zuordnungen.",
+                "empty": "Es gibt keine Zuordnungen für diese Buchung."
+            }
+        },
+        "media": {
+            "label": "Dateien",
+            "help": "Unterstützt die Formate PNG, JPG und PDF.",
+            "filter": {
+                "label": "Dateien",
+                "true": "Mit Dateien",
+                "false": "Ohne Dateien"
+            },
+            "has_attachments": "Buchung hat ({count}) Dateien",
+            "no_attachments": "Buchung hat keine Dateien"
+        },
+        "tax_account": {
+            "label": "Steuerkonto",
+            "help": "Das Steuerkonto, dem dieser Buchung zugeordnet ist."
+        }
+    },
+    "resource": {
+        "no_resources_found": "Keine {name} gefunden.",
+        "edit_resource": "{resource} bearbeiten",
+        "fields": {
+            "created_at": "Erstellt am",
+            "currency": {
+                "help": "In EUR"
+            }
+        },
+        "title": {
+            "one": "Ressource",
+            "other": "Ressourcen"
+        }
+    },
+    "role": {
+        "title": {
+            "one": "Rolle",
+            "other": "Rollen",
+            "label": "Rolle"
+        },
+        "super admin": "Super Admin",
+        "club admin": "Admin",
+        "club treasurer": "Kassenwart"
+    },
+    "statement": {
+        "title": {
+            "one": "Umsatz",
+            "other": "Umsätze",
+            "label": "Name"
+        },
+        "amount": {
+            "label": "Betrag",
+            "help": "Der gesamte Betrag des Umsatzes in EUR."
+        },
+        "date": {
+            "label": "Datum"
+        },
+        "type": {
+            "label": "Typ",
+            "collective": "Sammel",
+            "individual": "Einzel"
+        },
+        "import": {
+            "title": "Umsätze importieren",
+            "description": "Hier können exportierte Umsätze im MT940- und CAMT052-Format aus dem Online-Banking importiert werden. Übereinstimmungen mit bestehenden Umsätzen bzw. Transaktionen werden automatisch erkannt und übersprungen.",
+            "notification": {
+                "success": "{total_statements_created} Umsätze wurden importiert. {total_statements_skipped} Umsätze wurden übersprungen (doppelte oder fehlerhaft).",
+                "error": "Beim Import der Umsätze gab es Fehler: {errors}"
+            },
+            "help": "Unterstützt die Formate MT940 und CAMT052 (und ggf. andere CAMT-Formate) mit Dateien der Endungen *.mta, *.sta, *.txt und *.mt940 bzw. *.xml."
+        },
+        "all_sources": "Alle Quellen"
+    },
+    "tax_account": {
+        "title": {
+            "one": "Steuerkonto",
+            "other": "Steuerkonten",
+            "label": "Name"
+        },
+        "account_number": {
+            "label": "Kontonummer"
+        },
+        "description": {
+            "label": "Beschreibung",
+            "help": "Beschreibung des Steuerkontos"
+        },
+        "custom_hint": "Hier können Sie nur individuelle Steuerkonten verwalten. Vordefinierte Konten aus dem Kontenplan können nicht angesehen, bearbeitet oder gelöscht werden. {link} Hier finden Sie die Quellen für die vordefinierte Steuerkonten."
+    },
+    "transaction": {
+        "title": {
+            "one": "Transaktion",
+            "other": "Transaktionen",
+            "label": "Name",
+            "no_receipts": "Transaktionen ohne Buchung"
+        },
+        "description": {
+            "label": "Zweck"
+        },
+        "booked_at": {
+            "label": "Buchung"
+        },
+        "valued_at": {
+            "label": "Valuta"
+        },
+        "amount": {
+            "label": "Betrag",
+            "help": "Der Betrag der Transaktion in EUR."
+        },
+        "iban": {
+            "label": "IBAN"
+        },
+        "bic": {
+            "label": "BIC"
+        },
+        "status": {
+            "label": "Status",
+            "completed": "Vollständig",
+            "incompleted": "Unvollständig",
+            "empty": "Leer",
+            "description": {
+                "completed": "Die Transaktion wurde mindestens einer Buchung zugeordnet.",
+                "incompleted": "Nicht alle Transaktionen wurden einer Buchung zugeordnet.",
+                "empty": "Die Transaktion ist noch unvollständig: Es muss mindestens eine Buchung zugeordnet werden."
+            }
+        }
+    },
+    "user": {
+        "title": {
+            "one": "Benutzer*in",
+            "other": "Benutzer*innen",
+            "label": "Name"
+        },
+        "preferred_locale": {
+            "label": "Bevorzugte Sprache"
+        },
+        "password": {
+            "help": "Leer lassen, um das aktuelle Passwort zu behalten"
+        }
+    }
+}

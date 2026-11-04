@@ -1,23 +1,8 @@
 'use server';
 
+import type { ActionState } from '@/types/form-actions';
 import { ZodObject } from 'zod';
-import { supportedLocales } from '@/utils/localization';
-
-export type ActionState = {
-    message?: string;
-    errors?: {
-        [x: string]: string[] | undefined;
-        [x: number]: string[] | undefined;
-    };
-};
-
-export interface UpdateAction {
-    (
-        id: string,
-        initialState: ActionState,
-        formData: FormData,
-    ): Promise<ActionState>;
-}
+import { routing } from '@/i18n/routing';
 
 function getFormData(schema: ZodObject, formData: FormData) {
     const result: { [key: string]: string | object } = {};
@@ -44,7 +29,7 @@ function getFormData(schema: ZodObject, formData: FormData) {
 }
 
 function getTranslationFieldData(data: FormDataEntryValue[]) {
-    return supportedLocales.reduce(
+    return routing.locales.reduce(
         (object, key, index) => ({ ...object, [key]: data[index] }),
         {},
     );
@@ -60,7 +45,7 @@ export async function validateAndRunAction(
 
     if (!validatedFields.success) {
         return {
-            message: 'error:validation.general',
+            message: 'error.validation.general',
             errors: validatedFields.error.flatten().fieldErrors,
         };
     }

@@ -1,24 +1,17 @@
 'use client';
 
-import React from 'react';
+import { useLocale } from 'next-intl';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/app/components/DropdownMenu';
-import useTranslation from 'next-translate/useTranslation';
 import IconGlobe from '/public/svg/globe.svg';
-import { usePathname, useRouter } from 'next/navigation';
-import {
-    SupportedLocale,
-    getLocalizedPath,
-    getUnlocalizedPath,
-    supportedLocales,
-} from '@/utils/localization';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import Text from './Text/Text';
-import { setLocaleCookie } from '@/actions/cookies';
 import IconChevronDown from '/public/svg/chevron_down.svg';
+import { routing, type SupportedLocale } from '@/i18n/routing';
 
 interface LanguageSelectorProps {
     showLang?: boolean;
@@ -30,17 +23,11 @@ export default function LanguageSelector({
     showArrow = false,
 }: LanguageSelectorProps) {
     const pathname = usePathname();
-    const { lang } = useTranslation();
+    const lang = useLocale();
     const router = useRouter();
-    const unlocalizedPath = getUnlocalizedPath(
-        pathname,
-        lang as SupportedLocale,
-    );
 
     function changeLanguage(locale: SupportedLocale) {
-        setLocaleCookie(locale);
-
-        router.push(getLocalizedPath(unlocalizedPath, locale));
+        router.push(pathname, { locale });
     }
 
     return (
@@ -63,7 +50,7 @@ export default function LanguageSelector({
                 )}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                {supportedLocales.map((locale) => (
+                {routing.locales.map((locale) => (
                     <DropdownMenuItem key={locale} asChild>
                         <button
                             type="button"

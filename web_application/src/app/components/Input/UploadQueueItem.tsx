@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { deleteMedia } from '@/actions/media/delete';
 import { useToast } from '@/hooks/toast/use-toast';
 import {
@@ -6,7 +7,6 @@ import {
     LoaderCircle,
     X,
 } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import { Progress } from '../ui/progress';
 import { UploadTask } from './MediaInput';
 
@@ -20,7 +20,7 @@ export default function UploadQueueItem({
     onRemove,
 }: UploadQueueItemProps) {
     const { toast } = useToast();
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     async function handleRemove() {
         if (!task.mediaId) {
@@ -35,7 +35,7 @@ export default function UploadQueueItem({
                 onRemove();
                 toast({
                     variant: 'success',
-                    description: t('notification:media.delete.success', {
+                    description: t('notification.media.delete.success', {
                         fileName: task.rawFile.name,
                     }),
                 });
@@ -43,7 +43,7 @@ export default function UploadQueueItem({
         } catch {
             toast({
                 variant: 'error',
-                description: t('notification:media.delete.error', {
+                description: t('notification.media.delete.error', {
                     fileName: task.rawFile.name,
                 }),
             });

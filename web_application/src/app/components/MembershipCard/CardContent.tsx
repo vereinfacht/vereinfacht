@@ -1,13 +1,11 @@
+import { useTranslations } from 'next-intl';
 import { MembershipType } from '@/types/models';
-import Trans from 'next-translate/Trans';
 import DivisionList from '../DivisionList/DivisionList';
 import CardItem from './CardItem';
 import Text from '../Text/Text';
 import styles from './CardContent.module.css';
 import { useMembershipSwiper } from '@/hooks/membershipSwiper/useMembershipSwiper';
 import useCurrency from '@/hooks/useCurrency';
-import useTranslation from 'next-translate/useTranslation';
-
 interface Props {
     membershipType: MembershipType;
     showMonthCount: boolean;
@@ -19,7 +17,7 @@ export default function CardContent({
     showMonthCount,
     showAdmissionFee,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const { getFormatted } = useCurrency();
     const { divisions: clubDivisions } = useMembershipSwiper();
 
@@ -30,34 +28,17 @@ export default function CardContent({
         minimumNumberOfMonths,
     } = membershipType;
 
-    const personCountProps =
-        minimumNumberOfMembers !== maximumNumberOfMembers
-            ? {
-                  i18nKey: 'membership:person_count_range',
-                  values: {
-                      minimum: minimumNumberOfMembers,
-                      maximum: maximumNumberOfMembers,
-                  },
-              }
-            : {
-                  i18nKey: 'membership:person_count',
-                  values: {
-                      count: maximumNumberOfMembers,
-                  },
-              };
-
     return (
         <div className="flex-1">
             <div className="flex flex-col gap-4 px-8 pt-4">
                 {showMonthCount && (
                     <CardItem>
-                        <Trans
-                            i18nKey="membership:minimum_month_count"
-                            components={[
-                                <span key="0" className={'font-semibold'} />,
-                            ]}
-                            values={{ count: minimumNumberOfMonths }}
-                        />
+                        {t.rich('membership.minimum_month_count', {
+                            count: minimumNumberOfMonths,
+                            tag0: (chunks) => (
+                                <span className="font-semibold">{chunks}</span>
+                            ),
+                        })}
                     </CardItem>
                 )}
                 {showAdmissionFee && (
@@ -70,20 +51,32 @@ export default function CardContent({
                                         membershipType.admissionFee ?? 0,
                                     )}
                                 </span>{' '}
-                                {t('membership_type:admission_fee.label')}
+                                {t('membership_type.admission_fee.label')}
                             </>
                         ) : (
-                            t('membership_type:no_admission_fee.label')
+                            t('membership_type.no_admission_fee.label')
                         )}
                     </CardItem>
                 )}
                 <CardItem>
-                    <Trans
-                        components={[
-                            <span key="0" className={'font-semibold'} />,
-                        ]}
-                        {...personCountProps}
-                    />
+                    {minimumNumberOfMembers !== maximumNumberOfMembers
+                        ? t.rich('membership.person_count_range', {
+                              minimum: minimumNumberOfMembers,
+                              maximum: maximumNumberOfMembers,
+                              tag0: (chunks) => (
+                                  <span className="font-semibold">
+                                      {chunks}
+                                  </span>
+                              ),
+                          })
+                        : t.rich('membership.person_count', {
+                              count: maximumNumberOfMembers,
+                              tag0: (chunks) => (
+                                  <span className="font-semibold">
+                                      {chunks}
+                                  </span>
+                              ),
+                          })}
                 </CardItem>
             </div>
             {clubDivisions !== undefined && clubDivisions.length > 0 && (

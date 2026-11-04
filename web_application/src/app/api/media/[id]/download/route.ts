@@ -1,11 +1,12 @@
 import { NextRequest } from 'next/server';
 import { auth } from '@/utils/auth';
-import { redirect } from 'next/dist/client/components/navigation';
+import { redirect } from 'next/navigation';
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } },
+    { params }: { params: Promise<{ id: string }> },
 ) {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.accessToken) {
@@ -13,7 +14,7 @@ export async function GET(
     }
 
     const response = await fetch(
-        `${(process.env.API_DOMAIN || '') + (process.env.API_PATH || '')}/media/${params.id}/download`,
+        `${(process.env.API_DOMAIN || '') + (process.env.API_PATH || '')}/media/${id}/download`,
         {
             headers: {
                 Authorization: `Bearer ${session.accessToken}`,

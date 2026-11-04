@@ -1,12 +1,12 @@
 'use client';
 
+import { useTranslations, useLocale } from 'next-intl';
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { format, parseISO } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { enUS } from 'date-fns/locale/en-US';
 import { CalendarDays, RotateCcw } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import { ParserBuilder, useQueryState } from 'nuqs';
 import { paginationSearchParamParser } from '@/utils/search-params';
 import { useState } from 'react';
@@ -35,10 +35,9 @@ export function HeaderDatePicker({
     translationKey,
     parameterKeys,
 }: Props) {
-    const { t } = useTranslation();
-    const { lang } = useTranslation();
+    const t = useTranslations();
+    const lang = useLocale();
     const locale = lang === 'de' ? de : enUS;
-
     const [fromDate, setFromDate] = useQueryState(
         parameterKeys.from,
         fromDateParser,
@@ -168,7 +167,7 @@ export function HeaderDatePicker({
                                 }
                                 data-cy="date-range-apply-button"
                             >
-                                {t('general:apply')}
+                                {t('general.apply')}
                             </Button>
                             <Button
                                 onClick={handleClear}

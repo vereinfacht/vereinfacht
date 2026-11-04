@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -7,7 +8,6 @@ import {
 import Checkbox from '@/app/components/Input/Checkbox';
 import { Button } from '@/app/components/ui/button';
 import { ListFilter } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import { SingleParserBuilder, useQueryState } from 'nuqs';
 import { paginationSearchParamParser } from '@/utils/search-params';
 import { Badge } from '../ui/badge';
@@ -24,7 +24,7 @@ export function HeaderOptionFilter({
     parser,
     translationKey,
 }: Props) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const [filterQueryParam, setFilterQueryParam] = useQueryState(
         paramKey,
         parser,

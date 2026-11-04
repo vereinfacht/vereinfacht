@@ -1,8 +1,8 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { TMediaDeserialized } from '@/types/resources';
 import { Paperclip } from 'lucide-react';
-import useTranslation from 'next-translate/useTranslation';
 import IconTooltip from '../Tooltip/IconTooltip';
 import BadgeCount from './BadgeCount';
 
@@ -21,11 +21,11 @@ export default function MediaCell({
     className,
     translateNamespace,
 }: MediaCellProps) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     const mediaCount = media?.length ?? 0;
     const tooltipId = `media-tooltip-${rowId}`;
 
-    let statusDescription = t(`${translateNamespace}:media.no_attachments`);
+    let statusDescription = t(`${translateNamespace}.media.no_attachments`);
     if (mediaCount === 1) {
         const item = media[0];
         statusDescription = item.fileName
@@ -34,7 +34,7 @@ export default function MediaCell({
                   item.originalUrl?.split('/').pop() || 'unknown.pdf',
               );
     } else if (mediaCount > 1) {
-        statusDescription = t(`${translateNamespace}:media.has_attachments`, {
+        statusDescription = t(`${translateNamespace}.media.has_attachments`, {
             count: mediaCount,
         });
     }

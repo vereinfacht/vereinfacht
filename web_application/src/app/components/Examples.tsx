@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { hexToCssString, shouldUseDarkMode } from '@/utils/colors';
-import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import FormIntro from './FormIntro';
 import InputLabel from './Input/InputLabel';
@@ -19,7 +19,7 @@ import { Button } from '@/app/components/ui/button';
 
 export default function Examples() {
     const [color, setColor] = useState<string | undefined>();
-    const { t } = useTranslation();
+    const t = useTranslations();
     const [sections, setSections] = useState<Record<string, any>[]>([]);
     const btnClass = 'flex flex-row items-center gap-4';
 
@@ -27,15 +27,15 @@ export default function Examples() {
         <>
             <MultipleSections
                 sections={sections}
-                addText={t('application:add_person')}
+                addText={t('application.add_person')}
                 addSection={() => setSections([...sections, {}])}
                 renderSection={(index) => (
                     <FormIntro
-                        headline={t('application:headline_person', {
+                        headline={t('application.headline_person', {
                             count: index + 1,
                         })}
                         icon={<IconPerson className="fill-current" />}
-                        text={t('application:intro_owner')}
+                        text={t('application.intro_owner')}
                         rightComponent={
                             <IconTrash
                                 className="h-12 w-12 cursor-pointer stroke-red-500 stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"

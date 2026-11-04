@@ -1,6 +1,6 @@
+import { useTranslations } from 'next-intl';
 import { Club } from '@/types/models';
 import Text from './Text/Text';
-import useTranslation from 'next-translate/useTranslation';
 import styles from './ClubHeader.module.css';
 
 export interface ClubHeaderProps {
@@ -9,7 +9,7 @@ export interface ClubHeaderProps {
 }
 
 export default function ClubHeader({ club, showCard = true }: ClubHeaderProps) {
-    const { t } = useTranslation('application');
+    const t = useTranslations();
 
     return (
         <header
@@ -50,7 +50,7 @@ export default function ClubHeader({ club, showCard = true }: ClubHeaderProps) {
                                 }}
                             />
                         ) : (
-                            t('header_subline')
+                            t('application.header_subline')
                         )}
                     </Text>
                 </div>
