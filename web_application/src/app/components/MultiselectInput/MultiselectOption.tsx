@@ -1,7 +1,6 @@
 'use client';
 
 import { ComboboxOption } from '@headlessui/react';
-import React from 'react';
 import { Option } from '../Input/SelectInput';
 import IconCheck from '/public/svg/check.svg';
 

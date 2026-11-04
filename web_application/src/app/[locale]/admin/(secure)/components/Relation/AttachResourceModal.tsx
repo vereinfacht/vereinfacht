@@ -2,6 +2,7 @@ import { deserialize, DocumentObject } from 'jsonapi-fractal';
 import AttachResourceForm from './AttachResourceForm';
 import type { FormAction } from '@/types/form-actions';
 import RelationModal from './RelationModal';
+import { JSX } from 'react/jsx-runtime';
 
 interface AttachableItem {
     id: string;

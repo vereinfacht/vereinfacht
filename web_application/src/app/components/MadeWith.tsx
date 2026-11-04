@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import Text from './Text/Text';
 import Link from 'next/link';
 

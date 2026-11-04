@@ -1,4 +1,3 @@
-import React from 'react';
 import PatternWaves from '/public/svg/pattern_triangles.svg';
 
 export default function Triangles() {

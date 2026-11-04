@@ -1,4 +1,3 @@
-import React from 'react';
 import useCurrency from '@/hooks/useCurrency';
 import Text, { TextProps } from '../Text/Text';
 

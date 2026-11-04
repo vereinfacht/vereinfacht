@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { JSX } from 'react/jsx-runtime';
 
 type HTMLElements = keyof JSX.IntrinsicElements;
 

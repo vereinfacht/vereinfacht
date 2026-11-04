@@ -1,4 +1,3 @@
-import React from 'react';
 import { Badge } from '../ui/badge';
 
 export default function BadgeCount({ count }: { count: number | string }) {

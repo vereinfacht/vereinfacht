@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default async function TransactionShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const transaction = await Promise.all([
         getTransaction({
             id: id,

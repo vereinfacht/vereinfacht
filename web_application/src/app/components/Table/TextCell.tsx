@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import Text, { TextPresets } from '../Text/Text';
 
 export interface TextCellProps extends PropsWithChildren {

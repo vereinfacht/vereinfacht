@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 
 import { ComboboxOptions, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Option } from '../Input/SelectInput';
 import MultiselectOption from './MultiselectOption';
 

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default async function UserShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const [user, permissionResponse] = await Promise.all([
         getUser({
             id: id,

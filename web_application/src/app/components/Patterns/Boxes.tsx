@@ -1,4 +1,3 @@
-import React from 'react';
 import PatternWaves from '/public/svg/pattern_boxes.svg';
 
 export default function Boxes() {

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Edit from '../Button/Edit';
 import Text from '../Text/Text';
 

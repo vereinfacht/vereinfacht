@@ -1,5 +1,5 @@
 import useCurrency from '@/hooks/useCurrency';
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import Text from './Text/Text';
 
 interface Props extends HTMLAttributes<HTMLParagraphElement> {

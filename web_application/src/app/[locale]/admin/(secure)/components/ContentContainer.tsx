@@ -1,6 +1,6 @@
 import Footer from '@/app/components/Footer';
 import MadeWith from '@/app/components/MadeWith';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import TitleBar from './TitleBar';
 
 export default function ContentContainer({ children }: PropsWithChildren) {

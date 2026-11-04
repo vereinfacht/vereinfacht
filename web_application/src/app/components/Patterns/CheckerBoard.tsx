@@ -1,4 +1,3 @@
-import React from 'react';
 import PatternWaves from '/public/svg/pattern_checker_board.svg';
 
 export default function CheckerBoard() {

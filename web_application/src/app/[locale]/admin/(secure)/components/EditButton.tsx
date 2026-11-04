@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Button from '@/app/components/Button/Button';
 import { capitalizeFirstLetter } from '@/utils/strings';
-import React from 'react';
 
 interface Props {
     href: string;

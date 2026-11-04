@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default async function TaxAccountShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const taxAccount = await Promise.all([
         getTaxAccount({
             id: id,

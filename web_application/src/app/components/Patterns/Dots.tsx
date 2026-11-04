@@ -1,4 +1,3 @@
-import React from 'react';
 import PatternDots from '/public/svg/pattern_dots.svg';
 
 export default function Dots() {

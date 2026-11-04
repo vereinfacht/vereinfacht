@@ -124,7 +124,7 @@ export default function SettingsDropdown({ account }: Props) {
                                             {chunks}
                                         </span>
                                     ),
-                                    name: title,
+                                    name: title ?? '',
                                 },
                             )
                         ) : (
@@ -139,7 +139,7 @@ export default function SettingsDropdown({ account }: Props) {
                                             {chunks}
                                         </span>
                                     ),
-                                    name: title,
+                                    name: title ?? '',
                                 },
                             )
                         )}

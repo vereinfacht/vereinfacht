@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default async function ReceiptShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const receipt = await Promise.all([
         getReceipt({
             id: id,
