@@ -1,8 +1,8 @@
 'use client';
+import React from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import Link from 'next/link';
-import React from 'react';
 import Text from '../Text/Text';
 
 export interface BelongsToManyItem {

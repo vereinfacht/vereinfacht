@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default async function MembershipShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const membership = await getMembership({
         id: id,
         include: [

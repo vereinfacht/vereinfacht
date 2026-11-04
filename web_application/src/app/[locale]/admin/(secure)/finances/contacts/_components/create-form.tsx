@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useActionState } from 'react';
 import type { FormActionState } from '@/types/form-actions';
 import { TFinanceContactDeserialized } from '@/types/resources';

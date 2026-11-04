@@ -1,6 +1,5 @@
 import Empty from '@/app/components/Empty';
 import CurrencyText from '@/app/components/Text/CurrencyText';
-import React from 'react';
 
 interface Props {
     value?: number | string;

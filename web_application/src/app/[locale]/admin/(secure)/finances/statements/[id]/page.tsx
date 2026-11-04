@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default async function StatementShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const statement = await Promise.all([
         getStatement({
             id: id,

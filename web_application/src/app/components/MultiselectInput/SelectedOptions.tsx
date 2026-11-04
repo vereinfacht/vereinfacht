@@ -1,4 +1,3 @@
-import React from 'react';
 import { Option } from '../Input/SelectInput';
 import SelectedOption from './SelectedOption';
 

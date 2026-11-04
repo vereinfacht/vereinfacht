@@ -1,5 +1,4 @@
 import Empty from '@/app/components/Empty';
-import React from 'react';
 
 interface Props {
     value?: string;

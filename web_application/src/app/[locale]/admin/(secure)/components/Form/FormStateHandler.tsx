@@ -5,11 +5,7 @@ import { useToast } from '@/hooks/toast/use-toast';
 import type { FormActionState } from '@/types/form-actions';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import {
-    getI18nNamespace,
-    kebabToCamelCase,
-    singularize,
-} from '@/utils/strings';
+import { getI18nNamespace } from '@/utils/strings';
 
 interface Props {
     state: FormActionState;
@@ -49,6 +45,8 @@ export default function FormStateHandler({
                         customNotificationTranslationKey ??
                         `notification.resource.${type}`
                     }.success`,
+
+                    // @ts-ignore: state object structure unknown, but spreading it for translation parameters is intended
                     translationKey ? translationParams : { ...state },
                 ),
             });
@@ -69,6 +67,7 @@ export default function FormStateHandler({
                         customNotificationTranslationKey ??
                         `notification.resource.${type}`
                     }.error`,
+                    // @ts-ignore: state object structure unknown, but spreading it for translation parameters is intended
                     translationKey ? translationParams : { ...state },
                 ),
             });

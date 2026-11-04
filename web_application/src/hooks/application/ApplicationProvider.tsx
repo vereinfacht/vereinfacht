@@ -6,7 +6,7 @@ import {
     Membership,
     MembershipType,
 } from '@/types/models';
-import { Reducer, useReducer } from 'react';
+import { useReducer } from 'react';
 import { ApplicationContext } from './ApplicationContext';
 
 export type Steps = 'membership_type' | 'members' | 'divisions' | 'membership';
@@ -124,9 +124,10 @@ export function ApplicationProvider({
     club,
     children,
 }: ApplicationProviderProps) {
-    const [application, dispatch] = useReducer<
-        Reducer<Application, ApplicationActions>
-    >(applicationReducer, getInitialApplication(club));
+    const [application, dispatch] = useReducer(
+        applicationReducer,
+        getInitialApplication(club),
+    );
 
     const isStepSkipped = (step: Steps) =>
         getStepState(step, 'skipped', application);

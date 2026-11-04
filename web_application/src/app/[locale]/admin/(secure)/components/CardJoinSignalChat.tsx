@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import Text from '@/app/components/Text/Text';
-import React from 'react';
 import Card from '@/app/components/Card/Card';
 import Logo from '/public/svg/vereinfacht_signet.svg';
 import SignalLogo from '/public/svg/signal_logo.svg';

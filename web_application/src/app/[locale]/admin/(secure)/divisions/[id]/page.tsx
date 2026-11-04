@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default async function DivisionShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const division = await Promise.all([
         getDivision({ id: id, include: ['membershipTypes'] }),
     ]);

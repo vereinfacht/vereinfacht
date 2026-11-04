@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Text from '@/app/components/Text/Text';
 import { usePattern } from '@/hooks/usePattern';
-import React from 'react';
 import Card from '@/app/components/Card/Card';
 
 interface Props {

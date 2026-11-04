@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default async function MemberShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const member = await getMember({
         id: id,
         include: ['divisions', 'membership', 'membership.owner', 'media'],

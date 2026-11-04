@@ -1,7 +1,6 @@
 import Empty from '@/app/components/Empty';
 import Text from '@/app/components/Text/Text';
 import { routing, type SupportedLocale } from '@/i18n/routing';
-import React from 'react';
 
 export type Translation = Record<SupportedLocale, string>;
 

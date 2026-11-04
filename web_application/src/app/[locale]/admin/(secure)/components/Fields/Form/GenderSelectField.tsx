@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 
 import { genderOptions } from '@/actions/financeContacts/create.schema';
 import SelectInput, { Option } from '@/app/components/Input/SelectInput';
-import React from 'react';
 import FormField from '../../Form/FormField';
 
 interface Props {

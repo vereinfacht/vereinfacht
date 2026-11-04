@@ -15,7 +15,7 @@ import SubmitButton from './SubmitButton';
 
 interface Props {
     id: string;
-    fields: ReactElement[];
+    fields: ReactElement<{ id: string }>[];
     action: UpdateAction;
     resourceName: ResourceName;
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import PatternWaves from '/public/svg/pattern_lines.svg';
 
 export default function Lines() {

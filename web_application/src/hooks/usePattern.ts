@@ -4,6 +4,7 @@ import Dots from '@/app/components/Patterns/Dots';
 import Lines from '@/app/components/Patterns/Lines';
 import Triangles from '@/app/components/Patterns/Triangles';
 import Waves from '@/app/components/Patterns/Waves';
+import { JSX } from 'react/jsx-runtime';
 
 const patterns: JSX.Element[] = [
     Waves(),

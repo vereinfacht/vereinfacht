@@ -88,7 +88,7 @@ export default function FinancialStatementExportModal({ receiptIds }: Props) {
                     <DialogDescription asChild>
                         <Text>
                             {t('financial_statement.export_form.description', {
-                                count: receiptIds?.length,
+                                count: receiptIds?.length ?? 0,
                             })}
                         </Text>
                     </DialogDescription>

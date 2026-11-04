@@ -89,7 +89,7 @@ export async function updateClub(
         formData,
         (data) => update('clubs', id, data),
         () => {
-            revalidateTag('clubs');
+            revalidateTag('clubs', 'max');
         },
     );
 }

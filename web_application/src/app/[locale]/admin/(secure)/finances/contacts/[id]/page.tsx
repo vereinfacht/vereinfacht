@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default async function ContactShowPage({ params }: Props) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const contact = await getFinanceContact({
         id: id,
         include: ['receipts'],
@@ -101,9 +101,7 @@ export default async function ContactShowPage({ params }: Props) {
     return (
         <div className="col-span-2 container flex flex-col gap-6">
             {!Boolean(contact.isExternal) && (
-                <EditButton
-                    href={`/admin/finances/contacts/edit/${id}`}
-                />
+                <EditButton href={`/admin/finances/contacts/edit/${id}`} />
             )}
             <ul className="flex flex-col gap-2">
                 {fields.map((field, index) => (

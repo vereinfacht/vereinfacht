@@ -2,7 +2,6 @@
 import { useTranslations } from 'next-intl';
 
 import { ComboboxButton, ComboboxInput } from '@headlessui/react';
-import React from 'react';
 import { Option } from '../Input/SelectInput';
 import IconSearch from '/public/svg/search.svg';
 

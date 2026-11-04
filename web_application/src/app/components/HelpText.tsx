@@ -1,5 +1,4 @@
 import Text from '@/app/components/Text/Text';
-import React from 'react';
 
 interface Props {
     text: string;

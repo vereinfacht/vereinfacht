@@ -1,4 +1,3 @@
-import React from 'react';
 import Text from '@/app/components/Text/Text';
 
 export interface MessageBoxProps {

@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { ReactNode } from 'react';
 import Line from './Line';
 import Step, { StepProps } from './Step';
 

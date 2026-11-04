@@ -1,6 +1,5 @@
 import AdditionalCosts from '@/app/components/AdditionalCosts';
 import Text from '@/app/components/Text/Text';
-import React from 'react';
 
 export interface CostItemProps {
     label: string;

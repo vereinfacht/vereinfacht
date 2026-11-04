@@ -1,4 +1,3 @@
-import React from 'react';
 import IconCheck from '/public/svg/check.svg';
 import IconClose from '/public/svg/close.svg';
 

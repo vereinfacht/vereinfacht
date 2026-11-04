@@ -1,5 +1,4 @@
 import { BooleanIcon } from '@/app/components/BooleanIcon';
-import React from 'react';
 
 interface Props {
     value?: number;

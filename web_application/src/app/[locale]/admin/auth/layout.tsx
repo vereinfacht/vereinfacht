@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import Text from '@/app/components/Text/Text';
 import Footer from '@/app/components/Footer';
 import LanguageSelector from '@/app/components/LanguageSelector';

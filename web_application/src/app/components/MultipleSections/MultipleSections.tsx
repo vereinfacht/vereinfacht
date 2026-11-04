@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 
 import { capitalizeFirstLetter } from '@/utils/strings';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Button from '../Button/Button';
 import Section from './Section';
 import IconPlus from '/public/svg/plus.svg';
