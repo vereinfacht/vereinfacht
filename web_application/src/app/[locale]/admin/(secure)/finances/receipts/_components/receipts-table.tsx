@@ -13,7 +13,6 @@ import { HeaderDatePicker } from '@/app/components/Table/HeaderDatePicker';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import MediaCell from '@/app/components/Table/MediaCell';
-import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { TriStateHeaderFilter } from '@/app/components/Table/TriStateHeaderFilter';
 import { ResourceName } from '@/resources/resource';
@@ -29,6 +28,7 @@ import DateField from '../../../components/Fields/Detail/DateField';
 import FinancialStatementExportModal from './financial-statement-export-modal';
 import TableExportModal from '../../../components/TableExportModal';
 import TableToolbarActions from '../../../components/TableToolbarActions';
+import { TableName, TableBadge } from '@/app/components/ui/table-badge';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -68,7 +68,8 @@ export default function ReceiptsTable({
                     <BelongsToCell
                         resource={receipt}
                         path="/admin/finances/receipts"
-                        content={t(`receipt.receipt_type.${receipt.receiptType}`,
+                        content={t(
+                            `receipt.receipt_type.${receipt.receiptType}`,
                         )}
                         truncate
                     />
@@ -124,13 +125,17 @@ export default function ReceiptsTable({
                 ) : (
                     t('receipt.status.label')
                 ),
-            cell: ({ row }) => (
-                <StatusCell
-                    status={row.getValue('status')}
-                    rowId={row.id}
-                    translateNamespace={'receipt'}
-                />
-            ),
+            cell: ({ row }) => {
+                const status = row.getValue<string>('status');
+
+                return (
+                    <TableBadge
+                        table={TableName.Receipts}
+                        status={status}
+                        label={t(`receipt.status.${status}`)}
+                    />
+                );
+            },
         },
         {
             accessorKey: 'media',

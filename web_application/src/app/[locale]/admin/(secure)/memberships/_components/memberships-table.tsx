@@ -21,6 +21,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import DateField from '../../components/Fields/Detail/DateField';
 import TableExportModal from '../../components/TableExportModal';
 import TableToolbarActions from '../../components/TableToolbarActions';
+import { TableName, TableBadge } from '@/app/components/ui/table-badge';
 
 interface Props {
     memberships: TMembershipDeserialized[];
@@ -160,14 +161,13 @@ export default function MembershipsTable({
                 ) : (
                     t('membership.status.label')
                 ),
-            cell: ({ row }) => {
-                const status = row.getValue('status');
-                return (
-                    <TextCell>
-                        {status ? t(`membership.status.${status}`) : '-'}
-                    </TextCell>
-                );
-            },
+            cell: ({ row }) => (
+                <TableBadge
+                    table={TableName.Memberships}
+                    status={row.getValue('status')}
+                    label={t(`membership.status.${row.getValue('status')}`)}
+                />
+            ),
         },
     ];
 

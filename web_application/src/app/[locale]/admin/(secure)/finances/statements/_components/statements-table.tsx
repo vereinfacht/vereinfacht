@@ -8,7 +8,6 @@ import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
-import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
@@ -17,6 +16,7 @@ import { formatDate } from '@/utils/dates';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
+import { TableName, TableBadge } from '@/app/components/ui/table-badge';
 
 interface StatementsListProps {
     statements: TStatementDeserialized[];
@@ -115,13 +115,17 @@ export default function StatementsTable({
                 mobileLabel: t('transaction.status.label'),
             } as any,
             header: t('transaction.status.label'),
-            cell: ({ row }) => (
-                <StatusCell
-                    status={row.getValue('status')}
-                    rowId={row.id}
-                    translateNamespace={'transaction'}
-                />
-            ),
+            cell: ({ row }) => {
+                const status = row.getValue<string>('status');
+
+                return (
+                    <TableBadge
+                        table={TableName.Statements}
+                        status={status}
+                        label={t(`transaction.status.${status}`)}
+                    />
+                );
+            },
         },
         {
             accessorKey: 'financeAccount.title',

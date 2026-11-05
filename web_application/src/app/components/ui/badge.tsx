@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
 
 const badgeVariants = cva(
-    'inline-flex items-center rounded-full border border-slate-200 px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:border-slate-800 dark:focus:ring-slate-300',
+    'inline-flex items-center gap-1 rounded-full border border-slate-200 px-2 py-0.5 text-xs font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:border-slate-800 dark:focus:ring-slate-300',
     {
         variants: {
             variant: {
@@ -17,10 +17,20 @@ const badgeVariants = cva(
                 destructive:
                     'border-transparent bg-red-500 text-slate-50 hover:bg-red-500/80 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/80',
                 outline: 'text-slate-950 dark:text-slate-50',
+                success: 'border-transparent bg-bgSuccessSoft text-textPrimary',
+                warning: 'border-transparent bg-bgWarningSoft text-textPrimary',
+                danger: 'border-transparent bg-bgErrorSoft text-textPrimary',
+                muted: 'border-transparent bg-bgSurfaceSolidSurfaceMuted text-textPrimary',
+            },
+            size: {
+                default: '',
+                sm: 'text-xs leading-4',
+                lg: 'text-sm leading-5',
             },
         },
         defaultVariants: {
             variant: 'default',
+            size: 'default',
         },
     },
 );
@@ -28,11 +38,26 @@ const badgeVariants = cva(
 export interface BadgeProps
     extends
         React.HTMLAttributes<HTMLDivElement>,
-        VariantProps<typeof badgeVariants> {}
+        VariantProps<typeof badgeVariants> {
+    icon?: React.ReactNode;
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({
+    className,
+    variant,
+    size,
+    icon,
+    children,
+    ...props
+}: BadgeProps) {
     return (
-        <div className={cn(badgeVariants({ variant }), className)} {...props} />
+        <div
+            className={cn(badgeVariants({ variant, size }), className)}
+            {...props}
+        >
+            {icon && <span className="shrink-0">{icon}</span>}
+            {children}
+        </div>
     );
 }
 

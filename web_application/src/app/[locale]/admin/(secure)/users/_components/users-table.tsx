@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
-import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TUserDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
@@ -13,6 +12,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import DateField from '../../components/Fields/Detail/DateField';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import TableToolbarActions from '../../components/TableToolbarActions';
+import { TableName, TableBadge } from '@/app/components/ui/table-badge';
 
 interface Props {
     users: TUserDeserialized[];
@@ -69,17 +69,13 @@ export default function UsersTable({ users }: Props) {
 
                 return (
                     <div className="flex flex-wrap gap-2">
-                        {roles.map((role: { name: string }) => (
-                            <Badge
+                        {roles.map((role) => (
+                            <TableBadge
                                 key={role.name}
-                                variant={
-                                    role.name === 'club admin'
-                                        ? 'secondary'
-                                        : 'default'
-                                }
-                            >
-                                {t(`role.${role.name}`)}
-                            </Badge>
+                                table={TableName.Users}
+                                status={role.name}
+                                label={t(`role.${role.name}`)}
+                            />
                         ))}
                     </div>
                 );
