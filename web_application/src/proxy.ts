@@ -26,11 +26,21 @@ function proxy(request: NextRequestWithAuth) {
         return handleI18nRouting(request);
     }
 
+    // Always run next-intl's middleware so the locale is forwarded to server
+    // components via the X-NEXT-INTL-LOCALE request header. Without it,
+    // server-side getTranslations() without an explicit locale falls back to
+    // the default locale on locale-prefixed URLs.
+    const intlResponse = handleI18nRouting(request);
+
     if (pathname.slice(locale.length + 1).startsWith('/admin')) {
-        return handleAdminPaths(request);
+        const authResponse = handleAdminPaths(request);
+
+        if (authResponse.headers.has('location')) {
+            return authResponse;
+        }
     }
 
-    return NextResponse.next();
+    return intlResponse;
 }
 
 export default withAuth(proxy, {
