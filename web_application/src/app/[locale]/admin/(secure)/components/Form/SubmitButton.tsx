@@ -6,7 +6,6 @@ import { useFormStatus } from 'react-dom';
 
 interface Props extends ButtonProps {
     title: string;
-    isLoading?: boolean;
 }
 
 export default function SubmitButton({ title, isLoading, ...props }: Props) {
