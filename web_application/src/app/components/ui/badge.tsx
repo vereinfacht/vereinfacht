@@ -4,33 +4,31 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/shadcn';
 
 const badgeVariants = cva(
-    'inline-flex items-center gap-1 rounded-full border border-slate-200 px-2 py-0.5 text-xs font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:border-slate-800 dark:focus:ring-slate-300',
+    'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:focus:ring-slate-300',
     {
         variants: {
             variant: {
                 default:
-                    'border-transparent bg-slate-900 text-slate-50 hover:bg-slate-900/80 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/80',
+                    'bg-slate-900 text-slate-50 hover:bg-slate-900/80 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/80',
                 primary:
-                    'border-transparent bg-blue-500 text-white hover:bg-blue-500/80 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-500/80',
+                    ' bg-blue-500 text-white hover:bg-blue-500/80 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-500/80',
                 secondary:
-                    'border-transparent bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
+                    'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
                 destructive:
-                    'border-transparent bg-red-500 text-slate-50 hover:bg-red-500/80 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/80',
-                outline: 'text-slate-950 dark:text-slate-50',
-                success: 'border-transparent bg-bgSuccessSoft text-textPrimary',
-                warning: 'border-transparent bg-bgWarningSoft text-textPrimary',
-                danger: 'border-transparent bg-bgErrorSoft text-textPrimary',
-                muted: 'border-transparent bg-bgSurfaceSolidSurfaceMuted text-textPrimary',
+                    'bg-red-500 text-slate-50 hover:bg-red-500/80 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/80',
+                success: 'bg-bgSuccessSoft text-textPrimary',
+                warning: 'bg-bgWarningSoft text-textPrimary',
+                danger: 'bg-bgErrorSoft text-textPrimary',
+                muted: 'bg-bgSurfaceSolidSurfaceMuted text-textPrimary',
             },
             size: {
-                default: '',
                 sm: 'text-xs leading-4',
-                lg: 'text-sm leading-5',
+                md: 'text-sm leading-5',
             },
         },
         defaultVariants: {
             variant: 'default',
-            size: 'default',
+            size: 'md',
         },
     },
 );
