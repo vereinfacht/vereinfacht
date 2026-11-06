@@ -16,7 +16,9 @@ import { formatDate } from '@/utils/dates';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
-import { TableName, TableBadge } from '@/app/components/ui/table-badge';
+import IconCircleDashed from '/public/svg/no-assignments.svg';
+import IconCircleDotDashed from '/public/svg/incomplete.svg';
+import IconCircleCheck from '/public/svg/check-circle.svg';
 
 interface StatementsListProps {
     statements: TStatementDeserialized[];
@@ -116,14 +118,31 @@ export default function StatementsTable({
             } as any,
             header: t('transaction.status.label'),
             cell: ({ row }) => {
-                const status = row.getValue<string>('status');
+                const status = row.getValue<string | null>('status');
+
+                if (!status) return <TextCell>–</TextCell>;
 
                 return (
-                    <TableBadge
-                        table={TableName.Statements}
-                        status={status}
-                        label={t(`transaction.status.${status}`)}
-                    />
+                    <Badge
+                        variant={
+                            status === 'completed'
+                                ? 'success'
+                                : status === 'incompleted'
+                                  ? 'warning'
+                                  : 'muted'
+                        }
+                        icon={
+                            status === 'completed' ? (
+                                <IconCircleCheck />
+                            ) : status === 'incompleted' ? (
+                                <IconCircleDotDashed />
+                            ) : (
+                                <IconCircleDashed />
+                            )
+                        }
+                    >
+                        {t(`transaction.status.${status}`)}
+                    </Badge>
                 );
             },
         },

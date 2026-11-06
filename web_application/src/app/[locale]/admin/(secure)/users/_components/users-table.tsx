@@ -12,7 +12,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import DateField from '../../components/Fields/Detail/DateField';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import TableToolbarActions from '../../components/TableToolbarActions';
-import { TableName, TableBadge } from '@/app/components/ui/table-badge';
+import { Badge } from '@/app/components/ui/badge';
 
 interface Props {
     users: TUserDeserialized[];
@@ -63,19 +63,25 @@ export default function UsersTable({ users }: Props) {
                 const roles = row.original.roles as
                     { name: string }[] | undefined;
 
-                if (!roles || roles.length === 0) {
-                    return <TextCell>-</TextCell>;
+                if (!roles?.length) {
+                    return <TextCell>–</TextCell>;
                 }
 
                 return (
                     <div className="flex flex-wrap gap-2">
                         {roles.map((role) => (
-                            <TableBadge
+                            <Badge
                                 key={role.name}
-                                table={TableName.Users}
-                                status={role.name}
-                                label={t(`role.${role.name}`)}
-                            />
+                                variant={
+                                    role.name === 'super admin'
+                                        ? 'primary'
+                                        : role.name === 'club admin'
+                                          ? 'secondary'
+                                          : 'default'
+                                }
+                            >
+                                {t(`role.${role.name}`)}
+                            </Badge>
                         ))}
                     </div>
                 );

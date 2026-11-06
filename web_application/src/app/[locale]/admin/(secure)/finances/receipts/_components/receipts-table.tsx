@@ -28,7 +28,10 @@ import DateField from '../../../components/Fields/Detail/DateField';
 import FinancialStatementExportModal from './financial-statement-export-modal';
 import TableExportModal from '../../../components/TableExportModal';
 import TableToolbarActions from '../../../components/TableToolbarActions';
-import { TableName, TableBadge } from '@/app/components/ui/table-badge';
+import { Badge } from '@/app/components/ui/badge';
+import IconCircleDashed from '/public/svg/no-assignments.svg';
+import IconCircleDotDashed from '/public/svg/incomplete.svg';
+import IconCircleCheck from '/public/svg/check-circle.svg';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -126,14 +129,31 @@ export default function ReceiptsTable({
                     t('receipt.status.label')
                 ),
             cell: ({ row }) => {
-                const status = row.getValue<string>('status');
+                const status = row.getValue<string | null>('status');
+
+                if (!status) return <TextCell>–</TextCell>;
 
                 return (
-                    <TableBadge
-                        table={TableName.Receipts}
-                        status={status}
-                        label={t(`receipt.status.${status}`)}
-                    />
+                    <Badge
+                        variant={
+                            status === 'completed'
+                                ? 'success'
+                                : status === 'incompleted'
+                                  ? 'warning'
+                                  : 'muted'
+                        }
+                        icon={
+                            status === 'completed' ? (
+                                <IconCircleCheck />
+                            ) : status === 'incompleted' ? (
+                                <IconCircleDotDashed />
+                            ) : (
+                                <IconCircleDashed />
+                            )
+                        }
+                    >
+                        {t(`receipt.status.${status}`)}
+                    </Badge>
                 );
             },
         },
