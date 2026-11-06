@@ -4,12 +4,12 @@ import { useTranslations, useLocale } from 'next-intl';
 import Empty from '@/app/components/Empty';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
-import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { ResourceName } from '@/resources/resource';
 import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { ColumnDef } from '@tanstack/react-table';
+import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
     totalPages: number;
@@ -84,10 +84,9 @@ export default function TransactionsTable({
             } as any,
             header: t('transaction.status.label'),
             cell: ({ row }) => (
-                <StatusCell
-                    status={row.getValue('status')}
-                    rowId={row.id}
-                    translateNamespace={'transaction'}
+                <AssignmentBadge
+                    status={row.getValue<string>('status')}
+                    label={t(`transaction.status.${row.getValue('status')}`)}
                 />
             ),
         },
