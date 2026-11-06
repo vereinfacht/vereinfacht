@@ -41,7 +41,7 @@ const buttonVariants = cva(
                 variant: 'tertiary',
                 danger: true,
                 className:
-                    'text-textError hover:bg-btnTertiaryDangerHover focus-visible:bg-btnTertiaryDangerHover',
+                    'text-textError hover:bg-btnTertiaryDangerHover hover:text-textErrorHover focus-visible:bg-btnTertiaryDangerHover focus-visible:text-textError',
             },
         ],
         defaultVariants: {

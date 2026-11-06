@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import FormStateHandler from '@/app/[locale]/admin/(secure)/components/Form/FormStateHandler';
 import type { FormAction, FormActionState } from '@/types/form-actions';
 import SubmitButton from '@/app/[locale]/admin/(secure)/components/Form/SubmitButton';
-import Button from '@/app/components/Button/Button';
+import { Button } from '@/app/components/ui/button';
 import Text from '@/app/components/Text/Text';
 import {
     Dialog,
@@ -48,20 +48,16 @@ export default function DeleteForm({
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <button
+                <Button
+                    variant="tertiary"
+                    danger={true}
+                    size={'iconSm'}
+                    rightIcon={<IconBin />}
                     data-cy={`delete-${id}-button`}
                     title={t('general.delete')}
-                    className={[
-                        'transition-color p-2 duration-300',
-                        disabled
-                            ? 'cursor-not-allowed opacity-30'
-                            : 'cursor-pointer text-red-400 hover:text-red-500/50',
-                    ].join(' ')}
                     disabled={disabled}
                     aria-disabled={disabled}
-                >
-                    <IconBin />
-                </button>
+                />
             </DialogTrigger>
             <DialogContent className="max-w-md">
                 <DialogHeader>
@@ -93,8 +89,7 @@ export default function DeleteForm({
                         />
                         <div className="flex gap-4 self-end">
                             <Button
-                                preset="secondary"
-                                type="button"
+                                variant="secondary"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {capitalizeFirstLetter(t('general.cancel'))}

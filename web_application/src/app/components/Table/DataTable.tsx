@@ -11,7 +11,7 @@ import {
     TableToolbar,
     TableHeader,
     TableRow,
-} from '@/ui/table';
+} from '@/app/components/ui/table';
 import { ResourceName } from '@/resources/resource';
 import { Model } from '@/types/models';
 import {
@@ -52,7 +52,7 @@ function TableActions({ renderActions, hasActions }: TableActionsProps) {
         return null;
     }
 
-    return <div className="flex items-center gap-2">{renderActions()}</div>;
+    return <div className="flex items-center">{renderActions()}</div>;
 }
 
 export function DataTable<TData extends Model, TValue>({

@@ -45,6 +45,7 @@
     --color-textSecondary: var(--color-neutral-600);
     --color-textDisabled: var(--color-neutral-400);
     --color-textError: var(--color-red-700);
+    --color-textErrorHover: var(--color-red-800);
     --color-textHover: var(--color-blue-600);
     --color-textLink: var(--color-blue-500);
 

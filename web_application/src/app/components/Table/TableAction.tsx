@@ -5,6 +5,7 @@ import type { FormAction } from '@/types/form-actions';
 import Link from 'next/link';
 import DeleteForm from './DeleteForm';
 import IconPen from '/public/svg/edit.svg';
+import { Button } from '@/app/components/ui/button';
 
 interface Props {
     href?: string;
@@ -64,24 +65,20 @@ export function TableAction({
     }
 
     return (
-        <Link
-            data-cy={`${type}-${id}-button`}
-            href={href ?? ''}
-            title={t(`general.${type}`)}
-            className={[
-                'transition-color p-2 duration-300',
-                disabled
-                    ? 'cursor-not-allowed opacity-30'
-                    : 'text-blue-500 hover:text-blue-500/50',
-            ].join(' ')}
-            aria-disabled={disabled}
-            onClick={(e) => {
-                if (disabled) {
-                    e.preventDefault();
-                }
-            }}
-        >
-            {type === 'edit' && <IconPen />}
-        </Link>
+        <Button variant="tertiary" size="iconSm" asChild disabled={disabled}>
+            <Link
+                data-cy={`${type}-${id}-button`}
+                href={href ?? ''}
+                title={t(`general.${type}`)}
+                aria-disabled={disabled}
+                onClick={(e) => {
+                    if (disabled) {
+                        e.preventDefault();
+                    }
+                }}
+            >
+                {type === 'edit' && <IconPen />}
+            </Link>
+        </Button>
     );
 }
