@@ -8,7 +8,6 @@ import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
-import StatusCell from '@/app/components/Table/StatusCell';
 import TextCell from '@/app/components/Table/TextCell';
 import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
@@ -17,6 +16,7 @@ import { formatDate } from '@/utils/dates';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
+import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
 
 interface StatementsListProps {
     statements: TStatementDeserialized[];
@@ -115,13 +115,18 @@ export default function StatementsTable({
                 mobileLabel: t('transaction.status.label'),
             } as any,
             header: t('transaction.status.label'),
-            cell: ({ row }) => (
-                <StatusCell
-                    status={row.getValue('status')}
-                    rowId={row.id}
-                    translateNamespace={'transaction'}
-                />
-            ),
+            cell: ({ row }) => {
+                const status = row.getValue<string | null>('status');
+
+                if (!status) return <TextCell>–</TextCell>;
+
+                return (
+                    <AssignmentBadge
+                        status={status}
+                        label={t(`transaction.status.${status}`)}
+                    />
+                );
+            },
         },
         {
             accessorKey: 'financeAccount.title',

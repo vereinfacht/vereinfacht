@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { DataTable } from '@/app/components/Table/DataTable';
 import HeaderSort from '@/app/components/Table/HeaderSort';
 import TextCell from '@/app/components/Table/TextCell';
-import { Badge } from '@/app/components/ui/badge';
 import { ResourceName } from '@/resources/resource';
 import { TUserDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
@@ -13,6 +12,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import DateField from '../../components/Fields/Detail/DateField';
 import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import TableToolbarActions from '../../components/TableToolbarActions';
+import { Badge } from '@/app/components/ui/badge';
 
 interface Props {
     users: TUserDeserialized[];
@@ -63,19 +63,21 @@ export default function UsersTable({ users }: Props) {
                 const roles = row.original.roles as
                     { name: string }[] | undefined;
 
-                if (!roles || roles.length === 0) {
-                    return <TextCell>-</TextCell>;
+                if (!roles?.length) {
+                    return <TextCell>–</TextCell>;
                 }
 
                 return (
                     <div className="flex flex-wrap gap-2">
-                        {roles.map((role: { name: string }) => (
+                        {roles.map((role) => (
                             <Badge
                                 key={role.name}
                                 variant={
-                                    role.name === 'club admin'
-                                        ? 'secondary'
-                                        : 'default'
+                                    role.name === 'super admin'
+                                        ? 'primary'
+                                        : role.name === 'club admin'
+                                          ? 'secondary'
+                                          : 'default'
                                 }
                             >
                                 {t(`role.${role.name}`)}
