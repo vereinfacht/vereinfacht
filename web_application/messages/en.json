@@ -1,42 +1,42 @@
 {
     "admin": {
-        "title": "Club management",
-        "dashboard": "Dashboard",
-        "welcome": "Welcome, {name}.",
-        "menu": "Menu",
-        "visit_apply_form": "Visit member application form",
-        "visit_club_website": "Visit website",
-        "join_signal_chat_title": "Join Signal-Chat",
-        "join_signal_chat_description": "Provide feedback, get support and help shape vereinfacht.",
-        "support_phone": "Phone support",
-        "support_email": "Email support",
-        "finances": "Finances",
         "bank_and_cashier": "Bank & cashier",
-        "invoices": "Invoices",
+        "close_navigation": "Close navigation",
+        "club": "Club",
+        "contacts": "Contacts",
+        "dashboard": "Dashboard",
+        "divisions": "Divisions",
         "donations": "Donations",
         "evaluations": "Reports",
-        "contacts": "Contacts",
-        "users": "Users",
-        "tax-accounts": "Tax accounts",
-        "settings": "Settings",
-        "club": "Club",
-        "divisions": "Divisions",
-        "membership-types": "Membership types",
-        "members": "Members",
-        "memberships": "Memberships",
-        "unnamed": "Unnamed",
+        "finances": "Finances",
         "general": "General",
+        "invoices": "Invoices",
+        "join_signal_chat_description": "Provide feedback, get support and help shape vereinfacht.",
+        "join_signal_chat_title": "Join Signal-Chat",
+        "main_navigation": "Main navigation",
+        "members": "Members",
+        "membership-types": "Membership types",
+        "memberships": "Memberships",
+        "menu": "Menu",
         "open_navigation": "Open navigation",
-        "close_navigation": "Close navigation",
-        "main_navigation": "Main navigation"
+        "settings": "Settings",
+        "support_email": "Email support",
+        "support_phone": "Phone support",
+        "tax-accounts": "Tax accounts",
+        "title": "Club management",
+        "unnamed": "Unnamed",
+        "users": "Users",
+        "visit_apply_form": "Visit member application form",
+        "visit_club_website": "Visit website",
+        "welcome": "Welcome, {name}."
     },
     "application": {
         "add_person": "Add person",
         "confirm": "Confirm",
-        "division_text": "If marked, the selection of certain divisions may incur additional monthly charges.",
         "division_selection_help_exact": "Please select {count} division(s) per person.",
-        "division_selection_help_with_max": "Please select at least {min} and at most {max} division(s) per person.",
         "division_selection_help_min_only": "Please select at least {min} division(s) per person.",
+        "division_selection_help_with_max": "Please select at least {min} and at most {max} division(s) per person.",
+        "division_text": "If marked, the selection of certain divisions may incur additional monthly charges.",
         "header_subline": "Become a member",
         "headline_billing": "Billing information",
         "headline_division": "Choose divisions",
@@ -63,13 +63,13 @@
             "label": {
                 "billing": "Billing",
                 "contact": "Contact",
+                "membership_fee": "Fee „{title}“",
                 "monthly_fee": "Monthly fee",
                 "one_time_fee": "One-time fee",
-                "voluntary_contribution": "Voluntary contribution",
-                "membership_fee": "Fee „{title}“",
                 "persons": "Persons",
                 "start_of_membership": "Start of membership",
                 "sum": "Sum",
+                "voluntary_contribution": "Voluntary contribution",
                 "your_membership": "Your membership"
             }
         },
@@ -80,135 +80,109 @@
         "logout": "Logout"
     },
     "club": {
-        "title": {
-            "one": "Club",
-            "other": "Clubs",
-            "label": "Name"
-        },
-        "extended_title": {
-            "label": "Extended name",
-            "help": "The extended name is used in the header of the application form"
-        },
-        "apply_title": {
-            "label": "Application title",
-            "help": "The title of the application form"
-        },
-        "apply_url": {
-            "label": "Link to application form"
-        },
         "address": {
             "label": "Address"
-        },
-        "zip_code": {
-            "label": "Zip code"
-        },
-        "city": {
-            "label": "City"
-        },
-        "country": {
-            "label": "Country"
-        },
-        "email": {
-            "label": "Email",
-            "help": "Filled out application forms will be sent to this address"
-        },
-        "website_url": {
-            "label": "Homepage",
-            "help": "Link to the club's homepage"
-        },
-        "primary_color": {
-            "label": "Primary color",
-            "help": "The primary color of the club's application form"
-        },
-        "logo": {
-            "label": "Logo",
-            "help": "The logo is displayed in the header of the application form"
-        },
-        "logo_url": {
-            "label": "URL of the logo",
-            "help": "Currently the logo has to be hosted on a server and be accessible via an external URL"
-        },
-        "privacy_statement_url": {
-            "label": "Link to privacy statement",
-            "help": "Will be displayed in the application form and has to be agreed to"
-        },
-        "contribution_statement_url": {
-            "label": "Link to contribution statement",
-            "help": "Will be displayed in the application form and has to be agreed to"
-        },
-        "constitution_url": {
-            "label": "Link to constitution",
-            "help": "Will be displayed in the application form and has to be agreed to"
-        },
-        "membership_start_cycle_type": {
-            "label": "Membership start cycle",
-            "daily": "daily",
-            "monthly": "monthly",
-            "help": "The cycle in which memberships start"
         },
         "allow_voluntary_contribution": {
             "label": "Allow voluntary extra contribution"
         },
-        "has_consented_media_publication_is_required": {
-            "label": "Consent media publication required",
-            "help": "If enabled, the consent to media publication is required for all members"
+        "apply_title": {
+            "help": "The title of the application form",
+            "label": "Application title"
+        },
+        "apply_url": {
+            "label": "Link to application form"
+        },
+        "city": {
+            "label": "City"
+        },
+        "constitution_url": {
+            "help": "Will be displayed in the application form and has to be agreed to",
+            "label": "Link to constitution"
+        },
+        "contribution_statement_url": {
+            "help": "Will be displayed in the application form and has to be agreed to",
+            "label": "Link to contribution statement"
+        },
+        "country": {
+            "label": "Country"
+        },
+        "edit_hint": "Only certain fields can be edited on you own. Please contact the support if you need to change other fields.",
+        "email": {
+            "help": "Filled out application forms will be sent to this address",
+            "label": "Email"
+        },
+        "extended_title": {
+            "help": "The extended name is used in the header of the application form",
+            "label": "Extended name"
         },
         "has_consented_media_publication_default_value": {
             "label": "Default value for consent media publication"
         },
-        "edit_hint": "Only certain fields can be edited on you own. Please contact the support if you need to change other fields.",
+        "has_consented_media_publication_is_required": {
+            "help": "If enabled, the consent to media publication is required for all members",
+            "label": "Consent media publication required"
+        },
+        "logo": {
+            "help": "The logo is displayed in the header of the application form",
+            "label": "Logo"
+        },
+        "logo_url": {
+            "help": "Currently the logo has to be hosted on a server and be accessible via an external URL",
+            "label": "URL of the logo"
+        },
+        "membership_start_cycle_type": {
+            "daily": "daily",
+            "help": "The cycle in which memberships start",
+            "label": "Membership start cycle",
+            "monthly": "monthly"
+        },
+        "primary_color": {
+            "help": "The primary color of the club's application form",
+            "label": "Primary color"
+        },
+        "privacy_statement_url": {
+            "help": "Will be displayed in the application form and has to be agreed to",
+            "label": "Link to privacy statement"
+        },
         "tax_account_chart": {
-            "label": "Tax account group",
-            "help": "The tax account group used for this club."
+            "help": "The tax account group used for this club.",
+            "label": "Tax account group"
         },
         "tax_account_chart_source": {
-            "label": "Source of the tax account groups",
-            "content": "SKR03 by spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> with the goal of mapping the underlying Standard Chart of Accounts 03 <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>."
+            "content": "SKR03 by spritelite <a class=\"text-blue-500\" href=\"https://github.com/spritelite/SKR03/\">https://github.com/spritelite/SKR03/</a> with the goal of mapping the underlying Standard Chart of Accounts 03 <a class=\"text-blue-500\" href=\"https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174\">https://www.datev.de/web/de/shop/produkt-details/kontenrahmen-datev-skr-03-11174</a>.",
+            "label": "Source of the tax account groups"
+        },
+        "title": {
+            "label": "Name",
+            "one": "Club",
+            "other": "Clubs"
+        },
+        "website_url": {
+            "help": "Link to the club's homepage",
+            "label": "Homepage"
+        },
+        "zip_code": {
+            "label": "Zip code"
         }
     },
     "contact": {
-        "title": {
-            "one": "Contact",
-            "other": "Contacts",
-            "label": "Name"
+        "address": {
+            "label": "Street"
         },
-        "contact_type": {
-            "person": "Individual",
-            "company": "Company",
-            "label": "Type"
+        "city": {
+            "label": "City"
         },
         "company_name": {
             "label": "Company"
         },
-        "name": {
-            "label": "Name"
-        },
-        "personal_information": {
-            "label": "Persönliche Angaben"
-        },
         "contact_person": {
             "label": "Ansprechperson"
         },
-        "first_name": {
-            "label": "First name"
-        },
-        "last_name": {
-            "label": "Last name"
-        },
-        "email": {
-            "label": "E-Mail"
-        },
-        "phone_number": {
-            "label": "Phone"
-        },
-        "address": {
-            "label": "Street"
-        },
-        "zip_code": {
-            "label": "Zip code"
-        },
-        "city": {
-            "label": "City"
+        "contact_type": {
+            "company": "Company",
+            "label": "Type",
+            "person": "Individual"
         },
         "country": {
             "label": "Country"
@@ -220,196 +194,198 @@
         "created_at": {
             "label": "Created at"
         },
+        "email": {
+            "label": "E-Mail"
+        },
+        "first_name": {
+            "label": "First name"
+        },
+        "last_name": {
+            "label": "Last name"
+        },
+        "name": {
+            "label": "Name"
+        },
+        "personal_information": {
+            "label": "Persönliche Angaben"
+        },
+        "phone_number": {
+            "label": "Phone"
+        },
+        "title": {
+            "label": "Name",
+            "one": "Contact",
+            "other": "Contacts"
+        },
         "updated_at": {
             "label": "Updated at"
+        },
+        "zip_code": {
+            "label": "Zip code"
         }
     },
     "division": {
-        "title": {
-            "one": "Division",
-            "other": "Divisions",
-            "label": "Name"
-        },
+        "attach_membership_type": "Attach membership type",
         "create": "Create division",
         "edit": "Edit division",
-        "attach_membership_type": "Attach membership type"
+        "title": {
+            "label": "Name",
+            "one": "Division",
+            "other": "Divisions"
+        }
     },
     "error": {
-        "unknown": "Unknown error",
         "description": "We're sorry, but something went wrong. Please try again.",
         "headline": "Something went wrong",
         "membership_failed": "Failed to create membership, please try again.",
+        "status": {
+            "404": {
+                "description": "The page you are looking for does not exist.",
+                "headline": "Error 404",
+                "subline": "Page not found"
+            }
+        },
         "try_again": "Try again",
+        "unknown": "Unknown error",
         "validation": {
             "general": "Validation failed. Please check your input.",
             "iban": "Please enter a valid IBAN."
-        },
-        "status": {
-            "404": {
-                "headline": "Error 404",
-                "subline": "Page not found",
-                "description": "The page you are looking for does not exist."
-            }
         }
     },
     "finance": {
-        "title": "Finances",
-        "balance": "Balance",
-        "initial_balance": "Initial Balance",
         "account_id": "Account ID",
-        "amount": "Amount",
-        "statements": "Statements",
-        "transactions": "Transactions",
-        "contacts": "Contacts",
-        "receipts": "Receipts",
-        "name": "Name",
-        "purpose": "Purpose",
-        "booking": "Booking",
-        "valuation": "Valuation",
-        "credit": "Credit",
-        "debit": "Debit",
-        "receipt": "Receipt",
-        "close": "Close",
-        "new_badge": "New",
-        "info_badge": "Info",
-        "add_account": "Add Account",
-        "select_account": "Select an account",
-        "transaction_count": "{count} of {total}",
-        "search_placeholder": "Search transactions",
         "account_management": {
-            "select_account_description": "Choose a finance account from the sidebar to view its details and transactions.",
-            "account_information": "Account information",
             "account_info_description": "Account details and transaction history",
-            "show_transactions": "Show transactions",
+            "account_information": "Account information",
+            "account_not_found": "Account not found",
+            "cash_account": "Cash",
+            "error_loading_accounts": "Error loading accounts",
+            "error_loading_transactions": "Error loading transactions",
             "no_accounts": "No bank accounts",
             "no_accounts_description": "Create your first account.",
             "no_transactions": "No transactions",
             "no_transactions_description": "This account doesn't have any transactions yet.",
-            "error_loading_accounts": "Error loading accounts",
-            "error_loading_transactions": "Error loading transactions",
-            "account_not_found": "Account not found",
             "online_bank_account": "Online Bank Account",
-            "cash_account": "Cash"
+            "select_account_description": "Choose a finance account from the sidebar to view its details and transactions.",
+            "show_transactions": "Show transactions"
         },
+        "add_account": "Add Account",
+        "amount": "Amount",
+        "balance": "Balance",
+        "booking": "Booking",
+        "close": "Close",
+        "contacts": "Contacts",
+        "credit": "Credit",
+        "debit": "Debit",
         "default_values": {
             "person_name": "Maria Musterfrau",
             "purpose": "Court rent"
         },
+        "info_badge": "Info",
+        "initial_balance": "Initial Balance",
+        "name": "Name",
+        "new_badge": "New",
+        "purpose": "Purpose",
+        "receipt": "Receipt",
+        "receipts": "Receipts",
+        "search_placeholder": "Search transactions",
+        "select_account": "Select an account",
+        "statements": "Statements",
+        "title": "Finances",
+        "transaction_count": "{count} of {total}",
         "transaction_details": {
-            "title": "Transaction Details",
-            "assigned_on": "Assigned on",
+            "additional_details": "Additional Details",
             "assigned_by": "Assigned by",
-            "transaction_overview": "Transaction Overview",
+            "assigned_on": "Assigned on",
             "financial_information": "Financial Information",
-            "additional_details": "Additional Details"
-        }
+            "title": "Transaction Details",
+            "transaction_overview": "Transaction Overview"
+        },
+        "transactions": "Transactions",
+        "valuation": "Valuation"
     },
     "finance_account": {
-        "title": {
-            "one": "Statement source",
-            "other": "Statement sources",
-            "label": "Name"
-        },
-        "initial_balance": {
-            "label": "Initial balance"
-        },
         "account_type": {
-            "cash_box": "Cash box",
-            "bank_account": "Bank account"
+            "bank_account": "Bank account",
+            "cash_box": "Cash box"
         },
-        "rename": "Rename",
         "activate": "Activate",
-        "deactivate": "Deactivate",
-        "deactivated": "Deactivated sources",
-        "import_transactions": "Import statements",
-        "create_modal": {
-            "title": "Create new statement source",
-            "choose_type": "Choose type",
-            "edit_type": "Set up {type}"
-        },
-        "edit_modal": {
-            "description": "Adjust the settings of the statement source."
-        },
         "activate_modal": {
-            "title": "Activate statement source",
             "description": "<tag0>Do you want to activate the source <tag1>{name}</tag1>?</tag0>",
             "notification": {
                 "activate": {
-                    "success": "{resource} has been activated",
-                    "error": "{resource} could not be activated"
+                    "error": "{resource} could not be activated",
+                    "success": "{resource} has been activated"
                 }
-            }
+            },
+            "title": "Activate statement source"
         },
+        "create_modal": {
+            "choose_type": "Choose type",
+            "edit_type": "Set up {type}",
+            "title": "Create new statement source"
+        },
+        "deactivate": "Deactivate",
         "deactivate_modal": {
-            "title": "Deactivate statement source",
             "description": "<tag0>When you deactivate the source <tag1>{name}</tag1>, all existing statement and receipt assignments will remain. However, this source will no longer appear in the overview, and no notifications or reminders will be made for unassigned statements. This step can be undone.</tag0>",
             "notification": {
                 "deactivate": {
-                    "success": "{resource} has been deactivated",
-                    "error": "{resource} could not be deactivated"
+                    "error": "{resource} could not be deactivated",
+                    "success": "{resource} has been deactivated"
                 }
-            }
+            },
+            "title": "Deactivate statement source"
+        },
+        "deactivated": "Deactivated sources",
+        "edit_modal": {
+            "description": "Adjust the settings of the statement source."
+        },
+        "import_transactions": "Import statements",
+        "initial_balance": {
+            "label": "Initial balance"
+        },
+        "rename": "Rename",
+        "title": {
+            "label": "Name",
+            "one": "Statement source",
+            "other": "Statement sources"
+        }
+    },
+    "finance_contact": {
+        "title": {
+            "label": "Name",
+            "one": "Kontakt",
+            "other": "Kontakte"
         }
     },
     "financial_statement": {
         "export": "Export evaluation",
         "export_form": {
-            "title": "Export evaluation",
             "description": "Export an evaluation for all {count} filtered entries.",
-            "include_media_title": "Include attachments",
+            "evaluation_description": "A summarized evaluation can be downloaded here.",
             "include_media_help": "Including all linked receipt files of the entries",
-            "evaluation_description": "A summarized evaluation can be downloaded here."
+            "include_media_title": "Include attachments",
+            "title": "Export evaluation"
         }
     },
     "general": {
+        "actions": "Actions",
         "add": "add",
-        "choose": "choose",
-        "edit": "edit",
-        "save": "save",
-        "save_and_create_another": "save and create another",
-        "cancel": "cancel",
-        "view": "view",
-        "back": "back",
-        "create": "create",
-        "import": "import",
-        "export": "export",
-        "delete": "delete",
         "apply": "apply",
-        "table": {
-            "export": {
-                "title": "Export table",
-                "description": "Table with {count} filtered entries as a CSV file."
-            }
-        },
-        "delete_confirmation": {
-            "title": "Confirm deletion",
-            "description": "Are you sure you want to delete this item? This action cannot be undone."
-        },
-        "imprint": "Imprint",
-        "made_with": "Digital product by",
-        "nothing_found": "Nothing found",
-        "privacy": "Privacy policy",
-        "search": "Search",
-        "search_add": "Search and add",
-        "search_select": "Search and select",
-        "selected_count": "{count} selected",
-        "plus_n_more": "+{count} more",
-        "select": "Select",
-        "select_resource": "Select resource to attach",
-        "no_media_attached": "No media attached.",
-        "title": "Title",
-        "email": "Email",
-        "password": "Password",
+        "back": "back",
+        "cancel": "cancel",
+        "choose": "choose",
         "confirm_password": "Confirm Password",
-        "password_mismatch": "Passwords do not match",
+        "create": "create",
         "created_at": "Created at",
-        "updated_at": "Updated at",
-        "yes": "yes",
-        "no": "no",
-        "pagination": {
-            "previous": "Previous page",
-            "next": "Next page"
+        "delete": "delete",
+        "delete_confirmation": {
+            "description": "Are you sure you want to delete this item? This action cannot be undone.",
+            "title": "Confirm deletion"
         },
+        "edit": "edit",
+        "email": "Email",
+        "export": "export",
         "gender": {
             "label": "Gender",
             "options": {
@@ -419,42 +395,62 @@
                 "other": "diverse"
             }
         },
+        "import": "import",
+        "imprint": "Imprint",
+        "made_with": "Digital product by",
         "next": "Next",
-        "reset_password": {
-            "email_sent": "Reset email sent.",
-            "forgot_password": "Forgot password?",
-            "failed": "We couldn't process your request. Please try again.",
-            "title": "Reset password",
-            "confirm_password": "Confirm password",
-            "new_password": "New password",
-            "instruction": "Enter your email address here to reset your password."
+        "no": "no",
+        "no_media_attached": "No media attached.",
+        "nothing_found": "Nothing found",
+        "pagination": {
+            "next": "Next page",
+            "previous": "Previous page"
         },
-        "actions": "Actions"
+        "password": "Password",
+        "password_mismatch": "Passwords do not match",
+        "plus_n_more": "+{count} more",
+        "privacy": "Privacy policy",
+        "reset_password": {
+            "confirm_password": "Confirm password",
+            "email_sent": "Reset email sent.",
+            "failed": "We couldn't process your request. Please try again.",
+            "forgot_password": "Forgot password?",
+            "instruction": "Enter your email address here to reset your password.",
+            "new_password": "New password",
+            "title": "Reset password"
+        },
+        "save": "save",
+        "save_and_create_another": "save and create another",
+        "search": "Search",
+        "search_add": "Search and add",
+        "search_select": "Search and select",
+        "select": "Select",
+        "select_resource": "Select resource to attach",
+        "selected_count": "{count} selected",
+        "table": {
+            "export": {
+                "description": "Table with {count} filtered entries as a CSV file.",
+                "title": "Export table"
+            }
+        },
+        "title": "Title",
+        "updated_at": "Updated at",
+        "view": "view",
+        "yes": "yes"
+    },
+    "media": {
+        "title": {
+            "label": "Name",
+            "one": "Medium",
+            "other": "Medien"
+        }
     },
     "member": {
-        "title": {
-            "one": "Member",
-            "other": "Members"
-        },
-        "name": {
-            "label": "Name"
-        },
-        "membership": {
-            "label": "Membership"
-        },
-        "status": {
-            "label": "Status",
-            "active": "active",
-            "inactive": "inactive"
-        },
-        "email": {
-            "label": "Email"
-        },
         "address": {
             "label": "Address"
         },
-        "zip_code": {
-            "label": "Zip code"
+        "birthday": {
+            "label": "Birthday"
         },
         "city": {
             "label": "City"
@@ -462,34 +458,48 @@
         "country": {
             "label": "Country"
         },
-        "phone_number": {
-            "label": "Phone"
+        "create": "Create member",
+        "edit": "Edit member",
+        "email": {
+            "label": "Email"
         },
         "has_consented_media_publication": {
             "label": "Media consent"
         },
+        "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
+        "label_identical_information": "Contact and address information is identical to {name}",
+        "media": {
+            "label": "Media"
+        },
+        "membership": {
+            "label": "Membership"
+        },
+        "name": {
+            "label": "Name"
+        },
+        "phone_number": {
+            "label": "Phone"
+        },
         "preferred_locale": {
             "label": "Preferred language"
         },
-        "birthday": {
-            "label": "Birthday"
+        "status": {
+            "active": "active",
+            "inactive": "inactive",
+            "label": "Status"
         },
-        "media": {
-            "label": "Media"
+        "title": {
+            "one": "Member",
+            "other": "Members"
         },
         "total_cost": {
             "label": "Contributions"
         },
-        "label_identical_information": "Contact and address information is identical to {name}",
-        "label_consent_media_publication": "Club-related photos and videos may be taken of this person and published on social media, on the club's website or in the press.",
-        "create": "Create member",
-        "edit": "Edit member"
+        "zip_code": {
+            "label": "Zip code"
+        }
     },
     "membership": {
-        "title": {
-            "one": "Membership",
-            "other": "Memberships"
-        },
         "apply_to": "<tag0>Applying for: <tag1>{membershipType}</tag1></tag0>",
         "bank_account_holder": {
             "label": "Account holder",
@@ -498,13 +508,33 @@
         "bank_iban": {
             "label": "IBAN"
         },
+        "create": "Create membership",
+        "current": "current",
         "division_not_included": "Not included in „{title}“.",
         "divisions_all": "<tag0>All</tag0> divisions selectable:",
         "divisions_most": "<tag0>Most</tag0> divisions selectable:",
         "divisions_none": "<tag0>No</tag0> divisions selectable:",
         "divisions_some": "<tag0>Some</tag0> divisions selectable:",
+        "edit": "Edit membership",
+        "ended_at": {
+            "label": "End of membership",
+            "placeholder": "DD.MM.YYYY"
+        },
         "hide": "Hide",
         "minimum_month_count": "{count, plural, one {Minimum duration of <tag0>{count}</tag0> month} other {Minimum duration of <tag0>{count}</tag0> months}}",
+        "monthly_fee": {
+            "help": "Including all division fees and optional voluntary contributions",
+            "label": "Monthly fee"
+        },
+        "notes": {
+            "help": "Information provided by applying person.",
+            "label": "Other",
+            "placeholder": "Hints, questions, notes"
+        },
+        "owner": {
+            "label": "Inhaber*in"
+        },
+        "owner_email": "Owner email",
         "per_month": "per month",
         "person_count": "{count, plural, one {For <tag0>one</tag0> person} other {For <tag0>{count}</tag0> persons}}",
         "person_count_range": "For <tag0>{minimum}</tag0> to <tag0>{maximum}</tag0> persons",
@@ -513,65 +543,37 @@
             "label": "Start of membership",
             "placeholder": "DD.MM.YYYY"
         },
-        "ended_at": {
-            "label": "End of membership",
-            "placeholder": "DD.MM.YYYY"
-        },
-        "owner": {
-            "label": "Inhaber*in"
-        },
-        "owner_email": "Owner email",
-        "notes": {
-            "label": "Other",
-            "help": "Information provided by applying person.",
-            "placeholder": "Hints, questions, notes"
-        },
         "status": {
-            "applied": "applied",
             "active": "active",
+            "applied": "applied",
             "cancelled": "cancelled",
             "label": "Status"
         },
-        "monthly_fee": {
-            "label": "Monthly fee",
-            "help": "Including all division fees and optional voluntary contributions"
+        "title": {
+            "one": "Membership",
+            "other": "Memberships"
+        },
+        "validation": {
+            "membership_type_required": "Membership type is required",
+            "owner_required": "Owner is required"
         },
         "voluntary_contribution": {
-            "label": "Voluntary extra contribution",
-            "help": "An optional extra contribution that is charged in addition to the membership fee. Only added if the club has activated this feature."
-        },
-        "create": "Create membership",
-        "edit": "Edit membership",
-        "validation": {
-            "owner_required": "Owner is required",
-            "membership_type_required": "Membership type is required"
-        },
-        "current": "current"
+            "help": "An optional extra contribution that is charged in addition to the membership fee. Only added if the club has activated this feature.",
+            "label": "Voluntary extra contribution"
+        }
     },
     "membership_type": {
-        "title": {
-            "one": "Membership type",
-            "other": "Membership types",
-            "label": "Name"
-        },
         "admission_fee": {
             "label": "Admission fee"
         },
-        "no_admission_fee": {
-            "label": "No admission fee"
-        },
-        "monthly_fee": {
-            "label": "Monthly fee"
-        },
+        "attach_division": "Attach division",
+        "create": "Create membership type",
         "description": {
             "label": "Description"
         },
-        "minimum_number_of_months": {
-            "label": "Minimum duration",
-            "help": "In months"
-        },
-        "minimum_number_of_members": {
-            "label": "Minimum number of persons"
+        "edit": "Edit membership type",
+        "maximum_number_of_divisions": {
+            "label": "Maximum number of divisions"
         },
         "maximum_number_of_members": {
             "label": "Maximum number of persons"
@@ -579,143 +581,146 @@
         "minimum_number_of_divisions": {
             "label": "Minimum number of divisions"
         },
-        "maximum_number_of_divisions": {
-            "label": "Maximum number of divisions"
+        "minimum_number_of_members": {
+            "label": "Minimum number of persons"
         },
-        "number_of_members": {
-            "label": "Number of persons"
+        "minimum_number_of_months": {
+            "help": "In months",
+            "label": "Minimum duration"
+        },
+        "monthly_fee": {
+            "label": "Monthly fee"
+        },
+        "no_admission_fee": {
+            "label": "No admission fee"
         },
         "number_of_divisions": {
             "label": "Number of divisions"
         },
-        "create": "Create membership type",
-        "edit": "Edit membership type",
-        "attach_division": "Attach division"
+        "number_of_members": {
+            "label": "Number of persons"
+        },
+        "title": {
+            "label": "Name",
+            "one": "Membership type",
+            "other": "Membership types"
+        }
     },
     "notification": {
-        "title": {
-            "default": "Information",
-            "success": "Success",
-            "error": "Error",
-            "warning": "Warning"
-        },
-        "resource": {
-            "update": {
-                "success": "{resource} has been updated",
-                "error": "{resource} could not be updated"
-            },
-            "create": {
-                "success": "{resource} has been created",
-                "error": "{resource} could not be created"
-            },
-            "action": {
-                "success": "Action successful",
-                "error": "Action failed"
-            }
-        },
         "media": {
+            "delete": {
+                "error": "{fileName} could not be removed, please try again",
+                "success": "{fileName} has been removed successfully"
+            },
             "upload": {
                 "error": "{fileName} could not be uploaded, please try again",
                 "success": "{fileName} has been uploaded successfully"
+            }
+        },
+        "resource": {
+            "action": {
+                "error": "Action failed",
+                "success": "Action successful"
+            },
+            "create": {
+                "error": "{resource} could not be created",
+                "success": "{resource} has been created"
             },
             "delete": {
-                "success": "{fileName} has been removed successfully",
-                "error": "{fileName} could not be removed, please try again"
+                "error": "{resource} could not be deleted",
+                "success": "{resource} has been deleted"
+            },
+            "update": {
+                "error": "{resource} could not be updated",
+                "success": "{resource} has been updated"
             }
+        },
+        "title": {
+            "default": "Information",
+            "error": "Error",
+            "success": "Success",
+            "warning": "Warning"
         }
     },
     "payment_period": {
         "title": {
+            "label": "Payment period",
             "one": "Payment period",
-            "other": "Payment periods",
-            "label": "Payment period"
+            "other": "Payment periods"
         }
     },
     "permission": {
         "action": {
             "create": "Create",
-            "view": "Read",
+            "delete": "Delete",
             "update": "Update",
-            "delete": "Delete"
-        },
-        "title": {
-            "one": "Permission",
-            "other": "Permissions"
+            "view": "Read"
         },
         "resource": {
-            "financeContacts": {
-                "title": {
-                    "one": "Finance contact",
-                    "other": "Finance contacts"
-                }
-            },
-            "members": {
-                "title": {
-                    "one": "Member",
-                    "other": "Members"
-                }
-            },
-            "own club": {
+            "own_club": {
                 "title": {
                     "one": "Own club",
                     "other": "Own clubs"
                 }
             }
+        },
+        "title": {
+            "one": "Permission",
+            "other": "Permissions"
         }
     },
     "receipt": {
-        "title": {
-            "one": "Receipt",
-            "other": "Receipts",
-            "label": "Name"
-        },
-        "receipt_type": {
-            "label": "Type",
-            "income": "Income",
-            "expense": "Expense"
+        "amount": {
+            "help": "Only positive values are allowed. For expenses, the amount will later be shown as negative.",
+            "label": "Amount",
+            "still_open": "Still open",
+            "too_much": "Too much"
         },
         "booking_date": {
             "label": "Booking date"
         },
-        "reference_number": {
-            "label": "Reference number",
-            "help": "Designation for internal assignment (e.g. member number)"
-        },
-        "amount": {
-            "label": "Amount",
-            "still_open": "Still open",
-            "too_much": "Too much",
-            "help": "Only positive values are allowed. For expenses, the amount will later be shown as negative."
-        },
-        "status": {
-            "label": "Status",
-            "completed": "Completed",
-            "incompleted": "Incompleted",
-            "empty": "Empty",
-            "description": {
-                "completed": "The receipt is complete.",
-                "incompleted": "The receipt is incomplete: Assignments are missing.",
-                "empty": "There are no assignments for this receipt."
-            }
-        },
         "media": {
-            "label": "Files",
-            "help": "Supports PNG, JPG and PDF formats.",
             "filter": {
+                "false": "Without files",
                 "label": "Files",
-                "true": "With files",
-                "false": "Without files"
+                "true": "With files"
             },
             "has_attachments": "Receipt has ({count}) files",
+            "help": "Supports PNG, JPG and PDF formats.",
+            "label": "Files",
             "no_attachments": "Receipt has no files"
         },
+        "receipt_type": {
+            "expense": "Expense",
+            "income": "Income",
+            "label": "Type"
+        },
+        "reference_number": {
+            "help": "Designation for internal assignment (e.g. member number)",
+            "label": "Reference number"
+        },
+        "status": {
+            "completed": "Completed",
+            "description": {
+                "completed": "The receipt is complete.",
+                "empty": "There are no assignments for this receipt.",
+                "incompleted": "The receipt is incomplete: Assignments are missing."
+            },
+            "empty": "Empty",
+            "incompleted": "Incompleted",
+            "label": "Status"
+        },
         "tax_account": {
-            "label": "Tax account",
-            "help": "The tax account to which this receipt is assigned."
+            "help": "The tax account to which this receipt is assigned.",
+            "label": "Tax account"
+        },
+        "title": {
+            "label": "Name",
+            "one": "Receipt",
+            "other": "Receipts"
         }
     },
     "resource": {
-        "no_resources_found": "No {name} found.",
         "edit_resource": "Edit {resource}",
         "fields": {
             "created_at": "Created at",
@@ -723,114 +728,115 @@
                 "help": "In EUR"
             }
         },
+        "no_resources_found": "No {name} found.",
         "title": {
             "one": "Resource",
             "other": "Resources"
         }
     },
     "role": {
-        "title": {
-            "one": "Role",
-            "other": "Roles",
-            "label": "Role"
-        },
-        "super admin": "Super Admin",
         "club admin": "Admin",
-        "club treasurer": "Treasurer"
+        "club treasurer": "Treasurer",
+        "super admin": "Super Admin",
+        "title": {
+            "label": "Role",
+            "one": "Role",
+            "other": "Roles"
+        }
     },
     "statement": {
-        "title": {
-            "one": "Statement",
-            "other": "Statements",
-            "label": "Name"
-        },
+        "all_sources": "All Sources",
         "amount": {
-            "label": "Amount",
-            "help": "The total amount of the statement in EUR."
+            "help": "The total amount of the statement in EUR.",
+            "label": "Amount"
         },
         "date": {
             "label": "Date"
         },
-        "type": {
-            "label": "Type",
-            "collective": "Collective",
-            "individual": "Individual"
-        },
         "import": {
-            "title": "Import Statements",
             "description": "Here you can import exported statements in the MT940 and CAMT052 format from online banking. Matches with existing statements or transactions are automatically detected and skipped.",
+            "help": "Supports the formats MT940 and CAMT 052 (and possibly other CAMT formats) with files ending in *.mta, *.sta, *.txt, *.mt940, and *.xml.",
             "notification": {
-                "success": "{total_statements_created} statements were imported. {total_statements_skipped} statements were skipped (duplicate or erroneous).",
-                "error": "{errors}"
+                "error": "{errors}",
+                "success": "{total_statements_created} statements were imported. {total_statements_skipped} statements were skipped (duplicate or erroneous)."
             },
-            "help": "Supports the formats MT940 and CAMT 052 (and possibly other CAMT formats) with files ending in *.mta, *.sta, *.txt, *.mt940, and *.xml."
+            "title": "Import Statements"
         },
-        "all_sources": "All Sources"
+        "title": {
+            "label": "Name",
+            "one": "Statement",
+            "other": "Statements"
+        },
+        "type": {
+            "collective": "Collective",
+            "individual": "Individual",
+            "label": "Type"
+        }
     },
     "tax_account": {
-        "title": {
-            "one": "Tax account",
-            "other": "Tax accounts",
-            "label": "Name"
-        },
         "account_number": {
             "label": "Account number"
         },
+        "custom_hint": "Here you can only manage custom tax accounts. Predefined accounts from the chart of accounts cannot be viewed, edited, or deleted. {link} Here you can find the sources for the predefined tax accounts.",
         "description": {
-            "label": "Description",
-            "help": "Description of the tax account."
+            "help": "Description of the tax account.",
+            "label": "Description"
         },
-        "custom_hint": "Here you can only manage custom tax accounts. Predefined accounts from the chart of accounts cannot be viewed, edited, or deleted. {link} Here you can find the sources for the predefined tax accounts."
+        "title": {
+            "label": "Name",
+            "one": "Tax account",
+            "other": "Tax accounts"
+        }
     },
     "transaction": {
-        "title": {
-            "one": "Transaction",
-            "other": "Transactions",
-            "label": "Name",
-            "no_receipts": "Transactions without receipts"
-        },
-        "description": {
-            "label": "Purpose"
-        },
-        "booked_at": {
-            "label": "Booked At"
-        },
-        "valued_at": {
-            "label": "Valued At"
-        },
         "amount": {
-            "label": "Amount",
-            "help": "The amount of the transaction in EUR."
-        },
-        "iban": {
-            "label": "IBAN"
+            "help": "The amount of the transaction in EUR.",
+            "label": "Amount"
         },
         "bic": {
             "label": "BIC"
         },
+        "booked_at": {
+            "label": "Booked At"
+        },
+        "description": {
+            "label": "Purpose"
+        },
+        "iban": {
+            "label": "IBAN"
+        },
         "status": {
-            "label": "Status",
             "completed": "Completed",
-            "incompleted": "Incompleted",
-            "empty": "Empty",
             "description": {
                 "completed": "The transaction has been assigned to at least one receipt.",
-                "incompleted": "Not all transactions have been assigned to a receipt.",
-                "empty": "The transaction is incomplete: At least one receipt is required."
-            }
+                "empty": "The transaction is incomplete: At least one receipt is required.",
+                "incompleted": "Not all transactions have been assigned to a receipt."
+            },
+            "empty": "Empty",
+            "incompleted": "Incompleted",
+            "label": "Status"
+        },
+        "title": {
+            "label": "Name",
+            "no_receipts": "Transactions without receipts",
+            "one": "Transaction",
+            "other": "Transactions"
+        },
+        "valued_at": {
+            "label": "Valued At"
         }
     },
     "user": {
-        "title": {
-            "one": "User",
-            "other": "Users",
-            "label": "Name"
+        "password": {
+            "help": "Leave empty to keep current password"
         },
         "preferred_locale": {
             "label": "Preferred language"
         },
-        "password": {
-            "help": "Leave empty to keep current password"
+        "title": {
+            "label": "Name",
+            "one": "User",
+            "other": "Users"
         }
     }
 }

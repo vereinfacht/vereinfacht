@@ -92,7 +92,8 @@ export default function AccountCard({ balance, account, title }: Props) {
                             className="whitespace-nowrap text-slate-600"
                         >
                             <Text preset="body-sm">
-                                {t(`finance_account.account_type.${account.accountType}`,
+                                {t(
+                                    `finance_account.account_type.${account.accountType}`,
                                 )}
                             </Text>
                         </Badge>
@@ -101,7 +102,7 @@ export default function AccountCard({ balance, account, title }: Props) {
                 )}
                 <CurrencyText
                     value={balance ?? 0}
-                    className="w-full justify-self-start text-lg"
+                    className="w-full justify-self-start text-right text-lg"
                 ></CurrencyText>
             </CardFooter>
         </Card>
