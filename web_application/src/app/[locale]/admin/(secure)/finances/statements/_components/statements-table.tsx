@@ -16,9 +16,7 @@ import { formatDate } from '@/utils/dates';
 import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
-import IconCircleDashed from '/public/svg/no-assignments.svg';
-import IconCircleDotDashed from '/public/svg/incomplete.svg';
-import IconCircleCheck from '/public/svg/check-circle.svg';
+import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
 
 interface StatementsListProps {
     statements: TStatementDeserialized[];
@@ -123,26 +121,10 @@ export default function StatementsTable({
                 if (!status) return <TextCell>–</TextCell>;
 
                 return (
-                    <Badge
-                        variant={
-                            status === 'completed'
-                                ? 'success'
-                                : status === 'incompleted'
-                                  ? 'warning'
-                                  : 'muted'
-                        }
-                        icon={
-                            status === 'completed' ? (
-                                <IconCircleCheck />
-                            ) : status === 'incompleted' ? (
-                                <IconCircleDotDashed />
-                            ) : (
-                                <IconCircleDashed />
-                            )
-                        }
-                    >
-                        {t(`transaction.status.${status}`)}
-                    </Badge>
+                    <AssignmentBadge
+                        status={status}
+                        label={t(`transaction.status.${status}`)}
+                    />
                 );
             },
         },

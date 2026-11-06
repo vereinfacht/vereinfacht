@@ -28,10 +28,7 @@ import DateField from '../../../components/Fields/Detail/DateField';
 import FinancialStatementExportModal from './financial-statement-export-modal';
 import TableExportModal from '../../../components/TableExportModal';
 import TableToolbarActions from '../../../components/TableToolbarActions';
-import { Badge } from '@/app/components/ui/badge';
-import IconCircleDashed from '/public/svg/no-assignments.svg';
-import IconCircleDotDashed from '/public/svg/incomplete.svg';
-import IconCircleCheck from '/public/svg/check-circle.svg';
+import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -134,26 +131,10 @@ export default function ReceiptsTable({
                 if (!status) return <TextCell>–</TextCell>;
 
                 return (
-                    <Badge
-                        variant={
-                            status === 'completed'
-                                ? 'success'
-                                : status === 'incompleted'
-                                  ? 'warning'
-                                  : 'muted'
-                        }
-                        icon={
-                            status === 'completed' ? (
-                                <IconCircleCheck />
-                            ) : status === 'incompleted' ? (
-                                <IconCircleDotDashed />
-                            ) : (
-                                <IconCircleDashed />
-                            )
-                        }
-                    >
-                        {t(`receipt.status.${status}`)}
-                    </Badge>
+                    <AssignmentBadge
+                        status={status}
+                        label={t(`transaction.status.${status}`)}
+                    />
                 );
             },
         },
