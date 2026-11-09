@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { FormAction } from '@/types/form-actions';
 import {
     Table,
@@ -77,9 +77,36 @@ export function DataTable<TData extends Model, TValue>({
     });
     const t = useTranslations();
     const hasActions = Boolean(canEdit || canView || deleteAction);
+    const tableRef = useRef<HTMLDivElement>(null);
+    const [isOverflowing, setIsOverflowing] = useState(false);
+
+    useEffect(() => {
+        const tableElement = tableRef.current?.querySelector('table');
+        const scrollContainer = tableElement?.parentElement;
+
+        if (!tableElement || !scrollContainer) return;
+
+        const checkOverflow = () => {
+            setIsOverflowing(
+                scrollContainer.scrollWidth > scrollContainer.clientWidth,
+            );
+        };
+
+        const observer = new ResizeObserver(checkOverflow);
+        observer.observe(scrollContainer);
+        observer.observe(tableElement);
+        checkOverflow();
+
+        return () => observer.disconnect();
+    }, []);
+
+    const stickyActionsClass = cn(
+        'md:sticky md:right-0 md:z-20 md:whitespace-nowrap',
+        isOverflowing && 'md:bg-bgSurfaceGlassMedium',
+    );
 
     return (
-        <div className={cn('col-span-2', className)}>
+        <div ref={tableRef} className={cn('col-span-2', className)}>
             {header && (
                 <Text preset="headline">
                     {header === true
@@ -88,7 +115,7 @@ export function DataTable<TData extends Model, TValue>({
                 </Text>
             )}
             <TableToolbar />
-            <Table>
+            <Table className="md:min-w-max">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
@@ -108,7 +135,7 @@ export function DataTable<TData extends Model, TValue>({
                                 );
                             })}
                             {hasActions && (
-                                <TableHead>
+                                <TableHead className={stickyActionsClass}>
                                     <div className="text-textSecondary text-sm font-medium">
                                         <span>{t('general.actions')}</span>
                                     </div>
@@ -259,7 +286,10 @@ export function DataTable<TData extends Model, TValue>({
                                     {hasActions && (
                                         <TableCell
                                             key="actions"
-                                            className="hidden md:table-cell"
+                                            className={cn(
+                                                'hidden md:table-cell',
+                                                stickyActionsClass,
+                                            )}
                                         >
                                             <TableActions
                                                 hasActions={hasActions}
