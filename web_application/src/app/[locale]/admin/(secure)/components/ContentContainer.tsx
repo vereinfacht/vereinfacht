@@ -1,5 +1,4 @@
 import Footer from '@/app/components/Footer';
-import MadeWith from '@/app/components/MadeWith';
 import { PropsWithChildren } from 'react';
 import TitleBar from './TitleBar';
 
@@ -11,11 +10,7 @@ export default function ContentContainer({ children }: PropsWithChildren) {
                 {children}
             </main>
 
-            <Footer className="flex flex-col items-center justify-center">
-                <div className="mb-4">
-                    <MadeWith />
-                </div>
-            </Footer>
+            <Footer />
         </div>
     );
 }
