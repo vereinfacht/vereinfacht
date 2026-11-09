@@ -8,7 +8,6 @@ import InputLabel from './Input/InputLabel';
 import SelectInput from './Input/SelectInput';
 import TextAreaInput from './Input/TextAreaInput';
 import TextInput from './Input/TextInput';
-import MadeWith from './MadeWith';
 import MultipleSections from './MultipleSections/MultipleSections';
 import MultiselectInput from './MultiselectInput/MultiselectInput';
 import Text from './Text/Text';
@@ -364,7 +363,6 @@ export default function Examples() {
                         },
                     ]}
                 />
-                <MadeWith />
             </div>
         </>
     );
