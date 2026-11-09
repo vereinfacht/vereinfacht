@@ -86,7 +86,7 @@ export default function BelongsToManyCell({
         >
             <Link
                 href={`${parentPath}`}
-                className="text-base font-medium whitespace-nowrap underline hover:cursor-pointer"
+                className="text-base whitespace-nowrap underline hover:cursor-pointer"
             >
                 {getDisplayValue(firstItem)},{' '}
                 {t('general.plus_n_more', { count: remainingCount })}
