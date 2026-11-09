@@ -1,8 +1,10 @@
 'use client';
 
-import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import { ParserBuilder, useQueryState } from 'nuqs';
 import { Button } from '../ui/button';
+import IconSorting from '/public/svg/sorting.svg';
+import IconSortingDescending from '/public/svg/sorting_descending.svg';
+import IconSortingAscending from '/public/svg/sorting_ascending.svg';
 
 interface Props {
     parser: ParserBuilder<any[]>;
@@ -41,11 +43,11 @@ export default function HeaderSort({ parser, columnTitle, columnId }: Props) {
                 }
                 rightIcon={
                     matchedSort === `-${columnId}` ? (
-                        <ArrowDown className="stroke-iconSecondary h-4 w-4" />
+                        <IconSortingDescending />
                     ) : matchedSort === columnId ? (
-                        <ArrowUp className="stroke-iconSecondary h-4 w-4" />
+                        <IconSortingAscending />
                     ) : (
-                        <ArrowUpDown className="stroke-iconSecondary h-4 w-4" />
+                        <IconSorting />
                     )
                 }
             />
