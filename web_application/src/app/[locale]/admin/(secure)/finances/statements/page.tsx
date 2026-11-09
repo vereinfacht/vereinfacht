@@ -53,7 +53,7 @@ export default async function Page({ searchParams }: WithSearchParams) {
                     resourceName="statements"
                 />
             </TableToolbarActions>
-            <div className="col-span-2 flex gap-6">
+            <div className="col-span-2 flex min-w-0 gap-6">
                 <AccountsList />
                 <StatementsTable
                     statements={statements}

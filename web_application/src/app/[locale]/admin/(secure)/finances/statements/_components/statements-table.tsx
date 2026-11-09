@@ -160,7 +160,7 @@ export default function StatementsTable({
 
     return (
         <DataTable
-            className="w-full"
+            className="min-w-0 flex-1"
             data={statements}
             columns={columns}
             resourceName={'finances/statements' as ResourceName}
