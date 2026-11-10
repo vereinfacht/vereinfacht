@@ -143,10 +143,7 @@ function DivisionsList({ clubDivisions, divisionMembershipTypes }: Props) {
                     {t(showDivisions ? 'membership.hide' : 'membership.show')}
                 </Text>
                 <IconChevronDown
-                    width={24}
-                    height={24}
                     className={[
-                        'stroke-current stroke-2 text-slate-600 transition-transform duration-300 [stroke-linecap:round] [stroke-linejoin:round]',
                         showDivisions ? 'rotate-180 transform' : '',
                     ].join(' ')}
                 />

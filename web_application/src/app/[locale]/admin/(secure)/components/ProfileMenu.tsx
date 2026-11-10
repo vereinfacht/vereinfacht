@@ -7,7 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/app/components/DropdownMenu';
-import IconPerson from '/public/svg/person_new.svg';
+import IconUser from '/public/svg/user_circle.svg';
 import { signOut } from 'next-auth/react';
 import Text from '@/app/components/Text/Text';
 import IconChevronDown from '/public/svg/chevron_down.svg';
@@ -26,20 +26,15 @@ export default function ProfileMenu({
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex cursor-pointer items-center gap-x-2 px-3 py-2 text-sm font-medium">
-                <IconPerson className="fill-iconSecondary" />
+                <IconUser />
 
                 {userName && (
-                    <Text
-                        className="text-textSecondary hidden md:block"
-                        preset="label"
-                    >
+                    <Text className="hidden md:block" preset="label">
                         {userName}
                     </Text>
                 )}
 
-                {showArrow && (
-                    <IconChevronDown className="stroke-iconSecondary hidden stroke-2 [stroke-linecap:round] [stroke-linejoin:round] md:block" />
-                )}
+                {showArrow && <IconChevronDown />}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => signOut()}>
