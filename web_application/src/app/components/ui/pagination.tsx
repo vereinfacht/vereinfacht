@@ -75,6 +75,7 @@ function PaginationLink({
                 disabled &&
                     'bg-btnBgSecondaryDisabled shadow-buttonSecondaryDisabled backdrop-blur-topbar text-textDisabled pointer-events-none cursor-not-allowed',
                 !isActive && !disabled && 'cursor-pointer',
+                'focus-visible:ring-borderFocus focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                 className,
             )}
             asChild
@@ -84,7 +85,7 @@ function PaginationLink({
                 aria-disabled={isNonInteractable}
                 data-slot="pagination-link"
                 data-active={isActive}
-                tabIndex={isNonInteractable ? -1 : undefined}
+                tabIndex={isNonInteractable ? -1 : 0}
                 onClick={(e) => {
                     if (isNonInteractable) {
                         e.preventDefault();
@@ -92,6 +93,15 @@ function PaginationLink({
                         return;
                     }
                     onClick?.(e);
+                }}
+                onKeyDown={(e) => {
+                    if (isNonInteractable) return;
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onClick?.(
+                            e as unknown as React.MouseEvent<HTMLAnchorElement>,
+                        );
+                    }
                 }}
                 {...props}
             >
