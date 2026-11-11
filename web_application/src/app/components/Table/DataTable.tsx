@@ -204,7 +204,7 @@ export function DataTable<TData extends Model, TValue>({
                                     data-cy={`${row.index}-row`}
                                 >
                                     <td className="border-borderSubtle flex items-center justify-between border-b py-4 pr-3 pl-4 md:hidden">
-                                        <div className="text-textPrimary text-base font-semibold [&_a]:underline">
+                                        <div className="text-textPrimary min-w-0 flex-1 text-base font-semibold wrap-break-word **:whitespace-normal! [&_a]:underline">
                                             {flexRender(
                                                 mobileHeaderCell.column
                                                     .columnDef.cell,
