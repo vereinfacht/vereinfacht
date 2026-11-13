@@ -19,7 +19,7 @@ const badgeVariants = cva(
                 success: 'bg-bgSuccessSoft text-textPrimary',
                 warning: 'bg-bgWarningSoft text-textPrimary',
                 danger: 'bg-bgErrorSoft text-textPrimary',
-                muted: 'bg-bgSurfaceSolidSurfaceMuted text-textPrimary',
+                muted: 'bg-bgSurfaceSolidMuted text-textPrimary',
             },
             size: {
                 sm: 'text-xs leading-4',

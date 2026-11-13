@@ -16,12 +16,37 @@ import IconPerson from '/public/svg/person.svg';
 import IconTrash from '/public/svg/trash.svg';
 import IconEmpty from '/public/svg/empty.svg';
 import { Button } from '@/app/components/ui/button';
+import { User } from 'lucide-react';
+
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxContent,
+    ComboboxEmpty,
+    ComboboxList,
+    ComboboxItem,
+    useComboboxAnchor,
+} from '@/app/components/ui/combobox';
+
+const sportsOptions = [
+    { value: 'basketball', label: 'Basketball' },
+    { value: 'fitness', label: 'Fitness-Studio' },
+    { value: 'fussball', label: 'Fußball' },
+    { value: 'golf', label: 'Golf' },
+    { value: 'handball', label: 'Handball' },
+    { value: 'tennis', label: 'Tennis' },
+];
 
 export default function Examples() {
     const [color, setColor] = useState<string | undefined>();
     const t = useTranslations();
     const [sections, setSections] = useState<Record<string, any>[]>([]);
     const btnClass = 'flex flex-row items-center gap-4';
+
+    const [value, setValue] = useState<(typeof sportsOptions)[number] | null>(
+        null,
+    );
+    const anchor = useComboboxAnchor();
 
     return (
         <>
@@ -52,38 +77,12 @@ export default function Examples() {
 
             <MultipleSections
                 sections={sections}
-                renderSection={() => (
+                renderSection={(index) => (
                     <MultiselectInput
-                        id="multiselect"
+                        name={`multiselect.${index}`}
                         label={
                             <InputLabel
-                                forInput="multiselect"
-                                className="flex items-end"
-                            >
-                                <IconPerson className="mr-1 -mb-0.5 scale-75 fill-current" />
-                                MultiselectInput
-                            </InputLabel>
-                        }
-                        options={[
-                            { value: 1, label: 'Wade Cooper' },
-                            { value: 2, label: 'Arlene Mccoy' },
-                            { value: 3, label: 'Devon Webb' },
-                            { value: 4, label: 'Tom Cook' },
-                            { value: 5, label: 'Tanya Fox' },
-                            { value: 6, label: 'Hellen Schmidt' },
-                        ]}
-                    />
-                )}
-            />
-
-            <MultipleSections
-                sections={sections}
-                renderSection={() => (
-                    <MultiselectInput
-                        id="multiselect"
-                        label={
-                            <InputLabel
-                                forInput="multiselect"
+                                forInput={`multiselect.${index}`}
                                 className="flex items-end"
                             >
                                 <IconPerson className="mr-1 -mb-0.5 scale-75 fill-current" />
@@ -365,6 +364,46 @@ export default function Examples() {
                     ]}
                 />
                 <MadeWith />
+                <div className="w-full max-w-lg space-y-1.5 p-4">
+                    <label
+                        htmlFor="sports-combobox"
+                        className="text-textPrimary flex items-center gap-2 text-sm font-bold"
+                    >
+                        <User className="size-4 stroke-[2.5]" />
+                        <span>Ursa Gentry</span>
+                    </label>
+
+                    <Combobox
+                        items={sportsOptions}
+                        value={value}
+                        onValueChange={setValue}
+                        itemToStringLabel={(option) => option.label}
+                    >
+                        <div ref={anchor} className="w-full">
+                            <ComboboxInput
+                                id="sports-combobox"
+                                placeholder="Suchen und hinzufügen"
+                            />
+                        </div>
+
+                        <ComboboxContent
+                            anchor={anchor}
+                            className="group/combobox-content"
+                        >
+                            <ComboboxEmpty>Keine Ergebnisse</ComboboxEmpty>
+                            <ComboboxList>
+                                {(option: (typeof sportsOptions)[number]) => (
+                                    <ComboboxItem
+                                        key={option.value}
+                                        value={option}
+                                    >
+                                        {option.label}
+                                    </ComboboxItem>
+                                )}
+                            </ComboboxList>
+                        </ComboboxContent>
+                    </Combobox>
+                </div>
             </div>
         </>
     );

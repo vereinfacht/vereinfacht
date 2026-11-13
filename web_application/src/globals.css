@@ -56,10 +56,11 @@
     --color-bgWarningSoft: var(--color-yellow-100);
     --color-bgSuccessSoft: var(--color-green-100);
     --color-bgErrorSoft: var(--color-red-100);
-    --color-bgSurfaceSolidSurfaceMuted: var(--color-neutral-300);
+    --color-bgSurfaceSolidMuted: var(--color-neutral-300);
 
     --color-borderSubtle: var(--color-neutral-200);
     --color-borderFocus: var(--color-blue-500);
+    --color-borderDefault: var(--color-neutral-500);
 
     --color-iconSecondary: var(--color-neutral-600);
 
