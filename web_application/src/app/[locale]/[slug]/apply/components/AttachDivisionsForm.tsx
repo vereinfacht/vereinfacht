@@ -245,7 +245,6 @@ export default function AttachDivisionsForm({
 
                             return (
                                 <MultiselectInput
-                                    id={`members.${index}.divisions`}
                                     name={`members.${index}.divisions`}
                                     defaultValue={getMemberDivisionOptions(
                                         application.members[index],

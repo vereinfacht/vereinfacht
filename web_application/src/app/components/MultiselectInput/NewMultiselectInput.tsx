@@ -20,7 +20,7 @@ import { cn } from '@/utils/shadcn';
 import { Button } from '@/app/components/ui/button';
 import InputLabel from '../Input/InputLabel';
 import { Option } from '../Input/SelectInput';
-import { filterOptionsByQuery, sortOptions } from './MultiselectInput';
+import { sortOptions } from './MultiselectInput';
 import { useState } from 'react';
 import IconLoading from '/public/svg/loading.svg';
 import IconSorting from '/public/svg/sorting.svg';
@@ -40,6 +40,20 @@ interface Props {
     onQueryChange?: (query: string) => void;
 }
 
+export function filterOptionsByQuery(options: Option[], query: string) {
+    if (query === '') {
+        return options;
+    }
+
+    return options.filter((option) =>
+        typeof option.label === 'string'
+            ? option.label
+                  .toLowerCase()
+                  .replace(/\s+/g, '')
+                  .includes(query.toLowerCase().replace(/\s+/g, ''))
+            : true,
+    );
+}
 export function NewMultiselectInput({
     id,
     name,
