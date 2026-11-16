@@ -53,6 +53,7 @@ function PaginationLink({
     leftIcon,
     rightIcon,
     onClick,
+    onKeyDown,
     children,
     ...props
 }: PaginationLinkProps) {
@@ -63,6 +64,33 @@ function PaginationLink({
         isTextButton && !leftIcon && 'pl-2',
         isTextButton && !rightIcon && 'pr-2',
     );
+
+    function handleInteraction(
+        e:
+            | React.MouseEvent<HTMLAnchorElement>
+            | React.KeyboardEvent<HTMLAnchorElement>,
+    ) {
+        if (e.type === 'keydown') {
+            const keyEvent = e as React.KeyboardEvent<HTMLAnchorElement>;
+            onKeyDown?.(keyEvent);
+
+            if (keyEvent.key !== 'Enter' && keyEvent.key !== ' ') {
+                return;
+            }
+        }
+
+        if (isNonInteractable) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
+        if (e.type === 'keydown') {
+            e.preventDefault();
+        }
+
+        onClick?.(e as React.MouseEvent<HTMLAnchorElement>);
+    }
 
     return (
         <Button
@@ -86,23 +114,8 @@ function PaginationLink({
                 data-slot="pagination-link"
                 data-active={isActive}
                 tabIndex={isNonInteractable ? -1 : 0}
-                onClick={(e) => {
-                    if (isNonInteractable) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return;
-                    }
-                    onClick?.(e);
-                }}
-                onKeyDown={(e) => {
-                    if (isNonInteractable) return;
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        onClick?.(
-                            e as unknown as React.MouseEvent<HTMLAnchorElement>,
-                        );
-                    }
-                }}
+                onClick={handleInteraction}
+                onKeyDown={handleInteraction}
                 {...props}
             >
                 {leftIcon && (
