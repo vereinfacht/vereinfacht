@@ -197,6 +197,7 @@ export default function MembershipsTable({
                 data={memberships}
                 columns={columns}
                 resourceName={'memberships' as ResourceName}
+                titleColumn="owner"
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}

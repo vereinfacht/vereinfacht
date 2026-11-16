@@ -164,6 +164,7 @@ export default function StatementsTable({
             data={statements}
             columns={columns}
             resourceName={'finances/statements' as ResourceName}
+            titleColumn="title"
             totalPages={totalPages}
             canEdit={(statement) =>
                 statement.financeAccount?.accountType === 'cash_box'

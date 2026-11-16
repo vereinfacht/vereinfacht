@@ -264,6 +264,7 @@ export default function ReceiptsTable({
                 data={receipts}
                 columns={columns}
                 resourceName={'finances/receipts' as ResourceName}
+                titleColumn="receiptType"
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}

@@ -104,6 +104,7 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
         <DataTable
             data={contacts}
             columns={columns}
+            titleColumn="fullName"
             resourceName={'finances/contacts' as ResourceName}
             totalPages={totalPages}
             canEdit={(contact) => (contact.isExternal ? false : true)}

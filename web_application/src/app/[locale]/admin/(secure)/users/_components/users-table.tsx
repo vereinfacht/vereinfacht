@@ -112,6 +112,7 @@ export default function UsersTable({ users }: Props) {
                 data={users}
                 columns={columns}
                 resourceName={'users' as ResourceName}
+                titleColumn="name"
                 canView={true}
                 canEdit={true}
                 deleteAction={deleteAction}

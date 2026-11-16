@@ -185,6 +185,7 @@ export default function MembersTable({
             <DataTable
                 data={members}
                 columns={columns}
+                titleColumn="fullName"
                 resourceName={'members' as ResourceName}
                 totalPages={totalPages}
                 canEdit={true}

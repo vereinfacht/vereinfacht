@@ -1,6 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import TextCell from '@/app/components/Table/TextCell';
@@ -34,7 +35,14 @@ export default function MembersTable({
         {
             accessorKey: 'fullName',
             header: t('member.name.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
+            cell: ({ row }) => (
+                <BelongsToCell
+                    resource={row.original}
+                    path="/admin/members"
+                    content={row.original.fullName}
+                    truncate
+                />
+            ),
         },
         {
             accessorKey: 'divisions',
@@ -117,6 +125,7 @@ export default function MembersTable({
         <DataTable
             data={members}
             columns={columns}
+            titleColumn="fullName"
             resourceName={'members' as ResourceName}
             totalPages={totalPages}
             canEdit={true}

@@ -101,6 +101,7 @@ export default function DivisionsTable({
             <DataTable
                 data={divisions}
                 columns={columns}
+                titleColumn="title"
                 resourceName={'divisions'}
                 totalPages={totalPages}
                 canEdit={true}

@@ -10,6 +10,7 @@ import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { ColumnDef } from '@tanstack/react-table';
 import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
+import BelongsToCell from '@/app/components/Table/BelongsToCell';
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
     totalPages: number;
@@ -29,7 +30,13 @@ export default function TransactionsTable({
                 mobileLabel: t('transaction.title.label'),
             } as any,
             header: t('transaction.title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
+            cell: ({ row }) => (
+                <BelongsToCell
+                    resource={row.original}
+                    path="/admin/finances/transactions"
+                    content={row.getValue<string>('title')}
+                />
+            ),
         },
         {
             accessorKey: 'description',
@@ -117,6 +124,7 @@ export default function TransactionsTable({
             data={transactions}
             columns={columns}
             resourceName={'finances/transactions' as ResourceName}
+            titleColumn="title"
             totalPages={totalPages}
             canEdit={false}
             canView={true}

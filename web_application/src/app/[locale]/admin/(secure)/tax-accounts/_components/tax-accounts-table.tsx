@@ -62,6 +62,7 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
             data={taxAccounts}
             columns={columns}
             resourceName={'tax-accounts' as ResourceName}
+            titleColumn="accountNumber"
             totalPages={totalPages}
             canEdit={true}
             canView={true}

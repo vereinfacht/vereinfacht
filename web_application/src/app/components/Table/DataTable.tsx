@@ -40,6 +40,7 @@ interface DataTableProps<TData, TValue> {
     totalPages?: number;
     className?: string;
     header?: boolean | string;
+    titleColumn?: string;
 }
 
 interface TableActionsProps {
@@ -68,6 +69,7 @@ export function DataTable<TData extends Model, TValue>({
     className,
     header,
     totalPages,
+    titleColumn,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         defaultColumn,
@@ -204,7 +206,14 @@ export function DataTable<TData extends Model, TValue>({
                                     data-cy={`${row.index}-row`}
                                 >
                                     <td className="border-borderSubtle flex items-center justify-between border-b py-4 pr-3 pl-4 md:hidden">
-                                        <div className="text-textPrimary min-w-0 flex-1 text-base font-semibold wrap-break-word **:whitespace-normal! [&_a]:underline">
+                                        <div
+                                            className={cn(
+                                                'text-textPrimary text-base [&_a]:underline',
+                                                mobileHeaderCell.column.id ===
+                                                    titleColumn &&
+                                                    '[&_a]:font-bold',
+                                            )}
+                                        >
                                             {flexRender(
                                                 mobileHeaderCell.column
                                                     .columnDef.cell,
@@ -244,8 +253,9 @@ export function DataTable<TData extends Model, TValue>({
                                                 <div
                                                     className={cn(
                                                         'wrap-break text-textPrimary flex w-1/2 justify-start overflow-visible text-left md:w-auto md:flex-auto',
-                                                        index === 0 &&
-                                                            'md:font-bold md:[&_a]:font-bold!',
+                                                        cell.column.id ===
+                                                            titleColumn &&
+                                                            '[&_a]:font-bold',
                                                     )}
                                                 >
                                                     {flexRender(

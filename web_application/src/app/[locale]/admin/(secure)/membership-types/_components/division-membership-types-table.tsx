@@ -59,6 +59,7 @@ export default function DivisionMembershipTypesTable({
                 data={divisionMembershipTypes}
                 columns={columns}
                 resourceName={'divisionMembershipTypes'}
+                titleColumn="division"
                 totalPages={1}
                 canEdit={true}
                 onEdit={setEditingItem}
