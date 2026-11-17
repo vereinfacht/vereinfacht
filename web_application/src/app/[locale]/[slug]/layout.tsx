@@ -1,5 +1,4 @@
 import { fetchClubDataOrFail } from '@/actions/fetchClubDataOrFail';
-import MadeWith from '@/app/components/MadeWith';
 import '@/globals.css';
 import { ClubPageParams } from '@/types/params';
 import { getDefaultMetadata } from '@/utils/metadata';
@@ -59,11 +58,7 @@ export default async function ClubLayout({ children, params }: Props) {
             ].join(' ')}
         >
             {children}
-            <Footer className="flex flex-col items-center justify-center">
-                <div className="mb-4">
-                    <MadeWith />
-                </div>
-            </Footer>
+            <Footer />
         </div>
     );
 }
