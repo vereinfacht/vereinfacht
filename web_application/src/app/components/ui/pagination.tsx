@@ -5,8 +5,8 @@ import * as React from 'react';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/utils/shadcn';
-import IconChevronRight from '/public/svg/chevron-right.svg';
-import IconChevronLeft from '/public/svg/chevron-left.svg';
+import IconChevronRight from '/public/svg/chevron_right.svg';
+import IconChevronLeft from '/public/svg/chevron_left.svg';
 import { useIsMobile } from '@/hooks/useMobile';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
