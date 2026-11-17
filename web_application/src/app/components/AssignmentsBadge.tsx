@@ -1,7 +1,7 @@
 import { Badge } from '@/app/components/ui/badge';
-import IconCircleDashed from '/public/svg/no-assignments.svg';
+import IconCircleDashed from '/public/svg/no_assignments.svg';
 import IconCircleDotDashed from '/public/svg/incomplete.svg';
-import IconCircleCheck from '/public/svg/check-circle.svg';
+import IconCircleCheck from '/public/svg/check_circle.svg';
 
 type AssignmentBadgeProps = {
     status: string;

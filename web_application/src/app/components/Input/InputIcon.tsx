@@ -29,11 +29,7 @@ export default function InputIcon({ icon, type }: Props) {
     if (type === 'select') {
         return (
             <IconContainer>
-                <IconChevron
-                    width={24}
-                    height={24}
-                    className="stroke-current stroke-2 text-slate-600 [stroke-linecap:round] [stroke-linejoin:round]"
-                />
+                <IconChevron />
             </IconContainer>
         );
     }
