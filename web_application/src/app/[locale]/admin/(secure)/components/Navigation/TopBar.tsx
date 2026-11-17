@@ -29,7 +29,7 @@ export default function TopBar({
                 <ClubLogo logoUrl={clubLogoUrl} title={clubTitle} />
             </div>
 
-            <div className="flex items-center px-4">
+            <div className="text-textSecondary flex items-center px-4">
                 <LanguageSelector showLang={true} showArrow={true} />
 
                 <ProfileMenu userName={userName} showArrow={true} />

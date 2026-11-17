@@ -36,18 +36,13 @@ export default function LanguageSelector({
                 className="flex cursor-pointer items-center justify-end gap-x-2 px-3 py-2"
                 data-cy="language-selector"
             >
-                <IconGlobe className="fill-iconSecondary" />
+                <IconGlobe />
                 {showLang && (
-                    <Text
-                        preset="label"
-                        className="text-textSecondary hidden w-[1em] md:block"
-                    >
+                    <Text className="hidden md:block" preset="label">
                         {lang.toUpperCase()}
                     </Text>
                 )}
-                {showArrow && (
-                    <IconChevronDown className="stroke-iconSecondary hidden stroke-2 [stroke-linecap:round] [stroke-linejoin:round] md:block" />
-                )}
+                {showArrow && <IconChevronDown />}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 {routing.locales.map((locale) => (
