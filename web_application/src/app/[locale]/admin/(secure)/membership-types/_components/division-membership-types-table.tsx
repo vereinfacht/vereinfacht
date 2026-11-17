@@ -2,13 +2,13 @@
 import { useLocale, useTranslations } from 'next-intl';
 
 import { useState } from 'react';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { TDivisionMembershipTypeDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { ColumnDef } from '@tanstack/react-table';
 import EditDivisionMembershipTypeModal from './edit-division-membership-type-modal';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     divisionMembershipTypes: TDivisionMembershipTypeDeserialized[];
@@ -30,10 +30,9 @@ export default function DivisionMembershipTypesTable({
             id: 'division',
             header: t('division.title.label', { count: 1 }),
             cell: ({ row }) => (
-                <BelongsToCell
-                    resource={row.original.division}
-                    content={row.original.division?.titleTranslations?.[locale]}
-                    path={'/admin/divisions'}
+                <LinkCell
+                    href={`/admin/divisions/${row.original.division?.id}`}
+                    title={row.original.division?.titleTranslations?.[locale]}
                 />
             ),
         },
@@ -59,7 +58,6 @@ export default function DivisionMembershipTypesTable({
                 data={divisionMembershipTypes}
                 columns={columns}
                 resourceName={'divisionMembershipTypes'}
-                titleColumn="division"
                 totalPages={1}
                 canEdit={true}
                 onEdit={setEditingItem}

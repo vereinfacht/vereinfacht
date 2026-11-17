@@ -3,7 +3,6 @@ import { useTranslations, useLocale } from 'next-intl';
 
 import { statementTypeOptions } from '@/actions/statements/list.schema';
 import BadgeCount from '@/app/components/Table/BadgeCount';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
@@ -17,6 +16,7 @@ import { listStatementSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQueryState } from 'nuqs';
 import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface StatementsListProps {
     statements: TStatementDeserialized[];
@@ -42,11 +42,9 @@ export default function StatementsTable({
                 const statement = row.original as TStatementDeserialized;
 
                 return (
-                    <BelongsToCell
-                        resource={statement}
-                        path="/admin/finances/statements"
-                        content={statement.title}
-                        truncate
+                    <LinkCell
+                        href={`/admin/finances/statements/${statement.id}`}
+                        title={statement.title}
                     />
                 );
             },
@@ -164,7 +162,6 @@ export default function StatementsTable({
             data={statements}
             columns={columns}
             resourceName={'finances/statements' as ResourceName}
-            titleColumn="title"
             totalPages={totalPages}
             canEdit={(statement) =>
                 statement.financeAccount?.accountType === 'cash_box'

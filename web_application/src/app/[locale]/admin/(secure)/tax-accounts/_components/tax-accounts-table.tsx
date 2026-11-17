@@ -8,7 +8,7 @@ import { TTaxAccountDeserialized } from '@/types/resources';
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listTaxAccountSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     taxAccounts: TTaxAccountDeserialized[];
@@ -33,11 +33,9 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
                 const taxAccount = row.original;
 
                 return (
-                    <BelongsToCell
-                        resource={taxAccount}
-                        path="/admin/tax-accounts"
-                        content={taxAccount.accountNumber}
-                        truncate
+                    <LinkCell
+                        href={`/admin/tax-accounts/${taxAccount.id}`}
+                        title={taxAccount.accountNumber}
                     />
                 );
             },
@@ -62,7 +60,6 @@ export default function TaxAccountsTable({ taxAccounts, totalPages }: Props) {
             data={taxAccounts}
             columns={columns}
             resourceName={'tax-accounts' as ResourceName}
-            titleColumn="accountNumber"
             totalPages={totalPages}
             canEdit={true}
             canView={true}

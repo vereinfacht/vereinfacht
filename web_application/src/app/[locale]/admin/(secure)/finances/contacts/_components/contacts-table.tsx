@@ -2,7 +2,6 @@
 import { useTranslations } from 'next-intl';
 
 import { financeContactTypeOptions } from '@/actions/financeContacts/list.schema';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import { HeaderOptionFilter } from '@/app/components/Table/HeaderOptionFilter';
 import HeaderSort from '@/app/components/Table/HeaderSort';
@@ -13,6 +12,7 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listFinanceContactSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import { Building2, CircleUserRound } from 'lucide-react';
+import LinkCell from '@/app/components/Table/LinkCell';
 interface Props {
     contacts: TFinanceContactDeserialized[];
     totalPages: number;
@@ -57,11 +57,10 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                 const contact = row.original as TFinanceContactDeserialized;
 
                 return (
-                    <BelongsToCell
-                        resource={contact}
-                        path="/admin/finances/contacts"
-                        content={contact.fullName}
-                        truncate
+                    <LinkCell
+                        href={`/admin/finances/contacts/${contact.id}`}
+
+                        title={contact.fullName}
                     />
                 );
             },
@@ -104,7 +103,6 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
         <DataTable
             data={contacts}
             columns={columns}
-            titleColumn="fullName"
             resourceName={'finances/contacts' as ResourceName}
             totalPages={totalPages}
             canEdit={(contact) => (contact.isExternal ? false : true)}

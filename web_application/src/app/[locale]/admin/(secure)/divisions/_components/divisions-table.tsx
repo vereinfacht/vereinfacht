@@ -13,7 +13,7 @@ import { listDivisionSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import TableToolbarActions from '../../components/TableToolbarActions';
 import TableExportModal from '../../components/TableExportModal';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     divisions: TDivisionDeserialized[];
@@ -52,11 +52,9 @@ export default function DivisionsTable({
                     division.titleTranslations?.[locale] || division.title;
 
                 return (
-                    <BelongsToCell
-                        resource={division}
-                        path="/admin/divisions"
-                        content={title}
-                        truncate
+                    <LinkCell
+                        href={`/admin/divisions/${row.original.id}`}
+                        title={title}
                     />
                 );
             },
@@ -101,7 +99,6 @@ export default function DivisionsTable({
             <DataTable
                 data={divisions}
                 columns={columns}
-                titleColumn="title"
                 resourceName={'divisions'}
                 totalPages={totalPages}
                 canEdit={true}

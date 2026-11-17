@@ -29,6 +29,7 @@ import FinancialStatementExportModal from './financial-statement-export-modal';
 import TableExportModal from '../../../components/TableExportModal';
 import TableToolbarActions from '../../../components/TableToolbarActions';
 import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     receipts: TReceiptDeserialized[];
@@ -65,13 +66,9 @@ export default function ReceiptsTable({
                 const receipt = row.original as TReceiptDeserialized;
 
                 return (
-                    <BelongsToCell
-                        resource={receipt}
-                        path="/admin/finances/receipts"
-                        content={t(
-                            `receipt.receipt_type.${receipt.receiptType}`,
-                        )}
-                        truncate
+                    <LinkCell
+                        href={`/admin/finances/receipts/${receipt.id}`}
+                        title={t(`receipt.receipt_type.${receipt.receiptType}`)}
                     />
                 );
             },
@@ -264,7 +261,6 @@ export default function ReceiptsTable({
                 data={receipts}
                 columns={columns}
                 resourceName={'finances/receipts' as ResourceName}
-                titleColumn="receiptType"
                 totalPages={totalPages}
                 canEdit={true}
                 canView={true}

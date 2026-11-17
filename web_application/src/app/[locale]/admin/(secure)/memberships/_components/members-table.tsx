@@ -1,7 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import BelongsToManyCell from '@/app/components/Table/BelongsToManyCell';
 import { DataTable } from '@/app/components/Table/DataTable';
 import TextCell from '@/app/components/Table/TextCell';
@@ -14,6 +13,7 @@ import {
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { ColumnDef } from '@tanstack/react-table';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     members: TMemberDeserialized[];
@@ -36,11 +36,9 @@ export default function MembersTable({
             accessorKey: 'fullName',
             header: t('member.name.label'),
             cell: ({ row }) => (
-                <BelongsToCell
-                    resource={row.original}
-                    path="/admin/members"
-                    content={row.original.fullName}
-                    truncate
+                <LinkCell
+                    href={`/admin/members/${row.original.id}`}
+                    title={row.original.fullName}
                 />
             ),
         },
@@ -125,7 +123,6 @@ export default function MembersTable({
         <DataTable
             data={members}
             columns={columns}
-            titleColumn="fullName"
             resourceName={'members' as ResourceName}
             totalPages={totalPages}
             canEdit={true}
