@@ -53,6 +53,7 @@ function PaginationLink({
     leftIcon,
     rightIcon,
     onClick,
+    onKeyDown,
     children,
     ...props
 }: PaginationLinkProps) {
@@ -63,6 +64,33 @@ function PaginationLink({
         isTextButton && !leftIcon && 'pl-2',
         isTextButton && !rightIcon && 'pr-2',
     );
+
+    function handleInteraction(
+        e:
+            | React.MouseEvent<HTMLAnchorElement>
+            | React.KeyboardEvent<HTMLAnchorElement>,
+    ) {
+        if (e.type === 'keydown') {
+            const keyEvent = e as React.KeyboardEvent<HTMLAnchorElement>;
+            onKeyDown?.(keyEvent);
+
+            if (keyEvent.key !== 'Enter' && keyEvent.key !== ' ') {
+                return;
+            }
+        }
+
+        if (isNonInteractable) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
+        if (e.type === 'keydown') {
+            e.preventDefault();
+        }
+
+        onClick?.(e as React.MouseEvent<HTMLAnchorElement>);
+    }
 
     return (
         <Button
@@ -75,6 +103,7 @@ function PaginationLink({
                 disabled &&
                     'bg-btnBgSecondaryDisabled shadow-buttonSecondaryDisabled backdrop-blur-topbar text-textDisabled pointer-events-none cursor-not-allowed',
                 !isActive && !disabled && 'cursor-pointer',
+                'focus-visible:ring-borderFocus focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                 className,
             )}
             asChild
@@ -84,15 +113,9 @@ function PaginationLink({
                 aria-disabled={isNonInteractable}
                 data-slot="pagination-link"
                 data-active={isActive}
-                tabIndex={isNonInteractable ? -1 : undefined}
-                onClick={(e) => {
-                    if (isNonInteractable) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return;
-                    }
-                    onClick?.(e);
-                }}
+                tabIndex={isNonInteractable ? -1 : 0}
+                onClick={handleInteraction}
+                onKeyDown={handleInteraction}
                 {...props}
             >
                 {leftIcon && (
