@@ -13,6 +13,7 @@ import {
 import { createDeleteFormAction } from '@/utils/deleteActions';
 import { ColumnDef } from '@tanstack/react-table';
 import CurrencyCell from '@/app/components/Table/CurrencyCell';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     members: TMemberDeserialized[];
@@ -34,7 +35,12 @@ export default function MembersTable({
         {
             accessorKey: 'fullName',
             header: t('member.name.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('fullName')}</TextCell>,
+            cell: ({ row }) => (
+                <LinkCell
+                    href={`/admin/members/${row.original.id}`}
+                    title={row.original.fullName}
+                />
+            ),
         },
         {
             accessorKey: 'divisions',

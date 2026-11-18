@@ -10,8 +10,8 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listMembershipTypesSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import TableExportModal from '../../components/TableExportModal';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import TableToolbarActions from '../../components/TableToolbarActions';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     membershipTypes: TMembershipTypeDeserialized[];
@@ -52,11 +52,9 @@ export default function MembershipTypesTable({
                     membershipType.title;
 
                 return (
-                    <BelongsToCell
-                        resource={membershipType}
-                        path="/admin/membership-types"
-                        content={title}
-                        truncate
+                    <LinkCell
+                        href={`/admin/membership-types/${membershipType.id}`}
+                        title={title}
                     />
                 );
             },

@@ -10,9 +10,9 @@ import { createDeleteFormAction } from '@/utils/deleteActions';
 import { listUserSearchParams } from '@/utils/search-params';
 import { ColumnDef } from '@tanstack/react-table';
 import DateField from '../../components/Fields/Detail/DateField';
-import BelongsToCell from '@/app/components/Table/BelongsToCell';
 import TableToolbarActions from '../../components/TableToolbarActions';
 import { Badge } from '@/app/components/ui/badge';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     users: TUserDeserialized[];
@@ -36,11 +36,9 @@ export default function UsersTable({ users }: Props) {
                 const user = row.original;
 
                 return (
-                    <BelongsToCell
-                        resource={user}
-                        path="/admin/users"
-                        content={user.name}
-                        truncate
+                    <LinkCell
+                        href={`/admin/users/${user.id}`}
+                        title={user.name}
                     />
                 );
             },

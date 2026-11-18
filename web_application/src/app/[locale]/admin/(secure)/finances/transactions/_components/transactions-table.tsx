@@ -10,6 +10,7 @@ import { TTransactionDeserialized } from '@/types/resources';
 import { formatDate } from '@/utils/dates';
 import { ColumnDef } from '@tanstack/react-table';
 import { AssignmentBadge } from '@/app/components/AssignmentsBadge';
+import LinkCell from '@/app/components/Table/LinkCell';
 interface TransactionsListProps {
     transactions: TTransactionDeserialized[];
     totalPages: number;
@@ -29,7 +30,12 @@ export default function TransactionsTable({
                 mobileLabel: t('transaction.title.label'),
             } as any,
             header: t('transaction.title.label'),
-            cell: ({ row }) => <TextCell>{row.getValue('title')}</TextCell>,
+            cell: ({ row }) => (
+                <LinkCell
+                    href={`/admin/finances/transactions/${row.original.id}`}
+                    title={row.getValue<string>('title')}
+                />
+            ),
         },
         {
             accessorKey: 'description',

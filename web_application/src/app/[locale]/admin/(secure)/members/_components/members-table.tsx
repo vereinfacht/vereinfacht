@@ -21,6 +21,7 @@ import DateField from '../../components/Fields/Detail/DateField';
 import TableExportModal from '../../components/TableExportModal';
 import TableToolbarActions from '../../components/TableToolbarActions';
 import { Badge } from '@/app/components/ui/badge';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     members: TMemberDeserialized[];
@@ -56,11 +57,9 @@ export default function MembersTable({
                 const member = row.original as TMemberDeserialized;
 
                 return (
-                    <BelongsToCell
-                        resource={member}
-                        path="/admin/members"
-                        content={member.fullName}
-                        truncate
+                    <LinkCell
+                        href={`/admin/members/${member.id}`}
+                        title={member.fullName}
                     />
                 );
             },

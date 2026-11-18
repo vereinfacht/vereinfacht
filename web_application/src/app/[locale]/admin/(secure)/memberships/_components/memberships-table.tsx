@@ -22,6 +22,7 @@ import DateField from '../../components/Fields/Detail/DateField';
 import TableExportModal from '../../components/TableExportModal';
 import TableToolbarActions from '../../components/TableToolbarActions';
 import { Badge } from '@/app/components/ui/badge';
+import LinkCell from '@/app/components/Table/LinkCell';
 
 interface Props {
     memberships: TMembershipDeserialized[];
@@ -46,13 +47,9 @@ export default function MembershipsTable({
             cell: ({ row }) => {
                 const owner = row.getValue('owner') as TMemberDeserialized;
                 return owner ? (
-                    <BelongsToCell
-                        resource={owner}
-                        content={
-                            (owner as { fullName?: string }).fullName ?? '-'
-                        }
-                        path="/admin/memberships"
-                        truncate
+                    <LinkCell
+                        href={`/admin/members/${owner.id}`}
+                        title={(owner as { fullName?: string }).fullName ?? '-'}
                     />
                 ) : (
                     <TextCell>-</TextCell>

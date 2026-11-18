@@ -204,7 +204,7 @@ export function DataTable<TData extends Model, TValue>({
                                     data-cy={`${row.index}-row`}
                                 >
                                     <td className="border-borderSubtle flex items-center justify-between border-b py-4 pr-3 pl-4 md:hidden">
-                                        <div className="text-textPrimary text-base font-semibold [&_a]:underline">
+                                        <div className="text-textPrimary text-base [&_a]:underline">
                                             {flexRender(
                                                 mobileHeaderCell.column
                                                     .columnDef.cell,
@@ -228,11 +228,11 @@ export function DataTable<TData extends Model, TValue>({
                                             <TableCell
                                                 key={cell.id}
                                                 data-cy={`${cell.id}-cell`}
-                                                className={
+                                                className={cn(
                                                     isMobileHeader
                                                         ? 'hidden md:table-cell'
-                                                        : `flex md:table-cell md:items-start ${isLastCell ? '' : 'border-borderSubtle border-b md:border-0'}`
-                                                }
+                                                        : `flex md:table-cell md:items-start ${isLastCell ? '' : 'border-borderSubtle border-b md:border-0'}`,
+                                                )}
                                             >
                                                 <span className="text-textSecondary w-1/2 pr-4 text-sm font-medium md:hidden md:w-auto md:pr-0">
                                                     {(
