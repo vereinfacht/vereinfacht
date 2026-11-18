@@ -59,7 +59,6 @@ export default function ContactsTable({ contacts, totalPages }: Props) {
                 return (
                     <LinkCell
                         href={`/admin/finances/contacts/${contact.id}`}
-
                         title={contact.fullName}
                     />
                 );
