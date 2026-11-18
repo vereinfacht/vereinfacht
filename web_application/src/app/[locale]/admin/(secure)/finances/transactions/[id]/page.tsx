@@ -69,7 +69,7 @@ export default async function TransactionShowPage({ params }: Props) {
             type: 'belongsTo',
             fields: [
                 {
-                    label: 'statement.date.label',
+                    label: t('statement.date.label'),
                     attribute: 'date',
                     type: 'date',
                 },
@@ -80,17 +80,17 @@ export default async function TransactionShowPage({ params }: Props) {
             type: 'belongsTo',
             fields: [
                 {
-                    label: 'receipt.reference_number.label',
+                    label: t('receipt.reference_number.label'),
                     attribute: 'referenceNumber',
                     type: 'string',
                 },
                 {
-                    label: 'receipt.booking_date.label',
+                    label: t('receipt.booking_date.label'),
                     attribute: 'bookingDate',
                     type: 'date',
                 },
                 {
-                    label: 'receipt.amount.label',
+                    label: t('receipt.amount.label'),
                     attribute: 'amount',
                     type: 'currency',
                 },
