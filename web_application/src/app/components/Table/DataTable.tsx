@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { FormAction } from '@/types/form-actions';
 import {
     Table,
@@ -77,36 +77,11 @@ export function DataTable<TData extends Model, TValue>({
     });
     const t = useTranslations();
     const hasActions = Boolean(canEdit || canView || deleteAction);
-    const tableRef = useRef<HTMLDivElement>(null);
-    const [isOverflowing, setIsOverflowing] = useState(false);
-
-    useEffect(() => {
-        const tableElement = tableRef.current?.querySelector('table');
-        const scrollContainer = tableElement?.parentElement;
-
-        if (!tableElement || !scrollContainer) return;
-
-        const checkOverflow = () => {
-            setIsOverflowing(
-                scrollContainer.scrollWidth > scrollContainer.clientWidth,
-            );
-        };
-
-        const observer = new ResizeObserver(checkOverflow);
-        observer.observe(scrollContainer);
-        observer.observe(tableElement);
-        checkOverflow();
-
-        return () => observer.disconnect();
-    }, []);
-
-    const stickyActionsClass = cn(
-        'md:sticky md:right-0 md:z-20 md:whitespace-nowrap',
-        isOverflowing && 'md:bg-bgSurfaceGlassMedium',
-    );
+    const stickyActionsClass =
+        'md:sticky md:right-0 md:z-20 md:whitespace-nowrap';
 
     return (
-        <div ref={tableRef} className={cn('col-span-2', className)}>
+        <div className={cn('col-span-2', className)}>
             {header && (
                 <Text preset="headline">
                     {header === true
@@ -135,7 +110,12 @@ export function DataTable<TData extends Model, TValue>({
                                 );
                             })}
                             {hasActions && (
-                                <TableHead className={stickyActionsClass}>
+                                <TableHead
+                                    className={cn(
+                                        stickyActionsClass,
+                                        'md:bg-bgSurfaceSolidSubtle',
+                                    )}
+                                >
                                     <div className="text-textSecondary text-sm font-medium">
                                         <span>{t('general.actions')}</span>
                                     </div>
@@ -289,12 +269,17 @@ export function DataTable<TData extends Model, TValue>({
                                             className={cn(
                                                 'hidden md:table-cell',
                                                 stickyActionsClass,
+                                                'md:before:pointer-events-none md:before:absolute md:before:inset-x-0 md:before:inset-y-px md:before:backdrop-blur-lg md:before:content-[""]',
                                             )}
                                         >
-                                            <TableActions
-                                                hasActions={hasActions}
-                                                renderActions={renderActions}
-                                            />
+                                            <div className="relative z-10">
+                                                <TableActions
+                                                    hasActions={hasActions}
+                                                    renderActions={
+                                                        renderActions
+                                                    }
+                                                />
+                                            </div>
                                         </TableCell>
                                     )}
                                 </TableRow>
