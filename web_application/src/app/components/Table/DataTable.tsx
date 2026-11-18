@@ -77,6 +77,8 @@ export function DataTable<TData extends Model, TValue>({
     });
     const t = useTranslations();
     const hasActions = Boolean(canEdit || canView || deleteAction);
+    const stickyActionsClass =
+        'md:sticky md:right-0 md:z-20 md:whitespace-nowrap';
 
     return (
         <div className={cn('col-span-2', className)}>
@@ -88,7 +90,7 @@ export function DataTable<TData extends Model, TValue>({
                 </Text>
             )}
             <TableToolbar />
-            <Table>
+            <Table className="md:min-w-max">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
@@ -108,7 +110,12 @@ export function DataTable<TData extends Model, TValue>({
                                 );
                             })}
                             {hasActions && (
-                                <TableHead>
+                                <TableHead
+                                    className={cn(
+                                        stickyActionsClass,
+                                        'md:bg-bgSurfaceSolidSubtle',
+                                    )}
+                                >
                                     <div className="text-textSecondary text-sm font-medium">
                                         <span>{t('general.actions')}</span>
                                     </div>
@@ -259,12 +266,20 @@ export function DataTable<TData extends Model, TValue>({
                                     {hasActions && (
                                         <TableCell
                                             key="actions"
-                                            className="hidden md:table-cell"
+                                            className={cn(
+                                                'hidden md:table-cell',
+                                                stickyActionsClass,
+                                                'md:before:pointer-events-none md:before:absolute md:before:inset-x-0 md:before:inset-y-px md:before:backdrop-blur-lg md:before:content-[""]',
+                                            )}
                                         >
-                                            <TableActions
-                                                hasActions={hasActions}
-                                                renderActions={renderActions}
-                                            />
+                                            <div className="relative z-10">
+                                                <TableActions
+                                                    hasActions={hasActions}
+                                                    renderActions={
+                                                        renderActions
+                                                    }
+                                                />
+                                            </div>
                                         </TableCell>
                                     )}
                                 </TableRow>
