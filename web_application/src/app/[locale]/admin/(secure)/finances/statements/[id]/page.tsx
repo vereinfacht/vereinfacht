@@ -31,11 +31,13 @@ export default async function StatementShowPage({ params }: Props) {
         {
             attribute: 'title',
             value: statement[0]?.title,
+            label: t('general.title'),
         },
         {
             attribute: 'date',
             type: 'date',
             value: statement[0]?.date,
+            label: t('statement.date.label'),
         },
         {
             attribute: 'financeAccount',
@@ -46,8 +48,10 @@ export default async function StatementShowPage({ params }: Props) {
             attribute: 'amount',
             type: 'currency',
             value: statement[0]?.amount,
+            label: t('finance.amount'),
         },
     ];
+    console.log('fields', fields);
 
     return (
         <div className="col-span-2 container flex flex-col gap-6">

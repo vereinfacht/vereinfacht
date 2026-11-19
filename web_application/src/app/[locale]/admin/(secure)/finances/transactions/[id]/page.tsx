@@ -29,6 +29,7 @@ export default async function TransactionShowPage({ params }: Props) {
         {
             attribute: 'title',
             value: transaction[0]?.title,
+            label: t('general.title'),
         },
         {
             attribute: 'financeAccount',
@@ -38,6 +39,7 @@ export default async function TransactionShowPage({ params }: Props) {
         {
             attribute: 'description',
             value: transaction[0]?.description,
+            label: t('tax_account.description.label'),
         },
         {
             attribute: 'bankIban',
@@ -53,16 +55,19 @@ export default async function TransactionShowPage({ params }: Props) {
             attribute: 'amount',
             type: 'currency',
             value: transaction[0]?.amount,
+            label: t('transaction.amount.label'),
         },
         {
             attribute: 'valuedAt',
             type: 'date',
             value: transaction[0]?.valuedAt,
+            label: t('transaction.valued_at.label'),
         },
         {
             attribute: 'bookedAt',
             type: 'date',
             value: transaction[0]?.bookedAt,
+            label: t('transaction.booked_at.label'),
         },
         {
             attribute: 'statement',

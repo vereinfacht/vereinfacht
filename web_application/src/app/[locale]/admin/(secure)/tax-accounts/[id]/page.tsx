@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import { getTaxAccount } from '@/actions/taxAccounts/get';
 import { ResourceName } from '@/resources/resource';
 import { ShowPageParams } from '@/types/params';
@@ -19,15 +20,18 @@ export default async function TaxAccountShowPage({ params }: Props) {
     if (!taxAccount) {
         notFound();
     }
+    const t = await getTranslations();
 
     const fields = [
         {
             attribute: 'accountNumber',
             value: taxAccount[0]?.accountNumber,
+            label: t('tax_account.account_number.label'),
         },
         {
             attribute: 'description',
             value: taxAccount[0]?.description,
+            label: t('tax_account.description.label'),
         },
     ];
 
