@@ -786,7 +786,9 @@
             "label": "Name",
             "one": "Tax account",
             "other": "Tax accounts"
-        }
+        },
+        "create": "Create tax account",
+        "edit": "Edit tax account"
     },
     "transaction": {
         "amount": {
@@ -837,6 +839,8 @@
             "label": "Name",
             "one": "User",
             "other": "Users"
-        }
+        },
+        "create": "Create user",
+        "edit": "Edit user"
     }
 }

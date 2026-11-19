@@ -786,7 +786,9 @@
             "label": "Name",
             "one": "Steuerkonto",
             "other": "Steuerkonten"
-        }
+        },
+        "create": "Steuerkonto erstellen",
+        "edit": "Steuerkonto bearbeiten"
     },
     "transaction": {
         "amount": {
@@ -837,6 +839,8 @@
             "label": "Name",
             "one": "Benutzer*in",
             "other": "Benutzer*innen"
-        }
+        },
+        "create": "Benutzer*in erstellen",
+        "edit": "Benutzer*in bearbeiten"
     }
 }
