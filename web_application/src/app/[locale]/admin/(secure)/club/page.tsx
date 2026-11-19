@@ -65,7 +65,7 @@ export default async function ClubPage({ params }: Props) {
         },
         {
             attribute: 'logoUrl',
-            label: 'club.logo.label',
+            label: t('club.logo.label'),
             help: '',
             type: 'image',
         },
