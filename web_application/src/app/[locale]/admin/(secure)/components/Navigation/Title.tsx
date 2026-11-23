@@ -101,7 +101,7 @@ export default function Title({ className }: Props) {
         <Text
             tag="h1"
             className={[
-                'text-base font-bold tracking-[0.005em] md:text-2xl',
+                'font-display text-base font-bold tracking-[0.005em] md:text-2xl',
                 className,
             ].join(' ')}
         >
