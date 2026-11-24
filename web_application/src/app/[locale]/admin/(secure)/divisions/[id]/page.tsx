@@ -27,7 +27,7 @@ export default async function DivisionShowPage({ params }: Props) {
         {
             attribute: 'titleTranslations',
             type: 'translation',
-            label: 'division.title.label',
+            label: t('division.title.label'),
             value: division[0]?.titleTranslations,
         },
     ];
