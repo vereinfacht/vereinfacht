@@ -32,20 +32,24 @@ export default async function ReceiptShowPage({ params }: Props) {
         {
             attribute: 'receiptType',
             value: t(`receipt.receipt_type.${receipt[0]?.receiptType}`),
+            label: t('receipt.receipt_type.label'),
         },
         {
             attribute: 'referenceNumber',
             value: receipt[0]?.referenceNumber,
+            label: t('receipt.reference_number.label'),
         },
         {
             attribute: 'bookingDate',
             type: 'date',
             value: receipt[0]?.bookingDate,
+            label: t('receipt.booking_date.label'),
         },
         {
             attribute: 'amount',
             type: 'currency',
             help: '',
+            label: t('receipt.amount.label'),
             value:
                 receipt[0]?.receiptType === 'expense'
                     ? -(receipt[0]?.amount ?? 0)
@@ -53,6 +57,7 @@ export default async function ReceiptShowPage({ params }: Props) {
         },
         {
             attribute: 'taxAccount',
+            label: t('receipt.tax_account.label'),
             value:
                 receipt[0]?.taxAccount == null
                     ? '-'
@@ -68,6 +73,7 @@ export default async function ReceiptShowPage({ params }: Props) {
             type: 'media',
             value: receipt[0]?.media,
             help: '',
+            label: t('receipt.media.label'),
         },
     ];
 

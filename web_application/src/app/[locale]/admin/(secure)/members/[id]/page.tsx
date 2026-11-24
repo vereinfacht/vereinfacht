@@ -99,6 +99,7 @@ export default async function MemberShowPage({ params }: Props) {
         },
         {
             attribute: 'media',
+            label: t('media.title.one'),
             type: 'media',
             value: member?.media,
             help: '',
