@@ -51,7 +51,6 @@ export default async function StatementShowPage({ params }: Props) {
             label: t('finance.amount'),
         },
     ];
-    console.log('fields', fields);
 
     return (
         <div className="col-span-2 container flex flex-col gap-6">
