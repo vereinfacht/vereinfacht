@@ -10,6 +10,7 @@ import { routing } from '@/i18n/routing';
 import '@/globals.css';
 import { Toaster } from '@/hooks/toast/toaster';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { cn } from '@/utils/shadcn';
 
 interface Props {
     children: ReactNode;
@@ -21,6 +22,12 @@ export const metadata: Metadata = getDefaultMetadata();
 const font = localFont({
     src: '../../fonts/Rubik-VariableFont_wght.ttf',
     variable: '--font-rubik',
+    display: 'swap',
+});
+
+const fontFunnel = localFont({
+    src: '../../fonts/FunnelDisplay-VariableFont_wght.ttf',
+    variable: '--font-display',
     display: 'swap',
 });
 
@@ -39,7 +46,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className={font.variable}>
+        <html lang={locale} className={cn(font.variable, fontFunnel.variable)}>
             <body className="font-sans text-slate-900 antialiased">
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <NuqsAdapter>{children}</NuqsAdapter>
