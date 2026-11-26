@@ -57,10 +57,14 @@
     --color-bgSuccessSoft: var(--color-green-100);
     --color-bgErrorSoft: var(--color-red-100);
     --color-bgSurfaceSolidMuted: var(--color-neutral-300);
+    --color-bgPrimary: var(--color-primary-500);
+    --color-bgPrimaryHover: var(--color-primary-600);
 
     --color-borderSubtle: var(--color-neutral-200);
     --color-borderFocus: var(--color-blue-500);
     --color-borderDefault: var(--color-neutral-500);
+    --color-borderHover: var(--color-blue-600);
+    --color-borderDisabled: var(--color-neutral-300);
 
     --color-iconSecondary: var(--color-neutral-600);
 

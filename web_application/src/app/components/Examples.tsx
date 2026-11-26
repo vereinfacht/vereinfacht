@@ -16,6 +16,7 @@ import IconTrash from '/public/svg/trash.svg';
 import IconEmpty from '/public/svg/empty.svg';
 import { Button } from '@/app/components/ui/button';
 import { User } from 'lucide-react';
+import { Checkbox } from './ui/checkbox';
 
 import {
     Combobox,
@@ -403,6 +404,9 @@ export default function Examples() {
                     </Combobox>
                 </div>
             </div>
+            <Checkbox />
+            <Checkbox disabled />
+            <Checkbox defaultChecked disabled />
         </>
     );
 }
