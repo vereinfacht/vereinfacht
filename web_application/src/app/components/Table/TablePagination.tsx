@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
     Pagination,
@@ -18,6 +20,7 @@ interface Props {
 
 type EllipsesItemType = {
     type: 'ellipsis';
+    pages: number[];
 };
 
 type PageItemType = {
@@ -27,6 +30,13 @@ type PageItemType = {
 };
 
 type PaginationItemType = EllipsesItemType | PageItemType;
+
+function createPageRange(start: number, end: number): number[] {
+    return Array.from(
+        { length: Math.max(0, end - start + 1) },
+        (_, index) => start + index,
+    );
+}
 
 export default function TablePagination({ totalPages }: Props) {
     const [currentPage, setCurrentPage] = useQueryState(
@@ -46,98 +56,55 @@ export default function TablePagination({ totalPages }: Props) {
         setCurrentPage(page);
     }
 
-    function getPaginationItems() {
+    function getPaginationItems(): PaginationItemType[] {
+        if (totalPages === undefined || totalPages <= 1) {
+            return [];
+        }
+
+        if (totalPages <= 5) {
+            return createPageRange(1, totalPages).map((page) => ({
+                type: 'page',
+                index: page,
+                disabled: page === currentPage,
+            }));
+        }
+
+        let visiblePages: number[];
+
+        if (currentPage <= 2) {
+            visiblePages = [1, 2, 3, totalPages];
+        } else if (currentPage >= totalPages - 1) {
+            visiblePages = [1, totalPages - 2, totalPages - 1, totalPages];
+        } else {
+            visiblePages = [
+                1,
+                currentPage - 1,
+                currentPage,
+                currentPage + 1,
+                totalPages,
+            ];
+        }
+
+        visiblePages = Array.from(new Set(visiblePages));
+
         const items: PaginationItemType[] = [];
 
-        if (totalPages === undefined || totalPages <= 1) {
-            return items;
-        }
+        visiblePages.forEach((page, index) => {
+            const previousPage = visiblePages[index - 1];
 
-        // If total pages equal or less than 5, just show all pages
-        if (totalPages <= 5) {
-            for (let i = 1; i <= totalPages; i++) {
+            if (previousPage !== undefined && page - previousPage > 1) {
                 items.push({
-                    type: 'page',
-                    index: i,
-                    disabled: i === currentPage,
+                    type: 'ellipsis',
+                    pages: createPageRange(previousPage + 1, page - 1),
                 });
             }
-            return items;
-        }
 
-        // start ellipsis and first page
-        if (currentPage > totalPages - 2) {
             items.push({
                 type: 'page',
-                index: 1,
+                index: page,
+                disabled: page === currentPage,
             });
-
-            items.push({
-                type: 'ellipsis',
-            });
-        }
-
-        // previous page
-        if (currentPage > 1) {
-            if (
-                (currentPage === totalPages ||
-                    currentPage === totalPages - 2) &&
-                currentPage - 2 >= 1
-            ) {
-                items.push({
-                    type: 'page',
-                    index: currentPage - 2,
-                });
-            }
-
-            if (currentPage - 1 >= 1) {
-                items.push({
-                    type: 'page',
-                    index: currentPage - 1,
-                });
-            }
-        }
-
-        // current page
-        items.push({
-            type: 'page',
-            index: currentPage,
-            disabled: true,
         });
-
-        // next page
-        if (currentPage < totalPages) {
-            items.push({
-                type: 'page',
-                index: currentPage + 1,
-            });
-
-            if (currentPage === 1) {
-                items.push({
-                    type: 'page',
-                    index: currentPage + 2,
-                });
-            }
-
-            if (currentPage === totalPages - 2) {
-                items.push({
-                    type: 'page',
-                    index: totalPages,
-                });
-            }
-        }
-
-        // end ellipsis and last page
-        if (currentPage < totalPages - 2) {
-            items.push({
-                type: 'ellipsis',
-            });
-
-            items.push({
-                type: 'page',
-                index: totalPages,
-            });
-        }
 
         return items;
     }
@@ -154,15 +121,22 @@ export default function TablePagination({ totalPages }: Props) {
                     />
                 </PaginationItem>
 
-                {getPaginationItems().map((item, index) => {
+                {getPaginationItems().map((item) => {
                     if (item.type === 'ellipsis') {
                         return (
-                            <PaginationEllipsis key={index} className="w-10" />
+                            <PaginationItem key={`ellipsis-${item.pages[0]}`}>
+                                <PaginationEllipsis
+                                    pages={item.pages}
+                                    onSelectPage={(page) =>
+                                        setCurrentPage(page)
+                                    }
+                                />
+                            </PaginationItem>
                         );
                     }
 
                     return (
-                        <PaginationItem key={index}>
+                        <PaginationItem key={`page-${item.index}`}>
                             <PaginationLink
                                 isActive={item.disabled}
                                 onClick={(event) =>

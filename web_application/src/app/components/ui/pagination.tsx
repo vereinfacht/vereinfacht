@@ -9,6 +9,13 @@ import IconChevronRight from '/public/svg/chevron_right.svg';
 import IconChevronLeft from '/public/svg/chevron_left.svg';
 import { useIsMobile } from '@/hooks/useMobile';
 
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from '@/app/components/ui/dropdown-menu';
+
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
     return (
         <nav
@@ -178,23 +185,61 @@ function PaginationNext({
     );
 }
 
+type PaginationEllipsisProps = {
+    pages: number[];
+    onSelectPage: (page: number) => void;
+    className?: string;
+};
+
 function PaginationEllipsis({
+    pages,
+    onSelectPage,
     className,
-    ...props
-}: React.ComponentProps<'span'>) {
+}: PaginationEllipsisProps) {
     return (
-        <span
-            aria-hidden
-            data-slot="pagination-ellipsis"
-            className={cn(
-                'flex h-9 w-9 items-center justify-center',
-                className,
-            )}
-            {...props}
-        >
-            <MoreHorizontalIcon className="h-4 w-4" />
-            <span className="sr-only">More pages</span>
-        </span>
+        <DropdownMenu highlightItemOnHover={false}>
+            <DropdownMenuTrigger
+                render={
+                    <Button
+                        type="button"
+                        variant="secondary"
+                        size="circularSm"
+                    />
+                }
+                aria-label="Show more pages"
+                data-slot="pagination-ellipsis"
+                className={className}
+            >
+                <MoreHorizontalIcon className="size-4" />
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+                align="center"
+                side="bottom"
+                sideOffset={4}
+                className="bg-white-solid shadow-dropdown flex max-h-(--available-height) w-max min-w-0 flex-col overflow-hidden rounded-2xl border-none p-0 pr-0.5 ring-0"
+            >
+                <div
+                    tabIndex={-1}
+                    className="max-h-[calc(5*(1lh+4*var(--spacing)))] min-h-0 overflow-y-auto p-2 text-sm"
+                >
+                    {pages.map((page) => (
+                        <DropdownMenuItem
+                            key={page}
+
+                            onClick={() => onSelectPage(page)}
+                            className={cn(
+                                'text-textPrimary data-highlighted:bg-bgSurfaceSolidMuted pz-3 cursor-poi ter focus-visible:ring-borderFocus hover:text-textHover focus-visible:text-textLink flex w-full items-start justify-start rounded-xl py-3 pr-12 text-start text-base hover:cursor-pointer focus-visible:rounded-sm focus-visible:bg-transparent! focus-visible:ring-1',
+                            )}
+
+                            data-cy={`table-pagination-button-${page}`}
+                        >
+                            {page}
+                        </DropdownMenuItem>
+                    ))}
+                </div>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }
 
