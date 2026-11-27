@@ -57,7 +57,7 @@ export default function ReceiptsTable({
                         options={receiptTypeOptions ?? []}
                         parser={listReceiptSearchParams.receiptType}
                         paramKey={column.id}
-                        translationKey={'receipt.receipt_type'}
+                        translationKey={'receipt.receipt_type.label'}
                     />
                 ) : (
                     t('receipt.receipt_type.label')
